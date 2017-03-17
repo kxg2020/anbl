@@ -12,4 +12,11 @@ class IndexController extends Controller {
         $this->display('index/login');
 
     }
+
+    /**
+     * 后台首页
+     */
+    public function admin(){
+        $this->display('index/index');
+    }
 }

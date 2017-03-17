@@ -112,3 +112,2820 @@ ERR: 非法操作:login
 [ 2017-03-17T11:09:35+08:00 ] 127.0.0.1 /admin/login/login.html
 ERR: 非法操作:login
 
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:54:46+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:26+08:00 ] 127.0.0.1 /admin/Index/adminPage.html
+ERR: 非法操作:adminPage
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:30+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T11:55:31+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:30:56+08:00 ] 127.0.0.1 /admin/Index/adminPage.html
+ERR: 非法操作:adminPage
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:31:49+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:32:58+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:34:39+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:16+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:17+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:36:51+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:01+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:02+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:04+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:05+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:37:12+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:25+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:26+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:27+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:51+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:52+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:38:53+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:39:28+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:06+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:07+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:42+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:43+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:40:44+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:04+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/jquery-1.10.2.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/jquery-ui-1.9.2.custom.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/jquery-migrate-1.2.1.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/bootstrap.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/modernizr.min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/jquery.nicescroll.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/jquery.easypiechart.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/easypiechart/easypiechart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/jquery.sparkline.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/sparkline/sparkline-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/iCheck/jquery.icheck.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/icheck-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.tooltip.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/flot-chart/jquery.flot.resize.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/morris.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/morris-chart/raphael-min.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/calendar/clndr.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/calendar/evnt.calendar.init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/calendar/moment-2.2.1.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/scripts.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:41:56+08:00 ] 127.0.0.1 /admin/Index/js/dashboard-chart-init.js
+ERR: 非法操作:js
+
+[ 2017-03-17T12:54:22+08:00 ] 127.0.0.1 /admin/Index/fontawesome.html
+ERR: 非法操作:fontawesome
+
