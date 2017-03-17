@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+  <title>阿纳巴里</title>
+  <!--icheck-->
+  <link href="__CSS__/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+  <link href="__CSS__/iCheck/skins/square/square.css" rel="stylesheet">
+  <link href="__CSS__/iCheck/skins/square/red.css" rel="stylesheet">
+  <link href="__CSS__/iCheck/skins/square/blue.css" rel="stylesheet">
+  <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+
+  <!--common-->
+  <link href="__CSS__/style.css" rel="stylesheet">
+  <link href="__CSS__/style-responsive.css" rel="stylesheet">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="__JS__/html5shiv.js"></script>
+  <script src="__JS__/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="__IMG__/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="__IMG__/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="__IMG__/images/photos/user-avatar.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#">John Doe</a></h4>
+                        <span>"Hello There..."</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                  <li><a href="#"><i class="fa fa-user"></i> <span>个人中心</span></a></li>
+                  <li><a href="#"><i class="fa fa-cog"></i> <span>设置</span></a></li>
+                  <li><a href="#"><i class="fa fa-sign-out"></i> <span>退出登录</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li class="active"><a href="#"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>会员管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="{:U('admin/member/select')}">会员列表</a></li>
+                        <li><a href="blank_page.html">帮助</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-folder-o"></i> <span>电影管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="general.html">电影列表</a></li>
+                        <li><a href="buttons.html">电影添加</a></li>
+                        <li><a href="tabs-accordions.html">电影分类</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-building-o"></i> <span>订单管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="grids.html">订单列表</a></li>
+                        <li><a href="gallery.html">订单设置</a></li>
+                        <li><a href="calendar.html">支付设置</a></li>
+                        <li><a href="nestable.html">帮助</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>数据管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="mail.html">会员数据</a></li>
+                        <li><a href="mail_compose.html">销售数据</a></li>
+                        <li><a href="mail_view.html">分销数据</a></li>
+                        <li><a href="mail_view.html">财务数据</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-gears"></i> <span>后台系统</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="mail.html">模块管理</a></li>
+                        <li><a href="mail_compose.html">页面配置</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-rss"></i> <span>信息发布</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="form_layouts.html">分类管理</a></li>
+                        <li><a href="form_advanced_components.html">发布信息</a></li>
+                        <li><a href="form_wizard.html">广告管理</a></li>
+                    </ul>
+                </li>
+                <li><a href="login.html"><i class="fa fa-sign-in"></i> <span>退出</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+            <!--toggle button start-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
+
+            <!--search start-->
+            <form class="searchform" action="index.html" method="post">
+                <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+            </form>
+            <!--search end-->
+
+            <!--notification menu start -->
+            <div class="menu-right">
+                <ul class="notification-menu">
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <img src="__IMG__/user-avatar.png" alt="" />
+                            Macarinal
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="#"><i class="fa fa-user"></i>个人中心</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i>设置</a></li>
+                            <li><a href="#"><i class="fa fa-sign-out"></i> 退出</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!--notification menu end -->
+
+        </div>
+        <!-- header section end-->
+        <block name="main">
+
+        </block>
+        <!--footer section start-->
+        <footer>
+            2017 &copy; AdminEx by ThemeBucket
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__JS__/jquery-1.10.2.min.js"></script>
+<script src="__JS__/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__JS__/jquery-migrate-1.2.1.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/modernizr.min.js"></script>
+<script src="__JS__/jquery.nicescroll.js"></script>
+
+<!--Sparkline Chart-->
+<script src="__JS__/sparkline/jquery.sparkline.js"></script>
+<script src="__JS__/sparkline/sparkline-init.js"></script>
+
+<!--icheck -->
+<script src="__JS__/iCheck/jquery.icheck.js"></script>
+<script src="__JS__/icheck-init.js"></script>
+
+<!-- jQuery Flot Chart-->
+<script src="__JS__/flot-chart/jquery.flot.js"></script>
+<script src="__JS__/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="__JS__/flot-chart/jquery.flot.resize.js"></script>
+
+
+<!--common scripts for all pages-->
+<script src="__JS__/scripts.js"></script>
+
+</body>
+</html>

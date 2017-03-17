@@ -2929,3 +2929,15 @@ ERR: 非法操作:js
 [ 2017-03-17T12:54:22+08:00 ] 127.0.0.1 /admin/Index/fontawesome.html
 ERR: 非法操作:fontawesome
 
+[ 2017-03-17T13:30:12+08:00 ] 127.0.0.1 /admin/Index/blank_page.html
+ERR: 非法操作:blank_page
+
+[ 2017-03-17T16:46:21+08:00 ] 127.0.0.1 /admin/Index/mail.html
+ERR: 非法操作:mail
+
+[ 2017-03-17T16:46:44+08:00 ] 127.0.0.1 /admin/Index/blank_page.html
+ERR: 非法操作:blank_page
+
+[ 2017-03-17T17:09:14+08:00 ] 127.0.0.1 /admin/Index/blank_page.html
+ERR: 非法操作:blank_page
+

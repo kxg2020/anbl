@@ -19,4 +19,6 @@ class IndexController extends Controller {
     public function admin(){
         $this->display('index/index');
     }
+
+
 }

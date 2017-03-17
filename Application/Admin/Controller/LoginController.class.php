@@ -38,13 +38,12 @@ class LoginController extends Controller{
             //>> 判断是否记住个人信息
             if(isset($paramArr['remember']) && $paramArr['remember'] == 1){
 
-                $token = md5('remember');
+                $token = md5(microtime().'!@#$$%^'.rand(0,1000));
 
                 //>> 将token保存到数据库
-                M('User')->where(['id'=>$res['id']])->save(['token'=>$token]);
-                var_dump(M('User')->getLastSql());
+                M('User')->where(['id'=>$res['id']])->save(['token'=>$token,'create_time'=>time(),'last_ip'=>get_client_ip()]);
 
-                cookie(md5('admin'),$token,time()+7*3600*24);
+                cookie(md5('remember'),$token,time()+7*3600*24);
             }
 
             $this->redirect('admin/Index/admin');
@@ -53,5 +52,14 @@ class LoginController extends Controller{
 
             $this->error('用户名或密码错误!');
         }
+    }
+
+    /**
+     * 退出方法
+     */
+    public function logout(){
+        session(md5('admin'), null);
+        cookie(md5('remember'), null);
+        $this->redirect('Admin/index/index');
     }
 }
