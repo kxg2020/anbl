@@ -4,3 +4,15 @@ INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
 INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
 ERR: 无法加载模块:Favicon
 
+[ 2017-03-17T11:07:33+08:00 ] 127.0.0.1 /admin/login/login.html
+ERR: 无法加载模块:Login
+
+[ 2017-03-17T11:07:39+08:00 ] 127.0.0.1 /index
+ERR: 无法加载模块:Index
+
+[ 2017-03-17T11:07:41+08:00 ] 127.0.0.1 /index
+ERR: 无法加载模块:Index
+
+[ 2017-03-17T11:07:43+08:00 ] 127.0.0.1 /index
+ERR: 无法加载模块:Index
+

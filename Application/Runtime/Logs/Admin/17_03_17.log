@@ -61,3 +61,54 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
 INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
 
+[ 2017-03-17T10:55:38+08:00 ] 127.0.0.1 /admin/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:12+08:00 ] 127.0.0.1 /admin/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:16+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:50+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:51+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:51+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:51+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:52+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:52+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:52+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:52+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:52+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:03:52+08:00 ] 127.0.0.1 /admin.php/Login/Login.html
+ERR: 非法操作:Login
+
+[ 2017-03-17T11:04:02+08:00 ] 127.0.0.1 /admin.php/login/login
+ERR: 非法操作:login
+
+[ 2017-03-17T11:04:32+08:00 ] 127.0.0.1 /admin/login
+ERR: 非法操作:index
+
+[ 2017-03-17T11:09:09+08:00 ] 127.0.0.1 /admin/login/login.html
+ERR: 非法操作:login
+
+[ 2017-03-17T11:09:35+08:00 ] 127.0.0.1 /admin/login/login.html
+ERR: 非法操作:login
+
