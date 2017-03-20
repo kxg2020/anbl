@@ -1,4 +1,107 @@
 <extend name="public:tpl" />
+<block name="css">
+    <!--layer-->
+    <link href="__CSS__/layui.css" rel="stylesheet">
+</block>
 <block name="main">
+    <div class="page-heading">
+        <h3>
+            会员管理
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">会员管理</a>
+            </li>
+            <li class="active"> 会员列表 </li>
+        </ul>
+    </div>
+    <div class="wrapper">
+        <table class="table table-bordered table-hover">
+            <tr align="center">
+                <td>编号</td>
+                <td>账号</td>
+                <td>密码</td>
+                <td>余额</td>
+                <td>等级</td>
+                <td>是否绑定</td>
+                <td>是否实名</td>
+                <td>电话号码</td>
+                <td>操作</td>
+            </tr>
+            <tbody id="body">
+            <volist name="list" id="l">
+                <tr align="center">
+                    <td>{$l.id}</td>
+                    <td>{$l.username}</td>
+                    <td>{$l.password}</td>
+                    <td>{$l.money}</td>
+                    <td>{$l.level}</td>
+                    <td>
+                            <img src="__IMG__/{$l.is_bind}.gif">
+                    </td>
+                    <td>
+                        <img src="__IMG__/{$l.is_true}.gif">
+                    </td>
+                    <td>{$l.phone}</td>
+                    <td><a href="{:U('admin/member/detail',['id'=>$l['id']])}"><input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;<a href="{:U('admin/member/delete',['id'=>$l['id']])}"><input type="button" class="btn btn-xs btn-danger" value="删除"></a></td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div id="demo6"></div>
+        <input type="hidden" id="count" value="{$count}">
+    </div>
+</block>
+<block name="js">
+    <!--layer.js-->
+    <script src="__JS__/layer/layui.js"></script>
+    <script src="__JS__/layer/laypage.js"></script>
+    <script>
+        $(function(){
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo6'
+                    ,pages: $('#count').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/member/select')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':20,
+                                },
+                                success:function(result){
+                                    $('#body').html('');
+                                    if(result.status == 1 && result.data != ''){
+                                        $.each(result.data,function(k,v){
+                                            $('#body').append(
+                                                    '<tr align="center">'+
+                                                    '<td>'+ v.id+'</td>'+
+                                                    '<td>'+ v.username+'</td>'+
+                                                    '<td>'+ v.password+'</td>'+
+                                                    '<td>'+ v.money+'</td>'+
+                                                    '<td>'+ v.level+'</td>'+
+                                                    '<td>'+ v.is_bind+'</td>'+
+                                                    '<td>'+ v.is_true+'</td>'+
+                                                    '<td>'+ v.phone+'</td>'+
+                                                    '<td><a href="{:U("'+'admin/member/detail/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;'+'<a href="{:U("'+'admin/member/delete/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-danger" value="删除"></a>'+'</td>'+
+                                                    "</tr>"
+                                            );
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
 </block>
+
+
