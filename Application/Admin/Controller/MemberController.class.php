@@ -109,6 +109,16 @@ class MemberController extends  Controller{
             ];
             $res = $memberModel->where(['id'=>$paramArr['id']])->save($data);
 
+            if($res){
+
+                $this->redirect('admin/member/select');
+
+            }else{
+
+                $this->error('保存失败');
+
+            }
+
         }
 
     }
