@@ -43,13 +43,40 @@
                         <img src="__IMG__/{$l.is_true}.gif">
                     </td>
                     <td>{$l.phone}</td>
-                    <td><a href="{:U('admin/member/detail',['id'=>$l['id']])}"><input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;<a href="{:U('admin/member/delete',['id'=>$l['id']])}"><input type="button" class="btn btn-xs btn-danger" value="删除"></a></td>
+                    <td><a href="{:U('admin/member/detail',['id'=>$l['id']])}"><input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;<input type="button"  class="btn btn-xs btn-danger delete" data-id="{$l.id}" value="删除" data-toggle="modal" data-target=".myModal"></td>
                 </tr>
             </volist>
             </tbody>
         </table>
         <div id="demo6"></div>
         <input type="hidden" id="count" value="{$count}">
+        <input type="hidden" id="data-id" value="">
+    </div>
+    </button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        提示
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    删除后不可恢复，你确定要删除吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-danger deltrue" >
+                        删除
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
 </block>
 <block name="js">
@@ -88,7 +115,7 @@
                                                     '<td>'+ v.is_bind+'</td>'+
                                                     '<td>'+ v.is_true+'</td>'+
                                                     '<td>'+ v.phone+'</td>'+
-                                                    '<td><a href="{:U("'+'admin/member/detail/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;'+'<a href="{:U("'+'admin/member/delete/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-danger" value="删除"></a>'+'</td>'+
+                                                    '<td><a href="{:U("'+'admin/member/detail/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;'+'<input type="button" class="delete btn btn-xs btn-danger" data-toggle="modal" data-target=".myModal" value="删除"  data-id='+ v.id+'>'+'</td>'+
                                                     "</tr>"
                                             );
                                         });
@@ -99,9 +126,29 @@
                     }
                 });
             });
+            $('body').on('click','.delete',function(){
+                var id = $(this).attr('data-id');
+                $('#data-id').val(id);
+            });
+
+            $('body').on('click','.deltrue',function(){
+                var id = $('#data-id').val();
+                $.ajax({
+                    'type':'post',
+                    'dataType':'json',
+                    'url':'{:U("admin/member/delete")}',
+                    'data':{
+                        'id':id,
+                    },
+                    success:function(result){
+                        if(result.status == 1){
+                            location.reload();
+                        }
+                    }
+                });
+            });
         });
     </script>
-
 </block>
 
 
