@@ -1,6 +1,6 @@
 <?php
 namespace Admin\Controller;
-
+use Think\Upload;
 use Think\Controller;
 
 class PageConfigController extends  Controller{
@@ -11,7 +11,7 @@ class PageConfigController extends  Controller{
     public function Select(){
 
         $paramArr = $_REQUEST;
-        $list = M('Works')->where(['is_active'=>1])->select();
+        $list = M('Works')->select();
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && $paramArr['pgNum'] < 1000 && is_numeric($paramArr['pgNum'])){
             $pgNum = $paramArr['pgNum'];
@@ -93,7 +93,7 @@ class PageConfigController extends  Controller{
 
         if(isset($paramArr['id']) && !empty($paramArr['id']) && is_numeric($paramArr['id'])){
 
-            $row = M('Works')->where(['id'=>$paramArr['id'],'is_active'=>1])->find();
+            $row = M('Works')->where(['id'=>$paramArr['id']])->find();
             if(!empty($row)){
 
                 $this->assign('work',$row);
@@ -102,6 +102,28 @@ class PageConfigController extends  Controller{
         }
         $this->display('page/detail');
 
+    }
+
+    /**
+     * 保存作品
+     */
+    public function save(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+            $data = [
+                'name'=>$paramArr['name'],
+                'type'=>$paramArr['type'],
+                'fans_number'=>$paramArr['fans_number'],
+                'vote_number'=>$paramArr['vote_number'],
+                'is_active'=>$paramArr['is_active'],
+                'img_url'=>$paramArr['image_url']?$paramArr['image_url']:$paramArr['img_url'],
+                'intro'=>$paramArr['intro'],
+            ];
+            $res = M('Works')->where(['id'=>$paramArr['id']])->save($data);
+        }
     }
 
     /**
@@ -121,4 +143,35 @@ class PageConfigController extends  Controller{
         return $sliceArr;
     }
 
+    /**
+     * 图片上传
+     */
+    /**
+     * 图片文件上传
+     */
+    public function upload(){
+        $config = [
+            'exts'          =>  array('jpg','png','gif','bmp'), //允许上传的文件后缀
+            'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
+            'rootPath'      =>  'Upload/', //保存根路径
+        ];
+        $upload = new Upload($config);
+        $rst = $upload->uploadOne(array_shift($_FILES));
+        // 判断是否上传成功
+        if($rst == false){
+            $this->Msg['msg'] = $upload->getError();
+            $this->ajaxReturn($this->Msg);
+        }
+        if(!$rst){
+            $this->ajaxReturn([
+                'status' => 0,
+                'msg' => '文件上传失败'
+            ]);
+        }
+
+        $this->ajaxReturn([
+            'status' => 1,
+            'url' => $rst['url']
+        ]);
+    }
 }

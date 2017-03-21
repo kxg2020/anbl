@@ -24,6 +24,7 @@
                 <td>封面图</td>
                 <td>投票数</td>
                 <td>粉丝数</td>
+                <td>是否上线</td>
                 <td>操作</td>
             </tr>
             <tbody id="body">
@@ -37,7 +38,8 @@
                     <td>
                             {$l.fans_number}
                     </td>
-                    <td><a hre="{:U('admin/pageConfig/detail',['id'=>$l['id']])}"><input type="button" class="btn btn-xs btn-info detail" value="详情"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"  class="btn btn-xs btn-danger delete" data-id="{$l.id}" value="删除" data-toggle="modal" data-target=".myModal"></td>
+                    <td><img src="__IMG__/{$l.is_active}.gif"></td>
+                    <td><input type="button" class="btn btn-xs btn-info detail" value="详情" data-id="{$l['id']}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"  class="btn btn-xs btn-danger delete" data-id="{$l.id}" value="删除" data-toggle="modal" data-target=".myModal"></td>
                 </tr>
             </volist>
             </tbody>
@@ -82,6 +84,7 @@
                                                     '<td>'+ v.img_url+'</td>'+
                                                     '<td>'+ v.vote_number+'</td>'+
                                                     '<td>'+ v.fans_number+'</td>'+
+                                                    '<td>'+ '<img src="__IMG__/'+ v.is_active+'.gif"/>'+'</td>'+
                                                     '<td><a hre="{:U("'+'admin/pageConfig/detail/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-info detail" value="详情"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="button" class="delete btn btn-xs btn-danger" data-toggle="modal" data-target=".myModal" value="删除"  data-id='+ v.id+'>'+'</td>'+
                                                     "</tr>"
                                             );
@@ -113,13 +116,17 @@
             });
         });
         $('body').on('click','.detail',function(){
+            var id = $(this).attr('data-id');
             layer.open({
                 type: 2,
                 title: '作品详情',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['800px', '90%'],
-                content: "{:U('admin/pageConfig/detail')}"
+                area: ['70%', '100%'],
+                content: "{:U('admin/pageConfig/detail')}"+'?id='+id,
+                end: function () {
+                    location.reload();
+                }
             });
         });
     </script>
