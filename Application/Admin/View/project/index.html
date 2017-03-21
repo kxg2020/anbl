@@ -1,0 +1,105 @@
+<extend name="public:tpl" />
+        <!-- header section end-->
+<block name="main">
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/Index/index')}">后台首页</a>
+            </li>
+            <li class="active">
+                <a href="{:U('admin/Project/index')}">项目管理</a>
+            </li>
+            <li class="active"> 项目列表 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        项目列表
+                    </header>
+                    <div class="panel-body">
+
+                        <!--搜索开始-->
+                        <form class="form-inline" action="{:U('index')}" method="get">
+                            <div class="form-group">
+                                <label>项目名称</label>
+                                <input type="text" class="form-control" name="name" value="{:I('get.name')}" placeholder="请输入项目名称">
+                            </div>
+                            <button type="submit" class="btn btn-primary">搜索</button>
+                        </form>
+
+                        <!--搜索结束-->
+                        <hr/>
+                        <div class="adv-table text-center">
+                            <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center">名称</th>
+                                    <th class="text-center">类型</th>
+                                    <th class="text-center">目标金额</th>
+                                    <th class="text-center">已支持资金</th>
+                                    <th class="text-center">支持人数</th>
+                                    <th class="text-center">启动时间</th>
+                                    <th class="text-center">结束时间</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <if condition="empty($project)">
+                                    <tr>
+                                        <td colspan="9">暂无数据</td>
+                                    </tr>
+                                </if>
+                                <volist name="project" id="tag">
+                                <tr class="gradeX">
+                                    <td>{$tag.id}</td>
+                                    <td>{$tag.title}</td>
+                                    <td>{$tag.name}</td>
+                                    <td>{:date('Y-m-d',$tag['create_time'])}</td>
+                                    <td>
+                                        <a href="{:U('edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                        <a data-href="{:U('remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                    </td>
+                                </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                            {$pages}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要删除吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a href="" id="deleteTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('.deleteBtn').click(function(){
+                var _link = $(this).attr('data-href');
+                $('#deleteTrue').attr('href', _link);
+            })
+        });
+    </script>
+</block>
