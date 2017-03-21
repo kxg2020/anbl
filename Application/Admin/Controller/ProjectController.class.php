@@ -1,12 +1,45 @@
 <?php
 namespace Admin\Controller;
 
+use Think\Page;
 use Think\Upload;
 
 class ProjectController extends CommonController
 {
 
     public function index(){
+        //查看是否有查询
+        $name = I('get.name','','strip_tags');
+        // 创建查询条件
+        $where =[];
+        if($name){
+            $where['a.name'] = ['like',"%$name%"];
+        }
+
+        // 查询总记录数
+        $count =  M('project as a')
+            ->field('a.*, b.story,c.name as type')
+            ->join('LEFT JOIN an_project_survey as b ON a.id=b.project_id')
+            ->join('LEFT JOIN an_project_category as c ON c.id=a.type_id')
+            ->where($where)
+            ->count();
+
+        // 实列化一个分页工具类
+        $page = new Page($count,10);
+
+        $rows = M('project as a')
+            ->field('a.*, b.story,c.name as type')
+            ->join('LEFT JOIN an_project_survey as b ON a.id=b.project_id')
+            ->join('LEFT JOIN an_project_category as c ON c.id=a.type_id')
+            ->where($where)
+            ->limit($page->firstRow, $page->listRows)
+            ->order('id')
+            ->select();
+        // 生成分页DOM结构
+        $pages = $page->show();
+        // 向模板分配分页条
+        $this->assign('pages',$pages);
+        $this->assign('rows',$rows);
         $this->display('index');
     }
 
@@ -65,15 +98,138 @@ class ProjectController extends CommonController
             $this->ajaxReturn(['msg'=>'数据保存成功', 'status'=>1,]);
 
         }
+        //查询出所有项目分类
+        $ProjectCategorys = M('ProjectCategory')->select();
+        $this->assign('ProjectCategorys',$ProjectCategorys);
         $this->display('add');
     }
 
-    public function edit(){
+    public function edit($id){
+        $id = intval($id);
+        $projectModel = D('Project');
 
+        // 获取项目数据
+        $projectInfo = $projectModel->find($id);
+
+        // 判断数据是否存在
+        if (!$projectInfo) {
+            $this->Msg['msg'] = "项目不存在";
+            $this->ajaxReturn($this->Msg);
+        }
+        if (IS_POST && IS_AJAX) {
+            // 获取数据
+            $_data = i('post.');
+
+            // 判断开始时间是否比大结束时间
+            if ($_data['start_time'] >= $_data['end_time']) {
+                $this->ajaxReturnError('开始时间不能大于或等于结束时间',__LINE__);
+            }
+
+            // 获取项目数据
+            $projectInfo = $projectModel->find($_data['id']);
+
+            // 判断数据是否存在
+            if (!$projectInfo) {
+                $this->ajaxReturnError('项目不存在',__LINE__);
+            }
+
+            // 获取项目基本信息
+            $projectInfo = [
+                'name' => $_data['name'],
+                'target_amount' => $_data['target_amount'],
+                'title' => $_data['title'],
+                'intro' => $_data['intro'],
+                'start_time' => strtotime($_data['start_time']),
+                'end_time' => strtotime($_data['end_time']),
+                'sort' => $_data['sort'],
+                'is_active' => $_data['is_active'],
+                'type_id' => intval($_data['type_id']),
+                'url' => $_data['url'],
+                'image_url' => $_data['image_url'],
+            ];
+            // 开启事物
+            M()->startTrans();
+            // 将项目基本信息保存到数据库 an_project表
+            $_id = M('project')
+                ->where(['id'=>$_data['id']])
+                ->save($projectInfo);
+
+            if($_id === false){
+                M()->rollback();
+                $this->ajaxReturnError('数据更新失败',__LINE__);
+            }
+
+            // 商品概况表
+            $survey = [
+                'expected_return' => $_data['expected_return'],
+                'story' => $_data['story'],
+                'analysis' => $_data['analysis'],
+                'film_critic' => $_data['film_critic'],
+            ];
+
+            $result = M('project_survey')
+                ->where(['project_id'=>$_data['id']])
+                ->save($survey);
+
+            if($result === false){
+                M()->rollback();
+                $this->ajaxReturnError('数据更新失败',__LINE__);
+            }
+
+            // 提交事物
+            M()->commit();
+            $this->ajaxReturn(['msg'=>'数据更新成功', 'status'=>1,]);
+
+        }
+
+        // 获取项目概况
+        $surveys = M('ProjectSurvey')
+            ->where(['project_id'=>$projectInfo['id']])
+            ->find();
+
+        // 获取项目分类
+        $types = M('ProjectCategory')->select();
+
+        $this->assign('projectInfo',$projectInfo);
+        $this->assign('surveys',$surveys);
+        $this->assign('types',$types);
+        $this->display('edit');
     }
 
-    public function delete(){
-
+    public function remove($id){
+// 将ID转换成整数类型
+        $id = intval($id);
+        // 判断是否传了ID
+        if(!$id){
+            // 没有ID，报错
+            $this->error('没有找到数据');
+            exit;
+        }
+        // 实例化模型类
+        $model = D('Project');
+        // 通过ID主键 查询标签信息
+        $info = $model->find($id);
+        if(!$info){
+            // 没有在数据库中找到数据，报错
+            $this->error('没有找到数据');
+            exit;
+        }
+        // 执行删除
+        $res = $model->delete($id);
+        if(!$res){
+            $this->error('删除失败！');
+            exit;
+        }
+        // 删除关联表数据
+        $res = M('ProjectSurvey')
+            ->where(['project_id'=>$id])
+            ->delete();
+        if(!$res){
+            $this->error('删除失败！');
+            exit;
+        }
+        // 删除成功直接回到首页
+        $this->redirect('admin/Project/index');
     }
 
     /**
