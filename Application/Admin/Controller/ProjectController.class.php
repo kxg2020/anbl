@@ -20,17 +20,6 @@ class ProjectController extends CommonController
                 $this->ajaxReturnError('开始时间不能大于或等于结束时间',__LINE__);
             }
 
-            // 处理上传图片
-            $config = [
-                'exts'     => array('jpg', 'png', 'gif', 'bmp','jpeg'), //允许上传的文件后缀
-                'subName'  => array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
-                'rootPath' => 'Uploads/', //保存根路径
-            ];
-            $upload = new Upload($config);
-            $rst = $upload->upload($_FILES['image_url']);
-            dump($_FILES);
-            exit;
-
             // 获取项目基本信息
             $projectInfo = [
                 'name' => $_data['name'],
@@ -46,6 +35,35 @@ class ProjectController extends CommonController
                 'image_url' => $_data['image_url'],
                 'create_time' => time(),
             ];
+            // 开启事物
+            M()->startTrans();
+            // 将项目基本信息保存到数据库 an_project表
+            $_id = M('project')->add($projectInfo);
+            if($_id === false){
+                M()->rollback();
+                $this->ajaxReturnError('数据保存失败',__LINE__);
+            }
+
+            // 商品概况表
+            $survey = [
+                'project_id' => $_id,
+                'expected_return' => $_data['expected_return'],
+                'story' => $_data['story'],
+                'analysis' => $_data['analysis'],
+                'film_critic' => $_data['film_critic'],
+                'create_time' => time(),
+            ];
+
+            $result = M('project_survey')->add($survey);
+            if($result === false){
+                M()->rollback();
+                $this->ajaxReturnError('数据保存失败',__LINE__);
+            }
+
+            // 提交事物
+            M()->commit();
+            $this->ajaxReturn(['msg'=>'数据保存成功', 'status'=>1,]);
+
         }
         $this->display('add');
     }
@@ -58,4 +76,60 @@ class ProjectController extends CommonController
 
     }
 
+    /**
+     * 图片文件上传
+     */
+    public function upload(){
+        $config = [
+            'exts'          =>  array('jpg','png','gif','bmp'), //允许上传的文件后缀
+            'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
+            'rootPath'      =>  'Upload/', //保存根路径
+        ];
+        $upload = new Upload($config);
+        $rst = $upload->uploadOne(array_shift($_FILES));
+        // 判断是否上传成功
+        if($rst == false){
+            $this->Msg['msg'] = $upload->getError();
+            $this->ajaxReturn($this->Msg);
+        }
+        if(!$rst){
+            $this->ajaxReturn([
+                'status' => 0,
+                'msg' => '文件上传失败'
+            ]);
+        }
+
+        $this->ajaxReturn([
+            'status' => 1,
+            'url' => $rst['url']
+        ]);
+    }
+
+    /**
+     * 视频文件上传
+     */
+    public function upload_video(){
+        $config = [
+            'exts'          =>  array('avi','wma','rmvb','rm','flash','mp4','mid','3gp','mpg','mov','wmov','qt'), //允许上传的文件后缀
+            'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
+            'rootPath'      =>  'Upload/', //保存根路径
+        ];
+        $upload = new Upload($config);
+        $rst = $upload->uploadOne(array_shift($_FILES));
+        // 判断是否上传成功
+        if($rst == false){
+            $this->Msg['msg'] = $upload->getError();
+            $this->ajaxReturn($this->Msg);
+        }
+        if(!$rst){
+            $this->ajaxReturn([
+                'status' => 0,
+                'msg' => '文件上传失败'
+            ]);
+        }
+        $this->ajaxReturn([
+            'status' => 1,
+            'url' => $rst['url']
+        ]);
+    }
 }

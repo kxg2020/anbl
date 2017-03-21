@@ -1,5 +1,76 @@
 <extend name="public:tpl" />
 <block name="css">
+    <style>
+        .ms-drop input[type="checkbox"] {
+            margin-right: 3px;
+        }
+
+        .ms-drop ul > li.multiple label {
+            margin-right: 5px;
+        }
+
+        .imgInput {
+            float: left;
+            margin-right: 20px;
+            border: 1px dashed silver;
+        }
+
+        .imgInput:hover {
+            cursor: pointer;
+            border: 3px dashed silver;
+        }
+
+        .tangram-suggestion-main {
+            z-index: 100;
+        }
+
+        .some-class {
+            width: 100px !important;
+            height: 100px !important;
+            border-radius: 0;
+            line-height: 100px !important;
+            font-size: 40px;
+            font-weight: bold !important;
+            color: #666666 !important;
+            background: white !important;
+            border: dashed 1px #666666;
+        }
+
+        .radio, .checkbox {
+            padding-left: 0px !important;
+        }
+
+        .loadfile {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border: 1px dashed silver;
+            cursor: pointer;
+            color: #838383;
+            font-size: 44px;
+            line-height: calc(100px - 9px);
+            text-align: center;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #f5f5f5 !important;
+        }
+
+        .error {
+            color: red;
+            padding: 0 10px;
+        }
+
+        .ms-drop {
+            position: initial !important;
+        }
+
+        #l-map {
+            height: 500px;
+            width: auto;
+        }
+        .anchorBL{display:none;}
+    </style>
 </block>
 <block name="main">
     <!-- page heading start-->
@@ -63,9 +134,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">项目封面图</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">上传图片</label>
                                         <div class="col-sm-10">
-                                            <input type="file" name="image_url">
+                                            <span class="loadfile" id="file_upload">+</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">图片列表</label>
+                                        <div class="col-sm-10" id="images">
+
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -172,13 +250,21 @@
                                 <!--项目视频-->
                                 <div class="tab-pane" id="protocol">
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">项目视频</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">上传项目视频</label>
                                         <div class="col-sm-10">
-                                            <textarea name="protocol_content" cols="200" rows="10"
-                                                      class="summernote"></textarea>
+                                            <span class="loadfile" id="file_upload1">+</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-10" id="videos">
+
                                         </div>
                                     </div>
                                 </div>
+                                <div class="layui-progress">
+                                    <div class="layui-progress-bar" lay-percent="10%"></div>
+                                </div>
+                                <br>
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-primary" type="submit">保存项目信息</button>
@@ -199,6 +285,92 @@
     <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
     <script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
     <script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
+
+    <script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#file_upload").h5upload({
+                url: "{:U('admin/Project/upload')}",
+                fileObjName: 'image',
+                fileTypeExts: 'jpg,png,gif,bmp,jpeg',
+                multi: true,
+                accept: 'image/*',
+                fileSizeLimit: 1024 * 1024 * 1024 * 1024,
+                formData: {
+                    type: 'card_positive'
+                },
+                onUploadProgress: function (file, uploaded, total) {
+                    layer.msg('正在上传');
+                },
+                onUploadSuccess: function (file, data) {
+                    data = $.parseJSON(data);
+                    if (data.status == 0) {
+                        layer.alert(data.msg, {time: 1000})
+                    } else {
+                        var _isMax = false;
+                        var path = data.url;
+                        console.log(data.url);
+                        var _html = '<div class="imgInput"><img title="点我删除" src="' + path + '" width = 100 height = 100 /><input type="hidden" name="image_url" value="' + path + '"></div>';
+                        // 获取图片列表
+                        $('#images').append(_html);
+                        if (_isMax == false) {
+                            layer.msg('上传成功', {time: 1000})
+
+                        }
+                    }
+                },
+                onUploadError: function (file) {
+                    layer.alert('上传失败');
+                }
+            });
+
+            $('#images').on('click', '.imgInput', function () {
+                console.debug($(this));
+                // 删除当前图片
+                $(this).remove();
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#file_upload1").h5upload({
+                url: "{:U('admin/Project/upload_video')}",
+                fileObjName: 'video',
+                fileTypeExts: 'avi,wma,rmvb,rm,flash,mp4,mid,3GP,mpg,mov,wmov,qt',
+                multi: true,
+                accept: '*/*',
+                fileSizeLimit: 5*1024*1024*1024,
+                formData: {
+                    type: 'card_positive'
+                },
+                onUploadProgress: function (file, uploaded, total) {
+                    layer.msg('正在上传,请耐心等待');
+                },
+                onUploadSuccess:function(file, uploaded, total){
+                    layer.msg('上传成功');
+                },
+                onUploadSuccess: function (file, data) {
+                    data = $.parseJSON(data);
+                    if (data.status == 0) {
+                        layer.alert(data.msg, {time: 1000})
+                    } else {
+                        var _isMax = false;
+                        var path = data.url;
+                        var _html = '<div class="imgInput"><input type="hidden" name="url" value="' + path + '"></div>';
+                        // 获取图片列表
+                        $('#videos').append(_html);
+                        if (_isMax == false) {
+                            layer.msg('上传成功', {time: 1000})
+                        }
+                    }
+                },
+                onUploadError: function (file) {
+                    layer.alert('上传失败');
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
         var ue1 = UE.getEditor('container1', {
             toolbars: [

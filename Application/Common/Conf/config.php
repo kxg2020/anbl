@@ -30,4 +30,14 @@ return array(
 
     // 指定缓存的存储方式
     'DATA_CACHE_TYPE' =>  'Redis',
+
+    // 绑定上传方式
+    'FILE_UPLOAD_TYPE'    =>    'Qiniu',
+    'UPLOAD_TYPE_CONFIG'  =>    array(
+        'secretKey'      => '-ozcCzNuPfZQePdMUtEHzp6gfuQQfS-GR4IOmxen', //七牛密码
+        'accessKey'      => 'Oxorx2oRMYXe8bZCRvuoNpyOexkJAgKPgs14Gv4O', //七牛用户
+        'domain'         => 'on58ea572.bkt.clouddn.com', //域名
+        'bucket'         => 'macarin', //空间名称
+        'timeout'        => 300, //超时时间
+    ),
 );
