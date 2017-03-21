@@ -73,7 +73,7 @@ class MemberController extends  Controller{
         $memberModel = M('Member');
 
         //>> 查询数据库
-        $res = $memberModel->where(['id'=>$paramArr['id']])->find();
+        $res = $memberModel->where(['id'=>$paramArr['id'],'is_active'=>1])->find();
         if(!empty($res)){
 
             $res['date'] = date('Y-m-d',$res['create_time']);
