@@ -16,15 +16,15 @@
         </ul>
     </div>
     <div class="wrapper">
-       <a href="{:U('admin/pageConfig/add')}"> <input type="button" class="btn btn-xs btn-success" value="添加新作品"></a>
+       <a href="{:U('admin/pageConfig/addRector')}"> <input type="button" class="btn btn-xs btn-success" value="添加新导演"></a>
         <table class="table table-bordered table-hover">
             <tr align="center" >
                 <td>编号</td>
-                <td>作品名</td>
-                <td>类型</td>
-                <td>封面图</td>
-                <td>投票数</td>
+                <td>名字</td>
+                <td>地址</td>
                 <td>粉丝数</td>
+                <td>投票数</td>
+                <td>封面图</td>
                 <td>是否上线</td>
                 <td>操作</td>
             </tr>
@@ -33,12 +33,12 @@
                 <tr align="center">
                     <td>{$l.id}</td>
                     <td>{$l.name}</td>
-                    <td>{$l.type}</td>
-                    <td>{$l.img_url}</td>
-                    <td>{$l.vote_number}</td>
+                    <td>{$l.address}</td>
+                    <td>{$l.fans_number}</td>
                     <td>
-                            {$l.fans_number}
+                            {$l.vote_number}
                     </td>
+                    <td>{$l.image_url}</td>
                     <td><img src="__IMG__/{$l.is_active}.gif"></td>
                     <td><input type="button" class="btn btn-xs btn-info detail" value="详情" data-id="{$l['id']}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"  class="btn btn-xs btn-danger delete" data-id="{$l.id}" value="删除" data-toggle="modal" data-target=".myModal"></td>
                 </tr>
@@ -68,7 +68,7 @@
                             $.ajax({
                                 'type':'post',
                                 'dataType':'json',
-                                'url':"{:U('admin/pageConfig/select')}",
+                                'url':"{:U('admin/pageConfig/director')}",
                                 'data':{
                                     'pgNum':obj.curr,
                                     'pgSize':20,
@@ -81,10 +81,10 @@
                                                     '<tr align="center">'+
                                                     '<td>'+ v.id+'</td>'+
                                                     '<td>'+ v.name+'</td>'+
-                                                    '<td>'+ v.type+'</td>'+
-                                                    '<td>'+ v.img_url+'</td>'+
-                                                    '<td>'+ v.vote_number+'</td>'+
+                                                    '<td>'+ v.address+'</td>'+
                                                     '<td>'+ v.fans_number+'</td>'+
+                                                    '<td>'+ v.vote_number+'</td>'+
+                                                    '<td>'+ v.image_url+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+ v.is_active+'.gif"/>'+'</td>'+
                                                     '<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="详情" data-id="'+ v.id+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="button" class="delete btn btn-xs btn-danger" data-toggle="modal" data-target=".myModal" value="删除"  data-id='+ v.id+'>'+'</td>'+
                                                     "</tr>"
@@ -104,7 +104,7 @@
             $.ajax({
                 'type':'post',
                 'dataType':'json',
-                'url':"{:U('admin/pageConfig/delete')}",
+                'url':"{:U('admin/pageConfig/delRector')}",
                 'data':{
                     'id':id
                 },
@@ -112,6 +112,8 @@
                     if(result.status == 1){
                         layer.msg('删除成功!');
                         location.reload();
+                    }else{
+                        layer.msg('删除失败!');
                     }
                 }
             });
@@ -124,7 +126,7 @@
                 shadeClose: true,
                 shade: 0.8,
                 area: ['70%', '100%'],
-                content: "{:U('admin/pageConfig/detail')}"+'?id='+id,
+                content: "{:U('admin/pageConfig/info')}"+'?id='+id,
                 end: function () {
                     location.reload();
                 }
