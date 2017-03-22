@@ -16,6 +16,7 @@
         </ul>
     </div>
     <div class="wrapper">
+       <a href="{:U('admin/pageConfig/add')}"> <input type="button" class="btn btn-xs btn-success" value="添加新作品"></a>
         <table class="table table-bordered table-hover">
             <tr align="center">
                 <td>编号</td>
@@ -85,7 +86,7 @@
                                                     '<td>'+ v.vote_number+'</td>'+
                                                     '<td>'+ v.fans_number+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+ v.is_active+'.gif"/>'+'</td>'+
-                                                    '<td><a hre="{:U("'+'admin/pageConfig/detail/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-info detail" value="详情"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="button" class="delete btn btn-xs btn-danger" data-toggle="modal" data-target=".myModal" value="删除"  data-id='+ v.id+'>'+'</td>'+
+                                                    '<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="详情" data-id="'+ v.id+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="button" class="delete btn btn-xs btn-danger" data-toggle="modal" data-target=".myModal" value="删除"  data-id='+ v.id+'>'+'</td>'+
                                                     "</tr>"
                                             );
                                         });
