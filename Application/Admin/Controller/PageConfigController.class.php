@@ -59,6 +59,33 @@ class PageConfigController extends  Controller{
      */
     public function add(){
 
+        if(IS_POST){
+            $paramArr = $_REQUEST;
+
+            if(!empty($paramArr)){
+
+                $insertData = [
+                    'name'=>$paramArr['name'],
+                    'type'=>$paramArr['type'],
+                    'img_url'=>$paramArr['image_url'],
+                    'sort'=>$paramArr['sort'],
+                    'vote_number'=>$paramArr['vote_number'],
+                    'intro'=>$paramArr['intro'],
+                    'is_active'=>$paramArr['is_active'],
+                    'create_time'=>time(),
+                ];
+                $res = M('Works')->add($insertData);
+                if($res){
+                    $this->ajaxReturn([
+                        'status'=>1,
+                        'msg'=>'添加成功!'
+                    ]);
+                }
+
+            }
+            exit;
+        }
+
         $this->display('page/add');
     }
 
@@ -122,7 +149,7 @@ class PageConfigController extends  Controller{
                 'img_url'=>$paramArr['image_url']?$paramArr['image_url']:$paramArr['img_url'],
                 'intro'=>$paramArr['intro'],
             ];
-            $res = M('Works')->where(['id'=>$paramArr['id']])->save($data);
+            M('Works')->where(['id'=>$paramArr['id']])->save($data);
         }
     }
 
@@ -145,9 +172,6 @@ class PageConfigController extends  Controller{
 
     /**
      * 图片上传
-     */
-    /**
-     * 图片文件上传
      */
     public function upload(){
         $config = [
