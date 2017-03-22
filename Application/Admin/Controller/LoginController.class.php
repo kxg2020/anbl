@@ -3,12 +3,26 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class LoginController extends Controller{
+class LoginController extends CommonController{
+
+    /**
+     * 登录界面
+     */
+    public function index(){
+
+        if($this->isLogin){
+            $this->redirect('admin/index/index');
+            exit;
+        }
+        $this->display('index/login');
+
+    }
 
     /**
      * 登录方法
      */
     public function login(){
+
 
         $paramArr = $_REQUEST;
 
@@ -33,20 +47,21 @@ class LoginController extends Controller{
 
         if(!empty($res)){
 
-            session(md5('admin'),$res);
-
+            $token = md5(microtime().'!@#$$%^'.rand(0,1000));
+            session(md5('admin'),$token);
+            M('User')->where(['id'=>$res['id']])->save(['session_token'=>$token,'create_time'=>time(),'last_ip'=>get_client_ip()]);
             //>> 判断是否记住个人信息
             if(isset($paramArr['remember']) && $paramArr['remember'] == 1){
 
-                $token = md5(microtime().'!@#$$%^'.rand(0,1000));
+                $rememberToken = md5(microtime().rand(0,1000));
+
+                cookie(md5('admin'),$rememberToken,time()+7*3600*24);
 
                 //>> 将token保存到数据库
-                M('User')->where(['id'=>$res['id']])->save(['token'=>$token,'create_time'=>time(),'last_ip'=>get_client_ip()]);
-
-                cookie(md5('remember'),$token,time()+7*3600*24);
+                M('User')->where(['id'=>$res['id']])->save(['remember_token'=>$rememberToken]);
             }
 
-            $this->redirect('admin/Index/admin');
+            $this->redirect('admin/Index/index');
 
         }else{
 
@@ -60,6 +75,6 @@ class LoginController extends Controller{
     public function logout(){
         session(md5('admin'), null);
         cookie(md5('remember'), null);
-        $this->redirect('Admin/index/index');
+        $this->redirect('Admin/login/index');
     }
 }

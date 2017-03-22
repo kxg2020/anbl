@@ -15,6 +15,30 @@ class CommonController extends Controller
 
     // 初始化
     public function _initialize(){
+        //>> 拿session
+        $session = session(md5('admin'));
+        if(!empty($session)){
+            //>> 查询用户
+            $row = M('User')->where(['session_token'=>$session])->find();
+            if(!empty($row)){
+                $this->isLogin = 1;
+                $this->userInfo = $row;
+                $this->assign('userInfo',$row);
+            }
+        }else{
+            //>> 拿cookie
+            $cookie = cookie(md5('admin'));
+
+            if(!empty($cookie)){
+                $row = M('User')->where(['remember_token'=>$cookie]);
+                if(!empty($row)){
+
+                    $this->isLogin = 1;
+                    $this->userInfo = $row;
+                    $this->assign('userInfo',$row);
+                }
+            }
+        }
 
     }
 
