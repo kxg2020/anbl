@@ -80,9 +80,9 @@
         </h3>
         <ul class="breadcrumb">
             <li>
-                <a href="#">优秀作品</a>
+                <a href="#">优秀导演</a>
             </li>
-            <li class="active"> 添加作品 </li>
+            <li class="active"> 添加导演 </li>
         </ul>
     </div>
     <section class="wrapper">
@@ -92,48 +92,34 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <div class="panel-body">
-                        <form action="{:U('admin/pageConfig/add')}" class="form-horizontal adminex-form" method="post" id="projectForm">
+                        <form action="{:U('admin/pageConfig/addRector')}" class="form-horizontal adminex-form" method="post" id="projectForm" >
 
                             <div class="tab-content">
                                 <!--项目基本信息-->
                                 <div class="tab-pane active" id="baseInfo">
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">电影名称</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">名字</label>
                                         <div class="col-sm-4 col-md-4">
-                                            <input type="text" name="name" class="form-control" placeholder="请输入电影名称">
+                                            <input type="text" name="name" class="form-control" placeholder="请输入导演名字">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class=" col-md-2 control-label">电影类型</label>
-                                        <div class="col-sm-10 icheck">
-                                            <div class="input-group">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="checkbox" name="type[]" value="战争">战争
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="checkbox" name="type[]"  value="爱情">爱情
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="checkbox" name="type[]"  value="喜剧">喜剧
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="checkbox" name="type[]"  value="科幻">科幻
-                                                    </label>
-                                                </div>
-                                            </div>
+                                        <label class="col-sm-2 col-sm-2 control-label">地址</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="address" class="form-control" placeholder="请输入导演地址">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">排序</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="number" name="sort" class="form-control" value="1">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">简介</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <textarea name="intro" cols="100" rows="10" class="form-control"
+                                                      placeholder="请输入项目的简介"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -150,29 +136,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">作品排序</label>
-                                        <div class="col-sm-4 col-md-4">
-                                            <input type="number" name="sort" class="form-control" value="1">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">粉丝人数</label>
                                         <div class="col-sm-4 col-md-4">
-                                            <input type="text" name="fans_number" class="form-control" placeholder="请输入项目标题">
+                                            <input type="text" name="fans_number" value="0" class="form-control" placeholder="请输入粉丝人数">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">投票人数</label>
                                         <div class="col-sm-4 col-md-4">
-                                            <input type="text" name="vote_number" class="form-control" placeholder="请输入项目标题">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">电影简介</label>
-                                        <div class="col-sm-4 col-md-4">
-                                            <textarea name="intro" cols="100" rows="10" class="form-control"
-                                                      placeholder="请输入项目的简介"></textarea>
+                                            <input type="text" name="vote_number" value="0" class="form-control" placeholder="请输入投票人数">
                                         </div>
                                     </div>
                                     <!--项目状态-->
@@ -182,21 +154,28 @@
                                             <div class="input-group">
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" name="is_active" checked value="1">是
+                                                        <input type="radio" name="is_active" value="1">是
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="input-group">
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" name="is_active"  value="0">否
+                                                        <input type="radio" name="is_active" checked value="0">否
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
+                                </div>
+                                <!--项目详情-->
+                                <div class="tab-pane" id="details">
+                                    <!--编辑器-->
 
+                                </div>
                                 <!--项目视频-->
+
                                 <div class="layui-progress">
                                     <div class="layui-progress-bar" lay-percent="10%"></div>
                                 </div>
@@ -226,11 +205,11 @@
     <script type="text/javascript">
         $(function () {
             $("#file_upload").h5upload({
-                url: "{:U('admin/pageConfig/upload')}",
+                url: "{:U('admin/Project/upload')}",
                 fileObjName: 'image',
                 fileTypeExts: 'jpg,png,gif,bmp,jpeg',
                 multi: true,
-                accept: '*',
+                accept: '*/*',
                 fileSizeLimit: 1024 * 1024 * 1024 * 1024,
                 formData: {
                     type: 'card_positive'
@@ -248,7 +227,7 @@
                         console.log(data.url);
                         var _html = '<div class="imgInput"><img title="点我删除" src="' + path + '" width = 100 height = 100 /><input type="hidden" name="image_url" value="' + path + '"></div>';
                         // 获取图片列表
-                        $('#images').html(_html);
+                        $('#images').append(_html);
                         if (_isMax == false) {
                             layer.msg('上传成功', {time: 1000})
 
@@ -259,7 +238,6 @@
                     layer.alert('上传失败');
                 }
             });
-
             $('#images').on('click', '.imgInput', function () {
                 console.debug($(this));
                 // 删除当前图片
@@ -268,103 +246,44 @@
 
         });
     </script>
-    <script type="text/javascript">
-        $(function () {
-            $("#file_upload1").h5upload({
-                url: "{:U('admin/Project/upload_video')}",
-                fileObjName: 'video',
-                fileTypeExts: 'avi,wma,rmvb,rm,flash,mp4,mid,3GP,mpg,mov,wmov,qt',
-                multi: true,
-                accept: '*/*',
-                fileSizeLimit: 5*1024*1024*1024,
-                formData: {
-                    type: 'card_positive'
-                },
-                onUploadProgress: function (file, uploaded, total) {
-                    layer.msg('正在上传,请耐心等待');
-                },
-                onUploadSuccess:function(file, uploaded, total){
-                    layer.msg('上传成功');
-                },
-                onUploadSuccess: function (file, data) {
-                    data = $.parseJSON(data);
-                    if (data.status == 0) {
-                        layer.alert(data.msg, {time: 1000})
-                    } else {
-                        var _isMax = false;
-                        var path = data.url;
-                        var _html = '<div class="imgInput"><input type="hidden" name="url" value="' + path + '"></div>';
-                        // 获取图片列表
-                        $('#videos').append(_html);
-                        if (_isMax == false) {
-                            layer.msg('上传成功', {time: 1000})
-                        }
-                    }
-                },
-                onUploadError: function (file) {
-                    layer.alert('上传失败');
-                }
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        var ue4 = UE.getEditor('container4', {
-            toolbars: [
-                ['fullscreen', 'source', 'undo', 'redo', 'bold','indent','snapscreen', 'italic', 'underline', 'strikethrough','formatmatch','fontfamily',
-                    'fontsize', 'paragraph', 'simpleupload', 'insertimage','justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor',
-                    'backcolor', 'insertorderedlist', 'insertunorderedlist','imagecenter', 'wordimage', 'lineheight'
-                ]
-            ],
-            autoHeightEnabled: true,
-            autoFloatEnabled: true
-        });
-    </script>
+
     <script>
         $('#projectForm').validate({
             rules: {
                 name: {
                     required: true
                 },
-                type: {
+                address: {
+                    required: true
+                },
+                intro: {
                     required: true
                 },
                 fans_number: {
                     required: true
                 },
                 vote_number: {
-                    required: true
-                },
-                intro: {
-                    required: true
-                },
-                is_active: {
-                    required: true
-                },
-                image_url: {
                     required: true
                 }
             },
             messages: {
                 name: {
-                    required: '*电影名称必须填写*'
+                    required: '*导演名字必须填写*'
                 },
-                type: {
-                    required: '*请选择电影类型*'
+                address: {
+                    required: '*导演地址必须填写*'
                 },
-                fans_number: {
-                    required: '*粉丝人数必填*'
-                },
-                vote_number: {
-                    required: '*投票人数必填*'
-                },
-                is_active: {
-                    required: '*是否上线？*'
-                },
+
                 intro: {
-                    required: '*电影简介必须填写*'
+                    required: '*项目简介必须填写*'
                 },
-                image_url: {
-                    required: '*请上传封面图*'
+
+                fans_number: {
+                    required: '*粉丝人数必须填写*'
+                },
+
+                vote_number: {
+                    required: '*投票人数必须填写*'
                 }
             },
             showErrors: function (errorMap, errorList) {
@@ -378,16 +297,11 @@
                 var _data = $(form).serialize();
                 console.log($(form).attr('action'));
                 $.post($(form).attr('action'), _data, function (data) {
-                    if (data.status == 1) {
-                        layer.msg(data.msg, {
-                            time: 2000,
-                            success:function(){
-                                window.location.href = "{:U('admin/pageConfig/select')}"
-                            }
-                        });
-
+                    if (data.status == 0) {
+                        layer.alert(data.msg);
                     } else {
-
+                        // 跳转到列表
+                        window.location.href = "{:U('admin/pageConfig/director')}";
                     }
                 });
                 return false;
