@@ -46,6 +46,9 @@
                                     <th class="text-center">支持人数</th>
                                     <th class="text-center">启动时间</th>
                                     <th class="text-center">结束时间</th>
+                                    <th class="text-center">是否上架</th>
+                                    <th class="text-center">自然排序</th>
+                                    <th class="text-center">首页轮播</th>
                                     <th class="text-center">操作</th>
                                 </tr>
                                 </thead>
@@ -65,6 +68,19 @@
                                     <td>{$tag.support_number}</td>
                                     <td>{:date('Y-m-d',$tag['start_time'])}</td>
                                     <td>{:date('Y-m-d',$tag['end_time'])}</td>
+                                    <td><if condition="$tag['is_active'] eq 1">
+                                        <a href="javascript:;" onclick="checkState('{:U('admin/Project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
+                                        <else/>
+                                        <a href="javascript:;" onclick="checkState('{:U('admin/Project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
+                                    </if></td>
+                                    <td>
+                                        <input class="form-control" style="width: 50px; display: inline-block; text-align: center;" type="text" value="{$tag['sort']}" onchange="saveSort('{:U('admin/Project/saveSort', array('id' => $tag['id']))}',this)" >
+                                    </td>
+                                    <td><if condition="$tag['recommend'] eq 1">
+                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/Project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
+                                        <else/>
+                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/Project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
+                                    </if></td>
                                     <td>
                                         <a href="{:U('admin/Project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
                                         <a data-href="{:U('admin/Project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
@@ -99,6 +115,7 @@
         </div>
     </div>
     <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
     <script>
         $(function(){
             $('.deleteBtn').click(function(){
@@ -106,5 +123,41 @@
                 $('#deleteTrue').attr('href', _link);
             })
         });
+
+        function checkState(url,e) {
+            $.get(url,function (data) {
+                if(data.status == 1){
+                    if(data.value == 1){
+                        $(e).html('<span class="fa fa-check"></span>');
+                    }else{
+                        $(e).html('<span class="fa fa-times color-red"></span>');
+                    }
+                }
+                layer.msg(data.msg);
+            });
+        }
+
+        function checkRecommend(url,e) {
+            $.get(url,function (data) {
+                if(data.status == 1){
+                    if(data.value == 1){
+                        $(e).html('<span class="fa fa-check"></span>');
+                    }else{
+                        $(e).html('<span class="fa fa-times color-red"></span>');
+                    }
+                }
+                layer.msg(data.msg);
+            });
+        }
+
+        function saveSort(url,e) {
+            $.post(url,{sort:$(e).val()},function (data) {
+                if(data.status == 1){
+                    $(e).val(data.value);
+                }
+                layer.msg(data.msg);
+            });
+        }
+
     </script>
 </block>

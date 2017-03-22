@@ -294,7 +294,7 @@
                 fileObjName: 'image',
                 fileTypeExts: 'jpg,png,gif,bmp,jpeg',
                 multi: true,
-                accept: 'image/*',
+                accept: '*/*',
                 fileSizeLimit: 1024 * 1024 * 1024 * 1024,
                 formData: {
                     type: 'card_positive'
@@ -323,7 +323,6 @@
                     layer.alert('上传失败');
                 }
             });
-
             $('#images').on('click', '.imgInput', function () {
                 console.debug($(this));
                 // 删除当前图片
@@ -345,10 +344,16 @@
                     type: 'card_positive'
                 },
                 onUploadProgress: function (file, uploaded, total) {
-                    layer.msg('正在上传,请耐心等待');
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-molv', //样式类名
+                        closeBtn: 0, //不显示关闭按钮
+                        anim: 2,
+                        content: '视频上传中，可能需要点时间，请耐心等待！'
+                    });
                 },
-                onUploadSuccess:function(file, uploaded, total){
-                    layer.msg('上传成功');
+                onUploadComplete:function(file, uploaded, total){
+                    layer.closeAll();
                 },
                 onUploadSuccess: function (file, data) {
                     data = $.parseJSON(data);
@@ -357,7 +362,7 @@
                     } else {
                         var _isMax = false;
                         var path = data.url;
-                        var _html = '<div class="imgInput"><input type="hidden" name="url" value="' + path + '"></div>';
+                        var _html = '<div class="imgInput"><input type="hidden" name="url" value="' + path + '">》》》视频上传成功！</div>';
                         // 获取图片列表
                         $('#videos').append(_html);
                         if (_isMax == false) {

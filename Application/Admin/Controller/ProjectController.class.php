@@ -288,4 +288,115 @@ class ProjectController extends CommonController
             'url' => $rst['url']
         ]);
     }
+
+    /**
+     * 切换是否上架
+     * @param $id 项目id
+     */
+    public function state($id)
+    {
+        $projectModel = D('Project');
+
+        // 获取项目数据
+        $projectInfo = $projectModel->find($id);
+
+        // 判断数据是否存在
+        if (!$projectInfo) {
+            $this->Msg['msg'] = "项目不存在";
+            $this->ajaxReturn($this->Msg);
+        }
+
+
+        // 判断项目是否已上架
+        if ($projectInfo['is_active'] == 1) {
+            $projectInfo['is_active'] = 0;
+        } else {
+            $projectInfo['is_active'] = 1;
+        }
+
+        // 保存项目数据
+        $rst = $projectModel->save($projectInfo);
+        if ($rst === false) {
+            $this->Msg['msg'] = "修改失败，请重试";
+            $this->ajaxReturn($this->Msg);
+        } else {
+            $this->Msg['msg'] = "修改成功";
+            $this->Msg['status'] = 1;
+            $this->Msg['value'] = $projectInfo['is_active'];
+            $this->ajaxReturn($this->Msg);
+        }
+
+    }
+
+    /**
+     * 自定义排序
+     * @param $id 项目id
+     */
+    public function saveSort($id)
+    {
+        $id = intval($id);
+        $sort = I('post.sort') ? I('post.sort') : 50;
+
+        $projectModel = D('Project');
+
+        // 获取项目数据
+        $projectInfo = $projectModel->find($id);
+
+        // 判断数据是否存在
+        if (!$projectInfo) {
+            $this->Msg['msg'] = "项目不存在";
+            $this->ajaxReturn($this->Msg);
+        }
+        $projectInfo['sort'] = $sort;
+        // 保存项目数据
+        $rst = $projectModel->save($projectInfo);
+        if ($rst === false) {
+            $this->Msg['msg'] = "修改失败，请重试";
+            $this->ajaxReturn($this->Msg);
+        } else {
+            $this->Msg['msg'] = "修改成功";
+            $this->Msg['status'] = 1;
+            $this->Msg['value'] = $projectInfo['sort'];
+            $this->ajaxReturn($this->Msg);
+        }
+    }
+
+    /**
+     * 是否推荐到首页
+     * @param $id
+     */
+    public function recommend($id)
+    {
+        $projectModel = D('Project');
+
+        // 获取项目数据
+        $projectInfo = $projectModel->find($id);
+
+        // 判断数据是否存在
+        if (!$projectInfo) {
+            $this->Msg['msg'] = "项目不存在";
+            $this->ajaxReturn($this->Msg);
+        }
+
+
+        // 判断项目是否已上架
+        if ($projectInfo['recommend'] == 1) {
+            $projectInfo['recommend'] = 0;
+        } else {
+            $projectInfo['recommend'] = 1;
+        }
+
+        // 保存项目数据
+        $rst = $projectModel->save($projectInfo);
+        if ($rst === false) {
+            $this->Msg['msg'] = "修改失败，请重试";
+            $this->ajaxReturn($this->Msg);
+        } else {
+            $this->Msg['msg'] = "修改成功";
+            $this->Msg['status'] = 1;
+            $this->Msg['value'] = $projectInfo['recommend'];
+            $this->ajaxReturn($this->Msg);
+        }
+
+    }
 }
