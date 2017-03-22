@@ -399,4 +399,25 @@ class ProjectController extends CommonController
         }
 
     }
+
+    public function mm($res_filepath='http://on58ea572.bkt.clouddn.com/2017-03-22_58d1e7ba8826c.mp4'){
+        if(isset($_GET["filepath"])) {
+            $res_filepath = $_GET["filepath"];
+        }
+        $file_realpath = realpath($res_filepath);
+        $file_basename = basename($res_filepath);
+        $file_filesize = filesize($res_filepath);
+        $file = fopen($res_filepath, "r");
+        Header("Content-type: application/octet-stream");
+        Header("Accept-Ranges: bytes");
+        Header("Accept-Length: " . $file_filesize);
+        Header("Content-Disposition: attachment; filename=" . $file_basename);
+        echo fread($file, $file_filesize);
+        fclose($file);
+        // 下载或取消后，删除临时文件
+        $del_result = @unlink($res_filepath);
+        if ($del_result == true) {
+            @unlink($res_filepath);
+        }
+    }
 }
