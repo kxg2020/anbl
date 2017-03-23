@@ -195,7 +195,7 @@ class RegisterController extends CommonController{
 
             //>> 配置信息
             $config = [
-                
+
                 'phone_api_app_key'=>C('PHONE_API_APP_KEY'),
 
                 'verify_code_tpl'=>C('VERIFY_CODE_TPL'),

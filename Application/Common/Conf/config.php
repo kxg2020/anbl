@@ -32,8 +32,8 @@ return array(
     'DATA_CACHE_TYPE' =>  'Redis',
 
     // 发送短信配置
-    'PHONE_API_APP_KEY'=>'d86223080830f5cd6e98b08893d73658',
-    'VERIFY_CODE_TPL'=>'xxxx',
+    'PHONE_API_APP_KEY'=>'a7cacd2316e124a3bc0d07d97bf969eb',
+    'VERIFY_CODE_TPL'=>'【快易家】您的验证码是{验证码}',
 
     // 绑定上传方式
     'FILE_UPLOAD_TYPE'    =>    'Qiniu',
