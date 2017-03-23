@@ -31,6 +31,10 @@ return array(
     // 指定缓存的存储方式
     'DATA_CACHE_TYPE' =>  'Redis',
 
+    // 发送短信配置
+    'PHONE_API_APP_KEY'=>'d86223080830f5cd6e98b08893d73658',
+    'VERIFY_CODE_TPL'=>'xxxx',
+
     // 绑定上传方式
     'FILE_UPLOAD_TYPE'    =>    'Qiniu',
     'UPLOAD_TYPE_CONFIG'  =>    array(

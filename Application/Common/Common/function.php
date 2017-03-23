@@ -125,7 +125,8 @@ function sendSMSTemp($mobile = '', $text = '', $systemInfo, $tpl_id = 1)
     $data = [
         'tpl_id'    => $tpl_id, // 模板id
         'tpl_value' => $text,
-        'apikey'    => $apikey, 'mobile' => $mobile
+        'apikey'    => $apikey,
+        'mobile' => $mobile
     ];
     $json_data = tpl_send($ch, $data);
     $array = json_decode($json_data, true);
