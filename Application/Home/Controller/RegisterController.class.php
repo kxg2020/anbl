@@ -5,6 +5,15 @@ use Think\Controller;
 class RegisterController extends CommonController{
 
     /**
+     * 注册界面
+     */
+    public function index(){
+
+        $this->display('register/index');
+
+    }
+
+    /**
      * 用户注册
      */
     public function register(){
@@ -13,14 +22,14 @@ class RegisterController extends CommonController{
 
         if(!empty($paramArr) && !empty($paramArr['phone']) && !empty($paramArr['password']) && !empty($paramArr['captcha'])){
 
-            $userModel = M('User');
+            $userModel = M('Member');
 
             //>> 检测验证码
             $captcha = session('verify_code'.$paramArr['phone']);
 
             if($captcha != $paramArr['captcha']){
 
-                $this->_printError('1008');
+                die($this->_printError('1008'));
 
             }else{
 
@@ -32,12 +41,12 @@ class RegisterController extends CommonController{
 
                 if(!$row){
 
-                    $this->_printError('1006');
+                    die($this->_printError('1006'));
 
                 }
                 if(!$res){
 
-                    $this->_printError('1010');
+                    die($this->_printError('1010'));
 
                 }
 
@@ -64,12 +73,20 @@ class RegisterController extends CommonController{
 
                 $invite_key = implode('',$endArr);
 
+                //>> 判断当前用户是否已经注册
+                $res = $userModel->where(['phone'=>$paramArr['phone']])->find();
+                if($res){
+
+                    die($this->_printError('1014'));
+
+                }
+
 
                 //>> 将用户信息保存到数据库
                 $insertData = [
                     'phone'=>$paramArr['phone'],
                     'username'=>$paramArr['phone'],
-                    'password'=>$paramArr['password'],
+                    'password'=>md5($paramArr['password']),
                     'create_time'=>time(),
                     'last_ip'=>get_client_ip(),
                     'invite_key'=>$invite_key,
@@ -80,11 +97,11 @@ class RegisterController extends CommonController{
 
                 if($res){
 
-                    $this->_printSuccess();
+                    die($this->_printSuccess());
 
                 }else{
 
-                    $this->_printError('1012');
+                    die($this->_printError('1012'));
 
                 }
 
@@ -92,7 +109,7 @@ class RegisterController extends CommonController{
 
         }else{
 
-            $this->_printError('1000');
+            die($this->_printError('1000'));
 
         }
     }
@@ -111,7 +128,7 @@ class RegisterController extends CommonController{
             if(isset($password) && strlen($password) < 16){
 
                 //>> 密码由字母、数字、下划线组成，5-16位
-                $reg = '^[a-zA-Z][a-zA-Z0-9_]{4,15}$';
+                $reg = '/^[a-zA-Z]\w{5,16}$/';
 
                 preg_match_all($reg,$password,$str);
 
@@ -164,7 +181,7 @@ class RegisterController extends CommonController{
 
             if(!$res){
 
-                $this->_printError('1006');
+                die($this->_printError('1006'));
 
             }
 
@@ -176,7 +193,7 @@ class RegisterController extends CommonController{
                 //>> 判断时间是否小于60秒
                 if(time() - $verifyTime < 60 ){
 
-                    $this->_printError('10004');
+                    die($this->_printError('10004'));
 
                 }
             }
@@ -212,17 +229,17 @@ class RegisterController extends CommonController{
                 //>> 保发送时间
                 session('verify_create_time'.$paramArr['phone'],time());
 
-                $this->_printSuccess();
+                die($this->_printSuccess());
 
             }else{
 
-                $this->_printError('1002');
+                die($this->_printError('1002'));
 
             }
 
         }else{
 
-            $this->_printError('1006');
+            die($this->_printError('1006'));
         }
     }
 }

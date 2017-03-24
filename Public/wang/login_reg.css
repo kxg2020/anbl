@@ -1,0 +1,140 @@
+body{
+	font-family: 'Microsoft Yahei';
+	font-size: 16px;
+	min-width: 1200px;
+	width: 100%;
+	height: 100%;
+	background: url(img/login_bg.png);
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+.bg{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.6);
+	overflow: hidden;
+}
+.content{
+	margin: auto;
+	width: 355px;
+	height: auto;
+	padding-top: 180px;
+	color: white;
+	text-align: center;
+}
+.logo{
+	font-size: 25px;
+}
+.title{
+	font-size: 20px;
+	margin-bottom: 20px;
+	letter-spacing: 15px;
+}
+.content input{
+	border: none;
+	outline: none;
+	padding-left: 70px;
+	background: #7b7d7d;
+	color: #babcbb;
+	width: 285px;
+	height: 40px;
+	font-size: 20px;
+	margin-bottom: 45px;
+}
+.content .pwd input{
+	font-size: 30px;
+}
+.user,.pwd,.identify,.invite{
+	position: relative;
+}
+.user i{
+	display: block;
+	width: 26px;
+	height: 26px;
+	background: url(img/user.png);
+	position: absolute;
+	top: 8px;
+	left: 24px;
+}
+.pwd i{
+	display: block;
+	width: 22px;
+	height: 26px;
+	background: url(img/pwd.png);
+	position: absolute;
+	top: 8px;
+	left: 24px;
+}
+.login{
+	width: 146px;
+	height: 48px;
+	margin: auto;
+	line-height: 48px;
+	color: white;
+	background: #e50909;
+	font-size: 20px;
+	margin-bottom: 40px;
+	cursor: pointer;
+}
+.reg_forget{
+	margin: auto;
+	overflow: hidden;
+}
+.fast_reg{
+	float: left;
+	font-size: 20px;
+	cursor: pointer;
+}
+.forget_pwd{
+	float: right;
+	font-size: 20px;
+	cursor: pointer;
+}
+#reg_content{
+	padding-top: 100px;
+}
+#reg_content input{
+	padding-left: 20px;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+  color: #c5c6c6; 
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+color: #c5c6c6;
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+color: #c5c6c6;
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+color: #c5c6c6;
+} 
+
+#reg_content span{
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 355px;
+	background: #757474;
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 12px;
+	width: 100px;
+	height: 42px;
+	line-height: 42px;
+}
+#reg_content #repeat_get{
+	display: none;
+}
+.agreement,.agreement a{
+	font-size: 14px;
+	color: #ffd952;
+	margin-bottom: 30px;
+}

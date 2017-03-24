@@ -5,31 +5,32 @@ use Think\Controller;
 
 class CommonController extends Controller{
 
-    //¼ÇÂ¼ÓÃ»§µÇÂ¼×´Ì¬
+    //è®°å½•ç”¨æˆ·ç™»å½•çŠ¶æ€
     public $isLogin = false;
 
-    //µ±Ç°ÓÃ»§ĞÅÏ¢
+    //å½“å‰ç”¨æˆ·ä¿¡æ¯
     public $userInfo = [];
 
     protected $_msgArr = [
 
-        '1000'=>['ÓÃ»§×¢²áĞÅÏ¢²»ÄÜÎª¿Õ!','ÓÃ»§×¢²áĞÅÏ¢²»ÄÜÎª¿Õ!'],
-        '1002'=>['¶ÌĞÅ·¢ËÍÊ§°Ü!','¶ÌĞÅ·¢ËÍÊ§°Ü!'],
-        '1004'=>['ÇëµÈ´ı60ÃëºóÔÙ·¢ËÍÑéÖ¤Âë!','ÇëµÈ´ı60ÃëºóÔÙ·¢ËÍÑéÖ¤Âë!'],
-        '1006'=>['ÊÖ»úºÅÂë¸ñÊ½²»ÕıÈ·!','ÊÖ»úºÅÂë¸ñÊ½²»ÕıÈ·!'],
-        '1008'=>['ÑéÖ¤Âë´íÎó!','ÑéÖ¤Âë´íÎó!'],
-        '1010'=>['ÓÃ»§Ãû»òÃÜÂë¸ñÊ½²»ÕıÈ·!','ÓÃ»§Ãû»òÃÜÂëµÄ¸ñÊ½²»ÕıÈ·!'],
-        '1012'=>['×¢²áÊ§°Ü!','×¢²áÊ§°Ü£¡'],
+        '1000'=>['ç”¨æˆ·æ³¨å†Œä¿¡æ¯ä¸èƒ½ä¸ºç©º!','ç”¨æˆ·æ³¨å†Œä¿¡æ¯ä¸èƒ½ä¸ºç©º!'],
+        '1002'=>['çŸ­ä¿¡å‘é€å¤±è´¥!','çŸ­ä¿¡å‘é€å¤±è´¥!'],
+        '1004'=>['è¯·ç­‰å¾…60ç§’åå†å‘é€éªŒè¯ç !','è¯·ç­‰å¾…60ç§’åå†å‘é€éªŒè¯ç !'],
+        '1006'=>['æ‰‹æœºå·ç æ ¼å¼ä¸æ­£ç¡®!','æ‰‹æœºå·ç æ ¼å¼ä¸æ­£ç¡®!'],
+        '1008'=>['éªŒè¯ç é”™è¯¯!','éªŒè¯ç é”™è¯¯!'],
+        '1010'=>['ç”¨æˆ·åæˆ–å¯†ç æ ¼å¼ä¸æ­£ç¡®!','ç”¨æˆ·åæˆ–å¯†ç çš„æ ¼å¼ä¸æ­£ç¡®!'],
+        '1012'=>['æ³¨å†Œå¤±è´¥!','æ³¨å†Œå¤±è´¥ï¼'],
+        '1014'=>['è¯·ä¸è¦é‡å¤æ³¨å†Œ!','è¯·ä¸è¦é‡å¤æ³¨å†Œï¼'],
     ];
 
     /**
-     * ³õÊ¼»¯
+     * åˆå§‹åŒ–
      */
     public function _initialize(){
-        //>> ÄÃsession
+        //>> æ‹¿session
         $session = session(md5('home'));
         if(!empty($session)){
-            //>> ²éÑ¯ÓÃ»§
+            //>> æŸ¥è¯¢ç”¨æˆ·
             $row = M('Member')->where(['session_token'=>$session])->find();
             if(!empty($row)){
                 $this->isLogin = 1;
@@ -37,7 +38,7 @@ class CommonController extends Controller{
                 $this->assign('userInfo',$row);
             }
         }else{
-            //>> ÄÃcookie
+            //>> æ‹¿cookie
             $cookie = cookie(md5('home'));
 
             if(!empty($cookie)){
@@ -54,7 +55,7 @@ class CommonController extends Controller{
     }
 
     /**
-     *»ñÈ¡´íÎó
+     *è·å–é”™è¯¯
      */
     public function getError($code,$isShow = 1){
 
@@ -76,7 +77,7 @@ class CommonController extends Controller{
     }
 
     /**
-     * ·¢ËÍ´íÎó
+     * å‘é€é”™è¯¯
      */
     public function _printError($code){
 
@@ -89,7 +90,7 @@ class CommonController extends Controller{
     }
 
     /**
-     * ÇëÇó³É¹¦
+     * è¯·æ±‚æˆåŠŸ
      */
     public function _printSuccess($value = [],$isobject = 0)
     {
