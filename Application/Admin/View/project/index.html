@@ -4,10 +4,10 @@
     <div class="page-heading">
         <ul class="breadcrumb">
             <li>
-                <a href="{:U('admin/Index/index')}">后台首页</a>
+                <a href="{:U('admin/index/index')}">后台首页</a>
             </li>
             <li class="active">
-                <a href="{:U('admin/Project/index')}">项目管理</a>
+                <a href="{:U('admin/project/index')}">项目管理</a>
             </li>
             <li class="active"> 项目列表 </li>
         </ul>
@@ -20,14 +20,25 @@
                 <section class="panel">
                     <header class="panel-heading">
                         项目列表
+                            <span class="tools pull-right">
+                                <a href="{:U('admin/project/add')}" class="btn btn-success btn-link">新增项目</a>
+                            </span>
                     </header>
                     <div class="panel-body">
 
                         <!--搜索开始-->
-                        <form class="form-inline" action="{:U('admin/Project/index')}" method="get">
+                        <form class="form-inline" action="{:U('admin/project/index')}" method="get">
                             <div class="form-group">
                                 <label>项目名称</label>
                                 <input type="text" class="form-control" name="name" value="{:I('get.name')}" placeholder="请输入项目名称">
+                            </div>
+                            <div class="form-group">
+                                <select name="type_id" class="form-control">
+                                    <option value="">--项目分类--</option>
+                                    <volist name="types" id="tag" >
+                                    <option value="{$tag['id']}" <if condition="I('get.type_id') eq $tag['id']"> selected="selected"</if>>{$tag.name}</option>
+                                    </volist>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">搜索</button>
                         </form>
@@ -41,13 +52,14 @@
                                     <th class="text-center">编号</th>
                                     <th class="text-center">名称</th>
                                     <th class="text-center">类型</th>
+                                    <th class="text-center">项目图片</th>
                                     <th class="text-center">目标金额</th>
                                     <th class="text-center">已支持资金</th>
                                     <th class="text-center">支持人数</th>
                                     <th class="text-center">启动时间</th>
                                     <th class="text-center">结束时间</th>
                                     <th class="text-center">是否上架</th>
-                                    <th class="text-center">自然排序</th>
+                                    <th class="text-center">自定义排序</th>
                                     <th class="text-center">首页轮播</th>
                                     <th class="text-center">操作</th>
                                 </tr>
@@ -60,30 +72,31 @@
                                 </if>
                                 <volist name="rows" id="tag">
                                 <tr class="gradeX">
-                                    <td>{$tag.id}</td>
-                                    <td>{$tag.name}</td>
-                                    <td>{$tag.type}</td>
-                                    <td>{$tag.target_amount}</td>
-                                    <td>{$tag.money}</td>
-                                    <td>{$tag.support_number}</td>
-                                    <td>{:date('Y-m-d',$tag['start_time'])}</td>
-                                    <td>{:date('Y-m-d',$tag['end_time'])}</td>
-                                    <td><if condition="$tag['is_active'] eq 1">
-                                        <a href="javascript:;" onclick="checkState('{:U('admin/Project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
+                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                    <td style="vertical-align: middle">{$tag.target_amount}</td>
+                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                    <td style="vertical-align: middle">{$tag.support_number}</td>
+                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['start_time'])}</td>
+                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['end_time'])}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_active'] eq 1">
+                                        <a href="javascript:;" onclick="checkState('{:U('admin/project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
                                         <else/>
-                                        <a href="javascript:;" onclick="checkState('{:U('admin/Project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
+                                        <a href="javascript:;" onclick="checkState('{:U('admin/project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
                                     </if></td>
-                                    <td>
+                                    <td style="vertical-align: middle">
                                         <input class="form-control" style="width: 50px; display: inline-block; text-align: center;" type="text" value="{$tag['sort']}" onchange="saveSort('{:U('admin/Project/saveSort', array('id' => $tag['id']))}',this)" >
                                     </td>
-                                    <td><if condition="$tag['recommend'] eq 1">
-                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/Project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
+                                    <td style="vertical-align: middle"><if condition="$tag['recommend'] eq 1">
+                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
                                         <else/>
-                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/Project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
+                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
                                     </if></td>
-                                    <td>
-                                        <a href="{:U('admin/Project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                        <a data-href="{:U('admin/Project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                    <td style="vertical-align: middle">
+                                        <a href="{:U('admin/project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                        <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                     </td>
                                 </tr>
                                 </volist>

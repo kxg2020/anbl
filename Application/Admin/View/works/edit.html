@@ -29,10 +29,10 @@
         <div class="page-heading">
             <ul class="breadcrumb">
                 <li>
-                    <a href="{:U('Index/index')}">后台首页</a>
+                    <a href="{:U('index/index')}">后台首页</a>
                 </li>
                 <li class="active">
-                    <a href="{:U('admin/Works/index')}">优秀演员管理</a>
+                    <a href="{:U('admin/works/index')}">优秀演员管理</a>
                 </li>
                 <li class="active"> 编辑优秀演员</li>
             </ul>
@@ -50,7 +50,7 @@
                             编辑优秀演员
                         </header>
                         <div class="panel-body">
-                            <form  method="post" action="{:U('admin/Works/edit',['id'=>$row['id']])}" id="projectForm">
+                            <form  method="post" action="{:U('admin/works/edit',['id'=>$row['id']])}" id="projectForm">
                                 <div class="form-group">
                                     <label>演员姓名</label>
                                     <input type="text" class="form-control" name="name" value="{$row.name}">
@@ -98,7 +98,7 @@
     <script type="text/javascript">
         $(function () {
             $("#file_upload").h5upload({
-                url: "{:U('admin/Project/upload')}",
+                url: "{:U('admin/project/upload')}",
                 fileObjName: 'image',
                 fileTypeExts: 'jpg,png,gif,bmp,jpeg',
                 multi: true,
@@ -184,7 +184,7 @@
                         layer.alert(data.msg);
                     } else {
                         // 跳转到列表
-                        window.location.href = "{:U('admin/Works/index')}";
+                        window.location.href = "{:U('admin/works/index')}";
                     }
                 });
                 return false;

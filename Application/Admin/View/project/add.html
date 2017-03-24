@@ -77,10 +77,10 @@
     <div class="page-heading">
         <ul class="breadcrumb">
             <li>
-                <a href="{:U('admin/Index/index')}">后台首页</a>
+                <a href="{:U('admin/index/index')}">后台首页</a>
             </li>
             <li class="active">
-                <a href="{:U('admin/Project/index')}">项目管理</a>
+                <a href="{:U('admin/project/index')}">项目管理</a>
             </li>
             <li class="active"> 新增项目</li>
         </ul>
@@ -105,7 +105,7 @@
                         </ul>
                     </header>
                     <div class="panel-body">
-                        <form action="{:U('admin/Project/add')}" class="form-horizontal adminex-form" method="post" id="projectForm">
+                        <form action="{:U('admin/project/add')}" class="form-horizontal adminex-form" method="post" id="projectForm">
 
                             <div class="tab-content">
                                 <!--项目基本信息-->
@@ -125,6 +125,24 @@
                                                         <option value="{$type.id}">{$type.name}</option>
                                                 </volist>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">导演</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="director" class="form-control" placeholder="请输入导演姓名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">主演</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="star" class="form-control" placeholder="请输入项目主演">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">出品单位</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="company" class="form-control" placeholder="请输入项目出品单位">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -290,7 +308,7 @@
     <script type="text/javascript">
         $(function () {
             $("#file_upload").h5upload({
-                url: "{:U('admin/Project/upload')}",
+                url: "{:U('admin/project/upload')}",
                 fileObjName: 'image',
                 fileTypeExts: 'jpg,png,gif,bmp,jpeg',
                 multi: true,
@@ -334,7 +352,7 @@
     <script type="text/javascript">
         $(function () {
             $("#file_upload1").h5upload({
-                url: "{:U('admin/Project/upload_video')}",
+                url: "{:U('admin/project/upload_video')}",
                 fileObjName: 'video',
                 fileTypeExts: 'avi,wma,rmvb,rm,flash,mp4,mid,3GP,mpg,mov,wmov,qt',
                 multi: true,
@@ -475,7 +493,7 @@
                         layer.alert(data.msg);
                     } else {
                         // 跳转到列表
-                        window.location.href = "{:U('admin/Project/index')}";
+                        window.location.href = "{:U('admin/project/index')}";
                     }
                 });
                 return false;

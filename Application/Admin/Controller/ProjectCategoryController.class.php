@@ -37,7 +37,7 @@ class ProjectCategoryController extends CommonController
                 $this->error('数据保存失败');
                 exit;
             }
-            $this->redirect('admin/ProjectCategory/index');
+            $this->redirect('admin/projectCategory/index');
             exit;
         }
         $this->display('add');
@@ -111,6 +111,6 @@ class ProjectCategoryController extends CommonController
             exit;
         }
         // 删除成功直接回到首页
-        $this->redirect('admin/ProjectCategory/index');
+        $this->redirect('admin/projectCategory/index');
     }
 }
