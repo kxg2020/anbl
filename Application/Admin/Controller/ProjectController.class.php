@@ -56,7 +56,7 @@ class ProjectController extends CommonController
         $types = M('ProjectCategory')->select();
         $this->assign('types',$types);
         $this->assign('rows',$rows);
-        $this->display('index');
+        $this->display('project/index');
     }
 
     public function add(){
@@ -120,7 +120,7 @@ class ProjectController extends CommonController
         //查询出所有项目分类
         $ProjectCategorys = M('ProjectCategory')->select();
         $this->assign('ProjectCategorys',$ProjectCategorys);
-        $this->display('add');
+        $this->display('project/add');
     }
 
     public function edit($id){
@@ -215,7 +215,7 @@ class ProjectController extends CommonController
         $this->assign('projectInfo',$projectInfo);
         $this->assign('surveys',$surveys);
         $this->assign('types',$types);
-        $this->display('edit');
+        $this->display('project/edit');
     }
 
     public function remove($id){
