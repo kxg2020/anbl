@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/login_reg.css">
+	<title>reg</title>
+</head>
+<body>
+	<div class="bg">
+		<div class="content" id='reg_content'>
+			<div class="logo"><a href="#">logo</a></div>
+			<p class="title">用户注册</p>
+			<form method="post" action="{:U('home/register/register')}" id="registerForm">
+			<div class="user"><input type="text" placeholder='手机号码' maxlength="11" name="phone"></div>
+			<div class="pwd"><input type="password"  placeholder='登录密码(6-16位数字,字母组合)' name="password"></div>
+			<div class="identify"><input type="text" placeholder='短信验证码' name="captcha"><span id="get" style="cursor: pointer;">获取验证码</span><span id="repeat_get">60秒后重新获取</span></div>
+			<div class="invite"><input type="text" placeholder='邀请码(非必填)' name="invite_key"></div>
+			<p class="agreement">点击注册,即表示您已经同意<a href="#">《阿纳巴里服务协议》</a></p>
+			<div class="login" style="margin-bottom:20px;" id="ok">马上注册</div>
+			</form>
+			<a href="{:U('home/login/index')}">已有账号,立即登录</a>
+		</div>
+	</div>
+		<script src='__PUBLIC__/wang//jquery-1.12.4.min.js'></script>
+		<script src='__PUBLIC__/wang/reg.js'></script>
+		<script src='__PUBLIC__/layer/layer.js'></script>
+		<script src='__PUBLIC__/validate/dist/jquery.validate.js'></script>
+	<script>
+		$(function(){
+
+			//>> 获取验证码
+			$('#get').click(function(){
+				var phone  = $('input[name = phone]').val();
+				if(phone == ''){
+					layer.tips('请先填写手机号码!', 'input[name = phone]');
+				}else{
+					//>> 验证手机号
+					var r = /^0?(13|14|15|17|18)[0-9]{9}$/;
+					if(!r.test(phone)){
+						layer.tips('手机号码格式不正确', 'input[name = phone]');
+						return ;
+					}
+					$.ajax({
+						'type':'post',
+						'dataType':'json',
+						'url':"{:U('home/register/sendMessage')}",
+						'data':{
+							'phone':phone
+						},
+						success:function(result){
+
+						}
+					});
+				}
+			});
+
+			$('#ok').click(function(){
+				var password = $('input[name = password]').val();
+				var captcha = $('input[name = captcha]').val();
+				var phone = $('input[name = phone]').val();
+				if(phone == ''){
+					layer.tips('手机号不能为空!', 'input[name = phone]');
+
+				}else{
+					//>> 验证手机号
+					var r = /^0?(13|14|15|17|18)[0-9]{9}$/;
+					if(!r.test(phone)){
+						layer.tips('手机号码格式不正确', 'input[name = phone]');
+
+						return ;
+					}
+					//>> 验证密码
+					if(password == ''){
+						layer.tips('密码不能为空!', 'input[name = password]');
+
+					}else{
+						var e = /^[a-zA-Z]\w{5,16}$/ ;
+						if(!e.test(password)){
+							layer.tips('密码格式不正确!', 'input[name = password]');
+
+							return ;
+						}
+						//>> 验证验证码
+						if(captcha == ''){
+							layer.tips('验证码不能为空!', 'input[name = captcha]');
+						}else{
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('home/register/register')}",
+								'data':{
+									'phone':phone,
+									'password':password,
+									'captcha':captcha
+								},
+								success:function(result){
+									if(result.status == 1){
+										window.location.href = "{:U('home/login/index')}"
+									}else{
+										layer.msg(result.msg);
+									}
+								}
+							});
+						}
+					}
+
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>
