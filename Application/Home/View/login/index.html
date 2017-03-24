@@ -55,6 +55,8 @@
 								success:function(result){
 									if(result.status == 1){
 										window.location.href = "{:U('home/index/index')}";
+									}else{
+										layer.msg(result.msg);
 									}
 								}
 
