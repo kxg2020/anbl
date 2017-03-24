@@ -37,7 +37,7 @@ class ProjectController extends CommonController
             ->count();
 
         // 实列化一个分页工具类
-        $page = new Page($count,3);
+        $page = new Page($count,15);
 
         $rows = M('project as a')
             ->field('a.*, b.story,c.name as type')
@@ -73,6 +73,9 @@ class ProjectController extends CommonController
             $projectInfo = [
                 'name' => $_data['name'],
                 'target_amount' => $_data['target_amount'],
+                'director' => $_data['director'],
+                'star' => $_data['star'],
+                'company' => $_data['company'],
                 'title' => $_data['title'],
                 'intro' => $_data['intro'],
                 'start_time' => strtotime($_data['start_time']),
@@ -153,6 +156,9 @@ class ProjectController extends CommonController
             $projectInfo = [
                 'name' => $_data['name'],
                 'target_amount' => $_data['target_amount'],
+                'director' => $_data['director'],
+                'star' => $_data['star'],
+                'company' => $_data['company'],
                 'title' => $_data['title'],
                 'intro' => $_data['intro'],
                 'start_time' => strtotime($_data['start_time']),
