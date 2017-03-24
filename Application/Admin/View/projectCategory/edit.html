@@ -4,10 +4,10 @@
         <div class="page-heading">
             <ul class="breadcrumb">
                 <li>
-                    <a href="{:U('admin/Index/index')}">后台首页</a>
+                    <a href="{:U('admin/index/index')}">后台首页</a>
                 </li>
                 <li class="active">
-                    <a href="{:U('admin/Project/index')}">项目管理</a>
+                    <a href="{:U('admin/project/index')}">项目管理</a>
                 </li>
                 <li class="active"> 编辑项目分类 </li>
             </ul>
@@ -25,7 +25,7 @@
                             编辑项目分类
                         </header>
                         <div class="panel-body">
-                            <form role="form" method="post" action="{:U('admin/ProjectCategory/edit',['id'=>$row['id']])}" enctype="multipart/form-data">
+                            <form role="form" method="post" action="{:U('admin/projectCategory/edit',['id'=>$row['id']])}" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>项目分类名称</label>
                                     <input type="text" class="form-control" name="name" value="{$row.name}">

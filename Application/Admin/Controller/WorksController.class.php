@@ -114,6 +114,6 @@ class WorksController extends  CommonController
             exit;
         }
         // 删除成功直接回到首页
-        $this->redirect('admin/Works/index');
+        $this->redirect('admin/works/index');
     }
 }

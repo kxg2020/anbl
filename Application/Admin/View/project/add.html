@@ -77,10 +77,10 @@
     <div class="page-heading">
         <ul class="breadcrumb">
             <li>
-                <a href="{:U('admin/Index/index')}">后台首页</a>
+                <a href="{:U('admin/index/index')}">后台首页</a>
             </li>
             <li class="active">
-                <a href="{:U('admin/Project/index')}">项目管理</a>
+                <a href="{:U('admin/project/index')}">项目管理</a>
             </li>
             <li class="active"> 新增项目</li>
         </ul>
@@ -105,7 +105,7 @@
                         </ul>
                     </header>
                     <div class="panel-body">
-                        <form action="{:U('admin/Project/add')}" class="form-horizontal adminex-form" method="post" id="projectForm">
+                        <form action="{:U('admin/project/add')}" class="form-horizontal adminex-form" method="post" id="projectForm">
 
                             <div class="tab-content">
                                 <!--项目基本信息-->
@@ -290,7 +290,7 @@
     <script type="text/javascript">
         $(function () {
             $("#file_upload").h5upload({
-                url: "{:U('admin/Project/upload')}",
+                url: "{:U('admin/project/upload')}",
                 fileObjName: 'image',
                 fileTypeExts: 'jpg,png,gif,bmp,jpeg',
                 multi: true,
@@ -334,7 +334,7 @@
     <script type="text/javascript">
         $(function () {
             $("#file_upload1").h5upload({
-                url: "{:U('admin/Project/upload_video')}",
+                url: "{:U('admin/project/upload_video')}",
                 fileObjName: 'video',
                 fileTypeExts: 'avi,wma,rmvb,rm,flash,mp4,mid,3GP,mpg,mov,wmov,qt',
                 multi: true,
@@ -475,7 +475,7 @@
                         layer.alert(data.msg);
                     } else {
                         // 跳转到列表
-                        window.location.href = "{:U('admin/Project/index')}";
+                        window.location.href = "{:U('admin/project/index')}";
                     }
                 });
                 return false;

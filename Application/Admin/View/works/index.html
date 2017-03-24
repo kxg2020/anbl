@@ -4,10 +4,10 @@
     <div class="page-heading">
         <ul class="breadcrumb">
             <li>
-                <a href="{:U('admin/Index/index')}">后台首页</a>
+                <a href="{:U('admin/index/index')}">后台首页</a>
             </li>
             <li class="active">
-                <a href="{:U('admin/ProjectConfig/index')}">配置管理</a>
+                <a href="{:U('admin/projectConfig/index')}">配置管理</a>
             </li>
             <li class="active"> 优秀演员列表 </li>
         </ul>
@@ -21,13 +21,13 @@
                     <header class="panel-heading">
                         优秀演员列表
                             <span class="tools pull-right">
-                                <a href="{:U('admin/Works/add')}" class="btn btn-success btn-link">新增优秀演员</a>
+                                <a href="{:U('admin/works/add')}" class="btn btn-success btn-link">新增优秀演员</a>
                             </span>
                     </header>
                     <div class="panel-body">
 
                         <!--搜索开始-->
-                        <form class="form-inline" action="{:U('admin/Works/index')}" method="get">
+                        <form class="form-inline" action="{:U('admin/works/index')}" method="get">
                             <div class="form-group">
                                 <label>演员姓名</label>
                                 <input type="text" class="form-control" name="name" value="{:I('get.name')}" placeholder="请输入演员姓名">
@@ -67,8 +67,8 @@
                                     <td style="vertical-align: middle">{$tag.fans_number}</td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
                                     <td style="vertical-align: middle">
-                                        <a href="{:U('admin/Works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                        <a data-href="{:U('admin/Works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                     </td>
                                 </tr>
                                 </volist>

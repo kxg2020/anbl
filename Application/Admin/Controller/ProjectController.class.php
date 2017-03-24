@@ -19,12 +19,15 @@ class ProjectController extends CommonController
     public function index(){
         //查看是否有查询
         $name = I('get.name','','strip_tags');
+        $type_id = intval(I('get.type_id'));
         // 创建查询条件
         $where =[];
         if($name){
             $where['a.name'] = ['like',"%$name%"];
         }
-
+        if($type_id){
+            $where['a.type_id'] = $type_id;
+        }
         // 查询总记录数
         $count =  M('project as a')
             ->field('a.*, b.story,c.name as type')
@@ -34,7 +37,7 @@ class ProjectController extends CommonController
             ->count();
 
         // 实列化一个分页工具类
-        $page = new Page($count,10);
+        $page = new Page($count,3);
 
         $rows = M('project as a')
             ->field('a.*, b.story,c.name as type')
@@ -48,6 +51,10 @@ class ProjectController extends CommonController
         $pages = $page->show();
         // 向模板分配分页条
         $this->assign('pages',$pages);
+
+        // 查询出所有分类
+        $types = M('ProjectCategory')->select();
+        $this->assign('types',$types);
         $this->assign('rows',$rows);
         $this->display('index');
     }
@@ -238,7 +245,7 @@ class ProjectController extends CommonController
             exit;
         }
         // 删除成功直接回到首页
-        $this->redirect('admin/Project/index');
+        $this->redirect('admin/project/index');
     }
 
     /**
@@ -409,24 +416,34 @@ class ProjectController extends CommonController
 
     }
 
-    public function mm($res_filepath='http://on58ea572.bkt.clouddn.com/2017-03-22_58d1e7ba8826c.mp4'){
-        if(isset($_GET["filepath"])) {
-            $res_filepath = $_GET["filepath"];
-        }
-        $file_realpath = realpath($res_filepath);
-        $file_basename = basename($res_filepath);
-        $file_filesize = filesize($res_filepath);
-        $file = fopen($res_filepath, "r");
-        Header("Content-type: application/octet-stream");
-        Header("Accept-Ranges: bytes");
-        Header("Accept-Length: " . $file_filesize);
-        Header("Content-Disposition: attachment; filename=" . $file_basename);
-        echo fread($file, $file_filesize);
-        fclose($file);
-        // 下载或取消后，删除临时文件
-        $del_result = @unlink($res_filepath);
-        if ($del_result == true) {
-            @unlink($res_filepath);
-        }
+
+    /**
+     * @param string $res_filepath 文件地址
+     */
+    public function download(){
+            // 接收传递参数 文件地址 文件id
+            $data = I('get.');
+
+            $user_id = $data['uid'];
+            $project_id = $data['project_id'];
+
+           // 验证用户权限
+
+          // 根据项目id 查询出视频地址
+
+            $res_filepath = "http://on58ea572.bkt.clouddn.com/2017-03-22_58d20e3482321.mp4";//文件地址
+
+            // 判断用户是否已经在该项目已经充值
+
+            $file_basename = basename($res_filepath);
+            $file_filesize = filesize($res_filepath);
+            $file = fopen($res_filepath, "r");
+
+            Header("Content-type: application/octet-stream");
+            Header("Accept-Ranges: bytes");
+            Header("Accept-Length: " . $file_filesize);
+            Header("Content-Disposition: attachment; filename=" . $file_basename);
+            echo fread($file, $file_filesize);
+            fclose($file);
     }
 }
