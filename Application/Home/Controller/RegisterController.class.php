@@ -193,7 +193,7 @@ class RegisterController extends CommonController{
                 //>> 判断时间是否小于60秒
                 if(time() - $verifyTime < 60 ){
 
-                    die($this->_printError('10004'));
+                    die($this->_printError('1004'));
 
                 }
             }
