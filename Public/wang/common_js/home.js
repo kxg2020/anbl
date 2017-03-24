@@ -33,15 +33,22 @@ function toPercent(point){
 //转换影院
 $('.move_list p').click(function(){
 	var cont=$(this)[0].innerHTML;
+	$('.main').hide()
 	$('.move_list p').removeClass('choice');
 	if(cont==='星级'){
 		$('.move_list p').eq(0).addClass('choice');
+		$('.movie_star').show();
+
 	}
 	if(cont==='院线'){
 		$('.move_list p').eq(1).addClass('choice');
+		$('.cname').show();
+
 	}
 	if(cont==='网路IP'){
 		$('.move_list p').eq(2).addClass('choice');
+		$('.webip').show();
+
 	}
 });
 
