@@ -34,7 +34,8 @@
 		</div>
 		<div id="center">
 			<div id="slider">
-				<div class="slide" style="border-left: none; left: 0px;"><a href="" target="_blank"><img class="diapo" border="0" src="__PUBLIC__/wang/home_img/homeimg01.jpg" style="opacity: 0.7; visibility: visible;"></a>
+				<volist name="lunbos" id="lunbo">
+				<div class="slide" style="border-left: none; left: 0px;"><a href="" target="_blank"><img class="diapo" border="0" src="{$lunbo.image_url}" style="opacity: 0.7; visibility: visible;"></a>
 				<div class="backgroundText" style="top: 402px;"></div><div class="text" style="top: 402px;">百叶窗</div>
 				<a href="" class="content">
 					<div class="dragon">
@@ -44,56 +45,17 @@
 						<div class="rank">
 							01
 						</div>
-						<p class="move_title">灰姑娘</p>
-						<p>导演：王晶</p>
-						<p>主演：杨幂  胡歌 赵薇</p>
-						<p>出品单位：阿纳巴里</p>
+						<p class="move_title">{$lunbo.name}</p>
+						<p>导演：{$lunbo.director}</p>
+						<p>主演：{$lunbo.star}</p>
+						<p>出品单位：{$lunbo.company}</p>
 						<p>剩余时间：<span>15</span> 天</p>
 						<p>剩余名额：<span>12</span> 人</p>
 						<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i></p>
 						<p>支持金额：<span>121465</span> 元</p>
 				</a>
 				</div>
-				<div class="slide" style="left: 146px;"><a href="" target="_blank"><img class="diapo" border="0" src="__PUBLIC__/wang/home_img/homeimg03.jpg" style="opacity: 0.7; visibility: visible;"></a>
-				<div class="backgroundText" style="top: 404px;"></div><div class="text" style="top: 404px;">百叶窗</div>
-				<a href="" class="content">
-						<div class="dragon">
-							<div class="top"><img src="__PUBLIC__/wang/home_img/dragon00_03.png" alt=""></div>
-						</div>
-						<div class="complate_point">20%</div>
-						<div class="rank">
-							01
-						</div>
-						<p class="move_title">灰姑娘</p>
-						<p>导演：王晶</p>
-						<p>主演：杨幂  胡歌 赵薇</p>
-						<p>出品单位：阿纳巴里</p>
-						<p>剩余时间：<span>15</span> 天</p>
-						<p>剩余名额：<span>12</span> 人</p>
-						<p>评星 <i class="star"></i><i class="star"></i></p>
-						<p>支持金额：<span>121465</span> 元</p>
-				</a>
-				</div>
-				<div class="slide" style="left: 283px;"><a href="" target="_blank"><img class="diapo" border="0" src="__PUBLIC__/wang/home_img/homeimg03.jpg" style="opacity: 0.7; visibility: visible;"></a>
-				<div class="backgroundText" style="top: 405px;"></div><div class="text" style="top: 405px;">百叶窗</div>
-				<a href="" class="content">
-					<div class="dragon">
-							<div class="top"><img src="__PUBLIC__/wang/home_img/dragon00_03.png" alt=""></div>
-						</div>
-						<div class="complate_point">40%</div>
-						<div class="rank">
-							01
-						</div>
-						<p class="move_title">灰姑娘</p>
-						<p>导演：王晶</p>
-						<p>主演：杨幂  胡歌 赵薇</p>
-						<p>出品单位：阿纳巴里</p>
-						<p>剩余时间：<span>15</span> 天</p>
-						<p>剩余名额：<span>12</span> 人</p>
-						<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i> </p>
-						<p>支持金额：<span>121465</span> 元</p>
-				</a>
-				</div>
+				</volist>
 			</div>
 			<div class="hot_news"><i class="suona"></i>最新消息：<span>热烈祝贺<a href="">《那些年我们一起追过的女孩》</a>正式开拍</span></div>
 		</div>
@@ -104,15 +66,18 @@
 		<p>院线</p>
 		<p>网路IP</p>
 	</div>	
-		<div class="main">
+		<div class="main movie_star">
+			<volist name="projectInfo" id="info">
+				<if condition="$info['type_id'] eq 1">
   	  <section class="page1 tps-section tps-inview">
         <div class="page_container">
           <h1>
           		<a href="" target="_blank">
+					                    <img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
           								<div class="move_content content">
-          									<p>后会无期</p>
-          									<p>导演：王晶 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：杨幂 胡歌 赵薇</p>
-          									<p>出品单位：阿纳巴里</p>
+          									<p>{$info['name']}</p>
+          									<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+          									<p>出品单位：{$info.company}</p>
           									<p>剩余名额：<span>12</span> 人</p>
           									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
           									<p>支持金额：<span>121465</span> 元</p>
@@ -121,51 +86,55 @@
           	</h1>
         </div>
       </section>
-  	  <section class="page2 tps-section">
-        <div class="page_container">
-          <h1><a href="" target="_blank"><div class="move_content content">
-          									<p>后会无期</p>
-          									<p>导演：王晶 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：杨幂 胡歌 赵薇</p>
-          									<p>出品单位：阿纳巴里</p>
-          									<p>剩余名额：<span>12</span> 人</p>
-          									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-          									<p>支持金额：<span>121465</span> 元</p>
-          								</div></a></h1>
-      </div></section>
-  	  <section class="page3 tps-section">
-        <div class="page_container">
-          <h1><a href="" target="_blank"><div class="move_content content">
-          									<p>后会无期</p>
-          									<p>导演：王晶 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：杨幂 胡歌 赵薇</p>
-          									<p>出品单位：阿纳巴里</p>
-          									<p>剩余名额：<span>12</span> 人</p>
-          									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-          									<p>支持金额：<span>121465</span> 元</p>
-          								</div></a></h1>
-      </div></section>
-      <section class="page4 tps-section">
-        <div class="page_container">
-          <h1><a href="" target="_blank"><div class="move_content content">
-          									<p>后会无期</p>
-          									<p>导演：王晶 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：杨幂 胡歌 赵薇</p>
-          									<p>出品单位：阿纳巴里</p>
-          									<p>剩余名额：<span>12</span> 人</p>
-          									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-          									<p>支持金额：<span>121465</span> 元</p>
-          								</div></a></h1>
-      </div></section>
-  	  <section class="page5 tps-section">
-        <div class="page_container">
-          <h1><a href="" target="_blank"><div class="move_content content">
-          									<p>后会无期</p>
-          									<p>导演：王晶 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：杨幂 胡歌 赵薇</p>
-          									<p>出品单位：阿纳巴里</p>
-          									<p>剩余名额：<span>12</span> 人</p>
-          									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-          									<p>支持金额：<span>121465</span> 元</p>
-          								</div></a></h1>
-      </div></section>
+				</if>
+			</volist>
     </div>
+		<div class="main cname" style="display:none;">
+			<volist name="projectInfo" id="info">
+				<if condition="$info['type_id'] eq 2">
+			<section class="page1 tps-section tps-inview">
+				<div class="page_container">
+					<h1>
+						<a href="" target="_blank">
+							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
+							<div class="move_content content">
+								<p>{$info['name']}</p>
+								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+								<p>出品单位：{$info.company}</p>
+								<p>剩余名额：<span>12</span> 人</p>
+								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
+								<p>支持金额：<span>121465</span> 元</p>
+							</div>
+						</a>
+					</h1>
+				</div>
+			</section>
+				</if>
+			</volist>
+		</div>
+		<div class="main webip" style="display: none">
+			<volist name="projectInfo" id="info">
+				<if condition="$info['type_id'] eq 3">
+			<section class="page1 tps-section tps-inview">
+				<div class="page_container">
+					<h1>
+						<a href="" target="_blank">
+							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
+							<div class="move_content content">
+								<p>{$info['name']}</p>
+								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+								<p>出品单位：{$info.company}</p>
+								<p>剩余名额：<span>12</span> 人</p>
+								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
+								<p>支持金额：<span>121465</span> 元</p>
+							</div>
+						</a>
+					</h1>
+				</div>
+			</section>
+				</if>
+			</volist>
+		</div>
 	</div>
 	<footer>
 		Copyright 2015 摄图网 泸ICP备15050430号
