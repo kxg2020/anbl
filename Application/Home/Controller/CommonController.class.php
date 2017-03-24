@@ -6,7 +6,7 @@ use Think\Controller;
 class CommonController extends Controller{
 
     //记录用户登录状态
-    public $isLogin = false;
+    public $isLogin = 0;
 
     //当前用户信息
     public $userInfo = [];
@@ -21,6 +21,11 @@ class CommonController extends Controller{
         '1010'=>['用户名或密码格式不正确!','用户名或密码的格式不正确!'],
         '1012'=>['注册失败!','注册失败！'],
         '1014'=>['请不要重复注册!','请不要重复注册！'],
+        '1016'=>['用户名或密码错误!','用户名或密码错误！'],
+        '1018'=>['用户名不能为空!','用户名不能为空！'],
+        '1020'=>['密码不能为空!','密码不能为空！'],
+        '1022'=>['用户名格式不正确!','用户名格式不正确！'],
+
     ];
 
     /**

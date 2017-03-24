@@ -11,12 +11,59 @@
 		<div class="content">
 			<div class="logo"><a href="#">logo</a></div>
 			<p class="title">用户登录</p>
-			<div class="user"><input type="text"><i></i></div>
-			<div class="pwd"><input type="password"><i></i></div>
+			<div class="user"><input type="text" name="username"><i></i></div>
+			<div class="pwd"><input type="password" name="password"><i></i></div>
 			<div class="login">立即登录</div>
 			<div class="reg_forget"><p class="fast_reg"><a href="{:U('home/register/index')}">快速注册</a></p><p class="forget_pwd">忘记密码</p></div>
 		</div>
 	</div>
 	<script src='__PUBLIC__/wang/jquery-1.12.4.min.js'></script>
+	<script src='__PUBLIC__/layer/layer.js'></script>
+	<script>
+		$(function(){
+			$('.login').click(function(){
+				//>> 获取用户名
+				var username = $("input[name = username]").val();
+				var password = $("input[name = password]").val();
+				if(username == ''){
+					layer.tips('用户名不能为空!','input[name = username]');
+				}else{
+					//>> 判断用户名的格式是否正确
+					var _reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
+					if(!_reg.test(username)){
+						layer.tips('用户名的格式不正确!','input[name = username]');
+						return ;
+					}
+					//>> 判断密码是否为空
+					if(password == ''){
+						layer.tips('密码不能为空!','input[name = password]');
+					}else{
+						//>> 判断密码格式是否正确
+						var reg_ = /^[a-zA-Z]\w{5,16}$/;
+						if(!reg_.test(password)){
+							layer.tips('密码格式不正确!','input[name = password]');
+						}else{
+							//>> 提交表单
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('home/login/login')}",
+								'data':{
+									'username':username,
+									'password':password
+								},
+								success:function(result){
+									if(result.status == 1){
+										window.location.href = "{:U('home/index/index')}";
+									}
+								}
+
+							});
+						}
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>
