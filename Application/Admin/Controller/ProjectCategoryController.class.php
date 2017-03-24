@@ -19,7 +19,7 @@ class ProjectCategoryController extends CommonController
 
         $this->assign('ProjectCategorys',$ProjectCategorys);
 
-        $this->display('projectCategory/index');
+        $this->display('projectcategory/index');
     }
 
     public function add(){
