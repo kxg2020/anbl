@@ -91,14 +91,13 @@
 											window.location.href ="{:U('Home/Login/index')}";
 										},2000);
 									}else{
-										layer.msg('密码修改失败!');
+										layer.msg(result.msg);
 									}
 								}
 							});
 						}
 					}
 
-					//>> 检测两次密码是否相等
 				}
 			}
 
