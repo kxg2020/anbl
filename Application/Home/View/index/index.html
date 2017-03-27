@@ -43,7 +43,7 @@
 					<div class="dragon">
 							<div class="top"><img src="__PUBLIC__/wang/home_img/dragon00_03.png" alt=""></div>
 						</div>
-						<div class="complate_point">90%</div>
+						<div class="complate_point">{:ceil(($lunbo['money'])/$lunbo['target_amount'])*100}%</div>
 						<div class="rank">
 							0{$j}
 						</div>
@@ -52,9 +52,9 @@
 						<p>主演：{$lunbo.star}</p>
 						<p>出品单位：{$lunbo.company}</p>
 						<p>剩余时间：<span>{:dataNum(time(),$lunbo['end_time'])}</span> 天</p>
-						<p>剩余名额：<span>12</span> 人</p>
+						<p>剩余名额：<span>{$lunbo['total_num']-$lunbo['support_number']}</span> 人</p>
 						<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i></p>
-						<p>支持金额：<span>{$lunbo.target_amount}</span> 元</p>
+						<p>支持金额：<span>${$lunbo.target_amount}</span></p>
 				</a>
 				</div>
 				</volist>
@@ -74,15 +74,15 @@
   	  <section class="page1 tps-section tps-inview">
         <div class="page_container">
           <h1>
-          		<a href="" target="_blank">
+          		<a href="{:U('home/index/detail',['id'=>$info['id']])}" target="_blank">
 					                    <img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
           								<div class="move_content content">
           									<p>{$info['name']}</p>
           									<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
           									<p>出品单位：{$info.company}</p>
-          									<p>剩余名额：<span>12</span> 人</p>
+          									<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
           									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-          									<p>支持金额：<span>121465</span> 元</p>
+          									<p>支持金额：<span>${$info['target_amount']}</span></p>
           								</div>
           		</a>
           	</h1>
@@ -97,15 +97,15 @@
 			<section class="page1 tps-section tps-inview">
 				<div class="page_container">
 					<h1>
-						<a href="" target="_blank">
+						<a href="{:U('home/index/detail',['id'=>$info['id']])}" target="_blank">
 							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
 							<div class="move_content content">
 								<p>{$info['name']}</p>
 								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
 								<p>出品单位：{$info.company}</p>
-								<p>剩余名额：<span>12</span> 人</p>
+								<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
 								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-								<p>支持金额：<span>121465</span> 元</p>
+								<p>支持金额：<span>${$info['target_amount']}</span></p>
 							</div>
 						</a>
 					</h1>
@@ -120,15 +120,15 @@
 			<section class="page1 tps-section tps-inview">
 				<div class="page_container">
 					<h1>
-						<a href="" target="_blank">
+						<a href="{:U('home/index/detail',['id'=>$info['id']])}" target="_blank">
 							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
 							<div class="move_content content">
 								<p>{$info['name']}</p>
 								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
 								<p>出品单位：{$info.company}</p>
-								<p>剩余名额：<span>12</span> 人</p>
+								<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
 								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-								<p>支持金额：<span>121465</span> 元</p>
+								<p>支持金额：<span>${$info['target_amount']}</span></p>
 							</div>
 						</a>
 					</h1>
