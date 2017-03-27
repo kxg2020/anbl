@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/wang/details/details.css">
-	<title>details</title>
+	<title>阿纳巴里</title>
 </head>
 <body>
 	<header>
@@ -57,21 +57,21 @@
 		</div>
 		<div class="content_right">
 			<div class="collect">
-				<p>#以德报怨,真正活过的意义</p>
-				<p>2016 - 12 - 29 至 2017 - 3 - 15</p>
-				<p>123人收藏</p>
+				<p>#{$info['title']}</p>
+				<p>{:date('Y-m-d',$info['start_time'])} 至 {:date('Y-m-d',$info['end_time'])}</p>
+				<p>{$info.collection_number}人收藏</p>
 			</div>
 			<div class="suport">
-				<p>以支持资金</p>
-				<p>$ <span>165,123.3</span></p>
-				<p>该项目在2017/03/15募集到300万元金额视为成功</p>
+				<p>已支持资金</p>
+				<p> <span>${$info['money']}</span></p>
+				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到${$info['target_amount']}金额视为成功</p>
 				<ul class="suport_inform">
 					<li><p>目标金额</p>
-					<p><span >$</span>3000000.00</p>
+					<p><span >${$info['target_amount']}</span></p>
 				</li>
 				<li>
 					<p>支持人数</p>
-					<p>25人</p>
+					<p>{$info['support_number']}人</p>
 				</li>
 				</ul>
 				<div class="now_suport">立即支持</div>
