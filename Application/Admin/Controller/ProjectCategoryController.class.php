@@ -19,7 +19,7 @@ class ProjectCategoryController extends CommonController
 
         $this->assign('ProjectCategorys',$ProjectCategorys);
 
-        $this->display('Projectcategory/index');
+        $this->display('projectCategory/index');
     }
 
     public function add(){
@@ -40,7 +40,7 @@ class ProjectCategoryController extends CommonController
             $this->redirect('admin/projectCategory/index');
             exit;
         }
-        $this->display('Projectcategory/add');
+        $this->display('projectCategory/add');
     }
 
     public function edit(){
@@ -78,12 +78,12 @@ class ProjectCategoryController extends CommonController
                 exit;
             }
             // 更新成功直接跳转到首页
-            $this->redirect('admin/ProjectCategory/index');
+            $this->redirect('admin/projectCategory/index');
             exit;
         }
         // 向模板分配数据
         $this->assign('row',$row);
-        $this->display('Projectcategory/edit');
+        $this->display('projectCategory/edit');
     }
 
     public function remove($id){
