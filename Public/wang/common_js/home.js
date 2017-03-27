@@ -4,11 +4,7 @@ $(function(){
 		$('#search_cont').animate({
 			width:'120px'
 		},'slow');
-	}).on('mouseleave',function(){
-			$('#search_cont').animate({
-			width:'40px'
-		},'slow');
-	});
+	})
 	for(var i=0;i<$('.complate_point').length;i++){
 		var number=$('.complate_point').eq(i).text();
 		var height=1-toPoint(number);
