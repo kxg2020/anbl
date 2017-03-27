@@ -137,7 +137,64 @@ class LoginController extends CommonController{
      * 忘记密码
      */
     public function forget(){
+        if(IS_POST){
+            $paramArr = $_REQUEST;
+            if(!empty($paramArr)){
+                if(isset($paramArr['phone']) && !empty($paramArr['phone']) && is_numeric($paramArr['phone'])){
+                    //>> 检测用户名
+                    $res = $this->checkPhone($paramArr['phone']);
+                    //>> 检测验证码
+                    $captcha = session('verify_code'.$paramArr['phone']);
+                    if($captcha != $paramArr['captcha']){
+                        die($this->_printError('1008'));
+                    }
+                    if($res){
+                        if(isset($paramArr['password']) && !empty($paramArr['password'])){
+                            //>> 检测密码
+                            $_res = $this->checkPassword($paramArr['password']);
+                            if($_res){
+                                //>> 检测两次密码是否一致
+                                if(isset($paramArr['repassword']) && !empty($paramArr['repassword'])){
+                                   $result = $paramArr['password'] == $paramArr['repassword'] ? true : false;
+                                    if($result){
+                                        $user = M('Member')->where(['username'=>$paramArr['phone']]);
+                                        if(!empty($user)){
+                                            //>> 查询数据库
+                                            $data = [
+                                                'password'=>md5($paramArr['password']),
+                                            ];
+                                            $res = M('Member')->where(['username'=>$paramArr['phone']])->save($data);
+                                            if($res){
+                                                die($this->_printSuccess());
+                                            }else{
+                                                die($this->_printError('1030'));
+                                            }
+                                        }else{
+                                            die($this->_printError('1032'));
+                                        }
+                                    }else{
+                                        die($this->_printError('1028'));
+                                    }
+                                }else{
+                                    die($this->_printError('1026'));
+                                }
+                            }else{
+                                die($this->_printError('1024'));
+                            }
+                        }else{
+                            die($this->_printError('1020'));
+                        }
+                    }else{
+                        die($this->_printError('1022'));
+                    }
+                }else{
+                    die($this->_printError('1018'));
+                }
 
+            }else{
+                die($this->_printError('1000'));
+            }
+        }
         $this->display('login/forget');
     }
 }
