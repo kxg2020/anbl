@@ -132,4 +132,12 @@ class LoginController extends CommonController{
         }
 
     }
+
+    /**
+     * 忘记密码
+     */
+    public function forget(){
+
+        $this->display('login/forget');
+    }
 }
