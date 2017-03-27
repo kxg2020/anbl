@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/wang/details/details.css">
+		<!--layer-->
+	<link href="__CSS__/layui.css" rel="stylesheet">
 	<title>阿纳巴里</title>
 </head>
 <body>
@@ -34,6 +36,8 @@
 	<div class="content">
 		<div class="content_left">
 			<img id='title_img' src="{$info.image_url}" alt="moive_img">
+			<input type="hidden" value="{$info['id']}" name="movie_id">
+			<input type="hidden" value="{$userInfo['id']}" name="user_id">
 			<div id="title">{$info.name}</div>
 			<div class="movie_introduce">
 				<p><span>+</span>预期回报</p>
@@ -86,12 +90,16 @@
 						<li>后期</li>
 					</ul>
 					<div class="loginorreg"><span>登录</span> | <span>注册</span></div>
-					<textarea name="name" rows="8" cols="80" placeholder="输入我的想法"></textarea>
-					<div class="publish now_suport">发表</div>
+					<input type="hidden" value="{$count}" id="count">
+					<textarea name="name" rows="8" cols="80" placeholder="输入我的想法" id="mainContent"></textarea>
+					<div class="publish now_suport" id="ok">发表</div>
 					<div class="publish_area">
-						<p><span>1591910b0</span>:这个电影很有趣</p>
-						<p><span>爱囚</span>回复<span>15919910b0</span>:的确和有趣</p>
+						<volist name="comment" id="c">
+							<p><img src="__PUBLIC__/wang/img/1.jpg" style="width: 30px;height: 30px"><span>{$c['username']}</span>:{$c['content']}<img class="reply" src="__PUBLIC__/wang/details/img/comment.png" alt="" style="height: 18px;width: 22px;cursor: pointer;margin-left: 10px" ></p>
+						</volist>
+
 					</div>
+					<div id="demo6"></div>
 				</div>
 			</div>
 		</div>
@@ -99,5 +107,80 @@
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/common.js'></script>
 	<script src='__PUBLIC__/wang/details/details.js'></script>
+	<!--layer.js-->
+	<script src="__JS__/layer/layui.js"></script>
+	<script src="__JS__/layer/laypage.js"></script>
+	<script>
+		$(function(){
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage,layer = layui.layer;
+				laypage({
+					cont: 'demo6'
+					,pages: $('#count').val()
+					,skip: true
+					,jump: function(obj, first){
+						if(!first){
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('Home/Index/pageSelect')}",
+								'data':{
+									'pgNum':obj.curr,
+									'pgSize':12,
+									'type':3
+								},
+								success:function(result){
+									//>> 清空div中的内容
+									$('.publish_area').html('');
+									if(result.status == 1){
+										$.each(result.directorArr,function(k,v){
+											$('.publish_area').append('<p><img src="__PUBLIC__/wang/img/1.jpg"'+ "style='width: 30px;height: 30px'><span>"+ v.username+"</span>:"+ v.content+"<img class='reply'"+ 'src="__PUBLIC__/wang/details/img/comment.png" alt="" style="height: 18px;width: 22px;cursor: pointer;margin-left:'+ '10px" ></p>');
+										});
+									}
+								}
+							});
+						}
+					}
+				});
+			});
+			//>> 发表主评论
+			$('#ok').click(function(){
+				//>> 判断是否登录
+				var userInfo = $('input[name = user_id]').val();
+				if(userInfo == ''){
+					layer.msg('请先登录再评论');
+					return ;
+				}
+				//>> 获取评论内容
+				var content = $('#mainContent').val();
+				var id = $('input[name = movie_id]').val();
+				//>> 判断是否为空
+				if(content.length == 0){
+					layer.tips('请输入您的评论', '#mainContent');
+				}else{
+					$.ajax({
+						'type':'post',
+						'dataType':'json',
+						'url':"{:U('Home/Comment/add')}",
+						'data':{
+							'content':content,
+							'movie_id':id,
+							'type':1
+						},
+						success:function(result){
+							if(result.status == 1){
+								layer.msg('评论成功!',function(){
+									location.reload();
+								});
+
+							}else{
+								layer.msg('评论失败!');
+							}
+						}
+					});
+				}
+			});
+		});
+	</script>
 </body>
 </html>

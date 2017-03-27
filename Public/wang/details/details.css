@@ -295,8 +295,8 @@ margin-right: 8px;
   color: #67c1fe;
 }
 .comment textarea{
-  width: 500px;
-  height: 170px;
+  width: 498px;
+  height: 120px;
   resize: none;
   margin-top: 10px;
   margin-bottom: 18px;
@@ -308,6 +308,7 @@ margin-right: 8px;
   float: right;
 }
 .publish_area{
+  overflow: auto;
   clear: both;
   padding-bottom: 26px;
   margin-bottom: 18px;
@@ -319,8 +320,4 @@ margin-right: 8px;
 .publish_area span{
   color: #e66a2b;
   margin: 5px;
-}
-.publish_area p:last-child:after{
-  content: url(img/comment.png);
-  margin-left: 10px;
 }
