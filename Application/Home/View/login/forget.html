@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/wang/login_reg.css">
-	<title>reg</title>
+	<title>阿纳巴里</title>
 </head>
 <body>
 	<div class="bg">
@@ -19,26 +19,85 @@
 		</div>
 	</div>
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
-	<script src='reg.js'></script>
+	<script src='__PUBLIC__/wang/reg.js'></script>
 	<script src='__PUBLIC__/layer/layer.js'></script>
 <script>
 	$(function(){
+		$('#get').click(function(){
+			var phone = $('input[name = username]').val();
+			if(phone == ''){
+				layer.tips('电话号码不能为空!','input[name = username]');
+				return false;
+			}else{
+				//>> 验证手机
+				//>> 判断用户名的格式是否正确
+				var _reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
+				if(!_reg.test(phone)){
+					layer.tips('用户名的格式不正确!','input[name = username]');
+					return false;
+				}
+			}
+			$.ajax({
+				'type':'post',
+				'dataType':'json',
+				'url':"{:U('Home/Register/sendMessage')}",
+				'data':{
+					'phone':phone,
+				},
+				success:function(result){
+				}
+			});
+		});
 		$('#ok').click(function(){
 			//>> 获取用户名
 			var username = $('input[name = username]').val();
 			var password = $('input[name = password]').val();
 			var repassword = $('input[name = repassword]').val();
+			var captcha = $('input[name = captcha]').val();
 			//>> 检测用户名
 			var res_1 = checkUser(username,'username');
 			if(res_1){
+				//>> 检测验证码
+				if(captcha == ''){
+					layer.tips('验证码不能为空!','input[name = captcha]');
+					return false;
+				}
 				//>> 检测密码
 				var res_2 = checkUser(password,'password');
 				if(res_2){
 					//>> 检测确认密码
 					var res_3 = checkUser(repassword,'repassword');
-					//>> 检测验证码
+					//>> 检测密码是否相等
+					if(res_3){
+						if(!(repassword === password)){
+							layer.tips('两次密码不一致!','input[name = repassword]');
+							return false;
+						}else{
+							//>> 提交表单
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('Home/Login/forget')}",
+								'data':{
+									'phone':username,
+									'password':password,
+									'repassword':repassword,
+									'captcha':captcha
+								},
+								success:function(result){
+									if(result.status == 1){
+										layer.msg('密码修改成功!');
+										setTimeout(function(){
+											window.location.href ="{:U('Home/Login/index')}";
+										},2000);
+									}else{
+										layer.msg(result.msg);
+									}
+								}
+							});
+						}
+					}
 
-					//>> 检测两次密码是否相等
 				}
 			}
 
