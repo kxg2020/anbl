@@ -24,6 +24,13 @@ class RegisterController extends CommonController{
 
             $userModel = M('Member');
 
+            //>> 检测邀请码
+            if(empty($paramArr['invite_key'])){
+
+                die($this->_printError('1038'));
+
+            }
+
             //>> 检测验证码
             $captcha = session('verify_code'.$paramArr['phone']);
 
@@ -58,7 +65,13 @@ class RegisterController extends CommonController{
                     //>> 查询数据库
                     $row = $userModel->where($where)->find();
 
-                    $parent_id =  !empty($row) ? $row['id'] : 0;
+                    if(!empty($row)){
+
+                        $parent_id = $row['id'];
+                    }else{
+
+                        die($this->_printError('1040'));
+                    }
 
                 }
                 //>> 生成一个推荐码
@@ -84,7 +97,6 @@ class RegisterController extends CommonController{
 
                 //>> 将用户信息保存到数据库
                 $insertData = [
-                    'phone'=>$paramArr['phone'],
                     'username'=>$paramArr['phone'],
                     'password'=>md5($paramArr['password']),
                     'create_time'=>time(),

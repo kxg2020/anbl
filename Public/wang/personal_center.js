@@ -1,0 +1,148 @@
+$(function(){
+	//关闭回到主界面
+	$('.close_identity').click(function(){
+		$('.identity').hide();
+		$('.body_right>ul').show();
+	})
+    $('.close_attend').click(function(){
+		$('.attend').hide();
+		$('.body_right>ul').show();
+	})
+	$('.close_money').click(function(){
+	$('.money_operat').hide();
+	$('.body_right>ul').show();
+})
+$('.close_password').click(function(){
+$('.password').hide();
+$('.body_right>ul').show();
+})
+	//进入某一个界面
+	$('#identity').click(function(){
+		$('.body_right>ul').hide();
+		$('.identity').show();
+	})
+	$('#attend').click(function(){
+		$('.body_right>ul').hide();
+		$('.attend').show();
+	})
+	$('#password').click(function(){
+		$('.body_right>ul').hide();
+		$('.password').show();
+	})
+	$('#recharge').click(function(){
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.money_operat').show();
+		$('.money_content>ul>li').removeClass('choice');
+		$('.money_content>ul>li').eq(0).addClass('choice');
+		$('.put_money').show();
+		$('.get_money').hide();
+		$('.money_record').hide();
+	})
+	$('#post_cash').click(function(){
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.money_operat').show();
+		$('.money_content>ul>li').removeClass('choice');
+		$('.money_content>ul>li').eq(1).addClass('choice');
+		$('.put_money').hide();
+		$('.get_money').show();
+		$('.money_record').hide();
+	})
+	// 不同头部的li之间的div切换
+	$('.identity_content>ul>li').click(function(){
+		var txt=$(this)[0].innerHTML;
+		$('.identity_content>ul>li').removeClass('choice');
+		if(txt=='个人资料'){
+				$('.identity_content>ul>li').eq(0).addClass('choice');
+				$('.people_data').show();
+				$('.safe_center').hide();
+		}
+		if(txt=='安全中心'){
+				$('.identity_content>ul>li').eq(1).addClass('choice');
+				$('.people_data').hide();
+				$('.safe_center').show();
+		}
+	})
+	$('.attend_content>ul>li').click(function(){
+		var txt=$(this)[0].innerHTML;
+		$('.attend_content>ul>li').removeClass('choice');
+		if(txt=='我的支持'){
+				$('.attend_content>ul>li').eq(0).addClass('choice');
+				$('.my_suport').show();
+				$('.my_collect').hide();
+		}
+		if(txt=='我的收藏'){
+				$('.attend_content>ul>li').eq(1).addClass('choice');
+				$('.my_suport').hide();
+				$('.my_collect').show();
+		}
+	})
+	$('.money_content>ul>li').click(function(){
+		var txt=$(this)[0].innerHTML;
+
+		if(txt=='充值'){
+			$('.money_content>ul>li').removeClass('choice');
+				$('.money_content>ul>li').eq(0).addClass('choice');
+				$('.put_money').show();
+				$('.get_money').hide();
+				$('.money_record').hide();
+		}
+		if(txt=='提现'){
+			$('.money_content>ul>li').removeClass('choice');
+				$('.money_content>ul>li').eq(1).addClass('choice');
+				$('.put_money').hide();
+				$('.get_money').show();
+				$('.money_record').hide();
+		}
+	})
+	$('.put_record').click(function(){
+		$('.money_content>ul').eq(0).hide();
+		$('.money_content>ul').eq(1).show();
+		$('.put_money').hide();
+		$('.get_money').hide();
+		$('.money_record').show();
+	});
+	$('.now_put').click(function(){
+		$('.money_content>ul').eq(1).hide();
+		$('.money_content>ul').eq(0).show();
+		$('.put_money').show();
+		$('.get_money').hide();
+		$('.money_record').hide();
+		$('.money_content>ul>li').removeClass('choice');
+		$('.money_content>ul>li').eq(0).addClass('choice');
+	});
+	//性别选择
+	$('.sex>span>p').click(function(){
+		var id=$(this)[0].id;
+		$('.sex>span').removeClass('sex_choice');
+		if(id=='man'){
+			$('.sex>span').eq(1).addClass('sex_choice');
+			$('#man>i').show();
+			$('#woman>i').hide();
+		}
+		if(id=='woman'){
+			$('.sex>span').eq(2).addClass('sex_choice');
+			$('#man>i').hide();
+			$('#woman>i').show();
+		}
+	});
+		//填写绑定手机 邮箱
+	$('#bind_phone').click(function(){
+		$('.bind_phone>span').eq(1).hide();
+		$('.bind_phone>span').eq(2).show();
+	})
+	$('#bind_email').click(function(){
+		$('.bind_email>span').eq(1).hide();
+		$('.bind_email>span').eq(2).show();
+	})
+	//点击提升出现的界面
+	$('.up_btn').click(function(){
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.identity').show();
+		$('.safe_center').hide();
+	});
+
+
+});
