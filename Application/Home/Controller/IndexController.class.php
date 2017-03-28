@@ -86,7 +86,7 @@ class IndexController extends CommonController{
             }else{
                 $pgSize = 12;
             }
-            $rows = M('Comment')->where(['movie_id'=>$paramArr['type']])->select();
+            $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'] ,'type'=>$paramArr['type']])->select();
 
             if(!empty($rows)){
                 $directorArr = $this->pagination($rows,$pgNum,$pgSize);

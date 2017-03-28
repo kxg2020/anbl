@@ -24,7 +24,7 @@ $(function(){
    * 评论
    */
   $('body').on('click','.reply',function(){
-    var _html = '<div class="replyContent"><textarea  name="content" rows="2" cols="80" placeholder="输入我的想法" autofocus></textarea><input type="submit" value="回复" style="cursor: pointer"></div>';
+    var _html = '<div class="replyContent"><textarea  name="content" rows="2" cols="80" placeholder="回复" autofocus></textarea><input type="submit" value="回复" style="cursor: pointer"></div>';
     var dom = $(this).next('.replyContent');
     if(dom.length > 0){
       $(this).nextAll('.replyContent').remove();

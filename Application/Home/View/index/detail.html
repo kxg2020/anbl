@@ -127,9 +127,11 @@
 								'data':{
 									'pgNum':obj.curr,
 									'pgSize':12,
-									'type':3
+									'type':1,
+									'movie_id':$('input[name = movie_id]').val()
 								},
 								success:function(result){
+
 									//>> 清空div中的内容
 									$('.publish_area').html('');
 									if(result.status == 1){
