@@ -52,6 +52,7 @@
                                     <th class="text-center">编号</th>
                                     <th class="text-center">名称</th>
                                     <th class="text-center">类型</th>
+                                    <th class="text-center">分红方式</th>
                                     <th class="text-center">项目图片</th>
                                     <th class="text-center">目标金额</th>
                                     <th class="text-center">已支持资金</th>
@@ -75,6 +76,7 @@
                                     <td style="vertical-align: middle">{$tag.id}</td>
                                     <td style="vertical-align: middle">{$tag.name}</td>
                                     <td style="vertical-align: middle">{$tag.type}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['mode'] eq 1">固定分红<else/>浮动分红</if></td>
                                     <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
                                     <td style="vertical-align: middle">{$tag.target_amount}</td>
                                     <td style="vertical-align: middle">{$tag.money}</td>

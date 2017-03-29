@@ -9,10 +9,10 @@
 	<title>阿纳巴里</title>
 </head>
 <body>
-	<header>
-		<div class="nav">
-			<div>
-				<a class="logo" href="../../index.html">logo</a>
+<header>
+	<div class="nav">
+		<div>
+			<a class="logo" href="">logo</a>
 			<ul class="top_nav">
 				<li><a href="{:U('home/index/index')}"><p>首页</p><p>Home</p></a></li>
 				<li style="position: relative;"><a href=""><p>公司介绍</p><p>Company</p></a>
@@ -21,18 +21,18 @@
 						<dd><a href="">公司文化</a></dd>
 					</dl>
 				</li>
-				<li class="thishtml"><a href="../movie_store.html"><p>电影超市</p><p>Movie store</p></a></li>
+				<li><a href="{:U('home/market/index')}"><p>电影超市</p><p>Movie store</p></a></li>
 				<li><a href="{:U('home/factory/index')}"><p>星工场</p><p>Star Factory</p></a></li>
-				<li><a href=""><p>个人中心</p><p>Personal Center</p></a></li>
+				<li><a href="personal_center/personal_center.html"><p>个人中心</p><p>Personal Center</p></a></li>
 			</ul>
 			<ul class="login_reg">
 				<li style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
-				<li ><a id="login" href="../../login_reg/login.html">登录 |</a></li>
-				<li ><a href="../../login_reg/reg.html">注册</a></li>
+				<li ><a id="login" href="{:U('home/login/index')}">登录 |</a></li>
+				<li ><a href="login_reg/reg.html">注册</a></li>
 			</ul>
-			</div>
 		</div>
-	</header>
+	</div>
+</header>
 	<div class="content">
 		<div class="content_left">
 			<img id='title_img' src="{$info.image_url}" alt="moive_img">
@@ -40,21 +40,20 @@
 			<input type="hidden" value="{$userInfo['id']}" name="user_id">
 			<div id="title">{$info.name}</div>
 			<div class="movie_introduce">
-				<p><span>+</span>预期回报</p>
-				<div class="expect">
+				<p id="back"><span>+</span>预期回报</p>
+				<div class="expect back">
 					{:htmlspecialchars_decode($info['expected_return'])}
 				</div>
-				<br>
-				<p><span>-</span>故事结构</p>
-				<div class="expect">
+				<p id="framework"><span>-</span>故事结构</p>
+				<div class="expect framework" style="display: block;">
 					{:htmlspecialchars_decode($info['story'])}
 				</div>
-				<p><span>+</span>故事分析</p>
-				<div class="expect">
+				<p id="analyse"><span>+</span>故事分析</p>
+				<div class="expect analyse">
 					{:htmlspecialchars_decode($info['analysis'])}
 				</div>
-				<p><span>+</span>专业影评</p>
-				<div class="expect">
+					<p id="comment_film"><span>+</span>专业影评</p>
+					<div class="expect comment_film">
 					{:htmlspecialchars_decode($info['film_critic'])}
 				</div>
 			</div>
@@ -66,19 +65,19 @@
 				<p>{$info.collection_number}人收藏</p>
 			</div>
 			<div class="suport">
-				<p>已支持资金</p>
-				<p> <span>${$info['money']}</span></p>
-				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到${$info['target_amount']}金额视为成功</p>
+				<p>已支持积分</p>
+				<p> <span>{:floor($info['money'])}</span></p>
+				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到{:floor($info['target_amount'])}积分视为成功！</p>
 				<ul class="suport_inform">
-					<li><p>目标金额</p>
-					<p><span >${$info['target_amount']}</span></p>
+					<li><p>目标积分</p>
+					<p><span >{:floor($info['target_amount'])}</span></p>
 				</li>
 				<li>
 					<p>支持人数</p>
 					<p>{$info['support_number']}人</p>
 				</li>
 				</ul>
-				<div class="now_suport">立即支持</div>
+				<div class="now_suport" id="fast_suport">立即支持</div>
 			</div>
 			<div class="comment">
 				<div>
@@ -101,6 +100,28 @@
 					</div>
 					<div id="demo6"></div>
 				</div>
+			</div>
+		</div>
+		<div class="suport_bg" style="display: none;">
+			<div  id="suport">
+				<p>电影类型: <span><if condition="$info['mode'] eq 1">固定分红<else/>浮动分红</if></span></p>
+				<p>选择支持积分:</p>
+				<p>
+					<input type="radio" name="money" class="radio" value="100" checked><label>100</label>
+					<input type="radio" name="money" class="radio" value="500"><label>500</label>
+					<input type="radio" name="money" class="radio" value="1000"><label>1000</label>
+					<input type="radio" name="money" class="radio" value="5000"><label>5000</label>
+					<input type="radio" name="money" class="radio" value="10000"><label>10000</label>
+				</p>
+				<p><input type="checkbox" id="is_true"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></p>
+				<div><span id="sure_suport">确定支持</span><span id="cancel">取消</span></div>
+			</div>
+			<div class="argement"  style="display: none;">
+				<h3>1.关于积分</h3>
+				<p>支持的积分账户余额积分</p>
+				<h3>2.支持的上限</h3>
+				<p>你可以支持的上限为10000积分且只可以支持一次</p>
+				<div class="close_btn">关闭</div>
 			</div>
 		</div>
 	</div>
@@ -184,5 +205,35 @@
 			});
 		});
 	</script>
+
+     <script type="application/javascript">
+		 $('#sure_suport').on('click',function(){
+
+			 // 判断用户是否同意协议
+			 if(!$("#is_true").is(':checked')){
+				 layer.msg('请同意服务协议！！！');
+				 return false
+			 }
+			 var money = $("input[type='radio']:checked").val();
+			 var project_id="{$info['id']}";
+			 var _data = {
+				 money : money,
+				 project_id : project_id
+			 };
+			console.log(_data);
+			 $.post("{:U('home/index/support')}",_data,function (data) {
+				 if (data.status == 0) {
+					 layer.alert(data.msg);
+				 } else {
+					 // 跳转到列表
+					// window.location.href = "{:U('admin/project/index')}";
+				 }
+			 });
+
+			 //$('.suport_bg').fadeOut('slow');
+
+		 })
+
+	 </script>
 </body>
 </html>
