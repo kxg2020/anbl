@@ -9,6 +9,7 @@ class PersonalController extends CommonController{
      * 个人中心
      */
     public function index(){
+
        //>> 判断用户是否登录
         if($this->isLogin != 1){
             $this->redirect('Home/Login/index');
@@ -17,10 +18,23 @@ class PersonalController extends CommonController{
         $personModel = M('Member as a');
         $row = $personModel->where(['id'=>$this->userInfo['id'],'username'=>$this->userInfo['username']])->find();
         //>> 查询当前用户的支持情况
-        $rows = $personModel->field('a.*,b.*')
+        $rows = $personModel->field('a.*,b.*,c.*')
             ->join('left join an_member_support as b on a.id = b.member_id')
+            ->join('left join an_project as c on b.project_id = c.id')
             ->where(['a.id'=>$this->userInfo['id'],'a.username'=>$this->userInfo['username']])
             ->select();
+
+        //>> 查询收藏情况
+        $collection = $personModel->where(['member_id'=>$this->userInfo['id']])
+                    ->join('left join an_member_collection as b on a.id = b.member_id')
+                    ->join('left join an_project as c on b.project_id = c.id')
+                    ->select();
+
+        foreach($collection as $key => &$value){
+            $value['date'] = date('Y-m-d',$value['showtime']);
+            unset($value);
+        }
+
         $supportMoney = 0;
         if(!empty($rows)){
             //>> 对用户支持的电影金额求和
@@ -40,6 +54,7 @@ class PersonalController extends CommonController{
         $secretPhone = substr($row['username'],0,3).'****'.substr($row['username'],7,4);
         $this->assign([
             'personal'=>$row,
+            'collection'=>$collection,
             'safeLevel'=>$safeLevel,
             'supportSituation'=>$rows,
             'supportMoney'=>$supportMoney,
@@ -157,5 +172,13 @@ class PersonalController extends CommonController{
                 die($this->_printSuccess());
             }
         }
+    }
+
+    /**
+     * 我的收藏
+     */
+    public function collection(){
+
+
     }
 }

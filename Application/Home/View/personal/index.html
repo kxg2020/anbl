@@ -79,8 +79,12 @@
 						<div class="people_data">
 							<div class="user"><input type="text" value="{$personal['username']}" disabled></div>
 							<div class="real_name"><span>实名:</span><if condition="$personal['is_true'] eq 0"><span>未实名</span><else/><span style="color: forestgreen">已实名</span></if></div>
-							<div class="sex"><span>性别:</span><span class="sex_choice"><p id="man" class="man"><i style="display:block;"></i></p><label data-sex="1">男</label></span><span ><p id="woman" class="woman"><i style="
-							display: none;"></i></p><label data-sex="2">女</label></span></div>
+							<div class="sex">
+								<span>性别:</span>
+								<span><input type="radio" name="sex" value="" data-sex="1" <if condition="$userInfo['sex'] eq 1">checked="checked"</if>>男</span>
+</span>
+								<span><input type="radio" name="sex" value="" data-sex="2" <if condition="$userInfo['sex'] eq 2">checked="checked"</if>>女</span>
+							</div>
 							<div class="user_leval"><span>用户等级:</span><p><i></i><span>初级</span></p></div>
 							<div class="save_update" id="sex">保存更新</div>
 						</div>
@@ -91,6 +95,7 @@
 
 							<div class="bind_username"><span><i></i><if condition="$userInfo['realname'] eq ''"><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}"><else/><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}" disabled></if></span><label>*注意：必须是真实姓名</label></div>
 							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
+
 							<div id="line"></div>
 							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名" name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户名</label></div>
 							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号" name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
@@ -113,84 +118,32 @@
 							<li>我的收藏</li>
 						</ul>
 						<div class="my_suport">
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>张艺谋/导演</p>
-									<p><span>678</span>人支持</p>
-									<p>票房分红</p>
-									<p>已支持<span>$15000.00</span></p>
+							<volist name="supportSituation" id="s">
+								<div>
+									<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
+									<div class="movie_content">
+										<p>片名:{$s['name']}</p>
+										<p>{$s['englishname']}</p>
+										<p>{$s['director']}/导演</p>
+										<p><span>{$s['support_number']}</span>人支持</p>
+										<p><if condition="$s['mode'] eq 1">固定分红<else/>票房分红</if></p>
+										<p>已支持<span>{$s['support_money']}</span></p>
+									</div>
 								</div>
-							</div>
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>张艺谋/导演</p>
-									<p><span>678</span>人支持</p>
-									<p>票房分红</p>
-									<p>已支持<span>$15000.00</span></p>
-								</div>
-							</div>
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>张艺谋/导演</p>
-									<p><span>678</span>人支持</p>
-									<p>票房分红</p>
-									<p>已支持<span>$15000.00</span></p>
-								</div>
-							</div>
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>张艺谋/导演</p>
-									<p><span>678</span>人支持</p>
-									<p>票房分红</p>
-									<p>已支持<span>$15000.00</span></p>
-								</div>
-							</div>
+							</volist>
 						</div>
 						<div class="my_collect" style="display: none;">
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>美国/90分钟</p>
-									<p>2017-02-14大陆上映</p>
-									<p style="color: #e50909;"><i></i>已下载</p>
+							<volist name="collection" id="c">
+								<div><img src="{$c['image_url']}" style="height: 180px;width: 420px" alt="">
+									<div class="movie_content">
+										<p>片名:{$c['name']}</p>
+										<p>{$c['englishname']}</p>
+										<p>{$c['country']}/{$c['duration']}分钟</p>
+										<p>{$c['date']}/{$c['showaddress']}</p>
+										<p style="color: #e50909;"><i></i><if condition="$c['is_download'] eq 1">已下载<else/>未下载</if></p>
+									</div>
 								</div>
-							</div>
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>美国/90分钟</p>
-									<p>2017-02-14大陆上映</p>
-									<p style="color: #e50909;"><i></i>已下载</p>
-								</div>
-							</div>
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>美国/90分钟</p>
-									<p>2017-02-14大陆上映</p>
-									<p style="color: #e50909;"><i></i>已下载</p>
-								</div>
-							</div>
-							<div><img src="__PUBLIC__/wang/img/moive_img.png" alt="">
-								<div class="movie_content">
-									<p>片名:战国之怒</p>
-									<p>Resident:The Final Chapter</p>
-									<p>美国/90分钟</p>
-									<p>2017-02-14大陆上映</p>
-									<p style="color: #e50909;"><i></i>已下载</p>
-								</div>
-							</div>
+							</volist>
 						</div>
 					</div>
 				</div>
@@ -366,7 +319,8 @@
 
 		//>> 获取性别
 		$('#sex').click(function(){
-			var sex = $('.sex_choice > label').attr('data-sex');
+			var sex = $('input[type = radio]:checked').attr('data-sex');
+
 			$.ajax({
 				'type':'post',
 				'dataType':'json',
