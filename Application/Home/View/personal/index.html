@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/personal_center.css">
+	<title>阿纳巴里</title>
+</head>
+<body>
+	<header>
+		<include file="layout:header" />
+	</header>
+	<div class="body">
+		<div class="body_left">
+		<div>
+		 <div>
+			<p class="username">{$personal['username']}</p>
+			<div class="leval">还差XXX个积分，您就升到YYY啦</div>
+			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
+			<div class="money"><p>支持金额 ：￥  <span>{$supportMoney}</span></p><p>账户余额：￥ <span>{$personal['money']}</span></p></div>
+			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
+				<if condition="$personal['safe_level'] eq 1">
+					<span>低</span>
+				</if>
+				<if condition="$personal['safe_level'] eq 2">
+					<span>中</span>
+				</if>
+				<if condition="$personal['safe_level'] eq 3">
+					<span>高</span>
+				</if>
+				<span class="up_btn">点击提升</span></div>
+			<div class="user_inform" id="phone">{$secretPhone}</div>
+			<div class="user_inform" id="email"><if condition="$personal['is_bind_email'] eq 0">未绑定<else/><span style="color: forestgreen">已绑定</span></if></div>
+			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
+			<div><span id="recharge">充值</span><span id="post_cash">提现</span></div>
+		 </div>
+			<p id="repeat_bg">点击替换背景</p>
+			<p class="footer">Copyright 2015摄图网 泸ICP备15050430号</p>
+		</div>
+		</div>
+		<div class="body_right">
+			<ul>
+				<li id="identity"><div>帐号设置</div></li>
+				<li id="team"><div>我的团队</div></li>
+				<li id="password"><div>密码修改</div></li>
+				<li id="ask"><div>平台质询</div></li>
+				<li id="actor"><div>我要当演员</div></li>
+				<li id="attend"><div>我的参与</div></li>
+			</ul>
+			<div class="identity" style="display: none;">
+				<div class="bg">
+				<div class="close_identity"></div>
+					<div class="identity_content">
+						<ul>
+							<li class="choice">个人资料</li>
+							<li>安全中心</li>
+						</ul>
+						<div class="people_data">
+							<div class="user"><input type="text" value="{$personal['username']}" disabled></div>
+							<div class="real_name"><span>实名:</span><if condition="$personal['is_true'] eq 0"><span>未实名</span><else/><span style="color: forestgreen">已实名</span></if></div>
+							<div class="sex">
+								<span>性别:</span>
+								<span><input type="radio" name="sex" value="" data-sex="1" <if condition="$userInfo['sex'] eq 1">checked="checked"</if>>男</span>
+</span>
+								<span><input type="radio" name="sex" value="" data-sex="2" <if condition="$userInfo['sex'] eq 2">checked="checked"</if>>女</span>
+							</div>
+							<div class="user_leval"><span>用户等级:</span><p><i></i><span>初级</span></p></div>
+							<div class="save_update" id="sex">保存更新</div>
+						</div>
+						<div class="safe_center"  style="display: none;" >
+							<div class="bind_phone"><span>手机:</span><span><if condition="$userInfo['is_bind_phone'] eq 0 "><a id="bind_phone">绑定手机</a><else/><a style="color: forestgreen;text-decoration: none">已绑定</a></if></span><span style="display: none;"><input type="text" placeholder="请输入您的手机" name="phone" value=""></span></div>
+
+							<div class="bind_email"><span>邮箱:</span><if condition="$userInfo['is_bind_email'] eq 0"><span><a id="bind_email">绑定邮箱</a></span><else/><span><a style="color: forestgreen;text-decoration: none">已绑定</a></span></if><span style="display: none;"><input type="text" placeholder="请输入您的邮箱" name="email" value=""></span></div>
+
+							<div class="bind_username"><span><i></i><if condition="$userInfo['realname'] eq ''"><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}"><else/><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}" disabled></if></span><label>*注意：必须是真实姓名</label></div>
+							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
+
+							<div id="line"></div>
+							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名" name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户名</label></div>
+							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号" name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
+							<div class="bind_city"><span><i></i><input type="text" placeholder="HongKong" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
+							<div class="bind_otherbank"><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>开户支行</label></div>
+							<div class="save_update" id="save">保存更新</div>
+						</div>
+					</div>
+				</div>
+				<p>A</p>
+				<p>L</p>
+				<p>B</p>
+		    </div>
+		    <div class="attend" style="display: none;">
+				<div class="bg">
+				<div class="close_attend"></div>
+					<div class="attend_content">
+						<ul>
+							<li class="choice">我的支持</li>
+							<li>我的收藏</li>
+						</ul>
+						<div class="my_suport">
+							<volist name="supportSituation" id="s">
+								<div>
+									<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
+									<div class="movie_content">
+										<p>片名:{$s['name']}</p>
+										<p>{$s['englishname']}</p>
+										<p>{$s['director']}/导演</p>
+										<p><span>{$s['support_number']}</span>人支持</p>
+										<p><if condition="$s['mode'] eq 1">固定分红<else/>票房分红</if></p>
+										<p>已支持<span>{$s['support_money']}</span></p>
+									</div>
+								</div>
+							</volist>
+						</div>
+						<div class="my_collect" style="display: none;">
+							<volist name="collection" id="c">
+								<div><img src="{$c['image_url']}" style="height: 180px;width: 420px" alt="">
+									<div class="movie_content">
+										<p>片名:{$c['name']}</p>
+										<p>{$c['englishname']}</p>
+										<p>{$c['country']}/{$c['duration']}分钟</p>
+										<p>{$c['date']}/{$c['showaddress']}</p>
+										<p style="color: #e50909;"><i></i><if condition="$c['is_download'] eq 1">已下载<else/>未下载</if></p>
+									</div>
+								</div>
+							</volist>
+						</div>
+					</div>
+				</div>
+				<p>A</p>
+				<p>L</p>
+				<p>B</p>
+		    </div>
+		    <div class="money_operat" style="display:none;">
+				<div class="bg">
+				<div class="close_money"></div>
+					<div class="money_content">
+						<ul>
+							<li class="choice">充值</li>
+							<li>提现</li>
+							<li class="put_record">充值记录<span>>></span></li>
+						</ul>
+						<ul style="display: none;">
+							<li style="border-bottom: 1px solid #e50909;  color: #e50909;">充值记录</li>
+							<li>消费明细</li>
+							<li class="now_put">立即充值<span>>></span></li>
+						</ul>
+						<div class="put_money">
+							<p>选择充值帐号:</p>
+							<div><p>户主:大美女</p>
+									<p>卡号:51212132323</p>
+									<p>开户支行:成都靖江支行</p>
+									<p>开户银行:中国工商银行</p>
+									<img src="__PUBLIC__/wang/img/choice.png" alt="">
+							</div>
+							<p>充值金额: <input type="text"></p>
+							<p>交易凭证:<span style="margin-left: 20px;"><span>点击此处从电脑中选择一张图片</span><input class="money_file" type="file"></span></p>
+							<div id="put_btn">确定</div>
+						</div>
+						<div class="get_money" style="display: none;">
+							<p>提现金额: <input type="text"></p>
+							<p>可提余额$5000 <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
+							<div class="question_div"></div>
+							<div id="get_btn">确定</div>
+						</div>
+						<div class="money_record" style="display: none;">
+							<p><span>充值时间</span>
+							<span>充值方式</span>
+							<span style="color: white;">交易号</span>
+							<span style="color: white;">充值金额</span>
+							<span>交易状态</span></p>
+							<p><span>2017-01-24</span>
+							<span>银行转账</span>
+							<span>542368</span>
+							<span>$255</span>
+							<span>已完成</span></p>
+						 </div>
+					</div>
+				</div>
+				<p>A</p>
+				<p>L</p>
+				<p>B</p>
+		    </div>
+				<div class="password" style="display: none;">
+					<div class="bg">
+					<div class="close_password"></div>
+						<div class="password_content">
+								<ul><li>密码管理</li>
+								<li>修改登录密码</li></ul>
+								<div class="update_password">
+									<p><i></i><input style='padding-left:37px;width:174px;' type="password"><label>输入当前的登录密码</label></p>
+									<p><input type="password" placeholder="6-16位数字,字母组合"><label>新密码</label></p>
+									<p><input type="password" placeholder="再输入一次密码"><label>确认新密码</label></p>
+									<div class="save_update">保存更新</div>
+								</div>
+						</div>
+					</div>
+					<p>A</p>
+					<p>L</p>
+					<p>B</p>
+			    </div>
+		</div>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/common.js'></script>
+	<script src='__PUBLIC__/wang/personal_center.js'></script>
+	<!--layer.js-->
+	<script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+<script>
+	$(function(){
+		//>> 验证表单
+		$('#save').click(function(){
+
+			var phone = $('input[name = phone]').val();
+			var email = $('input[name = email]').val();
+			var realname = $('input[name = realname]').val();
+			var id_card = $('input[name = id_card]').val();
+			var bank_card_name = $('input[name = bank_card_name]').val();
+			var bank_card = $('input[name = bank_card]').val();
+			var city = $('input[name = city]').val();
+			var address = $('input[name = address]').val();
+			if(realname == ''){
+				layer.tips('请输入真实姓名','input[name = realname]',{
+					tips:4
+				});
+			}else{
+				if(id_card == ''){
+					layer.tips('请输入身份证','input[name = id_card]',{
+						tips:4
+					});
+				}else{
+					//>> 验证身份证格式
+					var reg = /\d{14}(\d{4}|(\d{3}[xX])|\d{1})/;
+					if(!reg.test(id_card)){
+						layer.tips('身份证格式不正确','input[name = id_card]',{
+							tips:4
+						});
+						return ;
+					}
+					if(bank_card_name == ''){
+						layer.tips('请输入开户名','input[name = bank_card_name]',{
+							tips:4
+						});
+					}else{
+						if(bank_card == ''){
+							layer.tips('请输入银行卡号','input[name = bank_card]',{
+								tips:4
+							});
+						}else{
+							//>> 验证银行卡
+							var reg_ = /^\d{19}$/g;
+							if(!reg_.test(bank_card)){
+								layer.tips('银行卡格式不正确','input[name = bank_card]',{
+									tips:4
+								});
+								return ;
+							}
+							if(city == ''){
+								layer.tips('请输入开户城市','input[name = city]',{
+									tips:4
+								});
+							}else{
+								if(address == ''){
+									layer.tips('请输入支行地址','input[name = address]',{
+										tips:4
+									});
+								}else{
+									$.ajax({
+										'type':'post',
+										'dataType':'json',
+										'url':"{:U('home/Personal/safeInfo')}",
+										'data':{
+											'phone':phone ? phone : '',
+											'email':email? email : '',
+											'realname':realname,
+											'id_card':id_card,
+											'bank_card_name':bank_card_name,
+											'bank_card':bank_card,
+											'city':city,
+											'address':address
+										},
+										success:function(result){
+											if(result.status == 1){
+												layer.msg('保存成功!');
+											}else{
+												layer.msg(result.msg);
+											}
+										}
+									});
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+		var safeLevel = $('input[name = safeLevel]').val();
+		$('#safe').css('width',safeLevel);
+
+		//>> 获取性别
+		$('#sex').click(function(){
+			var sex = $('input[type = radio]:checked').attr('data-sex');
+
+			$.ajax({
+				'type':'post',
+				'dataType':'json',
+				'url':"{:U('Home/Personal/save')}",
+				'data':{
+					'sex':sex
+				},
+				success:function(result){
+					if(result.status == 1){
+						layer.msg('保存成功！');
+					}else{
+						layer.msg('保存失败!');
+					}
+				}
+			});
+		});
+	});
+</script>
+</body>
+</html>
