@@ -144,5 +144,116 @@ $('.body_right>ul').show();
 		$('.safe_center').hide();
 	});
 
+//>> 验证表单
+	$('#save').click(function(){
 
+		var phone = $('input[name = phone]').val();
+		var email = $('input[name = email]').val();
+		var realname = $('input[name = realname]').val();
+		var id_card = $('input[name = id_card]').val();
+		var bank_card_name = $('input[name = bank_card_name]').val();
+		var bank_card = $('input[name = bank_card]').val();
+		var city = $('input[name = city]').val();
+		var address = $('input[name = address]').val();
+		if(realname == ''){
+			layer.tips('请输入真实姓名','input[name = realname]',{
+				tips:4
+			});
+		}else{
+			if(id_card == ''){
+				layer.tips('请输入身份证','input[name = id_card]',{
+					tips:4
+				});
+			}else{
+				//>> 验证身份证格式
+				var reg = /\d{14}(\d{4}|(\d{3}[xX])|\d{1})/;
+				if(!reg.test(id_card)){
+					layer.tips('身份证格式不正确','input[name = id_card]',{
+						tips:4
+					});
+					return ;
+				}
+				if(bank_card_name == ''){
+					layer.tips('请输入开户名','input[name = bank_card_name]',{
+						tips:4
+					});
+				}else{
+					if(bank_card == ''){
+						layer.tips('请输入银行卡号','input[name = bank_card]',{
+							tips:4
+						});
+					}else{
+						//>> 验证银行卡
+						var reg_ = /^\d{19}$/g;
+						if(!reg_.test(bank_card)){
+							layer.tips('银行卡格式不正确','input[name = bank_card]',{
+								tips:4
+							});
+							return ;
+						}
+						if(city == ''){
+							layer.tips('请输入开户城市','input[name = city]',{
+								tips:4
+							});
+						}else{
+							if(address == ''){
+								layer.tips('请输入支行地址','input[name = address]',{
+									tips:4
+								});
+							}else{
+								var url_ = location.protocol+'//'+window.location.host+'/Home/Personal/saveInfo';
+								$.ajax({
+									'type':'post',
+									'dataType':'json',
+									'url':url_,
+									'data':{
+										'phone':phone ? phone : '',
+										'email':email? email : '',
+										'realname':realname,
+										'id_card':id_card,
+										'bank_card_name':bank_card_name,
+										'bank_card':bank_card,
+										'city':city,
+										'address':address
+									},
+									success:function(result){
+										if(result.status == 1){
+											layer.msg('保存成功!');
+										}else{
+											layer.msg(result.msg);
+										}
+									}
+								});
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+	var safeLevel = $('input[name = safeLevel]').val();
+	$('#safe').css('width',safeLevel);
+
+	//>> 获取性别
+	$('#sex').click(function(){
+		var url = location.protocol+'//'+window.location.host+'/Home/Personal/save';
+
+		var sex = $('input[type = radio]:checked').attr('data-sex');
+
+		$.ajax({
+			'type':'post',
+			'dataType':'json',
+			'url':url,
+			'data':{
+				'sex':sex
+			},
+			success:function(result){
+				if(result.status == 1){
+					layer.msg('保存成功！');
+				}else{
+					layer.msg('保存失败!');
+				}
+			}
+		});
+	});
 });

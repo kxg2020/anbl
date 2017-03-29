@@ -18,3 +18,92 @@
     },1000);
   });
 })();
+$(function(){
+    //>> 获取验证码
+    $('#get').click(function(){
+        var phone  = $('input[name = phone]').val();
+        if(phone == ''){
+            layer.tips('请先填写手机号码!', 'input[name = phone]');
+        }else{
+            //>> 验证手机号
+            var r = /^0?(13|14|15|17|18)[0-9]{9}$/;
+            if(!r.test(phone)){
+                layer.tips('手机号码格式不正确', 'input[name = phone]');
+                return ;
+            }
+            var url = location.protocol+'//'+window.location.host+'/Home/Register/sendMessage';
+            $.ajax({
+                'type':'post',
+                'dataType':'json',
+                'url':url,
+                'data':{
+                    'phone':phone
+                },
+                success:function(result){
+
+                }
+            });
+        }
+    });
+
+    $('#ok').click(function(){
+        var password = $('input[name = password]').val();
+        var captcha = $('input[name = captcha]').val();
+        var phone = $('input[name = phone]').val();
+        var invite_key = $('input[name = invite_key]').val();
+        if(phone == ''){
+            layer.tips('手机号不能为空!', 'input[name = phone]');
+
+        }else{
+            //>> 验证手机号
+            var r = /^0?(13|14|15|17|18)[0-9]{9}$/;
+            if(!r.test(phone)){
+                layer.tips('手机号码格式不正确', 'input[name = phone]');
+
+                return ;
+            }
+            //>> 验证密码
+            if(password == ''){
+                layer.tips('密码不能为空!', 'input[name = password]');
+
+            }else{
+                var e = /^[a-zA-Z]\w{5,16}$/ ;
+                if(!e.test(password)){
+                    layer.tips('密码格式不正确!', 'input[name = password]');
+
+                    return ;
+                }
+                //>> 验证验证码
+                if(captcha == ''){
+                    layer.tips('验证码不能为空!', 'input[name = captcha]');
+                }else{
+                    //>> 验证邀请码
+                    if(invite_key == ''){
+                        layer.tips('邀请码不能为空!', 'input[name = invite_key]');
+                    }else{
+                        var url_ = location.protocol+'//'+window.location.host+'/Home/Register/register';
+                        $.ajax({
+                            'type':'post',
+                            'dataType':'json',
+                            'url':url_,
+                            'data':{
+                                'phone':phone,
+                                'password':password,
+                                'captcha':captcha,
+                                'invite_key':invite_key
+                            },
+                            success:function(result){
+                                if(result.status == 1){
+                                    window.location.href = location.protocol+'//'+window.location.host+'/Home/Login/index'
+                                }else{
+                                    layer.msg(result.msg);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+        }
+    });
+});

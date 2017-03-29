@@ -21,7 +21,7 @@ class MemberController extends  CommonController{
 
         $paramArr = $_REQUEST;
 
-        $list = M('Member')->where(['is_active'=>1])->select();
+        $list = M('Member')->where(['is_active'=>1])->order('create_time desc ')->select();
         if(empty($list)){
 
             exit;
@@ -55,6 +55,88 @@ class MemberController extends  CommonController{
         ]);
 
         $this->display('member/index');
+    }
+
+    /**
+     * 添加会员
+     */
+
+    public function addMember(){
+
+        $paramArr = $_REQUEST;
+        if(IS_POST){
+            if(!empty($paramArr)){
+                //>> 生成一个推荐码
+                $str = '012345679ABCDEFGHJKMNPQRSTUZabcdefghjkmnpqrstuz';
+                $strArr = str_split($str);
+                shuffle($strArr);
+                //>> 截取8位
+                $endArr = array_slice($strArr,0,7);
+
+                $invite_key = implode('',$endArr);
+                if(isset($paramArr['username']) && !empty($paramArr['username'])){
+
+                    //>> 查询用户是否已经添加过
+                    $row = M('Member')->where(['username'=>$paramArr['username']])->find();
+                    if(!empty($row)){
+                        $this->ajaxReturn([
+                            'status'=>0,
+                            'msg'=>'用户已经注册过了'
+                        ]);
+                    }
+                    //>> 查询积分制度表
+                    $level = 0;
+                    $integral = M('IntegralInstitution')->select();
+                    foreach($integral as $key => $value){
+                        if($value['money'] == $paramArr['money']){
+                            $level = $value['integral'];
+                        }
+                    }
+                    $insertData = [
+                        'username'=>$paramArr['username'],
+                        'last_ip'=>get_client_ip(),
+                        'password'=>md5($paramArr['password']),
+                        'money'=>$paramArr['money'] ? $paramArr['money'] : 0,
+                        'integral'=>$paramArr['money'] ? $paramArr['money'] : 0,
+                        'create_time'=>time(),
+                        'is_allowed_recharge'=>1,
+                        'invite_key'=>$invite_key,
+                        'parent_id'=>0,
+                        'level'=>$level
+                    ];
+
+                    $res = M('Member')->add($insertData);
+                    if($res){
+
+                        $this->ajaxReturn([
+                            'status'=>1,
+                            'msg'=>'添加成功!'
+                        ]);
+                    }else{
+                        $this->ajaxReturn([
+                            'status'=>0,
+                            'msg'=>'添加失败!'
+                        ]);
+                    }
+                }else{
+                    $this->ajaxReturn([
+                        'status'=>0,
+                        'msg'=>'用户名不能为空'
+                    ]);
+                }
+            }else{
+                $this->ajaxReturn([
+                    'status'=>0,
+                    'msg'=>'会员信息不能为空!'
+                ]);
+            }
+        }else{
+
+            //>> 查询升级规则
+            $institution = M('IntegralInstitution')->select();
+            $this->assign('integral',$institution);
+            $this->display('member/add');
+        }
     }
 
     /**
@@ -115,6 +197,10 @@ class MemberController extends  CommonController{
                 'integral'=>$paramArr['integral'],
                 'money'=>$paramArr['money'],
                 'phone'=>$paramArr['phone'],
+                'realname'=>$paramArr['realname'],
+                'bank_card_name'=>$paramArr['bank_card_name'],
+                'address'=>$paramArr['address'],
+                'city'=>$paramArr['city'],
             ];
             $res = $memberModel->where(['id'=>$paramArr['id']])->save($data);
 
@@ -158,7 +244,35 @@ class MemberController extends  CommonController{
         }else{
 
             return false;
+        }
+    }
 
+    /**
+     * 积分制度
+     */
+    public function integral(){
+
+        if(IS_POST){
+            $paramArr = $_REQUEST;
+            //>> 开启事物
+            $model = M('IntegralInstitution');
+            //>> 更新积分数据库
+            if(!empty($paramArr)){
+                foreach($paramArr['integral'] as $key => $value){
+                    $data = [
+                        'level'=>$key,
+                        'integral'=>$value
+                    ];
+                    $model->where(['level'=>$data['level']])->save($data);
+                }
+            }else{
+                $this->ajaxReturn(['msg'=>'数据不能为空','status'=>0]);
+            }
+        }else{
+
+            $rows = M('IntegralInstitution')->select();
+            $this->assign('row',$rows);
+            $this->display('member/integral');
         }
     }
 }

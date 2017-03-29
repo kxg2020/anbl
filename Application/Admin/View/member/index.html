@@ -16,6 +16,7 @@
         </ul>
     </div>
     <div class="wrapper">
+        <a href="{:U('admin/Member/addmember')}"><input type="button" value="会员添加" class="btn btn-xs btn-success"></a>
         <table class="table table-bordered table-hover">
             <tr align="center">
                 <td>编号</td>
@@ -25,19 +26,19 @@
                 <td>等级</td>
                 <td>是否绑定</td>
                 <td>是否实名</td>
-                <td>电话号码</td>
+                <td>绑定号码</td>
                 <td>操作</td>
             </tr>
             <tbody id="body">
             <volist name="list" id="l">
-                <tr align="center">
-                    <td>{$l.id}</td>
-                    <td>{$l.username}</td>
+                <tr align="center" >
+                    <td >{$l.id}</td>
+                    <td ><img src="__IMG__/{$l.parent_id}.png" style="width: 30px;height: 20px">&nbsp;{$l.username}</td>
                     <td>{$l.password}</td>
                     <td>{$l.money}</td>
                     <td>{$l.level}</td>
                     <td>
-                            <img src="__IMG__/{$l.is_bind}.gif">
+                            <img src="__IMG__/{$l.is_bind_phone}.gif">
                     </td>
                     <td>
                         <img src="__IMG__/{$l.is_true}.gif">
@@ -108,11 +109,11 @@
                                             $('#body').append(
                                                     '<tr align="center">'+
                                                     '<td>'+ v.id+'</td>'+
-                                                    '<td>'+ v.username+'</td>'+
+                                                    '<td>'+ '<img style="width:30px;height:20px" src="__IMG__/'+ v.parent_id+'.png">&nbsp;'+v.username+'</td>'+
                                                     '<td>'+ v.password+'</td>'+
                                                     '<td>'+ v.money+'</td>'+
                                                     '<td>'+ v.level+'</td>'+
-                                                    '<td>'+ '<img src="__IMG__/'+v.is_bind+'.gif" />'+'</td>'+
+                                                    '<td>'+ '<img src="__IMG__/'+v.is_bind_phone+'.gif" />'+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+v.is_true+'.gif" />'+'</td>'+
                                                     '<td>'+ v.phone+'</td>'+
                                                     '<td><a href="{:U("'+'admin/member/detail/id/'+ v.id+'")}">'+'<input type="button" class="btn btn-xs btn-info" value="详情"></a>&nbsp;&nbsp;'+'<input type="button" class="delete btn btn-xs btn-danger" data-toggle="modal" data-target=".myModal" value="删除"  data-id='+ v.id+'>'+'</td>'+

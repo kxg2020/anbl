@@ -62,7 +62,7 @@ class RegisterController extends CommonController{
                     $where = [
                         'invite_key'=>$paramArr['invite_key'],
                     ];
-                    //>> 查询数据库
+                    //>> 查询邀请码
                     $row = $userModel->where($where)->find();
 
                     if(!empty($row)){
