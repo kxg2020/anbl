@@ -197,4 +197,13 @@ class LoginController extends CommonController{
         }
         $this->display('login/forget');
     }
+
+    /**
+     * 退出登录
+     */
+    public function logout(){
+        session(md5('home'), null);
+        cookie(md5('home'), null);
+        $this->redirect('home/login/index');
+    }
 }
