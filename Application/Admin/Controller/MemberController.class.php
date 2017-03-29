@@ -22,10 +22,7 @@ class MemberController extends  CommonController{
         $paramArr = $_REQUEST;
 
         $list = M('Member')->where(['is_active'=>1])->order('create_time desc ')->select();
-        if(empty($list)){
 
-            exit;
-        }
         $count = ceil(count($list)/20);
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
@@ -86,23 +83,27 @@ class MemberController extends  CommonController{
                     }
                     //>> 查询积分制度表
                     $level = 0;
+                    $integral = 0;
                     $integral = M('IntegralInstitution')->select();
                     foreach($integral as $key => $value){
-                        if($value['money'] == $paramArr['money']){
-                            $level = $value['integral'];
+                        if($value['integral'] == $paramArr['money']){
+                            $level = $value['level'];
+                            $integral = $value['integral'];
                         }
                     }
+
                     $insertData = [
                         'username'=>$paramArr['username'],
                         'last_ip'=>get_client_ip(),
                         'password'=>md5($paramArr['password']),
                         'money'=>$paramArr['money'] ? $paramArr['money'] : 0,
-                        'integral'=>$paramArr['money'] ? $paramArr['money'] : 0,
+                        'integral'=>$integral,
                         'create_time'=>time(),
                         'is_allowed_recharge'=>1,
                         'invite_key'=>$invite_key,
                         'parent_id'=>0,
-                        'level'=>$level
+                        'level'=>$level,
+                        'safe_level'=>1,
                     ];
 
                     $res = M('Member')->add($insertData);
@@ -227,7 +228,7 @@ class MemberController extends  CommonController{
 
         if(isset($paramArr['id']) && !empty($paramArr['id']) && is_numeric($paramArr['id'])){
 
-            $res = M('Member')->where(['id'=>$paramArr['id']])->save(['is_active'=>0]);
+            $res = M('Member')->where(['id'=>$paramArr['id']])->delete();
             if($res){
 
                 $this->ajaxReturn([

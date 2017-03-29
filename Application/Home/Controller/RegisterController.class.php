@@ -103,6 +103,7 @@ class RegisterController extends CommonController{
                     'last_ip'=>get_client_ip(),
                     'invite_key'=>$invite_key,
                     'parent_id'=>isset($parent_id) ? $parent_id : 0,
+                    'safe_level'=>1
                 ];
 
                 $res = $userModel->add($insertData);

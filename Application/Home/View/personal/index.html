@@ -32,7 +32,7 @@
 			<div class="user_inform" id="phone">{$secretPhone}</div>
 			<div class="user_inform" id="email"><if condition="$personal['is_bind_email'] eq 0">未绑定<else/><span style="color: forestgreen">已绑定</span></if></div>
 			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
-			<div><span id="recharge">充值</span><span id="post_cash">提现</span></div>
+			<div><if condition="$userInfo['is_allowed_recharge'] eq 1"><span id="recharge">充值</span></if><span id="post_cash">提现</span></div>
 		 </div>
 			<p id="repeat_bg">点击替换背景</p>
 			<p class="footer">Copyright 2015摄图网 泸ICP备15050430号</p>

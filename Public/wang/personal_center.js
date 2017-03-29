@@ -201,7 +201,7 @@ $('.body_right>ul').show();
 									tips:4
 								});
 							}else{
-								var url_ = location.protocol+'//'+window.location.host+'/Home/Personal/saveInfo';
+								var url_ = location.protocol+'//'+window.location.host+'/Home/Personal/safeInfo';
 								$.ajax({
 									'type':'post',
 									'dataType':'json',
