@@ -15,7 +15,9 @@
 		<div>
 		 <div>
 			<p class="username">{$personal['username']}</p>
-			<div class="leval">还差XXX个积分，您就升到YYY啦</div>
+			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个积分，您就升到Lv{$allInfo['level']}啦<else/>
+			您当前的积分为:{$allInfo['integral']}
+			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
 			<div class="money"><p>支持金额 ：￥  <span>{$supportMoney}</span></p><p>账户余额：￥ <span>{$personal['money']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>

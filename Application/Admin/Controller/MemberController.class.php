@@ -104,6 +104,7 @@ class MemberController extends  CommonController{
                         'parent_id'=>0,
                         'level'=>$level,
                         'safe_level'=>1,
+                        'class'=>0
                     ];
 
                     $res = M('Member')->add($insertData);

@@ -24,17 +24,37 @@ class PersonalController extends CommonController{
             ->where(['a.id'=>$this->userInfo['id'],'a.username'=>$this->userInfo['username']])
             ->select();
 
+        //>> 查询积分制度表
+        $integral = M('IntegralInstitution')->select();
+
+        //>> 取出当前用户的积分
+        $crrIntegral = $row['integral'];
+
+        //>> 取出当前用户等级
+        $crrLevel = $row['level'];
+        
+        //>> 取出积分表下一个等级对应的积分
+        $allInfo = ['status'=>0,'integral'=>$row['integral']];
+        foreach($integral as $key => $value){
+            if($value['level'] == $crrLevel + 1){
+                $expIntegral = $value['integral'];
+                $allInfo['level'] = $value['level'];
+                //>> 算出还需要多少积分
+                $needIntegral = $expIntegral - $crrIntegral;
+                $allInfo['integral'] = $needIntegral;
+                $allInfo['status'] = 1;
+            }
+        }
+
         //>> 查询收藏情况
         $collection = $personModel->where(['member_id'=>$this->userInfo['id']])
                     ->join('left join an_member_collection as b on a.id = b.member_id')
                     ->join('left join an_project as c on b.project_id = c.id')
                     ->select();
-
         foreach($collection as $key => &$value){
             $value['date'] = date('Y-m-d',$value['showtime']);
             unset($value);
         }
-
         $supportMoney = 0;
         if(!empty($rows)){
             //>> 对用户支持的电影金额求和
@@ -53,6 +73,7 @@ class PersonalController extends CommonController{
         //>> 组装电话号码
         $secretPhone = substr($row['username'],0,3).'****'.substr($row['username'],7,4);
         $this->assign([
+            'allInfo'=>$allInfo,
             'personal'=>$row,
             'collection'=>$collection,
             'safeLevel'=>$safeLevel,

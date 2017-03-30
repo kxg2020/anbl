@@ -93,8 +93,6 @@ class RegisterController extends CommonController{
                     die($this->_printError('1014'));
 
                 }
-
-
                 //>> 将用户信息保存到数据库
                 $insertData = [
                     'username'=>$paramArr['phone'],
@@ -103,7 +101,8 @@ class RegisterController extends CommonController{
                     'last_ip'=>get_client_ip(),
                     'invite_key'=>$invite_key,
                     'parent_id'=>isset($parent_id) ? $parent_id : 0,
-                    'safe_level'=>1
+                    'safe_level'=>1,
+                    'class'=>1
                 ];
 
                 $res = $userModel->add($insertData);
