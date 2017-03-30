@@ -36,6 +36,8 @@ class CommonController extends Controller{
         '1040'=>['邀请码不存在!','邀请码不存在！'],
         '1042'=>['该手机号已经绑定过账号了!','该手机号已经绑定过账号了！'],
         '1044'=>['当前账号已经绑定过手机号了!','当前账号已经绑定过手机号了！'],
+        '1046'=>['你没有充值权限!','你没有充值权限！'],
+        '1048'=>['充值失败!','充值失败!'],
 
     ];
 
@@ -56,11 +58,9 @@ class CommonController extends Controller{
         }else{
             //>> 拿cookie
             $cookie = cookie(md5('home'));
-
             if(!empty($cookie)){
                 $row = M('User')->where(['remember_token'=>$cookie]);
                 if(!empty($row)){
-
                     $this->isLogin = 1;
                     $this->userInfo = $row;
                     $this->assign('userInfo',$row);
