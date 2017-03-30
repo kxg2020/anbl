@@ -42,7 +42,7 @@
 			<div class="collect">
 				<p>#{$info['title']}</p>
 				<p>{:date('Y-m-d',$info['start_time'])} 至 {:date('Y-m-d',$info['end_time'])}</p>
-				<p>{$info.collection_number}人收藏</p>
+				<p><span id="skl">{$info.collection_number}</span>人收藏 <input id="fast_collect" type="button" onclick="collect({$info['id']})" value="立即收藏"></p>
 			</div>
 			<div class="suport">
 				<p>已支持积分</p>
@@ -204,14 +204,23 @@
 				 if (data.status == 0) {
 					 layer.alert(data.msg);
 				 } else {
-					 // 跳转到列表
-					// window.location.href = "{:U('admin/project/index')}";
+					 layer.msg(data.msg);
+					 $('.suport_bg').fadeOut('slow');
 				 }
 			 });
-
-			 //$('.suport_bg').fadeOut('slow');
-
 		 })
+
+		 function collect(_id){
+			 var _id = _id;
+			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
+				 if (data.status == 0) {
+					 layer.alert(data.msg);
+				 } else {
+					 $('#skl').text(data.info);
+					 layer.msg(data.msg);
+				 }
+			 });
+		 }
 
 	 </script>
 </body>

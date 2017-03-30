@@ -76,6 +76,12 @@ class ProjectController extends CommonController
                 'director' => $_data['director'],
                 'star' => $_data['star'],
                 'company' => $_data['company'],
+                'dl' => $_data['dl'],
+                'country' => $_data['country'],
+                'englishname' => $_data['englishname'],
+                'showaddress' => $_data['showaddress'],
+                'showtime' => strtotime($_data['showtime']),
+                'duration' => $_data['duration'],
                 'total_num' => $_data['total_num'],
                 'title' => $_data['title'],
                 'mode' => $_data['mode'],
@@ -161,6 +167,12 @@ class ProjectController extends CommonController
                 'director' => $_data['director'],
                 'star' => $_data['star'],
                 'company' => $_data['company'],
+                'dl' => $_data['dl'],
+                'country' => $_data['country'],
+                'englishname' => $_data['englishname'],
+                'showaddress' => $_data['showaddress'],
+                'showtime' => $_data['showtime'],
+                'duration' => $_data['duration'],
                 'total_num' => $_data['total_num'],
                 'title' => $_data['title'],
                 'mode' => $_data['mode'],
@@ -426,34 +438,4 @@ class ProjectController extends CommonController
 
     }
 
-
-    /**
-     * @param string $res_filepath 文件地址
-     */
-    public function download(){
-            // 接收传递参数 文件地址 文件id
-            $data = I('get.');
-
-            $user_id = $data['uid'];
-            $project_id = $data['project_id'];
-
-           // 验证用户权限
-
-          // 根据项目id 查询出视频地址
-
-            $res_filepath = "http://on58ea572.bkt.clouddn.com/2017-03-22_58d20e3482321.mp4";//文件地址
-
-            // 判断用户是否已经在该项目已经充值
-
-            $file_basename = basename($res_filepath);
-            $file_filesize = filesize($res_filepath);
-            $file = fopen($res_filepath, "r");
-
-            Header("Content-type: application/octet-stream");
-            Header("Accept-Ranges: bytes");
-            Header("Accept-Length: " . $file_filesize);
-            Header("Content-Disposition: attachment; filename=" . $file_basename);
-            echo fread($file, $file_filesize);
-            fclose($file);
-    }
 }

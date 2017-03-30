@@ -429,3 +429,13 @@ margin-right: 8px;
     margin-left: -60px;
     bottom: 20px;
 }
+#fast_collect{
+  margin-left: 50px;
+  border: none;
+  outline: none;
+  padding-left: 5px;padding-right: 5px;
+  color: white;
+  background: #e89108;
+  border-radius: 5px;
+  cursor: pointer;
+}
