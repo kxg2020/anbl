@@ -24,6 +24,7 @@
                 <td>密码</td>
                 <td>余额</td>
                 <td>等级</td>
+                <td>充值权限</td>
                 <td>是否绑定</td>
                 <td>是否实名</td>
                 <td>绑定号码</td>
@@ -37,6 +38,7 @@
                     <td>{$l.password}</td>
                     <td>{$l.money}</td>
                     <td>{$l.level}</td>
+                    <td><img id="allowed" style="cursor: pointer;" data-id="{$l.is_allowed_recharge}" src="__IMG__/{$l.is_allowed_recharge}.gif"></td>
                     <td>
                             <img src="__IMG__/{$l.is_bind_phone}.gif">
                     </td>
@@ -113,6 +115,7 @@
                                                     '<td>'+ v.password+'</td>'+
                                                     '<td>'+ v.money+'</td>'+
                                                     '<td>'+ v.level+'</td>'+
+                                                    '<td>'+ '<img data-id="'+ v.is_allowed_recharge+'" style="cursor: pointer" id="allowed" src="__IMG__/'+v.is_allowed_recharge+'.gif" />'+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+v.is_bind_phone+'.gif" />'+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+v.is_true+'.gif" />'+'</td>'+
                                                     '<td>'+ v.phone+'</td>'+
@@ -130,6 +133,32 @@
             $('body').on('click','.delete',function(){
                 var id = $(this).attr('data-id');
                 $('#data-id').val(id);
+            });
+            $('body').on('click','#allowed',function(){
+                var id = $(this).attr('data-id');
+                if(id != ''){
+                    var status = id ^ 1;
+                    $(this).attr({'data-id':status});
+                    //>> 修改图片地址
+                    $(this).attr({
+                        'src':'__IMG__/'+status+'.gif'
+                    });
+
+                    $.ajax({
+                        'type':'post',
+                        'dataType':'json',
+                        'url':'{:U("admin/member/status")}',
+                        'data':{
+                            'id':id,
+                        },
+                        success:function(result){
+                            if(result.status == 1){
+
+                            }
+                        }
+                    });
+                }
+
             });
 
             $('body').on('click','.deltrue',function(){

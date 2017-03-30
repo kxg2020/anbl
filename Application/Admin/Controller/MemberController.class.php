@@ -83,7 +83,6 @@ class MemberController extends  CommonController{
                     }
                     //>> 查询积分制度表
                     $level = 0;
-                    $integral = 0;
                     $integral = M('IntegralInstitution')->select();
                     foreach($integral as $key => $value){
                         if($value['integral'] == $paramArr['money']){
@@ -277,4 +276,23 @@ class MemberController extends  CommonController{
             $this->display('member/integral');
         }
     }
+
+    /**
+     * 充值权限
+     */
+
+    public function status(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+        }else{
+            $this->ajaxReturn([
+                'status'=>0,
+                'msg'=>'修改失败'
+            ]);
+        }
+    }
+
 }

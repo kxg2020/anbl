@@ -1,634 +1,634 @@
 body{
-  font-family: 'Microsoft Yahei';
-  font-size: 16px;
-  min-width: 1900px;
+    font-family: 'Microsoft Yahei';
+    font-size: 16px;
+    min-width: 1900px;
 }
 li{
-  list-style: none;
+    list-style: none;
 }
 a{
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 header{
-  width: 100%;
-  height: 120px;
-  overflow: hidden;
-  position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    position: relative;
 }
 header .nav{
-  width: 100%;
-  height: 120px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background:black;
-  z-index: 100;
+    width: 100%;
+    height: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background:black;
+    z-index: 100;
 }
 .nav>div{
-  height: 120px;
-  margin: auto;
-  text-align: center;
-  width: 1100px;
+    height: 120px;
+    margin: auto;
+    text-align: center;
+    width: 1100px;
 }
 .logo{
-  width: auto;
-  height: 120px;
-  display: block;
-  float: left;
-  line-height: 120px;
+    width: auto;
+    height: 120px;
+    display: block;
+    float: left;
+    line-height: 120px;
 }
 .top_nav{
-  width: auto;
-  height: 120px;
-  margin-left: 100px;
-  float: left;
+    width: auto;
+    height: 120px;
+    margin-left: 100px;
+    float: left;
 }
 .top_nav li{
-  float: left;
-  padding-top: 40px;
-  font-size: 20px;
-  padding-right: 50px;
-  height: 80px;
+    float: left;
+    padding-top: 40px;
+    font-size: 20px;
+    padding-right: 50px;
+    height: 80px;
 }
 .top_nav li a p:nth-child(2){
-  font-size: 12px;
-  margin-top: 10px;
+    font-size: 12px;
+    margin-top: 10px;
 }
 .top_nav dl{
-  position: absolute;
-  top: 120px;
-  left: -20px;
-  background: black;
-  width: 150px;
-  display: none;
-  z-index: 100;
+    position: absolute;
+    top: 120px;
+    left: -20px;
+    background: black;
+    width: 150px;
+    display: none;
+    z-index: 100;
 }
 .top_nav dl dd{
-  height: 40px;
-  line-height: 40px;
-  text-align: left;
-  padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    padding-left: 20px;
 }
 .top_nav dl dd:nth-child(1) a{
-  display: inline-block;
-  height: 40px;
-  padding-right: 10px;
-  border-bottom: 1px solid #666;
+    display: inline-block;
+    height: 40px;
+    padding-right: 10px;
+    border-bottom: 1px solid #666;
 }
 .top_nav dl dd:nth-child(2){
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .top_nav li:hover p{
-  color: #e50909;
+    color: #e50909;
 }
 .thishtml p{
-   color: #e50909;
+    color: #e50909;
 }
 .top_nav li:nth-child(2):hover dl{
-  display: block;
+    display: block;
 }
 .login_reg{
-  width: auto;
-  height: 120px;
-  float: left;
-  margin-left: 50px;
-  color: white;
+    width: auto;
+    height: 120px;
+    float: left;
+    margin-left: 50px;
+    color: white;
 }
 .login_reg li{
-  position: relative;
-  float: left;
-  line-height: 120px;
-  cursor: pointer;
-  padding-left: 5px;
+    position: relative;
+    float: left;
+    line-height: 120px;
+    cursor: pointer;
+    padding-left: 5px;
 }
 .login_reg input{
-  width: 40px;
-  outline: none;
-  border:none;
-  background: black;
-  border-bottom: 1px solid white;
-  color: white
+    width: 40px;
+    outline: none;
+    border:none;
+    background: black;
+    border-bottom: 1px solid white;
+    color: white
 }
 #search_btn{
-  display: block;
-  width: 22px;
-  height: 22px;
-  background: url('../home_img/search_03.png');
-  position: absolute;
-  top: 46px;
-  right: 0;
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url('../home_img/search_03.png');
+    position: absolute;
+    top: 46px;
+    right: 0;
 }
 .login_reg  li:nth-child(1){
-  width: 120px;
-  text-align: right;
+    width: 120px;
+    text-align: right;
 }
 .body{
-	width: 100%;
-	height: 960px;
+    width: 100%;
+    height: 960px;
 }
 .body_left{
-	width: 600px;
-	height: 960px;
-	background-image: url(img/bg.png);
-	background-size: 100%;
-	color: white;
-	position: relative;
-	float: left;
+    width: 600px;
+    height: 960px;
+    background-image: url(img/bg.png);
+    background-size: 100%;
+    color: white;
+    position: relative;
+    float: left;
 }
 .body_left>div{
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,.63);
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.63);
 }
 .body_left>div>div{
-	padding-left: 84px;
-	padding-top: 190px;
+    padding-left: 84px;
+    padding-top: 190px;
 }
 .body_left .username{
-	font-size: 65px;
+    font-size: 65px;
 }
 .leval{
-	line-height: 35px;
-	font-size: 15px;
-	color: #ccc;
+    line-height: 35px;
+    font-size: 15px;
+    color: #ccc;
 }
 .leval:before{
-	content: url(img/level.png);
-	float: left;
-	margin-right: 17px;
+    content: url(img/level.png);
+    float: left;
+    margin-right: 17px;
 }
 .money{
-	margin-top: 37px;
+    margin-top: 37px;
 }
 .money p{
-	float: left;
-	margin-right: 20px;
+    float: left;
+    margin-right: 20px;
 }
 .money p span{
-	color: red;
-	font-size: 18px;
+    color: red;
+    font-size: 18px;
 }
 .safe{
-	color: #ccc;
-	clear: both;
-	padding-top: 30px;
-	font-size: 20px;
+    color: #ccc;
+    clear: both;
+    padding-top: 30px;
+    font-size: 20px;
 }
 .safe span:nth-child(1){
-	display: inline-block;
-	width: 100px;
-	height: 18px;
-	background: white;
-	border-radius: 9px;
-	margin-left: 12px;
-	margin-right: 15px;
-	position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 18px;
+    background: white;
+    border-radius: 9px;
+    margin-left: 12px;
+    margin-right: 15px;
+    position: relative;
 }
 .safe span:nth-child(1) i{
-	display: inline-block;
-	position: absolute;
-	top: 0; left: 0;
-	width: 0%;
-	height: 100%;
-	border-radius: 9px;
-	background: red;
+    display: inline-block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 0%;
+    height: 100%;
+    border-radius: 9px;
+    background: red;
 }
 .safe span:nth-child(2){
-	font-size: 15px;
-	color: #8b8b8b;
-	margin-right: 20px;
+    font-size: 15px;
+    color: #8b8b8b;
+    margin-right: 20px;
 }
 .up_btn{
-	font-size: 20px;
-	color: white;
-	cursor: pointer;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
 }
 .user_inform{
-	margin-top: 26px;
+    margin-top: 26px;
 }
 .user_inform:before{
-	content: url(img/phone.png);
-	float: left;
-	margin-right: 10px;
+    content: url(img/phone.png);
+    float: left;
+    margin-right: 10px;
 }
 #email:before{
-	content: url(img/email.png);
+    content: url(img/email.png);
 }
 #name:before{
-	content: url(img/card.png);
+    content: url(img/card.png);
 }
 .body_left>div>div>div:last-child{
-	margin-top: 36px;
+    margin-top: 36px;
 }
 .body_left>div>div>div:last-child span{
-	display: inline-block;
-	width: 120px;
-	height: 40px;
-	text-align: center;
-	line-height: 40px;
-	cursor: pointer;
-	border-radius: 3px;
-	margin-right: 50px;
-	font-size: 20px;
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 50px;
+    font-size: 20px;
 }
 #recharge{
-	background: #e50909;
-	color: white;
+    background: #e50909;
+    color: white;
 }
 #post_cash{
-	border: 1px solid #e50909;
-	color: #e50909;
+    border: 1px solid #e50909;
+    color: #e50909;
 }
 #repeat_bg{
-	position: absolute;
-	left: 245px;
-	bottom: 107px;
-	color: #ccc;
-	letter-spacing: 2px;
+    position: absolute;
+    left: 245px;
+    bottom: 107px;
+    color: #ccc;
+    letter-spacing: 2px;
 }
 .footer{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 70px;
-	background: rgba(0,0,0,.3);
-	text-align: center;
-	line-height: 70px;
-	font-size: 15px;
-	color: #464646;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(0,0,0,.3);
+    text-align: center;
+    line-height: 70px;
+    font-size: 15px;
+    color: #464646;
 }
 .body_right{
-	width: 1300px;
-	background: white;
-	height: 100%;
-	float: left;
+    width: 1300px;
+    background: white;
+    height: 100%;
+    float: left;
 }
 .body_right>ul{
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .body_right>ul>li{
-	width: 50%;
-	height: 33.3%;
-	outline: 1px solid #ccc;
-	float: left;
-	position: relative;
-	cursor: pointer;
+    width: 50%;
+    height: 33.3%;
+    outline: 1px solid #ccc;
+    float: left;
+    position: relative;
+    cursor: pointer;
 }
 .body_right>ul>li div{
-	text-align: center;
-	color: #666;
-	font-size: 24px;
+    text-align: center;
+    color: #666;
+    font-size: 24px;
 }
 .body_right>ul>li div:before{
-	margin-top: 114px;
-	content: url(img/identity.png);
-	display: block;
-	margin-bottom: 20px;
+    margin-top: 114px;
+    content: url(img/identity.png);
+    display: block;
+    margin-bottom: 20px;
 }
 .body_right>ul>li:nth-child(2) div:before{
-	margin-top: 114px;
-	content: url(img/team.png);
-	display: block;
-	margin-bottom: 20px;
+    margin-top: 114px;
+    content: url(img/team.png);
+    display: block;
+    margin-bottom: 20px;
 }
 .body_right>ul>li:nth-child(3) div:before{
-	margin-top: 114px;
-	content: url(img/password.png);
-	display: block;
-	margin-bottom: 20px;
+    margin-top: 114px;
+    content: url(img/password.png);
+    display: block;
+    margin-bottom: 20px;
 }
 .body_right>ul>li:nth-child(4) div:before{
-	margin-top: 114px;
-	content: url(img/ask.png);
-	display: block;
-	margin-bottom: 20px;
+    margin-top: 114px;
+    content: url(img/ask.png);
+    display: block;
+    margin-bottom: 20px;
 }
 .body_right>ul>li:nth-child(5) div:before{
-	margin-top: 114px;
-	content: url(img/actor.png);
-	display: block;
-	margin-bottom: 20px;
+    margin-top: 114px;
+    content: url(img/actor.png);
+    display: block;
+    margin-bottom: 20px;
 }
 .body_right>ul>li:nth-child(6) div:before{
-	margin-top: 114px;
-	content: url(img/attend.png);
-	display: block;
-	margin-bottom: 20px;
+    margin-top: 114px;
+    content: url(img/attend.png);
+    display: block;
+    margin-bottom: 20px;
 }
 .body_right>ul>li:hover{
-	background: url(img/hover_bg.png) 100%;
-	color: #e50909;
+    background: url(img/hover_bg.png) 100%;
+    color: #e50909;
 }
 .body_right>ul>li:hover div{
-	color: #e50909;
+    color: #e50909;
 }
 .body_right>ul>li:hover:nth-child(1) div:before{
-	content: url(img/identityhover.png);
+    content: url(img/identityhover.png);
 }
 .body_right>ul>li:hover:nth-child(2) div:before{
-	content: url(img/teamhover.png);
+    content: url(img/teamhover.png);
 }
 .body_right>ul>li:hover:nth-child(3) div:before{
-	content: url(img/passwordhover.png);
+    content: url(img/passwordhover.png);
 }
 .body_right>ul>li:hover:nth-child(4) div:before{
-	content: url(img/askhover.png);
+    content: url(img/askhover.png);
 }
 .body_right>ul>li:hover:nth-child(5) div:before{
-	content: url(img/actorhover.png);
+    content: url(img/actorhover.png);
 }
 .body_right>ul>li:hover:nth-child(6) div:before{
-	content: url(img/attendhover.png);
+    content: url(img/attendhover.png);
 }
 .body_right>div{
-	width: 100%;
-	height: 100%;
-	position: relative;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 .bg{
-	width: 100%;
-	height: 100%;
-	background: #333;
-	position: absolute;
-	top: 0;
-	left: 0;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .body_right>div>p{
-	font-size: 190px;
-	position: absolute;
-	color: #4b4b4b;
-	bottom: 97px;
+    font-size: 190px;
+    position: absolute;
+    color: #4b4b4b;
+    bottom: 97px;
 }
 .body_right>div>p:nth-child(2){
-	right: 194px;
+    right: 194px;
 }
 .body_right>div>p:nth-child(3){
-	right: 146px;
-	bottom: 135px;
+    right: 146px;
+    bottom: 135px;
 }
 .body_right>div>p:nth-child(4){
-	right: 66px;
+    right: 66px;
 }
 .identity_content{
-  width: 600px;
-  height: auto;
-  margin: auto;
-  overflow: hidden;
-  padding-top: 40px;
+    width: 600px;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    padding-top: 40px;
 }
 .identity_content>ul{
-  width: 100%;
-  height: 58px;
-  border-bottom: 1px solid #ccc;
-  padding-left: 104px;
+    width: 100%;
+    height: 58px;
+    border-bottom: 1px solid #ccc;
+    padding-left: 104px;
 }
 .identity_content>ul>li{
-  float: left;
-  font-size: 14px;
-  height: 100%;
-  line-height: 58px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-right: 20px;
-  color: white;
-  cursor: pointer;
+    float: left;
+    font-size: 14px;
+    height: 100%;
+    line-height: 58px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 20px;
+    color: white;
+    cursor: pointer;
 }
 .identity_content>ul .choice{
-  border-bottom: 1px solid #e50909;
-  color: #e50909;
+    border-bottom: 1px solid #e50909;
+    color: #e50909;
 }
 .people_data,.safe_center{
-  padding-left: 148px;
-  padding-top: 27px;
+    padding-left: 148px;
+    padding-top: 27px;
 }
 .people_data span{
-  color: white;
-  margin-right: 40px;
+    color: white;
+    margin-right: 40px;
 }
 .user{
-  width: 170px;
-  height: 30px;
-  background: url(img/input_bg.png);
-  color: white;
-  margin-bottom: 30px;
-  position: relative;
+    width: 170px;
+    height: 30px;
+    background: url(img/input_bg.png);
+    color: white;
+    margin-bottom: 30px;
+    position: relative;
 }
 .user>input{
-  position: absolute;
-  width: 138px;
-  height: 30px;
-  border: none;
-  padding: 0;
-  outline: none;
-  top: 0;
-  background: rgba(0, 0, 0,0);
-  color: white;
+    position: absolute;
+    width: 138px;
+    height: 30px;
+    border: none;
+    padding: 0;
+    outline: none;
+    top: 0;
+    background: rgba(0, 0, 0,0);
+    color: white;
 }
 .user:before{
-  content: url(img/name00.png);
-  line-height: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
+    content: url(img/name00.png);
+    line-height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .real_name{
-  margin-bottom: 38px;
+    margin-bottom: 38px;
 }
 .sex{
-  margin-bottom: 38px;
-  height: 30px;
-  line-height: 30px;
-  overflow: hidden;
+    margin-bottom: 38px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
 }
 .sex span,.sex label{
-  float: left;
-  margin-right: 46px;
+    float: left;
+    margin-right: 46px;
 }
 .man,.woman{
-  float: left;
-  width: 14px;
-  height: 14px;
-  border: 1px solid #979797;
-  border-radius: 50%;
-  margin-top: 8px;
-  margin-right: 4px;
-  position: relative;
+    float: left;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #979797;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-right: 4px;
+    position: relative;
 }
 .man>i,.woman>i{
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: #e50909;
-  border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #e50909;
+    border-radius: 50%;
 }
 .user_img{
-  width: auto;
-  height: 120px;
+    width: auto;
+    height: 120px;
 }
 .user_img>img{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-left: 5px;
-  margin-right: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .sex_choice>p{
-  border: 1px solid #e50909;
+    border: 1px solid #e50909;
 }
 .sex_choice>label{
-  color: #e50909;
+    color: #e50909;
 }
 .user_leval{
-  padding-bottom: 56px;
+    padding-bottom: 56px;
 }
 .user_leval>span{
-  float: left;
-  margin-right: 15px;
+    float: left;
+    margin-right: 15px;
 }
 .user_leval p{
-  width: 323px;
-  height: 21px;
-  float: left;
-  position: relative;
-  background: url(img/userleval_bg.png) no-repeat center;
+    width: 323px;
+    height: 21px;
+    float: left;
+    position: relative;
+    background: url(img/userleval_bg.png) no-repeat center;
 }
 .user_leval p>span{
-  width: 39px;
-  height: 15px;
-  display: inline-block;
-  text-align: center;
-  line-height: 15px;
-  background: #e50909;
-  position: absolute;
-  left: 15%;
-  top: 3px;
+    width: 39px;
+    height: 15px;
+    display: inline-block;
+    text-align: center;
+    line-height: 15px;
+    background: #e50909;
+    position: absolute;
+    left: 15%;
+    top: 3px;
 }
 .user_leval p>i{
-  display: block;
-  position: absolute;
-  top: -31px;
-  width: 39px;
-  height: 31px;
-  left: 15%;
-  background: url(img/level.png);
+    display: block;
+    position: absolute;
+    top: -31px;
+    width: 39px;
+    height: 31px;
+    left: 15%;
+    background: url(img/level.png);
 }
 .save_update{
-  width: 108px;
-  height: 30px;
-  background: #e50909;
-  color: white;
-  text-align: center;
-  line-height: 30px;
-  clear: both;
-  margin-left: 83px;
-  cursor: pointer;
+    width: 108px;
+    height: 30px;
+    background: #e50909;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    clear: both;
+    margin-left: 83px;
+    cursor: pointer;
 }
 .close_identity,.close_attend,.close_money,.close_password{
-	position:absolute;
-	top: 50px;
-	right: 50px;
-	width: 20px;
-	height: 20px;
+    position:absolute;
+    top: 50px;
+    right: 50px;
+    width: 20px;
+    height: 20px;
 }
 .close_identity:before,.close_attend:before,.close_money:before,.close_password:before{
-	position: absolute;
-	top: 10px;
-	left: 0;
-	display: block;
-	content: '';
-	width: 20px;
-	height: 2px;
-	background: white;
-	border-radius: 2px;
-	transform: rotateZ(45deg);
+    position: absolute;
+    top: 10px;
+    left: 0;
+    display: block;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transform: rotateZ(45deg);
 }
 .close_identity:after,.close_attend:after,.close_money:after,.close_password:after{
-	position: absolute;
-	top: 10px;
-	left: 0;
-	display: block;
-	content: '';
-	width: 20px;
-	height: 2px;
-	background: white;
-	border-radius: 2px;
-	transform: rotateZ(-45deg);
+    position: absolute;
+    top: 10px;
+    left: 0;
+    display: block;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transform: rotateZ(-45deg);
 }
 .safe_center>div{
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 .safe_center input{
-	padding: 0 0 0 36px;
-	width: 140px;
-	height: 30px;
-	border: 1px solid #999;
-	color: white;
-	background: rgba(0,0,0,0);
+    padding: 0 0 0 36px;
+    width: 140px;
+    height: 30px;
+    border: 1px solid #999;
+    color: white;
+    background: rgba(0,0,0,0);
 }
 .safe_center span{
-	position: relative;
-	margin-right: 50px;
-	color: white;
+    position: relative;
+    margin-right: 50px;
+    color: white;
 }
 .safe_center span a{
-	color: #e50909;
-	text-decoration: underline;
-	cursor: pointer;
+    color: #e50909;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .safe_center i{
-	position: absolute;
-	top: 6px;
-	left: 10px;
-	display: block;
-	width: 15px;
-	height: 16px;
-	background:  url(img/name01.png);
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    display: block;
+    width: 15px;
+    height: 16px;
+    background:  url(img/name01.png);
 }
 .safe_center label{
-	color: #ccc;
+    color: #ccc;
 }
 #line{
-	width: 395px;
-	border-bottom: 1px solid #ccc;
+    width: 395px;
+    border-bottom: 1px solid #ccc;
 }
 .bind_idcard i{
-	width: 17px;
-	background: url(img/idcard.png);
+    width: 17px;
+    background: url(img/idcard.png);
 }
 .bind_bankname i{
-	width: 15px;
-	background: url(img/name02.png);
+    width: 15px;
+    background: url(img/name02.png);
 }
 .bind_bankcard i{
-	width: 18px;
-	height: 14px;
-	background: url(img/bankcard.png);
+    width: 18px;
+    height: 14px;
+    background: url(img/bankcard.png);
 }
 .bind_city i{
-	width: 12px;
-	height: 16px;
-	background: url(img/updown.png);
+    width: 12px;
+    height: 16px;
+    background: url(img/updown.png);
 }
 .attend_content{
-	width: 880px;
-	height: auto;
-	margin: auto;
-	padding-top: 40px;
+    width: 880px;
+    height: auto;
+    margin: auto;
+    padding-top: 40px;
 }
 .attend_content>ul{
-	width: 590px;
-	height: 50px;
-	margin: auto;
-	border-bottom: 1px solid #ccc;
-	    padding-left: 104px;
+    width: 590px;
+    height: 50px;
+    margin: auto;
+    border-bottom: 1px solid #ccc;
+    padding-left: 104px;
 }
 .attend_content>ul>li{
-	    float: left;
+    float: left;
     font-size: 14px;
     height: 100%;
     line-height: 58px;
@@ -639,64 +639,64 @@ header .nav{
     cursor: pointer;
 }
 .attend_content>ul .choice{
-	    border-bottom: 1px solid #e50909;
-      color: #e50909;
+    border-bottom: 1px solid #e50909;
+    color: #e50909;
 
 }
 .attend_content>div{
-	margin-top: 50px;
+    margin-top: 50px;
 }
 .attend_content>div>div{
-	width: 420px;
-	height: 180px;
-	position: relative;
-	float: left;
-	margin-bottom: 20px;
-	margin-left: 40px;
+    width: 420px;
+    height: 180px;
+    position: relative;
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 40px;
 }
 .attend_content>div>div:nth-of-type(odd){
 
-	margin-left: 0;
+    margin-left: 0;
 }
 .attend_content>div>div>div{
-	position: absolute;
-	top: 0;
-	left:0;
-	background: rgba(255,255,255,.5);
-	width: 100%;
-	height: 100%;
+    position: absolute;
+    top: 0;
+    left:0;
+    background: rgba(255,255,255,.5);
+    width: 100%;
+    height: 100%;
 }
 .attend_content>div>div>div>p{
-	font-size: 13px;
-	text-align: right;
-	padding-right: 20px;
-	margin-bottom: 8px;
+    font-size: 13px;
+    text-align: right;
+    padding-right: 20px;
+    margin-bottom: 8px;
 }
 .attend_content>div>div>div>p>span{
-	color: #e50909;
+    color: #e50909;
 }
 .attend_content>div>div>div>p:nth-child(1){
-	font-size: 18px;
-	margin-top: 15px;
+    font-size: 18px;
+    margin-top: 15px;
 }
 .attend_content>div>div>div>p:last-child span{
-	font-size: 18px;
+    font-size: 18px;
 
 }
 .attend_content>div>div>div>p:last-child i{
-	display: inline-block;
-	width: 15px;
-	height: 13px;
-	background: url(img/heart.png);
-	margin-right: 12px;
+    display: inline-block;
+    width: 15px;
+    height: 13px;
+    background: url(img/heart.png);
+    margin-right: 12px;
 }
 .money_content{
-	width: 876px;
-	height: auto;
-	margin: auto;
-	padding-top: 40px;
-	color: white;
-	font-size: 18px;
+    width: 876px;
+    height: auto;
+    margin: auto;
+    padding-top: 40px;
+    color: white;
+    font-size: 18px;
 }
 .money_content>ul{
     width: 100%;
@@ -705,11 +705,11 @@ header .nav{
     border-bottom: 1px solid #ccc;
 }
 .money_content>ul .choice{
-	    border-bottom: 1px solid #e50909;
+    border-bottom: 1px solid #e50909;
     color: #e50909;
 }
 .money_content>ul>li{
-	float: left;
+    float: left;
     font-size: 14px;
     height: 100%;
     line-height: 38px;
@@ -720,170 +720,170 @@ header .nav{
     cursor: pointer;
 }
 .money_content>ul>li:last-child{
-	float: right;
+    float: right;
 }
 .money_content>ul>li:last-child span{
-	color: #e50909;
+    color: #e50909;
 }
 .put_money>p:first-child{
-	margin-top: 20px;
+    margin-top: 20px;
 }
 .put_money>div:nth-child(2){
-	width: 300px;
-	height: 108px;
-	background: white;
-	border: 1px solid red;
-	margin-top: 12px;
-	margin-bottom: 25px;
-	margin-left: 100px;
-	border-radius: 5px;
-	position: relative;
-	padding-top: 12px;
+    width: 300px;
+    height: 108px;
+    background: white;
+    border: 1px solid red;
+    margin-top: 12px;
+    margin-bottom: 25px;
+    margin-left: 100px;
+    border-radius: 5px;
+    position: relative;
+    padding-top: 12px;
 }
 .put_money>div>p{
-	padding-left: 10px;
-	color: black;
-	font-size: 15px;
-	margin-bottom: 5px;
+    padding-left: 10px;
+    color: black;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 .put_money>div img{
-	position: absolute;
-	right: 5px;
-	bottom: 5px;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
 }
 .put_money>p:nth-child(3){
-	height: 30px;
-	line-height: 30px;
-	margin-bottom: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 30px;
 
 }
 .put_money>p:nth-child(3) input{
-	border: 1px solid white;
-	background: rgba(255,255,255,0);
-	height: 20px;
-	width: 156px;
-	color: white;
-	margin-left: 20px;
+    border: 1px solid white;
+    background: rgba(255,255,255,0);
+    height: 20px;
+    width: 156px;
+    color: white;
+    margin-left: 20px;
 }
 .put_money>p:nth-child(4){
-	position: relative;
+    position: relative;
 }
 #put_btn{
-  width: 100px;
-height: 30px;
-text-align: center;
-line-height: 30px;
-background: #e50909;
-color: white;
-cursor: pointer;
-margin-left: 94px;
-margin-top: 25px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background: #e50909;
+    color: white;
+    cursor: pointer;
+    margin-left: 94px;
+    margin-top: 25px;
 }
 .money_file{
-	position: absolute;
-	top: 0;
-	left: 95px;
-	opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 95px;
+    opacity: 0;
 }
 .get_money{
-	position: relative;
+    position: relative;
 }
 .get_money p:nth-child(1){
-	margin-top: 30px;
+    margin-top: 30px;
 }
 .get_money p:nth-child(1) input{
-	border: 1px solid white;
-	background: rgba(255,255,255,0);
-	width: 160px;
-	height: 20px;
-	color: white;
-	margin-left: 15px;
+    border: 1px solid white;
+    background: rgba(255,255,255,0);
+    width: 160px;
+    height: 20px;
+    color: white;
+    margin-left: 15px;
 }
 .get_money p:nth-child(2){
-	margin-left: 90px;
-	color: #959595;
-	margin-top: 10px;
-	font-size: 15px;
-	height: 20px;
-	line-height: 20px;
+    margin-left: 90px;
+    color: #959595;
+    margin-top: 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
 }
 #get_btn{
-	width: 100px;
-	height: 30px;
-	text-align: center;
-	line-height: 30px;
-	background: #e50909;
-	color: white;
-	cursor: pointer;
-	margin-left: 94px;
-	margin-top: 25px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background: #e50909;
+    color: white;
+    cursor: pointer;
+    margin-left: 94px;
+    margin-top: 25px;
 }
 .money_record p{
-	margin-top: 27px;
+    margin-top: 27px;
 }
 .money_record p span:nth-child(3){
-	color: #e50909;
+    color: #e50909;
 }
 .money_record p span:nth-child(4){
-	color: #e50909;
+    color: #e50909;
 }
 .money_record span{
-	display: inline-block;
-	width: 18%;
-	font-size: 14px;
-	text-align: center;
+    display: inline-block;
+    width: 18%;
+    font-size: 14px;
+    text-align: center;
 }
 .money_record p:first-child span{
-	font-size: 16px;
+    font-size: 16px;
 }
 .password_content{
-  width: 588px;
-  height: auto;
-  margin: auto;
-  padding-top: 150px;
-  font-size: 14px;
-  color: #666;
+    width: 588px;
+    height: auto;
+    margin: auto;
+    padding-top: 150px;
+    font-size: 14px;
+    color: #666;
 }
 .password_content>ul{
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid #ccc;
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #ccc;
 
 }
 .password_content>ul>li{
-  float: left;
+    float: left;
 }
 .password_content>ul>li:nth-child(1){
-  margin-left: 114px;
-  color: white;
-  margin-right: 70px;
+    margin-left: 114px;
+    color: white;
+    margin-right: 70px;
 }
 .update_password{
-  padding-left: 180px;
-  padding-top: 33px;
+    padding-left: 180px;
+    padding-top: 33px;
 }
 .update_password>p{
-  margin-bottom: 24px;
-  position: relative;
+    margin-bottom: 24px;
+    position: relative;
 }
 .update_password>p>input{
-  width: 206px;
-  height: 20px;
-  padding-left: 5px;
-  border: 1px solid #999;
-  background: rgba(255, 255, 255, 0);
-  color: white;
-  margin-right: 30px;
+    width: 206px;
+    height: 20px;
+    padding-left: 5px;
+    border: 1px solid #999;
+    background: rgba(255, 255, 255, 0);
+    color: white;
+    margin-right: 30px;
 }
 .update_password>p>i{
-  display: inline-block;
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  width: 18px;
-  height: 18px;
-  background:url(img/password_bg.png);
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 18px;
+    height: 18px;
+    background:url(img/password_bg.png);
 }
 .update_password>div:last-child{
-  margin-left: 0;
+    margin-left: 0;
 }
