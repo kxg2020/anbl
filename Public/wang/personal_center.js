@@ -269,7 +269,11 @@ $(function(){
 	 */
 	$('.rechargeOk').click(function(){
 		var money = $('input[name = rechargeMoney]').val();
-
+		var path = $('#images').val();
+		if(path.length == 0){
+			layer.msg('请上传凭证!');
+			return false;
+		}
 		if(money == ''){
 
 			layer.tips('充值积分不能为空!','input[name = rechargeMoney]');
@@ -289,7 +293,11 @@ $(function(){
 						'money':money
 					},
 					success:function(result){
-
+						if(result.status == 1){
+							layer.msg('充值成功!,请等待审核');
+						}else{
+							layer.msg('充值失败!');
+						}
 					}
 				});
 

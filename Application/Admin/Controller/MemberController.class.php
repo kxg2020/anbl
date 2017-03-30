@@ -286,7 +286,18 @@ class MemberController extends  CommonController{
         $paramArr = $_REQUEST;
 
         if(!empty($paramArr)){
-
+            $status = $paramArr['c_id'] ^ 1;
+            $res = M('Member')->where(['id'=>$paramArr['id']])->save(['is_allowed_recharge'=>$status]);
+            if($res != 0){
+                $this->ajaxReturn([
+                    'status'=>1,
+                    'msg'=>'修改成功'
+                ]);
+            }else{
+                $this->ajaxReturn([
+                    'status'=>0,
+                ]);
+            }
         }else{
             $this->ajaxReturn([
                 'status'=>0,

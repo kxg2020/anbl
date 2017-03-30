@@ -30,9 +30,50 @@ class RechargeController extends CommonController{
 
             if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
 
+                //>> 查询出原有的积分和余额
+                $row = M('Member')->where(['id'=>$this->userInfo['id']])->find();
+                //>> 查询积分规则表
+                $ins = M('IntegralInstitution')->select();
+
+                $newLevel = $row['level'];
+                foreach($ins as $key => $value){
+                    //>> 取出当前等级下一级所对应的积分
+                    if($paramArr['money'] + $row['money'] > $value['integral'] && $row['integral'] + $paramArr['money'] > $value['integral'] ){
+                        $newLevel = $value['level'];
+                    }
+                }
                 $insertData = [
-                    'money'=>$paramArr['money'],
+                    'money'=>$paramArr['money'] + $row['money'],
+                    'integral'=>$paramArr['money'] + $row['integral'],
+                    'level'=>$newLevel,
                 ];
+
+                M('Member')->startTrans();
+                $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($insertData);
+                //>> 生成流水号
+                $orderNumber = 'RE' . sprintf("%08d",$this->userInfo['id']);
+                $orderData = [
+                    'member_id'=>$this->userInfo['id'],
+                    'money'=>$paramArr['money'],
+                    'create_time'=>time(),
+                    'type'=>1,
+                    'is_pass'=>0,
+                    'order_number'=>$orderNumber
+                ];
+                //>> 添加到充值订单表
+                $ros = M('MemberRecharge')->add($orderData);
+
+                if($res && $ros){
+
+                    M('Member')->commit();
+
+                    die($this->_printSuccess());
+
+                }else{
+
+                    die($this->_printError('1048'));
+                }
+
             }else{
 
                 die($this->_printError('1048'));

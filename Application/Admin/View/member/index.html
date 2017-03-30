@@ -38,7 +38,7 @@
                     <td>{$l.password}</td>
                     <td>{$l.money}</td>
                     <td>{$l.level}</td>
-                    <td><img id="allowed" style="cursor: pointer;" data-id="{$l.is_allowed_recharge}" src="__IMG__/{$l.is_allowed_recharge}.gif"></td>
+                    <td><img id="allowed" style="cursor: pointer;" data-re="{$l.id}" data-id="{$l.is_allowed_recharge}" src="__IMG__/{$l.is_allowed_recharge}.gif"></td>
                     <td>
                             <img src="__IMG__/{$l.is_bind_phone}.gif">
                     </td>
@@ -115,7 +115,7 @@
                                                     '<td>'+ v.password+'</td>'+
                                                     '<td>'+ v.money+'</td>'+
                                                     '<td>'+ v.level+'</td>'+
-                                                    '<td>'+ '<img data-id="'+ v.is_allowed_recharge+'" style="cursor: pointer" id="allowed" src="__IMG__/'+v.is_allowed_recharge+'.gif" />'+'</td>'+
+                                                    '<td>'+ '<img data-re="'+ v.id+'" data-id="'+ v.is_allowed_recharge+'" style="cursor: pointer" id="allowed" src="__IMG__/'+v.is_allowed_recharge+'.gif" />'+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+v.is_bind_phone+'.gif" />'+'</td>'+
                                                     '<td>'+ '<img src="__IMG__/'+v.is_true+'.gif" />'+'</td>'+
                                                     '<td>'+ v.phone+'</td>'+
@@ -143,17 +143,17 @@
                     $(this).attr({
                         'src':'__IMG__/'+status+'.gif'
                     });
-
                     $.ajax({
                         'type':'post',
                         'dataType':'json',
                         'url':'{:U("admin/member/status")}',
                         'data':{
-                            'id':id,
+                            'id':$(this).attr('data-re'),
+                            'c_id':id
                         },
                         success:function(result){
                             if(result.status == 1){
-
+                                layer.msg(result.msg);
                             }
                         }
                     });
