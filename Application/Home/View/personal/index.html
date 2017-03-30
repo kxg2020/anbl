@@ -99,21 +99,24 @@
 							<li>我的收藏</li>
 						</ul>
 						<div class="my_suport">
-							<volist name="supportSituation" id="s">
-								<div>
-									<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
-									<div class="movie_content">
-										<p>片名:{$s['name']}</p>
-										<p>{$s['englishname']}</p>
-										<p>{$s['director']}/导演</p>
-										<p><span>{$s['support_number']}</span>人支持</p>
-										<p><if condition="$s['mode'] eq 1">固定分红<else/>票房分红</if></p>
-										<p>已支持<span>{$s['support_money']}</span></p>
+							<notempty name="$supportSituation">
+								<volist name="supportSituation" id="s">
+									<div>
+										<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
+										<div class="movie_content">
+											<p>片名:{$s['name']}</p>
+											<p>{$s['englishname']}</p>
+											<p>{$s['director']}/导演</p>
+											<p><span>{$s['support_number']}</span>人支持</p>
+											<p><if condition="$s['mode'] eq 1">固定分红<else/>票房分红</if></p>
+											<p>已支持<span>{$s['support_money']}</span></p>
+										</div>
 									</div>
-								</div>
-							</volist>
+								</volist>
+							</notempty>
 						</div>
 						<div class="my_collect" style="display: none;">
+							<notempty name="$collection">
 							<volist name="collection" id="c">
 								<div><img src="{$c['image_url']}" style="height: 180px;width: 420px" alt="">
 									<div class="movie_content">
@@ -125,6 +128,7 @@
 									</div>
 								</div>
 							</volist>
+							</notempty>
 						</div>
 					</div>
 				</div>

@@ -32,7 +32,7 @@ class PersonalController extends CommonController{
 
         //>> 取出当前用户等级
         $crrLevel = $row['level'];
-        
+
         //>> 取出积分表下一个等级对应的积分
         $allInfo = ['status'=>0,'integral'=>$row['integral']];
         foreach($integral as $key => $value){
