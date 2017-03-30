@@ -18,12 +18,10 @@ class PersonalController extends CommonController{
         $personModel = M('Member as a');
         $row = $personModel->where(['id'=>$this->userInfo['id'],'username'=>$this->userInfo['username']])->find();
         //>> 查询当前用户的支持情况
-        $rows = $personModel->field('a.*,b.*,c.*')
-            ->join('left join an_member_support as b on a.id = b.member_id')
-            ->join('left join an_project as c on b.project_id = c.id')
-            ->where(['a.id'=>$this->userInfo['id'],'a.username'=>$this->userInfo['username']])
+        $rows = M('MemberSupport as a')->field('a.*,b.*')
+            ->join('left join an_project as b on a.project_id = b.id')
+            ->where(['a.member_id'=>$this->userInfo['id']])
             ->select();
-
         //>> 查询积分制度表
         $integral = M('IntegralInstitution')->select();
 

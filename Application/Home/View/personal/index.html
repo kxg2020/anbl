@@ -99,7 +99,6 @@
 							<li>我的收藏</li>
 						</ul>
 						<div class="my_suport">
-							<notempty name="$supportSituation">
 								<volist name="supportSituation" id="s">
 									<div>
 										<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
@@ -113,10 +112,8 @@
 										</div>
 									</div>
 								</volist>
-							</notempty>
 						</div>
 						<div class="my_collect" style="display: none;">
-							<notempty name="$collection">
 							<volist name="collection" id="c">
 								<div><img src="{$c['image_url']}" style="height: 180px;width: 420px" alt="">
 									<div class="movie_content">
@@ -127,8 +124,8 @@
 										<p style="color: #e50909;"><i></i><if condition="$c['is_download'] eq 1">已下载<else/>未下载</if></p>
 									</div>
 								</div>
+
 							</volist>
-							</notempty>
 						</div>
 					</div>
 				</div>
