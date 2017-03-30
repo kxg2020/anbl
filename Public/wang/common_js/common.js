@@ -21,7 +21,7 @@ $(function(){
 
     function navMarginauto(){
       $('.nav>div').css({
-        width:$('.logo').width()+$('.top_nav').width()+$('.login_reg').width()+150
+        width:$('.logo').width()+$('.top_nav').width()+$('.login_reg').width()+160
       })
     }
     navMarginauto();
