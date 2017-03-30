@@ -128,6 +128,58 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">项目分红方式</label>
+                                        <div class="col-sm-4 col-md-4 icheck minimal">
+                                            <select name="mode" class="form-control">
+                                                <option value="1">请选择项目分红方式</option>
+                                                <option value="1" <if condition="$projectInfo['mode'] eq 1">selected</if>>国定分红</option>
+                                                <option value="2" <if condition="$projectInfo['mode'] eq 2">selected</if>>浮动分红</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">下载金额</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="input-group">
+                                                <input type="number" name="dl" class="form-control" value="{$projectInfo.dl}">
+                                                <span class="input-group-addon">$</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">出品国家</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="country" class="form-control" value="{$projectInfo.country}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">项目英文名称</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="englishname" class="form-control" value="{$projectInfo.englishname}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">首映地址</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" name="showaddress" class="form-control" value="{$projectInfo.showaddress}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">首映时间</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="date" name="showtime" class="form-control" value="{:date('Y-m-d',$projectInfo['showtime'])}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">电影时长</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="input-group">
+                                                <input type="number" name="duration" class="form-control" value="{$projectInfo.duration}">
+                                                <span class="input-group-addon">分钟</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">导演</label>
                                         <div class="col-sm-4 col-md-4">
                                             <input type="text" name="director" class="form-control" value="{$projectInfo.director}">

@@ -33,7 +33,7 @@
 						<p>剩余时间：<span>{:dataNum(time(),$lunbo['end_time'])}</span> 天</p>
 						<p>剩余名额：<span>{$lunbo['total_num']-$lunbo['support_number']}</span> 人</p>
 						<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i></p>
-						<p>支持金额：<span>${$lunbo.target_amount}</span></p>
+						<p>支持积分：<span>{:floor($lunbo['target_amount'])}</span></p>
 				</a>
 				</div>
 				</volist>
@@ -61,7 +61,7 @@
           									<p>出品单位：{$info.company}</p>
           									<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
           									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-          									<p>支持金额：<span>${$info['target_amount']}</span></p>
+          									<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
           								</div>
           		</a>
           	</h1>
@@ -84,7 +84,7 @@
 								<p>出品单位：{$info.company}</p>
 								<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
 								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-								<p>支持金额：<span>${$info['target_amount']}</span></p>
+								<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
 							</div>
 						</a>
 					</h1>
@@ -107,7 +107,7 @@
 								<p>出品单位：{$info.company}</p>
 								<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
 								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
-								<p>支持金额：<span>${$info['target_amount']}</span></p>
+								<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
 							</div>
 						</a>
 					</h1>

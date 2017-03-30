@@ -20,19 +20,76 @@ $(function(){
     }
   }
 
-  /**
-   * 评论
-   */
-  $('body').on('click','.reply',function(){
-    var _html = '<div class="replyContent"><textarea  name="content" rows="2" cols="80" placeholder="回复" autofocus></textarea><input type="submit" value="回复" style="cursor: pointer"></div>';
-    var dom = $(this).next('.replyContent');
-    if(dom.length > 0){
-      $(this).nextAll('.replyContent').remove();
-    }else{
-      $('.replyContent').remove();
-      $(this).after(_html);
-    }
-  });
 
+       var backflag=true;
+      var frameworkflag=false;
+      var analyseflag=true;
+      var commentflag=true;
+  $('.movie_introduce>p').click(function(){
+
+      var text=$(this)[0].innerText.slice(1);
+      
+      if(text=='预期回报'){
+        $('.back').fadeToggle('slow')
+        if(backflag){
+          $('#back>span').text('-');
+          backflag=false;
+        }else{
+          $('#back>span').text('+');
+          backflag=true;
+        }
+      }
+      if(text=='故事结构'){
+        $('.framework').fadeToggle('slow')
+        if(frameworkflag){
+          $('#framework>span').text('-');
+          frameworkflag=false;
+        }else{
+          $('#framework>span').text('+');
+          frameworkflag=true;
+        }
+      }
+      if(text=='故事分析'){
+        $('.analyse').fadeToggle('slow')
+        if(analyseflag){
+          $('#analyse>span').text('-');
+          analyseflag=false;        
+        }else{
+          $('#analyse>span').text('+');
+          analyseflag=true;
+        }
+      }
+      if(text=='专业影评'){
+        $('.comment_film').fadeToggle('slow')
+        if(commentflag){
+          $('#comment_film>span').text('-');
+          commentflag=false;
+        }else{
+          $('#comment_film>span').text('+');
+          commentflag=true;
+        }
+      }
+  })
+
+
+$('#fast_suport').click(function(){
+  $('.suport_bg').fadeIn('slow');
+  $('.argement').hide();
+})
+
+$('#anbl_argement').click(function(){
+  $('.argement').fadeIn('slow');
+})
+$('.close_btn').click(function(){
+  $('.argement').fadeOut('slow');
+})
+
+ $('#cancel').click(function(){
+  $('.suport_bg').fadeOut('slow');
+ })
+
+$('.argement').click(function(){
+  return false;
+})
 
 });

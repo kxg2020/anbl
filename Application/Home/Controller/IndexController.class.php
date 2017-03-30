@@ -113,4 +113,106 @@ class IndexController extends CommonController{
         $sliceArr = array_slice($data,$start,$pgSize);
         return $sliceArr;
     }
+
+    public function support(){
+        if(IS_POST && IS_AJAX){
+            //判断会员是否已经登录
+            if(!$this->isLogin){
+                $this->ajaxReturn(['msg'=>"对不起，您还没有登录！！！",'status'=>0]);
+            }
+            $data = i('post.');
+            // 支持金额
+            $support_money = $data['money'];
+
+            // 判断用户余额够不够
+            if($support_money>$this->userInfo['money']){
+                $this->ajaxReturn(['msg'=>"对不起，余额不足！！！",'status'=>0]);
+            }
+            // 会员id
+            $member_id = $this->userInfo['id'];
+            // 项目id
+            $project_id = intval($data['project_id']);
+
+            $projectInfo = M('Project')->find($project_id);
+            if(!$projectInfo){
+                $this->ajaxReturn(['msg'=>"非法项目！！！",'status'=>0]);
+            }
+
+            // 生成订单
+            $order_number = 'AN' . sprintf("%09d",$member_id);
+            //封装数据
+            $supportInfo = [
+                'member_id' => $member_id,
+                'project_id' => $project_id,
+                'support_money' => $support_money,
+                'expect_return' => '',
+                'order_number' => $order_number,
+                'create_time' => time(),
+            ];
+
+            // 开启事物
+            M()->startTrans();
+
+            //保存支持信息
+            $rest = M('MemberSupport')->add($supportInfo);
+            if(!$rest){
+                M()->rollback();
+                $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
+            }
+
+            // 更新用户余额
+            $rest = M('Member')->where(['id'=>$member_id])->save(['money'=>$this->userInfo['money']-$support_money]);
+            if(!$rest){
+                M()->rollback();
+                $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
+            }
+            //提交事物
+            M()->commit();
+            $this->ajaxReturn(['msg'=>"支持成功！！！",'status'=>1]);
+        }
+    }
+//收藏
+    public function collect(){
+        if(IS_POST && IS_AJAX){
+            //判断会员是否已经登录
+            if(!$this->isLogin){
+                $this->ajaxReturn(['msg'=>"对不起，您还没有登录！！！",'status'=>0]);
+            }
+            $project_id = intval(I('post.project_id'));
+            $projectInfo = M('Project')->find($project_id);
+
+            if(!$projectInfo){
+                $this->ajaxReturn(['msg'=>"非法项目！！！",'status'=>0]);
+            }
+
+            $model = M('MemberCollection');
+
+            //判断用户是否已经收藏该项目
+            $info = $model->where(['member_id'=>$this->userInfo['id'],
+                'project_id'=>$projectInfo['id']])->find();
+            if($info){
+                $this->ajaxReturn(['msg'=>"您已收藏该项目！！！",'status'=>0]);
+            }
+            //收藏
+            $data = [
+                'member_id'=>$this->userInfo['id'],
+                'project_id'=>$projectInfo['id'],
+                'create_time'=>time(),
+            ];
+
+            $id = $model->add($data);
+            if($id===false){
+                $this->ajaxReturn(['msg'=>"收藏失败",'status'=>0]);
+            }
+
+            //更新项目收藏人数
+            $rest = M('Project')->where(['id'=>$projectInfo['id']])->save(['collection_number'=>$projectInfo['collection_number']+1]);
+            if($rest === false){
+                $this->ajaxReturn(['msg'=>"收藏失败",'status'=>0]);
+            }
+
+            $this->ajaxReturn(['msg'=>"收藏成功",'status'=>1,'info'=>$projectInfo['collection_number']+1]);
+
+        }
+    }
 }
