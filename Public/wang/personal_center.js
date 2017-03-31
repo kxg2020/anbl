@@ -227,7 +227,10 @@ $(function(){
 									},
 									success:function(result){
 										if(result.status == 1){
-											layer.msg('保存成功!');
+											layer.msg('保存成功!',function(){
+												location.reload();
+											});
+
 										}else{
 											layer.msg(result.msg);
 										}
@@ -258,7 +261,10 @@ $(function(){
 			},
 			success:function(result){
 				if(result.status == 1){
-					layer.msg('保存成功！');
+					layer.msg('保存成功！',function(){
+						location.reload();
+					});
+
 				}else{
 					layer.msg('保存失败!');
 				}
