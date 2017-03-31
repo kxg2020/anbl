@@ -64,8 +64,6 @@ class RegisterController extends CommonController{
                     ];
                     //>> 查询当前用户的上级
                     $row = $userModel->where($where)->find();
-
-
                     if(!empty($row)){
                         //>> 查询上级投资
                         $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
@@ -76,23 +74,20 @@ class RegisterController extends CommonController{
                         }
 
                         //>> 判断上级已经有多少下线
-                        $downStaff = M('Member')->where(['parent_id'=>$row['id']])->select();
-                        $count = count($downStaff);
-                        if($count >= 3){
+                        $count = $this->group($row['id']);
+                        if($count >= 2){
                             //>> 升级为经纪人
                             M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                         }
 
                         //>> 如果投资5000以上,直推10人,团队100人升级为制片人
-                        $allCount = $this->group($row['id']);
-                        if($support['support_money'] >= 5000 && $count >= 10 && $allCount >= 100){
+                        if($support['support_money'] >= 5000 && $count >= 10 && $count >= 100){
                             //>> 升级为经纪人
                             M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                         }
 
                         //>> 如果个人投资10000 直推50人 团队500人 升级出品人
-                        $allCounts = $this->group($row['id']);
-                        if($support['support_money'] >= 5000 && $count >= 50 && $allCounts >= 500){
+                        if($support['support_money'] >= 5000 && $count >= 50 && $count >= 500){
                             //>> 升级为经纪人
                             M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                         }
@@ -227,7 +222,7 @@ class RegisterController extends CommonController{
 
             }
 
-            $verifyTime = session('verify_create_time'.$paramArr['phone']);
+            $verifyTime = session('verify_create_time'.$paramArr['phone'],time());
 
             //>> 判断用户是否已经发送过短信
             if(!empty($verifyTime)){
@@ -289,13 +284,12 @@ class RegisterController extends CommonController{
      * 查询团队
      */
     private function group($id){
-        static $sum = 0;
-        $res = M('Member')->where(['parent_id'=>$id])->find();
+
+        $res = M('Member')->where(['parent_id'=>$id])->select();
+
         if(!empty($res)){
-            $sum += 1;
-            $this->group($res['id']);
-        }else{
-            return $sum;
+
+            return count($res);
         }
     }
 }
