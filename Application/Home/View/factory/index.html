@@ -30,14 +30,14 @@
 				<p>B</p>
 				<div class="hide_menu">
 					<ul class="login_reg">
-					    <li ><a href="../login_reg/reg.html">注册</a></li>
-					    <li ><a id="login" href="../login_reg/login.html">登录  |</a></li>
+					    <li ><a href="{:U('Home/Register/index')}">注册</a></li>
+					    <li ><a id="login" href="{:U('Home/Login/index')}">登录  |</a></li>
 						<li style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
 					</ul>
-					<p><a href="../index.html">首页</a></p>
+					<p><a href="{:U('home/index/index')}">首页</a></p>
 					<p style="margin-bottom: 22px;"><a href="">项目介绍</a></p>
-					<div><span></span><a href="">关于我们</a></div>
-					<div style="margin-bottom:43px;"><span></span><a href="">公司文化</a></div>
+					<div><span></span><a href="{:U('home/company/about')}">关于我们</a></div>
+					<div style="margin-bottom:43px;"><span></span><a href="{:U('home/company/index')}">公司文化</a></div>
 					<p><a href="{:U('home/market/index')}">电影超市</a></p>
 					<p><a href="{:U('home/factory/index')}">星工场</a></p>
 					<p><a href="{:U('Home/Personal/index')}">个人中心</a></p>
