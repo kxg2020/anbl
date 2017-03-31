@@ -79,10 +79,13 @@ class MarketController extends CommonController
                 if(!$rest){
                     $this->error("订单保存失败！！！");
                 }
+                // 生成订单
+                $order_number = 'AN' . sprintf("%09d",$this->userInfo['id']);
                 //保存到下载详情表
                 $downloadInfo1 = [
                     'member_id'=>$this->userInfo['id'],
                     'project_id'=>$projectInfo['id'],
+                    'order_number'=>$order_number,
                     'money'=>$projectInfo['dl'],//下载花费金额
                     'create_time'=>time(),
                 ];
@@ -93,10 +96,13 @@ class MarketController extends CommonController
                 }
 
             }else{
+                // 生成订单
+                $order_number = 'AN' . sprintf("%09d",$this->userInfo['id']);
                 //保存到下载详情表 免费下载
                 $downloadInfo2 = [
                     'member_id'=>$this->userInfo['id'],
                     'project_id'=>$projectInfo['id'],
+                    'order_number'=>$order_number,
                     'create_time'=>time(),
                 ];
                 $rest = M('MemberDownload')->add($downloadInfo2);

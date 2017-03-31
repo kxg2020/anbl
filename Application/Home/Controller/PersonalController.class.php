@@ -141,14 +141,12 @@ class PersonalController extends CommonController{
                 }
             }
 
-            //>> 判断是否实名
-            $updateData['is_true'] = isset($paramArr['realname']) ? 1 : 0;
-
             //>> 判断该账号是否已经有手机绑定
             $_res = $memberModel->where(['id'=>$this->userInfo['id']])->find();
 
             if($_res['is_bind_phone'] == 0 && $_res['is_bind_email'] == 1){
                 $updateData = [
+                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
                     'phone'=>$paramArr['phone'],
                     'realname'=>$paramArr['realname'],
                     'id_card'=>$paramArr['id_card'],
@@ -160,7 +158,9 @@ class PersonalController extends CommonController{
                     'safe_level'=>3
                 ];
             }elseif($_res['is_bind_email'] == 0 && $_res['is_bind_phone'] == 1){
+
                 $updateData = [
+                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
                     'email'=>$paramArr['email'],
                     'realname'=>$paramArr['realname'],
                     'id_card'=>$paramArr['id_card'],
@@ -173,6 +173,7 @@ class PersonalController extends CommonController{
                 ];
             }elseif($_res['is_bind_email'] == 0 && $_res['is_bind_phone'] == 0){
                 $updateData = [
+                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
                     'email'=>$paramArr['email'],
                     'phone'=>$paramArr['phone'],
                     'realname'=>$paramArr['realname'],
@@ -187,6 +188,7 @@ class PersonalController extends CommonController{
                 ];
             }else{
                 $updateData = [
+                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
                     'realname'=>$paramArr['realname'],
                     'id_card'=>$paramArr['id_card'],
                     'bank_card_name'=>$paramArr['bank_card_name'],
