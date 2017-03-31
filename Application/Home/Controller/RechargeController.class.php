@@ -47,6 +47,10 @@ class RechargeController extends CommonController{
                     'integral'=>$paramArr['money'] + $row['integral'],
                     'level'=>$newLevel,
                 ];
+                //>> 判断是否满100，满100升级为支持者
+                if($row['money'] + $paramArr['money'] >= 100){
+                    $insertData['role'] = 1;
+                }
 
                 M('Member')->startTrans();
                 $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($insertData);
@@ -59,7 +63,7 @@ class RechargeController extends CommonController{
                     'type'=>1,
                     'is_pass'=>0,
                     'order_number'=>$orderNumber,
-                    'image_url'=>$paramArr['image_url']
+                    'image_url'=>$paramArr['image_url'],
                 ];
                 //>> 添加到充值订单表
                 $ros = M('MemberRecharge')->add($orderData);
