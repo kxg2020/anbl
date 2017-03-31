@@ -45,7 +45,7 @@ class MarketController extends CommonController
                 ->where(['member_id' => $user_id, 'project_id' => $projectInfo['id']])
                 ->find();
 
-            if (!$rest) {
+            if ($rest) {
                 $this->ajaxReturn(['msg' => "您已支持该项目可免费下载！", 'status' => 1,'info'=>['dl'=>"您已支持该项目可免费下载！"],'id'=>$projectInfo['id']]);
             } else {
                 //判断用户余额

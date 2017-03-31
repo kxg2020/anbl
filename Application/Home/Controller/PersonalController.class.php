@@ -2,6 +2,7 @@
 namespace Home\Controller;
 
 use Think\Controller;
+use Think\Upload;
 
 class PersonalController extends CommonController{
 
@@ -61,6 +62,8 @@ class PersonalController extends CommonController{
             }
         }
 
+        //>> 查询充值订单
+        $orderList = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
         //>> 账户安全等级
         $safePercent = [
             '1'=>'25%',
@@ -71,6 +74,7 @@ class PersonalController extends CommonController{
         //>> 组装电话号码
         $secretPhone = substr($row['username'],0,3).'****'.substr($row['username'],7,4);
         $this->assign([
+            'orderList'=>$orderList,
             'allInfo'=>$allInfo,
             'personal'=>$row,
             'collection'=>$collection,
@@ -203,10 +207,44 @@ class PersonalController extends CommonController{
     }
 
     /**
-     * 我的收藏
+     * 提取现金
      */
-    public function collection(){
+    public function cash(){
 
+        $paramArr = $_REQUEST;
 
+        //>> 判断当前时间是否是周五
+        
     }
+
+
+    /**
+     * 图片文件上传
+     */
+    public function upload(){
+        $config = [
+            'exts'          =>  array('jpg','png','gif','bmp'), //允许上传的文件后缀
+            'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
+            'rootPath'      =>  'Upload/', //保存根路径
+        ];
+        $upload = new Upload($config);
+        $rst = $upload->uploadOne(array_shift($_FILES));
+        // 判断是否上传成功
+        if($rst == false){
+            $this->Msg['msg'] = $upload->getError();
+            $this->ajaxReturn($this->Msg);
+        }
+        if(!$rst){
+            $this->ajaxReturn([
+                'status' => 0,
+                'msg' => '文件上传失败'
+            ]);
+        }
+
+        $this->ajaxReturn([
+            'status' => 1,
+            'url' => $rst['url']
+        ]);
+    }
+
 }

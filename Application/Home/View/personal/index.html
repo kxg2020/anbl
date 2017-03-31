@@ -149,19 +149,20 @@
 						</ul>
 						<div class="put_money">
 							<p>选择充值帐号:</p>
-							<div><p>户主:大美女</p>
-									<p>卡号:51212132323</p>
-									<p>开户支行:成都靖江支行</p>
-									<p>开户银行:中国工商银行</p>
+							<div><p>户主:{$userInfo['bank_card_name']}</p>
+									<p>卡号:{$userInfo['bank_card']}</p>
+									<p>开户支行:{$userInfo['address']}</p>
+
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
 							</div>
 							<p>充值金额: <input type="text" name="rechargeMoney"></p>
-							<p>交易凭证:<span style="margin-left: 20px;"><span style="color:#e05959;">点击上传</span><input style="cursor: pointer;" class="money_file" type="file"></span></p>
+							<p>交易凭证:<span style="margin-left: 20px;"><span style="color:#e05959;">点击上传</span><input id="file_upload" style="cursor: pointer;" class="money_file" type="file"></span></p>
+
 							<div id="put_btn" class="rechargeOk">确定</div>
 						</div>
 						<div class="get_money" style="display: none;">
 							<p>提现金额: <input type="text"></p>
-							<p>可提余额$5000 <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
+							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
 							<div class="question_div"></div>
 							<div id="get_btn">确定</div>
 						</div>
@@ -171,11 +172,13 @@
 							<span style="color: white;">交易号</span>
 							<span style="color: white;">充值金额</span>
 							<span>交易状态</span></p>
-							<p><span>2017-01-24</span>
-							<span>银行转账</span>
-							<span>542368</span>
-							<span>$255</span>
-							<span>已完成</span></p>
+							<volist name="orderList" id="o">
+								<p><span>{$o.create_time}</span>
+									<span><if condition="$o.type eq 1">银行卡转账<else/>未知</if></span>
+									<span>{$o.order_number}</span>
+									<span>{$o.money}</span>
+									<span><if condition="$o.is_pass eq 1"><span style="color: forestgreen">完成</span><else/>未完成</if></span></p>
+							</volist>
 						 </div>
 					</div>
 				</div>
@@ -196,6 +199,7 @@
 									<div class="save_update">保存更新</div>
 								</div>
 						</div>
+						<input type="hidden" value="" id="images">
 					</div>
 					<p>A</p>
 					<p>L</p>
@@ -206,7 +210,46 @@
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/common.js'></script>
 	<script src='__PUBLIC__/wang/personal_center.js'></script>
+	<script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
 	<!--layer.js-->
 	<script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("#file_upload").h5upload({
+				url: "{:U('Home/Personal/upload')}",
+				fileObjName: 'image',
+				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
+				multi: true,
+				accept: '*/*',
+				fileSizeLimit: 1024 * 1024 * 1024 * 1024,
+				formData: {
+					type: 'card_positive'
+				},
+				onUploadProgress: function (file, uploaded, total) {
+
+				},
+				onUploadSuccess: function (file, data) {
+					data = $.parseJSON(data);
+					if (data.status == 0) {
+						layer.alert(data.msg, {time: 1000})
+					} else {
+						var _isMax = false;
+						var path = data.url;
+						console.log(data.url);
+						// 获取图片列表
+						$('#images').val(path);
+						if (_isMax == false) {
+							layer.msg('上传成功', {time: 1000})
+
+						}
+					}
+				},
+				onUploadError: function (file) {
+					layer.alert('上传失败');
+				}
+			});
+
+		});
+	</script>
 </body>
 </html>
