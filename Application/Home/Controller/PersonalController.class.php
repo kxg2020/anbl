@@ -11,6 +11,7 @@ class PersonalController extends CommonController{
      */
     public function index(){
 
+        $paramArr = $_REQUEST;
        //>> 判断用户是否登录
         if($this->isLogin != 1){
             $this->redirect('Home/Login/index');
@@ -63,7 +64,20 @@ class PersonalController extends CommonController{
         }
 
         //>> 查询充值订单
-        $orderList = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
+        $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
+        $count = ceil(count($orderLst)/13);
+
+        if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
+            $pgNum = $paramArr['pgNum'];
+        }else{
+            $pgNum = 1;
+        }
+        if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
+            $pgSize = $paramArr['pgSize'];
+        }else{
+            $pgSize = 15;
+        }
+        $orderList = $this->pagination($orderLst,$pgNum,$pgSize);
         //>> 账户安全等级
         $safePercent = [
             '1'=>'25%',
@@ -74,6 +88,7 @@ class PersonalController extends CommonController{
         //>> 组装电话号码
         $secretPhone = substr($row['username'],0,3).'****'.substr($row['username'],7,4);
         $this->assign([
+            'count'=>$count,
             'orderList'=>$orderList,
             'allInfo'=>$allInfo,
             'personal'=>$row,
@@ -84,6 +99,20 @@ class PersonalController extends CommonController{
             'secretPhone'=>$secretPhone,
         ]);
         $this->display('personal/index');
+    }
+
+    /**
+     * 分页
+     */
+    public function pagination($data = [],$phNum,$pgSize){
+
+        if(empty($data))return false;
+
+        $start = ($phNum - 1) * $pgSize;
+
+        $sliceArr = array_slice($data,$start,$pgSize);
+
+        return  $sliceArr;
     }
 
     /**
@@ -240,7 +269,8 @@ class PersonalController extends CommonController{
                     $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
 
                     //>> 生成订单
-                    $orderNumber = 'CN' . sprintf("%09d",$row['id']);
+                    $orderNumber = 'CS'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+
                     $insertData = [
                         'money'=>$paramArr['money'],
                         'member_id'=>$this->userInfo['id'],
@@ -248,6 +278,7 @@ class PersonalController extends CommonController{
                         'is_pass'=>0,
                         'order_number'=>$orderNumber
                     ];
+
                     //>> 保存订单
                     $ros = M('MemberCash')->add($insertData);
                     if($res && $ros){

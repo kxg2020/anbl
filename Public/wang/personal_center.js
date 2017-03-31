@@ -290,10 +290,12 @@ $(function(){
 					'dataType':'json',
 					'url':chargeUrl,
 					'data':{
-						'money':money
+						'money':money,
+						'image_url':path
 					},
 					success:function(result){
 						if(result.status == 1){
+							$('#images').val('');
 							layer.msg('充值成功!,请等待审核');
 						}else{
 							layer.msg('充值失败!');

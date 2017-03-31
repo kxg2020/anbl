@@ -51,14 +51,15 @@ class RechargeController extends CommonController{
                 M('Member')->startTrans();
                 $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($insertData);
                 //>> 生成流水号
-                $orderNumber = 'RE' . sprintf("%08d",$this->userInfo['id']);
+                $orderNumber = 'RE'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
                 $orderData = [
                     'member_id'=>$this->userInfo['id'],
                     'money'=>$paramArr['money'],
                     'create_time'=>time(),
                     'type'=>1,
                     'is_pass'=>0,
-                    'order_number'=>$orderNumber
+                    'order_number'=>$orderNumber,
+                    'image_url'=>$paramArr['image_url']
                 ];
                 //>> 添加到充值订单表
                 $ros = M('MemberRecharge')->add($orderData);
