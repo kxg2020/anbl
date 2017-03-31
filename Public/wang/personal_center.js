@@ -98,6 +98,7 @@ $(function(){
 			$('.put_money').hide();
 			$('.get_money').show();
 			$('.money_record').hide();
+			$('.first_bind').hide();
 		}
 	})
 	$('.put_record').click(function(){
@@ -106,6 +107,7 @@ $(function(){
 		$('.put_money').hide();
 		$('.get_money').hide();
 		$('.money_record').show();
+		$('.first_bind').hide();
 	});
 	$('.now_put').click(function(){
 		$('.money_content>ul').eq(1).hide();

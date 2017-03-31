@@ -33,9 +33,10 @@
 				</if>
 				<span class="up_btn">点击提升</span></div>
 			<div class="user_inform" id="phone">{$secretPhone}</div>
-			<div class="user_inform" id="email"><if condition="$personal['is_bind_email'] eq 0">未绑定<else/><span style="color: forestgreen">已绑定</span></if></div>
+			<div class="user_inform" id="email"><if condition="$personal['is_bind_email'] eq 0 ">未绑定<else/><span style="color: forestgreen">已绑定</span></if></div>
 			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
-			<div><if condition="$userInfo['is_allowed_recharge'] eq 1"><span id="recharge">充值</span></if><span id="post_cash">提现</span></div>
+			<div><if condition="$userInfo['is_allowed_recharge'] eq 1 and $userInfo['bank_card'] neq ''"><span id="recharge">充值</span><span id="post_cash">提现</span><else/><span class="up_btn" style="border: 1px solid #e50909;
+    color: #e50909;">请完善信息</span></if></div>
 		 </div>
 			<p id="repeat_bg">点击替换背景</p>
 			<p class="footer">Copyright 2015摄图网 泸ICP备15050430号</p>
@@ -148,19 +149,25 @@
 							<li>消费明细</li>
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
-						<div class="put_money">
-							<p>选择充值帐号:</p>
-							<div><p>户主:{$userInfo['bank_card_name']}</p>
+						<if condition="$userInfo['bank_card'] neq '' ">
+							<div class="put_money">
+								<p>选择充值帐号:</p>
+								<div><p>户主:{$userInfo['bank_card_name']}</p>
 									<p>卡号:{$userInfo['bank_card']}</p>
 									<p>开户支行:{$userInfo['address']}</p>
 
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
-							</div>
-							<p>充值金额: <input type="text" name="rechargeMoney"></p>
-							<p>交易凭证:<span style="margin-left: 20px;"><span style="color:#e05959;">点击上传</span><input id="file_upload" style="cursor: pointer;" class="money_file" type="file"></span></p>
+								</div>
+								<p>充值金额: <input type="text" name="rechargeMoney"></p>
+								<p>交易凭证:<span style="margin-left: 20px;"><span style="color:#e05959;">点击上传</span><input id="file_upload" style="cursor: pointer;" class="money_file" type="file"></span></p>
 
-							<div id="put_btn" class="rechargeOk">确定</div>
-						</div>
+								<div id="put_btn" class="rechargeOk">确定</div>
+							</div>
+							<else/>
+							<div class="first_bind" style="width: 100%;height: 300px;text-align: center; line-height: 300px;">
+								请先绑定用户信息
+							</div>
+						</if>
 						<div class="get_money" style="display: none;">
 							<p>提现金额: <input type="text" name="exMoney"></p>
 							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
