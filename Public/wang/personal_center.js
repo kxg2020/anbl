@@ -304,4 +304,39 @@ $(function(){
 			}
 		}
 	});
+
+	$('.ex').click(function(){
+		var money = $('input[name = exMoney]').val()
+		if(money == ''){
+
+			 layer.tips('请输入提现金额','input[name = exMoney]');
+		}else{
+
+			//>> 检测金额是否是数字
+			var reg = /^[0-9]+.?[0-9]*$/;
+			if(!reg.test(money)){
+
+				layer.tips('请输入数字','input[name = exMoney]');
+			}else{
+				var url =  location.protocol +'//'+ window.location.host+'/Home/Personal/cash';
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':url,
+					'data':{
+						'money':money
+					},
+					success:function(result){
+
+						if(result.status == 1){
+
+							layer.msg('提现成功,请等待审核');
+						}else{
+							layer.tips(result.msg,'input[name = exMoney]');
+						}
+					}
+				});
+			}
+		}
+	});
 });
