@@ -62,7 +62,7 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="#"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="active"><a href="{:U('admin/index/index')}"><i class="fa fa-home"></i> <span>首页</span></a></li>
                 <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>会员管理</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="{:U('admin/Member/select')}">会员列表</a></li>
@@ -77,7 +77,7 @@
                         <li><a href="{:U('admin/projectCategory/index')}">电影分类</a></li>
                     </ul>
                 </li>
-                <li class="menu-list"><a href=""><i class="fa fa-gear"></i> <span>配置管理</span></a>
+                <li class="menu-list"><a href=""><i class="fa fa-gear"></i> <span>明星管理</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="{:U('admin/pageConfig/select')}">优秀作品</a></li>
 
@@ -93,8 +93,8 @@
                     <ul class="sub-menu-list">
                         <li><a href="grids.html">充值订单</a></li>
                         <li><a href="gallery.html">提现订单</a></li>
-                        <li><a href="calendar.html">下载订单</a></li>
-                        <li><a href="nestable.html">支持订单</a></li>
+                        <li><a href="{:U('admin/order/downloadOrder')}">下载订单</a></li>
+                        <li><a href="{:U('admin/order/supportOrder')}">支持订单</a></li>
 
                     </ul>
                 </li>
@@ -110,16 +110,14 @@
 
                 <li class="menu-list"><a href=""><i class="fa fa-gears"></i> <span>后台系统</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="mail.html">模块管理</a></li>
-                        <li><a href="mail_compose.html">页面配置</a></li>
+                        <li><a href="{:U('admin/system/index')}">网站基本设置</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-rss"></i> <span>信息发布</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="form_layouts.html">分类管理</a></li>
-                        <li><a href="form_advanced_components.html">发布信息</a></li>
-                        <li><a href="form_wizard.html">广告管理</a></li>
+                        <li><a href="{:U('admin/articleCategory/index')}">分类管理</a></li>
+                        <li><a href="{:U('admin/article/index')}">信息列表</a></li>
                     </ul>
                 </li>
                 <li><a href="{:U('admin/login/logout')}"><i class="fa fa-sign-in"></i> <span>退出</span></a></li>
