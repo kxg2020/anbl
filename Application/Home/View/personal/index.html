@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/wang/personal_center.css">
+	<link href="__CSS__/layui.css" rel="stylesheet">
 	<title>阿纳巴里</title>
 </head>
 <body>
@@ -179,6 +180,7 @@
 									<span>{$o.money}</span>
 									<span><if condition="$o.is_pass eq 1"><span style="color: forestgreen">完成</span><else/>未完成</if></span></p>
 							</volist>
+							<div id="demo6"></div>
 						 </div>
 					</div>
 				</div>
@@ -213,6 +215,8 @@
 	<script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
 	<!--layer.js-->
 	<script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+	<script src="__JS__/layer/layui.js"></script>
+	<script src="__JS__/layer/laypage.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			$("#file_upload").h5upload({
@@ -235,7 +239,6 @@
 					} else {
 						var _isMax = false;
 						var path = data.url;
-						console.log(data.url);
 						// 获取图片列表
 						$('#images').val(path);
 						if (_isMax == false) {
@@ -248,7 +251,45 @@
 					layer.alert('上传失败');
 				}
 			});
-
+				layui.use(['laypage', 'layer'], function(){
+					var laypage = layui.laypage,layer = layui.layer;
+					laypage({
+						cont: 'demo6'
+						,pages: 2
+						,skip: true
+						,jump: function(obj, first){
+							if(!first){
+								$.ajax({
+									'type':'post',
+									'dataType':'json',
+									'url':"{:U('admin/Order/recharge')}",
+									'data':{
+										'pgNum':obj.curr,
+										'pgSize':20,
+									},
+									success:function(result){
+										$('#body').html('');
+										if(result.status == 1 && result.data != ''){
+											$.each(result.data,function(k,v){
+												$('#body').append(
+														'<tr align="center">'+
+														'<td>'+ v.id+'</td>'+
+														'<td>'+ v.order_number+'</td>'+
+														'<td>'+ v.username+'</td>'+
+														'<td>'+ v.create_time+'</td>'+
+														'<td>'+ v.money+'</td>'+
+														'<td>'+ v.is_pass +'</td>'+
+														'<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="审核" data-id="'+ v.id+'">'+'</td>'+
+														"</tr>"
+												);
+											});
+										}
+									}
+								});
+							}
+						}
+					});
+				});
 		});
 	</script>
 </body>

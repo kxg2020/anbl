@@ -62,11 +62,35 @@ class RegisterController extends CommonController{
                     $where = [
                         'invite_key'=>$paramArr['invite_key'],
                     ];
-                    //>> 查询邀请码
+                    //>> 查询当前用户的上级
                     $row = $userModel->where($where)->find();
-
                     if(!empty($row)){
+                        //>> 查询上级投资
+                        $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
+                       //>> 判断投资是否满100
+                        if($support['support_money'] >= 100){
 
+                            M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
+                        }
+
+                        //>> 判断上级已经有多少下线
+                        $count = $this->group($row['id']);
+                        if($count >= 2){
+                            //>> 升级为经纪人
+                            M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
+                        }
+
+                        //>> 如果投资5000以上,直推10人,团队100人升级为制片人
+                        if($support['support_money'] >= 5000 && $count >= 10 && $count >= 100){
+                            //>> 升级为经纪人
+                            M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
+                        }
+
+                        //>> 如果个人投资10000 直推50人 团队500人 升级出品人
+                        if($support['support_money'] >= 5000 && $count >= 50 && $count >= 500){
+                            //>> 升级为经纪人
+                            M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
+                        }
                         $parent_id = $row['id'];
                     }else{
 
@@ -93,6 +117,7 @@ class RegisterController extends CommonController{
                     die($this->_printError('1014'));
 
                 }
+
                 //>> 将用户信息保存到数据库
                 $insertData = [
                     'username'=>$paramArr['phone'],
@@ -102,7 +127,7 @@ class RegisterController extends CommonController{
                     'invite_key'=>$invite_key,
                     'parent_id'=>isset($parent_id) ? $parent_id : 0,
                     'safe_level'=>1,
-                    'class'=>1
+                    'class'=>1,
                 ];
 
                 $res = $userModel->add($insertData);
@@ -197,7 +222,7 @@ class RegisterController extends CommonController{
 
             }
 
-            $verifyTime = session('verify_create_time'.$paramArr['phone']);
+            $verifyTime = session('verify_create_time'.$paramArr['phone'],time());
 
             //>> 判断用户是否已经发送过短信
             if(!empty($verifyTime)){
@@ -252,6 +277,19 @@ class RegisterController extends CommonController{
         }else{
 
             die($this->_printError('1006'));
+        }
+    }
+
+    /**
+     * 查询团队
+     */
+    private function group($id){
+
+        $res = M('Member')->where(['parent_id'=>$id])->select();
+
+        if(!empty($res)){
+
+            return count($res);
         }
     }
 }
