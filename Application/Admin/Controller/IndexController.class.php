@@ -17,9 +17,24 @@ class IndexController extends CommonController {
     /**
      * 后台首页
      */
-    public function index(){
+    public function index()
+    {
+        // 获取项目数量
+        $projectNum = M('Project')->count();
+        $this->assign('projectNum', $projectNum);
 
-        $this->display('index/index');
+        // 获取本月会员支持总额
+        $projectNewNum = M('MemberSupport')
+            ->where(['create_time' => ['egt',date('Y-m-1 00:00:00')]])
+            ->sum('support_money');
+        $this->assign('projectNewNum', $projectNewNum);
+
+        // 获取会员数量
+        $userNum = M('Member')->count();
+        $this->assign('userNum', $userNum);
+
+
+        $this->display('index');
     }
 
 

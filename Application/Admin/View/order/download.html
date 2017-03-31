@@ -29,8 +29,41 @@
                                 <label>订单号</label>
                                 <input type="text" class="form-control" name="order_number" value="{:I('get.order_number')}" placeholder="请输入订单号">
                             </div>
+                            <div class="form-group">
+                                <label>下载用户</label>
+                                <input type="text" class="form-control" name="username" value="{:I('get.username')}" placeholder="请输入电话号码">
+                            </div>
+                            <div class="form-group">
+                                <label>下载项目</label>
+                                <input type="text" class="form-control" name="project_name" value="{:I('get.project_name')}" placeholder="请输入项目名称">
+                            </div>
+                            <div class="form-group">
+                                <label>订单开始时间</label>
+                                <input type="date" class="form-control" name="start_time" value="{:I('get.start_time')}" placeholder="请输入订单时间">
+                            </div>
+                            <div class="form-group">
+                                <label>订单结束时间</label>
+                                <input type="date" class="form-control" name="end_time" value="{:I('get.end_time')}" placeholder="请输入订单时间">
+                            </div>
                             <button type="submit" class="btn btn-primary">搜索</button>
+                            <button type="button" class="btn btn-primary" id="exportExcel">导出</button>
+                            <span>共计：{$count}条记录</span>
                         </form>
+                        <!--导出开始-->
+                        <form action="{:U('admin/order/exportData')}" method="get" class="form" id="exportForm">
+                            <input type="hidden" class="form-control" name="order_number" value="{:I('get.order_number')}" >
+                            <input type="hidden" class="form-control" name="username" value="{:I('get.username')}" >
+                            <input type="hidden" class="form-control" name="project_name" value="{:I('get.project_name')}">
+                            <input type="hidden" class="form-control" name="start_time" value="{:I('get.start_time')}" >
+                            <input type="hidden" class="form-control" name="end_time" value="{:I('get.end_time')}">
+                        </form>
+                        <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+                        <script>
+                            $('#exportExcel').click(function () {
+                                $('#exportForm').submit();
+                            });
+                        </script>
+                        <!--导出结束-->
 
                         <!--搜索结束-->
                         <hr/>
@@ -44,7 +77,7 @@
                                     <th class="text-center">下载项目</th>
                                     <th class="text-center">下载金额</th>
                                     <th class="text-center">下载时间</th>
-                                    <th class="text-center">操作</th>
+                                    <!--<th class="text-center">操作</th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -59,11 +92,11 @@
                                     <td style="vertical-align: middle">{$tag.order_number}</td>
                                     <td style="vertical-align: middle">{$tag.username}</td>
                                     <td style="vertical-align: middle">{$tag.project_name}</td>
-                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag.money eq 0">免费下载<else />{$tag.money}</if></td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                    <td style="vertical-align: middle">
+                                    <!--<td style="vertical-align: middle">
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 </volist>
                                 </tbody>
