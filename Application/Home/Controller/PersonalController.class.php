@@ -204,6 +204,17 @@ class PersonalController extends CommonController{
         }
     }
 
+    /**
+     * 提取现金
+     */
+    public function cash(){
+
+        $paramArr = $_REQUEST;
+
+        //>> 判断当前时间是否是周五
+        
+    }
+
 
     /**
      * 图片文件上传
