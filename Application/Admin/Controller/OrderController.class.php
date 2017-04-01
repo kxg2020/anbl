@@ -291,6 +291,50 @@ class OrderController extends CommonController
      */
     public function cash(){
 
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr['order_number'])){
+            $where = [
+                'order_number'=>$paramArr['order_number']
+            ];
+        }else{
+            $where = [
+                '1=1'
+            ];
+        }
+
+        //>> 查询订单
+        $orderLst = M('Member_cash as a')->field('a.*,b.username')
+            ->join('left join an_member as b on a.member_id = b.id')
+            ->where($where)->select();
+
+
+        $count = ceil(count($orderLst)/15);
+
+        if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
+            $pgNum = $paramArr['pgNum'];
+        }else{
+            $pgNum = 1;
+        }
+        if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
+            $pgSize = $paramArr['pgSize'];
+        }else{
+            $pgSize = 15;
+        }
+
+        $orderList = $this->pagination($orderLst,$pgNum,$pgSize);
+
+        if(IS_AJAX){
+            $this->ajaxReturn([
+                'data'=>array_values($orderList),
+                'status'=>1
+            ]);
+            exit;
+        }
+        $this->assign('order',$orderList);
+        $this->assign('count',$count);
+        $this->display('order/cash');
+
 
     }
 
@@ -311,6 +355,23 @@ class OrderController extends CommonController
 
         $this->assign('detail',$res);
         $this->display('order/detail');
+    }
+
+    /**
+     * 删除
+     */
+    public function delete(){
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+            $id = $paramArr['id'];
+            $res = M('MemberCash')->where(['id'=>$id])->delete();
+            if($res){
+
+                $this->ajaxReturn(['status'=>1,'msg'=>'删除成功!']);
+            }else{
+                $this->ajaxReturn(['status'=>1,'msg'=>'删除失败!']);
+            }
+        }
     }
 
     /**

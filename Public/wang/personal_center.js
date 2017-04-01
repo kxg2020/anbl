@@ -164,6 +164,18 @@ $(function(){
 		var bank_card = $('input[name = bank_card]').val();
 		var city = $('input[name = city]').val();
 		var address = $('input[name = address]').val();
+
+		//>> 验证手机号
+		if(phone != ''){
+			var reg_1 = /^0?(13|14|15|17|18)[0-9]{9}$/;
+			if(!reg_1.test(phone)){layer.tips('手机号格式不正确','input[name = phone]'); return false;}
+
+		}
+		if(email != ''){
+			var reg_2 = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+			if(!reg_2.test(email)){layer.tips('邮箱格式不正确','input[name = email]');return false;}
+
+		}
 		if(realname == ''){
 			layer.tips('请输入真实姓名','input[name = realname]',{
 				tips:4

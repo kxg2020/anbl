@@ -180,16 +180,18 @@
 							<span style="color: white;">交易号</span>
 							<span style="color: white;">充值金额</span>
 							<span>交易状态</span></p>
+							<div id="ls">
 							<volist name="orderList" id="o">
 								<p><span>{$o.create_time}</span>
-									<span><if condition="$o.type eq 1">银行卡转账<else/>未知</if></span>
+									<span>{$o.type}</span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>
 									<span><if condition="$o.is_pass eq 1"><span style="color: forestgreen">完成</span><else/>未完成</if></span></p>
 							</volist>
-							<div id="demo6"></div>
 						 </div>
+							<div id="demo6" style="margin-left: 42px;"></div>
 					</div>
+				</div>
 				</div>
 				<p>A</p>
 				<p>L</p>
@@ -209,6 +211,7 @@
 								</div>
 						</div>
 						<input type="hidden" value="" id="images">
+						<input type="hidden" value="{$count}" id="count">
 					</div>
 					<p>A</p>
 					<p>L</p>
@@ -262,35 +265,29 @@
 					var laypage = layui.laypage,layer = layui.layer;
 					laypage({
 						cont: 'demo6'
-						,pages: 2
-						,skip: true
+						,pages: $('#count').val()
+						,groups: 0
+						,first: false
+						,last: false
 						,jump: function(obj, first){
 							if(!first){
 								$.ajax({
 									'type':'post',
 									'dataType':'json',
-									'url':"{:U('admin/Order/recharge')}",
+									'url':'',
 									'data':{
 										'pgNum':obj.curr,
-										'pgSize':20,
+										'pgSize':15
 									},
 									success:function(result){
-										$('#body').html('');
-										if(result.status == 1 && result.data != ''){
-											$.each(result.data,function(k,v){
-												$('#body').append(
-														'<tr align="center">'+
-														'<td>'+ v.id+'</td>'+
-														'<td>'+ v.order_number+'</td>'+
-														'<td>'+ v.username+'</td>'+
-														'<td>'+ v.create_time+'</td>'+
-														'<td>'+ v.money+'</td>'+
-														'<td>'+ v.is_pass +'</td>'+
-														'<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="审核" data-id="'+ v.id+'">'+'</td>'+
-														"</tr>"
-												);
-											});
-										}
+										$('#ls').html('');
+										$.each(result.orderList,function(k,v){
+											$('#ls').append('<p><span>'+v.create_time+'</span>'+
+													'<span>'+ v.type+'</span>'+
+													'<span>'+ v.order_number+'</span>'+
+												'<span>'+ v.money+'</span>'+
+								'<span>'+ v.is_pass+'</span></p>');
+										});
 									}
 								});
 							}

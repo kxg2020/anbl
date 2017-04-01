@@ -65,7 +65,7 @@ class PersonalController extends CommonController{
 
         //>> 查询充值订单
         $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
-        $count = ceil(count($orderLst)/13);
+        $count = ceil(count($orderLst)/15);
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
             $pgNum = $paramArr['pgNum'];
@@ -87,9 +87,18 @@ class PersonalController extends CommonController{
         $safeLevel = $safePercent[$row['safe_level']];
         //>> 组装电话号码
         $secretPhone = substr($row['username'],0,3).'****'.substr($row['username'],7,4);
+        if(IS_AJAX){
+
+            $this->ajaxReturn([
+                'count'=>$count,
+                'orderList'=>$orderList,
+            ]);
+        }
         $this->assign([
             'count'=>$count,
             'orderList'=>$orderList,
+        ]);
+        $this->assign([
             'allInfo'=>$allInfo,
             'personal'=>$row,
             'collection'=>$collection,
