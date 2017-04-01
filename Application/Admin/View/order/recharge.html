@@ -36,6 +36,9 @@
                             <button type="submit" class="btn btn-primary" id="sea">搜索</button>
                         </form>
 
+
+
+
                         <!--搜索结束-->
                         <hr/>
                         <div class="adv-table text-center">
@@ -123,7 +126,8 @@
                                 'url':"{:U('admin/Order/recharge')}",
                                 'data':{
                                     'pgNum':obj.curr,
-                                    'pgSize':20,
+                                    'pgSize':15,
+                                    'type':$('select[name = type]').val()
                                 },
                                 success:function(result){
                                     $('#body').html('');
@@ -137,7 +141,7 @@
                                                     '<td>'+ v.create_time+'</td>'+
                                                     '<td>'+ v.money+'</td>'+
                                                     '<td>'+ v.is_pass +'</td>'+
-                                                    '<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="审核" data-id="'+ v.id+'">'+'</td>'+
+                                                    '<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="查看" data-id="'+ v.id+'">'+'</td>'+
                                                     "</tr>"
                                             );
                                         });
@@ -150,6 +154,7 @@
             });
 
         });
+
 
         $('body').on('click','.detail',function(){
             var id = $(this).attr('data-id');
