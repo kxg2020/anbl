@@ -90,11 +90,11 @@
                         'money':$('input[name = remoney]').val()
                     },
                     success:function(result){
+                           if(result){
+                               var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                               parent.layer.close(index); //执行关闭
+                           }
 
-                       if(result.status == 1){
-                           var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
-                           parent.layer.close(index); //执行关闭
-                       }
                     }
                 });
             });
