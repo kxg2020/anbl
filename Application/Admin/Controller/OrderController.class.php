@@ -491,7 +491,7 @@ class OrderController extends CommonController
 
         $paramArr = $_REQUEST;
 
-        $where = ['1=1'];
+        $where = [];
        if(!empty($paramArr)){
            //>> 查询记录
            if(!empty($paramArr['order_number'])){
@@ -505,18 +505,14 @@ class OrderController extends CommonController
 
                $where['a.money'] = $paramArr['money'];
            }
-           if(!empty($paramArr['start_time']) && !empty($paramArr['end_time'])){
-
-               $where['a.create_time'] = [['egt',strtotime($paramArr['start_time'])],['elt',strtotime($paramArr['end_time'])]];
+           if(!empty($paramArr['start_time'])){
+               $where['a.create_time'] = ['egt',strtotime($paramArr['start_time'])];
            }
-           if(!empty($paramArr['end_time']) && empty($paramArr['start_time'])){
-
-               $where['a.create_time'] = [['elt',strtotime($paramArr['end_time'])]];
-
+           if(!empty($paramArr['end_time'])){
+               $where['a.create_time'] = ['elt',strtotime($paramArr['end_time'])];
            }
-           if(!empty($paramArr['start_time']) && empty($paramArr['end_time'])){
-               $where['a.create_time'] = [['egt',strtotime($paramArr['start_time'])]];
-           }
+
+
        }
 
         $count = M('MemberRecharge as a ')
