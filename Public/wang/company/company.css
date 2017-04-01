@@ -171,7 +171,7 @@ header .nav{
   background: url(img/bg_img.png) 100%;
   float: left;
   color: white;
-  font-size: 26px;
+  font-size: 20px;
 }
 .content_right>div{
   width: 100%;
@@ -208,7 +208,7 @@ header .nav{
   text-align: left;
   margin: auto;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 20px;
 }
 footer{
   width: 100%;

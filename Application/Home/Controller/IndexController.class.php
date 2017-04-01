@@ -215,4 +215,26 @@ class IndexController extends CommonController{
 
         }
     }
+
+    public function search(){
+        $info = I('get.text','','strip_tags');
+        $where = [];
+        if($info){
+            $where['name'] = ['like',"%$info%"];;
+        }
+
+        $model = M('project');
+        $searchInfos = $model
+            ->where([
+                'name' => ['like',"%$info%"],
+                'recommend' => 1,
+                'end_time'   => [['egt', time()], '0', 'or'],// 结束时间 大于等于当前时间 或 为0
+                'start_time' => ['elt', time()],// 开始时间 小于等于当前时间
+                'is_active'      => 1,
+            ])
+            ->select();
+        $this->assign('searchInfos',$searchInfos);
+        $this->assign('searchno',$info);
+        $this->display('search');
+    }
 }

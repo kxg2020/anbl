@@ -16,7 +16,7 @@ class MarketController extends CommonController
             ->where($where)
             ->select();
         $this->assign('projectInfo',$projectInfo);
-        $this->display('index');
+        $this->display('market/index');
     }
 
     /**

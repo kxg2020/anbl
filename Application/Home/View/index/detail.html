@@ -184,8 +184,16 @@
 			});
 		});
 	</script>
-
      <script type="application/javascript">
+		 $('#fast_suport').on('click', function () {
+			 var  isLogin = "{$isLogin}";
+			 if(isLogin == 0){
+				 layer.alert("您还没有登录，请登录");
+				 return false;
+			 }
+			 $('.suport_bg').fadeIn('slow');
+			 $('.argement').hide();
+		 });
 		 $('#sure_suport').on('click',function(){
 
 			 // 判断用户是否同意协议

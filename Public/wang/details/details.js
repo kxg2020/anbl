@@ -69,13 +69,7 @@ $(function(){
           commentflag=true;
         }
       }
-  })
-
-
-$('#fast_suport').click(function(){
-  $('.suport_bg').fadeIn('slow');
-  $('.argement').hide();
-})
+  });
 
 $('#anbl_argement').click(function(){
   $('.argement').fadeIn('slow');
