@@ -98,6 +98,7 @@ $(function(){
 			$('.put_money').hide();
 			$('.get_money').show();
 			$('.money_record').hide();
+			$('.first_bind').hide();
 		}
 	})
 	$('.put_record').click(function(){
@@ -106,6 +107,7 @@ $(function(){
 		$('.put_money').hide();
 		$('.get_money').hide();
 		$('.money_record').show();
+		$('.first_bind').hide();
 	});
 	$('.now_put').click(function(){
 		$('.money_content>ul').eq(1).hide();
@@ -162,6 +164,18 @@ $(function(){
 		var bank_card = $('input[name = bank_card]').val();
 		var city = $('input[name = city]').val();
 		var address = $('input[name = address]').val();
+
+		//>> 验证手机号
+		if(phone != ''){
+			var reg_1 = /^0?(13|14|15|17|18)[0-9]{9}$/;
+			if(!reg_1.test(phone)){layer.tips('手机号格式不正确','input[name = phone]'); return false;}
+
+		}
+		if(email != ''){
+			var reg_2 = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+			if(!reg_2.test(email)){layer.tips('邮箱格式不正确','input[name = email]');return false;}
+
+		}
 		if(realname == ''){
 			layer.tips('请输入真实姓名','input[name = realname]',{
 				tips:4
@@ -225,7 +239,10 @@ $(function(){
 									},
 									success:function(result){
 										if(result.status == 1){
-											layer.msg('保存成功!');
+											layer.msg('保存成功!',function(){
+												location.reload();
+											});
+
 										}else{
 											layer.msg(result.msg);
 										}
@@ -256,7 +273,10 @@ $(function(){
 			},
 			success:function(result){
 				if(result.status == 1){
-					layer.msg('保存成功！');
+					layer.msg('保存成功！',function(){
+						location.reload();
+					});
+
 				}else{
 					layer.msg('保存失败!');
 				}

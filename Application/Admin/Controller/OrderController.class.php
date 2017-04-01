@@ -228,6 +228,72 @@ class OrderController extends CommonController
 
         $paramArr = $_REQUEST;
 
+        $where = [
+            'is_pass'=>0
+        ];
+        if(!empty($paramArr['order_number'])){
+            $where = [
+                'order_number'=>$paramArr['order_number']
+            ];
+        }
+        if(!empty($paramArr['type'])){
+            $where = [
+                'is_pass'=>$paramArr['type']
+            ];
+        }
+
+        //>> 查询充值订单
+        $orderLst = M('Member_recharge as a')->field('a.*,b.username')
+                ->join('left join an_member as b on a.member_id = b.id')
+                ->where($where)->select();
+
+        if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
+            $pgNum = $paramArr['pgNum'];
+        }else{
+            $pgNum = 1;
+        }
+        if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
+            $pgSize = $paramArr['pgSize'];
+        }else{
+            $pgSize = 15;
+        }
+        $count = ceil(count($orderLst)/$pgSize);
+        $orderList = $this->pagination($orderLst,$pgNum,$pgSize);
+
+        if(IS_AJAX){
+            $this->ajaxReturn([
+                'data'=>array_values($orderList),
+                'status'=>1,
+                'count'=>$count
+            ]);
+        }
+
+        $this->assign('order',$orderList);
+        $this->assign('count',$count);
+        $this->display('order/recharge');
+
+    }
+
+    /**
+     * 分页
+     */
+    public function pagination($data = [],$phNum,$pgSize){
+
+        if(empty($data))return false;
+
+        $start = ($phNum - 1) * $pgSize;
+
+        $sliceArr = array_slice($data,$start,$pgSize);
+
+        return  $sliceArr;
+    }
+
+    /**
+     * 提现订单
+     */
+    public function cash(){
+
+        $paramArr = $_REQUEST;
 
         if(!empty($paramArr['order_number'])){
             $where = [
@@ -238,10 +304,11 @@ class OrderController extends CommonController
                 '1=1'
             ];
         }
-        //>> 查询充值订单
-        $orderLst = M('Member_recharge as a')->field('a.*,b.username')
-                ->join('left join an_member as b on a.member_id = b.id')
-                ->where($where)->select();
+
+        //>> 查询订单
+        $orderLst = M('Member_cash as a')->field('a.*,b.username')
+            ->join('left join an_member as b on a.member_id = b.id')
+            ->where($where)->select();
 
 
         $count = ceil(count($orderLst)/15);
@@ -268,28 +335,7 @@ class OrderController extends CommonController
         }
         $this->assign('order',$orderList);
         $this->assign('count',$count);
-        $this->display('order/recharge');
-
-    }
-
-    /**
-     * 分页
-     */
-    public function pagination($data = [],$phNum,$pgSize){
-
-        if(empty($data))return false;
-
-        $start = ($phNum - 1) * $pgSize;
-
-        $sliceArr = array_slice($data,$start,$pgSize);
-
-        return  $sliceArr;
-    }
-
-    /**
-     * 提现订单
-     */
-    public function cash(){
+        $this->display('order/cash');
 
 
     }
@@ -314,6 +360,23 @@ class OrderController extends CommonController
     }
 
     /**
+     * 删除
+     */
+    public function delete(){
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+            $id = $paramArr['id'];
+            $res = M('MemberCash')->where(['id'=>$id])->delete();
+            if($res){
+
+                $this->ajaxReturn(['status'=>1,'msg'=>'删除成功!']);
+            }else{
+                $this->ajaxReturn(['status'=>1,'msg'=>'删除失败!']);
+            }
+        }
+    }
+
+    /**
      * 通过审核
      */
     public function pass(){
@@ -322,10 +385,32 @@ class OrderController extends CommonController
         if(!empty($paramArr)){
 
             if(isset($paramArr['id']) && !empty($paramArr['id']) && is_numeric($paramArr['id'])){
-                //>> 查询数据库
-                $res = M('MemberRecharge')->where(['id'=>$paramArr['id']])->save(['is_pass'=>1]);
 
-                if($res != 0){
+                $row = M('MemberRecharge')->where(['id'=>$paramArr['id']])->find();
+
+                $user = M('Member')->where(['id'=>$row['member_id']])->find();
+
+                //>> 查询积分规则表
+                $ins = M('IntegralInstitution')->select();
+                $newLevel = $user['level'];
+                foreach($ins as $key => $value){
+                    //>> 取出当前等级下一级所对应的积分
+                    if($paramArr['money'] + $user['money'] >= $value['integral'] && $user['integral'] + $paramArr['money'] >= $value['integral'] ){
+                        $newLevel = $value['level'];
+                    }
+                }
+                M('Member')->where(['id'=>$row['member_id']])->save([
+                    'money'=>$user['money'] + $paramArr['money'],
+                    'integral'=>$user['integral'] + $paramArr['money'],
+                    'level'=>$newLevel,
+                ]);
+
+                //>> 查询数据库,审核通过，余额和积分
+                $res = M('MemberRecharge')->where(['id'=>$paramArr['id']])->save([
+                    'is_pass'=>1,
+                ]);
+
+                if($res){
 
                     $this->ajaxReturn(['status'=>1]);
 
