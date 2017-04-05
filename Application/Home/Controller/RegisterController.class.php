@@ -281,7 +281,7 @@ class RegisterController extends CommonController{
     }
 
     /**
-     * 查询团队
+     * 查询直推
      */
     private function group($id){
 
@@ -292,4 +292,6 @@ class RegisterController extends CommonController{
             return count($res);
         }
     }
+
+
 }

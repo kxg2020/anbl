@@ -127,16 +127,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">项目分红方式</label>
-                                        <div class="col-sm-4 col-md-4 icheck minimal">
-                                            <select name="mode" class="form-control">
-                                                    <option value="1">请选择项目分红方式</option>
-                                                    <option value="1">国定分红</option>
-                                                    <option value="2">浮动分红</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">下载金额</label>
                                         <div class="col-sm-4 col-md-4">
@@ -264,6 +255,26 @@
                                                       placeholder="请输入项目的简介"></textarea>
                                         </div>
                                     </div>
+                                    <!--分红方式-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">固定分红</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="input-group">
+                                                <input type="text" name="fixed_rate"
+                                                       placeholder=" 请填写分红比例">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">浮动分红</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="input-group" >
+                                                <input  type="text" name="float_rate_1"
+                                                       placeholder=" 请填写分红比例">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---->
                                     <!--项目状态-->
                                     <div class="form-group">
                                         <label class=" col-md-2 control-label">是否推荐到首页</label>
@@ -571,6 +582,12 @@
                 },
                 intro: {
                     required: true
+                },
+                float_rate_1: {
+                    required: true
+                },
+                fixed_rate: {
+                    required: true
                 }
             },
             messages: {
@@ -591,6 +608,12 @@
                 },
                 intro: {
                     required: '*项目简介必须填写*'
+                },
+                float_rate_1: {
+                    required: '*浮动分红比例必须填写*'
+                },
+                fixed_rate: {
+                    required: '*固定分红比例必须填写*'
                 }
             },
             showErrors: function (errorMap, errorList) {

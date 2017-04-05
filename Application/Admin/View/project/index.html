@@ -52,7 +52,8 @@
                                     <th class="text-center">编号</th>
                                     <th class="text-center">名称</th>
                                     <th class="text-center">类型</th>
-                                    <th class="text-center">分红方式</th>
+                                    <th class="text-center">固定分红比例</th>
+                                    <th class="text-center">浮动分红比例</th>
                                     <th class="text-center">项目图片</th>
                                     <th class="text-center">目标金额</th>
                                     <th class="text-center">已支持资金</th>
@@ -77,7 +78,8 @@
                                     <td style="vertical-align: middle">{$tag.id}</td>
                                     <td style="vertical-align: middle">{$tag.name}</td>
                                     <td style="vertical-align: middle">{$tag.type}</td>
-                                    <td style="vertical-align: middle"><if condition="$tag['mode'] eq 1">固定分红<else/>浮动分红</if></td>
+                                    <td style="vertical-align: middle">{$tag.fixed_rate}</td>
+                                    <td style="vertical-align: middle">{$tag.float_rate}</td>
                                     <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
                                     <td style="vertical-align: middle">{$tag.target_amount}</td>
                                     <td style="vertical-align: middle">{$tag.money}</td>
@@ -101,6 +103,7 @@
                                     <td style="vertical-align: middle">
                                         <a href="{:U('admin/project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                        <input type="button" class="btn btn-xs btn-info" data-id="{$tag.id}" data-rate-2="{$tag.float_rate}" data-rate-1="{$tag.fixed_rate}" value="分红比例" name="rate">
                                     </td>
                                 </tr>
                                 </volist>
@@ -175,6 +178,24 @@
                 layer.msg(data.msg);
             });
         }
+
+        $('body').on('click','input[name = rate]',function(){
+            float_rate = $(this).attr('data-rate-2');
+            fixed_rate = $(this).attr('data-rate-1');
+            id = $(this).attr('data-id');
+            layer.open({
+                type: 2,
+                title: '分红比例设置',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['40%', '30%'],
+                content: "{:U('admin/project/rate')}?"+'id='+id,
+                end: function () {
+                    location.reload();
+                }
+            });
+        });
+
 
     </script>
 </block>
