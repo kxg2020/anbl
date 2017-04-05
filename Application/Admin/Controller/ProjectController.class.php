@@ -299,32 +299,18 @@ class ProjectController extends CommonController
         ]);
     }
 
-    /**
-     * 视频文件上传
-     */
-    public function upload_video(){
-        $config = [
-            'exts'          =>  array('avi','wma','rmvb','rm','flash','mp4','mid','3gp','mpg','mov','wmov','qt'), //允许上传的文件后缀
-            'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
-            'rootPath'      =>  'Upload/', //保存根路径
-        ];
-        $upload = new Upload($config);
-        $rst = $upload->uploadOne(array_shift($_FILES));
-        // 判断是否上传成功
-        if($rst == false){
-            $this->Msg['msg'] = $upload->getError();
-            $this->ajaxReturn($this->Msg);
-        }
-        if(!$rst){
-            $this->ajaxReturn([
-                'status' => 0,
-                'msg' => '文件上传失败'
-            ]);
-        }
-        $this->ajaxReturn([
-            'status' => 1,
-            'url' => $rst['url']
-        ]);
+
+    public function upToken(){
+        require './ThinkPHP/Library/Vendor/Qiniu/autoload.php';
+        // 用于签名的公钥和私钥
+        $accessKey = '6j17s5J33oPPMOEtrN3cSQW-W4VEc0Ssu6dbIu5N';
+        $secretKey = '9vO9LtdMzZlJLdRVuZ9J4vBj5kyuZhwQ5bP8jCO8';
+        // 初始化签权对象
+        $auth = new \Qiniu\Auth($accessKey, $secretKey);
+        $bucket = 'k1jia';
+        // 生成上传Token
+        $token = $auth->uploadToken($bucket,null,600);
+        $this->ajaxReturn(['uptoken'=>$token]);
     }
 
     /**

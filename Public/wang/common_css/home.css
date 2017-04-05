@@ -585,3 +585,19 @@ header .nav{
       line-height: 70px;
       font-size: 20px;
     }
+
+.news_carousel{
+    position: absolute;
+    top:0;
+    left: 260px;
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+}
+.news_carousel>div{
+    height: 100%;
+}
+.news_carousel>div>a{
+    margin-right: 30px;
+    font-size: 16px;
+}

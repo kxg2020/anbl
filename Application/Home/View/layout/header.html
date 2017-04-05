@@ -1,6 +1,6 @@
 <div class="nav">
     <div>
-        <a class="logo" href="">logo</a>
+        <a class="logo" href=""><img src="__PUBLIC__/wang/img/logo.png" alt=""></a>
         <ul class="top_nav">
             <li><a href="{:U('home/index/index')}"><p>首页</p><p>Home</p></a></li>
             <li style="position: relative;"><a href="#"><p>公司介绍</p><p>Company</p></a>
@@ -14,7 +14,7 @@
             <li><a href="{:U('Home/Personal/index')}"><p>个人中心</p><p>Personal Center</p></a></li>
         </ul>
         <ul class="login_reg">
-            <li style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
+            <li  class="search_li" style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
             <if condition="$userInfo['username'] eq ''"><li ><a id="login" href="{:U('Home/Login/index')}">登录 |</a></li>
                 <li ><a href="{:U('Home/Register/index')}">注册</a></li><else/>
                 <li class="user_img"><span>{$userInfo['username']}</span></li>
@@ -24,3 +24,5 @@
         </ul>
     </div>
 </div>
+<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+<script type="application/javascript"></script>

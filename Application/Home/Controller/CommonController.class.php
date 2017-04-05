@@ -70,6 +70,8 @@ class CommonController extends Controller{
                 }
             }
         }
+        $this->assign('isLogin',$this->isLogin);
+
 
     }
 

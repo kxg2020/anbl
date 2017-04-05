@@ -23,7 +23,7 @@ class FactoryController extends CommonController
             ->limit(0,10)
             ->select();
         $this->assign('worksInfos',$worksInfos);
-        $this->display('index');
+        $this->display('factory/index');
     }
 
     /**

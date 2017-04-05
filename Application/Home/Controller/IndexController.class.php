@@ -31,6 +31,9 @@ class IndexController extends CommonController{
             ->where($where)
             ->select();
 
+        // 查询出所有新闻
+        $news = M('Article')->select();
+        $this->assign('news',$news);
         $this->assign('lunbos',$lunbos);
         $this->assign('projectInfo',$projectInfo);
         $this->display('index/index');
@@ -214,5 +217,34 @@ class IndexController extends CommonController{
             $this->ajaxReturn(['msg'=>"收藏成功",'status'=>1,'info'=>$projectInfo['collection_number']+1]);
 
         }
+    }
+
+    public function search(){
+        $info = I('get.text','','strip_tags');
+        $where = [];
+        if($info){
+            $where['name'] = ['like',"%$info%"];;
+        }
+
+        $model = M('project');
+        $searchInfos = $model
+            ->where([
+                'name' => ['like',"%$info%"],
+                'recommend' => 1,
+                'end_time'   => [['egt', time()], '0', 'or'],// 结束时间 大于等于当前时间 或 为0
+                'start_time' => ['elt', time()],// 开始时间 小于等于当前时间
+                'is_active'      => 1,
+            ])
+            ->select();
+        $this->assign('searchInfos',$searchInfos);
+        $this->assign('searchno',$info);
+        $this->display('index/search');
+    }
+
+    public function news($id){
+        $id = intval($id);
+        $new = M('Article')->find($id);
+        $this->assign('new',$new);
+        $this->display('index/news');
     }
 }

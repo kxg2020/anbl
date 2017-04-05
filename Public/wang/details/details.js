@@ -69,13 +69,7 @@ $(function(){
           commentflag=true;
         }
       }
-  })
-
-
-$('#fast_suport').click(function(){
-  $('.suport_bg').fadeIn('slow');
-  $('.argement').hide();
-})
+  });
 
 $('#anbl_argement').click(function(){
   $('.argement').fadeIn('slow');
@@ -92,4 +86,22 @@ $('.argement').click(function(){
   return false;
 })
 
+    //评论区选择类型
+    $('.comment_ul>li').click(function(){
+        var text=$(this).text();
+        $('.comment_ul>li').removeClass('comment_choice');
+        if(text=='导演'){
+            $('.comment_ul>li').eq(0).addClass('comment_choice');
+        }
+        if(text=='演员'){
+            $('.comment_ul>li').eq(1).addClass('comment_choice');
+        }
+        if(text=='故事'){
+            $('.comment_ul>li').eq(2).addClass('comment_choice');
+        }
+        if(text=='后期'){
+            $('.comment_ul>li').eq(3).addClass('comment_choice');
+        }
+
+    })
 });
