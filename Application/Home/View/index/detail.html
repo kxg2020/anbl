@@ -63,10 +63,10 @@
 				<div>
 					<p class="title">评论</p>
 					<ul class="comment_ul">
-						<li class="comment_choice">导演</li>
-						<li>演员</li>
-						<li>故事</li>
-						<li>后期</li>
+						<li class="comment_choice" _type="1">导演</li>
+						<li _type="2">演员</li>
+						<li _type="3">故事</li>
+						<li _type="4">后期</li>
 					</ul>
 					<div class="loginorreg"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></div>
 					<input type="hidden" value="{$count}" id="count">
@@ -74,7 +74,7 @@
 					<div class="publish now_suport" id="ok">发表</div>
 					<div class="publish_area">
 						<volist name="comment" id="c">
-							<p><img src="__PUBLIC__/wang/img/1.jpg" style="width: 30px;height: 30px"><span>{$c['username']}</span>:{$c['content']}<img class="reply" src="__PUBLIC__/wang/details/img/comment.png" alt="" style="height: 18px;width: 22px;cursor: pointer;margin-left: 10px" ></p>
+							<p><img src="__PUBLIC__/wang/img/1.jpg" style="width: 30px;height: 30px"><span>{$c['username']}</span>:{$c['content']}</p>
 						</volist>
 
 					</div>
@@ -114,6 +114,7 @@
 	<script>
 		$(function(){
 			layui.use(['laypage', 'layer'], function(){
+				var type = $('.comment_choice').attr('_type');
 				var laypage = layui.laypage,layer = layui.layer;
 				laypage({
 					cont: 'demo6'
@@ -128,16 +129,15 @@
 								'data':{
 									'pgNum':obj.curr,
 									'pgSize':12,
-									'type':1,
+									'type':type,
 									'movie_id':$('input[name = movie_id]').val()
 								},
 								success:function(result){
-
 									//>> 清空div中的内容
 									$('.publish_area').html('');
 									if(result.status == 1){
 										$.each(result.directorArr,function(k,v){
-											$('.publish_area').append('<p><img src="__PUBLIC__/wang/img/1.jpg"'+ "style='width: 30px;height: 30px'><span>"+ v.username+"</span>:"+ v.content+"<img class='reply'"+ 'src="__PUBLIC__/wang/details/img/comment.png" alt="" style="height: 18px;width: 22px;cursor: pointer;margin-left:'+ '10px" ></p>');
+											$('.publish_area').append('<p><img src="__PUBLIC__/wang/img/1.jpg"'+ "style='width: 30px;height: 30px'><span>"+ v.username+"</span>:"+ v.content+'</p>');
 										});
 									}
 								}
@@ -157,6 +157,9 @@
 				//>> 获取评论内容
 				var content = $('#mainContent').val();
 				var id = $('input[name = movie_id]').val();
+
+				// 获取评论的类型
+				var type = $('.comment_choice').attr('_type');
 				//>> 判断是否为空
 				if(content.length == 0){
 					layer.tips('请输入您的评论', '#mainContent');
@@ -168,12 +171,13 @@
 						'data':{
 							'content':content,
 							'movie_id':id,
-							'type':1
+							'type':type
 						},
 						success:function(result){
 							if(result.status == 1){
+
 								layer.msg('评论成功!',function(){
-									location.reload();
+									location.reload();;
 								});
 
 							}else{
@@ -190,7 +194,13 @@
 			 var  isLogin = "{$isLogin}";
 			 console.log(isLogin);
 			 if(isLogin == 0){
-				 layer.alert("您还没有登录，请登录");
+				 layer.msg('您还没有登录!',{
+					 time: 0 //不自动关闭
+					 ,btn: ['立即登录']
+					 ,yes: function(index){
+						 window.location.href = "{:U('Home/Login/index')}"
+					 }
+				 });
 				 return false;
 			 }else{
 				 $('.suport_bg').fadeIn('slow');
@@ -231,7 +241,13 @@
 			 var _id = _id;
 			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
 				 if (data.status == 0) {
-					 layer.alert(data.msg);
+					 layer.msg(data.msg,{
+						 time: 0 //不自动关闭
+						 ,btn: ['立即登录']
+						 ,yes: function(index){
+							 window.location.href = "{:U('Home/Login/index')}"
+						 }
+					 });
 				 } else {
 					 $('#skl').text(data.info);
 					 layer.msg(data.msg);

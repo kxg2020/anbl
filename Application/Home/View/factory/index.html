@@ -59,7 +59,7 @@
 					</div>
 				</volist>
 					<div class="last_title">
-						<h4><span>arabevvi</span></h4>
+						<h4><span>araberri</span></h4>
 						<h5><span>We &hearts; love</span></h5>
 					</div>
 					
@@ -99,7 +99,7 @@
 					</div>
 				</volist>
 					<div class="last_title">
-						<h4><span>arabevvi</span></h4>
+						<h4><span>araberri</span></h4>
 						<h5><span>We &hearts; love</span></h5>											
 					</div>
 					
@@ -139,7 +139,7 @@
 					</div>
 					</volist>
 					<div class="last_title">
-						<h4><span>arabevvi</span></h4>
+						<h4><span>araberri</span></h4>
 						<h5><span>We &hearts; love</span></h5>											
 					</div>
 
@@ -201,7 +201,13 @@
 				};
 				$.post("{:U('home/factory/vote')}",_data,function (data) {
 					if (data.status == 0) {
-						layer.alert(data.msg);
+						layer.msg(data.msg,{
+							time: 0 //不自动关闭
+							,btn: ['立即登录']
+							,yes: function(index){
+								window.location.href = "{:U('Home/Login/index')}"
+							}
+						});
 					} else {
 						layer.msg(data.msg);
 					}

@@ -359,6 +359,7 @@
                                                 </div>
                                             </div>
                                             <span class="btn btn-sm btn-default" style="float: left;" id="closed">暂停</span>
+                                            <span class="btn btn-sm btn-default" style="float: left;" id="start">继续</span>
                                         </div>
 
                                     </div>
@@ -516,6 +517,10 @@
             });
             $('#closed').click(function () {
                 uploader.stop();
+                //uploader.start();
+            });
+            $('#start').click(function () {
+                uploader.start();
             });
         });
 
