@@ -361,4 +361,66 @@ $(function(){
 			}
 		}
 	});
+	//屏幕宽度高度调节
+	if($(window).height()>=768){
+		$('.body').css({
+			height:$(window).height()-120
+		})
+	}
+
+	//平台质询的相关操作
+	$('.close_ask').click(function(){
+		$('.ask').hide();
+		$('.body_right>ul').show();
+	})
+	$('#ask').click(function(){
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.ask').show();
+		$('.ask_content').show();
+		$('.ask_answer').hide();
+	})
+	$('.ask_content>p').click(function(){
+		$('.ask_content').hide();
+		$('.ask_answer').show();
+		$('.answer_div').show();
+		$('.answer_form').hide();
+	})
+	$('.ask_answer>p>span').click(function(){
+		$('.ask_content').show();
+		$('.ask_answer').hide();
+	})
+	$('.answer_div>p').click(function(){
+		$('.answer_div').hide();
+		$('.answer_form').show();
+	})
+	$('.back_title').click(function(){
+		$('.answer_div').show();
+		$('.answer_form').hide();
+	})
+
+	//我的团队相关操作
+
+	$('.close_team').click(function(){
+		$('.team').hide();
+		$('.body_right>ul').show();
+	})
+	$('#team').click(function(){
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.team').show();
+	})
+
+	//点击替换背景
+	var bgArry=['img/bg.png','img/bg1.jpg','img/bg2.jpg','img/bg3.jpg','img/bg4.jpg','img/bg5.jpg','img/bg6.jpg'];
+	var imgNumber=1;
+	$('#repeat_bg').click(function(){
+		$('.body_left').css({
+			'backgroundImage':'url('+bgArry[imgNumber]+')'
+		})
+		imgNumber++;
+		if(imgNumber==bgArry.length){
+			imgNumber=0;
+		}
+	})
 });

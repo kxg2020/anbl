@@ -75,19 +75,21 @@ class RegisterController extends CommonController{
 
                         //>> 判断上级已经有多少下线
                         $count = $this->group($row['id']);
+                        //>> 团队一共多少人
+                        $all = $this->allMembers($row['id']);
                         if($count >= 2){
                             //>> 升级为经纪人
                             M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                         }
 
                         //>> 如果投资5000以上,直推10人,团队100人升级为制片人
-                        if($support['support_money'] >= 5000 && $count >= 10 && $count >= 100){
+                        if($support['support_money'] >= 5000 && $count >= 10 && $all >= 100){
                             //>> 升级为经纪人
                             M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                         }
 
                         //>> 如果个人投资10000 直推50人 团队500人 升级出品人
-                        if($support['support_money'] >= 5000 && $count >= 50 && $count >= 500){
+                        if($support['support_money'] >= 5000 && $count >= 50 && $all >= 500){
                             //>> 升级为经纪人
                             M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                         }
@@ -291,6 +293,22 @@ class RegisterController extends CommonController{
 
             return count($res);
         }
+    }
+
+    /**
+     * 团队
+     */
+    public function allMembers($id){
+        static $sum = 0;
+        $rows = M('Member')->where(['parent_id'=>$id])->select();
+        $count = count($rows);
+        $sum += $count;
+        if(!empty($rows)){
+            foreach($rows as $k => $v){
+                $this->allMembers($v['id']);
+            }
+        }
+        return $sum;
     }
 
 

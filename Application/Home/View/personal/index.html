@@ -217,6 +217,72 @@
 					<p>L</p>
 					<p>B</p>
 			    </div>
+			<div class="ask" style="display: none;">
+				<div class="bg">
+					<div class="close_ask"></div>
+					<div class="ask_content">
+						<p>查看信箱<span>>></span></p>
+						<form class="ask_form">
+							<div> <label >问题标题</label><input style="height: 24px;" type="text" name="question"></div>
+							<div style="height: 40px;"> <label style="line-height: 40px;">上传问题图片</label><input type="file" id="upload"><div class="choice_file">选取文件</div></div>
+							<div> <label >问题详情</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="content"></textarea></div>
+							<div><input type="button" id="ask_btn" value='提交'></div>
+						</form>
+					</div>
+					<div class="ask_answer" style="display: none;">
+						<p>当前位置>信箱>信件<span>我要提问<b>>></b></span></p>
+						<div class="answer_div" >
+							<volist name="question" id="q">
+							<p class="qdetail" data-id="{$q['id']}">{$q['title']}</p>
+							<p style="display: none" id="{$q['id']}">{$q['content']}</p>
+							<p style="display: none" class="r{$q['id']}">{$q['reply']}</p>
+							</volist>
+						</div>
+						<form class="answer_form" style="display: none;">
+							<div><label >问题标题</label><input type="text" name="rtitle"></div>
+							<div><label >详细内容</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="rcontent"></textarea></div>
+							<div><label >回复内容</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="rdcontent"></textarea></div>
+							<input class="back_title" type="button" value="返回到标题">
+							<input type="hidden" value="" id="question" name="question">
+						</form>
+					</div>
+				</div>
+				<script>
+					$(function(){
+						$('.qdetail').click(function(){
+							id = $(this).attr('data-id');
+							title = $(this).text();
+							content = $('#'+id).text();
+							reply = $('.r'+id).text();
+							$('input[name  = rtitle]').val(title);
+							$('textarea[name  = rcontent]').val(content);
+							$('textarea[name  = rdcontent]').val(reply);
+						});
+					});
+				</script>
+				<p>A</p>
+				<p>L</p>
+				<p>B</p>
+			</div>
+
+			<div class="team" style="display: none;">
+				<div class="bg">
+					<div class="close_team"></div>
+					<div class="team_content">
+						<div class="main1" id="main1"><div class="1"><span>Angelababy</span><img src="img/question1.png" alt=""></div></div>
+						<p id="1">+</p>
+						<div class="main2">
+							<div class="1-1"><p>Laria</p><p><span>李三</span><span>15012345678</span></p><p><span>支持积分:</span><span>23223</span></p></div>
+							<div class="1-2"><p>Laria</p><p><span>李三</span><span>15012345678</span></p><p><span>支持积分:</span><span>23223</span></p></div>
+						</div>
+						<p id="1-1">+</p><p id="1-2">+</p>
+						<div class="main3"><div class="1-1-1"></div><div class="1-1-2"></div><div class="1-2-1"></div><div class="1-2-2"></div></div>
+					</div>
+				</div>
+				<p>A</p>
+				<p>L</p>
+				<p>B</p>
+			</div>
 		</div>
 	</div>
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
@@ -261,6 +327,38 @@
 					layer.alert('上传失败');
 				}
 			});
+			$("#upload").h5upload({
+				url: "{:U('Home/Personal/upload')}",
+				fileObjName: 'image',
+				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
+				multi: true,
+				accept: '*/*',
+				fileSizeLimit: 1024 * 1024 * 1024 * 1024,
+				formData: {
+					type: 'card_positive'
+				},
+				onUploadProgress: function (file, uploaded, total) {
+
+				},
+				onUploadSuccess: function (file, data) {
+					data = $.parseJSON(data);
+					if (data.status == 0) {
+						layer.alert(data.msg, {time: 1000})
+					} else {
+						var _isMax = false;
+						var path = data.url;
+						// 获取图片列表
+						$('#question').val(path);
+						if (_isMax == false) {
+							layer.msg('上传成功', {time: 1000})
+
+						}
+					}
+				},
+				onUploadError: function (file) {
+					layer.alert('上传失败');
+				}
+			});
 				layui.use(['laypage', 'layer'], function(){
 					var laypage = layui.laypage,layer = layui.layer;
 					laypage({
@@ -294,6 +392,37 @@
 						}
 					});
 				});
+			$('#ask_btn').click(function(){
+				title = $('input[name = question]').val();
+				content = $('textarea[name = content]').val();
+				url = location.protocol+'//'+window.location.host+'/Home/Consult/add';
+				if(title == ''){
+					layer.msg('提问标题不能为空');
+					return false;
+				}
+				if(content == ''){
+
+					layer.msg('问题内容不能为空');
+					return false;
+				}
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':url,
+					'data':{
+						'title':title,
+						'content':content,
+						'image_url':$('#question').val(),
+					},
+					success:function(result){
+						if(result.status == 1){
+							layer.msg('您的问题已保存,请等待管理员回复',function(){
+								location.reload();
+							});
+						}
+					}
+				});
+			});
 		});
 	</script>
 </body>
