@@ -94,7 +94,10 @@ class ProjectController extends CommonController
                 'url' => $_data['url'],
                 'image_url' => $_data['image_url'],
                 'create_time' => time(),
+                'fixed_rate'=>$_data['fixed_rate'],
+                'float_rate'=>$_data['float_rate_1'],
             ];
+
             // 开启事物
             M()->startTrans();
             // 将项目基本信息保存到数据库 an_project表
@@ -424,4 +427,26 @@ class ProjectController extends CommonController
 
     }
 
+    /**
+     * 分红比例
+     */
+    public function rate(){
+
+        $paramArr = $_REQUEST;
+
+        $row = M('Project')->where(['id'=>$paramArr['id']])->find();
+        $this->assign(['row'=>$row,'id'=>$paramArr['id']]);
+        $this->display('project/rate');
+    }
+
+    public function saveRate(){
+
+        $paramArr = $_REQUEST;
+
+       $res =  M('Project')->where(['id'=>$paramArr['id']])->save(['fixed_rate'=>$paramArr['fixed_rate'],'float_rate'=>$paramArr['float_rate']]);
+
+        $this->ajaxReturn([
+            'status'=>1
+        ]);
+    }
 }
