@@ -271,7 +271,7 @@ class PersonalController extends CommonController{
 
                     //>> 提取现金，生成订单
                     $updateData = [
-                        'money'=>$row['money'] - $paramArr['money'],
+                        'money'=>$row['money'] - $paramArr['money']-$paramArr['money']*0.1,
                     ];
 
                     M('Member')->startTrans();
@@ -308,8 +308,76 @@ class PersonalController extends CommonController{
                 die($this->_printError(''));
             }
         }else{
-            die($this->_printError('1050'));
+
+            $crrDay = date('Y-m-d');
+            $lastDay = $this->getTheMonth();
+            if($crrDay == $lastDay){
+                if(!empty($paramArr)){
+
+                    if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
+                        //>> 查询余额
+                        $row = M('Member')->where(['id'=>$this->userInfo['id']])->find();
+                        if(empty($row)){
+
+                            die($this->_printError(''));
+                        }
+                        //>> 判断金额是否大于余额
+                        if($paramArr['money'] > $row['money']){
+
+                            die($this->_printError('1052'));
+                        }
+
+                        //>> 提取现金，生成订单
+                        $updateData = [
+                            'money'=>$row['money'] - $paramArr['money']-$paramArr['money'],
+                        ];
+
+                        M('Member')->startTrans();
+                        $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
+
+                        //>> 生成订单
+                        $orderNumber = 'CS'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+
+                        $insertData = [
+                            'money'=>$paramArr['money'],
+                            'member_id'=>$this->userInfo['id'],
+                            'create_time'=>time(),
+                            'is_pass'=>0,
+                            'order_number'=>$orderNumber
+                        ];
+
+                        //>> 保存订单
+                        $ros = M('MemberCash')->add($insertData);
+                        if($res && $ros){
+
+                            M('Member')->commit();
+                            die($this->_printSuccess());
+                        }else{
+
+                            die($this->_printError('1054'));
+                        }
+
+                    }else{
+
+                        die($this->_printError(''));
+                    }
+                }else{
+
+                    die($this->_printError(''));
+                }
+            }
         }
+    }
+
+    /**
+     * 获取当月最后一天
+     */
+    function getTheMonth()
+    {
+        $firstDay = date('Y-m-01', strtotime(date("Y-m-d")));
+        $lastDay = date('Y-m-d', strtotime("$firstDay +1 month -1 day"));
+
+        return $lastDay;
     }
 
 
