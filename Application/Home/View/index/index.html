@@ -38,7 +38,16 @@
 				</div>
 				</volist>
 			</div>
-			<div class="hot_news"><i class="suona"></i>最新消息：<span>热烈祝贺<a href="">《那些年我们一起追过的女孩》</a>正式开拍</span></div>
+			<div class="hot_news"><i class="suona"></i>最新消息：
+				<div class="news_carousel">
+					<div>
+					<volist name="news" id="new">
+						<a href="{:U('home/index/news',['id'=>$new['id']])}">{$new.title}</a>
+					</volist>
+
+					</div>
+				</div>
+			</div>
 		</div>
 	</header>
 	<div class="body">	

@@ -31,6 +31,9 @@ class IndexController extends CommonController{
             ->where($where)
             ->select();
 
+        // 查询出所有新闻
+        $news = M('Article')->select();
+        $this->assign('news',$news);
         $this->assign('lunbos',$lunbos);
         $this->assign('projectInfo',$projectInfo);
         $this->display('index/index');
@@ -235,6 +238,13 @@ class IndexController extends CommonController{
             ->select();
         $this->assign('searchInfos',$searchInfos);
         $this->assign('searchno',$info);
-        $this->display('search');
+        $this->display('index/search');
+    }
+
+    public function news($id){
+        $id = intval($id);
+        $new = M('Article')->find($id);
+        $this->assign('new',$new);
+        $this->display('index/news');
     }
 }
