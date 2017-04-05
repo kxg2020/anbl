@@ -141,14 +141,26 @@ class IndexController extends CommonController{
                 $this->ajaxReturn(['msg'=>"非法项目！！！",'status'=>0]);
             }
 
+            // 分红类型  1固定 2浮动
+
+            $type = intval($data['type']);
+
+            // 计算收益
+            if($type == 1){//固定分红
+                $expect_return = $support_money + $support_money*($projectInfo['fixed_rate']/100);
+            }else{ //浮动分红 -100 - 300
+                $top = $support_money + $support_money*(300/100);
+                $expect_return ="0至$top";
+            }
             // 生成订单
-            $order_number = 'AN' . sprintf("%09d",$member_id);
+            $order_number = 'ZC'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
             //封装数据
             $supportInfo = [
                 'member_id' => $member_id,
                 'project_id' => $project_id,
                 'support_money' => $support_money,
-                'expect_return' => '',
+                'type' => $type,
+                'expect_return' => $expect_return,
                 'order_number' => $order_number,
                 'create_time' => time(),
             ];
@@ -169,6 +181,19 @@ class IndexController extends CommonController{
                 M()->rollback();
                 $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
             }
+
+            // 更新支持人数 //支持金额
+            $rest = M('Project')
+                ->where(['id'=>$projectInfo['id']])
+                ->save([
+                    'support_number' => $projectInfo['support_number']+1,
+                    'money' => $projectInfo['money']+$support_money,
+                ]);
+            if(!$rest){
+                M()->rollback();
+                $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
+            }
+
             //提交事物
             M()->commit();
             $this->ajaxReturn(['msg'=>"支持成功！！！",'status'=>1]);

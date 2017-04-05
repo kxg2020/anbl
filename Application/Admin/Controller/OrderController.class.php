@@ -156,6 +156,7 @@ class OrderController extends CommonController
             ->join('left join an_project as b on b.id=a.project_id')
             ->join('left join an_member as c on c.id=a.member_id')
             ->where($where)
+            ->order('a.create_time desc')
             ->limit($page->firstRow,$page->listRows)
             ->select();
 

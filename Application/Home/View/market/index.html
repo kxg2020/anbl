@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<div class="top">
-			<a href="../index.html" class="logo">logo</a>
+			<a class="logo" href="{:U('home/index/index')}"><img src="__PUBLIC__/wang/img/logo.png" alt=""></a>
 			<div class="title"><p>电影超市</p><span>MOVIE STORE</span></div>
 			<div class="menu_logo">
 				<div class="burger2 menu">
@@ -125,9 +125,17 @@
 							$(".down_bg").find("span").text(_name);
 							$(".down_bg").find("p").text(data.info.dl);
 							if(data.status == 1){
-								$("#sure_download").attr('href',"http://admin.com/home/market/download/?project_id="+data.id+"&&type_id="+1);
+								$("#sure_download").attr('download',data.infot.url);
+								$("#sure_download").attr('href',data.infot.url);
+								$("#sure_download").attr('_project_id',data.infot.id);
+								$("#sure_download").attr('type_id',data.status);
+								//$("#sure_download").attr('href',"http://admin.com/home/market/download/?project_id="+data.id+"&&type_id="+1);
 							}else{
-								$("#sure_download").attr('href',"http://admin.com/home/market/download/?project_id="+data.info.id+"&&type_id="+2);
+								//$("#sure_download").attr('href',"http://admin.com/home/market/download/?project_id="+data.info.id+"&&type_id="+2);
+								$("#sure_download").attr('download',data.info.url);
+								$("#sure_download").attr('href',data.info.url);
+								$("#sure_download").attr('_project_id',data.info.id);
+								$("#sure_download").attr('type_id',data.status);
 							}
 							$('.down_bg').show();
 						}
@@ -135,6 +143,15 @@
 
 				})
 
+				$("#sure_download").on('click',function(){
+						var _project_id = $(this).attr('_project_id');
+						var _type_id = $(this).attr('type_id');
+					console.log(_project_id);
+					console.log(_type_id);
+					$.post("{:U('home/market/download')}",{project_id:_project_id,type_id:_type_id},function (data) {
+
+					});
+				})
 			});
 
 
