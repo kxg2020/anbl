@@ -73,9 +73,11 @@
                                 <tr>
                                     <th class="text-center">编号</th>
                                     <th class="text-center">订单号</th>
+                                    <th class="text-center">分红方式</th>
                                     <th class="text-center">支持用户</th>
                                     <th class="text-center">支持项目</th>
                                     <th class="text-center">支持金额</th>
+                                    <th class="text-center">预期回报</th>
                                     <th class="text-center">支持时间</th>
                                     <!--<th class="text-center">操作</th>-->
                                 </tr>
@@ -90,9 +92,11 @@
                                 <tr class="gradeX">
                                     <td style="vertical-align: middle">{$tag.id}</td>
                                     <td style="vertical-align: middle">{$tag.order_number}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">固定分红<else />浮动分红</if></td>
                                     <td style="vertical-align: middle">{$tag.username}</td>
                                     <td style="vertical-align: middle">{$tag.project_name}</td>
-                                    <td style="vertical-align: middle">{$tag.support_money}</if></td>
+                                    <td style="vertical-align: middle">{$tag.support_money}</td>
+                                    <td style="vertical-align: middle">{$tag.expect_return}</td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
                                     <!--<td style="vertical-align: middle">
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>

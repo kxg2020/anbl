@@ -46,7 +46,7 @@ class MarketController extends CommonController
                 ->find();
 
             if ($rest) {
-                $this->ajaxReturn(['msg' => "您已支持该项目可免费下载！", 'status' => 1,'info'=>['dl'=>"您已支持该项目可免费下载！"],'id'=>$projectInfo['id']]);
+                $this->ajaxReturn(['msg' => "您已支持该项目可免费下载！", 'status' => 1,'info'=>['dl'=>"您已支持该项目可免费下载！"],'id'=>$projectInfo['id'],'infot'=>$projectInfo]);
             } else {
                 //判断用户余额
                 if($projectInfo['dl']>$this->userInfo['money']){
@@ -59,7 +59,7 @@ class MarketController extends CommonController
 
     public function download(){
             // 接收传递参数 文件地址 文件id
-            $data = I('get.');
+            $data = I('post.');
             // 根据项目id 查询出视频地址
             $project_id = $data['project_id'];
             //查看电影是否存在
@@ -80,7 +80,7 @@ class MarketController extends CommonController
                     $this->error("订单保存失败！！！");
                 }
                 // 生成订单
-                $order_number = 'AN' . sprintf("%09d",$this->userInfo['id']);
+                $order_number = 'XZ'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
                 //保存到下载详情表
                 $downloadInfo1 = [
                     'member_id'=>$this->userInfo['id'],
@@ -97,7 +97,7 @@ class MarketController extends CommonController
 
             }else{
                 // 生成订单
-                $order_number = 'AN' . sprintf("%09d",$this->userInfo['id']);
+                $order_number = 'XZ'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
                 //保存到下载详情表 免费下载
                 $downloadInfo2 = [
                     'member_id'=>$this->userInfo['id'],
@@ -118,7 +118,7 @@ class MarketController extends CommonController
             M('MemberCollection')->where(['member_id'=>$this->userInfo['id'],'project_id'=>$projectInfo['id']])->save(['is_download'=>1]);
         }
 
-        $res_filepath = $projectInfo['url'];//文件地址
+      /*  $res_filepath = $projectInfo['url'];//文件地址
         $file_basename = basename($res_filepath);
         $file_filesize = filesize($res_filepath);
         $file = fopen($res_filepath, "r");
@@ -129,7 +129,7 @@ class MarketController extends CommonController
         Header("Content-Disposition: attachment; filename=" . $file_basename);
         echo fread($file, $file_filesize);
         fclose($file);
-        exit;
+        exit;*/
     }
 
 

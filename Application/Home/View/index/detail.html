@@ -68,7 +68,7 @@
 						<li>故事</li>
 						<li>后期</li>
 					</ul>
-					<div class="loginorreg"><span>登录</span> | <span>注册</span></div>
+					<div class="loginorreg"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></div>
 					<input type="hidden" value="{$count}" id="count">
 					<textarea name="name" rows="8" cols="80" placeholder="输入我的想法" id="mainContent"></textarea>
 					<div class="publish now_suport" id="ok">发表</div>
@@ -85,9 +85,9 @@
 		<div class="suport_bg" style="display: none;">
 			<div  id="suport">
 				<p>电影类型:</p>
-				<p><input type="radio" name="fenhong" value="固定分红"><span style="margin-right: 100px;">固定分红</span><input type="radio" name="fenhong" value="浮动分红"><span>浮动分红</span></p>
+				<p class="fenghong"><input type="radio" name="fenhong" value="1" checked><span style="margin-right: 100px;">固定分红</span><input type="radio" name="fenhong" value="2"><span>浮动分红</span></p>
 				<p>选择支持积分:</p>
-				<p>
+				<p class="jifeng">
 					<input type="radio" name="money" class="radio" value="100" checked><label>100</label>
 					<input type="radio" name="money" class="radio" value="500"><label>500</label>
 					<input type="radio" name="money" class="radio" value="1000"><label>1000</label>
@@ -188,12 +188,14 @@
      <script type="application/javascript">
 		 $('#fast_suport').on('click', function () {
 			 var  isLogin = "{$isLogin}";
+			 console.log(isLogin);
 			 if(isLogin == 0){
 				 layer.alert("您还没有登录，请登录");
 				 return false;
+			 }else{
+				 $('.suport_bg').fadeIn('slow');
+				 $('.argement').hide();
 			 }
-			 $('.suport_bg').fadeIn('slow');
-			 $('.argement').hide();
 		 });
 		 $('#sure_suport').on('click',function(){
 
@@ -202,11 +204,17 @@
 				 layer.msg('请同意服务协议！！！');
 				 return false
 			 }
-			 var money = $("input[type='radio']:checked").val();
+			 // 选择分红方式
+			 var fh = $(".fenghong>input[type='radio']:checked").val();
+
+			 // 选择积分多少
+			 var money = $(".jifeng>input[type='radio']:checked").val();
+
 			 var project_id="{$info['id']}";
 			 var _data = {
 				 money : money,
-				 project_id : project_id
+				 project_id : project_id,
+				 type : fh
 			 };
 			console.log(_data);
 			 $.post("{:U('home/index/support')}",_data,function (data) {
