@@ -439,7 +439,7 @@
                 browse_button: 'file_upload1',
                 container: 'shangchuan',
                 drop_element: 'shangchuan',
-                max_file_size: '1000mb',
+                max_file_size: '10000mb',
                 flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
                 dragdrop: true,
                 chunk_size: '4mb',
@@ -494,7 +494,7 @@
                     },
                     'Error': function (up, err, errTip) {
                         //上传出错时，处理相关的事情
-                        layer.alert('errTip');
+                        layer.alert('网络延迟，请重试');
                         console.debug(errTip);
                     },
                     'UploadComplete': function () {
