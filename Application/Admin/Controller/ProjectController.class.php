@@ -443,7 +443,13 @@ class ProjectController extends CommonController
 
         $paramArr = $_REQUEST;
 
-       $res =  M('Project')->where(['id'=>$paramArr['id']])->save(['fixed_rate'=>$paramArr['fixed_rate'],'float_rate'=>$paramArr['float_rate']]);
+       $res =  M('Project')
+           ->where(['id'=>$paramArr['id']])
+           ->save([
+               'fixed_rate'=>$paramArr['fixed_rate'],
+               'float_rate'=>$paramArr['float_rate'],
+               'real_rate'=>$paramArr['real_rate'],
+           ]);
 
         $this->ajaxReturn([
             'status'=>1

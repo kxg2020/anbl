@@ -104,6 +104,7 @@
                                         <a href="{:U('admin/project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                         <input type="button" class="btn btn-xs btn-info" data-id="{$tag.id}" data-rate-2="{$tag.float_rate}" data-rate-1="{$tag.fixed_rate}" value="分红比例" name="rate">
+                                        <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分红</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">立即分红</a></if>
                                     </td>
                                 </tr>
                                 </volist>
@@ -116,7 +117,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal1 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -134,6 +135,24 @@
             </div>
         </div>
     </div>
+    <!-- Modal1 -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要立即分红吗？分红后不可逆转！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a data-id="" id="fhTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
     <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
     <script>
@@ -143,6 +162,35 @@
                 $('#deleteTrue').attr('href', _link);
             })
         });
+
+        //立即分红
+        $(function(){
+            $('.fhBtn').click(function(){
+                var _id = $(this).attr('data-id');
+                $('#fhTrue').attr('data-id',_id);
+            });
+            $('#fhTrue').click(function(){
+                var _id = $(this).attr('data-id');
+                $.post("{:U('admin/money/index')}",{id:_id},function (data) {
+                    if(data.status == 0){
+                        layer.msg(data.msg);
+                    }else{
+                        layer.msg(data.msg);
+                        window.location.href = "{:U('admin/order/supportOrder')}";
+                    }
+                });
+            })
+        });
+
+
+
+
+
+
+
+
+
+
 
         function checkState(url,e) {
             $.get(url,function (data) {
@@ -188,7 +236,7 @@
                 title: '分红比例设置',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['40%', '30%'],
+                area: ['50%', '40%'],
                 content: "{:U('admin/project/rate')}?"+'id='+id,
                 end: function () {
                     location.reload();

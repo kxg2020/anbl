@@ -19,6 +19,7 @@ class IndexController extends CommonController{
                 'is_active'      => 1,
                 ])
             ->limit(0,3)
+            ->order('money desc')
             ->select();
 
         // 查询出星级项目
@@ -146,12 +147,12 @@ class IndexController extends CommonController{
             $type = intval($data['type']);
 
             // 计算收益
-            if($type == 1){//固定分红
+            /*if($type == 1){//固定分红
                 $expect_return = $support_money + $support_money*($projectInfo['fixed_rate']/100);
             }else{ //浮动分红 -100 - 300
                 $top = $support_money + $support_money*(300/100);
                 $expect_return ="0至$top";
-            }
+            }*/
             // 生成订单
             $order_number = 'ZC'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
             //封装数据
@@ -160,8 +161,10 @@ class IndexController extends CommonController{
                 'project_id' => $project_id,
                 'support_money' => $support_money,
                 'type' => $type,
-                'expect_return' => $expect_return,
+                'expect_return' => '',
                 'order_number' => $order_number,
+                'is_fh' => 0,//是否分红
+                'is_true' => 0,//是否返还用户余额
                 'create_time' => time(),
             ];
 
