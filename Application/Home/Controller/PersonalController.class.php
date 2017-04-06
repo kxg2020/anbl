@@ -63,6 +63,9 @@ class PersonalController extends CommonController{
             }
         }
 
+        //>> 查询提问
+        $question = M('MemberConsult')->where(['member_id'=>$this->userInfo['id']])->select();
+
         //>> 查询充值订单
         $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
         $count = ceil(count($orderLst)/15);
@@ -99,6 +102,7 @@ class PersonalController extends CommonController{
             'orderList'=>$orderList,
         ]);
         $this->assign([
+            'question'=>$question,
             'allInfo'=>$allInfo,
             'personal'=>$row,
             'collection'=>$collection,
@@ -409,5 +413,14 @@ class PersonalController extends CommonController{
             'url' => $rst['url']
         ]);
     }
+
+    /**
+     * 忘记密码
+     */
+    public function modify(){
+
+        
+    }
+
 
 }
