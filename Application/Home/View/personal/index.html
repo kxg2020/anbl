@@ -447,6 +447,7 @@
 								//这里弹出层显示的内容你 来写快一点 就是下面的字
 								$(function(){
 									$('#sure_apply').click(function(){
+									
 										var name = $('input[name = name]').val();
 										var sex = $('input[name = sex01]').val();
 										var volk = $('input[name = volk]').val();
@@ -516,8 +517,7 @@
 													}
 												}
 											}
-										}
-
+										}}
 										 url = location.protocol+'//'+window.location.host+'/Home/Personal/star';
 										$.ajax({
 											'type':'post',
