@@ -79,7 +79,9 @@
                                     <th class="text-center">支持金额</th>
                                     <th class="text-center">静态收益</th>
                                     <th class="text-center">是否已分红</th>
-                                    <th class="text-center">是否已返还投资人账户</th>
+                                    <th class="text-center">返还分红到余额</th>
+                                    <th class="text-center">是否分佣</th>
+                                    <th class="text-center">返还分佣到余额</th>
                                     <th class="text-center">支持时间</th>
                                     <!--<th class="text-center">操作</th>-->
                                 </tr>
@@ -101,6 +103,8 @@
                                     <td style="vertical-align: middle">{$tag.expect_return}</td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_fh'] eq 1">已分红<else /><span style="color: red">未分红</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_true'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_fy'] eq 1">已分佣<else /><span style="color: red">未分佣</span></if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
                                     <!--<td style="vertical-align: middle">
                                         <a href="156415" class="btn btn-xs btn-success">结算收益</a>

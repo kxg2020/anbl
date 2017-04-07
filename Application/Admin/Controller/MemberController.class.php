@@ -325,6 +325,10 @@ class MemberController extends  CommonController{
 
             $where['a.create_time'] = ['egt',strtotime($paramArr['start_time'])];
         }
+        if($paramArr['id']){
+
+            $where['a.id'] = $paramArr['id'];
+        }
 
         $count = M('MemberConsult as a')->field('a.*,b.username')
                 ->join('left join an_member as b on a.member_id = b.id')

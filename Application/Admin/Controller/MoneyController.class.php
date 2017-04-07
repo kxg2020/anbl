@@ -24,9 +24,13 @@ class MoneyController extends CommonController
                 $this->ajaxReturn(['msg'=>"浮动分红比例没有设置",'status'=>0]);
             }
 
-            if(!$projectInfo['real_rate']){
-                $this->ajaxReturn(['msg'=>"真实票房收益没有设置",'status'=>0]);
+            if($projectInfo['is_active'] == 1){
+                $this->ajaxReturn(['msg'=>"项目还未下架，不能进行分红",'status'=>0]);
             }
+
+            /*if(!$projectInfo['real_rate']){
+                $this->ajaxReturn(['msg'=>"真实票房收益没有设置",'status'=>0]);
+            }*/
 
             //=============================== 立即分红===========================//
 
@@ -35,7 +39,8 @@ class MoneyController extends CommonController
                 'project_id'=>$projectInfo['id'],//当前项目
                 'is_fh'=> 0,//未分红的订单
             ];
-            $supportInfo = M('MemberSupport')->where($where)->select();
+            $supportInfo = M('MemberSupport')
+                ->where($where)->select();
 
             if(!$supportInfo){
                 $this->ajaxReturn(['msg'=>"该项目还没有支持订单产生",'status'=>0]);
@@ -47,24 +52,70 @@ class MoneyController extends CommonController
                     $rest = M('MemberSupport')
                         ->where(['id'=>$info['id']])
                         ->save([
-                            'expect_return'=> $info['support_money'] + $info['support_money']*($projectInfo['fixed_rate']/100),
+                            'expect_return'=>$info['support_money']*($projectInfo['fixed_rate']/100),
                             'is_fh'=> 1,
+                            'is_true'=> 1,
                         ]);
                     if($rest === false){
                         M()->rollback();
                         $this->ajaxReturn(['msg'=>"分红失败",'status'=>0]);
                     }
+                    // 更新会员余额
+                    $money = $info['support_money']+$info['support_money']*($projectInfo['fixed_rate']/100);
+                    $rest = M('Member')->where(['id'=>$info['member_id']])->save(['money'=>['exp','money+'.$money]]);
+                    if($rest === false){
+                        M()->rollback();
+                        $this->ajaxReturn(['msg'=>"分红失败",'status'=>0]);
+                    }
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' =>$info['member_id'],
+                        'money' =>$money,
+                        'create_time' =>time(),
+                        'type' =>1,
+                        'remark' =>$projectInfo['name']."影片分红",
+                    ]);
+                    if($rest === false){
+                        M()->rollback();
+                        $this->ajaxReturn(['msg'=>"分红失败",'status'=>0]);
+                    }
+
+
                 }elseif($info['type'] == 2){//订单为浮动分红方式的用户
                     $rest = M('MemberSupport')
                         ->where(['id'=>$info['id']])
                         ->save([
-                            'expect_return'=> $info['support_money'] + $info['support_money']*($projectInfo['float_rate']/100),
+                            'expect_return'=>$info['support_money']*($projectInfo['float_rate']/100),
                             'is_fh' =>1,
+                            'is_true'=> 1,
                         ]);
                     if($rest === false){
                         M()->rollback();
                         $this->ajaxReturn(['msg'=>"分红失败",'status'=>0]);
                     }
+
+                    // 更新会员余额
+                    $money = $info['support_money']+$info['support_money']*($projectInfo['float_rate']/100);
+                    $rest = M('Member')->where(['id'=>$info['member_id']])->save(['money'=>['exp','money+'.$money]]);
+                    if($rest === false){
+                        M()->rollback();
+                        $this->ajaxReturn(['msg'=>"分红失败",'status'=>0]);
+                    }
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' =>$info['member_id'],
+                        'money' =>$money,
+                        'create_time' =>time(),
+                        'type' =>1,
+                        'remark' =>$projectInfo['name']."影片分红",
+                    ]);
+                    if($rest === false){
+                        M()->rollback();
+                        $this->ajaxReturn(['msg'=>"分红失败",'status'=>0]);
+                    }
+
                 }
             }
             // 修改项目分红状态

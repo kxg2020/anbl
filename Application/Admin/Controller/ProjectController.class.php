@@ -448,7 +448,9 @@ class ProjectController extends CommonController
            ->save([
                'fixed_rate'=>$paramArr['fixed_rate'],
                'float_rate'=>$paramArr['float_rate'],
-               'real_rate'=>$paramArr['real_rate'],
+               'first_rate'=>$paramArr['first_rate'],
+               'two_rate'=>$paramArr['two_rate'],
+               'three_rate'=>$paramArr['three_rate'],
            ]);
 
         $this->ajaxReturn([
