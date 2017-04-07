@@ -1,7 +1,7 @@
 body{
   font-family: 'Microsoft Yahei';
   font-size: 16px;
-  min-width: 1366px;
+  min-width: 1200px;
   min-height: 768px;
 }
 li{
@@ -129,7 +129,7 @@ header .nav{
 	overflow: hidden;
 }
 .body_left{
-	width: 30%;
+	width: 35%;
 	height: 100%;
 	background-image: url(img/bg.png);
 	background-size: 100%;
@@ -269,7 +269,7 @@ header .nav{
 	color: #464646;
 }
 .body_right{
-	width: 70%;
+	width: 65%;
 	background: white;
 	height: 100%;
 	float: left;
@@ -527,7 +527,7 @@ header .nav{
   margin-left: 83px;
   cursor: pointer;
 }
-.close_identity,.close_attend,.close_money,.close_password,.close_ask,.close_team{
+.close_identity,.close_attend,.close_money,.close_password,.close_ask,.close_team,.close_actor{
 	position:absolute;
 	top: 50px;
 	right: 50px;
@@ -535,7 +535,7 @@ header .nav{
 	height: 20px;
 	cursor: pointer;
 }
-.close_identity:before,.close_attend:before,.close_money:before,.close_password:before,.close_ask:before,.close_team:before{
+.close_identity:before,.close_attend:before,.close_money:before,.close_password:before,.close_ask:before,.close_team:before,.close_actor:before{
 	position: absolute;
 	top: 10px;
 	left: 0;
@@ -547,7 +547,7 @@ header .nav{
 	border-radius: 2px;
 	transform: rotateZ(45deg);
 }
-.close_identity:after,.close_attend:after,.close_money:after,.close_password:after,.close_ask:after,.close_team:after{
+.close_identity:after,.close_attend:after,.close_money:after,.close_password:after,.close_ask:after,.close_team:after,.close_actor:after{
 	position: absolute;
 	top: 10px;
 	left: 0;
@@ -819,6 +819,8 @@ margin-top: 25px;
 	margin-top: 25px;
 }
 
+
+
 .money_record p,.money_deal p{
 	margin-top: 27px;
 }
@@ -1042,18 +1044,6 @@ margin-top: 25px;
 	position: relative;
 	width: 100%;
 	text-align: center;
-	margin-bottom: 40px;
-}
-.team_content>p{
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	background: #161515;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 20px; 
-	color: #444;
-	top:0; left: 0;
 }
 .team_content>div>div{
 	width: 150px;
@@ -1062,6 +1052,8 @@ margin-top: 25px;
 	border-radius:5px;
 	background: #3f3f3f;
 	margin-right: 10px; 
+	margin-bottom: 30px;
+	position: relative;
 }
 .team_content>div>div>p:nth-child(1){
 	width: 100%;
@@ -1075,6 +1067,18 @@ margin-top: 25px;
 	border-bottom: 1px solid #4a4a4a;
 	padding-bottom: 5px;
 	margin:auto;
+}
+.team_content>div>div>.operat_p{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: #161515;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 20px; 
+	color: #ffffff;
+	bottom:-25px; left: 50%;
+	cursor: pointer;	
 }
 .team_content>div>div>p:nth-child(2)>span:first-child{
 	margin-right: 10px;
@@ -1097,5 +1101,92 @@ margin-top: 25px;
 	position: absolute;
 	top:20px;
 	right: -30px;
+	cursor: pointer;
+}
+
+
+
+
+.actor_content{
+	width: 600px;
+	height: 100%;
+	padding-top: 20px;
+	margin: auto;
+	color: white;
+	font-size: 14px;
+}
+.actor_content h3{
+	font-size: 30px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.actor_content>form>div{
+	position: relative;
+	margin-bottom: 10px;
+}
+.actor_content label{
+	margin-right: 20px;
+}
+.actor_content input{
+	background: #1b1b1b;
+	padding-left: 5px;
+	border: none;
+	outline: none;
+	color: white;
+	width: 200px;
+	height: 25px;
+}
+.actor_content textarea{
+	background: #1b1b1b;
+	border: none;
+	outline: none;
+	color: white;
+	width: 200px;
+	height: 70px;
+	resize: none;
+}
+.actor_content span{
+	color: #5f5f5f;
+	margin-left: 20px;
+}
+.actor_content select{
+	width: 60px;
+	height: 25px;
+	background: #1b1b1b;
+	margin-right: 20px;
+	outline: none;
+	color: white;
+	border: none;
+}
+.actor_content>form>.up_photo input[type=button]{
+	position: absolute;
+	left: 90px;
+	top:0;
+	width: 100px;
+	cursor: pointer;
+	background: #e50909;
+}
+.actor_content>form>.up_photo input[type=file]{
+	 cursor: pointer;
+	position: absolute;
+	left: 90px;
+	top:0;
+	width: 110px;
+	z-index: 10;
+	opacity: 0;
+}
+#man01,#woman01{
+	background: #e50909;
+	padding-left: 0px;
+	border: none;
+	outline: none;
+	width: 12px;
+	height: 12px;
+}
+#sure_apply{
+	width: 100px;
+	height: 30px;
+	background: #e50909;
+	margin-left: 100px;
 	cursor: pointer;
 }

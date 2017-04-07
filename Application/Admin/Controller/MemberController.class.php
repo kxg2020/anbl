@@ -383,15 +383,109 @@ class MemberController extends  CommonController{
     }
 
     /**
-     * 会员搜索
+     * 明星会员
      */
-    public function memberSearch(){
+    public function memberStar(){
 
 
+        $paramArr = $_REQUEST;
+        $where = [];
+        if($paramArr['name']){
+            $where['name'] = $paramArr['name'];
+        }
+        //>> 查询明星会员
+        $rows = M('MemberStar')->where($where)->count();
+
+        $page = new Page($rows,15);
+
+        $rows = M('MemberStar')->where($where)->limit($page->firstRow,$page->listRows)->select();
+
+        $pages = $page->show();
+
+        $this->assign('star',$rows);
+        $this->assign('pages',$pages);
+        $this->display('member/star');
 
 
+    }
+
+    public function memberStarDetail(){
 
 
+        $id = $_REQUEST['id'];
+        //>> 查询明星会员
 
+
+        $row = M('MemberStar')->where(['id'=>$id])->find();
+        $row['image_url'] = explode(',',$row['image_url']);
+
+
+        $this->assign('star',$row);
+
+        $this->display('member/details');
+
+
+    }
+
+    /**
+     * 发送邮件
+     */
+    public function sendEmail($toEmail, $subject, $body){
+        vendor('PHPMailer.PHPMailerAutoload');
+        $mail = new \PHPMailer;
+        $mail->isSMTP(); // 设置使用SMTP服务器发送邮件
+        $mail->Host = C('SEND_EMAIL_HOST');  // 设置SMTP服务器地址
+        $mail->SMTPAuth = true;  // 使用SMTP的授权规则
+        $mail->Username = C('SEND_EMAIL_USER'); // 要使用哪一个邮箱发邮件
+        $mail->Password = C('SEND_EMAIL_PWD'); //
+        $mail->SMTPSecure = C('SEND_EMAIL_SECURE');  // 设置使用SMTP的协议
+        $mail->Port = C('SEND_EMAIL_PORT'); // SMTP ssl协议的端口
+
+        $mail->setFrom(C('SEND_EMAIL_USER'), C('SEND_EMAIL_SENDER'));
+        $mail->addAddress($toEmail);
+
+        $mail->isHTML(true); // 表示发送的邮件内容以html的形式发送
+
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        return $mail->send();
+
+    }
+
+    /**
+     * 调用发送邮件
+     */
+    public function sendToMember(){
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+
+            switch($paramArr['result']){
+
+                case 1:
+                    $body ="<p>".'亲爱的会员，恭喜你什么什么'."</p>" ;
+                    $res = $this->sendEmail($paramArr['email'],'关于明星会员的回复',$body);
+                    if($res){
+                        M('MemberStar')->where(['id'=>$paramArr['id']])->save(['is_pass'=>1,'status'=>1]);
+                        $this->ajaxReturn(['status'=>1]);
+                    }else{
+                        $this->ajaxReturn(['status'=>0]);
+                    }
+                    break;
+                case 0:
+                    $body ="<p>".'亲爱的会员，很抱歉的什么什么'."</p>" ;
+                    $res = $this->sendEmail($paramArr['email'],'关于明星会员的回复',$body);
+                    if($res){
+                        M('MemberStar')->where(['id'=>$paramArr['id']])->save(['is_pass'=>0,'status'=>1]);
+                        $this->ajaxReturn(['status'=>1]);
+                    }else{
+                        $this->ajaxReturn(['status'=>0]);
+                    }
+                    break;
+            }
+
+        }else{
+
+            die();
+        }
     }
 }

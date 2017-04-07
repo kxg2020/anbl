@@ -9,6 +9,13 @@ return array(
     'DB_PORT'               =>  3306,        // 端口
     'DB_PREFIX'             =>  'an_',    // 数据库表前缀
 
+    'SEND_EMAIL_HOST' => 'smtp.sina.com',
+    'SEND_EMAIL_USER' => 'kxg2020@sina.com',
+    'SEND_EMAIL_PWD' => 'a8268168',
+    'SEND_EMAIL_SECURE' => 'ssl',
+    'SEND_EMAIL_PORT' => 465,
+    'SEND_EMAIL_SENDER' => '阿纳巴里官方',
+
     // 通常在实际项目中会选择使用URL重写模式
     'URL_MODEL' => 2,
 
