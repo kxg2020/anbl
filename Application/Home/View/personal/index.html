@@ -433,7 +433,7 @@
 							<div><label>性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
 							<div><label>民族:</label><input style='width: 80px;' type="text" name="volk"></div>
 							<div><label>生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
-							<div><label>身高:</label><input type="text" name="realheight"><span>实际净身高</span></div>
+							<div><label>身高:</label><input type="number" name="realheight"><span>实际净身高</span></div>
 							<div><label>身份证号码:</label><input type="text" name="id_card_"></div>
 							<div><label>联系电话:</label><input type="text" name="phone1"></div>
 							<div><label>电子邮箱:</label><input type="text" name="email1"><span>申请的结果将发送至此邮箱</span></div>
@@ -447,7 +447,7 @@
 								//这里弹出层显示的内容你 来写快一点 就是下面的字
 								$(function(){
 									$('#sure_apply').click(function(){
-									
+
 										var name = $('input[name = name]').val();
 										var sex = $('input[name = sex01]').val();
 										var volk = $('input[name = volk]').val();
