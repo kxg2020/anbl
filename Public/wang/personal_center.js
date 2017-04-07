@@ -40,6 +40,7 @@ $(function(){
 		$('.put_money').show();
 		$('.get_money').hide();
 		$('.money_record').hide();
+		$('.money_deal').hide();
 	})
 	$('#post_cash').click(function(){
 		$('.money_content>ul').eq(0).show();
@@ -52,6 +53,7 @@ $(function(){
 		$('.put_money').hide();
 		$('.get_money').show();
 		$('.money_record').hide();
+		$('.money_deal').hide();
 	})
 	// 不同头部的li之间的div切换
 	$('.identity_content>ul>li').click(function(){
@@ -84,13 +86,14 @@ $(function(){
 	})
 	$('.money_content>ul>li').click(function(){
 		var txt=$(this)[0].innerHTML;
-
+		console.log(txt)
 		if(txt=='充值'){
 			$('.money_content>ul>li').removeClass('choice');
 			$('.money_content>ul>li').eq(0).addClass('choice');
 			$('.put_money').show();
 			$('.get_money').hide();
 			$('.money_record').hide();
+			$('.money_deal').hide();
 		}
 		if(txt=='提现'){
 			$('.money_content>ul>li').removeClass('choice');
@@ -98,17 +101,39 @@ $(function(){
 			$('.put_money').hide();
 			$('.get_money').show();
 			$('.money_record').hide();
-			$('.first_bind').hide();
+			$('.money_deal').hide();
 		}
+
+		if(txt=='充值记录'){
+			$('.money_content>ul:nth-child(2)>li').removeClass('choice');
+			$('.money_content>ul:nth-child(2)>li').eq(0).addClass('choice');
+			$('.put_money').hide();
+			$('.get_money').hide();
+			$('.money_record').show();
+			$('.money_deal').hide();
+
+		}
+		if(txt=='消费明细'){
+			$('.money_content>ul:nth-child(2)>li').removeClass('choice');
+			$('.money_content>ul:nth-child(2)>li').eq(1).addClass('choice');
+			$('.put_money').hide();
+			$('.get_money').hide();
+			$('.money_record').hide();
+			$('.money_deal').show();
+		}
+
+
 	})
 	$('.put_record').click(function(){
+		$('.money_content>ul:nth-child(2)>li').eq(0).addClass('choice');      //x新增
 		$('.money_content>ul').eq(0).hide();
 		$('.money_content>ul').eq(1).show();
 		$('.put_money').hide();
 		$('.get_money').hide();
 		$('.money_record').show();
-		$('.first_bind').hide();
 	});
+
+
 	$('.now_put').click(function(){
 		$('.money_content>ul').eq(1).hide();
 		$('.money_content>ul').eq(0).show();
@@ -117,6 +142,7 @@ $(function(){
 		$('.money_record').hide();
 		$('.money_content>ul>li').removeClass('choice');
 		$('.money_content>ul>li').eq(0).addClass('choice');
+		$('.money_deal').hide();
 	});
 	//性别选择
 	$('.sex>span>p').click(function(){
@@ -349,10 +375,12 @@ $(function(){
 						'money':money
 					},
 					success:function(result){
-
+						$('.ex').css('display','none');
 						if(result.status == 1){
+							layer.msg('提现成功,请等待审核',function(){
+								location.reload();
+							});
 
-							layer.msg('提现成功,请等待审核');
 						}else{
 							layer.tips(result.msg,'input[name = exMoney]');
 						}

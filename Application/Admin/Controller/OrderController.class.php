@@ -321,7 +321,7 @@ class OrderController extends CommonController
 
         // 查询总记录数
         $count =   M('MemberCash as a')
-            ->field('a.*,b.username')
+            ->field('a.*,b.username,b.bank_card_name,b.bank_card,b.address')
             ->join('left join an_member as b on a.member_id = b.id')
             ->where($where)
             ->count();
@@ -331,7 +331,7 @@ class OrderController extends CommonController
 
         //查询出所有下载订单
         $rows = M('MemberCash as a')
-            ->field('a.*,b.username')
+            ->field('a.*,b.username,b.bank_card_name,b.bank_card,b.address')
             ->join('left join an_member as b on a.member_id = b.id')
             ->where($where)
             ->limit($page->firstRow,$page->listRows)
@@ -379,7 +379,7 @@ class OrderController extends CommonController
 
         //查询出所有下载订单
         $rows = M('MemberCash as a')
-            ->field('a.*,b.username')
+            ->field('a.*,b.username,b.bank_card_name,b.bank_card,b.address')
             ->join('left join an_member as b on a.member_id = b.id')
             ->where($where)
             ->select();
@@ -589,8 +589,76 @@ class OrderController extends CommonController
         );
         $this->exportExcel(date('Y-m-d') . '_充值订单', $xlsCell, $rows);
     }
+    /**
+     * 提现通过
+     */
+    public function cashPass(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+            $res = M('MemberCash')->where(['id'=>$paramArr['id']])->save(['is_pass'=>1]);
+
+          if($res != false){
+
+              $this->ajaxReturn([
+                  'status'=>1
+              ]);
+          }else{
+                $this->ajaxReturn([
+                    'status'=>0
+                ]);
+            }
+        }else{
+
+            $this->ajaxReturn([
+                'status'=>0
+            ]);
+        }
+    }
+
+    /**
+     * 拒绝提现
+     */
+    public function cashRefuse(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+            M('MemberCash')->startTrans();
+            $res = M('MemberCash')->where(['id'=>$paramArr['id']])->save(['is_pass'=>2]);
+
+            //>> 查询用户id
+            $casher = M('MemberCash')->where(['id'=>$paramArr['id']])->find();
+            $userId = $casher['member_id'];
+
+            $user = M('Member')->where(['id'=>$userId])->find();
+            //>>将用户的余额重新恢复
+            $updateData = [
+                'money'=>$paramArr['charge'] + $paramArr['money'] + $user['money']
+            ];
+            $re = M('Member')->where(['id'=>$userId])->save($updateData);
+            if($res && $re){
+                M('MemberCash')->commit();
+                $this->ajaxReturn([
+                    'status'=>1
+                ]);
+            }else{
+                $this->ajaxReturn([
+                    'status'=>0
+                ]);
+            }
+        }else{
+
+            $this->ajaxReturn([
+                'status'=>0
+            ]);
+        }
+    }
 
     /**
      * 提现订单(tp自带分页)
      */
+
 }

@@ -100,7 +100,7 @@
 							<li class="choice">我的支持</li>
 							<li>我的收藏</li>
 						</ul>
-						<div class="my_suport">
+						<div class="my_suport" >
 								<volist name="supportSituation" id="s">
 									<div>
 										<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
@@ -109,12 +109,14 @@
 											<p>{$s['englishname']}</p>
 											<p>{$s['director']}/导演</p>
 											<p><span>{$s['support_number']}</span>人支持</p>
-											<p><if condition="$s['mode'] eq 1">固定分红<else/>票房分红</if></p>
 											<p>已支持<span>{$s['support_money']}</span></p>
 										</div>
 									</div>
 								</volist>
+							<input type="hidden" name="page_1" value="{$count_1}">
+							<p id="demo8" style="position: absolute;left:235px;bottom: 20px;"></p>
 						</div>
+
 						<div class="my_collect" style="display: none;">
 							<volist name="collection" id="c">
 								<div><img src="{$c['image_url']}" style="height: 180px;width: 420px" alt="">
@@ -126,8 +128,9 @@
 										<p style="color: #e50909;"><i></i><if condition="$c['is_download'] eq 1">已下载<else/>未下载</if></p>
 									</div>
 								</div>
-
 							</volist>
+							<input type="hidden" name="page_2" value="{$collectionCount}">
+							<p id="demo9" style="position: absolute;left:235px;bottom: 20px;"></p>
 						</div>
 					</div>
 				</div>
@@ -145,7 +148,7 @@
 							<li class="put_record">充值记录<span>>></span></li>
 						</ul>
 						<ul style="display: none;">
-							<li style="border-bottom: 1px solid #e50909;  color: #e50909;">充值记录</li>
+							<li>充值记录</li>
 							<li>消费明细</li>
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
@@ -186,12 +189,37 @@
 									<span>{$o.type}</span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>
-									<span><if condition="$o.is_pass eq 1"><span style="color: forestgreen">完成</span><else/>未完成</if></span></p>
+									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png" style="border-radius:50%;height: 18px;width: 18px"></span></p>
 							</volist>
 						 </div>
 							<div id="demo6" style="margin-left: 42px;"></div>
 					</div>
-				</div>
+						<div class="money_deal" style="display: none;">
+
+							<p><span>交易时间</span>
+								<span>交易类型</span>
+								<span style="color: white;">交易号</span>
+								<span style="color: white;">交易金额</span>
+
+								<volist name="consume" id="c">
+									<p><span>{:date('Y-m-d',$c['create_time'])}</span>
+										<span>电影下载</span>
+										<span>{$c.order_number}</span>
+										<span>{$c.money}</span>
+										<span>{$c.is_pass}</span></p>
+								</volist>
+
+
+								<volist name="consume_1" id="e">
+									<p><span>{:date('Y-m-d',$e['create_time'])}</span>
+										<span>电影支持</span>
+										<span>{$e.order_number}</span>
+										<span>{$e.support_money}</span>
+								</volist>
+
+						</div>
+
+					</div>
 				</div>
 				<p>A</p>
 				<p>L</p>
@@ -204,10 +232,10 @@
 								<ul><li>密码管理</li>
 								<li>修改登录密码</li></ul>
 								<div class="update_password">
-									<p><i></i><input style='padding-left:37px;width:174px;' type="password"><label>输入当前的登录密码</label></p>
-									<p><input type="password" placeholder="6-16位数字,字母组合"><label>新密码</label></p>
-									<p><input type="password" placeholder="再输入一次密码"><label>确认新密码</label></p>
-									<div class="save_update">保存更新</div>
+									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password"><label>输入当前的登录密码</label></p>
+									<p><input type="password" placeholder="6-16位数字,字母组合" name="newpassword"><label>新密码</label></p>
+									<p><input type="password" placeholder="再输入一次密码" name="repassword"><label>确认新密码</label></p>
+									<div class="save_update" id="editPassword">保存更新</div>
 								</div>
 						</div>
 						<input type="hidden" value="" id="images">
@@ -375,7 +403,7 @@
 									'url':'',
 									'data':{
 										'pgNum':obj.curr,
-										'pgSize':15
+										'pgSize':12
 									},
 									success:function(result){
 										$('#ls').html('');
@@ -384,7 +412,7 @@
 													'<span>'+ v.type+'</span>'+
 													'<span>'+ v.order_number+'</span>'+
 												'<span>'+ v.money+'</span>'+
-								'<span>'+ v.is_pass+'</span></p>');
+								'<span>'+ '<img style="height:18px;width:18px;border-radius:50%" src="__PUBLIC__/images/status/'+ v.is_pass+'.png">'+'</span></p>');
 										});
 									}
 								});
@@ -422,6 +450,128 @@
 						}
 					}
 				});
+			});
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage,layer = layui.layer;
+				laypage({
+					cont: 'demo8'
+					,pages: $('input[name = page_1]').val()
+					,groups: 0
+					,first: false
+					,last: false
+					,jump: function(obj, first){
+						if(!first){
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('Home/Personal/mySupport')}",
+								'data':{
+									'pgNum':obj.curr,
+									'pgSize':6
+								},
+								success:function(result){
+
+									$('div[class = my_suport] > div').remove();
+									$.each(result.rows,function(k,v){
+										$('div[class = my_suport]').append('<div>'+
+												'<img src="'+ v.image_url+'" alt="" style="height: 180px;width: 420px">'+
+												'<div class="movie_content">'+
+												'<p>片名:'+ v.name+'</p>'+
+										'<p>'+ v.englishname+'</p>'+
+										'<p>'+ v.director+'</p>'+
+										'<p><span>'+ v.support_number+'</span>人支持</p>'+
+										'<p>已支持<span>'+ v.support_money+'</span></p>'+
+										'</div>'+
+										'</div>');
+									});
+								}
+							});
+						}
+					}
+				});
+			});
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage,layer = layui.layer;
+				laypage({
+					cont: 'demo9'
+					,pages: $('input[name = page_2]').val()
+					,groups: 0
+					,first: false
+					,last: false
+					,jump: function(obj, first){
+						if(!first){
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('Home/Personal/myCollection')}",
+								'data':{
+									'pgNum':obj.curr,
+									'pgSize':6
+								},
+								success:function(result){
+
+									$('div[class = my_collect] > div').remove();
+									$.each(result.rows,function(k,v){
+										$('div[class = my_collect]').append('<div><img src="'+ v.image_url+'" style="height: 180px;width: 420px" alt="">'+
+										'<div class="movie_content">'+
+												'<p>片名:'+ v.name+'</p>'+
+										'<p>'+ v.englishname+'</p>'+
+										'<p>'+ v.country+'/'+ v.duration+'分钟</p>'+
+										'<p>'+ v.date+'/'+ v.showaddress+'</p>'+
+										'<p style="color: #e50909;"><i></i>'+ v.is_download+'</p>'+
+										'</div>'+
+										'</div>');
+									});
+								}
+							});
+						}
+					}
+				});
+			});
+
+			$('#editPassword').click(function(){
+
+				password = $('input[name = password]').val();
+				newpassword = $('input[name = newpassword]').val();
+				repassword = $('input[name = repassword]').val();
+				var reg = /^[a-zA-Z]\w{5,16}$/;
+				if(password == ''){
+					layer.tips('当前密码不能为空','input[name = password]');return;
+				}
+				if(newpassword == ''){
+					layer.tips('新密码不能为空','input[name= newpassword]');return;
+				}
+				if(repassword == ''){
+					layer.tips('确认密码不能为空','input[name= repassword]');return;
+				}
+				if(repassword != newpassword){
+
+					layer.msg('两次输入的密码不一致');return;
+				}
+				if(!reg.test(password) || !reg.test(repassword) || !reg.test(newpassword)){
+					layer.msg('密码格式不正确');return;
+				}
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':"{:U('Home/Personal/editPassword')}",
+					'data':{
+						'password':password,
+						'newpassword':newpassword,
+						'repassword':repassword
+					},
+					success:function(result){
+						if(result.status == 1){
+							$(this).css('display','none');
+							layer.msg(result.msg,function(){
+								location.reload();
+							});
+						}else{
+							layer.msg(result.msg);
+						}
+					}
+				});
+
 			});
 		});
 	</script>

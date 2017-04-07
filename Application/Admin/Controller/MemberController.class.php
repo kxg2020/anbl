@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 
 use Think\Controller;
+use Think\Page;
 
 class MemberController extends  CommonController{
 
@@ -20,37 +21,38 @@ class MemberController extends  CommonController{
     public function select(){
 
         $paramArr = $_REQUEST;
+        $where = [];
+        if($paramArr['username']){
 
-        $list = M('Member')->where(['is_active'=>1])->order('create_time desc ')->select();
-
-        $count = ceil(count($list)/20);
-
-        if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
-            $pgNum = $paramArr['pgNum'];
-        }else{
-            $pgNum = 1;
+            $where['username'] = $paramArr['username'];
         }
-        if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
-            $pgSize = $paramArr['pgSize'];
-        }else{
-            $pgSize = 20;
+        if($paramArr['level']){
+
+            $where['level'] = $paramArr['level'];
         }
+        if($paramArr['money']){
 
-        $memberList = $this->pagination($list,$pgNum,$pgSize);
+            $where['money'] = $paramArr['money'];
+        }
+        if($paramArr['start_time']){
 
-        if(IS_AJAX){
-            $this->ajaxReturn([
-                'data'=>array_values($memberList),
-                'status'=>1
-            ]);
-            exit;
+            $where['create_time'] = ['egt',$paramArr['start_time']];
+        }
+        if($paramArr['end_time']){
+
+            $where['create_time'] = ['elt',$paramArr['end_time']];
         }
 
-        $this->assign([
-            'list'=>$memberList,
-            'count'=>$count
-        ]);
+        $count = M('Member')->where($where)->order('create_time desc ')->count();
 
+        $page = new Page($count,15);
+
+        $memberList = M('Member')->where($where)->order('create_time desc ')->limit($page->firstRow,$page->listRows)->select();
+
+        $pages = $page->show();
+        $this->assign('list',$memberList);
+        $this->assign('count',$count);
+        $this->assign('pages',$pages);
         $this->display('member/index');
     }
 
@@ -306,4 +308,86 @@ class MemberController extends  CommonController{
         }
     }
 
+    /**
+     * 会员问答
+     */
+    public function question(){
+
+        $where = [];
+
+        $paramArr = $_REQUEST;
+        if($paramArr['username']){
+            $user = M('Member')->where(['username'=>$paramArr['username']])->find();
+            $where['a.member_id'] = $user['id'];
+        }
+
+        if($paramArr['start_time']){
+
+            $where['a.create_time'] = ['egt',strtotime($paramArr['start_time'])];
+        }
+
+        $count = M('MemberConsult as a')->field('a.*,b.username')
+                ->join('left join an_member as b on a.member_id = b.id')
+                ->where($where)
+                ->count();
+
+        $page = new Page($count,15);
+        $rows = M('MemberConsult as a')->field('a.*,b.username')
+            ->join('left join an_member as b on a.member_id = b.id')
+            ->where($where)
+            ->limit($page->firstRow,$page->listRows)
+            ->select();
+        $pages = $page->show();
+        $this->assign('question',$rows);
+        $this->assign('pages',$pages);
+        $this->assign('count',$count);
+        $this->display('member/question');
+    }
+
+    /**
+     * 问题详情
+     */
+
+    public function questionDetail(){
+
+        $paramArr = $_REQUEST;
+
+        $row = M('MemberConsult as a')->field('a.*,b.username')->join('left join an_member as b on a.member_id = b.id')->where(['a.id'=>$paramArr['id']])->find();
+
+        $this->assign('question',$row);
+        $this->display('member/single');
+    }
+
+    /**
+     * 问题回复
+     */
+    public function questionReply(){
+
+        $paramArr = $_REQUEST;
+
+        //>>更新
+        $updateData = [
+            'status'=>1,
+            'reply'=>$paramArr['reply'],
+        ];
+
+         M('MemberConsult')->where(['id'=>$paramArr['id']])->save($updateData);
+
+        $this->ajaxReturn([
+            'status'=>1
+        ]);
+    }
+
+    /**
+     * 会员搜索
+     */
+    public function memberSearch(){
+
+
+
+
+
+
+
+    }
 }

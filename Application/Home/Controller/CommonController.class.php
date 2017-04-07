@@ -41,6 +41,7 @@ class CommonController extends Controller{
         '1050'=>['只有每周星期五才能提现!','只有每周星期五才能提现!'],
         '1052'=>['提现金额不能大于余额!','提现金额不能大于余额!'],
         '1054'=>['提现失败!','提现失败!'],
+        '1056'=>['只有周五或月末才能提现','只有周五或月末才能提现'],
 
     ];
 
@@ -54,6 +55,36 @@ class CommonController extends Controller{
             //>> 查询用户
             $row = M('Member')->where(['session_token'=>$session])->find();
             if(!empty($row)){
+                //>> 查询投资
+                $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
+                //>> 判断投资是否满100
+                if($support['support_money'] >= 100){
+
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
+                }
+
+                //>> 判断上级已经有多少下线
+                $count = $this->group($row['id']);
+                //>> 团队一共多少人
+                $all = $this->allMembers($row['id']);
+                if($count >= 3){
+                    //>> 升级为经纪人
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
+                }
+
+                //>> 如果投资5000以上,直推10人,团队100人升级为制片人
+                if($support['support_money'] >= 5000 && $count >= 10 && $all >= 100){
+                    //>> 升级为经纪人
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
+                }
+
+                //>> 如果个人投资10000 直推50人 团队500人 升级出品人
+                if($support['support_money'] >= 5000 && $count >= 50 && $all >= 500){
+                    //>> 升级为经纪人
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
+                }
+
+
                 $this->isLogin = 1;
                 $this->userInfo = $row;
                 $this->assign('userInfo',$row);
@@ -74,6 +105,39 @@ class CommonController extends Controller{
 
 
     }
+
+
+    /**
+     * 查询直推
+     */
+    private function group($id){
+
+        $res = M('Member')->where(['parent_id'=>$id])->select();
+
+        if(!empty($res)){
+
+            return count($res);
+        }
+    }
+
+    /**
+     * 团队
+     */
+    public function allMembers($id){
+
+        static $sum = 0;
+        $rows = M('Member')->where(['parent_id'=>$id])->select();
+        $count = count($rows);
+        $sum += $count;
+        if(!empty($rows)){
+            foreach($rows as $k => $v){
+                $this->allMembers($v['id']);
+            }
+        }
+        return $sum/2;
+    }
+
+
 
     /**
      *获取错误

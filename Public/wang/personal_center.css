@@ -818,24 +818,27 @@ margin-top: 25px;
 	margin-left: 94px;
 	margin-top: 25px;
 }
-.money_record p{
+
+.money_record p,.money_deal p{
 	margin-top: 27px;
 }
-.money_record p span:nth-child(3){
+.money_record p span:nth-child(3),.money_deal p span:nth-child(3){
 	color: #e50909;
 }
-.money_record p span:nth-child(4){
+.money_record p span:nth-child(4),.money_deal p span:nth-child(4){
 	color: #e50909;
 }
-.money_record span{
+.money_record span,.money_deal span{
 	display: inline-block;
 	width: 18%;
 	font-size: 14px;
 	text-align: center;
 }
-.money_record p:first-child span{
+.money_record>p:first-child span,.money_deal>p:first-child span{
 	font-size: 16px;
 }
+
+
 .password_content{
   width: 588px;
   height: auto;

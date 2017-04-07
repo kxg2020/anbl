@@ -45,7 +45,7 @@ class RechargeController extends CommonController{
                 //>> 添加到充值订单表
                 $ros = M('MemberRecharge')->add($orderData);
 
-                if($res && $ros){
+                if($ros){
 
                     M('Member')->commit();
 

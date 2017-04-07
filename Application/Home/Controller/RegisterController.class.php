@@ -65,35 +65,7 @@ class RegisterController extends CommonController{
                     //>> 查询当前用户的上级
                     $row = $userModel->where($where)->find();
                     if(!empty($row)){
-                        //>> 查询上级投资
-                        $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
-                       //>> 判断投资是否满100
-                        if($support['support_money'] >= 100){
 
-                            M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
-                        }
-
-                        //>> 判断上级已经有多少下线
-                        $count = $this->group($row['id']);
-                        //>> 团队一共多少人
-                        $all = $this->allMembers($row['id']);
-                        if($count >= 2){
-                            //>> 升级为经纪人
-                            M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
-                        }
-
-                        //>> 如果投资5000以上,直推10人,团队100人升级为制片人
-                        if($support['support_money'] >= 5000 && $count >= 10 && $all >= 100){
-                            //>> 升级为经纪人
-                            M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
-                        }
-
-                        //>> 如果个人投资10000 直推50人 团队500人 升级出品人
-                        if($support['support_money'] >= 5000 && $count >= 50 && $all >= 500){
-                            //>> 升级为经纪人
-                            M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
-                        }
-                        $parent_id = $row['id'];
                     }else{
 
                         die($this->_printError('1040'));
@@ -282,34 +254,7 @@ class RegisterController extends CommonController{
         }
     }
 
-    /**
-     * 查询直推
-     */
-    private function group($id){
 
-        $res = M('Member')->where(['parent_id'=>$id])->select();
-
-        if(!empty($res)){
-
-            return count($res);
-        }
-    }
-
-    /**
-     * 团队
-     */
-    public function allMembers($id){
-        static $sum = 0;
-        $rows = M('Member')->where(['parent_id'=>$id])->select();
-        $count = count($rows);
-        $sum += $count;
-        if(!empty($rows)){
-            foreach($rows as $k => $v){
-                $this->allMembers($v['id']);
-            }
-        }
-        return $sum;
-    }
 
 
 }

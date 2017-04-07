@@ -6,12 +6,47 @@ use Think\Upload;
 
 class PersonalController extends CommonController{
 
+
+    /**
+     * 递归查询最上级
+     */
+    private function groupLeader ($id){
+
+
+        $res = M('Member')->where(['id'=>$id])->find();
+
+        if($res['parent_id'] != 0){
+             return $this->groupLeader($res['parent_id']);
+        }else{
+            return $res;
+        }
+    }
+
+    /**
+     * 递归查询所有下级
+     */
+    private function groupFollower($id){
+
+        $res = M('Member')->where(['parent_id'=>$id])->select();
+
+        if(!empty($res)){
+
+            foreach($res as $key => $value){
+                return $this->groupFollower($res['id']);
+            }
+        }else{
+            return $res;
+        }
+    }
+
     /**
      * 个人中心
      */
     public function index(){
 
+
         $paramArr = $_REQUEST;
+
        //>> 判断用户是否登录
         if($this->isLogin != 1){
             $this->redirect('Home/Login/index');
@@ -19,11 +54,31 @@ class PersonalController extends CommonController{
         }
         $personModel = M('Member as a');
         $row = $personModel->where(['id'=>$this->userInfo['id'],'username'=>$this->userInfo['username']])->find();
+
+        //>> 查询消费情况
+        $consume = $personModel->field('a.username,b.create_time,b.order_number,b.money')
+            ->join('right join an_member_download as b on a.id = b.member_id')
+            ->where(['a.id'=>$this->userInfo['id']])
+            ->select();
+        $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number')
+            ->join('right join an_member_support as b on a.id = b.member_id')
+            ->where(['a.id'=>$this->userInfo['id']])
+            ->select();
+
+        //>> 查最上级
+        $topLeader = $this->groupLeader($this->userInfo['parent_id']);
+
+        //>> 查所有下级
+        $follower = $this->groupFollower($this->userInfo['id']);
+        var_dump($follower);exit;
+
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.*,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id']])
             ->select();
+        $count_1 = ceil(count($rows)/6);
+        $rows = $this->pagination($rows,1,6);
         //>> 查询积分制度表
         $integral = M('IntegralInstitution')->select();
 
@@ -55,6 +110,9 @@ class PersonalController extends CommonController{
             $value['date'] = date('Y-m-d',$value['showtime']);
             unset($value);
         }
+
+        $collectionCount = ceil(count($collection)/6);
+        $collectionList = $this->pagination($collection,1,6);
         $supportMoney = 0;
         if(!empty($rows)){
             //>> 对用户支持的电影金额求和
@@ -68,7 +126,7 @@ class PersonalController extends CommonController{
 
         //>> 查询充值订单
         $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
-        $count = ceil(count($orderLst)/15);
+        $count = ceil(count($orderLst)/12);
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
             $pgNum = $paramArr['pgNum'];
@@ -78,7 +136,7 @@ class PersonalController extends CommonController{
         if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
             $pgSize = $paramArr['pgSize'];
         }else{
-            $pgSize = 15;
+            $pgSize = 12;
         }
         $orderList = $this->pagination($orderLst,$pgNum,$pgSize);
         //>> 账户安全等级
@@ -101,12 +159,19 @@ class PersonalController extends CommonController{
             'count'=>$count,
             'orderList'=>$orderList,
         ]);
+
+
+
         $this->assign([
+            'consume'=>$consume,
+            'consume_1'=>$consume_1,
             'question'=>$question,
             'allInfo'=>$allInfo,
             'personal'=>$row,
-            'collection'=>$collection,
+            'collectionCount'=>$collectionCount,
+            'collection'=>$collectionList,
             'safeLevel'=>$safeLevel,
+            'count_1'=>$count_1,
             'supportSituation'=>$rows,
             'supportMoney'=>$supportMoney,
             'secretPhone'=>$secretPhone,
@@ -249,15 +314,15 @@ class PersonalController extends CommonController{
     }
 
     /**
-     * 提取现金
+     * 提现
      */
     public function cash(){
 
         $paramArr = $_REQUEST;
-
+        $crrDay = date('Y-m-d');
+        $lastDay = $this->getTheMonth();
         //>> 判断当前时间是否是周五
         if(date('w') == 5){
-
             if(!empty($paramArr)){
 
                 if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
@@ -265,7 +330,7 @@ class PersonalController extends CommonController{
                     $row = M('Member')->where(['id'=>$this->userInfo['id']])->find();
                     if(empty($row)){
 
-                        die($this->_printError(''));
+                        die($this->_printError('1056'));
                     }
                     //>> 判断金额是否大于余额
                     if($paramArr['money'] > $row['money']){
@@ -280,7 +345,6 @@ class PersonalController extends CommonController{
 
                     M('Member')->startTrans();
                     $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
-
                     //>> 生成订单
                     $orderNumber = 'CS'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
 
@@ -289,35 +353,30 @@ class PersonalController extends CommonController{
                         'member_id'=>$this->userInfo['id'],
                         'create_time'=>time(),
                         'is_pass'=>0,
-                        'order_number'=>$orderNumber
+                        'order_number'=>$orderNumber,
+                        'charge'=>$paramArr['money'] * 0.1
                     ];
 
                     //>> 保存订单
                     $ros = M('MemberCash')->add($insertData);
-                    if($res && $ros){
-
+                    if($ros && $res){
                         M('Member')->commit();
                         die($this->_printSuccess());
                     }else{
 
-                        die($this->_printError('1054'));
+                        die($this->_printError('1056'));
                     }
 
                 }else{
 
-                    die($this->_printError(''));
+                    die($this->_printError('1056'));
                 }
             }else{
 
-                die($this->_printError(''));
+                die($this->_printError('1056'));
             }
-        }else{
-
-            $crrDay = date('Y-m-d');
-            $lastDay = $this->getTheMonth();
-            if($crrDay == $lastDay){
+        }elseif($crrDay == $lastDay){
                 if(!empty($paramArr)){
-
                     if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
                         //>> 查询余额
                         $row = M('Member')->where(['id'=>$this->userInfo['id']])->find();
@@ -333,7 +392,7 @@ class PersonalController extends CommonController{
 
                         //>> 提取现金，生成订单
                         $updateData = [
-                            'money'=>$row['money'] - $paramArr['money']-$paramArr['money'],
+                            'money'=>$row['money'] - $paramArr['money'] - $paramArr['money'] * 0,
                         ];
 
                         M('Member')->startTrans();
@@ -347,7 +406,8 @@ class PersonalController extends CommonController{
                             'member_id'=>$this->userInfo['id'],
                             'create_time'=>time(),
                             'is_pass'=>0,
-                            'order_number'=>$orderNumber
+                            'order_number'=>$orderNumber,
+                            'charge'=>$paramArr['money'] * 0
                         ];
 
                         //>> 保存订单
@@ -363,13 +423,14 @@ class PersonalController extends CommonController{
 
                     }else{
 
-                        die($this->_printError(''));
+                        die($this->_printError('1054'));
                     }
                 }else{
 
-                    die($this->_printError(''));
-                }
+                    die($this->_printError('1054'));
             }
+        }else{
+            die($this->_printError('1056'));
         }
     }
 
@@ -419,8 +480,93 @@ class PersonalController extends CommonController{
      */
     public function modify(){
 
-        
+
+    }
+
+    /**
+     * 我的支持分页
+     */
+
+    public function mySupport(){
+
+        $paramArr = $_REQUEST;
+
+        $pgNum = $paramArr['pgNum'];
+        $pgSize = 6;
+
+        $rows =  M('MemberSupport as a')->field('a.*,b.*')
+            ->join('left join an_project as b on a.project_id = b.id')
+            ->where(['a.member_id'=>$this->userInfo['id']])
+            ->select();
+
+        $rows = $this->pagination($rows,$pgNum,$pgSize);
+
+        $this->ajaxReturn([
+            'rows'=>$rows,
+        ]);
+    }
+
+    /*
+     * 我的收藏分页
+     */
+    public function myCollection(){
+
+        $paramArr = $_REQUEST;
+        //>> 查询收藏情况
+        $collection = M('Member as a')->where(['member_id'=>$this->userInfo['id']])
+            ->join('left join an_member_collection as b on a.id = b.member_id')
+            ->join('left join an_project as c on b.project_id = c.id')
+            ->select();
+        foreach($collection as $key => &$value){
+            $value['date'] = date('Y-m-d',$value['showtime']);
+            unset($value);
+        }
+
+        $collectionList = $this->pagination($collection,$paramArr['pgNum'],6);
+        $this->ajaxReturn([
+            'rows'=>$collectionList,
+        ]);
     }
 
 
+    /**
+     * 修改密码
+     */
+    public function editPassword(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+            $user = M('Member')->where(['id'=>$this->userInfo['id']])->find();
+
+            if(!empty($user)){
+
+                if($user['password'] != md5($paramArr['password'])){
+
+                    $this->ajaxReturn(['status'=>0,'msg'=>'当前密码错误']);
+                }
+            }
+            $updateData  = [
+                'password'=>md5($paramArr['newpassword']),
+            ];
+            $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
+            if($res != false){
+                $this->ajaxReturn([
+                    'status'=>1,
+                    'msg'=>'修改成功',
+                ]);
+            }else{
+                $this->ajaxReturn([
+                    'status'=>0,
+                    'msg'=>'修改失败'
+                ]);
+            }
+        }else{
+
+            $this->ajaxReturn([
+                'status'=>0
+            ]);
+        }
+    }
 }
