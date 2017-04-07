@@ -45,7 +45,7 @@ $(function(){
       width:$('.logo').width()+$('.top_nav').width()+$('.login_reg').width()+240
     })
   }
-  navMarginauto();
+  //navMarginauto();
 
 
 });
