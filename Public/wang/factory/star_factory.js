@@ -61,4 +61,34 @@ $(function(){
     }
   });
 
+
+
+   window.onresize=function(){
+  screen_auto();
+ }
+
+
+ //不同屏幕的适配
+ function screen_auto (){
+  var bodyWidth=$('.body').width();
+  if(bodyWidth>=1200&&bodyWidth<=1400){
+    $('.star_content').css({
+      marginLeft:0
+    })
+  }else if (bodyWidth>1400&&bodyWidth<=1600) {
+    $('.star_content').css({
+      marginLeft:50
+    })
+  }else if (bodyWidth>1600&&bodyWidth<=1800) {
+    $('.star_content').css({
+      marginLeft:250
+    })
+  }else {
+    $('.star_content').css({
+      marginLeft:350
+    })
+  }
+ }
+  screen_auto();  
+
 });

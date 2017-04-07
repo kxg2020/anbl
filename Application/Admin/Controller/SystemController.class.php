@@ -14,6 +14,10 @@ class SystemController extends CommonController
                 $this->Msg['msg'] = M('System')->getError();
                 $this->ajaxReturn($this->Msg);
             }
+            // 判断 是否需要更改邮件发送密码
+            if (empty($data['send_mail_password'])) {
+                unset($data['send_mail_password']);
+            }
 
             // 将数据保存到数据库中
             $rst = M('System')->save($data);

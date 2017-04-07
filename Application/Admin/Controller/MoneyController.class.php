@@ -146,6 +146,10 @@ class MoneyController extends CommonController
                 $this->ajaxReturn(['msg' => "真实票房收益不存在", 'status' => 0]);
             }
 
+            if($projectInfo['is_fy'] == 0){
+                $this->ajaxReturn(['msg' => "还没有进行分红，无法分佣", 'status' => 0]);
+            }
+
             // 查询出所有会员
             $members = M('Member')->select();
             if (!$members) {
@@ -156,6 +160,7 @@ class MoneyController extends CommonController
             $where = [
                 'project_id' => $projectInfo['id'],//当前项目
                 'is_fy' => 0,//未分佣的订单
+                'is_fh' => 1,//已分红订单
             ];
 
             $supportInfo = M('MemberSupport')->where($where)->select();
@@ -164,10 +169,17 @@ class MoneyController extends CommonController
                 $this->ajaxReturn(['msg'=>"该项目还没有支持订单产生",'status'=>0]);
             }
 
+
             // 开启事物
             M()->startTrans();
 
-            foreach ($members as $member) {
+            foreach($supportInfo as $info){//拿到每一笔支持订单
+
+                $this->getParent($info,$projectInfo);
+                //进行分佣
+            }
+
+            /*foreach ($members as $member) {
                 //判断会员等级
                 if ($member['role'] == 1) {//支持者 查询出一代会员
                     $money = '';
@@ -199,12 +211,27 @@ class MoneyController extends CommonController
                 } elseif ($member['role'] == 4) {//出品人
 
                 }
-            }
+            }*/
 
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg'=>"分佣成功",'status'=>1]);
 
         }
+    }
+
+
+    protected function getParent($info,$projectInfo){
+        // 获取分佣比例
+        $first_rate = $projectInfo['first_rate'];//一代分佣比例 5%
+        $two_rate = $projectInfo['two_rate'];//二代分佣比例     3%
+        $three_rate = $projectInfo['three_rate'];//三代分佣比例 1%
+
+
+        //接受请求参数
+        $member_id = $info['member_id'];//当前订单会员id
+        
+        //获取上级并进行分佣操作
+
     }
 }

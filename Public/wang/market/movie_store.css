@@ -4,7 +4,7 @@ body{
     background: #2F2F2F;
     color: #E2E2E2;
     background: radial-gradient(black,#444 80%);
-    min-width: 1900px;
+    min-width: 1200px;
 }
 li{
 	list-style: none;
@@ -189,4 +189,7 @@ a{
 	color: white;
 	border: none;
 	outline: none;
+}
+.container{
+	width: 100%;
 }
