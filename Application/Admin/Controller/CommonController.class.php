@@ -13,8 +13,28 @@ class CommonController extends Controller
     //当前用户信息
     public $userInfo = [];
 
-    // 初始化
+    // 系统设置
+    public $systemInfo;
+
+    // 系统通知列表 格式：
+    public $untreated_list = [];
+    /**
+     * 初始化
+     */
     public function _initialize(){
+        // 获取系统设置信息
+        $this->getSystemInfo();
+
+        // 获取所有待处理消息回复
+        $this->getAllFeedback();
+        // 获取所有待处理充值
+        $this->getAllProject();
+
+        // 获取所有待处理提现
+        $this->getAllWithdrawals();
+        // 消息栏
+        $this->assign('untreated_list', $this->untreated_list);
+
         //>> 拿session
         $session = session(md5('admin'));
         if(!empty($session)){
@@ -167,6 +187,134 @@ class CommonController extends Controller
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
         exit;
+    }
+
+    /**
+     * 获取系统配置信息
+     */
+    public function getSystemInfo()
+    {
+        // 判断系统设置 是否存在于缓存中
+        if (S('SystemInfo') && S('SystemInfoOutTime') > time()) {
+            $this->systemInfo = S('SystemInfo');
+            // 分配到页面中
+            $this->assign('systemInfo', $this->systemInfo);
+            return;
+        } else {
+            // 清空缓存
+            S('SystemInfo', null);
+            S('SystemInfoOutTime', null);
+        }
+
+        // 获取系统设置数据
+        $this->systemInfo = M('System')->find(1);
+
+        // 放在缓存中
+        S('SystemInfo', $this->systemInfo);
+        // 设置过期时间
+        S('SystemInfoOutTime', time() + 600); // 10 分钟更新一次
+
+        // 分配到页面中
+        $this->assign('systemInfo', $this->systemInfo);
+    }
+
+
+    /**
+     * 获取所有未处理事务
+     */
+    public function getTrans()
+    {
+        ////////////////////////////////////////////////////////获取动态信息
+        $this->untreated_list = [];
+            // 获取所有待处理消息回复
+            $this->getAllFeedback();
+            // 获取所有待处理充值
+            $this->getAllProject();
+
+            // 获取所有待处理提现
+            $this->getAllWithdrawals();
+
+
+        // 处理数据
+        $string = '';
+        foreach ($this->untreated_list as $untreated_info) {
+            $string .= '<li class="new"><a href="' . $untreated_info['url'] . '" title="点我立即处理"><span class="label label-danger"><i class="fa fa-bolt"></i></span><span class="name">[' . $untreated_info['type'] . ']' . $untreated_info['content'] . '</span><em class="small"></em></a></li>';
+        }
+        if ($string == '') {
+            $this->Msg['content'] = '<li class="new"><a href="javascript:;"> <span class="name">暂无事务</span></a></li>';
+            $this->Msg['num'] = 0;
+            $this->ajaxReturn($this->Msg);
+        } else {
+            $this->Msg['content'] = $string;
+            $this->Msg['num'] = count($this->untreated_list) >= 99 ? '100' : count($this->untreated_list);
+            $this->Msg['status'] = 1;
+            $this->ajaxReturn($this->Msg);
+        }
+
+    }
+
+    /**
+     * 获取所有待处理提现
+     */
+    public function getAllWithdrawals()
+    {
+        $lists = M('MemberCash as a')
+            ->field('a.*,b.username as name')
+            ->join('left join an_member as b on b.id = a.member_id')
+            ->where([
+                'a.is_pass' => 0,// 等待处理
+            ])
+            ->select();
+
+
+        foreach ($lists as $list) {
+            $this->untreated_list[] = [
+                'type'    => '提现',
+                'url'     => U('admin/order/cash', ['id' => $list['id']]),// 跳转过去的url 地址
+                'content' => $list['name'] . ' 等待处理提现',// 显示的内容
+            ];
+        }
+    }
+
+    /**
+     * 获取有待充值处理的订单
+     */
+    public function getAllProject(){
+        $lists = M('MemberRecharge as a')
+            ->field('a.*,b.username as name')
+            ->join('left join an_member as b on b.id = a.member_id')
+            ->where([
+                'a.is_pass' => 0,// 等待处理
+            ])
+            ->select();
+
+
+        foreach ($lists as $list) {
+            $this->untreated_list[] = [
+                'type'    => '充值',
+                'url'     => U('admin/Order/orderRecharge', ['id' => $list['id']]),// 跳转过去的url 地址
+                'content' => $list['name'] . ' 等待处理充值',// 显示的内容
+            ];
+        }
+    }
+
+    public function getAllFeedback(){
+        $lists = M('MemberConsult as a')
+            ->field('a.*,b.username as name')
+            ->join('left join an_member as b on b.id = a.member_id')
+            ->where([
+                'a.status' => 0,// 等待处理
+            ])
+            ->select();
+
+
+        foreach ($lists as $list) {
+            $this->untreated_list[] = [
+                'type'    => '问答',
+                'url'     => U('admin/Member/question', ['id' => $list['id']]),// 跳转过去的url 地址
+                'content' => $list['name'] . ' 等待处理问答回复',// 显示的内容
+            ];
+        }
     }
 
 }

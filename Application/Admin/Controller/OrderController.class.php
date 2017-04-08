@@ -29,8 +29,11 @@ class OrderController extends CommonController
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
         }
-        if($end_time){
-            $where['a.create_time'] = ['elt',$end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
         // 查询总记录数
         $count =   M('MemberDownload as a')
@@ -84,8 +87,11 @@ class OrderController extends CommonController
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
         }
-        if($end_time){
-            $where['a.create_time'] = ['elt',$end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
 
         //查询出所有下载订单
@@ -138,8 +144,11 @@ class OrderController extends CommonController
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
         }
-        if($end_time){
-            $where['a.create_time'] = ['elt',$end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
         // 查询总记录数
         $count =   M('MemberSupport as a')
@@ -191,11 +200,14 @@ class OrderController extends CommonController
         if ($name) {
             $where['b.name'] = ['like', "%$name%"];
         }
-        if ($start_time) {
-            $where['a.create_time'] = ['egt', $start_time];
+        if($start_time){
+            $where['a.create_time'] = ['egt',$start_time];
         }
-        if ($end_time) {
-            $where['a.create_time'] = ['elt', $end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
 
         //查询出所有下载订单
@@ -304,6 +316,10 @@ class OrderController extends CommonController
         if($order_number){
             $where['a.order_number'] = ['like',"%$order_number%"];
         }
+        // 提现id
+        if (I('get.id')) {
+            $where[] = ['a.id' => I('get.id')];
+        }
         if($username){
             $user = M('Member')->where(['username'=>$username])->find();
             $id = $user['id'];
@@ -315,8 +331,11 @@ class OrderController extends CommonController
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
         }
-        if($end_time){
-            $where['a.create_time'] = ['elt',$end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
 
         // 查询总记录数
@@ -372,8 +391,11 @@ class OrderController extends CommonController
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
         }
-        if($end_time){
-            $where['a.create_time'] = ['elt',$end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
 
 
@@ -514,7 +536,9 @@ class OrderController extends CommonController
                $where['a.create_time'] = ['elt',strtotime($paramArr['end_time'])];
            }
 
-
+           if(!empty($paramArr['id'])){
+               $where['a.id'] = $paramArr['id'];
+           }
        }
 
         $count = M('MemberRecharge as a ')
@@ -561,11 +585,14 @@ class OrderController extends CommonController
         if ($money) {
             $where['a.money'] = ['like', "%$money%"];
         }
-        if ($start_time) {
-            $where['a.create_time'] = ['egt', $start_time];
+        if($start_time){
+            $where['a.create_time'] = ['egt',$start_time];
         }
-        if ($end_time) {
-            $where['a.create_time'] = ['elt', $end_time];
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
         }
 
         //查询出所有下载订单

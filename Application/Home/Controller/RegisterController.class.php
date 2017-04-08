@@ -222,18 +222,18 @@ class RegisterController extends CommonController{
             $code = implode('',$endArr);
 
             //>> 配置信息
-            $config = [
+            /*$config = [
 
                 'phone_api_app_key'=>C('PHONE_API_APP_KEY'),
 
                 'verify_code_tpl'=>C('VERIFY_CODE_TPL'),
-            ];
+            ];*/
 
             //>> 将验证码保存到session
             session('verify_code'.$paramArr['phone'],$code);
 
             //>> 发送短信
-            $res = sendSMS($paramArr['phone'],$code,$config,1);
+            $res = sendSMS($paramArr['phone'],$code,$this->systemInfo,1);
 
             if($res){
 

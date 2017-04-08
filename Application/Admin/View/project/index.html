@@ -183,15 +183,6 @@
         });
 
 
-
-
-
-
-
-
-
-
-
         function checkState(url,e) {
             $.get(url,function (data) {
                 if(data.status == 1){
@@ -236,7 +227,7 @@
                 title: '分红比例设置',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['50%', '40%'],
+                area: ['50%', '50%'],
                 content: "{:U('admin/project/rate')}?"+'id='+id,
                 end: function () {
                     location.reload();
