@@ -194,25 +194,9 @@ class CommonController extends Controller
      */
     public function getSystemInfo()
     {
-        // 判断系统设置 是否存在于缓存中
-        if (S('SystemInfo') && S('SystemInfoOutTime') > time()) {
-            $this->systemInfo = S('SystemInfo');
-            // 分配到页面中
-            $this->assign('systemInfo', $this->systemInfo);
-            return;
-        } else {
-            // 清空缓存
-            S('SystemInfo', null);
-            S('SystemInfoOutTime', null);
-        }
 
         // 获取系统设置数据
         $this->systemInfo = M('System')->find(1);
-
-        // 放在缓存中
-        S('SystemInfo', $this->systemInfo);
-        // 设置过期时间
-        S('SystemInfoOutTime', time() + 600); // 10 分钟更新一次
 
         // 分配到页面中
         $this->assign('systemInfo', $this->systemInfo);

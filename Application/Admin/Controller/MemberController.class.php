@@ -434,14 +434,14 @@ class MemberController extends  CommonController{
         vendor('PHPMailer.PHPMailerAutoload');
         $mail = new \PHPMailer;
         $mail->isSMTP(); // 设置使用SMTP服务器发送邮件
-        $mail->Host = C('SEND_EMAIL_HOST');  // 设置SMTP服务器地址
+        $mail->Host = $this->systemInfo['send_mail_server'];  // 设置SMTP服务器地址
         $mail->SMTPAuth = true;  // 使用SMTP的授权规则
-        $mail->Username = C('SEND_EMAIL_USER'); // 要使用哪一个邮箱发邮件
-        $mail->Password = C('SEND_EMAIL_PWD'); //
+        $mail->Username = $this->systemInfo['send_mail_user']; // 要使用哪一个邮箱发邮件
+        $mail->Password = $this->systemInfo['send_mail_password']; //
         $mail->SMTPSecure = C('SEND_EMAIL_SECURE');  // 设置使用SMTP的协议
         $mail->Port = C('SEND_EMAIL_PORT'); // SMTP ssl协议的端口
 
-        $mail->setFrom(C('SEND_EMAIL_USER'), C('SEND_EMAIL_SENDER'));
+        $mail->setFrom($this->systemInfo['send_mail_user'], C('SEND_EMAIL_SENDER'));
         $mail->addAddress($toEmail);
 
         $mail->isHTML(true); // 表示发送的邮件内容以html的形式发送
