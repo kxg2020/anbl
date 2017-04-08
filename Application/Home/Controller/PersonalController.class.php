@@ -25,18 +25,23 @@ class PersonalController extends CommonController{
     /**
      * 递归查询所有下级
      */
-    private function groupFollower($id){
+    function getMenuTree($id){
 
-        $res = M('Member')->where(['parent_id'=>$id])->select();
+        static  $arrTree = array(); //使用static代替global
+        //>> 查询子类
+        $childTree = M('Member')->where(['parent_id'=>$id])->select();
 
-        if(!empty($res)){
+        //>> 判断是否有子类
+        if(!empty($childTree)){
+            $arrTree[] = $childTree;
 
-            foreach($res as $key => $value){
-                return $this->groupFollower($res['id']);
+            foreach($childTree as $key => $value){
+
+                return $this->getMenuTree($value['id']);
             }
-        }else{
-            return $res;
         }
+
+        return $arrTree;
     }
 
     /**
@@ -67,10 +72,15 @@ class PersonalController extends CommonController{
 
         //>> 查最上级
         $topLeader = $this->groupLeader($this->userInfo['parent_id']);
+        if(!$topLeader){
+            $topLeader = $row;
+        }
 
         //>> 查所有下级
-        $follower = $this->groupFollower($this->userInfo['id']);
-        var_dump($follower);exit;
+
+        $follower = $this->getMenuTree($this->userInfo['id']);
+
+
 
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.*,b.*')
@@ -163,6 +173,8 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'topLeader'=>$topLeader,
+            'follower'=>$follower,
             'consume'=>$consume,
             'consume_1'=>$consume_1,
             'question'=>$question,
@@ -567,6 +579,49 @@ class PersonalController extends CommonController{
             $this->ajaxReturn([
                 'status'=>0
             ]);
+        }
+    }
+
+    /**
+     * 我要当演员
+     */
+    public function star(){
+
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+
+            //>> 判断是否已经添加过
+            $res = M('Member')->where(['id_card'=>$paramArr['id_card'],'phone'=>$paramArr['phone']])->find();
+            if(!empty($res)){
+
+                die($this->_printError('1058'));
+            }
+
+            $insertData = [
+                'name'=>$paramArr['name'],
+                'sex'=>$paramArr['sex'],
+                'volk'=>$paramArr['volk'],
+                'birthday'=>$paramArr['birthday'],
+                'height'=>$paramArr['height'],
+                'id_card'=>$paramArr['id_card'],
+                'phone'=>$paramArr['phone'],
+                'email'=>$paramArr['email'],
+                'address'=>$paramArr['address'],
+                'skill'=>$paramArr['skill'],
+                'ex'=>$paramArr['ex'],
+                'image_url'=>$paramArr['image_url']
+            ];
+            $res = M('MemberStar')->add($insertData);
+            if($res){
+
+                die($this->_printSuccess());
+            }else{
+
+                die($this->_printError(''));
+            }
+        }else{
+
+            die($this->_printError(''));
         }
     }
 }

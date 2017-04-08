@@ -100,7 +100,7 @@
                                     <td style="vertical-align: middle">{:date('Y-m-d',$o['create_time'])}</td>
                                     <td style="vertical-align: middle">{$o.money}</td>
                                     <td style="vertical-align: middle">
-                                        <img src="__PUBLIC__/images/status/{$o.is_pass}.png" style="width: 18px;height: 18px;border-radius: 50%">
+                                        <if condition="$o.is_pass eq 0"><span class="label label-danger">等待审核</span><else/><span class="label label-success">通过审核</span></if>
                                     </td>
                                     <td style="vertical-align: middle"><input type="button" data-id="{$o['id']}" class="btn btn-xs btn-info detail" value="查看"  ></td>
                                 </tr>

@@ -47,7 +47,7 @@
 				<li id="identity"><div>帐号设置</div></li>
 				<li id="team"><div>我的团队</div></li>
 				<li id="password"><div>密码修改</div></li>
-				<li id="ask"><div>平台质询</div></li>
+				<li id="ask"><div>平台咨询</div></li>
 				<li id="actor"><div>我要当演员</div></li>
 				<li id="attend"><div>我的参与</div></li>
 			</ul>
@@ -275,6 +275,10 @@
 						</form>
 					</div>
 				</div>
+
+				<p>A</p>
+				<p>L</p>
+				<p>B</p>
 				<script>
 					$(function(){
 						$('.qdetail').click(function(){
@@ -288,23 +292,265 @@
 						});
 					});
 				</script>
+			</div>
+
+			<div class="team" style="display: block;">
+				<div class="bg">
+					<div class="close_team"></div>
+					<div class="team_content">
+						<div class="main1" id="main1">
+							<div class="1">
+								<span>{$topLeader.realname}</span>
+								<img src="img/question1.png" alt="">
+								<p class='operat_p' id="1">-</p>
+							</div>
+						</div>
+
+						<div class="main2">
+							<volist name="follower[0]" id="f">
+							<div class="1-1">
+								<p>Laria</p>
+								<p><span>李三</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-1">+</p>
+							</div>
+
+							</volist>
+						</div>
+						<div class="main3" style='display: none;'>
+							<volist name="follower[1]" id="f1"></volist>
+							<div class="1-1-1">
+								<p>Laria1-1-1</p>
+								<p><span>李三</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-1-1">+</p>
+							</div>
+							<div class="1-1-2">
+								<p>Laria1-1-2</p>
+								<p><span>李三</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-1-2">+</p>
+							</div>
+							<div class="1-2-1">
+								<p>Laria1-2-1</p>
+								<p><span>李三</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1">+</p>
+							</div>
+							<div class="1-2-2">
+								<p>Laria1-2-2</p>
+								<p><span>李三</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+
+							</div>
+							<div class="1-2-3">
+								<p>Laria1-2-3</p>
+								<p><span>李三</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+
+							</div>
+						</div>
+						<div class="main4" style='display: none;'>
+							<div class="1-1-1-1">
+								<p>Laria1-1-1-1</p>
+								<p><span>李三1</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-1-1-1">+</p>
+							</div>
+							<div class="1-1-2-1">
+								<p>Laria1-1-2-1</p>
+								<p><span>李三2</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-1-2-1">+</p>
+							</div>
+							<div class="1-2-1-1">
+								<p>Laria1-2-1</p>
+								<p><span>李三3</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-1">+</p>
+							</div>
+							<div class="1-2-1-2">
+								<p>Laria1-2-2</p>
+								<p><span>李三4</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-2">+</p>
+							</div>
+							<div class="1-2-1-3">
+								<p>Laria1-2-3</p>
+								<p><span>李三5</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-3">+</p>
+							</div>
+							<div class="1-2-1-4">
+								<p>Laria1-2-2</p>
+								<p><span>李三4</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-4">+</p>
+							</div>
+							<div class="1-2-1-5">
+								<p>Laria1-2-3</p>
+								<p><span>李三5</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-5">+</p>
+							</div>
+							<div class="1-2-1-6">
+								<p>Laria1-2-2</p>
+								<p><span>李三4</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-6">+</p>
+							</div>
+							<div class="1-2-1-7">
+								<p>Laria1-2-3</p>
+								<p><span>李三5</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-7">+</p>
+							</div>
+						</div>
+						<div class="main5" style='display: none;'>
+							<div class="1-2-1-6-1">
+								<p>Laria1-1-1-1</p>
+								<p><span>李三1</span><span>15012345678</span></p>
+								<p><span>支持积分:</span><span>23223</span></p>
+								<p class='operat_p' id="1-2-1-6-1">+</p>
+							</div>
+						</div>
+					</div>
+				</div>
 				<p>A</p>
 				<p>L</p>
 				<p>B</p>
 			</div>
 
-			<div class="team" style="display: none;">
+
+
+			<div class="actor" style="display: none;">
 				<div class="bg">
-					<div class="close_team"></div>
-					<div class="team_content">
-						<div class="main1" id="main1"><div class="1"><span>Angelababy</span><img src="img/question1.png" alt=""></div></div>
-						<p id="1">+</p>
-						<div class="main2">
-							<div class="1-1"><p>Laria</p><p><span>李三</span><span>15012345678</span></p><p><span>支持积分:</span><span>23223</span></p></div>
-							<div class="1-2"><p>Laria</p><p><span>李三</span><span>15012345678</span></p><p><span>支持积分:</span><span>23223</span></p></div>
-						</div>
-						<p id="1-1">+</p><p id="1-2">+</p>
-						<div class="main3"><div class="1-1-1"></div><div class="1-1-2"></div><div class="1-2-1"></div><div class="1-2-2"></div></div>
+					<div class="close_actor"></div>
+					<div class="actor_content">
+						<form>
+							<h3>我要当演员申请</h3>
+							<div><label>姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
+							<div><label>性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
+							<div><label>民族:</label><input style='width: 80px;' type="text" name="volk"></div>
+							<div><label>生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
+							<div><label>身高:</label><input type="text" name="realheight"><span>实际净身高</span></div>
+							<div><label>身份证号码:</label><input type="text" name="id_card_"></div>
+							<div><label>联系电话:</label><input type="text" name="phone1"></div>
+							<div><label>电子邮箱:</label><input type="text" name="email1"><span>申请的结果将发送至此邮箱</span></div>
+							<div><label>现居住地:</label><input type="text" name="crraddress"></div>
+							<div class="up_photo"><label>上传生活照:</label><input type="file" id="uploadStar"><input type="button"  value="点击上传"></div>
+							<input type="hidden" value="" name="im">
+							<div><label style='float: left;'>才能描述:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
+							<div><label style='float: left;'>表演经历:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
+							<input type="button" value="确定申请" id="sure_apply">
+							<script>
+								//这里弹出层显示的内容你 来写快一点 就是下面的字
+								$(function(){
+									$('#sure_apply').click(function(){
+										var name = $('input[name = name]').val();
+										var sex = $('input[name = sex01]').val();
+										var volk = $('input[name = volk]').val();
+										var birthday = $('input[name = birthday]').val();
+										var height_ = $('input[name = realheight]').val();
+										var id_card_ = $('input[name = id_card_]').val();
+										var phone = $('input[name = phone1]').val();
+										var email = $('input[name = email1]').val();
+										var crraddress = $('input[name = crraddress]').val();
+										var skill = $('textarea[name = skill]').val();
+										var ex = $('textarea[name = ex]').val();
+										var image_url = $('input[name = im]').val();
+
+										if(name == ''){
+											layer.tips('姓名不能为空','input[name = name]');
+											return;
+										}else{
+											if(sex == ''){
+												layer.tips('性别不能为空','input[name = sex01]');
+												return;
+											}else{
+												if(volk == ''){
+													layer.tips('民族不能为空','input[name = volk]');
+													return;
+												}else{
+
+													if(birthday == ''){
+														layer.tips('生日不能为空','input[name = birthday]');
+														return;
+													}else{
+														if(height_== ''){
+															layer.tips('身高不能为空','input[name = realheight]');
+															return;
+														}else{
+															if(id_card_ == ''){
+																layer.tips('身份证号不能为空','input[name = id_card_]');
+																return;
+															}else{
+																var reg = /\d{14}(\d{4}|(\d{3}[xX])|\d{1})/;
+																if(!reg.test(id_card_)){
+																	layer.tips('身份证号格式不正确','input[name = id_card_]');
+																	return;
+																}
+
+																if(phone == ''){
+																	layer.tips('手机号不能为空','input[name = phone1]');
+																	return;
+																}else{
+
+																	if(email == ''){
+																		layer.tips('邮箱不能为空','input[name = email1]');
+																		return;
+																	}else{
+																		reg_ = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+																		if(!reg_.test(email)){
+																			layer.tips('邮箱格式不正确','input[name = email1]');
+																			return;
+																		}else{
+																			if(crraddress == ''){
+																				layer.tips('邮箱不能为空','input[name = crraddress]');
+																				return;
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+
+										 url = location.protocol+'//'+window.location.host+'/Home/Personal/star';
+										$.ajax({
+											'type':'post',
+											'dataType':'json',
+											'url':url,
+											'data':{
+												'name':name,
+												'sex':sex,
+												'volk':volk,
+												'birthday':birthday,
+												'height':height_,
+												'id_card':id_card_,
+												'phone':phone,
+												'email':email,
+												'address':crraddress,
+												'skill':skill,
+												'ex':ex,
+												'image_url':image_url,
+											},
+											success:function(result){
+												if(result.status == 1){
+													layer.msg('申请成功',function(){
+														location.reload();
+													});
+												}else{
+													layer.msg('申请失败');
+												}
+											}
+										});
+									});
+								});
+							</script>
+						</form>
 					</div>
 				</div>
 				<p>A</p>
@@ -377,6 +623,39 @@
 						var path = data.url;
 						// 获取图片列表
 						$('#question').val(path);
+						if (_isMax == false) {
+							layer.msg('上传成功', {time: 1000})
+
+						}
+					}
+				},
+				onUploadError: function (file) {
+					layer.alert('上传失败');
+				}
+			});
+			var  path = [];
+			$("#uploadStar").h5upload({
+				url: "{:U('Home/Personal/upload')}",
+				fileObjName: 'image',
+				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
+				multi: true,
+				accept: '*/*',
+				fileSizeLimit: 1024 * 1024 * 1024 * 1024,
+				formData: {
+					type: 'card_positive'
+				},
+				onUploadProgress: function (file, uploaded, total) {
+
+				},
+				onUploadSuccess: function (file, data) {
+					data = $.parseJSON(data);
+					if (data.status == 0) {
+						layer.alert(data.msg, {time: 1000})
+					} else {
+						var _isMax = false;
+						path.push(data.url);
+						// 获取图片列表
+						$('input[name = im]').val(path);
 						if (_isMax == false) {
 							layer.msg('上传成功', {time: 1000})
 
