@@ -375,7 +375,6 @@ $(function(){
 						'money':money
 					},
 					success:function(result){
-						$('.ex').css('display','none');
 						if(result.status == 1){
 							layer.msg('提现成功,请等待审核',function(){
 								location.reload();
