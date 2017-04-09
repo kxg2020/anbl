@@ -32,8 +32,6 @@ class PersonalController extends CommonController{
         $childTree = M('Member')->where(['parent_id'=>$id])->select();
 
         $lev ++;
-        echo "<pre>";
-
         //>> 判断是否有子类
         if(!empty($childTree)){
             $arrTree['level_'.$lev] = $childTree;
@@ -49,7 +47,7 @@ class PersonalController extends CommonController{
 
     public function test(){
 
-        var_dump($this->getMenuTree(50,0));
+       
     }
     /**
      * 个人中心
