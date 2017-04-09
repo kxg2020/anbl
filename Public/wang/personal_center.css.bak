@@ -49,7 +49,7 @@ header .nav{
   margin: auto;
   position: absolute;
   left: 50%;
-  margin-left: -295px;
+  margin-left: -410px;
 }
 .top_nav li{
   float: left;
@@ -548,7 +548,7 @@ header .nav{
   margin-left: 83px;
   cursor: pointer;
 }
-.close_identity,.close_attend,.close_money,.close_password,.close_ask,.close_team,.close_actor{
+.close_identity,.close_attend,.close_money,.close_password,.close_ask,.close_team{
 	position:absolute;
 	top: 50px;
 	right: 50px;
@@ -556,7 +556,7 @@ header .nav{
 	height: 20px;
 	cursor: pointer;
 }
-.close_identity:before,.close_attend:before,.close_money:before,.close_password:before,.close_ask:before,.close_team:before,.close_actor:before{
+.close_identity:before,.close_attend:before,.close_money:before,.close_password:before,.close_ask:before,.close_team:before{
 	position: absolute;
 	top: 10px;
 	left: 0;
@@ -568,7 +568,7 @@ header .nav{
 	border-radius: 2px;
 	transform: rotateZ(45deg);
 }
-.close_identity:after,.close_attend:after,.close_money:after,.close_password:after,.close_ask:after,.close_team:after,.close_actor:after{
+.close_identity:after,.close_attend:after,.close_money:after,.close_password:after,.close_ask:after,.close_team:after{
 	position: absolute;
 	top: 10px;
 	left: 0;
@@ -680,13 +680,13 @@ header .nav{
 	margin-bottom: 20px;
 	margin-left: 4%;
 }
-.attend_content>div>div:nth-of-type(odd){
-
-	margin-left: 0;
-}
 .attend_content>div>div>img{
 	width: 100%;
 	height: 100%;
+}
+.attend_content>div>div:nth-of-type(odd){
+
+	margin-left: 0;
 }
 .attend_content>div>div>div{
 	position: absolute;
@@ -848,8 +848,6 @@ margin-top: 25px;
 	margin-left: 94px;
 	margin-top: 25px;
 }
-
-
 
 .money_record p,.money_deal p{
 	margin-top: 27px;
@@ -1074,6 +1072,18 @@ margin-top: 25px;
 	position: relative;
 	width: 100%;
 	text-align: center;
+	margin-bottom: 40px;
+}
+.team_content>p{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: #161515;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 20px; 
+	color: #444;
+	top:0; left: 0;
 }
 .team_content>div>div{
 	width: 150px;
@@ -1082,8 +1092,6 @@ margin-top: 25px;
 	border-radius:5px;
 	background: #3f3f3f;
 	margin-right: 10px; 
-	margin-bottom: 30px;
-	position: relative;
 }
 .team_content>div>div>p:nth-child(1){
 	width: 100%;
@@ -1105,10 +1113,10 @@ margin-top: 25px;
 	background: #161515;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 20px; 
+	line-height: 20px;
 	color: #ffffff;
 	bottom:-25px; left: 50%;
-	cursor: pointer;	
+	cursor: pointer;
 }
 .team_content>div>div>p:nth-child(2)>span:first-child{
 	margin-right: 10px;
@@ -1133,10 +1141,6 @@ margin-top: 25px;
 	right: -30px;
 	cursor: pointer;
 }
-
-
-
-
 .actor_content{
 	width: 600px;
 	height: 100%;
@@ -1197,7 +1201,7 @@ margin-top: 25px;
 	background: #e50909;
 }
 .actor_content>form>.up_photo input[type=file]{
-	 cursor: pointer;
+	cursor: pointer;
 	position: absolute;
 	left: 90px;
 	top:0;

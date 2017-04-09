@@ -185,7 +185,7 @@
 							<span>交易状态</span></p>
 							<div id="ls">
 							<volist name="orderList" id="o">
-								<p><span>{$o.create_time}</span>
+								<p><span>{:date('Y-m-d',$o['create_time'])}</span>
 									<span>{$o.type}</span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>

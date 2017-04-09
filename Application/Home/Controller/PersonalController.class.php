@@ -25,25 +25,32 @@ class PersonalController extends CommonController{
     /**
      * 递归查询所有下级
      */
-    function getMenuTree($id){
+    public  function getMenuTree($id,$lev = 0){
 
         static  $arrTree = array(); //使用static代替global
         //>> 查询子类
         $childTree = M('Member')->where(['parent_id'=>$id])->select();
 
+        $lev ++;
+        echo "<pre>";
+
         //>> 判断是否有子类
         if(!empty($childTree)){
-            $arrTree[] = $childTree;
+            $arrTree['level_'.$lev] = $childTree;
 
             foreach($childTree as $key => $value){
 
-                return $this->getMenuTree($value['id']);
+                return $this->getMenuTree($value['id'],$lev);
             }
         }
 
         return $arrTree;
     }
 
+    public function test(){
+
+        var_dump($this->getMenuTree(50,0));
+    }
     /**
      * 个人中心
      */

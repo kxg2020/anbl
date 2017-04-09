@@ -132,4 +132,58 @@ class CountController extends CommonController
 
         $this->display('finance');
     }
+
+    /**
+     * 会员数据统计
+     */
+    public function memberCount(){
+
+        $paramArr = $_REQUEST;
+        $where = [];
+        if($paramArr['username']){
+            $where['username'] = $paramArr['username'];
+        }
+        if($paramArr['start_time']){
+            $where['create_time'] = ['egt',strtotime($paramArr['start_time'])];
+        }
+        if($paramArr['end_time']){
+            $where['create_time'] = ['elt',strtotime($paramArr['end_time'])];
+        }
+
+        if($paramArr['start_time'] && $paramArr['end_time']){
+            $where['create_time'] = [['egt',strtotime($paramArr['start_time'])],['elt',strtotime($paramArr['end_time'])]];
+        }
+
+        //>> 查询所有会员
+        $members = M('Member')->where($where)->select();
+
+        $count = count($members);
+        $all = M('Member')->where($where)->sum('money');
+        foreach($members as $key => &$value){
+            //>> 收藏电影
+            $films = M('MemberCollection')->where(['member_id'=>$value['id']])->count();
+
+                $value['project'] = $films ? $films : 0;
+
+            //>> 投资金额
+            $money = M('MemberSupport')->where(['member_id'=>$value['id']])->sum('support_money');
+
+                $value['support'] = $money ? $money : 0;
+
+            //>> 发展人数
+            $follower = M('Member')->where(['parent_id'=>$value['id']])->count();
+
+                $value['follower'] = $follower ? $follower : 0;
+
+            //>> 下载电影
+            $downLoad = M('MemberDownload')->where(['member_id'=>$value['id']])->count();
+            $downLoadMoney = M('MemberDownload')->where(['member_id'=>$value['id']])->sum('money');
+            $value['downLoad'] = $downLoad ? $downLoad : 0;
+            $value['downLoadMoney'] = $downLoadMoney ? $downLoadMoney : 0;
+        }
+       $this->assign('members',$members);
+       $this->assign('count',$count);
+       $this->assign('all',$all);
+        $this->display('count/member');
+    }
 }
