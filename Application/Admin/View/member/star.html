@@ -23,29 +23,16 @@
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        充值订单
+                        明星列表
                     </header>
                     <div class="panel-body">
 <input type="hidden" value="{$count}" name="count">
                         <!--搜索开始-->
-                        <form class="form-inline" action="{:U('admin/Member/memberStar')}" method="get">
-                            <div class="form-group">
-                                <label>申请用户</label>
-                                <input type="text" class="form-control" name="name" value="{:I('get.name')}">
-                            </div>
-                            <button type="submit" class="btn btn-primary">搜索</button>
-                            <button type="button" class="btn btn-primary" id="exportExcel">导出</button>
-                            <span>共计：{$count}条记录</span>
-                        </form>
+
                         <!--搜索结束-->
 
 
-                        <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-                        <script>
-                            $('#exportExcel').click(function () {
-                                $('#exportForm').submit();
-                            });
-                        </script>
+
                         <!--导出结束-->
 
 

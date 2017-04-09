@@ -375,7 +375,6 @@ $(function(){
 						'money':money
 					},
 					success:function(result){
-						$('.ex').css('display','none');
 						if(result.status == 1){
 							layer.msg('提现成功,请等待审核',function(){
 								location.reload();
@@ -440,7 +439,7 @@ $(function(){
 	})
 
 	//点击替换背景
-	var bgArry=['img/bg.png','img/bg1.jpg','img/bg2.jpg','img/bg3.jpg','img/bg4.jpg','img/bg5.jpg','img/bg6.jpg'];
+	var bgArry=['/public/wang/img/bg.png','/public/wang/img/bg1.jpg','/public/wang/img/bg2.jpg','/public/wang/img/bg3.jpg','/public/wang/img/bg4.jpg','/public/wang/img/bg5.jpg','/public/wang/img/bg6.jpg'];
 	var imgNumber=1;
 	$('#repeat_bg').click(function(){
 		$('.body_left').css({
@@ -449,6 +448,61 @@ $(function(){
 		imgNumber++;
 		if(imgNumber==bgArry.length){
 			imgNumber=0;
+		}
+	})
+
+	//我要当演员相关操作
+	$('.close_actor').click(function(){
+		$('.actor').hide();
+		$('.body_right>ul').show();
+	})
+	$('#actor').click(function(){
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.actor').show();
+	})
+
+
+	//树形结构的控制
+
+	$('.team_content>div>div>.operat_p').click(function(){
+		var thisText=$(this).text();  //保存此次变量
+		//同级的全部变加号
+		var mainDiv=$(this).parent().parent();
+		for(var i=0;i<mainDiv.children().length;i++){
+			mainDiv.children().eq(i).children().eq(3).text('+');
+		}
+		//上一级收起来以后下一级和后面的都变为加号
+		var classArry=$(this)[0].id.split('-');
+		for(var i=classArry.length;i<$('.team_content>div').length;i++){
+			for(var j=0;j<$('.team_content>div').eq(i).children().length;j++){
+				$('.team_content>div').eq(i).children().eq(j).children().eq(3).text('+');
+			}
+		}
+		//下一级的消失
+		for(var i=classArry.length;i<$('.team_content>div').length;i++){
+			$('.team_content>div').eq(i).hide();
+		}
+
+		//判断加号和减号进行相应的操作
+		if(thisText=='+'){
+			var classStr=$(this)[0].id;
+			$('.team_content>div').eq(classArry.length).show();
+			for(var i=0;i<$('.team_content>div').eq(classArry.length).children().length;i++){
+				var childrenStr=$('.team_content>div').eq(classArry.length).children().eq(i).attr('class').slice(0,-2);
+				if(childrenStr==classStr){
+					$('.team_content>div').eq(classArry.length).children().eq(i).show()
+				}else{
+					$('.team_content>div').eq(classArry.length).children().eq(i).hide()
+				}
+			}
+			$(this).text('-')
+		}else{
+			for(var i=classArry.length;i<$('.team_content>div').length;i++){
+				$('.team_content>div').eq(i).hide();
+			}
+
+			$(this).text('+')
 		}
 	})
 });
