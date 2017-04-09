@@ -89,10 +89,8 @@ class PersonalController extends CommonController{
             ->select();
 
         //>> 查最上级
-        $topLeader = $this->groupLeader($this->userInfo['parent_id']);
-        if(!$topLeader){
-            $topLeader = $row;
-        }
+        $topLeader = $row;
+        
 
         //>> 查所有下级
 
