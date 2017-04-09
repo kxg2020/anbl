@@ -135,18 +135,24 @@ class MoneyController extends CommonController
      */
     public function fy(){
         if(IS_POST && IS_AJAX) {
-            $id = intval(I('get.id'));
+            $id = intval(I('post.id'));
             // 判断项目是否存在
             $projectInfo = M('Project')->find($id);
             if (!$projectInfo) {
                 $this->ajaxReturn(['msg' => "项目不存在", 'status' => 0]);
             }
             // 判断分佣所用到的参数是否完整
-            if(!$projectInfo['real_rate']){
-                $this->ajaxReturn(['msg' => "真实票房收益不存在", 'status' => 0]);
+            if(!$projectInfo['first_rate']){
+                $this->ajaxReturn(['msg' => "分佣参数未设置", 'status' => 0]);
+            }
+            if(!$projectInfo['two_rate']){
+                $this->ajaxReturn(['msg' => "分佣参数未设置", 'status' => 0]);
+            }
+            if(!$projectInfo['three_rate']){
+                $this->ajaxReturn(['msg' => "分佣参数未设置", 'status' => 0]);
             }
 
-            if($projectInfo['is_fy'] == 0){
+            if($projectInfo['is_fh'] == 0){
                 $this->ajaxReturn(['msg' => "还没有进行分红，无法分佣", 'status' => 0]);
             }
 
@@ -175,44 +181,19 @@ class MoneyController extends CommonController
 
             foreach($supportInfo as $info){//拿到每一笔支持订单
 
-                $this->getParent($info,$projectInfo);
-                //进行分佣
-            }
+                //接受请求参数
+                $member_id = $info['member_id'];//当前订单会员id
+                // 查询出当前会员信息
+                $memberInfo = M('Member')->find($member_id);
 
-            /*foreach ($members as $member) {
-                //判断会员等级
-                if ($member['role'] == 1) {//支持者 查询出一代会员
-                    $money = '';
-                    $childs = M('Member')->where(['parent_id'=>$member['id']])->select();
-                    foreach($childs as $child){
-                        foreach($supportInfo as $info){
-                            if($info['member_id'] == $child['id']){
-                                $money += $info['support_money']*0.05;
-                            }
-                        }
-                    }
-                    $data = [
-                        'member_id' =>$member['id'],
-                        'type' =>2,//佣金
-                        'money' =>$money,
-                        'remark' =>"支持者一代佣金",
-                        'create_time' =>time(),
-                    ];
-                    // 保存到数据表
-                    $rest = M('MemberProfit')->add($data);
-                    if($rest === false){
-                        $this->ajaxReturn(['msg'=>"分佣失败",'status'=>0]);
-                    }
-
-                } elseif ($member['role'] == 2) {//经纪人
-
-                } elseif ($member['role'] == 3) {//制片人
-
-                } elseif ($member['role'] == 4) {//出品人
-
+                if($info['type'] == 1){//固定分红类型
+                    $box = 0;
+                }else{
+                    $box = $info['expect_return'];
                 }
-            }*/
-
+                //进行分佣
+                $this->genCommission($info,$box,$projectInfo,$memberInfo['parent_id'],1);
+            }
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg'=>"分佣成功",'status'=>1]);
@@ -220,18 +201,134 @@ class MoneyController extends CommonController
         }
     }
 
+    /**
+     * @param $info 当前订单信息
+     * @param $roi 票房分红
+     * @param $projectInfox 当前项目信息
+     * @param $parent_id 父级id
+     * @param $level 级别
+     */
+    protected function genCommission($info,$roi, $projectInfox,$parent_id, $level){
+        if ($parent_id == 0) {
+            return;
+        }
+        $projectInfo = $projectInfox;
 
-    protected function getParent($info,$projectInfo){
-        // 获取分佣比例
-        $first_rate = $projectInfo['first_rate'];//一代分佣比例 5%
-        $two_rate = $projectInfo['two_rate'];//二代分佣比例     3%
-        $three_rate = $projectInfo['three_rate'];//三代分佣比例 1%
+        $parent = M('Member')->where(['id'=>$parent_id])->find();
+
+        switch($parent['role']) {
+            case "1":
+                if ($level > 1) {
+                    return ;
+                }
+                if($level == 1){//第一父
+                    // 计算佣金
+                    $commission = $info['support_money']*($projectInfo['first_rate']/100) + $roi*($projectInfo['first_rate']/100);//一代投资额的5%  一代票房收益的5%
+                    // 操作数据库
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+                break;
+
+            case "2":
+                if ($level > 2) {
+                    return;
+                }
+                if($level == 1){//第一父
+                    // 计算佣金
+                    $commission = $info['support_money']*($projectInfo['first_rate']/100) + $roi*($projectInfo['first_rate']/100);// 5%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+                if($level == 2){//第二父
+                    $commission = $info['support_money']*($projectInfo['two_rate']/100) + $roi*($projectInfo['two_rate']/100);//  3%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+
+                break;
+
+            case "3":
+                //计算票房收益
+                if ($level > 3) {
+                    return;
+                }
+                if($level == 1){
+                    // 计算佣金
+                    $commission = $info['support_money']*($projectInfo['first_rate']/100) + $roi*($projectInfo['first_rate']/100);// 5%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+
+                }
+                if($level == 2){
+                    $commission = $info['support_money']*($projectInfo['two_rate']/100) + $roi*($projectInfo['two_rate']/100);// 3%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+                if($level == 3){
+                    $commission = $info['support_money']*($projectInfo['three_rate']/100) + $roi*($projectInfo['three_rate']/100);// 1%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+
+                break;
+
+            case "4":
+                if ($level > 3) {
+                    return;
+                }
+                if($level == 1){
+                    // 计算佣金
+                    $commission = $info['support_money']*($projectInfo['first_rate']/100) + $roi*($projectInfo['first_rate']/100);// 5%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+                if($level == 2){
+                    $commission = $info['support_money']*($projectInfo['two_rate']/100) + $roi*($projectInfo['two_rate']/100);// 3%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+                if($level == 3){
+                    $commission = $info['support_money']*($projectInfo['three_rate']/100) + $roi*($projectInfo['three_rate']/100);// 1%
+                    $this->insertDb($info,$commission,$parent,$projectInfo['name']);
+                }
+                break;
+
+        }
+        $this->genCommission($info['support_money'], $roi, $projectInfo,$parent['parent_id'],$level+1);
+    }
 
 
-        //接受请求参数
-        $member_id = $info['member_id'];//当前订单会员id
-        
-        //获取上级并进行分佣操作
+    /**
+     * @param $info 当前订单信息
+     * @param $commission 佣金
+     * @param $parent 父级
+     * @param $projectName 项目名称
+     */
+    protected function insertDb($info,$commission,$parent,$projectName){
 
+        // 修改订单状态
+        $rest = M('MemberSupport')
+            ->where(['id'=>$info['id']])
+            ->save([
+                'is_fy'=> 1,
+                'is_ok'=> 1,
+            ]);
+        if($rest === false){
+            M()->rollback();
+            $this->ajaxReturn(['msg'=>"分佣失败",'status'=>0]);
+        }
+        // 更新会员余额
+        $money = $commission;
+        $rest = M('Member')->where(['id'=>$parent['id']])->save(['money'=>['exp','money+'.$money]]);
+        if($rest === false){
+            M()->rollback();
+            $this->ajaxReturn(['msg'=>"分佣失败",'status'=>0]);
+        }
+
+        // 向会员收益表追加一条记录
+        $rest = M('MemberProfit')->add([
+            'member_id' =>$parent['id'],
+            'money' =>$money,
+            'create_time' =>time(),
+            'type' =>2,
+            'remark' =>$projectName."影片分佣",
+        ]);
+        if($rest === false){
+            M()->rollback();
+            $this->ajaxReturn(['msg'=>"分佣失败",'status'=>0]);
+        }
     }
 }
