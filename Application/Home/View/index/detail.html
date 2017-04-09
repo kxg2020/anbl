@@ -6,6 +6,16 @@
 	<link rel="stylesheet" href="__PUBLIC__/wang/details/details.css">
 		<!--layer-->
 	<link href="__CSS__/layui.css" rel="stylesheet">
+	<style>
+		*{ margin:0; padding:0; list-style:none;}
+		a{ text-decoration:none;}
+		a:hover{ text-decoration:none;}
+		.tcdPageCode{padding: 15px 20px;text-align: left;color: #ccc;}
+		.tcdPageCode a{display: inline-block;color: #428bca;display: inline-block;height: 25px;	line-height: 25px;	padding: 0 10px;border: 1px solid #ddd;	margin: 0 2px;border-radius: 4px;vertical-align: middle;}
+		.tcdPageCode a:hover{text-decoration: none;border: 1px solid #428bca;}
+		.tcdPageCode span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #428bca;	border: 1px solid #428bca;border-radius: 4px;vertical-align: middle;}
+		.tcdPageCode span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
+	</style>
 	<title>阿纳巴里</title>
 </head>
 <body>
@@ -63,10 +73,10 @@
 				<div>
 					<p class="title">评论</p>
 					<ul class="comment_ul">
-						<li class="comment_choice" _type="1">导演</li>
-						<li _type="2">演员</li>
-						<li _type="3">故事</li>
-						<li _type="4">后期</li>
+						<li class="comment_choice chk" _type="1">导演</li>
+						<li _type="2" class="chk">演员</li>
+						<li _type="3" class="chk">故事</li>
+						<li _type="4" class="chk">后期</li>
 					</ul>
 					<div class="loginorreg"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></div>
 					<input type="hidden" value="{$count}" id="count">
@@ -78,8 +88,9 @@
 						</volist>
 
 					</div>
-					<div id="demo6"></div>
+					<div class="tcdPageCode"></div>
 				</div>
+
 			</div>
 		</div>
 		<div class="suport_bg" style="display: none;">
@@ -105,46 +116,55 @@
 				<div class="close_btn">关闭</div>
 			</div>
 		</div>
+		<input type="hidden" value="{$count_1}" name="pages_1">
 	</div>
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/common.js'></script>
 	<script src='__PUBLIC__/wang/details/details.js'></script>
 	<script src="__JS__/layer/layui.js"></script>
 	<script src="__JS__/layer/laypage.js"></script>
+	<script src="__PUBLIC__/layer/layer.js"></script>
+	<script src="__JS__/page.js"></script>
 	<script>
 		$(function(){
-			layui.use(['laypage', 'layer'], function(){
-				var type = $('.comment_choice').attr('_type');
-				var laypage = layui.laypage,layer = layui.layer;
-				laypage({
-					cont: 'demo6'
-					,pages: $('#count').val()
-					,skip: true
-					,jump: function(obj, first){
-						if(!first){
-							$.ajax({
-								'type':'post',
-								'dataType':'json',
-								'url':"{:U('Home/Index/pageSelect')}",
-								'data':{
-									'pgNum':obj.curr,
-									'pgSize':12,
-									'type':type,
-									'movie_id':$('input[name = movie_id]').val()
-								},
-								success:function(result){
-									//>> 清空div中的内容
-									$('.publish_area').html('');
-									if(result.status == 1){
-										$.each(result.directorArr,function(k,v){
-											$('.publish_area').append('<p><img src="__PUBLIC__/wang/img/1.jpg"'+ "style='width: 30px;height: 30px'><span>"+ v.username+"</span>:"+ v.content+'</p>');
-										});
+			$(".tcdPageCode").createPage({
+				pageCount:$('#count').val(),
+				current:1,
+				backFn:function(pgNum){
+
+					id = $('input[name = movie_id]').val();
+					// 获取评论的类型
+					type = $('.comment_choice').attr('_type');
+					console.log(type);
+					$.ajax({
+						'type':'post',
+						'dataType':'json',
+						'url':"{:U('Home/Index/pageSelect')}",
+						'data':{
+							'movie_id':id,
+							'type':type,
+							'pgNum':pgNum,
+						},
+						success:function(result){
+							$('div[class = publish_area]').html('');
+							if(result.status == 1){
+								$.each(result.directorArr,function(k,v){
+									$('div[class = publish_area]').append(
+											'<p><img src="__PUBLIC__/wang/img/1.jpg" style="width: 30px;height: 30px"><span>'+ v.username+'</span>:'+ v.content+'</p>'
+
+									);
+								});
+								$(".tcdPageCode").createPage({
+									pageCount:result.pages,
+									current:result.crrpage,
+									backFn:function(p){
+
 									}
-								}
-							});
+								});
+							}
 						}
-					}
-				});
+					});
+				}
 			});
 			//>> 发表主评论
 			$('#ok').click(function(){
@@ -160,6 +180,7 @@
 
 				// 获取评论的类型
 				var type = $('.comment_choice').attr('_type');
+
 				//>> 判断是否为空
 				if(content.length == 0){
 					layer.tips('请输入您的评论', '#mainContent');
@@ -175,11 +196,11 @@
 						},
 						success:function(result){
 							if(result.status == 1){
+								layer.msg('评论成功!');
+								$('div[class = publish_area]').append(
+										'<p><img src="__PUBLIC__/wang/img/1.jpg" style="width: 30px;height: 30px"><span>'+ result.data.username+'</span>:'+ result.data.list+'</p>'
 
-								layer.msg('评论成功!',function(){
-									location.reload();;
-								});
-
+								);
 							}else{
 								layer.msg('评论失败!');
 							}
@@ -187,6 +208,43 @@
 					});
 				}
 			});
+			$('.chk').click(function(){
+				$('div[class = publish_area]').html('');
+				id = $('input[name = movie_id]').val();
+				// 获取评论的类型
+				type = $('.comment_choice').attr('_type');
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':"{:U('Home/Index/pageSelect')}",
+					'data':{
+						'movie_id':id,
+						'type':type,
+						'pgNum':1
+					},
+					success:function(result){
+
+						if(result.status == 1){
+
+							$.each(result.directorArr,function(k,v){
+								$('div[class = publish_area]').append(
+										'<p><img src="__PUBLIC__/wang/img/1.jpg" style="width: 30px;height: 30px"><span>'+ v.username+'</span>:'+ v.content+'</p>'
+
+								);
+							});
+							$(".tcdPageCode").createPage({
+								pageCount:result.pages,
+								current:result.crrpage,
+								backFn:function(p){
+
+								}
+							});
+						}else{
+							$("div[class = tcdPageCode]").empty();
+						}
+					}
+				});
+			})
 		});
 	</script>
      <script type="application/javascript">
