@@ -8,6 +8,27 @@ class PersonalController extends CommonController{
 
 
     /**
+     * 查询下级
+     */
+    public function find(){
+
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+
+            $rows = M('Member')->where(['parent_id'=>$paramArr['id']])->select();
+            foreach($rows as &$row){
+                //查询支持金额
+                $row['support_money'] = M('MemberSupport')->where(['member_id'=>$row['id']])->sum('support_money');
+                if(!$row['support_money']){
+                    $row['support_money'] = 0;
+                }
+            }
+            unset($row);
+            $this->ajaxReturn($rows);
+        }
+    }
+
+    /**
      * 递归查询最上级
      */
     private function groupLeader ($id){
@@ -27,28 +48,20 @@ class PersonalController extends CommonController{
      */
     public  function getMenuTree($id,$lev = 0){
 
-        static  $arrTree = array(); //使用static代替global
+        static  $arrTree = array();
         //>> 查询子类
         $childTree = M('Member')->where(['parent_id'=>$id])->select();
-
         $lev ++;
-        //>> 判断是否有子类
         if(!empty($childTree)){
             $arrTree['level_'.$lev] = $childTree;
-
             foreach($childTree as $key => $value){
-
-                return $this->getMenuTree($value['id'],$lev);
+                $this->getMenuTree($value['id'],$lev);
             }
         }
-
         return $arrTree;
     }
 
-    public function test(){
 
-       
-    }
     /**
      * 个人中心
      */
@@ -83,8 +96,7 @@ class PersonalController extends CommonController{
 
         //>> 查所有下级
 
-        $follower = $this->getMenuTree($this->userInfo['id']);
-
+       // $follower = $this->getMenuTree($this->userInfo['id']);
 
 
         //>> 查询当前用户的支持情况
@@ -179,7 +191,6 @@ class PersonalController extends CommonController{
 
         $this->assign([
             'topLeader'=>$topLeader,
-            'follower'=>$follower,
             'consume'=>$consume,
             'consume_1'=>$consume_1,
             'question'=>$question,
