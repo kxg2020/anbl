@@ -48,9 +48,10 @@ class IndexController extends CommonController{
         $id = intval($id);
         $commentModel = M('Comment');
         //>> 默认查询导演
-        $rows = $commentModel->where(['type'=>1,'movie_id'=>$id])->select();
+        $rows = $commentModel->where(['type'=>1,'movie_id'=>$id])->order('create_time desc')->select();
         $directorArr = [];
         $count = 0;
+
         if(!empty($rows)){
             $count = ceil(count($rows) / 12);
             $directorArr = $this->pagination($rows,1,12);
@@ -90,19 +91,21 @@ class IndexController extends CommonController{
             }else{
                 $pgSize = 12;
             }
-            $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'] ,'type'=>$paramArr['type']])->select();
+            $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'] ,'type'=>$paramArr['type']])->order('create_time desc')->select();
 
             if(!empty($rows)){
                 $directorArr = $this->pagination($rows,$pgNum,$pgSize);
                 $this->ajaxReturn([
                     'directorArr'=>$directorArr,
+                    'pages'=>ceil(count($rows)/12) ? ceil(count($rows)/12):0,
+                    'crrpage'=>$paramArr['pgNum'],
                     'status'=>1
                 ]);
             }else{
-                die($this->_printError(''));
+                die($this->_printError('1000'));
             }
         }else{
-            die($this->_printError(''));
+            die($this->_printError('1000'));
         }
     }
 

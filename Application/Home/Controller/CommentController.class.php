@@ -24,7 +24,7 @@ class CommentController extends CommonController{
                 ];
                 $res = M('Comment')->add($insertData);
                 if($res){
-                    die($this->_printSuccess());
+                    die($this->_printSuccess(['list'=>$insertData['content'],'username'=>$this->userInfo['username']]));
                 }else{
                     die($this->_printError('1036'));
                 }

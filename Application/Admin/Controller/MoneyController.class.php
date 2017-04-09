@@ -172,7 +172,7 @@ class MoneyController extends CommonController
             $supportInfo = M('MemberSupport')->where($where)->select();
 
             if(!$supportInfo){
-                $this->ajaxReturn(['msg'=>"该项目还没有支持订单产生",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"该项目没有未分佣的订单",'status'=>0]);
             }
 
 
@@ -194,6 +194,13 @@ class MoneyController extends CommonController
                 //进行分佣
                 $this->genCommission($info,$box,$projectInfo,$memberInfo['parent_id'],1);
             }
+
+            // 修改项目分红状态
+            $rest = M('Project')->where(['id'=>$projectInfo['id']])->save(['is_fy'=>1]);
+            if($rest === false){
+                M()->rollback();
+                $this->ajaxReturn(['msg'=>"分佣失败",'status'=>0]);
+            }
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg'=>"分佣成功",'status'=>1]);
@@ -209,6 +216,7 @@ class MoneyController extends CommonController
      * @param $level 级别
      */
     protected function genCommission($info,$roi, $projectInfox,$parent_id, $level){
+
         if ($parent_id == 0) {
             return;
         }
@@ -236,6 +244,8 @@ class MoneyController extends CommonController
                 if($level == 1){//第一父
                     // 计算佣金
                     $commission = $info['support_money']*($projectInfo['first_rate']/100) + $roi*($projectInfo['first_rate']/100);// 5%
+
+
                     $this->insertDb($info,$commission,$parent,$projectInfo['name']);
                 }
                 if($level == 2){//第二父
@@ -257,7 +267,9 @@ class MoneyController extends CommonController
 
                 }
                 if($level == 2){
+
                     $commission = $info['support_money']*($projectInfo['two_rate']/100) + $roi*($projectInfo['two_rate']/100);// 3%
+
                     $this->insertDb($info,$commission,$parent,$projectInfo['name']);
                 }
                 if($level == 3){
@@ -287,7 +299,7 @@ class MoneyController extends CommonController
                 break;
 
         }
-        $this->genCommission($info['support_money'], $roi, $projectInfo,$parent['parent_id'],$level+1);
+       $this->genCommission($info, $roi, $projectInfo,$parent['parent_id'],$level+1);
     }
 
 
