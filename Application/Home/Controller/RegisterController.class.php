@@ -66,6 +66,7 @@ class RegisterController extends CommonController{
                     $row = $userModel->where($where)->find();
                     if(!empty($row)){
 
+                        $parent_id = $row['id'];
                     }else{
 
                         die($this->_printError('1040'));
