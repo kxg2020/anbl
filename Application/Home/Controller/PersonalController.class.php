@@ -90,7 +90,7 @@ class PersonalController extends CommonController{
 
         //>> 查最上级
         $topLeader = $row;
-        
+
 
         //>> 查所有下级
 

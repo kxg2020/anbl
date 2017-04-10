@@ -68,7 +68,21 @@
 </span>
 								<span><input type="radio" name="sex" value="" data-sex="2" <if condition="$userInfo['sex'] eq 2">checked="checked"</if>>女</span>
 							</div>
-							<div class="user_leval"><span>用户等级:</span><p><i></i><span>初级</span></p></div>
+							<input type="hidden" value="{$personal['level']}" id="dengji">
+							{~$userLevel=['1'=>'I','2'=>'II','3'=>'III','4'=>'IV','5'=>'V']}
+							{~$userWidth=['1'=>'10%','3'=>'50%','4'=>'70%','5'=>'90%']}
+							<div class="user_leval"><span>用户等级:</span><p><i id="bg_1"></i><span id="d">
+
+							</span></p></div>
+							<script>
+								var arr = ['10%','30%','50%','70%','90%'];
+								var brr = ['I','II','III','IV','V'];
+								var lv = $('#dengji').val()- 1;
+								var lvR = $('#dengji').val();
+								$('#d').css('left',arr[lv]);
+								$('#d').text(brr[lv]);
+								$('#bg_1').css({'background':'url('+'__PUBLIC__/wang/img/level'+lvR+'.png)','left':arr[lv]});
+							</script>
 							<div class="save_update" id="sex">保存更新</div>
 						</div>
 						<div class="safe_center"  style="display: none;" >
@@ -175,7 +189,7 @@
 							<p>提现金额: <input type="text" name="exMoney"></p>
 							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
 							<div class="question_div"></div>
-							<div id="get_btn" class="ex">确定</div>
+							<input type="button" value="确定" id="get_btn" class="ex" >
 						</div>
 						<div class="money_record" style="display: none;">
 							<p><span>充值时间</span>

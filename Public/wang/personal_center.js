@@ -354,7 +354,8 @@ $(function(){
 	});
 
 	$('.ex').click(function(){
-		var money = $('input[name = exMoney]').val()
+		var money = $('input[name = exMoney]').val();
+
 		if(money == ''){
 
 			 layer.tips('请输入提现金额','input[name = exMoney]');
@@ -366,6 +367,7 @@ $(function(){
 
 				layer.tips('请输入数字','input[name = exMoney]');
 			}else{
+				$(this).attr('disabled','disabled');
 				var url =  location.protocol +'//'+ window.location.host+'/Home/Personal/cash';
 				$.ajax({
 					'type':'post',
@@ -381,7 +383,9 @@ $(function(){
 							});
 
 						}else{
-							layer.tips(result.msg,'input[name = exMoney]');
+							layer.msg(result.msg,function(){
+								location.reload();
+							});
 						}
 					}
 				});
