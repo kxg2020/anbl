@@ -62,17 +62,18 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="{:U('admin/index/index')}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="active"><a href="{:U('admin/Index/index')}"><i class="fa fa-home"></i> <span>首页</span></a></li>
                 <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/user/index')}">用户列表</a></li>
-                        <li><a href="{:U('admin/user/add')}">用户添加</a></li>
+                        <li><a href="{:U('admin/User/index')}">用户列表</a></li>
+                        <li><a href="{:U('admin/User/add')}">用户添加</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>会员管理</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="{:U('admin/Member/select')}">会员列表</a></li>
                         <li><a href="{:U('admin/Member/addMember')}">会员添加</a></li>
+                        <li><a href="{:U('admin/Member/getProfit')}">会员收益</a></li>
                         <li><a href="{:U('admin/Member/integral')}">升级规则</a></li>
                         <li><a href="{:U('admin/Member/question')}">会员问答</a></li>
                         <li><a href="{:U('admin/Member/memberStar')}">明星会员</a></li>
@@ -80,19 +81,19 @@
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-folder-o"></i> <span>电影管理</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/project/index')}">电影列表</a></li>
-                        <li><a href="{:U('admin/project/add')}">电影添加</a></li>
-                        <li><a href="{:U('admin/projectCategory/index')}">电影分类</a></li>
+                        <li><a href="{:U('admin/Project/index')}">电影列表</a></li>
+                        <li><a href="{:U('admin/Project/add')}">电影添加</a></li>
+                        <li><a href="{:U('admin/ProjectCategory/index')}">电影分类</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-gear"></i> <span>明星管理</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/pageConfig/select')}">优秀作品</a></li>
+                        <li><a href="{:U('admin/PageConfig/select')}">优秀作品</a></li>
 
                        
-                        <li><a href="{:U('admin/works/index')}">优秀演员</a></li>
+                        <li><a href="{:U('admin/Works/index')}">优秀演员</a></li>
 
-                        <li><a href="{:U('admin/pageConfig/director')}">优秀导演</a></li>
+                        <li><a href="{:U('admin/PageConfig/director')}">优秀导演</a></li>
                         
 
                     </ul>
@@ -111,26 +112,26 @@
 
                 <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>数据管理</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/count/memberCount')}">会员数据</a></li>
-                        <li><a href="{:U('admin/count/projectCount')}">电影数据</a></li>
-                        <li><a href="{:U('admin/count/payCount')}">销售数据</a></li>
-                        <li><a href="{:U('admin/count/financeCount')}">财务数据</a></li>
+                        <li><a href="{:U('admin/Count/memberCount')}">会员数据</a></li>
+                        <li><a href="{:U('admin/Count/projectCount')}">电影数据</a></li>
+                        <li><a href="{:U('admin/Count/payCount')}">销售数据</a></li>
+                        <li><a href="{:U('admin/Count/financeCount')}">财务数据</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-gears"></i> <span>后台系统</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/system/index')}">网站基本设置</a></li>
+                        <li><a href="{:U('admin/System/index')}">网站基本设置</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-rss"></i> <span>信息发布</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/articleCategory/index')}">分类管理</a></li>
-                        <li><a href="{:U('admin/article/index')}">信息列表</a></li>
+                        <li><a href="{:U('admin/ArticleCategory/index')}">分类管理</a></li>
+                        <li><a href="{:U('admin/Article/index')}">信息列表</a></li>
                     </ul>
                 </li>
-                <li><a href="{:U('admin/login/logout')}"><i class="fa fa-sign-in"></i> <span>退出</span></a></li>
+                <li><a href="{:U('admin/Login/logout')}"><i class="fa fa-sign-in"></i> <span>退出</span></a></li>
 
             </ul>
             <!--sidebar nav end-->
@@ -258,7 +259,7 @@
     setInterval("getTrans()",10000);//1000为1秒钟
     function getTrans()
     {
-        $.get('{:U("admin/common/getTrans")}',function (data) {
+        $.get('{:U("admin/Common/getTrans")}',function (data) {
             $('#untreatedList').html(data.content);
             if(data.num > 0){
                 $('#transNum').removeClass('badge');

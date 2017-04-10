@@ -489,4 +489,44 @@ class MemberController extends  CommonController{
         }
     }
 
+
+    /**
+     * 会员收益
+     */
+    public function getProfit(){
+        //搜索条件
+        $where =[];
+        $phone = I('get.phone');
+        $type =  I('get.type_id');
+        if($phone){
+            $where['b.phone'] = ['like',"%$phone%"];
+        }
+        if($type){
+            $where['a.type'] = ['like',"%$type%"];
+        }
+        $count = M('MemberProfit as a')
+            ->field('a.*,b.username')
+            ->join('left join an_member as b on b.id=a.member_id')
+            ->where($where)
+            ->count();
+
+        $page = new Page($count,2);
+        // 查询出会员收益
+        $profit = M('MemberProfit as a')
+            ->field('a.*,b.username')
+            ->join('left join an_member as b on b.id=a.member_id')
+            ->where($where)
+            ->limit($page->firstRow, $page->listRows)
+            ->order('a.create_time desc')
+            ->select();
+
+        // 生成分页DOM结构
+        $pages = $page->show();
+        // 向模板分配分页条
+        $this->assign('pages',$pages);
+
+        $this->assign('rows',$profit);
+        $this->display('profit');
+    }
+
 }
