@@ -96,7 +96,7 @@ $(function(){
 	for (var i = 0; i < $('.news_carousel>div>a').length; i++) {
 		maxLeft=maxLeft+$('.news_carousel>div>a').eq(i).width()
 	}
-	console.log(-maxLeft)
+	//console.log(-maxLeft)
 	setInterval(function(){
 		marginLeft-=2;
 		$('.news_carousel>div').css({

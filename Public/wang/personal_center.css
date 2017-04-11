@@ -32,7 +32,7 @@ header .nav{
   height: 120px;
   margin: auto;
   text-align: center;
-  width: 100%;
+  width: 1200px;
   position: relative;
 }
 .logo{
@@ -41,15 +41,12 @@ header .nav{
   display: block;
   float: left;
   line-height: 120px;
-  margin-left: 20px;
 }
 .top_nav{
   width: 590px;
   height: 120px;
-  margin: auto;
-  position: absolute;
-  left: 50%;
-  margin-left: -295px;
+  float: left;
+  margin-left: 100px;
 }
 .top_nav li{
   float: left;
@@ -102,7 +99,6 @@ header .nav{
   width: auto;
   height: 120px;
   float: right;
-  margin-right: 20px;
   color: white;
 }
 .login_reg li{
@@ -1072,72 +1068,51 @@ margin-top: 25px;
 	position: relative;
 	font-size: 12px;
 }
-.team_content>div{
-	position: relative;
+.team_content table{
 	width: 100%;
-	text-align: center;
-}
-.team_content>div>div{
-	width: 150px;
-	height: 75px;
-	display: inline-block;
-	border-radius:5px;
-	background: #3f3f3f;
-	margin-right: 10px; 
-	margin-bottom: 30px;
-	position: relative;
-}
-.team_content>div>div>p:nth-child(1){
-	width: 100%;
-	height: 30px;
-	text-align: center;
-	line-height: 30px;
+	height: auto;
 	font-size: 16px;
 }
-.team_content>div>div>p:nth-child(2){
-	width: 95%;
-	border-bottom: 1px solid #4a4a4a;
-	padding-bottom: 5px;
-	margin:auto;
-}
-.team_content>div>div>.operat_p{
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	background: #161515;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 20px; 
-	color: #ffffff;
-	bottom:-25px; left: 50%;
-	cursor: pointer;	
-}
-.team_content>div>div>p:nth-child(2)>span:first-child{
-	margin-right: 10px;
-}
-.team_content>div>div>p:nth-child(3)>span:last-child{
-	margin-left: 10px;
-	color: #e50909;
-}
-#main1>div{
-	width: 160px;
-	height: 40px;
-	text-align: center;
-	line-height: 40px;
-	position: relative;
-}
-#main1>div>span{
+.team_content table thead {
 	font-size: 20px;
 }
-#main1>div>img{
+.team_content table tbody td:nth-child(2){
+	color: #e50909;
+}
+.team_content table th,.team_content table td{
+	padding-bottom: 15px;
+}
+.team_content table tbody  input{
+	padding-left: 15px;
+	padding-right: 15px;
+	border: none;
+	outline: none;
+	background: #e50909;
+	color: white;
+	cursor: pointer;
+	border-radius: 3px;	
+} 
+.money_modal{
+	width: 100%;
+	height: auto;
 	position: absolute;
-	top:20px;
-	right: -30px;
+	top:0; left: 0;
+	background: white;
+	border-radius: 5px;
+	color: #666;
+}
+.close_modal{
+	width: 120px;
+	height: 40px;
+	margin: auto;
+	background: #e50909;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 3px;
+	font-size: 16px;
 	cursor: pointer;
 }
-
-
-
 
 .actor_content{
 	width: 600px;
