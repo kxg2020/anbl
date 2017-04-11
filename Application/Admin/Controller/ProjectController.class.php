@@ -76,7 +76,7 @@ class ProjectController extends CommonController
                 'director' => $_data['director'],
                 'star' => $_data['star'],
                 'company' => $_data['company'],
-                'dl' => $_data['dl'],
+               // 'dl' => $_data['dl'],
                 'country' => $_data['country'],
                 'englishname' => $_data['englishname'],
                 'showaddress' => $_data['showaddress'],
@@ -91,11 +91,11 @@ class ProjectController extends CommonController
                 'sort' => $_data['sort'],
                 'is_active' => $_data['is_active'],
                 'type_id' => intval($_data['type_id']),
-                'url' => $_data['url'],
+               // 'url' => $_data['url'],
                 'image_url' => $_data['image_url'],
                 'create_time' => time(),
-                'fixed_rate'=>$_data['fixed_rate'],
-                'float_rate'=>$_data['float_rate_1'],
+                //'fixed_rate'=>$_data['fixed_rate'],
+               // 'float_rate'=>$_data['float_rate_1'],
             ];
 
             // 开启事物
@@ -170,7 +170,7 @@ class ProjectController extends CommonController
                 'director' => $_data['director'],
                 'star' => $_data['star'],
                 'company' => $_data['company'],
-                'dl' => $_data['dl'],
+               // 'dl' => $_data['dl'],
                 'country' => $_data['country'],
                 'englishname' => $_data['englishname'],
                 'showaddress' => $_data['showaddress'],
@@ -185,7 +185,7 @@ class ProjectController extends CommonController
                 'sort' => $_data['sort'],
                 'is_active' => $_data['is_active'],
                 'type_id' => intval($_data['type_id']),
-                'url' => $_data['url'],
+               // 'url' => $_data['url'],
                 'image_url' => $_data['image_url'],
             ];
             // 开启事物
