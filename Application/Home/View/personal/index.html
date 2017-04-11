@@ -43,9 +43,9 @@
 		</div>
 		</div>
 		<div class="body_right">
-			<ul>
+			<ul style='display: none;'>
 				<li id="identity"><div>帐号设置</div></li>
-				<li id="team"><div>我的团队</div></li>
+				<li id="team"><div>消费明细</div></li>
 				<li id="password"><div>密码修改</div></li>
 				<li id="ask"><div>平台咨询</div></li>
 				<li id="actor"><div>我要当演员</div></li>
@@ -310,14 +310,58 @@
 				<div class="bg">
 					<div class="close_team"></div>
 					<div class="team_content">
-						<div class="main1" id="main1">
-							<div class="1">
-								<span>{$topLeader.username}</span>
-								<img src="__PUBLIC__/wang/img/question1.png" alt="">
-								<p class='operat_p' id="1" data-id="{$topLeader.id}" >+</p>
-							</div>
+						<table>
+							<thead>
+								<tr>
+									<th>消费时间</th>
+									<th>消费积分</th>
+									<th>消费类型</th>		
+									<th>操作</th>
+								</tr>								
+							</thead>
+							<tbody>
+								<tr>
+									<td>2017-4-11</td>
+									<td>1000</td>
+									<td>进账</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+								<tr>
+									<td>2017-4-10</td>
+									<td>1000</td>
+									<td>出账</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+								<tr>
+									<td>2017-4-10</td>
+									<td>1000</td>
+									<td>出账</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+								<tr>
+									<td>2017-4-10</td>
+									<td>1000</td>
+									<td>出账</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+								<tr>
+									<td>2017-4-10</td>
+									<td>1000</td>
+									<td>出账</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+								<tr>
+									<td>2017-4-10</td>
+									<td>1000</td>
+									<td>出账</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class='money_modal' style='display: none;'>
+							<p>我的下线</p>
+							<div class='close_modal'>关闭</div>
 						</div>
-
 					</div>
 				</div>
 				<p>A</p>

@@ -445,6 +445,7 @@ $(function(){
 	$('#team').click(function(){
 		$('.body_right>ul').hide();
 		$('.body_right>div').hide();
+		$('.money_modal').hide()
 		$('.team').show();
 	})
 
@@ -473,45 +474,17 @@ $(function(){
 	})
 
 
-	//树形结构的控制
+	//消费明细模态框操作
 
-	//$('.team_content>div>div>.operat_p').click(function(){
-	//	var thisText=$(this).text();  //保存此次变量
-	//
-	//	//上一级收起来以后下一级和后面的都变为加号
-	//	var classArry=$(this)[0].id.split('-');
-    //
-	//
-	//	//下一级的消失
-	//	for(var i=classArry.length;i<$('.team_content>div').length;i++){
-	//		$('.team_content>div').eq(i).hide();
-	//	}
-    //
-	//	//判断加号和减号进行相应的操作
-	//	if(thisText=='+'){
-	//		var divWidth=0;
-	//		var classStr=$(this)[0].id;
-	//		$('.team_content>div').eq(classArry.length).show();
-	//		for(var i=0;i<$('.team_content>div').eq(classArry.length).children().length;i++){
-	//			var childrenStr=$('.team_content>div').eq(classArry.length).children().eq(i).attr('class').slice(0,-2);
-	//			if(childrenStr==classStr){
-	//				$('.team_content>div').eq(classArry.length).children().eq(i).show();
-	//				divWidth+=160;
-	//			}else{
-	//				$('.team_content>div').eq(classArry.length).children().eq(i).hide()
-	//			}
-	//		}
-	//		//$('.team_content>div').eq(classArry.length).css({
-	//		//	width:divWidth+30
-	//		//})
-	//		$(this).text('-')
-	//	}else{
-	//		for(var i=classArry.length;i<$('.team_content>div').length;i++){
-	//			$('.team_content>div').eq(i).hide();
-	//		}
-    //
-	//		$(this).text('+')
-	//	}
-	//})
+	$('.join').click(function(){
+		
+		var offset=$(this).parent().parent().offset();
+		$('.money_modal').fadeIn('slow').css({
+			marginTop:offset.top-120
+		});
+	})
+	$('.close_modal').click(function(){
+		$('.money_modal').fadeOut('slow');
+	})
 
 });

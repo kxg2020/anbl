@@ -2,7 +2,7 @@ body{
   font-family: 'Microsoft Yahei';
   font-size: 16px;
   min-width: 1200px;
-  background: #fafafa;
+  background: #3a3a3a;
 }
 li{
   list-style: none;
@@ -32,7 +32,7 @@ header .nav{
   height: 120px;
   margin: auto;
   text-align: center;
-  width: 100%;
+  width: 1200px;
   position: relative;
 }
 .logo{
@@ -41,15 +41,12 @@ header .nav{
   display: block;
   float: left;
   line-height: 120px;
-  margin-left: 20px;
 }
 .top_nav{
   width: 590px;
   height: 120px;
-  margin: auto;
-  position: absolute;
-  left: 50%;
-  margin-left: -410px;
+  float: left;
+  margin-left: 100px;
 }
 .top_nav li{
   float: left;
@@ -102,7 +99,6 @@ header .nav{
   width: auto;
   height: 120px;
   float: right;
-  margin-right: 20px;
   color: white;
 }
 .login_reg li{
@@ -598,6 +594,10 @@ header .nav{
 .move_list .choice{
   font-size: 30px;
   color: red;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #e50909;
+  color: white;
 }
     footer{
       clear: both;
