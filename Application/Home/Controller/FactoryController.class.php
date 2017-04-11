@@ -27,6 +27,49 @@ class FactoryController extends CommonController
     }
 
     /**
+     * 我要当演员
+     */
+    public function actor(){
+        if(IS_POST && IS_AJAX){
+            //判断有没有搜索
+            $where = [];
+            $name = I('post.name');
+            if($name){
+                $where['name'] =$name;
+                $rows = M('')->where($where)->find();
+                if($rows){
+                    $this->ajaxReturn([
+                        'data' =>$rows,
+                        'status' =>1,
+                    ]);
+                    exit;
+                }else{
+                    $this->ajaxReturn([
+                        'msg' =>"没有您想要的数据",
+                        'status' =>0,
+                    ]);
+                    exit;
+                }
+            }
+            // 查询出我要当演员的所有申请
+            $rows = M('')->where($where)->select();
+            if($rows){
+                $this->ajaxReturn([
+                    'data' =>$rows,
+                    'status' =>1,
+                ]);
+                exit;
+            }else{
+                $this->ajaxReturn([
+                    'msg' =>"没有您想要的数据",
+                    'status' =>0,
+                ]);
+                exit;
+            }
+        }
+    }
+
+    /**
      * 投票
      */
     public function vote(){
