@@ -62,8 +62,8 @@ class CommonController extends Controller{
             if(!empty($row)){
                 //>> 查询投资
                 $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
-                //>> 判断投资是否满100
-                if($support['support_money'] >= 100){
+                //>> 判断投资是否满700
+                if($support['support_money'] >= 700){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
                 }
@@ -72,19 +72,19 @@ class CommonController extends Controller{
                 $count = $this->group($row['id']);
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
-                if($count >= 3){
+                if($count >= 5){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
-                //>> 如果投资5000以上,直推10人,团队100人升级为制片人
-                if($support['support_money'] >= 5000 && $count >= 10 && $all >= 100){
-                    //>> 升级为经纪人
+                //>> 如果投资35000以上,直推10人,团队100人升级为制片人
+                if($support['support_money'] >= 35000 && $count >= 10 && $all >= 100){
+                    //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
-                //>> 如果个人投资10000 直推50人 团队500人 升级出品人
-                if($support['support_money'] >= 5000 && $count >= 50 && $all >= 500){
+                //>> 如果个人投资70000 直推50人 团队500人 升级出品人
+                if($support['support_money'] >= 70000 && $count >= 50 && $all >= 500){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
@@ -128,13 +128,13 @@ class CommonController extends Controller{
     /**
      * 团队
      */
-    public function allMembers($id){
+    private function allMembers($id){
 
         static $sum = 0;
         $rows = M('Member')->where(['parent_id'=>$id])->select();
-        $count = count($rows);
-        $sum += $count;
         if(!empty($rows)){
+            $count = count($rows);
+            $sum += $count;
             foreach($rows as $k => $v){
                 $this->allMembers($v['id']);
             }
