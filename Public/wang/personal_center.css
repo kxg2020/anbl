@@ -725,10 +725,14 @@ header .nav{
 	font-size: 18px;
 }
 .money_content>ul{
-    width: 90%;
+    width: 80%;
     height: 38px;
     margin: auto;
     border-bottom: 1px solid #ccc;
+}
+.money_content>div{
+	width: 80%;
+	margin:auto;
 }
 .money_content>ul .choice{
 	    border-bottom: 1px solid #e50909;
@@ -1200,3 +1204,10 @@ margin-top: 25px;
 	margin-left: 100px;
 	cursor: pointer;
 }
+ .actor_content .movie1 a{
+ 	color: gold;
+ 	display: inline-block;
+ 	padding-right: 15px;
+	border-right: 1px solid #e50909;
+	padding-left: 15px;
+ }

@@ -161,7 +161,6 @@
 						</ul>
 						<ul style="display: none;">
 							<li>充值记录</li>
-							<li>消费明细</li>
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
 						<if condition="$userInfo['bank_card'] neq '' ">
@@ -206,6 +205,7 @@
 						 </div>
 							<div id="demo6" style="margin-left: 42px;"></div>
 					</div>
+<<<<<<< HEAD
 						<div class="money_deal" style="display: none;">
 
 							<p><span>交易时间</span>
@@ -230,6 +230,9 @@
 								</volist>
 
 						</div>
+=======
+						
+>>>>>>> 167d1a77a0aa904d994c2f986c7734de1b39a308
 
 					</div>
 				</div>
@@ -306,7 +309,7 @@
 				</script>
 			</div>
 
-			<div class="team" style="display: block;">
+			<div class="team" style="display: none;">
 				<div class="bg">
 					<div class="close_team"></div>
 					<div class="team_content">
@@ -345,12 +348,13 @@
 
 
 
-			<div class="actor" style="display: none;">
+			<div class="actor" style="display: block;">
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<form>
 							<h3 style="color: orange;" >演员申请表</h3>
+							<div class='movie1'> <label >声请电影名:</label> <a href="#">迪昂月</a><a href="#">斯蒂芬</a><a href="#">斯蒂芬</a></div>
 							<div><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
 							<div><label><span style="color: red">*</span>&nbsp;性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
 							<div><label><span style="color: red">*</span>&nbsp;民族:</label><input style='width: 80px;' type="text" name="volk"></div>
@@ -362,8 +366,9 @@
 							<div><label><span style="color: red">*</span>&nbsp;现居住地:</label><input type="text" name="crraddress"></div>
 							<div class="up_photo"><label><span style="color: red">*</span>&nbsp;生活照:</label><input type="file" id="uploadStar"><input type="button"  value="点击上传"></div>
 							<input type="hidden" value="" name="im">
-							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;才能描述:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
+							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;自我评价:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
 							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;表演经历:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
+
 							<input type="button" value="确定申请" id="sure_apply">
 							<script>
 								//这里弹出层显示的内容你 来写快一点 就是下面的字
