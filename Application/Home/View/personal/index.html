@@ -161,7 +161,6 @@
 						</ul>
 						<ul style="display: none;">
 							<li>充值记录</li>
-							<li>消费明细</li>
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
 						<if condition="$userInfo['bank_card'] neq '' ">
@@ -206,30 +205,7 @@
 						 </div>
 							<div id="demo6" style="margin-left: 42px;"></div>
 					</div>
-						<div class="money_deal" style="display: none;">
-
-							<p><span>交易时间</span>
-								<span>交易类型</span>
-								<span style="color: white;">交易号</span>
-								<span style="color: white;">交易金额</span>
-
-								<volist name="consume" id="c">
-									<p><span>{:date('Y-m-d',$c['create_time'])}</span>
-										<span>电影下载</span>
-										<span>{$c.order_number}</span>
-										<span>{$c.money}</span>
-										<span>{$c.is_pass}</span></p>
-								</volist>
-
-
-								<volist name="consume_1" id="e">
-									<p><span>{:date('Y-m-d',$e['create_time'])}</span>
-										<span>电影支持</span>
-										<span>{$e.order_number}</span>
-										<span>{$e.support_money}</span>
-								</volist>
-
-						</div>
+						
 
 					</div>
 				</div>
@@ -306,7 +282,7 @@
 				</script>
 			</div>
 
-			<div class="team" style="display: block;">
+			<div class="team" style="display: none;">
 				<div class="bg">
 					<div class="close_team"></div>
 					<div class="team_content">
@@ -373,15 +349,20 @@
 
 
 
-			<div class="actor" style="display: none;">
+			<div class="actor" style="display: block;">
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<form>
 							<h3>我要当演员申请</h3>
+							<div class='movie1'> <label >声请电影名:</label> <a href="#">迪昂月</a><a href="#">斯蒂芬</a><a href="#">斯蒂芬</a>
+							</div>
 							<div><label>姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
 							<div><label>性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
-							<div><label>民族:</label><input style='width: 80px;' type="text" name="volk"></div>
+							<div>
+								<label>民族:</label><input style='width: 80px;' type="text" name="volk">
+								
+							</div>
 							<div><label>生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
 							<div><label>身高:</label><input type="number" name="realheight"><span>单位:cm</span></div>
 							<div><label>身份证号码:</label><input type="text" name="id_card_"></div>
@@ -390,8 +371,8 @@
 							<div><label>现居住地:</label><input type="text" name="crraddress"></div>
 							<div class="up_photo"><label>上传生活照:</label><input type="file" id="uploadStar"><input type="button"  value="点击上传"></div>
 							<input type="hidden" value="" name="im">
-							<div><label style='float: left;'>才能描述:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
-							<div><label style='float: left;'>表演经历:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
+							<div><label style='float: left;'>自我评价:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
+							<div><label style='float: left;'>角色理解:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
 							<input type="button" value="确定申请" id="sure_apply">
 							<script>
 								//这里弹出层显示的内容你 来写快一点 就是下面的字

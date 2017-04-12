@@ -50,7 +50,7 @@ header{
 }
 .body{
 	width: 100%;
-	padding-top: 168px;
+	margin-top: 168px;
 	height: auto;
 	overflow: hidden;
 	position: relative;

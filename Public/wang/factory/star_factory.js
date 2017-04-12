@@ -107,11 +107,16 @@ $(function(){
  }
   screen_auto();  
 
-  if($('html').height()>700){
-     $('.body').css({
-    height:$('html').height() - 168 
-  })
+  if($('html').height()>868){
+      $('.menu_content').css({
+      height:$('html').height()
+    })
+  }else{
+      $('.menu_content').css({
+      height:868
+    })
   }
+  
  
 
 });
