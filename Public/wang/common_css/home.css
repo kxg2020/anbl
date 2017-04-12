@@ -2,7 +2,7 @@ body{
   font-family: 'Microsoft Yahei';
   font-size: 16px;
   min-width: 1200px;
-  background: #3a3a3a;
+  background: #000;
 }
 li{
   list-style: none;
@@ -583,9 +583,10 @@ header .nav{
   top: 200px;
   left: 5px;
   z-index: 99;
+
 }
 .move_list p{
-  color: black;
+ color: white;
   margin-bottom:50px;
   text-align: left;
   font-size: 20px;
@@ -593,11 +594,10 @@ header .nav{
 }
 .move_list .choice{
   font-size: 30px;
-  color: red;
   padding-left: 20px;
   padding-right: 20px;
-  background: #e50909;
-  color: white;
+  color:  #e50909;
+  border: 1px solid #e50909;
 }
     footer{
       clear: both;

@@ -23,7 +23,7 @@ a{
 	margin: auto;
 	width: 355px;
 	height: auto;
-	padding-top: 180px;
+	padding-top: 10%;
 	color: white;
 	text-align: center;
 }
@@ -96,7 +96,7 @@ a{
 	cursor: pointer;
 }
 #reg_content{
-	padding-top: 100px;
+	padding-top: 9%;
 }
 #reg_content input{
 	padding-left: 20px;
@@ -141,4 +141,5 @@ color: #c5c6c6;
 #reg_content #menban{
 	background: rgba(0,0,0,0);
 	z-index: 10;
+	cursor: pointer;
 }

@@ -24,10 +24,11 @@ $(function(){
         $('.star_content>div').hide();
     $('.classify p').removeClass('choice');
     if(txt==='优秀演员'){
-      $('.classify p').eq(0).addClass('choice');
+      $('.classify p').eq(1).addClass('choice');
       $('.nice_actor').show();
       $('.nice_director').hide();
       $('.nice_work').hide();
+      $('.choice_role').hide();
         $('#sb-container>div').eq(0).addClass('ff-active')
         $('#star_content>div').eq(0).show();
         div=$('#star_content>div').eq(0);
@@ -36,10 +37,11 @@ $(function(){
         } );
     }
     if(txt==='优秀导演'){
-      $('.classify p').eq(1).addClass('choice');
+      $('.classify p').eq(2).addClass('choice');
       $('.nice_actor').hide();
       $('.nice_director').show();
       $('.nice_work').hide();
+      $('.choice_role').hide();
         $('#sb-container1>div').eq(0).addClass('ff-active')
         $('#star_content1>div').eq(0).show();
         div=$('#star_content1>div').eq(0);
@@ -48,14 +50,28 @@ $(function(){
         } );
     }
     if(txt==='优秀作品'){
-      $('.classify p').eq(2).addClass('choice');
+      $('.classify p').eq(3).addClass('choice');
       $('.nice_actor').hide();
       $('.nice_director').hide();
       $('.nice_work').show();
+      $('.choice_role').hide();
         $('#sb-container2>div').eq(0).addClass('ff-active')
         $('#star_content2>div').eq(0).show();
         div=$('#star_content2>div').eq(0);
       $( '#sb-container2' ).swatchbook( {
+          openAt : 0
+        } );
+    }
+    if(txt==='评选角色'){
+      $('.classify p').eq(0).addClass('choice');
+      $('.nice_actor').hide();
+      $('.nice_director').hide();
+      $('.nice_work').hide();
+      $('.choice_role').show();
+        $('#sb-container3>div').eq(0).addClass('ff-active')
+        $('#star_content3>div').eq(0).show();
+        div=$('#star_content3>div').eq(0);
+      $( '#sb-container3' ).swatchbook( {
           openAt : 0
         } );
     }
@@ -90,5 +106,12 @@ $(function(){
   }
  }
   screen_auto();  
+
+  if($('html').height()>700){
+     $('.body').css({
+    height:$('html').height() - 168 
+  })
+  }
+ 
 
 });
