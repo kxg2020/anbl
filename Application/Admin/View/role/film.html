@@ -52,7 +52,7 @@
 
                                     <volist name="roles" id="ro">
                                     <label>{$ro['name']}</label>
-                                    <input type="checkbox"  name="roles[]">&nbsp;&nbsp;
+                                    <input type="checkbox"  name="role" value="{$ro['id']}">&nbsp;&nbsp;
                                     </volist>
                                 </div>
 
@@ -68,9 +68,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>电影名称</label>
-                                    <input type="text" class="form-control" name="works" placeholder="请输入电影名">
+                                    <input type="text" class="form-control" name="film" placeholder="请输入电影名">
                                 </div>
-                                <button type="submit" class="btn btn-primary">提交</button>
+                                <button type="button" class="btn btn-primary" >提交</button>
                         </div>
                     </section>
                 </div>
@@ -105,7 +105,6 @@
                     } else {
                         var _isMax = false;
                         var path = data.url;
-                        console.log(data.url);
                         var _html = '<div class="imgInput"><img title="点我删除" src="' + path + '" width = 100 height = 100 /><input type="hidden" name="image_url" value="' + path + '"></div>';
                         // 获取图片列表
                         $('#images').html(_html);
@@ -125,7 +124,35 @@
                 $(this).remove();
             });
 
+            $('button[type = button]').click(function(){
+                arr = [];
+                //>> 角色列表
+                $("input[name = role]:checked").each(function(){
+                    arr.push($(this).val())
+                });
+                images = $('input[name = image_url]').val();
+                film = $('input[name = film]').val();
+                $.ajax({
+                    'type':'post',
+                    'dataType':'json',
+                    'url':location.protocol+'//'+window.location.host+'/admin/Role/film',
+                    'data':{
+                        'film':film,
+                        'image_url':images,
+                        'roles':arr
+                    },
+                    success:function(result){
+                        if(result.status == 1){
+                            layer.msg(result.msg);
+                        }else{
+                            layer.msg(result.msg);
+                        }
+                    }
+                });
+            });
         });
+
+
     </script>
 
 </block>

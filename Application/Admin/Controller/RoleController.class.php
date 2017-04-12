@@ -92,8 +92,64 @@ class RoleController extends CommonController{
      */
     public function film(){
 
+        if(IS_POST && IS_AJAX){
+
+            $paramArr = $_REQUEST;
+
+            if(!empty($paramArr)){
+
+                $insertData = [
+                    'name'=>$paramArr['film'],
+                    'image_url'=>$paramArr['image_url'],
+                    'role_id'=>json_encode($paramArr['roles']),
+                    'create_time'=>time(),
+                ];
+                $res = M('ProjectRecruit')->add($insertData);
+                if($res){
+
+                    $this->ajaxReturn([
+                        'msg'=>'添加成功',
+                        'status'=>1
+                    ]);
+                }else{
+
+                    $this->ajaxReturn([
+                        'msg'=>'添加失败',
+                        'status'=>0
+                    ]);
+                }
+            }else{
+
+                $this->ajaxReturn([
+                    'status'=>0,
+                    'msg'=>'添加失败'
+                ]);
+            }
+        }
+
         $roles = M('ProjectRole')->select();
         $this->assign('roles',$roles);
         $this->display('role/film');
+    }
+
+    /**
+     * 招募列表
+     */
+    public function index(){
+
+        $films = M('ProjectRecruit')->select();
+        foreach($films as $key => &$value){
+            $value['role_id'] = json_decode($value['role_id']);
+            //>> 循环查询角色
+            foreach($value['role_id'] as $k => $v){
+                static $role = [];
+                $row = M('ProjectRole')->where(['id'=>$v['id']])->find();
+                $role[] = $row['name'];
+                $value['roles'] = implode('、',$role);
+            }
+        }
+        unset($value);
+        $this->assign('films',$films);
+        $this->display('role/index');
     }
 }
