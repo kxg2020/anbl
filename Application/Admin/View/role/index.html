@@ -109,6 +109,11 @@
                                                 <td>创建时间</td>
                                                 <td>操作</td>
                                             </tr>
+                                            <if condition="empty($films)">
+                                            <tr align="center">
+                                                <td colspan="6">暂无数据</td>
+                                            </tr>
+                                            </if>
                                             <volist name="films" id="f">
                                             <tr align="center">
                                                 <td style='vertical-align: middle'>{$f.id}</td>
@@ -116,7 +121,7 @@
                                                 <td style='vertical-align: middle'><img src="{$f['image_url']}" style="height: 50px;width: 30px"></td>
                                                 <td style='vertical-align: middle'>{$f['roles']}</td>
                                                 <td style='vertical-align: middle'>{:date('Y-m-d',$f['create_time'])}</td>
-                                                <td style='vertical-align: middle'><input type="button" name="delete" class="btn btn-xs btn-danger" data-id="{$r['id']}" value="删除"></td>
+                                                <td style='vertical-align: middle'><input type="button" name="delete" class="btn btn-xs btn-danger" data-id="{$f['id']}" value="删除"></td>
                                             </tr>
                                             </volist>
                                         </table>
@@ -167,7 +172,7 @@ $(function(){
     $('input[name = delete]').click(function(){
 
         id = $(this).attr('data-id');
-        url = location.protocol+'//'+window.location.host+'/admin/Role/delete';
+        url = location.protocol+'//'+window.location.host+'/admin/Role/delRecruit';
         $.ajax({
             'type':'post',
             'dataType':'json',

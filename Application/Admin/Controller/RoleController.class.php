@@ -98,6 +98,33 @@ class RoleController extends CommonController{
 
             if(!empty($paramArr)){
 
+                //>> 判断电影是否添加
+                $where = [];
+                $where['name'] = ['like',"%".$paramArr['film']."%"];
+                $result = M('ProjectRecruit')->where($where)->find();
+
+                if(!empty($result)){
+                    $updateData = [
+                        'name'=>$paramArr['film'] ? $paramArr['film'] :'',
+                        'image_url'=>$paramArr['image_url'] ? $paramArr['image_url']: '',
+                        'role_id'=>json_encode($paramArr['roles']),
+                        'create_time'=>time(),
+                    ];
+                    $re = M('ProjectRecruit')->where(['id'=>$result['id']])->save($updateData);
+
+                    if($re === false){
+
+                        $this->ajaxReturn([
+                            'msg'=>'添加失败',
+                            'status'=>0
+                        ]);
+                    }else{
+                        $this->ajaxReturn([
+                            'msg'=>'添加成功',
+                            'status'=>1
+                        ]);
+                    }
+                }
                 $insertData = [
                     'name'=>$paramArr['film'],
                     'image_url'=>$paramArr['image_url'],
@@ -151,5 +178,36 @@ class RoleController extends CommonController{
         unset($value);
         $this->assign('films',$films);
         $this->display('role/index');
+    }
+
+    /**
+     * 删除招募
+     */
+    public function delRecruit(){
+
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+
+            $res = M('ProjectRecruit')->where(['id'=>$paramArr['id']])->delete();
+            if($res){
+
+                $this->ajaxReturn([
+                    'status'=>1,
+                    'msg'=>'删除成功'
+                ]);
+            }else{
+
+                $this->ajaxReturn([
+                    'status'=>0,
+                    'msg'=>'删除失败'
+                ]);
+            }
+        }else{
+
+            $this->ajaxReturn([
+                'status'=>0,
+                'msg'=>'删除失败'
+            ]);
+        }
     }
 }

@@ -143,7 +143,9 @@
                     },
                     success:function(result){
                         if(result.status == 1){
-                            layer.msg(result.msg);
+                            layer.msg(result.msg,function(){
+                                window.location = location.protocol+'//'+window.location.host+'/admin/Role/index';
+                            });
                         }else{
                             layer.msg(result.msg);
                         }

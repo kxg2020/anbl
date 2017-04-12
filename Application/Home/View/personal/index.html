@@ -223,10 +223,10 @@
 
 
 								<volist name="consume_1" id="e">
-									<p><span>{:date('Y-m-d',$e['create_time'])}</span>
+									<p><span></span>
 										<span>电影支持</span>
 										<span>{$e.order_number}</span>
-										<span>{$e.support_money}</span>
+										<span></span>
 								</volist>
 
 						</div>
@@ -316,44 +316,16 @@
 									<th>消费时间</th>
 									<th>消费积分</th>
 									<th>消费类型</th>		
+									<th>消费订单</th>
 									<th>操作</th>
 								</tr>								
 							</thead>
 							<tbody>
 								<tr>
-									<td>2017-4-11</td>
-									<td>1000</td>
-									<td>进账</td>
-									<td><input type="button" value="参与" class='join'></td>
-								</tr>
-								<tr>
-									<td>2017-4-10</td>
-									<td>1000</td>
-									<td>出账</td>
-									<td><input type="button" value="参与" class='join'></td>
-								</tr>
-								<tr>
-									<td>2017-4-10</td>
-									<td>1000</td>
-									<td>出账</td>
-									<td><input type="button" value="参与" class='join'></td>
-								</tr>
-								<tr>
-									<td>2017-4-10</td>
-									<td>1000</td>
-									<td>出账</td>
-									<td><input type="button" value="参与" class='join'></td>
-								</tr>
-								<tr>
-									<td>2017-4-10</td>
-									<td>1000</td>
-									<td>出账</td>
-									<td><input type="button" value="参与" class='join'></td>
-								</tr>
-								<tr>
-									<td>2017-4-10</td>
-									<td>1000</td>
-									<td>出账</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 									<td><input type="button" value="参与" class='join'></td>
 								</tr>
 							</tbody>
@@ -378,20 +350,20 @@
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<form>
-							<h3>我要当演员申请</h3>
-							<div><label>姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
-							<div><label>性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
-							<div><label>民族:</label><input style='width: 80px;' type="text" name="volk"></div>
-							<div><label>生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
-							<div><label>身高:</label><input type="number" name="realheight"><span>单位:cm</span></div>
-							<div><label>身份证号码:</label><input type="text" name="id_card_"></div>
-							<div><label>联系电话:</label><input type="text" name="phone1"></div>
-							<div><label>电子邮箱:</label><input type="text" name="email1"><span>申请的结果将发送至此邮箱</span></div>
-							<div><label>现居住地:</label><input type="text" name="crraddress"></div>
-							<div class="up_photo"><label>上传生活照:</label><input type="file" id="uploadStar"><input type="button"  value="点击上传"></div>
+							<h3 style="color: orange;" >演员申请表</h3>
+							<div><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
+							<div><label><span style="color: red">*</span>&nbsp;性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
+							<div><label><span style="color: red">*</span>&nbsp;民族:</label><input style='width: 80px;' type="text" name="volk"></div>
+							<div><label><span style="color: red">*</span>&nbsp;生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
+							<div><label><span style="color: red">*</span>&nbsp;身高:</label><input type="number" name="realheight"><span>单位:cm</span></div>
+							<div><label><span style="color: red">*</span>&nbsp;身份证号:</label><input type="text" name="id_card_"></div>
+							<div><label><span style="color: red">*</span>&nbsp;联系电话:</label><input type="text" name="phone1"></div>
+							<div><label><span style="color: red">*</span>&nbsp;电子邮箱:</label><input type="text" name="email1"><span>申请的结果将发送至此邮箱</span></div>
+							<div><label><span style="color: red">*</span>&nbsp;现居住地:</label><input type="text" name="crraddress"></div>
+							<div class="up_photo"><label><span style="color: red">*</span>&nbsp;生活照:</label><input type="file" id="uploadStar"><input type="button"  value="点击上传"></div>
 							<input type="hidden" value="" name="im">
-							<div><label style='float: left;'>才能描述:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
-							<div><label style='float: left;'>表演经历:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
+							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;才能描述:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
+							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;表演经历:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
 							<input type="button" value="确定申请" id="sure_apply">
 							<script>
 								//这里弹出层显示的内容你 来写快一点 就是下面的字
