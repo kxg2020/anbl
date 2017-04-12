@@ -81,7 +81,6 @@ class FactoryController extends CommonController
             $data = I('post.');
             $type_id = intval($data['type']);
             $id = intval($data['id']);
-            $model = '';
             //判断投票类别
             if($type_id == 1){//优秀演员
                 $model = M('performer');
@@ -90,26 +89,34 @@ class FactoryController extends CommonController
                 if(!$info){
                     $this->ajaxReturn(['msg'=>"演员信息不存在",'status'=>0]);
                 }
+                $result = $model->where(['id'=>$id])->save(['vote_number'=>$info['vote_number']+1]);
+                if($result === false){
+                    $this->ajaxReturn(['msg'=>"投票失败",'status'=>0]);
+                }
+                $this->ajaxReturn(['msg'=>"投票成功",'status'=>1]);
             }elseif($type_id == 2){
                 $model = M('Director');
                 $info = $model->find($id);
                 if(!$info){
                     $this->ajaxReturn(['msg'=>"导演信息不存在",'status'=>0]);
                 }
+                $result = $model->where(['id'=>$id])->save(['vote_number'=>$info['vote_number']+1]);
+                if($result === false){
+                    $this->ajaxReturn(['msg'=>"投票失败",'status'=>0]);
+                }
+                $this->ajaxReturn(['msg'=>"投票成功",'status'=>1]);
             }else{
                 $model = M('Works');
                 $info = $model->find($id);
                 if(!$info){
                     $this->ajaxReturn(['msg'=>"作品信息不存在",'status'=>0]);
                 }
+                $result = $model->where(['id'=>$id])->save(['vote_number'=>$info['vote_number']+1]);
+                if($result === false){
+                    $this->ajaxReturn(['msg'=>"投票失败",'status'=>0]);
+                }
+                $this->ajaxReturn(['msg'=>"投票成功",'status'=>1]);
             }
-
-            $result = $model->where(['id'=>$id])->save(['vote_number'=>$info['vote_number']+1]);
-            if($result === false){
-                $this->ajaxReturn(['msg'=>"投票失败",'status'=>0]);
-            }
-            $this->ajaxReturn(['msg'=>"投票成功",'status'=>1]);
-
         }
     }
 

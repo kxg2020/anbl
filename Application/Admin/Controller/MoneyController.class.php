@@ -60,7 +60,7 @@ class MoneyController extends CommonController
                     $rest = M('MemberSupport')
                         ->where(['id'=>$info['id']])
                         ->save([
-                            'expect_return'=>$info['support_money']*($projectInfo['fixed_rate']/100),
+                            'fixed'=>$info['support_money']*($projectInfo['fixed_rate']/100),
                             'is_fh'=> 1,
                             'is_true'=> 1,
                         ]);
@@ -94,7 +94,7 @@ class MoneyController extends CommonController
                     $rest = M('MemberSupport')
                         ->where(['id'=>$info['id']])
                         ->save([
-                            'expect_return'=>$info['support_money']*($projectInfo['float_rate']/100),
+                            'float'=>$info['support_money']*($projectInfo['float_rate']/100),
                             'is_fh' =>1,
                             'is_true'=> 1,
                         ]);
@@ -350,5 +350,143 @@ class MoneyController extends CommonController
             M()->rollback();
             $this->ajaxReturn(['msg'=>"分佣失败",'status'=>0]);
         }
+    }
+
+
+    public function test(){
+            // 未分红的订单
+            $where = [
+                'is_fh'=> 0,//未分红的订单
+                'type'=> 1,//未分红固定分红方式的订单
+            ];
+            $supportInfo = M('MemberSupport')
+                ->where($where)
+                ->select();
+            if(!$supportInfo){
+                exit;
+            }
+
+            M()->startTrans();
+            // 静态分红
+            foreach($supportInfo as &$info){
+                // 查询出当前项目
+                $projectInfo = M('Project')->find($info['project_id']);
+                if(!$projectInfo){// 项目不存在
+                    continue;
+                }
+
+                // 判断项目在线在线状态 在线就可以进行分红  不在线查看 目标金额是否达到 未达到 则分红失败
+                if($projectInfo['is_active']==0 && $projectInfo['is_ok']==0){
+                    // 当前订单用户的收益全部失效
+                    $profits = M('MemberProfit')->where(['support_id'=>$info['id']])->select();
+                    foreach($profits as $profit){
+                        // 修改收益状态
+                        $rest = M('MemberProfit')->where(['id'=>$profit['id']])->save(['is_ok'=>0,'intro'=>$projectInfo['name']."目标金额未达到",]);
+                        // 扣除用户余额
+                        $money = $profit['money'];
+                        $rest = M('Member')->where(['id'=>$profit['member_id']])->save(['money'=>['exp','money-'.$money]]);
+                    }
+                }
+
+                // 获取影片拍摄周期
+                $end_time = $projectInfo['cycle'];// 周期时间 例如6个月
+
+                // 获取系统当前时间
+                $time = time();
+
+                if($end_time>3 && $time<$projectInfo['end_time']){
+                     // 查看分红时间是不是已经够 3个月
+                    if($info['num']>=90){//不在进行分红 //修改订单状态
+                        $rest = M('MemberSupport')
+                            ->where(['id'=>$info['id']])
+                            ->save([
+                                'is_fh'=>1,//分红结束
+                            ]);
+                        if($rest === false){
+                            M()->rollback();
+                            exit;
+                        }
+                        continue;
+                    }
+
+                        $rest = M('MemberSupport')
+                            ->where(['id'=>$info['id']])
+                            ->save([
+                                'fixed'=>($info['support_money']*($projectInfo['fixed_rate']/100))/30+$info['fixed'],//每天的收益
+                                'num' =>$info['num']+1
+                            ]);
+                        if($rest === false){
+                            M()->rollback();
+                            exit;
+                        }
+                        $money = ($info['support_money']*($projectInfo['fixed_rate']/100))/30;//每天的收益
+
+                        // 向会员收益表追加一条记录
+                        $rest = M('MemberProfit')->add([
+                            'member_id' =>$info['member_id'],
+                            'money' =>$money,
+                            'create_time' =>time(),
+                            'type' =>1,
+                            'remark' =>$projectInfo['name']."影片每日分红",
+                            'support_id' =>$info['id'],
+                            'is_ok' =>1,
+                        ]);
+                        if($rest === false){
+                            M()->rollback();
+                            exit;
+                        }
+                        // 更新用户余额
+                    $rest = M('Member')->where(['id'=>$info['member_id']])->save(['money'=>['exp','money+'.$money]]);
+                    if($rest === false){
+                        M()->rollback();
+                        exit;
+                    }
+
+                }elseif($end_time <= 3 && $time<$projectInfo['end_time']){
+                    $rest = M('MemberSupport')
+                        ->where(['id'=>$info['id']])
+                        ->save([
+                            'fixed'=>($info['support_money']*($projectInfo['fixed_rate']/100))/30,//每天的收益
+                            'num' =>$info['num']+1
+                        ]);
+                    if($rest === false){
+                        M()->rollback();
+                        exit;
+                    }
+                    $money = ($info['support_money']*($projectInfo['fixed_rate']/100))/30;//每天的收益
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' =>$info['member_id'],
+                        'money' =>$money,
+                        'create_time' =>time(),
+                        'type' =>1,
+                        'remark' =>$projectInfo['name']."影片每日分红",
+                        'support_id' =>$info['id'],
+                        'is_ok' =>1,
+                    ]);
+                    if($rest === false){
+                        M()->rollback();
+                        exit;
+                    }
+                    $rest = M('Member')->where(['id'=>$info['member_id']])->save(['money'=>['exp','money+'.$money]]);
+                    if($rest === false){
+                        M()->rollback();
+                        exit;
+                    }
+                }else{
+                    // 修改当前订单分红状态 未分红结束
+                    $rest = M('MemberSupport')
+                        ->where(['id'=>$info['id']])
+                        ->save([
+                            'is_fh'=>1,//每天的收益
+                        ]);
+                    if($rest === false){
+                        M()->rollback();
+                        exit;
+                    }
+                }
+            }
+            M()->commit();
     }
 }
