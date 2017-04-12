@@ -47,7 +47,7 @@ $(function(){
 
 	window.onscroll = function(){
 		var t = document.documentElement.scrollTop || document.body.scrollTop;
-		console.log(t)
+		//console.log(t)
 		if( t >= 1000 ) {
 			$('.move_list').css({
 				top:t-700

@@ -172,3 +172,95 @@ SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0090s ]
 SQL: SHOW COLUMNS FROM `an_comment` [ RunTime:0.0140s ]
 SQL: SELECT * FROM `an_comment` WHERE `movie_id` = 10 AND `type` = 1 ORDER BY create_time desc  [ RunTime:0.0050s ]
 
+[ 2017-04-11T18:08:17+08:00 ] ::1 /home/index/collect.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0430s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0090s ]
+
+[ 2017-04-11T18:12:50+08:00 ] ::1 /home/login/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0300s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `an_member` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `an_member` WHERE `username` = '15982123358' AND `password` = '25d6896e5d9ad869b943092c63fdd537' LIMIT 1   [ RunTime:0.0820s ]
+SQL: UPDATE `an_member` SET `session_token`='66e300c2a7e1f08b4ca0f9732bc87c28' WHERE `username` = '15982123358' AND `password` = '25d6896e5d9ad869b943092c63fdd537' [ RunTime:0.0060s ]
+
+[ 2017-04-11T18:36:54+08:00 ] ::1 /Home/Index/pageSelect.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0260s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `an_member` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `an_member` WHERE `session_token` = '66e300c2a7e1f08b4ca0f9732bc87c28' LIMIT 1   [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `an_member_support` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `an_member_support` WHERE `member_id` = 79 LIMIT 1   [ RunTime:0.0050s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0060s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `an_comment` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `an_comment` WHERE `movie_id` = 4 AND `type` = 2 ORDER BY create_time desc  [ RunTime:0.0040s ]
+
+[ 2017-04-11T18:36:55+08:00 ] ::1 /Home/Index/pageSelect.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0570s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0330s ]
+SQL: SHOW COLUMNS FROM `an_member` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `an_member` WHERE `session_token` = '66e300c2a7e1f08b4ca0f9732bc87c28' LIMIT 1   [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `an_member_support` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `an_member_support` WHERE `member_id` = 79 LIMIT 1   [ RunTime:0.0040s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0080s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `an_comment` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `an_comment` WHERE `movie_id` = 4 AND `type` = 4 ORDER BY create_time desc  [ RunTime:0.0070s ]
+
+[ 2017-04-11T18:36:56+08:00 ] ::1 /Home/Index/pageSelect.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `an_member` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `an_member` WHERE `session_token` = '66e300c2a7e1f08b4ca0f9732bc87c28' LIMIT 1   [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `an_member_support` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `an_member_support` WHERE `member_id` = 79 LIMIT 1   [ RunTime:0.0050s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0040s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0130s ]
+SQL: SHOW COLUMNS FROM `an_comment` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `an_comment` WHERE `movie_id` = 4 AND `type` = 3 ORDER BY create_time desc  [ RunTime:0.0040s ]
+
+[ 2017-04-11T18:36:56+08:00 ] ::1 /Home/Index/pageSelect.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0260s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0340s ]
+SQL: SHOW COLUMNS FROM `an_member` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `an_member` WHERE `session_token` = '66e300c2a7e1f08b4ca0f9732bc87c28' LIMIT 1   [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `an_member_support` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `an_member_support` WHERE `member_id` = 79 LIMIT 1   [ RunTime:0.0040s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0040s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `an_comment` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `an_comment` WHERE `movie_id` = 4 AND `type` = 2 ORDER BY create_time desc  [ RunTime:0.0070s ]
+
+[ 2017-04-11T18:36:57+08:00 ] ::1 /Home/Index/pageSelect.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `an_system` [ RunTime:0.0280s ]
+SQL: SELECT * FROM `an_system` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `an_member` [ RunTime:0.0210s ]
+SQL: SELECT * FROM `an_member` WHERE `session_token` = '66e300c2a7e1f08b4ca0f9732bc87c28' LIMIT 1   [ RunTime:0.0080s ]
+SQL: SHOW COLUMNS FROM `an_member_support` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `an_member_support` WHERE `member_id` = 79 LIMIT 1   [ RunTime:0.0030s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0040s ]
+SQL: SELECT * FROM `an_member` WHERE `parent_id` = 79  [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `an_comment` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `an_comment` WHERE `movie_id` = 4 AND `type` = 1 ORDER BY create_time desc  [ RunTime:0.0030s ]
+

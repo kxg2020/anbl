@@ -27,7 +27,8 @@ a{
 .title{
 	position: absolute;
 	top: 95px;
-	left: 350px;
+	left: 50%;
+	margin-left: -100px;
 	width: 200px;
 	color: white;
 }

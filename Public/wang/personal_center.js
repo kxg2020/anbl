@@ -479,9 +479,7 @@ $(function(){
 	$('.join').click(function(){
 		
 		var offset=$(this).parent().parent().offset();
-		$('.money_modal').fadeIn('slow').css({
-			marginTop:offset.top-120
-		});
+		$('.money_modal').fadeIn('slow');
 	})
 	$('.close_modal').click(function(){
 		$('.money_modal').fadeOut('slow');

@@ -4,7 +4,7 @@ body{
 	min-width: 1200px;
 	background: #333333;
 	width: 100%;
-	height: 1080px;
+	height: auto;
 }
 li{
 	list-style: none;
@@ -14,7 +14,7 @@ a{
     color: white;
 }
 header{
-	position: relative;
+	position: absolute;
 	width: 100%;
 	height: 168px;
 	top: 0;left: 0;
@@ -29,7 +29,8 @@ header{
 	height: 90px;
 	position: absolute;
 	top: 84px;
-	left: 376px;
+	left: 50%;
+	margin-left: -93px;
 }
 .star_factory:before{
 	content: url(img/star_factory.png);
@@ -49,8 +50,8 @@ header{
 }
 .body{
 	width: 100%;
-	margin-top: 100px;
-	height: 812px;
+	padding-top: 168px;
+	height: auto;
 	overflow: hidden;
 	position: relative;
 }
@@ -153,6 +154,10 @@ header{
 	color: white;
 	font-size: 25px;
 }
+.last_title>h5 img{
+	position: absolute;
+	top: 5px; left: -87px;
+}
 footer{
 	width: 100%;
 	height: 90px;
@@ -160,4 +165,27 @@ footer{
 	line-height: 90px;
 	background: #0f0f0f;
 	font-size: 20px;
+}
+#star_content3>div .works p{
+	font-size: 16px;
+}
+#star_content3>div .works p span{
+	color: #e50909;
+}
+#star_content3>div .myself p{
+	font-size: 14px;
+	color: #bab6b6;
+	margin-bottom: 5px;
+}
+#star_content3>div>p>span{
+	font-size: 30px;
+}
+.page{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.page>a{
+	color: black;
+	cursor: pointer;
 }
