@@ -353,8 +353,8 @@
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<form>
-							<h3 style="color: orange;" >演员申请表</h3>
-							<div class='movie1'> <label >声请电影名:</label> <a href="#">迪昂月</a><a href="#">斯蒂芬</a><a href="#">斯蒂芬</a></div>
+							<h3 style="color: orange;" >申请表</h3>
+							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><volist name="recruit" id="recr"><a href="#" data-id="{$recr['id']}" class="recruit">{$recr['name']}</a></volist> </div>
 							<div><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
 							<div><label><span style="color: red">*</span>&nbsp;性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
 							<div><label><span style="color: red">*</span>&nbsp;民族:</label><input style='width: 80px;' type="text" name="volk"></div>
@@ -496,58 +496,24 @@
 	<script src="__JS__/layer/laypage.js"></script>
 	<script type="text/javascript">
 		$(function () {
-			//>> 团队下级
-			$('body').on('click','.operat_p',function(){
-				id = $(this).attr('data-id');
-				var thisText=$(this).text();  //保存此次变量
-				var divWidth=0;
-				//清空下一级
-				if($(this).parent().parent().next().length){
-					$(this).parent().parent().next().remove()
-				}
 
-				// 点击上一级下级全部移除
-				while($(this).parent().parent().next().length){
-					$(this).parent().parent().next().remove()
-				}
 
-				//同级的全部变加号
-				var mainDiv=$(this).parent().parent();
-				for(var i=0;i<mainDiv.children().length;i++){
-					mainDiv.children().eq(i).children().eq(3).text('+');
-				}
+			//>> 点击查看电影详情
+			$('.recruit').click(function(){
+				var id = $(this).attr('data-id');
+				layer.open({
+					type: 2,
+					title: '影片详情',
+					shadeClose: true,
+					shade: 0.8,
+					area: ['60%', '70%'],
+					content: "{:U('Home/Personal/filmDetail')}"+'?id='+id,
+					end: function () {
 
-				if(thisText=='+') {
-					$.ajax({
-						'type': 'post',
-						'dataType': 'json',
-						'url': "{:U('Home/Personal/find')}",
-						'data': {
-							'id': id
-						},
-						success: function (result) {
-							var html = '';
-							$.each(result, function (k, v) {
-								html += ('<div class="1-1">' +
-								'<p>' + v.username + '</p>' +
-								'<p><span>' + v.realname + '</span><span>' + v.phone + '</span></p>' +
-								'<p><span>支持积分:</span><span>'+v.support_money+'</span></p>' +
-								"<p class='operat_p' id='1-1' data-id='" + v.id + "'>+</p>" +
-								'</div>');
-								divWidth+=160;
-							});
-							$('div[class = team_content]').append('<div class="' + id + '">' + html + '</div>');
-							$('.team_content>div:last-child').css({
-								width:divWidth+30
-							})
-						}
-					});
-					$(this).text('-');
-				}else{
-					$(this).parent().parent().next().remove()
-					$(this).text('+');
-				}
+					}
+				});
 			});
+
 
 			$("#file_upload").h5upload({
 				url: "{:U('Home/Personal/upload')}",

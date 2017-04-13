@@ -109,6 +109,7 @@ class RoleController extends CommonController{
                         'image_url'=>$paramArr['image_url'] ? $paramArr['image_url']: '',
                         'role_id'=>json_encode($paramArr['roles']),
                         'create_time'=>time(),
+                        'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
                     ];
                     $re = M('ProjectRecruit')->where(['id'=>$result['id']])->save($updateData);
 
@@ -130,6 +131,7 @@ class RoleController extends CommonController{
                     'image_url'=>$paramArr['image_url'],
                     'role_id'=>json_encode($paramArr['roles']),
                     'create_time'=>time(),
+                    'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
                 ];
                 $res = M('ProjectRecruit')->add($insertData);
                 if($res){
@@ -169,13 +171,14 @@ class RoleController extends CommonController{
             $value['role_id'] = json_decode($value['role_id']);
             //>> 循环查询角色
             foreach($value['role_id'] as $k => $v){
-                static $role = [];
                 $row = M('ProjectRole')->where(['id'=>$v['id']])->find();
-                $role[] = $row['name'];
-                $value['roles'] = implode('、',$role);
+                $value['roles'][] = $row['name'];
             }
+            $value['roles'] = implode('、',$value['roles']);
         }
+
         unset($value);
+
         $this->assign('films',$films);
         $this->display('role/index');
     }
@@ -210,4 +213,7 @@ class RoleController extends CommonController{
             ]);
         }
     }
+
+
+
 }
