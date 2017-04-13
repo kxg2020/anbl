@@ -58,6 +58,7 @@
 				<p>已支持积分</p>
 				<p> <span>{:floor($info['money'])}</span></p>
 				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到{:floor($info['target_amount'])}积分视为成功！</p>
+				<div class='view_suport'><p>支持进展</p><p><p></p></p></div>
 				<ul class="suport_inform">
 					<li><p>目标积分</p>
 					<p><span >{:floor($info['target_amount'])}</span></p>
@@ -66,8 +67,9 @@
 					<p>支持人数</p>
 					<p>{$info['support_number']}人</p>
 				</li>
-				</ul>
 				<div class="now_suport" id="fast_suport">立即支持</div>
+				</ul>
+				
 			</div>
 			<div class="comment">
 				<div>

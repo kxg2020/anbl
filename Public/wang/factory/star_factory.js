@@ -77,8 +77,12 @@ $(function(){
     }
   });
 
-
-
+  $('.vote_btn').click(function(){
+   $('.warn').show();
+  })
+$('.warn>input[name=cancel]').click(function(){
+  $('.warn').hide();
+})
    window.onresize=function(){
   screen_auto();
  }
