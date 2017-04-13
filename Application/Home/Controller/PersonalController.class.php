@@ -84,12 +84,33 @@ class PersonalController extends CommonController{
             ->join('right join an_member_support as b on a.id = b.member_id')
             ->where(['a.id'=>$this->userInfo['id']])
             ->select();
+        foreach($consume_1 as $key => &$value){
+            $value['type'] = '电影支持';
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['money'] = $value['support_money'];
+        }
+        unset($value);
         //>> 查询消费情况(当演员)
-        $consume_2 = $personModel->field('')
+        $consume_2 = $personModel->field('b.*')
             ->join('left join an_member_star as b on a.id = b.member_id')
             ->where(['a.id'=>$this->userInfo['id']])
             ->select();
+        foreach($consume_2 as $key => &$value){
+            $value['type'] = '演员申请';
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['money'] = 70000;
+        }
+        unset($value);
 
+        //>> 投票记录
+        $consume_3 = $personModel->field('a.username,b.*,sum(b.money) as money')
+            ->join('left join an_member_consume as b on a.id = b.member_id')
+            ->where(['a.id'=>$this->userInfo['id'],'b.type'=>'投票'])
+            ->select();
+        foreach($consume_3 as $key => &$value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+        }
+        unset($value);
         //>> 查最上级
         $topLeader = $row;
 
@@ -193,7 +214,8 @@ class PersonalController extends CommonController{
         $this->assign([
             'recruit'=>$recruit,
             'topLeader'=>$topLeader,
-            'consume'=>$consume,
+            'consume_3'=>$consume_3,
+            'consume_2'=>$consume_2,
             'consume_1'=>$consume_1,
             'question'=>$question,
             'allInfo'=>$allInfo,

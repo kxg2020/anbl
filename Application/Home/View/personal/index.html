@@ -316,22 +316,37 @@
 								<tr>
 									<th>消费时间</th>
 									<th>消费积分</th>
-									<th>消费类型</th>		
-									<th>消费订单</th>
+									<th>消费类型</th>
 									<th>操作</th>
 								</tr>								
 							</thead>
 							<tbody>
+							<volist name="consume_1" id="c">
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>{$c.create_time}</td>
+									<td>{$c.money}</td>
+									<td>{$c.type}</td>
 									<td><input type="button" value="参与" class='join'></td>
 								</tr>
+							</volist>
+							<volist name="consume_2" id="c">
+								<tr>
+									<td>{$c.create_time}</td>
+									<td>{$c.money}</td>
+									<td>{$c.type}</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+							</volist>
+							<volist name="consume_3" id="c">
+								<tr>
+									<td>{$c.create_time}</td>
+									<td>{$c.money}</td>
+									<td>{$c.type}</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+							</volist>
 							</tbody>
 						</table>
-						
 					</div>
 				</div>
 				
