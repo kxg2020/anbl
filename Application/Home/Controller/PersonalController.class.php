@@ -630,12 +630,6 @@ class PersonalController extends CommonController{
         $paramArr = $_REQUEST;
         if(!empty($paramArr)){
 
-            //>> 判断是否选择了角色
-            if(empty(session('roleId'.$this->userInfo['id']))){
-
-                die($this->_printError('1058'));
-            }
-
             M('Member')->startTrans();
 
             //>> 将消费信息写入数据库

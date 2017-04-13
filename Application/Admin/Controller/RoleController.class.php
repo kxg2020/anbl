@@ -171,7 +171,7 @@ class RoleController extends CommonController{
             $value['role_id'] = json_decode($value['role_id']);
             //>> 循环查询角色
             foreach($value['role_id'] as $k => $v){
-                $row = M('ProjectRole')->where(['id'=>$v['id']])->find();
+                $row = M('ProjectRole')->where(['id'=>$v])->find();
                 $value['roles'][] = $row['name'];
             }
             $value['roles'] = implode('、',$value['roles']);
