@@ -37,10 +37,16 @@ $(function(){
       serch();
     }
   });
-
-  $('.menu_content').css({
-    height:$('body').height()
-  })
+  if($('body').height()>700){
+        $('.menu_content').css({
+          height:$('body').height()
+        })
+     }else{
+        $('.menu_content').css({
+          height:700
+        })
+     }
+ 
 
   function navMarginauto(){
     $('.nav>div').css({
