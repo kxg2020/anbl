@@ -145,6 +145,11 @@ class IndexController extends CommonController{
                 $this->ajaxReturn(['msg'=>"项目不存在！！！",'status'=>0]);
             }
 
+            // 判断目标金额是否达到
+            if($projectInfo['target_amount'] <= $projectInfo['money']){
+                $this->ajaxReturn(['msg'=>"积分已达到，不能进行支持",'status'=>0]);
+            }
+
             // 分红类型  1固定 2浮动
 
             $type = intval($data['type']);

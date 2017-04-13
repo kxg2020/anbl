@@ -52,14 +52,12 @@ header{
 	width: 100%;
 	margin-top: 168px;
 	height: auto;
-	overflow: hidden;
 	position: relative;
 }
 .star_content{
 	width: 350px;
 	height: 660px;
 	float: left;
-	overflow: hidden;
 }
 .star_content>div{
 	display: none;
@@ -198,10 +196,28 @@ footer{
 }
 .page{
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	left: 30%;
+	bottom: 150px;
 }
 .page>a{
-	color: black;
 	cursor: pointer;
+	font-style: 25px;
+	color:white;
+	padding: 5px;
+}
+.page>a:hover{
+	color: #e50909;
+}
+.page>.current{
+	color: #e50909;
+}
+#sb-container3>div>span,#sb-container>div>span{
+	background: url(img/actor.png) no-repeat;
+	width: 37px;
+	height: 61px;
+}
+#sb-container2>div>span{
+	background: url(img/movie.png) no-repeat;
+	width: 44px;
+	height: 44px;
 }
