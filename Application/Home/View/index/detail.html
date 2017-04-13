@@ -293,7 +293,7 @@
 
 			 // 判断用户是否同意协议
 			 if(!$("#is_true").is(':checked')){
-				 layer.msg('请同意服务协议！！！');
+				 layer.msg('请同意服务协议！');
 				 return false
 			 }
 			 // 选择分红方式
@@ -308,13 +308,12 @@
 				 project_id : project_id,
 				 type : fh
 			 };
-			console.log(_data);
 			 $.post("{:U('home/index/support')}",_data,function (data) {
 				 if (data.status == 0) {
 					 layer.alert(data.msg);
 				 } else {
 					 layer.msg(data.msg);
-					 $('.suport_bg').fadeOut('slow');
+					 $('.suport_bg').hide();
 				 }
 			 });
 		 })

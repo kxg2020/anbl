@@ -78,13 +78,15 @@ class PersonalController extends CommonController{
         $personModel = M('Member as a');
         $row = $personModel->where(['id'=>$this->userInfo['id'],'username'=>$this->userInfo['username']])->find();
 
-        //>> 查询消费情况
-        $consume = $personModel->field('a.username,b.create_time,b.order_number,b.money')
-            ->join('right join an_member_download as b on a.id = b.member_id')
-            ->where(['a.id'=>$this->userInfo['id']])
-            ->select();
+        //>> 查询消费情况(支持)
+
         $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number')
             ->join('right join an_member_support as b on a.id = b.member_id')
+            ->where(['a.id'=>$this->userInfo['id']])
+            ->select();
+        //>> 查询消费情况(当演员)
+        $consume_2 = $personModel->field('')
+            ->join('left join an_member_star as b on a.id = b.member_id')
             ->where(['a.id'=>$this->userInfo['id']])
             ->select();
 
@@ -92,9 +94,9 @@ class PersonalController extends CommonController{
         $topLeader = $row;
 
 
-        //>> 查所有下级
+        //>> 所有消费
 
-       // $follower = $this->getMenuTree($this->userInfo['id']);
+
 
 
         //>> 查询当前用户的支持情况
@@ -102,8 +104,8 @@ class PersonalController extends CommonController{
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id']])
             ->select();
-        $count_1 = ceil(count($rows)/6);
-        $rows = $this->pagination($rows,1,6);
+        $count_1 = ceil(count($rows)/4);
+        $rows = $this->pagination($rows,1,4);
         //>> 查询积分制度表
         $integral = M('IntegralInstitution')->select();
 
@@ -116,13 +118,15 @@ class PersonalController extends CommonController{
         //>> 取出积分表下一个等级对应的积分
         $allInfo = ['status'=>0,'integral'=>$row['integral']];
         foreach($integral as $key => $value){
-            if($value['level'] == $crrLevel + 1){
+            if($value['level'] == $crrLevel + 1 ){
                 $expIntegral = $value['integral'];
                 $allInfo['level'] = $value['level'];
                 //>> 算出还需要多少积分
                 $needIntegral = $expIntegral - $crrIntegral;
                 $allInfo['integral'] = $needIntegral;
                 $allInfo['status'] = 1;
+            }else{
+                $allInfo = ['status'=>0,'integral'=>$row['integral']];
             }
         }
 
@@ -136,15 +140,11 @@ class PersonalController extends CommonController{
             unset($value);
         }
 
-        $collectionCount = ceil(count($collection)/6);
-        $collectionList = $this->pagination($collection,1,6);
-        $supportMoney = 0;
-        if(!empty($rows)){
-            //>> 对用户支持的电影金额求和
-            foreach($rows as $key => $value){
-                $supportMoney += $value['support_money'];
-            }
-        }
+        $collectionCount = ceil(count($collection)/4);
+        $collectionList = $this->pagination($collection,1,4);
+
+        $supportMoney = M('MemberSupport')->where(['member_id'=>$this->userInfo['id']])->sum('support_money');
+
 
         //>> 查询提问
         $question = M('MemberConsult')->where(['member_id'=>$this->userInfo['id']])->select();
@@ -522,7 +522,7 @@ class PersonalController extends CommonController{
         $paramArr = $_REQUEST;
 
         $pgNum = $paramArr['pgNum'];
-        $pgSize = 6;
+        $pgSize = 4;
 
         $rows =  M('MemberSupport as a')->field('a.*,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
@@ -552,7 +552,7 @@ class PersonalController extends CommonController{
             unset($value);
         }
 
-        $collectionList = $this->pagination($collection,$paramArr['pgNum'],6);
+        $collectionList = $this->pagination($collection,$paramArr['pgNum'],4);
         $this->ajaxReturn([
             'rows'=>$collectionList,
         ]);
@@ -615,6 +615,18 @@ class PersonalController extends CommonController{
                 die($this->_printError('1058'));
             }
 
+
+            M('Member')->startTrans();
+
+            //>> 将消费信息写入数据库
+            $data = [
+                'money'=>70000,
+                'create_time'=>time(),
+                'member_id'=>$this->userInfo['id'],
+                'type'=>'演员申请'
+            ];
+
+            M('MemberConsume')->add($data);
             $insertData = [
                 'name'=>$paramArr['name'],
                 'sex'=>$paramArr['sex'],
@@ -628,14 +640,21 @@ class PersonalController extends CommonController{
                 'skill'=>$paramArr['skill'],
                 'ex'=>$paramArr['ex'],
                 'image_url'=>$paramArr['image_url'],
+                'member_id'=>$this->userInfo['id'],
+                'project_id'=>session('filmId'.$this->userInfo['id']),
+                'role_id'=>session('roleId'.$this->userInfo['id']),
+                'is_pass'=>2,
             ];
 
-            $res = M('MemberStar')->where(['member_id'=>$this->userInfo['id']])->save($insertData);
-            if($res){
+            $res = M('MemberStar')->where(['member_id'=>$this->userInfo['id']])->add($insertData);
+            $re = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money'] - 70000]);
+            if($res && $re){
 
+                M('Member')->commit();
                 die($this->_printSuccess());
             }else{
 
+                M('Member')->rollback();
                 die($this->_printError(''));
             }
         }else{
@@ -688,18 +707,20 @@ class PersonalController extends CommonController{
      * 保存选择的角色
      */
     public function filmSave(){
-
         $paramArr = $_REQUEST;
 
         $filmId = $paramArr['filmId'];
         $roleId = $paramArr['roleId'];
+      //>> 将id存到session中
+        session('filmId'.$this->userInfo['id'],$filmId);
+        session('roleId'.$this->userInfo['id'],$roleId);
+    }
 
-        //>> 查询是否有申请
-        $res = M('MemberStar')->where(['member_id'=>$this->userInfo['id']])->find();
+    /**
+     * 申请演员完成提示
+     */
+    public function tips(){
 
-        if(empty($res)){
-            //>> 将id保存到数据库
-            $res = M('MemberStar')->add(['role_id'=>$roleId,'project_id'=>$filmId,'member_id'=>$this->userInfo['id']]);
-        }
+        $this->display('personal/tips');
     }
 }
