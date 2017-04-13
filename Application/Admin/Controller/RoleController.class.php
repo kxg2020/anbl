@@ -176,7 +176,6 @@ class RoleController extends CommonController{
             }
             $value['roles'] = implode('、',$value['roles']);
         }
-
         unset($value);
 
         $this->assign('films',$films);

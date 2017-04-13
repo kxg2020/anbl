@@ -630,13 +630,11 @@ class PersonalController extends CommonController{
         $paramArr = $_REQUEST;
         if(!empty($paramArr)){
 
-            //>> 判断是否已经添加过
-            $res = M('Member')->where(['id_card'=>$paramArr['id_card'],'phone'=>$paramArr['phone']])->find();
-            if(!empty($res)){
+            //>> 判断是否选择了角色
+            if(empty(session('roleId'.$this->userInfo['id']))){
 
                 die($this->_printError('1058'));
             }
-
 
             M('Member')->startTrans();
 
@@ -733,9 +731,12 @@ class PersonalController extends CommonController{
 
         $filmId = $paramArr['filmId'];
         $roleId = $paramArr['roleId'];
-      //>> 将id存到session中
-        session('filmId'.$this->userInfo['id'],$filmId);
-        session('roleId'.$this->userInfo['id'],$roleId);
+
+      if(!empty($filmId) && !empty($roleId)){
+          //>> 将id存到session中
+          session('filmId'.$this->userInfo['id'],$filmId);
+          session('roleId'.$this->userInfo['id'],$roleId);
+      }
     }
 
     /**
