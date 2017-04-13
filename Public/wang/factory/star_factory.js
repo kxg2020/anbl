@@ -1,5 +1,6 @@
 $(function(){
-	var div=$('#star_content>div').eq(0);
+	var div=$('.star_content>div').eq(0);
+    console.log(div)
 	$('.sb-container>div').click(function(){
 		var id=$(this)[0].id;
 

@@ -133,7 +133,7 @@ class IndexController extends CommonController{
 
             // 判断用户余额够不够
             if($support_money>$this->userInfo['money']){
-                $this->ajaxReturn(['msg'=>"对不起，余额不足！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，积分不足！！！",'status'=>0]);
             }
             // 会员id
             $member_id = $this->userInfo['id'];
@@ -142,20 +142,18 @@ class IndexController extends CommonController{
 
             $projectInfo = M('Project')->find($project_id);
             if(!$projectInfo){
-                $this->ajaxReturn(['msg'=>"非法项目！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"项目不存在！！！",'status'=>0]);
+            }
+
+            // 判断目标金额是否达到
+            if($projectInfo['target_amount'] <= $projectInfo['money']){
+                $this->ajaxReturn(['msg'=>"积分已达到，不能进行支持",'status'=>0]);
             }
 
             // 分红类型  1固定 2浮动
 
             $type = intval($data['type']);
 
-            // 计算收益
-            /*if($type == 1){//固定分红
-                $expect_return = $support_money + $support_money*($projectInfo['fixed_rate']/100);
-            }else{ //浮动分红 -100 - 300
-                $top = $support_money + $support_money*(300/100);
-                $expect_return ="0至$top";
-            }*/
             // 生成订单
             $order_number = 'ZC'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
             //封装数据
@@ -164,7 +162,6 @@ class IndexController extends CommonController{
                 'project_id' => $project_id,
                 'support_money' => $support_money,
                 'type' => $type,
-                'expect_return' => '',
                 'order_number' => $order_number,
                 'is_fh' => 0,//是否分红
                 'is_true' => 0,//是否返还用户余额
