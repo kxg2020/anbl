@@ -20,7 +20,7 @@
 			您当前的累计积分为:{$allInfo['integral']}
 			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
-			<div class="money"><p>支持积分 ：￥ <span>{$supportMoney}</span></p><p>剩余积分：￥ <span>{$personal['money']}</span></p></div>
+			<div class="money"><p>支持积分: <span>{$supportMoney}</span></p><p>剩余积分: <span>{$personal['money']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
 				<if condition="$personal['safe_level'] eq 1">
 					<span>低</span>
@@ -126,7 +126,7 @@
 									</div>
 								</volist>
 							<input type="hidden" name="page_1" value="{$count_1}">
-							<p id="demo8" style="position: absolute;left:235px;bottom: 20px;"></p>
+							<p id="demo8" style="position: absolute;left:5%;bottom: 20px;"></p>
 						</div>
 
 						<div class="my_collect" style="display: none;">
@@ -142,7 +142,7 @@
 								</div>
 							</volist>
 							<input type="hidden" name="page_2" value="{$collectionCount}">
-							<p id="demo9" style="position: absolute;left:235px;bottom: 20px;"></p>
+							<p id="demo9" style="position: absolute;left:5%;bottom: 20px;"></p>
 						</div>
 					</div>
 				</div>
@@ -243,7 +243,7 @@
 					<div class="close_password"></div>
 						<div class="password_content">
 								<ul><li>密码管理</li>
-								<li>修改登录密码</li></ul>
+								</ul>
 								<div class="update_password">
 									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password"><label>输入当前的登录密码</label></p>
 									<p><input type="password" placeholder="6-16位数字,字母组合" name="newpassword"><label>新密码</label></p>

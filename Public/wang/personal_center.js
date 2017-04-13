@@ -86,7 +86,7 @@ $(function(){
 	})
 	$('.money_content>ul>li').click(function(){
 		var txt=$(this)[0].innerHTML;
-		console.log(txt)
+		//console.log(txt)
 		if(txt=='充值'){
 			$('.money_content>ul>li').removeClass('choice');
 			$('.money_content>ul>li').eq(0).addClass('choice');
