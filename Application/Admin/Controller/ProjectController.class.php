@@ -37,7 +37,7 @@ class ProjectController extends CommonController
             ->count();
 
         // 实列化一个分页工具类
-        $page = new Page($count,15);
+        $page = new Page($count,10);
 
         $rows = M('project as a')
             ->field('a.*, b.story,c.name as type')
@@ -76,13 +76,13 @@ class ProjectController extends CommonController
                 'director' => $_data['director'],
                 'star' => $_data['star'],
                 'company' => $_data['company'],
-               // 'dl' => $_data['dl'],
+                'cycle' => $_data['cycle'],
                 'country' => $_data['country'],
                 'englishname' => $_data['englishname'],
                 'showaddress' => $_data['showaddress'],
                 'showtime' => strtotime($_data['showtime']),
                 'duration' => $_data['duration'],
-                'total_num' => $_data['total_num'],
+                'star_num' => $_data['star_num']>5?5:$_data['star_num'],
                 'title' => $_data['title'],
                 'mode' => $_data['mode'],
                 'intro' => $_data['intro'],
@@ -170,13 +170,13 @@ class ProjectController extends CommonController
                 'director' => $_data['director'],
                 'star' => $_data['star'],
                 'company' => $_data['company'],
-               // 'dl' => $_data['dl'],
+                'cycle' => $_data['cycle'],
                 'country' => $_data['country'],
                 'englishname' => $_data['englishname'],
                 'showaddress' => $_data['showaddress'],
                 'showtime' => $_data['showtime'],
                 'duration' => $_data['duration'],
-                'total_num' => $_data['total_num'],
+                'star_num' => $_data['star_num']>5?5:$_data['star_num'],
                 'title' => $_data['title'],
                 'mode' => $_data['mode'],
                 'intro' => $_data['intro'],

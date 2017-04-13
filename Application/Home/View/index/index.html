@@ -31,8 +31,7 @@
 						<p>主演：{$lunbo.star}</p>
 						<p>出品单位：{$lunbo.company}</p>
 						<p>剩余时间：<span>{:dataNum(time(),$lunbo['end_time'])}</span> 天</p>
-						<p>剩余名额：<span>{$lunbo['total_num']-$lunbo['support_number']}</span> 人</p>
-						<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i></p>
+						<p>评星 <for start="0" end="$lunbo['star_num']"><i class="star"></i></for></p>
 						<p>支持积分：<span>{:floor($lunbo['target_amount'])}</span></p>
 				</a>
 				</div>
@@ -68,8 +67,7 @@
           									<p>{$info['name']}</p>
           									<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
           									<p>出品单位：{$info.company}</p>
-          									<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
-          									<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
+          									<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
           									<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
           								</div>
           		</a>
@@ -91,8 +89,7 @@
 								<p>{$info['name']}</p>
 								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
 								<p>出品单位：{$info.company}</p>
-								<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
-								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
+								<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
 								<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
 							</div>
 						</a>
@@ -114,8 +111,7 @@
 								<p>{$info['name']}</p>
 								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
 								<p>出品单位：{$info.company}</p>
-								<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
-								<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
+								<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
 								<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
 							</div>
 						</a>
