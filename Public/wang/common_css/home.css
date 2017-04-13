@@ -598,6 +598,7 @@ header .nav{
   padding-right: 20px;
   color:  #e50909;
   border: 1px solid #e50909;
+  border-radius: 3px;
 }
     footer{
       clear: both;

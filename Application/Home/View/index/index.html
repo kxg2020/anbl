@@ -61,11 +61,12 @@
   	  <section class="page1 tps-section tps-inview">
         <div class="page_container">
           <h1>
-          		<a href="{:U('home/index/detail',['id'=>$info['id']])}" target="_blank">
+          		<a href="{:U('home/index/detail',['id'=>$info['id']])}">
 					                    <img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
           								<div class="move_content content">
           									<p>{$info['name']}</p>
-          									<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+          									<p>导演：{$info['director']}</p>
+											<p>主演：{$info['star']}</p>
           									<p>出品单位：{$info.company}</p>
           									<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
           									<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
@@ -83,11 +84,12 @@
 			<section class="page1 tps-section tps-inview">
 				<div class="page_container">
 					<h1>
-						<a href="{:U('home/index/detail',['id'=>$info['id']])}" target="_blank">
+						<a href="{:U('home/index/detail',['id'=>$info['id']])}">
 							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
 							<div class="move_content content">
 								<p>{$info['name']}</p>
-								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+								<p>导演：{$info['director']}</p>
+								<p>主演：{$info['star']}</p>
 								<p>出品单位：{$info.company}</p>
 								<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
 								<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
@@ -105,11 +107,12 @@
 			<section class="page1 tps-section tps-inview">
 				<div class="page_container">
 					<h1>
-						<a href="{:U('home/index/detail',['id'=>$info['id']])}" target="_blank">
+						<a href="{:U('home/index/detail',['id'=>$info['id']])}">
 							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
 							<div class="move_content content">
 								<p>{$info['name']}</p>
-								<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+								<p>导演：{$info['director']}</p>
+								<p>主演：{$info['star']}</p>
 								<p>出品单位：{$info.company}</p>
 								<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
 								<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>

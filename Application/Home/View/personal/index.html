@@ -316,22 +316,37 @@
 								<tr>
 									<th>消费时间</th>
 									<th>消费积分</th>
-									<th>消费类型</th>		
-									<th>消费订单</th>
+									<th>消费类型</th>
 									<th>操作</th>
 								</tr>								
 							</thead>
 							<tbody>
+							<volist name="consume_1" id="c">
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>{$c.create_time}</td>
+									<td>{$c.money}</td>
+									<td>{$c.type}</td>
 									<td><input type="button" value="参与" class='join'></td>
 								</tr>
+							</volist>
+							<volist name="consume_2" id="c">
+								<tr>
+									<td>{$c.create_time}</td>
+									<td>{$c.money}</td>
+									<td>{$c.type}</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+							</volist>
+							<volist name="consume_3" id="c">
+								<tr>
+									<td>{$c.create_time}</td>
+									<td>{$c.money}</td>
+									<td>{$c.type}</td>
+									<td><input type="button" value="参与" class='join'></td>
+								</tr>
+							</volist>
 							</tbody>
 						</table>
-						
 					</div>
 				</div>
 				
@@ -351,7 +366,7 @@
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<form>
-							<h3 style="color: orange;" >申请表</h3>
+							<h3 >申请表</h3>
 							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><volist name="recruit" id="recr"><a href="#" data-id="{$recr['id']}" class="recruit">{$recr['name']}</a></volist> </div>
 
 							<div><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
@@ -516,7 +531,7 @@
 					title: '影片详情',
 					shadeClose: true,
 					shade: 0.8,
-					area: ['60%', '70%'],
+					area: ['60%', '100%'],
 					content: "{:U('Home/Personal/filmDetail')}"+'?id='+id,
 					end: function () {
 						alert($.cookie('filmId'));
@@ -769,7 +784,7 @@
 				password = $('input[name = password]').val();
 				newpassword = $('input[name = newpassword]').val();
 				repassword = $('input[name = repassword]').val();
-				var reg = /^[a-zA-Z]\w{5,16}$/;
+				var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
 				if(password == ''){
 					layer.tips('当前密码不能为空','input[name = password]');return;
 				}
