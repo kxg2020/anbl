@@ -55,7 +55,10 @@
                                     <input type="checkbox"  name="role" value="{$ro['id']}">&nbsp;&nbsp;
                                     </volist>
                                 </div>
-
+                            <div class="form-group">
+                                <label>电影名称</label>
+                                <input type="text" class="form-control" name="film" placeholder="请输入电影名">
+                            </div>
                                 <div class="form-group">
                                     <label>电影封面</label>
                                         <span class="loadfile" id="file_upload">+</span>
@@ -66,10 +69,11 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>电影名称</label>
-                                    <input type="text" class="form-control" name="film" placeholder="请输入电影名">
-                                </div>
+                            <div class="form-group clearfix">
+                                <label>电影简介</label>
+                                 <textarea name="intro" cols="100" rows="10" class="form-control"
+                                           placeholder="请输入简介"></textarea>
+                            </div>
                                 <button type="button" class="btn btn-primary" >提交</button>
                         </div>
                     </section>
@@ -132,6 +136,7 @@
                 });
                 images = $('input[name = image_url]').val();
                 film = $('input[name = film]').val();
+                intro = $('textarea[name = intro]').val();
                 $.ajax({
                     'type':'post',
                     'dataType':'json',
@@ -139,7 +144,8 @@
                     'data':{
                         'film':film,
                         'image_url':images,
-                        'roles':arr
+                        'roles':arr,
+                        'intro':intro
                     },
                     success:function(result){
                         if(result.status == 1){

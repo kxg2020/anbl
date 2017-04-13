@@ -125,7 +125,7 @@
 							return false;
 						}
 						//>> 判断密码格式是否正确
-						var reg_ = /^[a-zA-Z]\w{5,16}$/;
+						var reg_ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
 						if(!reg_.test(data)){
 							layer.tips('密码格式不正确!','input[name = password]');
 							return false;
@@ -139,7 +139,7 @@
 							return false;
 						}
 						//>> 判断密码格式是否正确
-						var reg__ = /^[a-zA-Z]\w{5,16}$/;
+						var reg__ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
 						if(!reg__.test(data)){
 							layer.tips('密码格式不正确!','input[name = repassword]');
 							return false;

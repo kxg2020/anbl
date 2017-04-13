@@ -149,6 +149,9 @@ class PersonalController extends CommonController{
         //>> 查询提问
         $question = M('MemberConsult')->where(['member_id'=>$this->userInfo['id']])->select();
 
+        //>> 查询招募电影
+        $recruit = M('ProjectRecruit')->select();
+
         //>> 查询充值订单
         $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
         $count = ceil(count($orderLst)/12);
@@ -188,6 +191,7 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'recruit'=>$recruit,
             'topLeader'=>$topLeader,
             'consume'=>$consume,
             'consume_1'=>$consume_1,
@@ -623,9 +627,10 @@ class PersonalController extends CommonController{
                 'address'=>$paramArr['address'],
                 'skill'=>$paramArr['skill'],
                 'ex'=>$paramArr['ex'],
-                'image_url'=>$paramArr['image_url']
+                'image_url'=>$paramArr['image_url'],
             ];
-            $res = M('MemberStar')->add($insertData);
+
+            $res = M('MemberStar')->where(['member_id'=>$this->userInfo['id']])->save($insertData);
             if($res){
 
                 die($this->_printSuccess());
@@ -636,6 +641,65 @@ class PersonalController extends CommonController{
         }else{
 
             die($this->_printError(''));
+        }
+    }
+
+    /**
+     * 查看电影详情
+     */
+    public function filmDetail(){
+
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+
+            if(isset($paramArr['id']) && is_numeric($paramArr['id']) && !empty($paramArr['id'])){
+
+                $film = M('ProjectRecruit')->where(['id'=>$paramArr['id']])->find();
+                $film['role_id'] = json_decode($film['role_id']);
+
+                if(!empty($film)){
+                    static $dataArr = [];
+                    //>> 循环查询角色
+                    foreach($film['role_id'] as $key => $value){
+                        $row = M('ProjectRole')->where(['id'=>$value])->find();
+                        $dataArr[$key] = array_merge($row);
+                    }
+                    $this->assign('role',$dataArr);
+                    $this->assign('film',$film);
+                }
+            }else{
+
+                $this->ajaxReturn([
+                    'status'=>0,
+                    'msg'=>'查询失败'
+                ]);
+            }
+        }else{
+
+            $this->ajaxReturn([
+                'status'=>0,
+                'msg'=>'数据为空'
+            ]);
+        }
+        $this->display('role/detail');
+    }
+
+    /**
+     * 保存选择的角色
+     */
+    public function filmSave(){
+
+        $paramArr = $_REQUEST;
+
+        $filmId = $paramArr['filmId'];
+        $roleId = $paramArr['roleId'];
+
+        //>> 查询是否有申请
+        $res = M('MemberStar')->where(['member_id'=>$this->userInfo['id']])->find();
+
+        if(empty($res)){
+            //>> 将id保存到数据库
+            $res = M('MemberStar')->add(['role_id'=>$roleId,'project_id'=>$filmId,'member_id'=>$this->userInfo['id']]);
         }
     }
 }

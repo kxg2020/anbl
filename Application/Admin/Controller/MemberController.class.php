@@ -398,7 +398,11 @@ class MemberController extends  CommonController{
 
         $page = new Page($rows,15);
 
-        $rows = M('MemberStar')->where($where)->limit($page->firstRow,$page->listRows)->select();
+        $rows = M('MemberStar as a')->field('a.*,b.name as rolename,c.name as filmname')
+            ->join('left join an_project_role as b on a.role_id = b.id')
+            ->join('left join an_project_recruit as c on a.project_id = c.id')
+            ->where($where)
+            ->limit($page->firstRow,$page->listRows)->select();
 
         $pages = $page->show();
 
