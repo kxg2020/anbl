@@ -107,6 +107,22 @@ header{
 	overflow-y: auto;
 
 }
+.star_content  .warn>p{
+	font-size: 16px;
+	color: #e50909;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.star_content  .warn>input{
+	width: 50px;
+	height: 20px;
+	font-size: 16px;
+	background: #e50909;
+	color: white;
+	border: none;
+	outline: none;
+	margin-right: 15px;
+}
 .star_content p{
 	color: white;
 	font-size: 30px;

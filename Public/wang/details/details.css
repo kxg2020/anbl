@@ -276,13 +276,18 @@ margin-right: 8px;
 .now_suport{
   width: 120px;
   height: 40px;
-  margin-top: 48px;
+  margin-top: 7px;
   cursor: pointer;
   background: #e50909;
   color: white;
   text-align: center;
   line-height: 40px;
   border-radius: 3px;
+  float: right;
+}
+.view_suport{
+  width: 100%;
+  height: auto;
 }
 .comment{
   width: 100%;
