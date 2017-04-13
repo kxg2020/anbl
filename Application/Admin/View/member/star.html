@@ -69,9 +69,10 @@
                                     <td style="vertical-align: middle">{$s.address}</td>
                                     <td style="vertical-align: middle">{$s.filmname}</td>
                                     <td style="vertical-align: middle">{$s.rolename}</td>
-                                    <td style="vertical-align: middle"><if condition="$s.status eq 1"><span class="label label-success">已处理</span><else/><span class="label label-danger">未处理</span></if></td>
+                                    <td style="vertical-align: middle"><if condition="$s.is_pass eq 1"><span class="label label-success">已通过</span><elseif condition="$s.is_pass eq 0"/><span class="label label-warning">已拒绝</span>
+                                        <elseif condition="$s.is_pass eq 2"/><span class="label label-danger">未处理</span></if></td>
                                     <td style="vertical-align: middle"><a href="{:U('admin/Member/memberStarDetail',['id'=>$s['id']])}"><input type="button" data-id="{$s['id']}" class="btn btn-xs  btn-info" value="详情"  ></a>&nbsp;&nbsp;&nbsp;
-                                  <if condition="$s.is_pass eq 0"><input type="button"  data-id="{$s['id']}" data-email="{$s.email}" data-result="1" class="btn btn-xs btn-success status1" value="通过"  >&nbsp;&nbsp;&nbsp;
+                                  <if condition="$s.status eq 0"><input type="button"  data-id="{$s['id']}" data-email="{$s.email}" data-result="1" class="btn btn-xs btn-success status1" value="通过"  >&nbsp;&nbsp;&nbsp;
                                       <input type="button"  data-id="{$s['id']}" class="btn btn-danger btn-xs status1" data-result="0" data-email="{$s.email}"   value="拒绝"  ></if>
                                     </td>
                                 </tr>

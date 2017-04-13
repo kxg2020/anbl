@@ -471,7 +471,7 @@ $(function(){
 		//>> 点击我要当演员
 			integral = $('input[name = jifen]').val();
 			if(integral < 70000){
-				layer.msg('积分达到70000才能申请');return false;
+				layer.msg('剩余积分大于70000才能申请');return false;
 			}
 		$('.body_right>ul').hide();
 		$('.body_right>div').hide();

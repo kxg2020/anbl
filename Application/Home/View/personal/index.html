@@ -17,10 +17,10 @@
 		 <div>
 			<p class="username">{$personal['username']}</p>
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个积分，您就升到Lv{$allInfo['level']}啦<else/>
-			您当前的积分为:{$allInfo['integral']}
+			您当前的累计积分为:{$allInfo['integral']}
 			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
-			<div class="money"><p>支持金额 ：￥  <span>{$supportMoney}</span></p><p>账户余额：￥ <span>{$personal['money']}</span></p></div>
+			<div class="money"><p>支持积分 ：￥ <span>{$supportMoney}</span></p><p>剩余积分：￥ <span>{$personal['money']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
 				<if condition="$personal['safe_level'] eq 1">
 					<span>低</span>
@@ -43,7 +43,7 @@
 		</div>
 		</div>
 		<div class="body_right">
-			<ul style='display: none;'>
+			<ul style='display: block;'>
 				<li id="identity"><div>帐号设置</div></li>
 				<li id="team"><div>消费明细</div></li>
 				<li id="password"><div>密码修改</div></li>
@@ -137,7 +137,7 @@
 										<p>{$c['englishname']}</p>
 										<p>{$c['country']}/{$c['duration']}分钟</p>
 										<p>{$c['date']}/{$c['showaddress']}</p>
-										<p style="color: #e50909; float: right;"><i></i><if condition="$c['is_download'] eq 1">未收藏<else/>已收藏</if></p>
+										<p style="color: #e50909; float: right;"><i></i>已收藏</p>
 									</div>
 								</div>
 							</volist>
@@ -197,7 +197,7 @@
 							<div id="ls">
 							<volist name="orderList" id="o">
 								<p><span>{:date('Y-m-d',$o['create_time'])}</span>
-									<span>{$o.type}</span>
+									<span>银行转账</span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>
 									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png" style="border-radius:50%;height: 18px;width: 18px"></span></p>
@@ -345,8 +345,8 @@
 			</div>
 
 
-<input type="hidden" value="{$personal['integral']}" name="jifen">
-			<div class="actor" style="display: block;">
+<input type="hidden" value="{$personal['money']}" name="jifen">
+			<div class="actor" style="display: none;">
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
@@ -366,7 +366,7 @@
 							<div class="up_photo"><label><span style="color: red">*</span>&nbsp;生活照:</label><input type="file" id="uploadStar"><input type="button"  value="点击上传"></div>
 							<input type="hidden" value="" name="im">
 							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;自我评价:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
-							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;表演经历:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
+							<div><label style='float: left;'><span style="color: red">*</span>&nbsp;角色理解:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
 
 
 							<input type="button" value="确定申请" id="sure_apply">
@@ -467,11 +467,20 @@
 											},
 											success:function(result){
 												if(result.status == 1){
-													layer.msg('申请成功',function(){
-														location.reload();
+													layer.open({
+														type: 2,
+														title: '提示',
+														btn: ['确定'],
+														shadeClose: true,
+														shade: 0.8,
+														area: ['380px', '30%'],
+														content: "{:U('Home/Personal/tips')}", //iframe的url
+														btn1:function(){
+															location.reload();
+														}
 													});
 												}else{
-													layer.msg('申请失败');
+													layer.msg(result.msg);
 												}
 											}
 										});
@@ -510,7 +519,7 @@
 					area: ['60%', '70%'],
 					content: "{:U('Home/Personal/filmDetail')}"+'?id='+id,
 					end: function () {
-
+						alert($.cookie('filmId'));
 					}
 				});
 			});
@@ -635,7 +644,7 @@
 										$('#ls').html('');
 										$.each(result.orderList,function(k,v){
 											$('#ls').append('<p><span>'+v.create_time+'</span>'+
-													'<span>'+ v.type+'</span>'+
+													'<span>'+ '银行转账'+'</span>'+
 													'<span>'+ v.order_number+'</span>'+
 												'<span>'+ v.money+'</span>'+
 								'<span>'+ '<img style="height:18px;width:18px;border-radius:50%" src="__PUBLIC__/images/status/'+ v.is_pass+'.png">'+'</span></p>');
@@ -693,7 +702,7 @@
 								'url':"{:U('Home/Personal/mySupport')}",
 								'data':{
 									'pgNum':obj.curr,
-									'pgSize':6
+									'pgSize':4
 								},
 								success:function(result){
 
@@ -732,7 +741,7 @@
 								'url':"{:U('Home/Personal/myCollection')}",
 								'data':{
 									'pgNum':obj.curr,
-									'pgSize':6
+									'pgSize':4
 								},
 								success:function(result){
 
@@ -744,7 +753,7 @@
 										'<p>'+ v.englishname+'</p>'+
 										'<p>'+ v.country+'/'+ v.duration+'分钟</p>'+
 										'<p>'+ v.date+'/'+ v.showaddress+'</p>'+
-										'<p style="color: #e50909;"><i></i>'+ v.is_download+'</p>'+
+										'<p style="color: #e50909;"><i></i>'+ '已收藏'+'</p>'+
 										'</div>'+
 										'</div>');
 									});

@@ -1174,11 +1174,12 @@ margin-top: 25px;
 }
 .actor_content>form>.up_photo input[type=button]{
 	position: absolute;
-	left: 90px;
+	left: 110px;
 	top:0;
 	width: 100px;
 	cursor: pointer;
 	background: #e50909;
+
 }
 .actor_content>form>.up_photo input[type=file]{
 	 cursor: pointer;
@@ -1201,7 +1202,7 @@ margin-top: 25px;
 	width: 100px;
 	height: 30px;
 	background: #e50909;
-	margin-left: 100px;
+	margin-left: 108px;
 	cursor: pointer;
 }
  .actor_content .movie1 a{
@@ -1212,3 +1213,6 @@ margin-top: 25px;
 	padding-left: 15px;
 	cursor: pointer;
  }
+.actor_content .movie1 a:nth-child(2){
+	border-left: 1px solid #e05959;
+}
