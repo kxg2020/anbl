@@ -308,11 +308,14 @@ class CommonController extends Controller
     public function projectStop(){
         $projectInfo = M('Project')->select();
         foreach($projectInfo as $info){
-            //dump($info['end_time'] < time());
-
             if(($info['end_time'] < time()) && ($info['is_active'] == 1)){
                 // 项目下架 修改项目下架
-                $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0]);
+                // 判断目标金额是否达到
+                if($info['target_amount']>=$info['money']){
+                    $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0,'is_ok'=>1]);
+                }else{
+                    $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0]);
+                }
             }
         }
     }

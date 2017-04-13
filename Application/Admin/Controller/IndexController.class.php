@@ -3,7 +3,8 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class IndexController extends CommonController {
+class IndexController extends CommonController
+{
 
     public function _initialize(){
         parent::_initialize();
@@ -32,8 +33,6 @@ class IndexController extends CommonController {
         // 获取会员数量
         $userNum = M('Member')->count();
         $this->assign('userNum', $userNum);
-
-
         $this->display('index/index');
     }
 }

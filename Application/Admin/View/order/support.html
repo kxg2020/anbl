@@ -77,7 +77,8 @@
                                     <th class="text-center">支持用户</th>
                                     <th class="text-center">支持项目</th>
                                     <th class="text-center">支持金额</th>
-                                    <th class="text-center">静态收益</th>
+                                    <th class="text-center">固定收益</th>
+                                    <th class="text-center">浮动收益</th>
                                     <th class="text-center">是否已分红</th>
                                     <th class="text-center">返还分红到余额</th>
                                     <th class="text-center">是否分佣</th>
@@ -100,7 +101,8 @@
                                     <td style="vertical-align: middle">{$tag.username}</td>
                                     <td style="vertical-align: middle">{$tag.project_name}</td>
                                     <td style="vertical-align: middle">{$tag.support_money}</td>
-                                    <td style="vertical-align: middle">{$tag.expect_return}</td>
+                                    <td style="vertical-align: middle">{$tag.fixed}</td>
+                                    <td style="vertical-align: middle">{$tag.float}</td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_fh'] eq 1">已分红<else /><span style="color: red">未分红</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_true'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_fy'] eq 1">已分佣<else /><span style="color: red">未分佣</span></if></td>
