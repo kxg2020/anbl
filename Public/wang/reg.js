@@ -75,7 +75,7 @@ $(function(){
                 layer.tips('密码不能为空!', 'input[name = password]');
 
             }else{
-                var e = /^[a-zA-Z]\w{5,16}$/ ;
+                var e = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/ ;
                 if(!e.test(password)){
                     layer.tips('密码格式不正确!', 'input[name = password]');
 

@@ -141,7 +141,7 @@ class RegisterController extends CommonController{
             if(isset($password) && strlen($password) < 16){
 
                 //>> 密码由字母、数字、下划线组成，5-16位
-                $reg = '/^[a-zA-Z]\w{5,16}$/';
+                $reg = '/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/';
 
                 preg_match_all($reg,$password,$str);
 
