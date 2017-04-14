@@ -44,7 +44,7 @@ class CountController extends CommonController
         $this->assign('pages',$pages);
         $this->assign('projectInfos',$rows);
 
-        $this->display('project');
+        $this->display('count/project');
     }
 
     /**
@@ -94,7 +94,7 @@ class CountController extends CommonController
             ->select();
         $this->assign('download',$download);
 
-        $this->display('pay');
+        $this->display('count/pay');
     }
 
 
@@ -130,7 +130,7 @@ class CountController extends CommonController
         $dmoney = M('MemberProfit')->where(array_merge($where,['type'=>2]))->sum('money');
         $this->assign('dmoney',$dmoney);
 
-        $this->display('finance');
+        $this->display('count/finance');
     }
 
     /**

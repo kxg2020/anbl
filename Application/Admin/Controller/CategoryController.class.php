@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 
-class ArticleCategoryController extends CommonController
+class CategoryController extends CommonController
 {
 
     public function _initialize(){
@@ -14,12 +14,13 @@ class ArticleCategoryController extends CommonController
     }
 
     public function index(){
+
         // 查询出所有项目分类
         $ArticleCategorys = M('ArticleCategory')->select();
 
         $this->assign('ArticleCategorys',$ArticleCategorys);
 
-        $this->display('articleCategory/index');
+        $this->display('category/index');
     }
 
     public function add(){
@@ -40,7 +41,7 @@ class ArticleCategoryController extends CommonController
             $this->redirect('admin/articleCategory/index');
             exit;
         }
-        $this->display('articleCategory/add');
+        $this->display('category/add');
     }
 
     public function edit(){
@@ -78,12 +79,12 @@ class ArticleCategoryController extends CommonController
                 exit;
             }
             // 更新成功直接跳转到首页
-            $this->redirect('admin/articleCategory/index');
+            $this->redirect('admin/category/index');
             exit;
         }
         // 向模板分配数据
         $this->assign('row',$row);
-        $this->display('articleCategory/edit');
+        $this->display('category/edit');
     }
 
     public function remove($id){
@@ -111,6 +112,6 @@ class ArticleCategoryController extends CommonController
             exit;
         }
         // 删除成功直接回到首页
-        $this->redirect('admin/articleCategory/index');
+        $this->redirect('admin/category/index');
     }
 }

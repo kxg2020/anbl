@@ -61,7 +61,7 @@ class OrderController extends CommonController
         $this->assign('pages',$pages);
         $this->assign('count',$count);
         $this->assign('rows',$rows);
-        $this->display('download');
+        $this->display('order/download');
     }
 
     /**
@@ -176,7 +176,7 @@ class OrderController extends CommonController
         $this->assign('pages',$pages);
         $this->assign('count',$count);
         $this->assign('rows',$rows);
-        $this->display('support');
+        $this->display('order/support');
     }
 
     /**

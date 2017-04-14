@@ -1,4 +1,4 @@
-<extend name="Public:tpl" />
+<extend name="public:tpl" />
         <!-- header section end-->
 <block name="main">
     <div class="page-heading">
@@ -21,7 +21,7 @@
                     <header class="panel-heading">
                         消息分类列表
                             <span class="tools pull-right">
-                                <a href="{:U('admin/articleCategory/add')}" class="btn btn-success btn-link">新增消息分类</a>
+                                <a href="{:U('admin/Category/add')}" class="btn btn-success btn-link">新增消息分类</a>
                             </span>
                     </header>
                     <div class="panel-body">
@@ -48,8 +48,8 @@
                                     <td>{$tag.name}</td>
                                     <td>{:date('Y-m-d',$tag['create_time'])}</td>
                                     <td>
-                                        <a href="{:U('admin/articleCategory/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                        <a data-href="{:U('admin/articleCategory/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                        <a href="{:U('admin/Category/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                        <a data-href="{:U('admin/Category/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                     </td>
                                 </tr>
                                 </volist>

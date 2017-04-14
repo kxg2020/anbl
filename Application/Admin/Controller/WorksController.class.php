@@ -14,7 +14,7 @@ class WorksController extends  CommonController
         // 查询出所有演员
         $performerInfos = M('Performer')->where($where)->select();
         $this->assign('performerInfos',$performerInfos);
-        $this->display('index');
+        $this->display('works/index');
     }
 
     public function add(){
@@ -36,7 +36,7 @@ class WorksController extends  CommonController
             }
             $this->ajaxReturn(['msg'=>'数据保存成功', 'status'=>1,]);
         }
-        $this->display('add');
+        $this->display('works/add');
     }
 
     public function edit($id){
@@ -86,7 +86,7 @@ class WorksController extends  CommonController
 
         }
         $this->assign('row',$performerInfo);
-        $this->display('edit');
+        $this->display('works/edit');
     }
 
     public function remove($id){

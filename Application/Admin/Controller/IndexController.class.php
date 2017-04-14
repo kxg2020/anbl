@@ -36,6 +36,4 @@ class IndexController extends CommonController {
 
         $this->display('index/index');
     }
-
-
 }

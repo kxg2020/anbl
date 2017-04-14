@@ -10,7 +10,7 @@ class ArticleController extends CommonController
             ->join('left join an_article_category as b on b.id=a.type')
             ->select();
         $this->assign('articleInfos',$articleInfos);
-        $this->display('index');
+        $this->display('article/index');
 
     }
 
@@ -34,7 +34,7 @@ class ArticleController extends CommonController
         // 查询所有分类
         $types = M('ArticleCategory')->select();
         $this->assign('articleCategory',$types);
-        $this->display('add');
+        $this->display('article/add');
     }
 
     public function edit($id){
@@ -86,7 +86,7 @@ class ArticleController extends CommonController
 
         $this->assign('types',$types);
         $this->assign('row',$ArticleInfo);
-        $this->display('edit');
+        $this->display('article/edit');
     }
 
     public function remove($id){
