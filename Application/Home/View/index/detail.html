@@ -329,7 +329,9 @@
 							 window.location.href = "{:U('Home/Login/index')}"
 						 }
 					 });
-				 } else {
+				 } else if(data.status == 2) {
+					 layer.msg(data.msg);
+				 }else{
 					 $('#skl').text(data.info);
 					 layer.msg(data.msg);
 				 }

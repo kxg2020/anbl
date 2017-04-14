@@ -213,7 +213,7 @@ class IndexController extends CommonController{
             $projectInfo = M('Project')->find($project_id);
 
             if(!$projectInfo){
-                $this->ajaxReturn(['msg'=>"非法项目！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"非法项目！！！",'status'=>2]);
             }
 
             $model = M('MemberCollection');
@@ -222,7 +222,7 @@ class IndexController extends CommonController{
             $info = $model->where(['member_id'=>$this->userInfo['id'],
                 'project_id'=>$projectInfo['id']])->find();
             if($info){
-                $this->ajaxReturn(['msg'=>"您已收藏该项目！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"您已收藏该项目！！！",'status'=>2]);
             }
             //收藏
             $data = [
@@ -233,13 +233,13 @@ class IndexController extends CommonController{
 
             $id = $model->add($data);
             if($id===false){
-                $this->ajaxReturn(['msg'=>"收藏失败",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"收藏失败",'status'=>2]);
             }
 
             //更新项目收藏人数
             $rest = M('Project')->where(['id'=>$projectInfo['id']])->save(['collection_number'=>$projectInfo['collection_number']+1]);
             if($rest === false){
-                $this->ajaxReturn(['msg'=>"收藏失败",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"收藏失败",'status'=>2]);
             }
 
             $this->ajaxReturn(['msg'=>"收藏成功",'status'=>1,'info'=>$projectInfo['collection_number']+1]);
