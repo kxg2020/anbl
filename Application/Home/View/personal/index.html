@@ -43,7 +43,7 @@
 		</div>
 		</div>
 		<div class="body_right">
-			<ul style='display: none;'>
+			<ul style='display: block;'>
 				<li id="identity"><div>帐号设置</div></li>
 				<li id="team"><div>消费明细</div></li>
 				<li id="password"><div>密码修改</div></li>
@@ -361,11 +361,11 @@
 
 
 <input type="hidden" value="{$personal['money']}" name="jifen">
-			<div class="actor" style="display: block;">
+			<div class="actor" style="display: none;">
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
-						<div class='movie_list' style="display: none;">
+						<div class='movie_list' style="display: block;">
 							<div>
 								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
 								<p>申请积分<span>7000</span>分</p>
@@ -412,7 +412,7 @@
 								</div>
 							</div>	
 						</div>
-						<form class="apply_role" style='display:block'>
+						<form class="apply_role" style='display:none;'>
 							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2">电影详情</span><b>></b><span class="backTo3 mianbaoChoice">申请表</span></p>
 							<h3 >申请表</h3>
 							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><volist name="recruit" id="recr"><a href="#" data-id="{$recr['id']}" class="recruit">{$recr['name']}</a></volist> </div>
