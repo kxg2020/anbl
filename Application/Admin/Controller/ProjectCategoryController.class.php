@@ -111,6 +111,6 @@ class ProjectCategoryController extends CommonController
             exit;
         }
         // 删除成功直接回到首页
-        $this->redirect('admin/projectcategory/index');
+        $this->redirect('admin/projectCategory/index');
     }
 }
