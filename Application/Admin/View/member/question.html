@@ -84,8 +84,8 @@
                                     <td style="vertical-align: middle">{$q.id}</td>
                                     <td style="vertical-align: middle">{$q.username}</td>
                                     <td style="vertical-align: middle">{$q.title}</td>
-                                    <td style="vertical-align: middle">{$q.content}</td>
-                                    <td style="vertical-align: middle"><img src="__PUBLIC__/images/status/{$q.status}.png" style="width: 18px;height: 18px;border-radius: 50%"></td>
+                                    <td style="vertical-align: middle">{:mb_substr($q['content'], 0, 15, 'utf-8')}</td>
+                                    <td style="vertical-align: middle"><if condition="$q['status'] eq 0"><span class="label label-danger">未回复</span><else/><span class="label label-success">已回复</span></if></td>
                                     <td style="vertical-align: middle"><input type="button" data-id="{$q['id']}" class="btn btn-xs btn-info detail" value="查看"  ></td>
                                 </tr>
                                 </volist>

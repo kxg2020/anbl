@@ -721,7 +721,7 @@ header .nav{
 	margin-right: 12px;
 }
 .money_content{
-	width: 876px;
+	width: 100%;
 	height: auto;
 	margin: auto;
 	padding-top: 40px;
@@ -729,7 +729,7 @@ header .nav{
 	font-size: 18px;
 }
 .money_content>ul{
-    width: 100%;
+    width: 90%;
     height: 38px;
     margin: auto;
     border-bottom: 1px solid #ccc;
@@ -812,7 +812,7 @@ margin-top: 25px;
 .money_file{
 	position: absolute;
 	top: 0;
-	left: 95px;
+	left: -8px;
 	opacity: 0;
 }
 .get_money{

@@ -69,9 +69,7 @@
 								<span><input type="radio" name="sex" value="" data-sex="2" <if condition="$userInfo['sex'] eq 2">checked="checked"</if>>女</span>
 							</div>
 							<input type="hidden" value="{$personal['level']}" id="dengji">
-							{~$userLevel=['1'=>'I','2'=>'II','3'=>'III','4'=>'IV','5'=>'V']}
-							{~$userWidth=['1'=>'10%','3'=>'50%','4'=>'70%','5'=>'90%']}
-							<div class="user_leval"><span>用户等级:</span><p><i id="bg_1"></i><span id="d">
+							<div class="user_leval"><span >用户等级:</span><p><i id="bg_1"></i><span id="d" style="border-radius: 10px">
 
 							</span></p></div>
 							<script>
@@ -176,7 +174,7 @@
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
 								</div>
 								<p>充值金额: <input type="text" name="rechargeMoney"></p>
-								<p>交易凭证:<span style="margin-left: 20px;"><span style="color:#e05959;">点击上传</span><input id="file_upload" style="cursor: pointer;" class="money_file" type="file"></span></p>
+								<p>交易凭证:<span style="margin-left: 20px;"><span style="height: 50px;width: 50px; text-align:center; line-height:50px;color:#e05959;cursor: pointer;display: inline-block;border: 1px dashed red" >+</span><input id="file_upload" style="cursor: pointer; width: 160px; height: 50px;"  class="money_file" type="file"></span></p>
 
 								<div id="put_btn" class="rechargeOk">确定</div>
 							</div>
@@ -186,7 +184,7 @@
 							</div>
 						</if>
 						<div class="get_money" style="display: none;">
-							<p>提现金额: <input type="text" name="exMoney"></p>
+							<p>提现金额: <input type="text" name="exMoney" placeholder="0.00"></p>
 							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
 							<div class="question_div"></div>
 							<input type="button" value="确定" id="get_btn" class="ex" >
@@ -339,7 +337,7 @@
 							<div><label>性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
 							<div><label>民族:</label><input style='width: 80px;' type="text" name="volk"></div>
 							<div><label>生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
-							<div><label>身高:</label><input type="number" name="realheight"><span>实际净身高</span></div>
+							<div><label>身高:</label><input type="number" name="realheight"><span>单位:cm</span></div>
 							<div><label>身份证号码:</label><input type="text" name="id_card_"></div>
 							<div><label>联系电话:</label><input type="text" name="phone1"></div>
 							<div><label>电子邮箱:</label><input type="text" name="email1"><span>申请的结果将发送至此邮箱</span></div>

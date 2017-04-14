@@ -86,7 +86,8 @@ class RegisterController extends CommonController{
                 $invite_key = implode('',$endArr);
 
                 //>> 判断当前用户是否已经注册
-                $res = $userModel->where(['phone'=>$paramArr['phone']])->find();
+                $res = $userModel->where(['username'=>$paramArr['phone']])->find();
+
                 if($res){
 
                     die($this->_printError('1014'));

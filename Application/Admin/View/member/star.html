@@ -62,8 +62,8 @@
                                     <td style="vertical-align: middle">{$s.id}</td>
                                     <td style="vertical-align: middle">{$s.email}</td>
                                     <td style="vertical-align: middle">{$s.name}</td>
-                                    <td style="vertical-align: middle">{$s.sex}</td>
-                                    <td style="vertical-align: middle">{$s.height}</td>
+                                    <td style="vertical-align: middle"><if condition="$s.sex eq 1">男<else/>女</if></td>
+                                    <td style="vertical-align: middle">{$s.height}cm</td>
                                     <td style="vertical-align: middle">{$s.address}</td>
                                     <td style="vertical-align: middle"><if condition="$s.status eq 1"><span class="label label-success">已处理</span><else/><span class="label label-danger">未处理</span></if></td>
                                     <td style="vertical-align: middle"><a href="{:U('admin/Member/memberStarDetail',['id'=>$s['id']])}"><input type="button" data-id="{$s['id']}" class="btn btn-xs  btn-info" value="详情"  ></a>&nbsp;&nbsp;&nbsp;

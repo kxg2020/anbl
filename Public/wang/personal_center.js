@@ -361,13 +361,18 @@ $(function(){
 			 layer.tips('请输入提现金额','input[name = exMoney]');
 		}else{
 
+			//>> 检测是否为0
+			if(money == 0){
+				layer.tips('金额不能为0','input[name = exMoney]');
+				return;
+			}
 			//>> 检测金额是否是数字
 			var reg = /^[0-9]+.?[0-9]*$/;
 			if(!reg.test(money)){
 
-				layer.tips('请输入数字','input[name = exMoney]');
+				layer.tips('请输入正确的金额','input[name = exMoney]');
 			}else{
-				$(this).attr('disabled','disabled');
+
 				var url =  location.protocol +'//'+ window.location.host+'/Home/Personal/cash';
 				$.ajax({
 					'type':'post',
@@ -378,13 +383,14 @@ $(function(){
 					},
 					success:function(result){
 						if(result.status == 1){
+							$('input[name = exMoney]').val(0.00);
 							layer.msg('提现成功,请等待审核',function(){
-								location.reload();
+
 							});
 
 						}else{
 							layer.msg(result.msg,function(){
-								location.reload();
+
 							});
 						}
 					}
