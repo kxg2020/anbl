@@ -19,7 +19,11 @@ $(function(){
   //   'y':y
   //   }
   // }
-
+        var right=$('#title').innerWidth()/2;
+        console.log(-right)
+      $('#title').css({
+        right:-right
+      })
 
        var backflag=true;
       var frameworkflag=false;
