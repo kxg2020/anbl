@@ -1,9 +1,9 @@
 $(function(){
 	var div=$('.star_content>div').eq(0);
-    console.log(div)
+   
 	$('.sb-container>div').click(function(){
 		var id=$(this)[0].id;
-
+      $('.warn').hide();
         if(id!==div.attr('class')&&$(this).attr('class')!='last_title'&&$(this).attr('class')!='last_title ff-active'){
       var newdiv;
       for(var i=0;i<=$('.star_content>div').length;i++){
@@ -21,6 +21,7 @@ $(function(){
 
 	$('.classify p').click(function(){
     var txt=$(this)[0].innerHTML;
+     $('.warn').hide();
         $('.sb-container>div').removeClass("ff-active");
         $('.star_content>div').hide();
     $('.classify p').removeClass('choice');

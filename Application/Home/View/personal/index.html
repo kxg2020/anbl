@@ -43,7 +43,7 @@
 		</div>
 		</div>
 		<div class="body_right">
-			<ul style='display: block;'>
+			<ul style='display: none;'>
 				<li id="identity"><div>帐号设置</div></li>
 				<li id="team"><div>消费明细</div></li>
 				<li id="password"><div>密码修改</div></li>
@@ -271,7 +271,7 @@
 						</form>
 					</div>
 					<div class="ask_answer" style="display: none;">
-						<p>当前位置>信箱>信件<span>我要提问<b>>></b></span></p>
+						<p><span>我要提问<b>>></b></span></p>
 						<div class="answer_div" >
 							<volist name="question" id="q">
 							<p class="qdetail" data-id="{$q['id']}">{$q['title']}</p>
@@ -361,11 +361,59 @@
 
 
 <input type="hidden" value="{$personal['money']}" name="jifen">
-			<div class="actor" style="display: none;">
+			<div class="actor" style="display: block;">
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
-						<form>
+						<div class='movie_list' style="display: none;">
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail" type="button" value="立即申请">
+							</div>
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail"  type="button" value="立即申请">
+							</div>
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg01.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail"  type="button" value="立即申请">
+							</div>
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail"  type="button" value="立即申请">
+							</div>
+						</div>
+						<div class='movie_intr' style="display: none;">
+							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2 mianbaoChoice">电影详情</span></p>
+							<div class="movie_details">
+								<div class="movie_topleft"><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""></div>
+								<div class="movie_topright">
+									<p>电影名称: <span>小电影</span></p>
+									<p>申请积分: <span>7000</span></p>
+									<p>剩余名额: <span>10</span>个</p>
+									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
+										<option value="role1">男一号</option>
+										<option value="role2">男二号</option>
+										<option value="role3">男三号</option>
+									</select>
+									<p><input class="goToform" type="button" value="点击申请"></p>				
+								</div>
+								<div class="movie_body">
+									<h3>角色性格</h3>
+									<p>由于游览器自带的滚动条在美观方面并不是很好看，所以很多设计师希望通过自己设计出来的滚动条来做这样的效果，JS模拟滚动条其实很早看到jQuery有这样的插件或者KISSY有这样的组件，一直想着自己什么时候也来研究下这个神秘的东东，思来想去 做demo 但是也没有研究出来，一开始有2点不了解：一是：当前的滚动条的宽度(水平滚动)或者高度(垂直滚动)不知道</p>	
+									<h3>角色特征</h3>
+									<p>由于游览器自带的滚动条在美观方面并不是很好看，所以很多设计师希望通过自己设计出来的滚动条来做这样的效果，JS模拟滚动条其实很早看到jQuery有这样的插件或者KISSY有这样的组件，一直想着自己什么时候也来研究下这个神秘的东东，思来想去 做demo 但是也没有研究出来，一开始有2点不了解：一是：当前的滚动条的宽度(水平滚动)或者高度(垂直滚动)不知道</p>	
+									<h3>形象风格</h3>
+									<p>sdfsdafsdfasdf</p>		
+								</div>
+							</div>	
+						</div>
+						<form class="apply_role" style='display:block'>
+							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2">电影详情</span><b>></b><span class="backTo3 mianbaoChoice">申请表</span></p>
 							<h3 >申请表</h3>
 							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><volist name="recruit" id="recr"><a href="#" data-id="{$recr['id']}" class="recruit">{$recr['name']}</a></volist> </div>
 
