@@ -34,7 +34,7 @@ class IndexController extends CommonController {
         $this->assign('userNum', $userNum);
 
 
-        $this->display('index');
+        $this->display('index/index');
     }
 
 
