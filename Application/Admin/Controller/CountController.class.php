@@ -194,4 +194,5 @@ class CountController extends CommonController
        $this->assign('all',$all);
         $this->display('count/member');
     }
+
 }

@@ -98,7 +98,11 @@
                                     <td style="vertical-align: middle">{$o.order_number}</td>
                                     <td style="vertical-align: middle">{$o.username}</td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$o['create_time'])}</td>
-                                    <td style="vertical-align: middle">{$o.money}</td>
+                                    <td style="vertical-align: middle">
+                                        <if condition="$o['money'] egt 700"><span style="color: red">{$o['money']}</span><else/>
+                                            <span >{$o['money']}</span>
+                                        </if>
+                                    </td>
                                     <td style="vertical-align: middle">
                                         <if condition="$o.is_pass eq 0"><span class="label label-danger">等待审核</span><else/><span class="label label-success">通过审核</span></if>
                                     </td>

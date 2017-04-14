@@ -26,9 +26,20 @@ class RechargeController extends CommonController{
 
             die($this->_printError('1046'));
         }
+
         if(!empty($paramArr)){
 
             if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
+
+                if($paramArr['money'] <= 700){
+
+                    //>> 判断用户是否点击确认协议
+                    $agree = session('agree'.$this->userInfo['id']);
+                    if(!$agree){
+
+                        die($this->_printError('1062'));
+                    }
+                }
 
                 M('Member')->startTrans();
                 //>> 生成流水号

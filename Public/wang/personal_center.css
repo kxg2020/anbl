@@ -444,6 +444,7 @@ header .nav{
   position: relative;
 }
 .user>input{
+	border-radius: 3px;
   position: absolute;
   width: 138px;
   height: 30px;
@@ -534,6 +535,7 @@ header .nav{
   background: url(img/level.png);
 }
 .save_update{
+	border-radius: 3px;
   width: 108px;
   height: 30px;
   background: #e50909;
@@ -577,9 +579,11 @@ header .nav{
 	transform: rotateZ(-45deg);
 }
 .safe_center>div{
+	border-radius: 3px;
 	margin-bottom: 30px;
 }
 .safe_center input{
+	border-radius: 3px;
 	padding: 0 0 0 36px;
 	width: 140px;
 	height: 30px;
@@ -788,6 +792,7 @@ header .nav{
 
 }
 .put_money>p:nth-child(3) input{
+	border-radius: 3px;
 	border: 1px solid white;
 	background: rgba(255,255,255,0);
 	height: 20px;
@@ -799,6 +804,7 @@ header .nav{
 	position: relative;
 }
 #put_btn{
+	border-radius: 3px;
   width: 100px;
 height: 30px;
 text-align: center;
@@ -822,6 +828,7 @@ margin-top: 25px;
 	margin-top: 30px;
 }
 .get_money p:nth-child(1) input{
+	border-radius: 3px;
 	border: 1px solid white;
 	background: rgba(255,255,255,0);
 	width: 160px;
@@ -838,6 +845,7 @@ margin-top: 25px;
 	line-height: 20px;
 }
 #get_btn{
+	border-radius: 3px;
 	width: 120px;
 	height: 30px;
 	border: none;
@@ -904,8 +912,9 @@ margin-top: 25px;
   position: relative;
 }
 .update_password>p>input{
+	border-radius: 3px;
   width: 206px;
-  height: 20px;
+  height: 30px;
   padding-left: 5px;
   border: 1px solid #999;
   background: rgba(255, 255, 255, 0);
@@ -957,6 +966,7 @@ margin-top: 25px;
 	float: left;
 }
 .ask_content>form input, .ask_content>form textarea{
+	border-radius: 3px;
 	background: #1a1a1a;
 	outline: none;
 	border: none;
@@ -1024,6 +1034,7 @@ margin-top: 25px;
 	float: left;
 }
 .answer_form>div>input{
+	border-radius: 3px;
 	background: #1a1a1a;
 	outline: none;
 	border: none;
@@ -1034,6 +1045,7 @@ margin-top: 25px;
 	font-size: 16px;
 }
 .answer_form>div>textarea{
+	border-radius: 3px;
 	background: #1a1a1a;
 	outline: none;
 	border: none;
@@ -1065,8 +1077,8 @@ margin-top: 25px;
 }
 .team_content{
 	width: 80%;
-	height: 90%;
-	margin: 30px auto;
+	height: 100%;
+	margin: auto;
 	overflow: auto;
 	color: white;
 	position: relative;
@@ -1098,27 +1110,19 @@ margin-top: 25px;
 } 
 .money_modal{
 	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0; left: 0;
-	
+	height: 90%;
+
+
+	overflow: auto;
 	color: #666;
 	background:#333;
 }
 .close_modal{
-	width: 120px;
-	height: 40px;
+	width: 100%;
+	height: 10%;
 	margin: auto;
-	background: #e50909;
-	color: white;
+	background: #333;
 	text-align: center;
-	line-height: 40px;
-	border-radius: 3px;
-	font-size: 16px;
-	cursor: pointer;
-	position: absolute;
-	left: 50%;
-	bottom: 20px;
 }
 
 .actor_content{
@@ -1213,3 +1217,38 @@ margin-top: 25px;
 	padding-left: 15px;
 	cursor: pointer;
  }
+.join,.close_modal>input{
+	position: absolute;
+	left: 50%;
+	margin-left: -50px;
+	bottom: 0;
+	width: 100px;
+	height: 30px;
+	color: #e50909;
+	border: 1px solid #e50909;
+	outline: none;
+	border-radius: 3px;
+	background: rgba(0,0,0,0);
+	cursor: pointer;
+	font-size: 20px;
+}
+.money_modal>span{
+	font-size: 25px;text-align: center;display: inline-block;
+	width: 100%;
+}
+#table{
+	width: 80%;
+	margin: auto;
+	font-size: 16px;
+	padding-top: 15px;
+
+	overflow: auto;
+}
+#table tr{
+	padding-bottom: 15px;
+}
+#table th{
+	font-size: 20px;
+	padding-bottom: 15px;
+	width: 20%;
+}

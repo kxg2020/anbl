@@ -172,7 +172,7 @@
 
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
 								</div>
-								<p>充值金额: <input type="text" name="rechargeMoney"></p>
+								<p>充值金额: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
 								<p>交易凭证:<span style="margin-left: 20px;"><span style="height: 50px;width: 50px; text-align:center; line-height:50px;color:#e05959;cursor: pointer;display: inline-block;border: 1px dashed red" >+</span><input id="file_upload" style="cursor: pointer; width: 160px; height: 50px;"  class="money_file" type="file"></span></p>
 
 								<div id="put_btn" class="rechargeOk">确定</div>
@@ -280,7 +280,7 @@
 							</volist>
 						</div>
 						<form class="answer_form" style="display: none;">
-							<div><label >问题标题</label><input type="text" name="rtitle"></div>
+							<div><label >问题标题</label><input type="text" name="rtitle" style="height: 30px"></div>
 							<div><label >详细内容</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="rcontent"></textarea></div>
 							<div><label >回复内容</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="rdcontent"></textarea></div>
 							<input class="back_title" type="button" value="返回到标题">
@@ -311,13 +311,14 @@
 				<div class="bg">
 					<div class="close_team"></div>
 					<div class="team_content">
+
 						<table>
+
 							<thead>
 								<tr>
 									<th>消费时间</th>
 									<th>消费积分</th>
 									<th>消费类型</th>
-									<th>操作</th>
 								</tr>								
 							</thead>
 							<tbody>
@@ -326,7 +327,6 @@
 									<td>{$c.create_time}</td>
 									<td>{$c.money}</td>
 									<td>{$c.type}</td>
-									<td><input type="button" value="参与" class='join'></td>
 								</tr>
 							</volist>
 							<volist name="consume_2" id="c">
@@ -334,7 +334,6 @@
 									<td>{$c.create_time}</td>
 									<td>{$c.money}</td>
 									<td>{$c.type}</td>
-									<td><input type="button" value="参与" class='join'></td>
 								</tr>
 							</volist>
 							<volist name="consume_3" id="c">
@@ -342,21 +341,47 @@
 									<td>{$c.create_time}</td>
 									<td>{$c.money}</td>
 									<td>{$c.type}</td>
-									<td><input type="button" value="参与" class='join'></td>
 								</tr>
 							</volist>
 							</tbody>
 						</table>
+						<input type="button" value="参与" class='join' style="font-size: 20px;">
 					</div>
+
 				</div>
 				
 				<p>A</p>
 				<p>L</p>
 				<p>B</p>
 				<div class='money_modal' style='display: none;'>
-							<p>我的下线</p>
-							<div class='close_modal'>关闭</div>
+							<span style="color: white;margin: 0 auto">我的成员:{:count($follower)}人</span><br>
+					<br>
+					<table id="table" width="100%" cellpadding="0" cellspacing="0" >
+						<tr>
+							<th>电话</th>
+							<th>等级</th>
+							<th>姓名</th>
+							<th>投资等级</th>
+							<th>推荐时间</th>
+						</tr>
+						<volist name="follower" id="fo">
+						<tr style="color: white" align="center">
+							<td>{$fo['username']}</td>
+							<td>{$fo['level']}</td>
+							<td>{$fo['realname']}</td>
+							<td><if condition="$fo['role'] eq 0">无
+								<elseif condition="$fo['role'] eq 1" />经纪人
+								<elseif condition="$fo['role'] eq 2" />经纪人
+								<elseif condition="$fo['role'] eq 3" />制片人
+								<elseif condition="$fo['role'] eq 4"/>出品人</if>
+							</td>
+							<td>{:date('Y-m-d',$fo['create_time'])}</td>
+						</tr>
+						</volist>
+					</table>
+
 					</div>
+				<div class='close_modal' style="display: none"><input type="button"  value="关闭"></div>
 			</div>
 
 

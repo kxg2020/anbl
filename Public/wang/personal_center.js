@@ -313,6 +313,47 @@ $(function(){
 	/**
 	 * 充值验证
 	 */
+	$('input[name = rechargeMoney]').blur(function(){
+		//>> 获取内容
+		data = $(this).val();
+
+		if(data == ''){
+			layer.tips('请输入充值积分','input[name = rechargeMoney]');
+			return false;
+		}
+		if(!isNaN(data)){
+			//>> 判断当前的数字值
+			if(data <= 700 ){
+				//在这里面输入任何合法的js语句
+				layer.open({
+					btn:['确定'],
+					btn1:function(){
+						$.ajax({
+							'type':'post',
+							'dataType':'json',
+							'url':location.protocol+'//'+window.location.host+'/Home/Personal/agree',
+							'data':{
+								'agree':$('input[type = checkbox]:checked').val()
+							},
+							complete:function(){
+								layer.closeAll('page');
+							}
+						});
+
+					},
+					btnAlign: 'c',
+					type: 1 //Page层类型
+					,area: ['500px', '700px']
+					,title: '阿纳巴里用户协议'
+					,shade: 0.6 //遮罩透明度
+					,anim: 1 //0-6的动画形式，-1不开启
+					,content: '<div style="padding:50px;overflow: auto">这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html这是一个非常普通的页面层，传入了自定义的html<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+				});
+			}
+		}else{
+			layer.tips('请输入正确的数字','input[name = rechargeMoney]');
+		}
+	});
 	$('.rechargeOk').click(function(){
 		var money = $('input[name = rechargeMoney]').val();
 		var path = $('#images').val();
@@ -328,7 +369,7 @@ $(function(){
 			var isNum = /^[0-9]*$/;
 			if(!isNum.test(money)){
 
-				layer.tips('格式不正确!','input[name = rechargeMoney]');
+				layer.tips('请输入正确的数字!','input[name = rechargeMoney]');
 			}else{
 				var chargeUrl = location.protocol+'//'+window.location.host+'/Home/Recharge/recharge';
 				$.ajax({
@@ -342,14 +383,56 @@ $(function(){
 					success:function(result){
 						if(result.status == 1){
 							$('#images').val('');
-							layer.msg('充值成功!,请等待审核');
+							layer.msg('充值成功!,请等待工作人员与您联系',function(){
+								$('input[name = rechargeMoney]').val('');
+							});
 						}else{
-							layer.msg('充值失败!');
+							layer.msg(result.msg,function(){
+								$('input[name = rechargeMoney]').val('');
+							});
 						}
 					}
 				});
 
 			}
+		}
+	});
+
+	//>> 提现输入框失去焦点事件
+	$('input[name = exMoney]').blur(function(){
+		//>> 获取值
+		e = $(this).val();
+		//>> 判断金额
+		if(e != '' && !isNaN(e)){
+			if(e <= 700){
+				layer.open({
+					btn:['确定'],
+					btn1:function(){
+						$.ajax({
+							'type':'post',
+							'dataType':'json',
+							'url':location.protocol+'//'+window.location.host+'/Home/Personal/exportAgree',
+							'data':{
+								'export':$('input[type = checkbox]:checked').val()
+							},
+							complete:function(){
+								layer.closeAll('page');
+							}
+						});
+
+					},
+					btnAlign: 'c',
+					type: 1 //Page层类型
+					,area: ['500px', '700px']
+					,title: '阿纳巴里用户协议'
+					,shade: 0.6 //遮罩透明度
+					,anim: 1 //0-6的动画形式，-1不开启
+					,content: '<div style="padding:50px;overflow: auto">协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议协议<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+				});
+			}
+		}else{
+			layer.tips('请输入提现积分','input[name = exMoney]');
+			return false;
 		}
 	});
 
@@ -383,14 +466,13 @@ $(function(){
 					},
 					success:function(result){
 						if(result.status == 1){
-							$('input[name = exMoney]').val(0.00);
-							layer.msg('提现成功,请等待审核',function(){
-
+							$('input[name = exMoney]').val('0');
+							layer.msg('提现申请成功,请等待审核',function(){
+								$('input[name = exMoney]').val('');
 							});
-
 						}else{
 							layer.msg(result.msg,function(){
-
+								$('input[name = exMoney]').val('');
 							});
 						}
 					}
@@ -483,11 +565,14 @@ $(function(){
 
 	$('.join').click(function(){
 		
-		var offset=$(this).parent().parent().offset();
-		$('.money_modal').fadeIn('slow');
+		$('.close_modal').show();
+		$('.money_modal').show();
+		$('.team>.bg').hide()
 	})
-	$('.close_modal').click(function(){
-		$('.money_modal').fadeOut('slow');
+	$('.close_modal>input').click(function(){
+		$('.close_modal').hide();
+		$('.money_modal').hide();
+		$('.team>.bg').show();
 	})
 
 });

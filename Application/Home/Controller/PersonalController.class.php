@@ -67,7 +67,6 @@ class PersonalController extends CommonController{
      */
     public function index(){
 
-
         $paramArr = $_REQUEST;
 
        //>> 判断用户是否登录
@@ -173,6 +172,9 @@ class PersonalController extends CommonController{
         //>> 查询招募电影
         $recruit = M('ProjectRecruit')->select();
 
+        //>> 查询我的下级
+        $follower = M('Member')->where(['parent_id'=>$this->userInfo['id']])->select();
+
         //>> 查询充值订单
         $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
         $count = ceil(count($orderLst)/12);
@@ -212,6 +214,7 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'follower'=>$follower,
             'recruit'=>$recruit,
             'topLeader'=>$topLeader,
             'consume_3'=>$consume_3,
@@ -388,6 +391,16 @@ class PersonalController extends CommonController{
                     if($paramArr['money'] > $row['money']){
 
                         die($this->_printError('1052'));
+                    }
+
+                    //>> 判断金额和协议
+                    if($paramArr['money'] <= 700){
+
+                        $agree = session('export'.$this->userInfo['id']);
+                        if(!$agree){
+
+                            die($this->_printError('1062'));
+                        }
                     }
 
                     //>> 提取现金，生成订单
@@ -739,5 +752,45 @@ class PersonalController extends CommonController{
     public function tips(){
 
         $this->display('personal/tips');
+    }
+
+    /**
+     * 同意充值
+     */
+    public function agree(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+            if(isset($paramArr['agree']) && !empty($paramArr['agree']) && is_numeric($paramArr['agree'])){
+                //>> 保存到session中
+                session('agree'.$this->userInfo['id'],$paramArr['agree']);
+                $this->ajaxReturn(['status'=>1]);
+            }else{
+
+                session('agree'.$this->userInfo['id'],null);
+                $this->ajaxReturn(['status'=>1]);
+            }
+        }
+    }
+
+    /**
+     * 同意提现
+     */
+    public function exportAgree(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+            if(isset($paramArr['export']) && !empty($paramArr['export']) && is_numeric($paramArr['export'])){
+                //>> 保存到session中
+                session('export'.$this->userInfo['id'],$paramArr['export']);
+                $this->ajaxReturn(['status'=>1]);
+            }else{
+
+                session('export'.$this->userInfo['id'],null);
+                $this->ajaxReturn(['status'=>1]);
+            }
+        }
     }
 }
