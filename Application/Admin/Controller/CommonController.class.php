@@ -25,6 +25,9 @@ class CommonController extends Controller
         // 获取系统设置信息
         $this->getSystemInfo();
 
+        // 修改项目状态
+        $this->projectStop();
+
         // 获取所有待处理消息回复
         $this->getAllFeedback();
         // 获取所有待处理充值
@@ -298,6 +301,19 @@ class CommonController extends Controller
                 'url'     => U('admin/Member/question', ['id' => $list['id']]),// 跳转过去的url 地址
                 'content' => $list['name'] . ' 等待处理问答回复',// 显示的内容
             ];
+        }
+    }
+
+
+    public function projectStop(){
+        $projectInfo = M('Project')->select();
+        foreach($projectInfo as $info){
+            //dump($info['end_time'] < time());
+
+            if(($info['end_time'] < time()) && ($info['is_active'] == 1)){
+                // 项目下架 修改项目下架
+                $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0]);
+            }
         }
     }
 
