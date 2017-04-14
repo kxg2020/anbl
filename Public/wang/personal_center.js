@@ -86,7 +86,7 @@ $(function(){
 	})
 	$('.money_content>ul>li').click(function(){
 		var txt=$(this)[0].innerHTML;
-		console.log(txt)
+		//console.log(txt)
 		if(txt=='充值'){
 			$('.money_content>ul>li').removeClass('choice');
 			$('.money_content>ul>li').eq(0).addClass('choice');
@@ -558,8 +558,32 @@ $(function(){
 		$('.body_right>ul').hide();
 		$('.body_right>div').hide();
 		$('.actor').show();
+		$('.movie_list').show();
+		$('.movie_intr').hide();
+		$('.apply_role').hide();
 	})
-
+	//我要当演员 面包屑操作
+	$('.backTo2').click(function(){
+		$('.movie_list').hide();
+		$('.movie_intr').show();
+		$('.apply_role').hide();
+	})
+	$('.backTo1').click(function(){
+		$('.movie_list').show();
+		$('.movie_intr').hide();
+		$('.apply_role').hide();
+	})
+	// 申请流程顺序点击
+	$('.goTodetail').click(function(){
+		$('.movie_list').hide();
+		$('.movie_intr').show();
+		$('.apply_role').hide();
+	})
+	$('.goToform').click(function(){
+		$('.movie_list').hide();
+		$('.movie_intr').hide();
+		$('.apply_role').show();
+	})
 
 	//消费明细模态框操作
 

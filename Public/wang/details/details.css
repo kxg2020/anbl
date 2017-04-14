@@ -166,9 +166,10 @@ header .nav{
   font-size: 30px;
   background: black;
   color: white;
-  padding: 35px 58px;
-  display: none;
+  padding: 25px 30px;
   position: absolute;
+  top: 90px;
+  right: -100px;
 }
 .movie_introduce{
   float: right;
@@ -255,7 +256,7 @@ header .nav{
 }
 .suport_inform li{
   float: left;
-  width: 120px;
+  width: 90px;
   text-align: left;
 }
 .suport_inform li p span{

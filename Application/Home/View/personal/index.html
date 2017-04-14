@@ -20,7 +20,7 @@
 			您当前的累计积分为:{$allInfo['integral']}
 			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
-			<div class="money"><p>支持积分 ：￥ <span>{$supportMoney}</span></p><p>剩余积分：￥ <span>{$personal['money']}</span></p></div>
+			<div class="money"><p>支持积分: <span>{$supportMoney}</span></p><p>剩余积分: <span>{$personal['money']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
 				<if condition="$personal['safe_level'] eq 1">
 					<span>低</span>
@@ -126,7 +126,7 @@
 									</div>
 								</volist>
 							<input type="hidden" name="page_1" value="{$count_1}">
-							<p id="demo8" style="position: absolute;left:235px;bottom: 20px;"></p>
+							<p id="demo8" style="position: absolute;left:5%;bottom: 20px;"></p>
 						</div>
 
 						<div class="my_collect" style="display: none;">
@@ -142,7 +142,7 @@
 								</div>
 							</volist>
 							<input type="hidden" name="page_2" value="{$collectionCount}">
-							<p id="demo9" style="position: absolute;left:235px;bottom: 20px;"></p>
+							<p id="demo9" style="position: absolute;left:5%;bottom: 20px;"></p>
 						</div>
 					</div>
 				</div>
@@ -243,7 +243,7 @@
 					<div class="close_password"></div>
 						<div class="password_content">
 								<ul><li>密码管理</li>
-								<li>修改登录密码</li></ul>
+								</ul>
 								<div class="update_password">
 									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password"><label>输入当前的登录密码</label></p>
 									<p><input type="password" placeholder="8-16位数字,字母组合" name="newpassword"><label>新密码</label></p>
@@ -271,7 +271,7 @@
 						</form>
 					</div>
 					<div class="ask_answer" style="display: none;">
-						<p>当前位置>信箱>信件<span>我要提问<b>>></b></span></p>
+						<p><span>我要提问<b>>></b></span></p>
 						<div class="answer_div" >
 							<volist name="question" id="q">
 							<p class="qdetail" data-id="{$q['id']}">{$q['title']}</p>
@@ -390,7 +390,55 @@
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
-						<form>
+						<div class='movie_list' style="display: block;">
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail" type="button" value="立即申请">
+							</div>
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail"  type="button" value="立即申请">
+							</div>
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg01.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail"  type="button" value="立即申请">
+							</div>
+							<div>
+								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
+								<p>申请积分<span>7000</span>分</p>
+								<input class="goTodetail"  type="button" value="立即申请">
+							</div>
+						</div>
+						<div class='movie_intr' style="display: none;">
+							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2 mianbaoChoice">电影详情</span></p>
+							<div class="movie_details">
+								<div class="movie_topleft"><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""></div>
+								<div class="movie_topright">
+									<p>电影名称: <span>小电影</span></p>
+									<p>申请积分: <span>7000</span></p>
+									<p>剩余名额: <span>10</span>个</p>
+									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
+										<option value="role1">男一号</option>
+										<option value="role2">男二号</option>
+										<option value="role3">男三号</option>
+									</select>
+									<p><input class="goToform" type="button" value="点击申请"></p>				
+								</div>
+								<div class="movie_body">
+									<h3>角色性格</h3>
+									<p>由于游览器自带的滚动条在美观方面并不是很好看，所以很多设计师希望通过自己设计出来的滚动条来做这样的效果，JS模拟滚动条其实很早看到jQuery有这样的插件或者KISSY有这样的组件，一直想着自己什么时候也来研究下这个神秘的东东，思来想去 做demo 但是也没有研究出来，一开始有2点不了解：一是：当前的滚动条的宽度(水平滚动)或者高度(垂直滚动)不知道</p>	
+									<h3>角色特征</h3>
+									<p>由于游览器自带的滚动条在美观方面并不是很好看，所以很多设计师希望通过自己设计出来的滚动条来做这样的效果，JS模拟滚动条其实很早看到jQuery有这样的插件或者KISSY有这样的组件，一直想着自己什么时候也来研究下这个神秘的东东，思来想去 做demo 但是也没有研究出来，一开始有2点不了解：一是：当前的滚动条的宽度(水平滚动)或者高度(垂直滚动)不知道</p>	
+									<h3>形象风格</h3>
+									<p>sdfsdafsdfasdf</p>		
+								</div>
+							</div>	
+						</div>
+						<form class="apply_role" style='display:none;'>
+							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2">电影详情</span><b>></b><span class="backTo3 mianbaoChoice">申请表</span></p>
 							<h3 >申请表</h3>
 							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><volist name="recruit" id="recr"><a href="#" data-id="{$recr['id']}" class="recruit">{$recr['name']}</a></volist> </div>
 
