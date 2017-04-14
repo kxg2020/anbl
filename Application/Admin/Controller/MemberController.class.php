@@ -530,7 +530,7 @@ class MemberController extends  CommonController{
         $this->assign('pages',$pages);
 
         $this->assign('rows',$profit);
-        $this->display('profit');
+        $this->display('member/profit');
     }
 
 }
