@@ -451,6 +451,8 @@ class ProjectController extends CommonController
                'first_rate'=>$paramArr['first_rate'],
                'two_rate'=>$paramArr['two_rate'],
                'three_rate'=>$paramArr['three_rate'],
+               'pub_rate'=>$paramArr['pub_rate'],
+               'pro_rate'=>$paramArr['pro_rate'],
            ]);
 
         $this->ajaxReturn([

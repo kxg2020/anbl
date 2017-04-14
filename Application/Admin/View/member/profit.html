@@ -49,6 +49,7 @@
                                     <th class="text-center">会员</th>
                                     <th class="text-center">收益类型</th>
                                     <th class="text-center">金额</th>
+                                    <th class="text-center">状态</th>
                                     <th class="text-center">备注</th>
                                     <th class="text-center">时间</th>
                                 </tr>
@@ -65,6 +66,7 @@
                                     <td style="vertical-align: middle">{$tag.username}</td>
                                     <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">分红<else />佣金</if></td>
                                     <td style="vertical-align: middle">{$tag.money}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 1">正常<else />失效</if></td>
                                     <td style="vertical-align: middle">{$tag.remark}</td>
                                     <td style="vertical-align: middle">{:date('Y-m-d H:i',$tag['create_time'])}</td>
                                 </tr>
