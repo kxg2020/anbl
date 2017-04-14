@@ -60,6 +60,27 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">新增业务比例设置：</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">制片人新增业务比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="pro_rate" class="form-control" placeholder=" " value="{$row['pro_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">出品人新增业务比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="pub_rate" class="form-control" placeholder=" " value="{$row['pub_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
     <input name="id" type="hidden" value="{$id}">
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
@@ -84,6 +105,8 @@
                     'first_rate':$('input[name = first_rate]').val(),
                     'two_rate':$('input[name = two_rate]').val(),
                     'three_rate':$('input[name = three_rate]').val(),
+                    'pub_rate':$('input[name = pub_rate]').val(),
+                    'pro_rate':$('input[name = pro_rate]').val(),
                     'id':$('input[name = id]').val(),
                 },
                 success:function(result){

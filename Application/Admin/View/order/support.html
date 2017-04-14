@@ -80,7 +80,7 @@
                                     <th class="text-center">固定收益</th>
                                     <th class="text-center">浮动收益</th>
                                     <th class="text-center">是否已分红</th>
-                                    <th class="text-center">返还分红到余额</th>
+                                    <th class="text-center">本金是否返还</th>
                                     <th class="text-center">是否分佣</th>
                                     <th class="text-center">返还分佣到余额</th>
                                     <th class="text-center">支持时间</th>
@@ -101,11 +101,11 @@
                                     <td style="vertical-align: middle">{$tag.username}</td>
                                     <td style="vertical-align: middle">{$tag.project_name}</td>
                                     <td style="vertical-align: middle">{$tag.support_money}</td>
-                                    <td style="vertical-align: middle">{$tag.fixed}</td>
-                                    <td style="vertical-align: middle">{$tag.float}</td>
-                                    <td style="vertical-align: middle"><if condition="$tag['is_fh'] eq 1">已分红<else /><span style="color: red">未分红</span></if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">{$tag.fixed}<else />--</if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 2">{$tag.float}<else />--</if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_fh'] eq 1">已分红<elseif condition="$tag['is_fh'] eq 2"/>失效<else /><span style="color: red">未分红</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_true'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
-                                    <td style="vertical-align: middle"><if condition="$tag['is_fy'] eq 1">已分佣<else /><span style="color: red">未分佣</span></if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_fy'] eq 1">已分佣<elseif condition="$tag['is_fy'] eq 2"/>失效<else /><span style="color: red">未分佣</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
                                     <!--<td style="vertical-align: middle">

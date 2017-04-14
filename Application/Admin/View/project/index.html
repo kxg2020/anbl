@@ -104,9 +104,9 @@
                                         <a href="{:U('admin/project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                         <input type="button" class="btn btn-xs btn-info" data-id="{$tag.id}" data-rate-2="{$tag.float_rate}" data-rate-1="{$tag.fixed_rate}" value="分红比例" name="rate">
-<!--
-                                        <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分红</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">立即分红</a></if>
--->
+
+                                        <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已返还</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">返还本金</a></if>
+
                                         <if condition="$tag['is_fy'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分佣</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-xs fyBtn">立即分佣</a></if>
                                     </td>
                                 </tr>
@@ -139,7 +139,7 @@
         </div>
     </div>
     <!-- Modal1 -->
-<!--    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -147,7 +147,7 @@
                     <h4 class="modal-title" id="myModalLabel1">提示：Notice!</h4>
                 </div>
                 <div class="modal-body">
-                    你确认要立即分红吗？
+                    你确认要立即返还本金吗？
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 
     <!-- Modal1 -->
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -188,7 +188,7 @@
         });
 
         //立即分红
-        /*$(function(){
+        $(function(){
             $('.fhBtn').click(function(){
                 var _id = $(this).attr('data-id');
                 $('#fhTrue').attr('data-id',_id);
@@ -204,7 +204,7 @@
                     }
                 });
             })
-        });*/
+        });
 
         //立即分佣
         $(function(){
