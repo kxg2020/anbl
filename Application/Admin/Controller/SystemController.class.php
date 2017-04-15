@@ -43,7 +43,7 @@ class SystemController extends CommonController
         // 查询出系统设置信息
         $systemInfo = M('System')->find();
         $this->assign('info',$systemInfo);
-        $this->display('System/index');
+        $this->display('system/index');
     }
 
     /**
@@ -72,7 +72,7 @@ class SystemController extends CommonController
             }
             $this->ajaxReturn(['msg'=>'数据保存成功', 'status'=>1,]);
         }
-        $this->display('System/add');
+        $this->display('system/add');
     }
 
     public function edit($id){
@@ -121,7 +121,7 @@ class SystemController extends CommonController
 
         }
         $this->assign('row',$cooperInfo);
-        $this->display('System/edit');
+        $this->display('system/edit');
     }
 
     public function remove($id){
