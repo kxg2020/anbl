@@ -99,9 +99,9 @@
                             <li class="">
                                 <a href="#details" data-toggle="tab">项目详情</a>
                             </li>
-                            <li class="">
+                            <!--<li class="">
                                 <a href="#protocol" data-toggle="tab">视频上传</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </header>
                     <div class="panel-body">
@@ -128,7 +128,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">下载金额</label>
                                         <div class="col-sm-4 col-md-4">
                                             <div class="input-group">
@@ -136,7 +136,7 @@
                                                 <span class="input-group-addon">$</span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">出品国家</label>
                                         <div class="col-sm-4 col-md-4">
@@ -256,7 +256,7 @@
                                         </div>
                                     </div>
                                     <!--分红方式-->
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">固定分红</label>
                                         <div class="col-sm-4 col-md-4">
                                             <div class="input-group">
@@ -273,7 +273,7 @@
                                                        placeholder=" 请填写分红比例">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!---->
                                     <!--项目状态-->
                                     <div class="form-group">
@@ -340,7 +340,7 @@
                                     </div>
                                 </div>
                                 <!--项目视频-->
-                                <div class="tab-pane" id="protocol">
+                                <!--<div class="tab-pane" id="protocol">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">上传项目视频</label>
                                         <div class="col-sm-10" id="shangchuan">
@@ -348,7 +348,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group" style="display:block;">
-                                        <!--进度条-->
+                                        &lt;!&ndash;进度条&ndash;&gt;
                                         <span class="col-sm-2 control-label"></span>
                                         <div class="col-sm-6">
                                             <div class="progress progress-striped">
@@ -368,7 +368,7 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="layui-progress">
                                     <div class="layui-progress-bar" lay-percent="10%"></div>
                                 </div>
@@ -588,12 +588,24 @@
                 intro: {
                     required: true
                 },
-                float_rate_1: {
+                expected_return: {
                     required: true
                 },
-                fixed_rate: {
+                story: {
+                    required: true
+                },
+                analysis: {
+                    required: true
+                },
+                film_critic: {
                     required: true
                 }
+//                float_rate_1: {
+//                    required: true
+//                },
+//                fixed_rate: {
+//                    required: true
+//                }
             },
             messages: {
                 name: {
@@ -611,15 +623,27 @@
                 target_amount: {
                     required: '*目标金额必须填写*'
                 },
+                expected_return: {
+                    required: '*预期回报必须填写*'
+                },
+                story: {
+                    required: '*故事结构必须填写*'
+                },
+                analysis: {
+                    required: '*故事分析必须填写*'
+                },
                 intro: {
                     required: '*项目简介必须填写*'
                 },
-                float_rate_1: {
-                    required: '*浮动分红比例必须填写*'
-                },
-                fixed_rate: {
-                    required: '*固定分红比例必须填写*'
+                film_critic: {
+                    required: '*专业影评必须填写*'
                 }
+//                float_rate_1: {
+//                    required: '*浮动分红比例必须填写*'
+//                },
+//                fixed_rate: {
+//                    required: '*固定分红比例必须填写*'
+//                }
             },
             showErrors: function (errorMap, errorList) {
                 $.each(errorList, function (i, v) {
