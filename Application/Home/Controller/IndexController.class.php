@@ -179,7 +179,7 @@ class IndexController extends CommonController{
             }
 
             // 更新用户余额
-            $rest = M('Member')->where(['id'=>$member_id])->save(['money'=>$this->userInfo['money']-$support_money]);
+            $rest = M('Member')->where(['id' => $member_id])->save(['money' => ['exp', 'money-' . $support_money]]);
             if(!$rest){
                 M()->rollback();
                 $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);

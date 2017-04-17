@@ -150,7 +150,7 @@ class FactoryController extends CommonController
 
 
         // 更新用户余额
-        $rest = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money']-1]);
+        $rest = M('Member')->where(['id' => $this->userInfo['id']])->save(['money' => ['exp', 'money-' . 1]]);
         if($rest === false){
             $this->ajaxReturn(['msg'=>"投票失败",'status'=>0]);
         }
