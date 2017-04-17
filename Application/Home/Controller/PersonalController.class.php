@@ -174,6 +174,10 @@ class PersonalController extends CommonController{
         //>> 查询提问
         $question = M('MemberConsult')->where(['member_id'=>$this->userInfo['id']])->select();
 
+        //>> 支付方式
+        $weixin = M('Pay')->where(['name'=>'微信'])->find();
+        $ali = M('Pay')->where(['name'=>'支付宝'])->find();
+
         //>> 查询招募电影
         $recruit = M('ProjectRecruit')->select();
 
@@ -219,6 +223,8 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'weixin'=>$weixin,
+            'ali'=>$ali,
             'films'=>$films,
             'follower'=>$follower,
             'recruit'=>$recruit,

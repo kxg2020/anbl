@@ -172,10 +172,10 @@
 						</ul>
 						<if condition="$userInfo['bank_card'] neq '' ">
 							<div class="put_money">
-								<p>选择充值方式: <span class="apply_style apply_style_choice">微信</span><span class="apply_style">支付宝</span><span class="apply_style">个人银联</span></p>
+								<p>选择充值方式: <span class="apply_style apply_style_choice" data-id="1">微信</span><span class="apply_style" data-id="2">支付宝</span><span class="apply_style" data-id="3">个人银联</span></p>
 								<div id="feiyinglian">
-									<img id="weixing" src="__PUBLIC__/wang/img/choice.png" alt="">
-									<img id="zhifubao" style="display: none;" src="__PUBLIC__/wang/img/choice.png" alt="">
+									<img id="weixing" src="{$weixin['image_url']}" alt="">
+									<img id="zhifubao" style="display: none;" src="{$ali['image_url']}" alt="">
 								</div>
 								<div id="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
 									<p>卡号:{$userInfo['bank_card']}</p>
@@ -185,6 +185,7 @@
 								<p>充值金额: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
 								<p>交易凭证:<span style="margin-left: 20px;"><span style="height: 50px;width: 50px; text-align:center; line-height:50px;color:#e05959;cursor: pointer;display: inline-block;border: 1px dashed red" >+</span><input id="file_upload" style="cursor: pointer; width: 160px; height: 50px;"  class="money_file" type="file"></span></p>
 
+								<div id="container1"></div>
 								<div id="put_btn" class="rechargeOk">确定</div>
 							</div>
 							<else/>
@@ -678,6 +679,8 @@
 						var path = data.url;
 						// 获取图片列表
 						$('#images').val(path);
+						$('#container1').html('');
+						$('#container1').html('<div style="padding-left: 94px;margin-top: 10px; width: 300px;height: auto;"><img src="'+path+'" alt=""></div>');
 						if (_isMax == false) {
 							layer.msg('上传成功', {time: 1000})
 

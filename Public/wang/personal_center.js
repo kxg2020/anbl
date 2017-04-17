@@ -358,6 +358,7 @@ $(function(){
 	$('.rechargeOk').click(function(){
 		var money = $('input[name = rechargeMoney]').val();
 		var path = $('#images').val();
+		var type = $('.apply_style_choice').attr('data-id');
 		if(path.length == 0){
 			layer.msg('请上传凭证!');
 			return false;
@@ -379,7 +380,8 @@ $(function(){
 					'url':chargeUrl,
 					'data':{
 						'money':money,
-						'image_url':path
+						'image_url':path,
+						'type':type
 					},
 					success:function(result){
 						if(result.status == 1){
