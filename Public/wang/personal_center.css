@@ -1264,6 +1264,7 @@ margin-top: 25px;
 .actor_content>form>.up_photo input[type=button]{
 	position: absolute;
 	left: 110px;
+	height: 20px;
 	top:0;
 	width: 100px;
 	cursor: pointer;
@@ -1273,7 +1274,7 @@ margin-top: 25px;
 .actor_content>form>.up_photo input[type=file]{
 	 cursor: pointer;
 	position: absolute;
-	left: 90px;
+	left: 95px;
 	top:0;
 	width: 110px;
 	z-index: 10;
