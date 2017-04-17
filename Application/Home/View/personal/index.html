@@ -391,56 +391,41 @@
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<div class='movie_list' style="display: block;">
+							<volist name="films" id="fi">
 							<div>
-								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
-								<p>申请积分<span>7000</span>分</p>
-								<input class="goTodetail" type="button" value="立即申请">
+								<div><img src="{$fi['image_url']}" alt=""><p> &nbsp;{$fi['name']}</p></div>
+								<p>申请积分<span>70000</span>分</p>
+								<input class="goTodetail" type="button" value="立即申请" data-id="{$fi['id']}">
 							</div>
-							<div>
-								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
-								<p>申请积分<span>7000</span>分</p>
-								<input class="goTodetail"  type="button" value="立即申请">
-							</div>
-							<div>
-								<div><img src="__PUBLIC__/wang/home_img/homeimg01.jpg" alt=""><p> &nbsp;王麻子</p></div>
-								<p>申请积分<span>7000</span>分</p>
-								<input class="goTodetail"  type="button" value="立即申请">
-							</div>
-							<div>
-								<div><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""><p> &nbsp;王麻子</p></div>
-								<p>申请积分<span>7000</span>分</p>
-								<input class="goTodetail"  type="button" value="立即申请">
-							</div>
+							</volist>
 						</div>
 						<div class='movie_intr' style="display: none;">
 							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2 mianbaoChoice">电影详情</span></p>
 							<div class="movie_details">
 								<div class="movie_topleft"><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""></div>
 								<div class="movie_topright">
-									<p>电影名称: <span>小电影</span></p>
-									<p>申请积分: <span>7000</span></p>
+									<p>电影名称: <span class="filmname">小电影</span></p>
+									<p>申请积分: <span>70000</span></p>
 									<p>剩余名额: <span>10</span>个</p>
 									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
-										<option value="role1">男一号</option>
-										<option value="role2">男二号</option>
-										<option value="role3">男三号</option>
+
 									</select>
 									<p><input class="goToform" type="button" value="点击申请"></p>				
 								</div>
 								<div class="movie_body">
 									<h3>角色性格</h3>
-									<p>由于游览器自带的滚动条在美观方面并不是很好看，所以很多设计师希望通过自己设计出来的滚动条来做这样的效果，JS模拟滚动条其实很早看到jQuery有这样的插件或者KISSY有这样的组件，一直想着自己什么时候也来研究下这个神秘的东东，思来想去 做demo 但是也没有研究出来，一开始有2点不了解：一是：当前的滚动条的宽度(水平滚动)或者高度(垂直滚动)不知道</p>	
+									<p class="intro"></p>
 									<h3>角色特征</h3>
-									<p>由于游览器自带的滚动条在美观方面并不是很好看，所以很多设计师希望通过自己设计出来的滚动条来做这样的效果，JS模拟滚动条其实很早看到jQuery有这样的插件或者KISSY有这样的组件，一直想着自己什么时候也来研究下这个神秘的东东，思来想去 做demo 但是也没有研究出来，一开始有2点不了解：一是：当前的滚动条的宽度(水平滚动)或者高度(垂直滚动)不知道</p>	
+									<p class="feature"></p>
 									<h3>形象风格</h3>
-									<p>sdfsdafsdfasdf</p>		
+									<p class="figure"></p>
 								</div>
 							</div>	
 						</div>
 						<form class="apply_role" style='display:none;'>
 							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2">电影详情</span><b>></b><span class="backTo3 mianbaoChoice">申请表</span></p>
 							<h3 >申请表</h3>
-							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><volist name="recruit" id="recr"><a href="#" data-id="{$recr['id']}" class="recruit">{$recr['name']}</a></volist> </div>
+							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><a href="#"  class="recruit"></a> </div>
 
 							<div><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
 							<div><label><span style="color: red">*</span>&nbsp;性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
@@ -595,23 +580,46 @@
 	<script type="text/javascript">
 		$(function () {
 
+			//>> 点击进入电影详情页
+			$('.goTodetail').click(function(){
 
-			//>> 点击查看电影详情
-			$('.recruit').click(function(){
-				var id = $(this).attr('data-id');
-				layer.open({
-					type: 2,
-					title: '影片详情',
-					shadeClose: true,
-					shade: 0.8,
-					area: ['60%', '100%'],
-					content: "{:U('Home/Personal/filmDetail')}"+'?id='+id,
-					end: function () {
-						alert($.cookie('filmId'));
+				id = $(this).attr('data-id');
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/filmDetail',
+					'data':{'id':id},
+					success:function(e){
+						$('.filmname').text(e.film.name);
+						$.each(e.role,function(k,v){
+							$('select[name = role]').append('<option value="'+ v.id+'">'+ v.name+'</option>');
+						});
+						$('.intro').text(e.film.intro);
+						$('.feature').text(e.film.feature);
+						$('.figure').text(e.film.figure);
 					}
 				});
+
 			});
 
+			//>> 点击申请
+			$('.goToform').click(function(){
+				rid = $('select[name = role]').val();
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/saveId',
+					'data':{'roleId':rid},
+					success:function(e){
+
+					}
+				});
+
+				//>> 获取当前的电影名
+				fname = $('.filmname').text();
+				$('.recruit').text(fname);
+
+			});
 
 			$("#file_upload").h5upload({
 				url: "{:U('Home/Personal/upload')}",

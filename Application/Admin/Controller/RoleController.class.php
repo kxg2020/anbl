@@ -110,6 +110,8 @@ class RoleController extends CommonController{
                         'role_id'=>json_encode($paramArr['roles']),
                         'create_time'=>time(),
                         'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
+                        'feature'=>$paramArr['feature'] ? $paramArr['feature'] : '',
+                        'figure'=>$paramArr['figure'] ? $paramArr['figure'] : '',
                     ];
                     $re = M('ProjectRecruit')->where(['id'=>$result['id']])->save($updateData);
 
@@ -132,6 +134,8 @@ class RoleController extends CommonController{
                     'role_id'=>json_encode($paramArr['roles']),
                     'create_time'=>time(),
                     'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
+                    'feature'=>$paramArr['feature'] ? $paramArr['feature'] : '',
+                    'figure'=>$paramArr['figure'] ? $paramArr['figure'] : '',
                 ];
                 $res = M('ProjectRecruit')->add($insertData);
                 if($res){
