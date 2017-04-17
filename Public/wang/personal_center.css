@@ -811,7 +811,33 @@ header .nav{
 .put_money>p:first-child{
 	margin-top: 20px;
 }
+.apply_style{
+	cursor: pointer;
+	margin-left: 15px;
+}
+.apply_style_choice{
+	color: gold;
+}
 .put_money>div:nth-child(2){
+	width: 108px;
+	height: 108px;
+	border: 1px solid red;
+	margin-top: 12px;
+	margin-bottom: 25px;
+	margin-left: 100px;
+	border-radius: 5px;
+}
+.put_money>div img{
+	width: 100%;
+	height: 100%;
+}
+.put_money>p:nth-child(3){
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 30px;
+}
+
+#yinglian{
 	width: 300px;
 	height: 108px;
 	background: white;
@@ -823,24 +849,25 @@ header .nav{
 	position: relative;
 	padding-top: 12px;
 }
-.put_money>div>p{
+#yinglian>p{
 	padding-left: 10px;
 	color: black;
 	font-size: 15px;
 	margin-bottom: 5px;
 }
-.put_money>div img{
+#yinglian img{
+	width: 20px;
+	height: 20px;
 	position: absolute;
 	right: 5px;
 	bottom: 5px;
 }
-.put_money>p:nth-child(3){
+.put_money>p:nth-child(4) {
 	height: 30px;
 	line-height: 30px;
 	margin-bottom: 30px;
-
 }
-.put_money>p:nth-child(3) input{
+.put_money>p:nth-child(4) input{
 	border-radius: 3px;
 	border: 1px solid white;
 	background: rgba(255,255,255,0);
@@ -849,7 +876,7 @@ header .nav{
 	color: white;
 	margin-left: 20px;
 }
-.put_money>p:nth-child(4){
+.put_money>p:nth-child(5){
 	position: relative;
 }
 #put_btn{
@@ -1140,6 +1167,7 @@ margin-top: 25px;
 }
 .team_content table thead {
 	font-size: 20px;
+	padding-top: 50px;
 }
 .team_content table tbody td:nth-child(2){
 	color: #e50909;

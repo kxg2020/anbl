@@ -609,4 +609,28 @@ $(function(){
 		$('#cancel_div').fadeOut('slow')
 	})
 
+	//选择支付方式
+	$('.apply_style').click(function(){
+		$('.apply_style').removeClass('apply_style_choice');
+		if($(this).html()=='微信'){
+			$(this).addClass('apply_style_choice');
+			$('#weixing').show();
+			$('#zhifubao').hide();
+			$('#feiyinglian').show();
+			$('#yinglian').hide();
+		}if($(this).html()=='支付宝'){
+			$(this).addClass('apply_style_choice');
+			$('#weixing').hide();
+			$('#zhifubao').show();
+			$('#feiyinglian').show();
+			$('#yinglian').hide();
+		}if($(this).html()=='个人银联'){
+			$(this).addClass('apply_style_choice');
+			$('#weixing').hide();
+			$('#zhifubao').hide();
+			$('#feiyinglian').hide();
+			$('#yinglian').show();
+		}
+	})
+
 });

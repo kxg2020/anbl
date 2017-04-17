@@ -172,11 +172,14 @@
 						</ul>
 						<if condition="$userInfo['bank_card'] neq '' ">
 							<div class="put_money">
-								<p>选择充值帐号:</p>
-								<div><p>户主:{$userInfo['bank_card_name']}</p>
+								<p>选择充值方式: <span class="apply_style apply_style_choice">微信</span><span class="apply_style">支付宝</span><span class="apply_style">个人银联</span></p>
+								<div id="feiyinglian">
+									<img id="weixing" src="__PUBLIC__/wang/img/choice.png" alt="">
+									<img id="zhifubao" style="display: none;" src="__PUBLIC__/wang/img/choice.png" alt="">
+								</div>
+								<div id="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
 									<p>卡号:{$userInfo['bank_card']}</p>
 									<p>开户支行:{$userInfo['address']}</p>
-
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
 								</div>
 								<p>充值金额: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
