@@ -122,7 +122,7 @@
 											<p>{$s['director']}/导演</p>
 											<p><span>{$s['support_number']}</span>人支持</p>
 											<p>已支持<span>{$s['support_money']}</span></p>
-											<p><input type="button" class="cancel_suport" value="取消支持"></p>
+											<p><input type="button" class="cancel_suport" value="取消支持" data-id="{$s['aid']}"></p>
 										</div>
 									</div>
 								</volist>
@@ -411,9 +411,8 @@
 							<div class="movie_details">
 								<div class="movie_topleft"><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""></div>
 								<div class="movie_topright">
-									<p>电影名称: <span class="filmname">小电影</span></p>
+									<p>电影名称: <span class="filmname"></span></p>
 									<p>申请积分: <span>70000</span></p>
-									<p>剩余名额: <span>10</span>个</p>
 									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
 
 									</select>
@@ -586,7 +585,31 @@
 	<script src="__JS__/layer/laypage.js"></script>
 	<script type="text/javascript">
 		$(function () {
+			var cancel_id = '';
+			$('.cancel_suport').click(function(){
+				cancel_id = $(this).attr('data-id');
+			});
+			//>> 点击"取消支持"
+			$('.sure_input').click(function(){
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/feedBack',
+					'data':{
+						'orderId':cancel_id,
+					},
+					success:function(e){
+						if(e.status == 1){
 
+							layer.msg('退款成功',function(){
+								location.reload();
+							});
+						}else{
+							layer.msg(e.msg);
+						}
+					}
+				});
+			});
 			//>> 点击进入电影详情页
 			$('.goTodetail').click(function(){
 
@@ -598,6 +621,7 @@
 					'data':{'id':id},
 					success:function(e){
 						$('.filmname').text(e.film.name);
+						$('select[name = role]').html('');
 						$.each(e.role,function(k,v){
 							$('select[name = role]').append('<option value="'+ v.id+'">'+ v.name+'</option>');
 						});
