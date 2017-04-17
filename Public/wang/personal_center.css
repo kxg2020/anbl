@@ -667,7 +667,7 @@ header .nav{
 .attend_content>div{
 	margin-top: 30px;
 	width: 90%;
-	height: auto;
+	height: 500px;
 	padding-left: 5%;
 	padding-right: 5%;
 	position: relative;
@@ -704,7 +704,7 @@ header .nav{
 }
 .cancel_suport{
 	width: 80px;
-	height: 20px;
+	height: 25px;
 	background: #e50909;
 	color: white;
 	outline: none;
@@ -720,6 +720,8 @@ header .nav{
 	position: absolute;
 	top:0; left: 5%;
 	z-index: 10; 
+	margin-left: 0;
+	margin-bottom: 0;
 }
 #cancel_div>p{
 	color: #666;
@@ -811,7 +813,33 @@ header .nav{
 .put_money>p:first-child{
 	margin-top: 20px;
 }
+.apply_style{
+	cursor: pointer;
+	margin-left: 15px;
+}
+.apply_style_choice{
+	color: gold;
+}
 .put_money>div:nth-child(2){
+	width: 108px;
+	height: 108px;
+	border: 1px solid red;
+	margin-top: 12px;
+	margin-bottom: 25px;
+	margin-left: 100px;
+	border-radius: 5px;
+}
+.put_money>div img{
+	width: 100%;
+	height: 100%;
+}
+.put_money>p:nth-child(3){
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 30px;
+}
+
+#yinglian{
 	width: 300px;
 	height: 108px;
 	background: white;
@@ -823,24 +851,25 @@ header .nav{
 	position: relative;
 	padding-top: 12px;
 }
-.put_money>div>p{
+#yinglian>p{
 	padding-left: 10px;
 	color: black;
 	font-size: 15px;
 	margin-bottom: 5px;
 }
-.put_money>div img{
+#yinglian img{
+	width: 20px;
+	height: 20px;
 	position: absolute;
 	right: 5px;
 	bottom: 5px;
 }
-.put_money>p:nth-child(3){
+.put_money>p:nth-child(4) {
 	height: 30px;
 	line-height: 30px;
 	margin-bottom: 30px;
-
 }
-.put_money>p:nth-child(3) input{
+.put_money>p:nth-child(4) input{
 	border-radius: 3px;
 	border: 1px solid white;
 	background: rgba(255,255,255,0);
@@ -849,7 +878,7 @@ header .nav{
 	color: white;
 	margin-left: 20px;
 }
-.put_money>p:nth-child(4){
+.put_money>p:nth-child(5){
 	position: relative;
 }
 #put_btn{
@@ -1141,6 +1170,7 @@ margin-top: 25px;
 }
 .team_content table thead {
 	font-size: 20px;
+	padding-top: 50px;
 }
 .team_content table tbody td:nth-child(2){
 	color: #e50909;
@@ -1189,6 +1219,13 @@ margin-top: 25px;
 .actor_content>form>div{
 	position: relative;
 	margin-bottom: 10px;
+	overflow: hidden;
+}
+.actor_content>form>div>p:nth-child(1){
+	float: left;
+}
+.actor_content>form>div>p:nth-child(2){
+	float: right;
 }
 .actor_content label{
 	margin-right: 20px;
@@ -1261,7 +1298,7 @@ margin-top: 25px;
  	color: gold;
  	display: inline-block;
  	padding-right: 15px;
-	border-right: 1px solid #e50909;
+	
 	padding-left: 15px;
 	cursor: pointer;
  }
@@ -1393,17 +1430,19 @@ margin-top: 25px;
 	height: 90%;
 }
 .movie_topleft{
-	width: 50%;
+	width: 45%;
+	margin-right: 5%;
 	height: auto;
 	float: left;
-	margin-right: 10%;
+	
 }
 .movie_topleft>img{
 	width: 100%;
 	height: auto;
 }
 .movie_topright{
-	float: left;
+	width: 50%;
+	float: right;
 }
 .movie_topright>P{
 	font-size: 16px;
@@ -1416,6 +1455,9 @@ margin-top: 25px;
 }
 .movie_topright>P:nth-child(1){
 	font-size: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .movie_topright>P:nth-child(2)>span{
 	color: #e50909;
@@ -1458,8 +1500,8 @@ margin-top: 25px;
 	margin-bottom:10px;
 }
 .apply_role{
-	width: 100%;
+	width: 90%;
 	height: 100%;
 	overflow: auto;
-
+	margin: auto;
 }

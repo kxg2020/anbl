@@ -172,11 +172,14 @@
 						</ul>
 						<if condition="$userInfo['bank_card'] neq '' ">
 							<div class="put_money">
-								<p>选择充值帐号:</p>
-								<div><p>户主:{$userInfo['bank_card_name']}</p>
+								<p>选择充值方式: <span class="apply_style apply_style_choice">微信</span><span class="apply_style">支付宝</span><span class="apply_style">个人银联</span></p>
+								<div id="feiyinglian">
+									<img id="weixing" src="__PUBLIC__/wang/img/choice.png" alt="">
+									<img id="zhifubao" style="display: none;" src="__PUBLIC__/wang/img/choice.png" alt="">
+								</div>
+								<div id="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
 									<p>卡号:{$userInfo['bank_card']}</p>
 									<p>开户支行:{$userInfo['address']}</p>
-
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
 								</div>
 								<p>充值金额: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
@@ -412,6 +415,7 @@
 								<div class="movie_topleft"><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""></div>
 								<div class="movie_topright">
 									<p>电影名称: <span class="filmname"></span></p>
+
 									<p>申请积分: <span>70000</span></p>
 									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
 
@@ -431,9 +435,10 @@
 						<form class="apply_role" style='display:none;'>
 							<p class='mianbao' style="margin-bottom: 20px;"><span class="backTo1">电影列表</span><b>></b><span class="backTo2">电影详情</span><b>></b><span class="backTo3 mianbaoChoice">申请表</span></p>
 							<h3 >申请表</h3>
-							<div class='movie1'> <label ><span style="color: red">*</span>&nbsp;电影名:</label><a href="#"  class="recruit"></a> </div>
-
-							<div><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></div>
+							<div class='movie1'>
+							<p> <label ><span style="color: red">*</span>&nbsp;电影名:</label><a href="#"  class="recruit"></a> </p>
+							<p><label><span style="color: red">*</span>&nbsp;姓名:</label><input type="text" name="name"><span>输入真实姓名</span></p>
+							</div>
 							<div><label><span style="color: red">*</span>&nbsp;性别:</label><input type="radio" name="sex01" id="man01" value="1" checked><label for="man01">男</label><input type="radio" name="sex01" id="woman01" value="0"><label for="woman01">女</label></div>
 							<div><label><span style="color: red">*</span>&nbsp;民族:</label><input style='width: 80px;' type="text" name="volk"></div>
 							<div><label><span style="color: red">*</span>&nbsp;生日:</label><input placeholder="例如:1990-01-01" type="date" name="birthday"></div>
