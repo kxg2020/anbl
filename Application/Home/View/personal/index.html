@@ -122,11 +122,18 @@
 											<p>{$s['director']}/导演</p>
 											<p><span>{$s['support_number']}</span>人支持</p>
 											<p>已支持<span>{$s['support_money']}</span></p>
+											<p><input type="button" class="cancel_suport" value="取消支持"></p>
 										</div>
 									</div>
 								</volist>
+							<div id="cancel_div" style="display: none;">
+								<h3>亲爱的用户:</h3>
+								<p>根据我们的用户协议规定:退出影片的支持</p>
+								<p>将扣除所有收益和10%的手续费，可在7-15个工作日到账</p>
+								<p><input type="button" class="sure_input" value="确定"><input type="button" class="cancek_input" value="取消"></p>
+							</div>	
 							<input type="hidden" name="page_1" value="{$count_1}">
-							<p id="demo8" style="position: absolute;left:5%;bottom: 20px;"></p>
+							<p id="demo8" style="position: absolute;left:5%;top: 450px;"></p>
 						</div>
 
 						<div class="my_collect" style="display: none;">
@@ -142,7 +149,7 @@
 								</div>
 							</volist>
 							<input type="hidden" name="page_2" value="{$collectionCount}">
-							<p id="demo9" style="position: absolute;left:5%;bottom: 20px;"></p>
+							<p id="demo9" style="position: absolute;left:5%;top: 450px;"></p>
 						</div>
 					</div>
 				</div>
@@ -419,7 +426,6 @@
 								<div class="movie_topright">
 									<p>电影名称: <span>小电影</span></p>
 									<p>申请积分: <span>7000</span></p>
-									<p>剩余名额: <span>10</span>个</p>
 									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
 										<option value="role1">男一号</option>
 										<option value="role2">男二号</option>
