@@ -53,7 +53,7 @@
 			  <div  class="mk-carousel" id="mkCarousel">
 				  <volist name="projectInfo" id="info" key="k">
 					  <if condition="$info['type_id'] eq 1">
-	            <div <if condition="$key eq 1">class="active"</if>><div class="detail"><a href="{:U('home/index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"><div class="movie_star"><i></i><i></i><i></i><i></i><i></i></div> </div>
+	            <div <if condition="$key eq 1">class="active"</if>><div class="detail"><a href="{:U('home/index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"><div class="movie_star"><for start="0" end="$info['star_num']"><i class="star"></i></for></div> </div>
 					  </if>
 				  </volist>
 	         </div>
