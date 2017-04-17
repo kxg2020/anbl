@@ -344,6 +344,7 @@ class MoneyController extends CommonController
             'member_id' => $parent['id'],
             'money' => $money,
             'create_time' => time(),
+            'support_id' =>$info['id'],
             'type' => 2,
             'remark' => $projectName . "影片分佣",
         ]);

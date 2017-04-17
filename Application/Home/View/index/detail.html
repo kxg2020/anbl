@@ -55,12 +55,12 @@
 				<p><span id="skl">{$info.collection_number}</span>人收藏 <input id="fast_collect" type="button" onclick="collect({$info['id']})" value="立即收藏"></p>
 			</div>
 			<div class="suport">
-				<p>已支持积分</p>
+				<p>已支持阿纳豆</p>
 				<p> <span>{:floor($info['money'])}</span></p>
-				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到{:floor($info['target_amount'])}积分视为成功！</p>
+				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到{:floor($info['target_amount'])}阿纳豆视为成功！</p>
 				<div class='view_suport'><p style="color: #e50909;margin-top: 15px;">项目支持进展</p><p class='progress_bar'><span style="width: {:($info['money']/$info['target_amount'])*100}%"></span></p></div>
 				<ul class="suport_inform">
-					<li><p>目标积分</p>
+					<li><p>目标阿纳豆</p>
 					<p><span >{:floor($info['target_amount'])}</span></p>
 				</li>
 				<li>
@@ -98,8 +98,8 @@
 		<div class="suport_bg" style="display: none;">
 			<div  id="suport">
 				<p>电影类型:</p>
-				<p class="fenghong"><input type="radio" name="fenhong" value="1" checked><span style="margin-right: 100px;">固定分红</span><input type="radio" name="fenhong" value="2"><span>浮动分红</span></p>
-				<p>选择支持积分:</p>
+				<p class="fenghong"><input type="radio" name="fenhong" value="1" checked><span style="margin-right: 100px;">固定</span><input type="radio" name="fenhong" value="2"><span>浮动</span></p>
+				<p>选择支持阿纳豆:</p>
 				<p class="jifeng">
 					<input type="radio" name="money" class="radio" value="100" checked><label>100</label>
 					<input type="radio" name="money" class="radio" value="500"><label>500</label>
