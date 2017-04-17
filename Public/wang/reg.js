@@ -53,8 +53,7 @@ $(function(){
             });
         }
     });
-
-    $('#ok').click(function(){
+    function regto(){
         var password = $('input[name = password]').val();
         var captcha = $('input[name = captcha]').val();
         var phone = $('input[name = phone]').val();
@@ -113,5 +112,16 @@ $(function(){
             }
 
         }
+     
+    }
+    $('#ok').click(function(){
+        regto()
     });
+    $('body').on('keyup',function(e){
+            if(e.keyCode==13){
+                regto()
+            }
+            
+        })
+
 });

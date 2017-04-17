@@ -48,7 +48,8 @@
 				}
 			});
 		});
-		$('#ok').click(function(){
+		function forget(){
+			
 			//>> 获取用户名
 			var username = $('input[name = username]').val();
 			var password = $('input[name = password]').val();
@@ -149,7 +150,18 @@
 						break;
 				}
 			}
+		
+		}
+		$('#ok').click(function(){
+			forget();
 		});
+		$('body').on('keyup',function(e){
+			if(e.keyCode==13){
+				forget();
+			}
+			
+		})
+		
 	});
 </script>
 </body>

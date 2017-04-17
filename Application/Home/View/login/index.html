@@ -21,7 +21,8 @@
 	<script src='__PUBLIC__/layer/layer.js'></script>
 	<script>
 		$(function(){
-			$('.login').click(function(){
+			function login(){
+			
 				//>> 获取用户名
 				var username = $("input[name = username]").val();
 				var password = $("input[name = password]").val();
@@ -64,7 +65,16 @@
 						}
 					}
 				}
-			});
+			
+			}
+			$('.login').click(function(){
+					login();
+						});
+			$('body').on('keyup',function(e){
+				if(e.keyCode==13){
+					login();
+				}
+			})
 		});
 	</script>
 </body>

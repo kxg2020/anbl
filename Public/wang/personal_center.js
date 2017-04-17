@@ -24,6 +24,7 @@ $(function(){
 	$('#attend').click(function(){
 		$('.body_right>ul').hide();
 		$('.attend').show();
+		$('#cancel_div').hide();
 	})
 	$('#password').click(function(){
 		$('.body_right>ul').hide();
@@ -597,6 +598,15 @@ $(function(){
 		$('.close_modal').hide();
 		$('.money_modal').hide();
 		$('.team>.bg').show();
+	})
+
+	//取消支持 
+
+	$('.cancel_suport').click(function(){
+		$('#cancel_div').fadeIn('slow')
+	})
+	$('.cancek_input').click(function(){
+		$('#cancel_div').fadeOut('slow')
 	})
 
 });
