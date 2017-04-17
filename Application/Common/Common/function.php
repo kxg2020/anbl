@@ -154,3 +154,30 @@ function tpl_send($ch, $data)
 function dataNum($data1,$data2){
     return intval(($data2-$data1)/86400+1);
 }
+
+/**
+ * 获取用户等级名称
+ *
+ * @param $level
+ *
+ * @return string
+ */
+function getUserLevelsName($level)
+{
+    $levelName = '';
+    switch ($level) {
+        case 1:
+            $levelName = '支持者';
+            break;
+        case 2:
+            $levelName = '经纪人';
+            break;
+        case 3:
+            $levelName = '制片人';
+            break;
+        case 4:
+            $levelName = '出品人';
+            break;
+    }
+    return $levelName;
+}
