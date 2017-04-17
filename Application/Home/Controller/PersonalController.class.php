@@ -150,6 +150,11 @@ class PersonalController extends CommonController{
             }
         }
 
+
+       //>> 电影招募演员
+        $films = M('ProjectRecruit')->select();
+
+
         //>> 查询收藏情况
         $collection = $personModel->where(['member_id'=>$this->userInfo['id']])
                     ->join('left join an_member_collection as b on a.id = b.member_id')
@@ -214,6 +219,7 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'films'=>$films,
             'follower'=>$follower,
             'recruit'=>$recruit,
             'topLeader'=>$topLeader,
@@ -650,7 +656,8 @@ class PersonalController extends CommonController{
                 'money'=>70000,
                 'create_time'=>time(),
                 'member_id'=>$this->userInfo['id'],
-                'type'=>'演员申请'
+                'type'=>'演员申请',
+                'project_Id'=>isset($paramArr['id']) ? $paramArr['id'] : 0,
             ];
 
             M('MemberConsume')->add($data);
@@ -668,12 +675,12 @@ class PersonalController extends CommonController{
                 'ex'=>$paramArr['ex'],
                 'image_url'=>$paramArr['image_url'],
                 'member_id'=>$this->userInfo['id'],
-                'project_id'=>session('filmId'.$this->userInfo['id']),
-                'role_id'=>session('roleId'.$this->userInfo['id']),
+                'project_id'=>session('filmId'),
+                'role_id'=>session('roleId'),
                 'is_pass'=>2,
             ];
 
-            $res = M('MemberStar')->where(['member_id'=>$this->userInfo['id']])->add($insertData);
+            $res = M('MemberStar')->add($insertData);
             $re = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money'] - 70000]);
             if($res && $re){
 
@@ -690,14 +697,17 @@ class PersonalController extends CommonController{
         }
     }
 
+
+
     /**
      * 查看电影详情
      */
     public function filmDetail(){
 
         $paramArr = $_REQUEST;
-        if(!empty($paramArr)){
 
+        if(!empty($paramArr)){
+            session('filmId',$paramArr['id']);
             if(isset($paramArr['id']) && is_numeric($paramArr['id']) && !empty($paramArr['id'])){
 
                 $film = M('ProjectRecruit')->where(['id'=>$paramArr['id']])->find();
@@ -710,8 +720,11 @@ class PersonalController extends CommonController{
                         $row = M('ProjectRole')->where(['id'=>$value])->find();
                         $dataArr[$key] = array_merge($row);
                     }
-                    $this->assign('role',$dataArr);
-                    $this->assign('film',$film);
+                    $this->ajaxReturn([
+                        'status'=>0,
+                        'role'=>$dataArr,
+                        'film'=>$film,
+                    ]);
                 }
             }else{
 
@@ -727,23 +740,19 @@ class PersonalController extends CommonController{
                 'msg'=>'数据为空'
             ]);
         }
-        $this->display('role/detail');
+        //$this->display('role/detail');
     }
 
     /**
-     * 保存选择的角色
+     * 保存
      */
-    public function filmSave(){
+    public function saveId(){
+
         $paramArr = $_REQUEST;
-
-        $filmId = $paramArr['filmId'];
-        $roleId = $paramArr['roleId'];
-
-      if(!empty($filmId) && !empty($roleId)){
-          //>> 将id存到session中
-          session('filmId'.$this->userInfo['id'],$filmId);
-          session('roleId'.$this->userInfo['id'],$roleId);
-      }
+        //>> 将电影id保存到session中
+        if(isset($paramArr['roleId']) && !empty($paramArr['roleId'])){
+            session('roleId',$paramArr['roleId']);
+        }
     }
 
     /**
