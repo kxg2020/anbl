@@ -1152,8 +1152,9 @@ margin-top: 25px;
 	font-size: 20px;
 }
 .team_content{
+	padding-top: 2%;
 	width: 80%;
-	height: 100%;
+	height: 95%;
 	margin: auto;
 	overflow: auto;
 	color: white;
