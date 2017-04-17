@@ -68,6 +68,13 @@ class ProjectController extends CommonController
             if ($_data['start_time'] >= $_data['end_time']) {
                 $this->ajaxReturnError('开始时间不能大于或等于结束时间',__LINE__);
             }
+            // 判断是否上传封面图
+            if(!$_data['image_url']){
+                $this->ajaxReturnError('影片封面图必须上传',__LINE__);
+            }
+            if(!$_data['analysis']){
+                $this->ajaxReturnError('故事分析必须填写',__LINE__);
+            }
 
             // 获取项目基本信息
             $projectInfo = [
@@ -451,8 +458,6 @@ class ProjectController extends CommonController
                'first_rate'=>$paramArr['first_rate'],
                'two_rate'=>$paramArr['two_rate'],
                'three_rate'=>$paramArr['three_rate'],
-               'pub_rate'=>$paramArr['pub_rate'],
-               'pro_rate'=>$paramArr['pro_rate'],
            ]);
 
         $this->ajaxReturn([

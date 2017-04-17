@@ -120,7 +120,7 @@ class PersonalController extends CommonController{
 
 
         //>> 查询当前用户的支持情况
-        $rows = M('MemberSupport as a')->field('a.*,b.*')
+        $rows = M('MemberSupport as a')->field('a.id as aid,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id']])
             ->select();
@@ -800,6 +800,77 @@ class PersonalController extends CommonController{
                 session('export'.$this->userInfo['id'],null);
                 $this->ajaxReturn(['status'=>1]);
             }
+        }
+    }
+
+    /**
+     * 退款
+     */
+    public function feedBack(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+            $res = M('MemberProfit')->where(['support_id'=>$paramArr['orderId']])->select();
+
+            $order = M('MemberSupport')->where(['support_id'=>$paramArr['orderId']])->find();
+
+            M()->startTrans();
+            if(!empty($res)){
+
+                foreach($res as $value){
+                    $res = M('Member')->where(['id' => $value['member_id']])->save(['money' => ['exp', 'money-' . $value['money']]]);
+
+                    if($res === false){
+
+                        M()->rollback();
+                        $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                    }else{
+
+                        $result =  M('MemberProfit')->where(['id'=>$value['id']])->delete();
+                        if($result === false){
+
+                            M()->rollback();
+                            $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                        }
+                    }
+                }
+                $re = M('Member')->where(['id' => $order['member_id']])->save(['money' => ['exp', 'money+' . $order['support_money'] * 0.9]]);
+
+                if($re === false){
+
+                    M()->rollback();
+                    $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                }
+
+                $result =  M('MemberSupport')->where(['id'=>$order['id']])->delete();
+                if($result === false){
+
+                    M()->rollback();
+                    $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                }
+
+                M()->commit();
+                $this->ajaxReturn([
+                    'status'=>1,
+                    'msg'=>'退款成功',
+                ]);
+
+
+            }else{
+
+                $this->ajaxReturn([
+                    'status'=>1,
+                    'msg'=>'退款失败',
+                ]);
+            }
+        }else{
+
+            $this->ajaxReturn([
+                'msg'=>'退款失败',
+                'status'=>0
+            ]);
         }
     }
 }
