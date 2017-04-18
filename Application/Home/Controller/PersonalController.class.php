@@ -149,8 +149,7 @@ class PersonalController extends CommonController{
                 $needIntegral = $expIntegral - $crrIntegral;
                 $allInfo['integral'] = $needIntegral;
                 $allInfo['status'] = 1;
-            }else{
-                $allInfo = ['status'=>0,'integral'=>$row['integral']];
+
             }
         }
 
@@ -827,7 +826,6 @@ class PersonalController extends CommonController{
         if(!empty($paramArr)){
 
             $res = M('MemberProfit')->where(['support_id'=>$paramArr['orderId']])->select();
-
             $order = M('MemberSupport')->where(['support_id'=>$paramArr['orderId']])->find();
 
             M()->startTrans();
@@ -875,7 +873,7 @@ class PersonalController extends CommonController{
             }else{
 
                 $this->ajaxReturn([
-                    'status'=>1,
+                    'status'=>0,
                     'msg'=>'退款失败',
                 ]);
             }
