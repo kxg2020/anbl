@@ -52,7 +52,7 @@ class SystemController extends CommonController
     public function cooperation(){
         $cooperInfos = M('Cooper')->select();
         $this->assign('cooperInfos',$cooperInfos);
-        $this->display('System/cooper');
+        $this->display('system/cooper');
     }
 
     public function add(){

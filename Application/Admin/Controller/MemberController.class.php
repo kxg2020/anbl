@@ -196,14 +196,14 @@ class MemberController extends  CommonController{
         if(!empty($paramArr)){
             $data = [
                 'password'=>md5($paramArr['password']),
-                'level'=>$paramArr['level'],
-                'integral'=>$paramArr['integral'],
-                'money'=>$paramArr['money'],
-                'phone'=>$paramArr['phone'],
-                'realname'=>$paramArr['realname'],
-                'bank_card_name'=>$paramArr['bank_card_name'],
-                'address'=>$paramArr['address'],
-                'city'=>$paramArr['city'],
+                'level'=>isset($paramArr['level']) ? $paramArr['level'] : 0,
+                'integral'=>isset($paramArr['integral']) ? $paramArr['integral'] : 0,
+                'money'=>isset($paramArr['money']) ? $paramArr['money'] : 0,
+                'phone'=>isset($paramArr['phone']) ? $paramArr['phone'] : '',
+                'realname'=>isset($paramArr['realname']) ? $paramArr['realname'] : '',
+                'bank_card_name'=>isset($paramArr['bank_card_name']) ? $paramArr['bank_card_name'] : '',
+                'address'=>isset($paramArr['address']) ? $paramArr['city'] : '',
+                'city'=>isset($paramArr['city']) ? $paramArr['city'] : '',
             ];
             $res = $memberModel->where(['id'=>$paramArr['id']])->save($data);
 
@@ -259,15 +259,16 @@ class MemberController extends  CommonController{
             $paramArr = $_REQUEST;
             //>> 开启事物
             $model = M('IntegralInstitution');
+
             //>> 更新积分数据库
             if(!empty($paramArr)){
+
                 foreach($paramArr['integral'] as $key => $value){
-                    $data = [
-                        'level'=>$key,
-                        'integral'=>$value
-                    ];
-                    $model->where(['level'=>$data['level']])->save($data);
+
+                   $re =  $model->where(['level'=>$key])->save(['integral'=>$value]);
+                    
                 }
+                $this->ajaxReturn(['msg'=>'保存成功','status'=>1]);
             }else{
                 $this->ajaxReturn(['msg'=>'数据不能为空','status'=>0]);
             }

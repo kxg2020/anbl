@@ -38,7 +38,7 @@ class CategoryController extends CommonController
                 $this->error('数据保存失败');
                 exit;
             }
-            $this->redirect('admin/articleCategory/index');
+            $this->redirect('admin/Category/index');
             exit;
         }
         $this->display('category/add');

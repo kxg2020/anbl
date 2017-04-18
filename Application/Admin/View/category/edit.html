@@ -25,7 +25,7 @@
                             编辑消息分类
                         </header>
                         <div class="panel-body">
-                            <form role="form" method="post" action="{:U('admin/articleCategory/edit',['id'=>$row['id']])}" enctype="multipart/form-data">
+                            <form role="form" method="post" action="{:U('admin/Category/edit',['id'=>$row['id']])}" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>项目分类名称</label>
                                     <input type="text" class="form-control" name="name" value="{$row.name}">

@@ -106,7 +106,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">密码</label>
                                         <div class="col-sm-4 col-md-4">
-                                            <input type="password" name="password" class="form-control" placeholder="密码长度为5-16位,由字母数字组成">
+                                            <input type="password" name="password" class="form-control" placeholder="密码长度为8-16位,由字母数字组成">
                                         </div>
                                     </div>
 
@@ -163,7 +163,7 @@ $(function(){
                     layer.tips('密码不能为空','input[name = password]');
                 }else{
                     //>> 检测密码
-                    var reg = /^[a-zA-Z]\w{5,16}$/;
+                    var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
                     if(!reg.test(password)){
                         layer.tips('密码格式不正确','input[name = password]');
                     }else{

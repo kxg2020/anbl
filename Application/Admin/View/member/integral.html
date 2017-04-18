@@ -152,7 +152,9 @@ $(function(){
                 'integral':arr,
             },
             success:function(result){
-                window.location.href = location.protocol+'//'+window.location.host+'/Admin/Member/integral';
+                if(result.status != ''){
+                    layer.msg(result.msg);
+                }
             }
         });
     });

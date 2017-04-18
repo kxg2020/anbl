@@ -162,9 +162,13 @@ $(function(){
             success:function(result){
                 console.log(result);
                 if(result.status == 1){
-                    layer.msg(result.msg);
+                    layer.msg(result.msg,function(){
+                        location.reload();
+                    });
                 }else{
-                    layer.msg(result.msg);
+                    layer.msg(result.msg,function(){
+                        location.reload();
+                    });
                 }
             }
         });
