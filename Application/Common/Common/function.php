@@ -152,7 +152,7 @@ function tpl_send($ch, $data)
 }
 
 function dataNum($data1,$data2){
-    return intval(($data2-$data1)/86400+1);
+    return intval(($data2-$data1)/86400);
 }
 
 /**

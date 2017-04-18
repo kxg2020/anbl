@@ -254,12 +254,11 @@
 				};
 				$.post("{:U('home/factory/vote')}",_data,function (data) {
 					if (data.status == 0) {
-						layer.msg(data.msg,{
-							time: 0 //不自动关闭
-							,btn: ['立即登录']
-							,yes: function(index){
-								window.location.href = "{:U('Home/Login/index')}"
-							}
+						layer.confirm('您还没有登录！', {
+							btn: ['登录','取消'] //按钮
+						}, function(){
+							window.location.href = "{:U('Home/Login/index')}"
+						}, function(){
 						});
 					} else {
 						layer.msg(data.msg);

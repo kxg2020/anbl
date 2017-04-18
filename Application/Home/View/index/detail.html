@@ -276,12 +276,18 @@
 			 var  isLogin = "{$isLogin}";
 			 console.log(isLogin);
 			 if(isLogin == 0){
-				 layer.msg('您还没有登录!',{
+				 /*layer.msg('您还没有登录!',{
 					 time: 0 //不自动关闭
 					 ,btn: ['立即登录']
 					 ,yes: function(index){
 						 window.location.href = "{:U('Home/Login/index')}"
 					 }
+				 });*/
+				 layer.confirm('您还没有登录！', {
+					 btn: ['登录','取消'] //按钮
+				 }, function(){
+					 window.location.href = "{:U('Home/Login/index')}"
+				 }, function(){
 				 });
 				 return false;
 			 }else{
@@ -322,12 +328,11 @@
 			 var _id = _id;
 			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
 				 if (data.status == 0) {
-					 layer.msg(data.msg,{
-						 time: 0 //不自动关闭
-						 ,btn: ['立即登录']
-						 ,yes: function(index){
-							 window.location.href = "{:U('Home/Login/index')}"
-						 }
+					 layer.confirm('您还没有登录！', {
+						 btn: ['登录','取消'] //按钮
+					 }, function(){
+						 window.location.href = "{:U('Home/Login/index')}"
+					 }, function(){
 					 });
 				 } else if(data.status == 2) {
 					 layer.msg(data.msg);
