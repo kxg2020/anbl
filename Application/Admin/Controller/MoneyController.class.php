@@ -29,8 +29,9 @@ class MoneyController extends CommonController
             // 查询出当前项目所有支持订单
             $where = [
                 'project_id' => $projectInfo['id'],//当前项目
-                'is_fh' => 1,//已分红的订单
-                'is_true' => 0,//已分红的订单
+                'is_fh' => 0,//已分红的订单
+                'is_true' => 0,//未返回金额
+                'type'=>2     //订单为浮动分红方式的用户
             ];
             $supportInfo = M('MemberSupport')
                 ->where($where)->select();
@@ -41,41 +42,42 @@ class MoneyController extends CommonController
             M()->startTrans();
             // 静态分红
             foreach ($supportInfo as &$info) {
-                if ($info['type'] == 2) {//订单为浮动分红方式的用户
-                    $rest = M('MemberSupport')
-                        ->where(['id' => $info['id']])
-                        ->save([
-                            'is_fh' => 1,
-                            'float' => $info['support_money'] * $projectInfo['float_rate'],
-                            'is_true' => 1,
-                        ]);
-                    if ($rest === false) {
-                        M()->rollback();
-                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-                    }
 
-                    // 更新会员余额
-                    $money = $info['support_money'] + $info['support_money'] * ($projectInfo['float_rate'] / 100);
-                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
-                    if ($rest === false) {
-                        M()->rollback();
-                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-                    }
-
-                    // 向会员收益表追加一条记录
-                    $rest = M('MemberProfit')->add([
-                        'member_id' => $info['member_id'],
-                        'money' => $money,
-                        'create_time' => time(),
-                        'type' => 1,
-                        'remark' => $projectInfo['name'] . "影片本金返还及浮动分红",
-                    ]);
-                    if ($rest === false) {
-                        M()->rollback();
-                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-                    }
-
+                // 更新会员余额
+                $money = $info['support_money'] + $info['support_money'] * ($projectInfo['float_rate'] / 100);
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+
+                // 向会员收益表追加一条记录
+                $rest = M('MemberProfit')->add([
+                    'member_id' => $info['member_id'],
+                    'money' => $money,
+                    'create_time' => time(),
+                    'type' => 1,
+                    'support_id' => $info['id'],
+                    'is_ok' => 1,
+                    'remark' => $projectInfo['name'] . "影片本金返还及浮动分红",
+                ]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+                // 修改订单状态
+                $rest = M('MemberSupport')
+                    ->where(['id' => $info['id']])
+                    ->save([
+                        'is_fh' => 1,
+                        'float' => $info['support_money'] * $projectInfo['float_rate'],
+                        'is_true' => 1,
+                    ]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+
             }
             // 修改项目分红状态
             $rest = M('Project')->where(['id' => $projectInfo['id']])->save(['is_fh' => 1]);
@@ -313,7 +315,7 @@ class MoneyController extends CommonController
     {
         // 未分红的订单
         $where = [
-            'is_fh' => 0,//未分红的订单
+            'is_fh' => 0,//未分红的订单或者分红还未结束的订单
             'type' => 1,//未分红固定分红方式的订单
         ];
         $supportInfo = M('MemberSupport')
@@ -330,40 +332,6 @@ class MoneyController extends CommonController
             $projectInfo = M('Project')->find($info['project_id']);
             if (!$projectInfo) {// 项目不存在
                 continue;
-            }
-
-            // 项目下架自动返还本金
-            if($projectInfo['is_active'] == 0 && $info['is_true']==0){
-
-                // 更新会员余额
-                $money = $info['support_money'];
-                $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
-                if ($rest === false) {
-                    M()->rollback();
-                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-                }
-                // 向会员收益表追加一条记录
-                $rest = M('MemberProfit')->add([
-                    'member_id' => $info['member_id'],
-                    'money' => $money,
-                    'create_time' => time(),
-                    'type' => 1,
-                    'remark' => $projectInfo['name'] . "影片本金返还",
-                ]);
-                if ($rest === false) {
-                    M()->rollback();
-                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-                }
-                $rest = M('MemberSupport')
-                    ->where(['id' => $info['id']])
-                    ->save([
-                        'is_fh' => 1,
-                        'is_true' => 1,
-                    ]);
-                if ($rest === false) {
-                    M()->rollback();
-                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-                }
             }
 
             // 判断项目在线在线状态 在线就可以进行分红  不在线查看 目标金额是否达到 未达到 则分红失败
@@ -494,6 +462,67 @@ class MoneyController extends CommonController
         }
         M()->commit();
     }
+
+
+    /**
+     * 返还固定分红会员的本金
+     */
+    public function benjin(){
+        // 未分红的订单
+        $where = [
+            'is_true'=>0,//未返还本金的
+            'type' => 1,//未分红固定分红方式的订单
+        ];
+        $supportInfo = M('MemberSupport')
+            ->where($where)
+            ->select();
+        if (!$supportInfo) {
+            exit;
+        }
+
+        M()->startTrans();
+        foreach ($supportInfo as $info) {
+            $projectInfo = M('Project')->find($info['project_id']);
+            if (!$projectInfo) {// 项目不存在
+                continue;
+            }
+            // 项目下架自动返还本金
+            if($projectInfo['is_active'] == 0 && $info['is_true']==0){
+
+                // 更新会员余额
+                $money = $info['support_money'];
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+                // 向会员收益表追加一条记录
+                $rest = M('MemberProfit')->add([
+                    'member_id' => $info['member_id'],
+                    'money' => $money,
+                    'create_time' => time(),
+                    'type' => 1,
+                    'remark' => $projectInfo['name'] . "影片本金返还",
+                ]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+                $rest = M('MemberSupport')
+                    ->where(['id' => $info['id']])
+                    ->save([
+                        'is_true' => 1,
+                    ]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+            }
+        }
+        M()->commit();
+    }
+
+
 
     /**
      * 新增业绩分佣

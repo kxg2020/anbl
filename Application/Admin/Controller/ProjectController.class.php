@@ -262,12 +262,28 @@ class ProjectController extends CommonController
             $this->error('没有找到数据');
             exit;
         }
+
+        // 判断该项目是否存在还没有处理完的订单
+        $supportInfo = M('MemberSupport')->where(['is_ok'=>0,'project_id'=>$info['id']])->find();
+        if($supportInfo){
+            $this->error('该项目还存在未处理完成的订单，不能删除!');
+            exit;
+        }
+
         // 执行删除
         $res = $model->delete($id);
         if(!$res){
             $this->error('删除失败！');
             exit;
         }
+
+        // 删除相关订单信息
+        $rest = M('MemberSupport')->where(['project_id'=>$info['id']])->delete();
+        if(!$rest){
+            $this->error('删除失败！');
+            exit;
+        }
+
         // 删除关联表数据
         $res = M('ProjectSurvey')
             ->where(['project_id'=>$id])
