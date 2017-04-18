@@ -578,6 +578,7 @@
 				<p>L</p>
 				<p>B</p>
 			</div>
+			<input type="hidden"  value="" name="film_id">
 		</div>
 	</div>
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
@@ -590,6 +591,9 @@
 	<script src="__JS__/layer/laypage.js"></script>
 	<script type="text/javascript">
 		$(function () {
+
+
+
 			var cancel_id = '';
 			$('.cancel_suport').click(function(){
 				cancel_id = $(this).attr('data-id');
@@ -618,24 +622,50 @@
 			//>> 点击进入电影详情页
 			$('.goTodetail').click(function(){
 
-				id = $(this).attr('data-id');
+				var film_id = $(this).attr('data-id');
+				$('input[name = film_id]').val(film_id);
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
 					'url':location.protocol+'//'+window.location.host+'/Home/Personal/filmDetail',
-					'data':{'id':id},
+					'data':{'id':film_id},
 					success:function(e){
+						console.log(e);
 						$('.filmname').text(e.film.name);
 						$('select[name = role]').html('');
 						$.each(e.role,function(k,v){
 							$('select[name = role]').append('<option value="'+ v.id+'">'+ v.name+'</option>');
 						});
-						$('.intro').text(e.film.intro);
-						$('.feature').text(e.film.feature);
-						$('.figure').text(e.film.figure);
+						$('.intro').text(e.roleDetail.intro);
+						$('.feature').text(e.roleDetail.feature);
+						$('.figure').text(e.roleDetail.figure);
 					}
 				});
 
+			});
+
+			//>> 点击切换角色
+			$('select[name = role]').change(function(){
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/getFilm',
+					'data':{
+						'film_id':$('input[name = film_id]').val(),
+						'role_id':$(this).val(),
+					},
+					success:function(e){
+						if(e.data != ''){
+							$('.intro').text(e.data.intro);
+							$('.feature').text(e.data.feature);
+							$('.figure').text(e.data.figure);
+						}else{
+							$('.intro').text('');
+							$('.feature').text('');
+							$('.figure').text('');
+						}
+					}
+				});
 			});
 
 			//>> 点击申请

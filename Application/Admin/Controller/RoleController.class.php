@@ -99,21 +99,22 @@ class RoleController extends CommonController{
             if(!empty($paramArr)){
 
                 //>> 判断电影是否添加
-                $where = [];
-                $where['name'] = ['like',"%".$paramArr['film']."%"];
-                $result = M('ProjectRecruit')->where($where)->find();
+                $result = M('ProjectRecruit')->where(['name'=>$paramArr['film']])->find();
 
                 if(!empty($result)){
                     $updateData = [
                         'name'=>$paramArr['film'] ? $paramArr['film'] :'',
-                        'image_url'=>$paramArr['image_url'] ? $paramArr['image_url']: '',
-                        'role_id'=>json_encode($paramArr['roles']),
+                        'image_url'=>$paramArr['image_url'],
+                        'role_id'=>json_encode(array_unique(array_merge(json_decode($result['role_id']),$paramArr['roles']))),
                         'create_time'=>time(),
+                    ];
+                    $re = M('ProjectRecruit')->where(['id'=>$result['id']])->save($updateData);
+                    //>> 再更新角色描述
+                    M('RoleDescription')->where(['role_id'=>$paramArr['roles'][0],'recruit_id'=>$result['id']])->save([
                         'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
                         'feature'=>$paramArr['feature'] ? $paramArr['feature'] : '',
                         'figure'=>$paramArr['figure'] ? $paramArr['figure'] : '',
-                    ];
-                    $re = M('ProjectRecruit')->where(['id'=>$result['id']])->save($updateData);
+                    ]);
 
                     if($re === false){
 
@@ -128,17 +129,41 @@ class RoleController extends CommonController{
                         ]);
                     }
                 }
+
+//                $r = M('RoleDescription')->where(['member_id'=>$this->userInfo['id'],'role_id'=>$paramArr['roles'][0],'recruit_id'=>$result['id']])->find();
+//
+//                if(!empty($r)){
+//                    $upDa = [
+//                        'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
+//                        'feature'=>$paramArr['feature'] ? $paramArr['feature'] : '',
+//                        'figure'=>$paramArr['figure'] ? $paramArr['figure'] : '',
+//                    ];
+//
+//                    M('RoleDescription')->where(['role_id'=>$paramArr['roles'][0],'recruit_id'=>$result['id']])->save($upDa);
+//                }else{
+//
+//                }
                 $insertData = [
                     'name'=>$paramArr['film'],
                     'image_url'=>$paramArr['image_url'],
                     'role_id'=>json_encode($paramArr['roles']),
                     'create_time'=>time(),
+                ];
+                $res = M('ProjectRecruit')->add($insertData);
+                $lastId = M('ProjectRecruit')->getLastInsID();
+
+                $insData = [
                     'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
                     'feature'=>$paramArr['feature'] ? $paramArr['feature'] : '',
                     'figure'=>$paramArr['figure'] ? $paramArr['figure'] : '',
+                    'role_id'=>$paramArr['roles'][0],
+                    'recruit_id'=>$lastId,
+                    'member_id'=>$this->userInfo['id'],
                 ];
-                $res = M('ProjectRecruit')->add($insertData);
-                if($res){
+
+                //>> 将角色信息单独保存到一张表中
+                $row = M('RoleDescription')->add($insData);
+                if($res && $row){
 
                     $this->ajaxReturn([
                         'msg'=>'添加成功',
@@ -195,7 +220,9 @@ class RoleController extends CommonController{
         if(!empty($paramArr)){
 
             $res = M('ProjectRecruit')->where(['id'=>$paramArr['id']])->delete();
-            if($res){
+            //>> 删除所有角色
+            $re = M('RoleDescription')->where(['recruit_id'=>$paramArr['id']])->delete();
+            if($res && $re){
 
                 $this->ajaxReturn([
                     'status'=>1,

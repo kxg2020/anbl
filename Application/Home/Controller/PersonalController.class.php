@@ -719,6 +719,8 @@ class PersonalController extends CommonController{
                 $film = M('ProjectRecruit')->where(['id'=>$paramArr['id']])->find();
                 $film['role_id'] = json_decode($film['role_id']);
 
+                //>> 默认查询第一个角色的详细信息
+                $roleDetail = M('RoleDescription')->where(['recruit_id'=>$film['id'],'role_id'=>$film['role_id'][0]])->find();
                 if(!empty($film)){
                     static $dataArr = [];
                     //>> 循环查询角色
@@ -730,6 +732,7 @@ class PersonalController extends CommonController{
                         'status'=>0,
                         'role'=>$dataArr,
                         'film'=>$film,
+                        'roleDetail'=>$roleDetail
                     ]);
                 }
             }else{
@@ -876,6 +879,30 @@ class PersonalController extends CommonController{
             $this->ajaxReturn([
                 'msg'=>'退款失败',
                 'status'=>0
+            ]);
+        }
+    }
+
+    /*
+     * 切换角色
+     */
+    public function getFilm(){
+
+        $id = $_REQUEST;
+
+        $row = M('RoleDescription')->where(['recruit_id'=>$id['film_id'],'role_id'=>$id['role_id']])->find();
+
+        if(!empty($row)){
+
+            $this->ajaxReturn([
+                'status'=>1,
+                'data'=>$row,
+            ]);
+        }else{
+
+            $this->ajaxReturn([
+                'data'=>[],
+                'status'=>1
             ]);
         }
     }
