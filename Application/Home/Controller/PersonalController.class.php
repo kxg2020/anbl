@@ -857,6 +857,14 @@ class PersonalController extends CommonController{
                     $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
                 }
 
+                // 修改项目支持金额
+                $result =  M('Project')->where(['id'=>$order['project_id']])->save(['money' => ['exp', 'money-' . $order['support_money']]]);
+                if($result === false){
+
+                    M()->rollback();
+                    $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                }
+
                 $result =  M('MemberSupport')->where(['id'=>$order['id']])->delete();
                 if($result === false){
 
@@ -872,11 +880,35 @@ class PersonalController extends CommonController{
 
 
             }else{
+                $re = M('Member')->where(['id' => $order['member_id']])->save(['money' => ['exp', 'money+' . $order['support_money'] * 0.9]]);
 
+                if($re === false){
+
+                    M()->rollback();
+                    $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                }
+
+                // 修改项目支持金额
+                $result =  M('Project')->where(['id'=>$order['project_id']])->save(['money' => ['exp', 'money-' . $order['support_money']]]);
+                if($result === false){
+
+                    M()->rollback();
+                    $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                }
+
+                $result =  M('MemberSupport')->where(['id'=>$order['id']])->delete();
+                if($result === false){
+
+                    M()->rollback();
+                    $this->ajaxReturn(['msg'=>'退款失败','status'=>0]);
+                }
+
+                M()->commit();
                 $this->ajaxReturn([
-                    'status'=>0,
-                    'msg'=>'退款失败',
+                    'status'=>1,
+                    'msg'=>'退款成功',
                 ]);
+
             }
         }else{
 

@@ -150,6 +150,11 @@ class IndexController extends CommonController{
                 $this->ajaxReturn(['msg'=>"积分已达到，不能进行支持",'status'=>0]);
             }
 
+            if(($support_money+$projectInfo['money'])>$projectInfo['target_amount']){
+                $x = $projectInfo['target_amount']-$projectInfo['money'];
+                $this->ajaxReturn(['msg'=>"该影片还可以提供.$x.阿纳豆支持",'status'=>0]);
+            }
+
             // 分红类型  1固定 2浮动
 
             $type = intval($data['type']);
