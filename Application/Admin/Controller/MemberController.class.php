@@ -21,6 +21,53 @@ class MemberController extends  CommonController{
     public function select(){
 
         $paramArr = $_REQUEST;
+        $start_time = strtotime(I('get.start_time'));
+        $end_time = strtotime(I('get.end_time'));
+        $where = [];
+        if($paramArr['username']){
+
+            $where['username'] = $paramArr['username'];
+        }
+        if($paramArr['level']){
+
+            $where['level'] = $paramArr['level'];
+        }
+        if($paramArr['money']){
+
+            $where['money'] = $paramArr['money'];
+        }
+        if($start_time){
+            $where['create_time'] = ['egt',$start_time];
+        }
+        if($start_time && $end_time ){
+            $where['create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
+        }
+
+
+        $count = M('Member')->where($where)->order('create_time desc ')->count();
+
+        $page = new Page($count,15);
+
+        $memberList = M('Member')->where($where)->order('create_time desc ')->limit($page->firstRow,$page->listRows)->select();
+
+        $pages = $page->show();
+        $this->assign('list',$memberList);
+        $this->assign('count',$count);
+        $this->assign('pages',$pages);
+        $this->display('member/index');
+    }
+
+    /**
+     * 导出下载订单列表
+     */
+    public function exportDataMember(){
+
+        $paramArr = $_REQUEST;
+        $start_time = strtotime(I('get.start_time'));
+        $end_time = strtotime(I('get.end_time'));
         $where = [];
         if($paramArr['username']){
 
@@ -43,18 +90,50 @@ class MemberController extends  CommonController{
             $where['create_time'] = ['elt',$paramArr['end_time']];
         }
 
+        if($start_time){
+            $where['create_time'] = ['egt',$start_time];
+        }
+        if($start_time && $end_time ){
+            $where['create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
+        }
+
         $count = M('Member')->where($where)->order('create_time desc ')->count();
 
         $page = new Page($count,15);
 
         $memberList = M('Member')->where($where)->order('create_time desc ')->limit($page->firstRow,$page->listRows)->select();
+        foreach ($memberList as &$info){
+            $info['create_time'] = date('Y-m-d',$info['create_time']);
+        }
+        unset($info);
 
-        $pages = $page->show();
-        $this->assign('list',$memberList);
-        $this->assign('count',$count);
-        $this->assign('pages',$pages);
-        $this->display('member/index');
+        $xlsCell  = array(
+            array('id','编号'),
+            array('username','账户'),
+            array('money','余额'),
+            array('phone','电话'),
+            array('create_time','加入时间'),
+        );
+
+        $this->exportExcel(date('Y-m-d').'_会员信息',$xlsCell,$memberList);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 添加会员

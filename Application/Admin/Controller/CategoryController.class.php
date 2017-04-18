@@ -32,8 +32,9 @@ class CategoryController extends CommonController
                 $this->error($model->getError());
                 exit;
             }
+            $data['create']=time();
             //将数据保存到数据库
-            $result = $model->add();
+            $result = $model->add($data);
             if(!$result){
                 $this->error('数据保存失败');
                 exit;
