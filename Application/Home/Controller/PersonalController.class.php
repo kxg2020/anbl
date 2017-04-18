@@ -889,7 +889,7 @@ class PersonalController extends CommonController{
                 }
 
                 // 修改项目支持金额
-                $result =  M('Project')->where(['id'=>$order['project_id']])->save(['money' => ['exp', 'money-' . $order['support_money']]]);
+                $result =  M('Project')->where(['id'=>$order['project_id']])->save(['money' => ['exp', 'money-' . $order['support_money']],'support_number' => ['exp', 'support_number-' . 1]]);
                 if($result === false){
 
                     M()->rollback();
