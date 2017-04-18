@@ -36,6 +36,7 @@ a{
 	letter-spacing: 15px;
 }
 .content input{
+	border-radius: 3px;
 	border: none;
 	outline: none;
 	padding-left: 70px;
@@ -71,6 +72,7 @@ a{
 	left: 24px;
 }
 .login{
+	border-radius: 3px;
 	width: 146px;
 	height: 48px;
 	margin: auto;
@@ -139,6 +141,7 @@ color: #c5c6c6;
 	margin-bottom: 30px;
 }
 #reg_content #menban{
+	border-radius: 3px;
 	background: rgba(0,0,0,0);
 	z-index: 10;
 	cursor: pointer;
