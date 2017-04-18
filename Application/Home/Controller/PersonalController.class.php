@@ -126,7 +126,7 @@ class PersonalController extends CommonController{
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
-            ->where(['a.member_id'=>$this->userInfo['id']])
+            ->where(['a.member_id'=>$this->userInfo['id'],'a.is_fh'=>0])
             ->select();
         $count_1 = ceil(count($rows)/4);
         $rows = $this->pagination($rows,1,4);
@@ -825,7 +825,8 @@ class PersonalController extends CommonController{
 
         if(!empty($paramArr)){
 
-            $res = M('MemberProfit')->where(['support_id'=>$paramArr['orderId']])->select();
+
+            $res = M('MemberProfit')->where(['support_id'=>$paramArr['orderId'],'is_ok'=>1])->select();
             $order = M('MemberSupport')->where(['support_id'=>$paramArr['orderId']])->find();
 
             M()->startTrans();
