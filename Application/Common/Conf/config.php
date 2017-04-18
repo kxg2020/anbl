@@ -20,7 +20,7 @@ return array(
     'URL_MODEL' => 2,
 
     // 页面调试功能
-    'SHOW_PAGE_TRACE' => true,
+    //'SHOW_PAGE_TRACE' => true,
 
     'TMPL_PARSE_STRING' => [
         '__CSS__' =>  '/Public/css',
