@@ -16,11 +16,11 @@
 		<div>
 		 <div>
 			<p class="username">{$personal['username']}</p>
-			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个积分，您就升到Lv{$allInfo['level']}啦<else/>
-			您当前的累计积分为:{$allInfo['integral']}
+			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
+			您当前的累计阿纳豆为:{$allInfo['integral']}
 			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
-			<div class="money"><p>支持积分: <span>{$supportMoney}</span></p><p>剩余积分: <span>{$personal['money']}</span></p></div>
+			<div class="money"><p>支持阿纳豆: <span>{$supportMoney}</span></p><p>剩余阿纳豆: <span>{$personal['money']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
 				<if condition="$personal['safe_level'] eq 1">
 					<span>低</span>
@@ -195,7 +195,7 @@
 						</if>
 						<div class="get_money" style="display: none;">
 							<p>提现金额: <input type="text" name="exMoney" placeholder="0.00"></p>
-							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""></p>
+							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月低可以免费提现一次哦！</span></p>
 							<div class="question_div"></div>
 							<input type="button" value="确定" id="get_btn" class="ex" >
 						</div>
@@ -328,7 +328,7 @@
 							<thead>
 								<tr>
 									<th>消费时间</th>
-									<th>消费积分</th>
+									<th>消费阿纳豆</th>
 									<th>消费类型</th>
 								</tr>								
 							</thead>
@@ -405,7 +405,7 @@
 							<volist name="films" id="fi">
 							<div>
 								<div><img src="{$fi['image_url']}" alt=""><p> &nbsp;{$fi['name']}</p></div>
-								<p>申请积分<span>70000</span>分</p>
+								<p>申请阿纳豆<span>70000</span>分</p>
 								<input class="goTodetail" type="button" value="立即申请" data-id="{$fi['id']}">
 							</div>
 							</volist>
@@ -417,7 +417,7 @@
 								<div class="movie_topright">
 									<p>电影名称: <span class="filmname"></span></p>
 
-									<p>申请积分: <span>70000</span></p>
+									<p>申请阿纳豆: <span>70000</span></p>
 									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
 									</select>
 									<p><input class="goToform" type="button" value="点击申请"></p>				

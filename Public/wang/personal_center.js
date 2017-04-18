@@ -530,6 +530,8 @@ $(function(){
 	$('#team').click(function(){
 		$('.body_right>ul').hide();
 		$('.body_right>div').hide();
+		$('.close_modal').hide();
+		$('.team>.bg').show();
 		$('.money_modal').hide()
 		$('.team').show();
 	})
@@ -633,6 +635,13 @@ $(function(){
 			$('#feiyinglian').hide();
 			$('#yinglian').show();
 		}
+	})
+
+	//支付方式说明
+	$('.get_money>p:nth-child(2)>img').on('mouseenter',function(){
+		$('.get_money>p:nth-child(2)>span').show();
+	}).on('mouseleave',function(){
+		$('.get_money>p:nth-child(2)>span').css({display:'none'})
 	})
 
 });

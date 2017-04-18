@@ -148,7 +148,7 @@ header .nav{
 .body_left{
 	width: 35%;
 	height: 100%;
-	background-image: url(img/bg.png);
+	background-image: url(img/bg.jpg);
 	background-size: 100%;
 	color: white;
 	position: relative;
@@ -921,6 +921,13 @@ margin-top: 25px;
 	font-size: 15px;
 	height: 20px;
 	line-height: 20px;
+}
+.get_money p:nth-child(2)>img{
+	cursor: pointer;
+}
+.get_money p:nth-child(2)>span{
+	color: #e50909;
+	display: none;
 }
 #get_btn{
 	border-radius: 3px;

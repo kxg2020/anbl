@@ -149,7 +149,7 @@ header .nav{
 .content_left{
   width: 30%;
   height: 630px;
-  background: url(img/bg.png) 100%;
+  background: url(img/bg.jpg) 100%;
   float: left;
 }
 .bg{
@@ -174,7 +174,7 @@ header .nav{
 .content_right{
   width: 70%;
   height: 630px;
-  background: url(img/bg_img.png) 100%;
+  background: url(img/bg_img.jpg) 100%;
   float: left;
   color: white;
   font-size: 20px;
