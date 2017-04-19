@@ -1,0 +1,47 @@
+body{
+	font-family: "Microsoft YaHei";
+	font-size: 0.12rem;
+	color: white;
+	background: #333;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+li{
+	list-style: none;
+}
+header{
+	width: 100%;
+	height: 0.9rem;
+	line-height: 0.9rem;
+}
+header a{
+	display: inline-block;
+	width: 1.2rem;
+	padding-left: 0.3rem;
+	font-size: 0.3rem;
+	float: left;
+}
+header p{
+	width: 4.5rem;
+	height: 100%;
+	font-size: 0.3rem;
+	text-align: center;
+	float: left;
+}
+.detail_img{
+	width: 100%;
+	height: 5.2rem;
+}
+.detail_img>img{
+	width: 100%;
+	height: 100%;
+}
+.mubiao{
+	width: 100%;
+	height: 1rem;
+}
+.mubiao>p:nth-child(1){
+	font-size: 0.24rem;
+}

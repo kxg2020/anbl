@@ -318,7 +318,9 @@
 				 if (data.status == 0) {
 					 layer.alert(data.msg);
 				 } else {
-					 layer.msg(data.msg);
+					 layer.msg(data.msg,function(){
+						 location.reload();
+					 });
 					 $('.suport_bg').hide();
 				 }
 			 });
