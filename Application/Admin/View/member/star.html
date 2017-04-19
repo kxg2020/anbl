@@ -73,11 +73,12 @@
                                         <elseif condition="$s.is_pass eq 2"/><span class="label label-danger">未处理</span></if></td>
                                     <td style="vertical-align: middle"><a href="{:U('admin/Member/memberStarDetail',['id'=>$s['id']])}"><input type="button" data-id="{$s['id']}" class="btn btn-xs  btn-info" value="详情"  ></a>&nbsp;&nbsp;&nbsp;
                                   <if condition="$s.status eq 0"><input type="button"  data-id="{$s['id']}" data-email="{$s.email}" data-result="1" class="btn btn-xs btn-success status1" value="通过"  >&nbsp;&nbsp;&nbsp;
-                                      <input type="button"  data-id="{$s['id']}" class="btn btn-danger btn-xs status1" data-result="0" data-email="{$s.email}"   value="拒绝"  ></if>
+                                      <input type="button"  data-id="{$s['id']}" data-member="{$s.member_id}" class="btn btn-danger btn-xs status1" data-result="0" data-email="{$s.email}"   value="拒绝"  ></if>
                                     </td>
                                 </tr>
                                 </volist>
                                 </tbody>
+
                             </table>
                             {$pages}
                         </div>
@@ -120,12 +121,13 @@
                 result = $(this).attr('data-result');
                 email = $(this).attr('data-email');
                 id = $(this).attr('data-id');
+                member_id = $(this).attr('data-member');
                 url = location.protocol+'//'+window.location.host+'/admin/Member/sendToMember';
                 $.ajax({
                     'type':'post',
                     'dataType':'json',
                     'url':url,
-                    'data':{'result':result,'email':email,'id':id},
+                    'data':{'result':result,'email':email,'id':id,'member_id':member_id},
                     success:function(result){
                         if(result.status == 1){
                             layer.msg('邮件发送成功',function(){

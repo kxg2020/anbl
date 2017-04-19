@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/wang/detail/detail.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/layerMobile/need/layer.css">
 	<title>电影详情</title>
 </head>
 <body>
@@ -43,10 +44,10 @@
 	<div class="bg" style="display: none;">
 		<div id="suport_div">
 			<p>电影类型:</p>
-			<div class="fenghong"><input type="radio" value="1" name='xin' id="lei1"><label for="lei1">固定型 </label><input type="radio" value="2" name="xin" id="lei2"><label for="lei2">票房型 </label></div>
+			<div class="fenghong"><input type="radio" value="1" name='xin' id="lei1" checked><label for="lei1">固定型 </label><input type="radio" value="2" name="xin" id="lei2"><label for="lei2">票房型 </label></div>
 			<p>选择支持阿纳豆:</p>
 			<div class="jifeng">
-				<input type="radio" name="money" id="money1" value="100"><label for="money1">100</label>
+				<input type="radio" name="money" id="money1" value="100" checked><label for="money1">100</label>
 				<input type="radio" name="money" id="money2" value="500"><label for="money2">500</label>
 				<input type="radio" name="money" id="money3" value="1000"><label for="money3">1000</label>
 				<br>
@@ -61,17 +62,18 @@
 	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
 	<script src='__PUBLIC__/wang/detail/detail.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
 	<script type="application/javascript">
 
 		$('.now_suport').click(function(){
 			var  isLogin = "{$isLogin}";
-			console.log(isLogin);
-			if(isLogin == 1){
+			if(isLogin == 0){
 				layer.open({
 					content: '您还没有登录！',
+					style: 'color:red;',
 					btn: ['登录', '取消'],
 					yes: function(index){
-						//location.reload();
+						window.location.href = "{:U('Login/index')}"
 						layer.close(index);
 					}
 				});
@@ -89,7 +91,11 @@
 
 			// 判断用户是否同意协议
 			if(!$("#xieyi").is(':checked')){
-				layer.msg('请同意服务协议！');
+				layer.open({
+					content: '请同意服务协议！'
+					,skin: 'msg'
+					,time: 2 //2秒后自动关闭
+				});
 				return false
 			}
 			// 选择分红方式
@@ -106,10 +112,16 @@
 			};
 			$.post("{:U('index/support')}",_data,function (data) {
 				if (data.status == 0) {
-					layer.alert(data.msg);
+					layer.open({
+						content: data.msg,
+						style: 'color:red;',
+						btn: '我知道了'
+					});
 				} else {
-					layer.msg(data.msg,function(){
-						location.reload();
+					layer.open({
+						content: data.msg,
+						skin: 'msg',
+						time: 2 //2秒后自动关闭
 					});
 					$('.bg').hide();
 				}

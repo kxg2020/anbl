@@ -143,14 +143,15 @@ header>a:nth-child(3)>img{
 	background: #e50909;
 	overflow: hidden;
 }
-.body>p{
+.body>a{
+	display: block;
 	width: 100%;
 	height: 0.6rem;
 	line-height: 0.6rem;
 	font-size: 0.32rem;
 	margin-top: 0.3rem;
 }
-.body>p>img{
+.body>a>img{
 	margin-left: 0.48rem;
 	margin-right: 0.15rem;
 }
@@ -172,6 +173,6 @@ header>a:nth-child(3)>img{
 .body_bottom>div:first-child{
 	border-right: 1px solid white;
 }
-.body>p:first-child{
+.body>a:first-child{
 	background: #333;
 }

@@ -1,10 +1,87 @@
 $(function(){
 	
 	$('#login').click(function(){
-		alert('fuck');
-	})
+
+		//>> 获取用户名
+		username = $('input[name = username]').val();
+		password = $('input[name = password]').val();
+		if(username == '' || password == ''){
+			layer.open({
+				content: '用户名或密码不能为空',
+				style: 'color:black;'
+				,btn: '我知道了'
+			});
+			return false;
+		}
+		//>> 请求后台
+		$.ajax({
+			'type':'post',
+			'dataType':'json',
+			'url':location.protocol+'//'+window.location.host+'/login/checkLogin',
+			'data':{'username':username,'password':password},
+			success:function(e){
+				if(e.status == 1){
+					//>> 登录成功,跳转
+					window.location.href = location.protocol+'//'+window.location.host+'/index/index'
+				}else{
+					layer.open({
+						content: e.msg,
+						style: 'color:black;'
+						,time:2
+					});
+				}
+			}
+		});
+
+	});
 	$('#reg').click(function(){
-		alert('fuck you')
+		username = $('input[name = phone]').val();
+		password = $('input[name = passWord]').val();
+		rePassword = $('input[name = rePassword]').val();
+		captcha = $('input[name = captcha]').val();
+
+		if(username == ''){
+			layer.open({
+				content: '手机号不能为空',
+				style: 'color:black;'
+				,btn: '确定'
+			});
+			return false;
+		}
+		if(password == ''){
+			layer.open({
+				content: '密码不能为空',
+				style: 'color:black;'
+				,btn: '确定'
+			});
+			return false;
+		}
+		if(rePassword == ''){
+			layer.open({
+				content: '确认密码不能为空',
+				style: 'color:black;'
+				,time:2
+			});
+			return false;
+		}if(captcha == ''){
+			layer.open({
+				content: '验证码不能为空',
+				style: 'color:black;'
+				,time:2
+			});
+			return false;
+		}if(passWord != password){
+			layer.open({
+				content: '两次输入的密码不一致',
+				style: 'color:black;'
+				,time:2
+			});
+			return false;
+		}
+
+		//>>
+
+
 	})
 
 	//切换
@@ -25,7 +102,6 @@ $(function(){
 	// 短信验证码蒙板
 	$('.song').click(function(){
 		if(/^1(3|4|5|7|8)\d{9}$/.test($('.phoneinput').val())){
-			console.log(1)
 				 var time=60;
 				 $('.mengban').show();
 				 var timer = setInterval(function(){
@@ -37,8 +113,21 @@ $(function(){
 					        clearInterval(timer);
 					      }
 					 },1000);
+
+			//>> 获取验证码
+			$.ajax({
+				'type':'post',
+				'dataType':'json',
+				'url':location.protocol+'//'+window.location.host+'/Register/sendMessage',
+				'data':{'username':username,'password':password},
+			});
 		}else{
-			alert('请输入正确的手机号')
+			layer.open({
+				content: '请输入正确的手机号',
+				style: 'color:black;'
+				,btn: '确定'
+			});
+			return false;
 		}
 	})	
 

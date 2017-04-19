@@ -558,7 +558,10 @@ class MemberController extends  CommonController{
                 case 0:
                     $body ="<p>".'亲爱的会员，很抱歉的什么什么'."</p>" ;
                     $res = $this->sendEmail($paramArr['email'],'关于明星会员的回复',$body);
+
                     if($res){
+                        //>> 退还申请的金额
+                        M('Member')->where(['id'=>$paramArr['member_id']])->save(['money' => ['exp', 'money+' . 70000]]);
                         M('MemberStar')->where(['id'=>$paramArr['id']])->save(['is_pass'=>0,'status'=>1]);
                         $this->ajaxReturn(['status'=>1]);
                     }else{
