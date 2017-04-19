@@ -1,8 +1,40 @@
 $(function(){
 	
 	$('#login').click(function(){
-		alert('fuck');
-	})
+
+		//>> 获取用户名
+		username = $('input[name = username]').val();
+		password = $('input[name = password]').val();
+		if(username == '' || password == ''){
+			layer.open({
+				content: '用户名和密码不能为空',
+				style: 'color:black;'
+				,btn: '我知道了'
+			});
+			return false;
+		}
+		//>> 请求后台
+		$.ajax({
+			'type':'post',
+			'dataType':'json',
+			'url':location.protocol+'//'+window.location.host+'/Login/checkLogin',
+			'data':{'username':username,'password':password},
+			success:function(e){
+				if(e.status == 1){
+
+					//>> 登录成功,跳转
+					
+				}else{
+					layer.open({
+						content: e.msg,
+						style: 'color:black;'
+						,time:2
+					});
+				}
+			}
+		});
+
+	});
 	$('#reg').click(function(){
 		alert('fuck you')
 	})
