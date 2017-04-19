@@ -632,6 +632,8 @@ class PersonalController extends CommonController{
             ];
             $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
             if($res != false){
+                //>> 删除session中的值
+                session(md5('home'),null);
                 $this->ajaxReturn([
                     'status'=>1,
                     'msg'=>'修改成功',
@@ -681,7 +683,7 @@ class PersonalController extends CommonController{
                 'email'=>$paramArr['email'],
                 'address'=>$paramArr['address'],
                 'skill'=>$paramArr['skill'],
-                'ex'=>$paramArr['ex'],
+                'expirence'=>$paramArr['ex'],
                 'image_url'=>$paramArr['image_url'],
                 'member_id'=>$this->userInfo['id'],
                 'project_id'=>session('filmId'),

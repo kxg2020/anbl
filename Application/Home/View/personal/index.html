@@ -208,7 +208,7 @@
 							<div id="ls">
 							<volist name="orderList" id="o">
 								<p><span>{:date('Y-m-d',$o['create_time'])}</span>
-									<span>银行转账</span>
+									<span><if condition="$o['type'] eq 1">微信</if><if condition="$o['type'] eq 2">支付宝</if><if condition="$o['type'] eq 3">银行转账</if></span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>
 									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png" style="border-radius:50%;height: 18px;width: 18px"></span></p>
@@ -519,7 +519,7 @@
 																			return;
 																		}else{
 																			if(crraddress == ''){
-																				layer.tips('邮箱不能为空','input[name = crraddress]');
+																				layer.tips('居住不能为空','input[name = crraddress]');
 																				return;
 																		}
 																	}

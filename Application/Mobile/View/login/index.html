@@ -21,12 +21,13 @@
 		<div><i class="passwordimg"></i><input type="password" placeholder="密码" name="password"></div>
 		<p id="login">登录</p>
 	</div>
+	<input type="hidden" name="parent_id" value="{$parent_id}">
 	<div class="reg" style="display: none;">
-		<div><i class="phone"></i><input class="phoneinput" type="text" placeholder='输入电话好码'></div>
-		<div class="div2"><i class="duanxing"></i><input type="text" placeholder="输入短信验证码"><span class="song">发送验证码</span>
+		<div><i class="phone"></i><input class="phoneinput" type="text" placeholder='输入手机号码' name="phone"></div>
+		<div class="div2"><i class="duanxing"></i><input type="text" placeholder="输入短信验证码" name="captcha"><span class="song">发送验证码</span>
 		<span class="mengban" style="display: none;"></span></div>
-		<div><i class="mima"></i><input type="password" placeholder="请输入(8-16位字母,数字)密码"></div>
-		<div><i class="queren"></i><input type="password" placeholder="请确认密码"></div>
+		<div><i class="mima"></i><input type="password" placeholder="请输入(8-16位字母,数字)密码" name="passWord"></div>
+		<div><i class="queren"></i><input type="password" placeholder="请确认密码" name="rePassword"></div>
 		<p id="reg">注册</p>
 	</div>
 	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
