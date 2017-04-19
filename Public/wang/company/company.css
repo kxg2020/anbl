@@ -185,6 +185,7 @@ header .nav{
 }
 .content_right>div>p{
   text-indent: 15px;
+  font-size: 26px;
 
 }
 .content_right>div:nth-child(1) p{
@@ -214,7 +215,8 @@ header .nav{
   text-align: left;
   margin: auto;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 26px;
 }
 footer{
   width: 100%;
@@ -357,6 +359,7 @@ footer{
   position: relative;
   margin-top: 120px;
   overflow: hidden;
+  background: #e8e8e8;
 }
 .box3_left{
   width: 580px;
@@ -416,11 +419,12 @@ border-bottom: 1px solid #ccc;
 }
 .box4{
   width: 100%;
-  height: auto;
+  height: 411px;
   position: relative;
   margin-top: 100px;
   overflow: hidden;
   font-size: 16px;
+  background: url(img/bg_box4.png);
 }
 .box4>ul:nth-child(1) li{
   width: 33%;
