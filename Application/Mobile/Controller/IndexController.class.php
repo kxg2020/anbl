@@ -36,6 +36,12 @@ class IndexController extends CommonController {
         $this->display('detail');
     }
 
+    public function apply(){
+        $id = I('get.id');
+        $this->assign('id',$id);
+        $this->display('apply');
+    }
+
     public function support(){
         if(IS_POST && IS_AJAX){
             //判断会员是否已经登录

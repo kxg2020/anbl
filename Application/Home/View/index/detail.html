@@ -30,21 +30,21 @@
 			<input type="hidden" value="{$userInfo['id']}" name="user_id">
 			<div id="title">{$info.name}</div>
 			<div class="movie_introduce">
-				<p id="back"><span>+</span>预期回报</p>
+				<p id="back"><span>+</span>剧情简介</p>
 				<div class="expect back">
-					{:htmlspecialchars_decode($info['expected_return'])}
-				</div>
-				<p id="framework"><span>-</span>故事结构</p>
-				<div class="expect framework" style="display: block;">
 					{:htmlspecialchars_decode($info['story'])}
 				</div>
-				<p id="analyse"><span>+</span>故事分析</p>
-				<div class="expect analyse">
+				<p id="framework"><span>-</span>演艺阵容</p>
+				<div class="expect framework" style="display: block;">
 					{:htmlspecialchars_decode($info['analysis'])}
 				</div>
-					<p id="comment_film"><span>+</span>专业影评</p>
-					<div class="expect comment_film">
+				<p id="analyse"><span>+</span>受众定位</p>
+				<div class="expect analyse">
 					{:htmlspecialchars_decode($info['film_critic'])}
+				</div>
+					<p id="comment_film"><span>+</span>预期回报</p>
+					<div class="expect comment_film">
+						{:htmlspecialchars_decode($info['expected_return'])}
 				</div>
 			</div>
 		</div>
@@ -276,13 +276,6 @@
 			 var  isLogin = "{$isLogin}";
 			 console.log(isLogin);
 			 if(isLogin == 0){
-				 /*layer.msg('您还没有登录!',{
-					 time: 0 //不自动关闭
-					 ,btn: ['立即登录']
-					 ,yes: function(index){
-						 window.location.href = "{:U('Home/Login/index')}"
-					 }
-				 });*/
 				 layer.confirm('您还没有登录！', {
 					 btn: ['登录','取消'] //按钮
 				 }, function(){
