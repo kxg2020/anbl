@@ -807,6 +807,7 @@
 										'pgSize':12
 									},
 									success:function(result){
+
 										$('#ls').html('');
 										$.each(result.orderList,function(k,v){
 											$('#ls').append('<p><span>'+v.create_time+'</span>'+
@@ -815,6 +816,7 @@
 												'<span>'+ v.money+'</span>'+
 								'<span>'+ '<img style="height:18px;width:18px;border-radius:50%" src="__PUBLIC__/images/status/'+ v.is_pass+'.png">'+'</span></p>');
 										});
+
 									}
 								});
 							}
@@ -871,6 +873,8 @@
 									'pgSize':4
 								},
 								success:function(result){
+									var clonediv = $('#cancel_div').clone();
+									console.log(clonediv)
 
 									$('div[class = my_suport] > div').remove();
 									$.each(result.rows,function(k,v){
@@ -886,6 +890,9 @@
 										'</div>'+
 										'</div>');
 									});
+
+									console.log(clonediv)
+									$('div[class = my_suport]').append(clonediv)
 								}
 							});
 						}
