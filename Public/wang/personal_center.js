@@ -537,7 +537,7 @@ $(function(){
 	})
 
 	//点击替换背景
-	var bgArry=['/public/wang/img/bg.png','/public/wang/img/bg1.jpg','/public/wang/img/bg2.jpg','/public/wang/img/bg3.jpg','/public/wang/img/bg4.jpg','/public/wang/img/bg5.jpg','/public/wang/img/bg6.jpg'];
+	var bgArry=['/Public/wang/img/bg.png','/Public/wang/img/bg1.jpg','/Public/wang/img/bg2.jpg','/Public/wang/img/bg3.jpg','/Public/wang/img/bg4.jpg','/Public/wang/img/bg5.jpg','/Public/wang/img/bg6.jpg'];
 	var imgNumber=1;
 	$('#repeat_bg').click(function(){
 		$('.body_left').css({
