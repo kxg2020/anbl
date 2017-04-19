@@ -116,7 +116,7 @@ class FactoryController extends CommonController
             $id = intval($data['id']);
             // 判断会员余额够不够
             if($this->userInfo['money']<1){
-                $this->ajaxReturn(['msg'=>"积分不足",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"阿纳豆不足",'status'=>0]);
             }
 
             //判断投票类别
