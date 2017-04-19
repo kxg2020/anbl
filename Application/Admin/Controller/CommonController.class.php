@@ -311,11 +311,16 @@ class CommonController extends Controller
             if(($info['end_time'] < time()) && ($info['is_active'] == 1)){
                 // 项目下架 修改项目下架
                 // 判断目标金额是否达到
-                if($info['target_amount']>=$info['money']){
+                if($info['target_amount']<=$info['money']){
                     $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0,'is_ok'=>1]);
                 }else{
                     $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0]);
                 }
+            }
+
+            // 目标金额达到自动下架
+            if($info['target_amount']<=$info['money']){
+                $rest = M('Project')->where(['id'=>$info['id']])->save(['is_active'=>0,'is_ok'=>1]);
             }
         }
     }
