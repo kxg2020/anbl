@@ -300,7 +300,9 @@ $(function(){
 			},
 			success:function(result){
 				if(result.status == 1){
-					layer.msg('保存成功！',function(){
+					layer.msg('保存成功！',{
+						time:3,
+					},function(){
 						location.reload();
 					});
 

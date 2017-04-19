@@ -153,10 +153,10 @@
             var id = $(this).attr('data-id');
             layer.open({
                 type: 2,
-                title: '作品详情',
+                title: '充值详情',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['70%', '100%'],
+                area: ['45%', '70%'],
                 content: "{:U('admin/Order/detail')}"+'?id='+id,
                 end: function () {
                     location.reload();
