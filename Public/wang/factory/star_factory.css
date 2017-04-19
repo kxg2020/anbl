@@ -58,6 +58,7 @@ header{
 	width: 350px;
 	height: 660px;
 	float: left;
+	position: relative;
 }
 .star_content>div{
 	display: none;
@@ -65,13 +66,33 @@ header{
 .star_content>div:first-child{
 	display: block;
 }
-.star_content>div>p:nth-child(1){
+.star_content>.movie_logo{
+	display: block;
+	width: 167px;
+	height: 62px;
+	background: url(img/star.png);
+	position: absolute;
+	left: 0;
+	top: -76px;
+}
+.star_content .toupiao1{
+	overflow: hidden;
+}
+.star_content>div .toupiao{
 	color: white;
 	font-size: 18px;
 	text-align: right;
+	float: right;
+	background: #242424;
+	height: 54px;
+	border-radius:  27px;
+	line-height: 54px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
-.star_content>div>p:nth-child(1) span{
-	color: #e50909
+.star_content>div .toupiao span{
+	color: #e50909;
+	font-size: 30px;
 }
 .role_img{
 	width: 194px;

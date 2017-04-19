@@ -3,7 +3,7 @@ body{
     font-size: 16px;
     background: #2F2F2F;
     color: #E2E2E2;
-    background: radial-gradient(black,#444 80%);
+    background: radial-gradient(#444,black 80%);
     min-width: 1200px;
 }
 li{
