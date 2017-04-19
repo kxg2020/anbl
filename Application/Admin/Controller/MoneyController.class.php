@@ -37,7 +37,7 @@ class MoneyController extends CommonController
                 ->where($where)->select();
 
             if (!$supportInfo) {
-                $this->ajaxReturn(['msg' => "该项目还没有支持订单产生", 'status' => 0]);
+                $this->ajaxReturn(['msg' => "该项目没有支持订单产生", 'status' => 0]);
             }
             M()->startTrans();
             // 静态分红
@@ -70,7 +70,7 @@ class MoneyController extends CommonController
                     ->where(['id' => $info['id']])
                     ->save([
                         'is_fh' => 1,
-                        'float' => $info['support_money'] * $projectInfo['float_rate'],
+                        'float' => $info['support_money'] * $projectInfo['float_rate']/100,
                         'is_true' => 1,
                     ]);
                 if ($rest === false) {
@@ -79,12 +79,12 @@ class MoneyController extends CommonController
                 }
 
             }
-            // 修改项目分红状态
+            /*// 修改项目分红状态
             $rest = M('Project')->where(['id' => $projectInfo['id']])->save(['is_fh' => 1]);
             if ($rest === false) {
                 M()->rollback();
                 $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-            }
+            }*/
             M()->commit();
 
             $this->ajaxReturn(['msg' => "返还成功", 'status' => 1]);
@@ -113,8 +113,8 @@ class MoneyController extends CommonController
             if (!$projectInfo['three_rate']) {
                 $this->ajaxReturn(['msg' => "分佣参数未设置", 'status' => 0]);
             }
-            if ($projectInfo['is_fh'] == 0) {
-                $this->ajaxReturn(['msg' => "还没有进行分红，无法分佣", 'status' => 0]);
+            if ($projectInfo['is_active'] == 1) {
+                $this->ajaxReturn(['msg' => "项目还未下架，不能进行分佣", 'status' => 0]);
             }
 
             // 查询出所有会员
@@ -156,12 +156,12 @@ class MoneyController extends CommonController
                 $this->genCommission($info, $box, $projectInfo, $memberInfo['parent_id'], 1);
             }
 
-            // 修改项目分红状态
+            /*// 修改项目分红状态
             $rest = M('Project')->where(['id' => $projectInfo['id']])->save(['is_fy' => 1]);
             if ($rest === false) {
                 M()->rollback();
                 $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
-            }
+            }*/
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg' => "分佣成功", 'status' => 1]);
