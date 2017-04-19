@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/home/home.css">
+	<title>首页</title>
+</head>
+<body>
+	<header>
+		<p id="nav"><img src="__PUBLIC__/wang/home/nav.png"></p>
+		<p><img src="__PUBLIC__/wang/common_img/logo.png"></p>
+		<a href="share/share.html">分享<img src="__PUBLIC__/wang/home/share.png"></a>
+	</header>
+	<div class="content">
+		<volist name="projectInfo" id="info">
+		<div>
+			<div class="left">
+				<a href="{:U('index/detail',['id'=>$info['id']])}">
+				<img src="{$info.image_url}" alt="">
+				<div class="star">
+				<span>评星:</span>
+					<for start="0" end="$info['star_num']"><i></i></for>
+				</div>
+				</a>
+			</div>
+			<div class="right">
+				<p>{$info['name']}</p>
+				<p>阿纳豆: <span> {:floor($info['target_amount'])}</span></p>
+				<p>剩余天数: <span> {:dataNum(time(),$info['end_time'])}</span></p>
+				<p>导演:{$info['director']}</p>
+				<p>主演:{$info['star']}</p>
+			</div>
+		</div>
+		</volist>
+	</div>
+	<div class="menu" style="display: none;">
+		<div class="body">
+			<p><img style="width: 0.4rem;height: 0.4rem;" src="__PUBLIC__/wang/common_img/home.png" alt="">首页</p>
+			<p><img style="width: 0.36rem;height: 0.32rem;" src="__PUBLIC__/wang/common_img/project.png" alt="">我的账户</p>
+			<p><img style="width: 0.38rem;height: 0.30rem;" src="__PUBLIC__/wang/common_img/zhanghu.png" alt="">我的项目</p>
+			<p><img style="width: 0.26rem;height: 0.42rem;" src="__PUBLIC__/wang/common_img/actor.png" alt="">我要当演员</p>
+			<p><img style="width: 0.33rem;height: 0.33rem;" src="__PUBLIC__/wang/common_img/apply.png" alt="">上传凭证</p>
+			<div class="body_bottom">
+				<div><span style="display: none;">15982123358</span><a href="login_reg/login.html">登录</a></div>
+				<div><span style="display: none;">退出账户</span><a href="login_reg/login.html?url=reg">注册</a></div>
+			</div>
+		</div>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/home/home.js'></script>
+</body>
+</html>

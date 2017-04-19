@@ -10,7 +10,7 @@ class IndexController extends CommonController {
             'is_active'      => 1,//上架状态
         ];
         $model = M('project');
-        $projectInfo = $model->where($where)->select();
+        $projectInfo = $model->where($where)->order('sort')->select();
         $this->assign('projectInfo',$projectInfo);
         $this->display('index');
     }
@@ -20,7 +20,6 @@ class IndexController extends CommonController {
      */
     public function detail($id){
         $id = intval($id);
-
         // 查看项目是否存在
         $info = M('project as a')
             ->join('left join an_project_survey as b on b.project_id = a.id')
@@ -30,6 +29,7 @@ class IndexController extends CommonController {
             $this->error('项目不存在');
             exit;
         }
+
         $this->assign('info',$info);
         $this->display('detail');
     }
