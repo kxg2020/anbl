@@ -264,7 +264,11 @@
 						}, function(){
 						});
 					} else {
-						layer.msg(data.msg);
+						layer.msg(data.msg,{
+							time:2
+						},function(){
+							location.reload();
+						});
 						$('.vote_btn').next().hide();
 					}
 				});
