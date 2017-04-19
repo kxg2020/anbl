@@ -595,7 +595,7 @@
 
 
 			var cancel_id = '';
-			$('.cancel_suport').click(function(){
+			$('body').on('click','.cancel_suport',function(){
 				cancel_id = $(this).attr('data-id');
 			});
 			//>> 点击"取消支持"
@@ -882,6 +882,7 @@
 										'<p>'+ v.director+'</p>'+
 										'<p><span>'+ v.support_number+'</span>人支持</p>'+
 										'<p>已支持<span>'+ v.support_money+'</span></p>'+
+												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.id+'"></p>'+
 										'</div>'+
 										'</div>');
 									});

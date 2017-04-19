@@ -608,7 +608,8 @@ $(function(){
 
 	//取消支持 
 
-	$('.cancel_suport').click(function(){
+	$('.my_suport').on('click','.cancel_suport',function(){
+		console.log(1)
 		$('#cancel_div').fadeIn('slow')
 	})
 	$('.cancek_input').click(function(){

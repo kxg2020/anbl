@@ -830,7 +830,7 @@ class PersonalController extends CommonController{
 
 
             $res = M('MemberProfit')->where(['support_id'=>$paramArr['orderId'],'is_ok'=>1])->select();
-            $order = M('MemberSupport')->where(['support_id'=>$paramArr['orderId']])->find();
+            $order = M('MemberSupport')->where(['id'=>$paramArr['orderId']])->find();
 
             M()->startTrans();
             if(!empty($res)){
@@ -869,6 +869,7 @@ class PersonalController extends CommonController{
                 }
 
                 $result =  M('MemberSupport')->where(['id'=>$order['id']])->delete();
+
                 if($result === false){
 
                     M()->rollback();
