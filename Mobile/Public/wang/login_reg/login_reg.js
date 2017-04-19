@@ -39,12 +39,29 @@ $(function(){
 		password = $('input[name = passWord]').val();
 		rePassword = $('input[name = rePassword]').val();
 		captcha = $('input[name = captcha]').val();
+		parent_id = $('input[name = parent_id]').val();
 
 		if(username == ''){
 			layer.open({
 				content: '手机号不能为空',
 				style: 'color:black;'
-				,btn: '确定'
+				,time:2
+			});
+			return false;
+		}
+		if(captcha == ''){
+			layer.open({
+				content: '验证码不能为空',
+				style: 'color:black;'
+				,time:2
+			});
+			return false;
+		}
+		if(captcha.length != 6){
+			layer.open({
+				content: '验证码格式不正确',
+				style: 'color:black;'
+				,time:2
 			});
 			return false;
 		}
@@ -52,7 +69,15 @@ $(function(){
 			layer.open({
 				content: '密码不能为空',
 				style: 'color:black;'
-				,btn: '确定'
+				,time:2
+			});
+			return false;
+		}
+		if(password.length < 8 || password.length > 16){
+			layer.open({
+				content: '密码格式不正确',
+				style: 'color:black;'
+				,time:2
 			});
 			return false;
 		}
@@ -63,14 +88,16 @@ $(function(){
 				,time:2
 			});
 			return false;
-		}if(captcha == ''){
+		}
+		if(rePassword.length < 8 || rePassword.length > 16){
 			layer.open({
-				content: '验证码不能为空',
+				content: '确认密码格式不正确',
 				style: 'color:black;'
 				,time:2
 			});
 			return false;
-		}if(passWord != password){
+		}
+		if(password != rePassword){
 			layer.open({
 				content: '两次输入的密码不一致',
 				style: 'color:black;'
@@ -79,8 +106,18 @@ $(function(){
 			return false;
 		}
 
-		//>>
-
+		//>> 注册
+		$.ajax({
+			'type':'post',
+			'dataType':'json',
+			'url':location.protocol+'//'+window.location.host+'/Register/register',
+			'data':{'username':username,'password':password,'captcha':captcha,'parent_id':parent_id},
+			success:function(e){
+				if(e.status == 1){
+					window.location.href = location.protocol+'//'+window.location.host+'/login/index';
+				}
+			}
+		});
 
 	})
 
@@ -101,6 +138,7 @@ $(function(){
 
 	// 短信验证码蒙板
 	$('.song').click(function(){
+		username = $('input[name = phone]').val();
 		if(/^1(3|4|5|7|8)\d{9}$/.test($('.phoneinput').val())){
 				 var time=60;
 				 $('.mengban').show();
@@ -119,13 +157,13 @@ $(function(){
 				'type':'post',
 				'dataType':'json',
 				'url':location.protocol+'//'+window.location.host+'/Register/sendMessage',
-				'data':{'username':username,'password':password},
+				'data':{'username':username},
 			});
 		}else{
 			layer.open({
 				content: '请输入正确的手机号',
 				style: 'color:black;'
-				,btn: '确定'
+				,time:2
 			});
 			return false;
 		}

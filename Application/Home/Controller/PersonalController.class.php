@@ -389,6 +389,7 @@ class PersonalController extends CommonController{
     public function cash(){
 
         $paramArr = $_REQUEST;
+
         $crrDay = date('Y-m-d');
         $lastDay = $this->getTheMonth();
         //>> 判断当前时间是否是周五

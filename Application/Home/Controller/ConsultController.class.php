@@ -6,11 +6,12 @@ use Think\Controller;
 class ConsultController extends CommonController{
 
     /**
-     * ÓÃ»§×ÉÑ¯
+     * ï¿½Ã»ï¿½ï¿½ï¿½Ñ¯
      */
     public function add(){
 
         $paramArr = $_REQUEST;
+
         if(!empty($paramArr)){
 
             $insertData = [

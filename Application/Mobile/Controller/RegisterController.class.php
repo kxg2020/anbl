@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Mobile\Controller;
 use Think\Controller;
 
 class RegisterController extends CommonController{
@@ -11,7 +11,7 @@ class RegisterController extends CommonController{
 
         $paramArr = $_REQUEST;
 
-        if(!empty($paramArr) && !empty($paramArr['phone']) && !empty($paramArr['password']) && !empty($paramArr['captcha'])){
+        if(!empty($paramArr) && !empty($paramArr['username']) && !empty($paramArr['password']) && !empty($paramArr['captcha'])){
 
             $userModel = M('Member');
 
@@ -29,7 +29,7 @@ class RegisterController extends CommonController{
                 $res = $this->checkUser($paramArr['password']);
 
                 //>> 检测手机号
-                $row = $this->checkPhone($paramArr['phone']);
+                $row = $this->checkPhone($paramArr['username']);
 
                 if(!$row){
 
