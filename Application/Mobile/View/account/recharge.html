@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/apply/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/apply/apply.css">
+	<title>提现</title>
+</head>
+<body>
+	<header>
+		<a href="{:U('Account/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">我的账户</a>
+		<p>申请提现</p>
+	</header>
+	<div class="content">
+		<h3>请填写提现的阿纳豆数目</h3>
+		<input type="text" placeholder="提现数目须为100的倍数" name="number">
+		<p>您当前可提数目为<span>{$user['money']}</span>阿纳豆</p>
+	</div>
+	<p class="remind">提醒：待管理员在3个工作日内审核通过,请耐心等待</p>
+	<div class="apply">提交申请</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+	<script src='__PUBLIC__/wang/apply/apply.js'></script>
+</body>
+</html>

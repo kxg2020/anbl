@@ -546,7 +546,7 @@ class MemberController extends  CommonController{
             switch($paramArr['result']){
 
                 case 1:
-                    $body ="<p>".'亲爱的会员，恭喜你什么什么'."</p>" ;
+                    $body ="<p>".'亲爱的会员，恭喜你通过我们的明星筛选，我们稍后将安排工作人员联系您'."</p>" ;
                     $res = $this->sendEmail($paramArr['email'],'关于明星会员的回复',$body);
                     if($res){
                         M('MemberStar')->where(['id'=>$paramArr['id']])->save(['is_pass'=>1,'status'=>1]);
@@ -556,8 +556,8 @@ class MemberController extends  CommonController{
                     }
                     break;
                 case 0:
-                    $body ="<p>".'亲爱的会员，很抱歉的什么什么'."</p>" ;
-                    $res = $this->sendEmail($paramArr['email'],'关于明星会员的回复',$body);
+                    $body ="<p>".'亲爱的会员，很抱歉您未能通过我们的明星筛选，请再接再厉哦'."</p>" ;
+                    $res = $this->sendEmail($paramArr['email'],'明星会员申请结果',$body);
 
                     if($res){
                         //>> 退还申请的金额

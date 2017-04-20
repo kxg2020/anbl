@@ -9,22 +9,26 @@
 </head>
 <body>
 	<header>
-		<a href="../../../../Mobile/Public/wang/index.html"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
+		<a href="{:U('Index/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
 		<a href="../../../../Mobile/Public/wang/share/share.html">分享注册<img src="__PUBLIC__/wang/home/share.png" alt=""></a>
 		<p class="name">Angelababy</p>
-		<p class="lv"><img src="__PUBLIC__/wang/account/lv.png" alt="">还差1个阿纳豆,您就升级到V2啦</p>
+		<p class="lv"><img src="__PUBLIC__/wang/account/lv.png" alt=""><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
+			您当前的累计阿纳豆为:{$allInfo['integral']}
+		</if></p>
 	</header>
 	<div class="xiaohao">
-		<p>消耗阿纳豆：<span>1312.00</span></p>
-		<p>剩余阿纳豆：<span>1312.00</span></p>
+		<p>消耗阿纳豆：<span>{$supportMoney}</span></p>
+		<p>剩余阿纳豆：<span>{$personal['money']}</span></p>
 	</div>
 	<div class="user">
-		<p>账户:136****1234</p>
-		<p class="shiming">实名:<span style="color: white;">未实名</span><span style="display: none;"> 已实名</span>  <a href="../name/name.html">马上认证></a></p>
+		<p>账户:{$secretPhone}</p>
+		<p class="shiming">实名:
+			<if condition="$personal['is_true'] eq 0"> <span style="color: red;">未实名</span>
+			<else/><span style="color: forestgreen;"> 已实名</span></if><if condition="$personal['is_true'] eq 0"> <a href="../name/name.html" style="color: orange">马上认证>></a></if></p>
 	</div>
 	<footer>
-		<a href="../apply/apply.html">提现</a>
-		<a href="../putmoney/putmoney.html">充值</a>
+		<a href="{:U('Account/rechargeIndex')}">提现</a>
+		<a href="{:U('Account/cashIndex')}">充值</a>
 		<a href="../upload/upload.html">上传凭证</a>
 	</footer>
 	<script src='__PUBLIC__//wang/common_js/zepto.min.js'></script>

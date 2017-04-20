@@ -208,4 +208,19 @@ class CommonController extends Controller{
         // 分配到页面中
         $this->assign('systemInfo', $this->systemInfo);
     }
+
+    /**
+     * 分页
+     */
+    public function pagination($data = [],$pgNum = '',$pgSize = ''){
+
+        if(empty($data)) return false;
+
+        $start = ($pgNum - 1) * $pgSize;
+
+        $sliceArr = array_slice($data,$start,$pgSize);
+
+        return $sliceArr;
+
+    }
 }
