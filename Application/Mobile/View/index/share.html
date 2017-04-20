@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/share/share.css">
+	<title>分享注册</title>
+</head>
+<body>
+	<header>
+		<p class="back"><a href="../index.html"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a></p>
+		<p class="title">分享注册</p>
+	</header>
+	<div class="url">
+		<p>分享链接 :</p>
+		<input type="text" value="http://wap.com/login/index?invite_key={$key}"><span>点击复制</span>
+	</div>
+	<div class="share_img">
+		<div id="qrcode">
+
+		</div>
+
+		<a class="download">长按二维码保存、分享注册</a>
+	</div>
+	<div class="guide">
+		<span>操作指南:</span>
+		<p>1.点击复制链接分享给你的好友,好友注册以后会成为你的下级会员</p>
+		<p>2.点击下载二维码保存到手机通过微信,QQ分享给你的好友,通过该二维码进行注册也会成为你的下级会员</p>
+		<p>3.直接让你的好友扫描此二维码,并完成注册成为你的下级会员</p>	
+	</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/share/share.js'></script>
+	<script src="__PUBLIC__/js/qrcode.js"></script>
+	<script type="text/javascript">
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			width: 180,
+			height: 180
+		});
+		qrcode.makeCode("http://wap.com/login/index?invite_key={$key}");
+
+
+		$('.download').on('click',function(){
+			var url = $('#qrcode>img').attr('src');
+			$(this).attr('href',url)
+			$(this).attr('download',url)
+		});
+	</script>
+</body>
+</html>
