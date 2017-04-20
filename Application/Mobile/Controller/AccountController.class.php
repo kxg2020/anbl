@@ -184,7 +184,7 @@ class AccountController extends CommonController{
             'safeLevel'=>$safeLevel,
             'count_1'=>$count_1,
             'supportSituation'=>$rows,
-            'supportMoney'=>$supportMoney,
+            'supportMoney'=>$supportMoney ? $supportMoney : 0,
             'secretPhone'=>$secretPhone,
         ]);
         $this->display('account/index');
