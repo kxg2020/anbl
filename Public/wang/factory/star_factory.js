@@ -123,6 +123,11 @@ $('.warn>input[name=cancel]').click(function(){
     })
   }
   
- 
+
+
+  console.log($('.star_content').offset())
+  $('.star_factory').css({
+    left:$('.star_content').offset().left+100
+  })
 
 });
