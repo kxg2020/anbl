@@ -33,7 +33,7 @@ $(function(){
 
       var text=$(this)[0].innerText.slice(1);
       
-      if(text=='预期回报'){
+      if(text=='剧情简介'){
         $('.back').fadeToggle('slow')
         if(backflag){
           $('#back>span').text('-');
@@ -43,7 +43,7 @@ $(function(){
           backflag=true;
         }
       }
-      if(text=='故事结构'){
+      if(text=='演艺阵容'){
         $('.framework').fadeToggle('slow')
         if(frameworkflag){
           $('#framework>span').text('-');
@@ -53,7 +53,7 @@ $(function(){
           frameworkflag=true;
         }
       }
-      if(text=='故事分析'){
+      if(text=='受众定位'){
         $('.analyse').fadeToggle('slow')
         if(analyseflag){
           $('#analyse>span').text('-');
@@ -63,7 +63,7 @@ $(function(){
           analyseflag=true;
         }
       }
-      if(text=='专业影评'){
+      if(text=='预期回报'){
         $('.comment_film').fadeToggle('slow')
         if(commentflag){
           $('#comment_film>span').text('-');

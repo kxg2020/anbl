@@ -133,7 +133,7 @@ class IndexController extends CommonController{
 
             // 判断用户余额够不够
             if($support_money>$this->userInfo['money']){
-                $this->ajaxReturn(['msg'=>"对不起，积分不足！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，阿纳豆不足！！！",'status'=>0]);
             }
             // 会员id
             $member_id = $this->userInfo['id'];
@@ -147,7 +147,7 @@ class IndexController extends CommonController{
 
             // 判断目标金额是否达到
             if($projectInfo['target_amount'] <= $projectInfo['money']){
-                $this->ajaxReturn(['msg'=>"积分已达到，不能进行支持",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"阿纳豆已达到，不能进行支持",'status'=>0]);
             }
 
             if(($support_money+$projectInfo['money'])>$projectInfo['target_amount']){
