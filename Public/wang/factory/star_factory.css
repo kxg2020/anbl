@@ -25,18 +25,15 @@ header{
 	top: 58px;
 }
 .star_factory{
-	width: 186px;
-	height: 90px;
+	width: 167px;
+	height: 62px;
+	background: url(img/star.png);
 	position: absolute;
 	top: 84px;
 	left: 50%;
 	margin-left: -93px;
 }
-.star_factory:before{
-	content: url(img/star_factory.png);
-	float: left;
-	margin-right: 10px;
-}
+
 .star_factory p{
 	margin-top: 28px;
 	color: white;

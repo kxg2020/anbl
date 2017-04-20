@@ -161,13 +161,13 @@ header .nav{
 }
 .body_left>div>div{
 	width: 400px;
-	margin: auto;
-	height: 100%;
-	padding-top: 20px;
+	height: 420px;
+	padding-top: 20%;
+	margin:auto;
 }
 
 .body_left .username{
-	font-size: 65px;
+	font-size: 45px;
 }
 .leval{
 	line-height: 35px;

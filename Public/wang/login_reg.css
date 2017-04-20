@@ -16,34 +16,37 @@ a{
 .bg{
 	width: 100%;
 	height: 100%;
-	background: rgba(0,0,0,0.6);
 	overflow: hidden;
 }
 .content{
-	margin: auto;
-	width: 355px;
-	height: auto;
-	padding-top: 10%;
+	width: 378px;
+	height: 610px;
 	color: white;
 	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -189px;
+	margin-top: -305px;
 }
 .logo{
 	font-size: 25px;
 }
 .title{
-	font-size: 20px;
+	font-size: 24px;
 	margin-bottom: 20px;
 	letter-spacing: 15px;
+	margin-top: 94px;
 }
 .content input{
 	border-radius: 3px;
 	border: none;
 	outline: none;
 	padding-left: 70px;
-	background: #7b7d7d;
+	background: rgba(255,255,255,0.4);
 	color: #babcbb;
-	width: 285px;
-	height: 40px;
+	width: 280px;
+	height: 60px;
 	font-size: 20px;
 	margin-bottom: 45px;
 }
@@ -59,7 +62,7 @@ a{
 	height: 26px;
 	background: url(img/user.png);
 	position: absolute;
-	top: 8px;
+	top: 17px;
 	left: 24px;
 }
 .pwd i{
@@ -68,7 +71,7 @@ a{
 	height: 26px;
 	background: url(img/pwd.png);
 	position: absolute;
-	top: 8px;
+	top: 17px;
 	left: 24px;
 }
 .login{
@@ -97,13 +100,11 @@ a{
 	font-size: 20px;
 	cursor: pointer;
 }
-#reg_content{
-	padding-top: 9%;
-}
 #reg_content input{
 	padding-left: 20px;
 	margin-bottom: 20px;
 	font-size: 20px;
+	width: 330px;
 }
  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
   color: #c5c6c6; 
@@ -122,15 +123,15 @@ color: #c5c6c6;
 	display: block;
 	position: absolute;
 	top: 0;
-	left: 355px;
+	left: 375px;
 	background: #757474;
 	color: white;
 	padding-left: 5px;
 	padding-right: 5px;
 	font-size: 12px;
 	width: 100px;
-	height: 42px;
-	line-height: 42px;
+	height: 62px;
+	line-height: 62px;
 }
 #reg_content #repeat_get{
 	display: none;
