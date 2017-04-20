@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="bg">
-		<a href="__PUBLIC__/wang/index.html"><img src="__PUBLIC__/wang/common_img/logo.png" alt=""></a>
+		<a href="{:U('Index/index')}"><img src="__PUBLIC__/wang/common_img/logo.png" alt=""></a>
 	</div>
 	<div class="loginorreg">
 		<p class="choice">登录<i></i></p>
@@ -21,7 +21,7 @@
 		<div><i class="passwordimg"></i><input type="password" placeholder="密码" name="password"></div>
 		<p id="login">登录</p>
 	</div>
-	<input type="hidden" name="parent_id" value="{$parent_id}">
+	<input type="hidden" name="parent_id" value="{$parent_id['parent_id']}">
 	<div class="reg" style="display: none;">
 		<div><i class="phone"></i><input class="phoneinput" type="text" placeholder='输入手机号码' name="phone"></div>
 		<div class="div2"><i class="duanxing"></i><input type="text" placeholder="输入短信验证码" name="captcha"><span class="song">发送验证码</span>

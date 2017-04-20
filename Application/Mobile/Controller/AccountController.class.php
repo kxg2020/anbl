@@ -1,6 +1,6 @@
 <?php
 namespace Mobile\Controller;
-
+use Think\Upload;
 class AccountController extends CommonController{
 
     /**
@@ -349,7 +349,7 @@ class AccountController extends CommonController{
     }
 
     /**
-     * 账户提现
+     * 账户充值
      */
     public function recharge(){
 
@@ -357,7 +357,7 @@ class AccountController extends CommonController{
 
         //>> 判断用户是否登录
         if($this->isLogin == 0){
-            $this->redirect('Home/Login/index');
+            $this->redirect('Login/index');
             exit;
         }
         //>> 判断用户是否有权限充值
@@ -374,16 +374,6 @@ class AccountController extends CommonController{
 
             if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
 
-                if($paramArr['money'] <= 700){
-
-                    //>> 判断用户是否点击确认协议
-                    $agree = session('agree'.$this->userInfo['id']);
-                    if(!$agree){
-
-                        die($this->_printError('1062'));
-                    }
-                }
-
                 M()->startTrans();
                 //>> 生成流水号
                 $orderNumber = 'RE'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
@@ -396,6 +386,7 @@ class AccountController extends CommonController{
                     'order_number'=>$orderNumber,
                     'image_url'=>$paramArr['image_url'],
                 ];
+
                 //>> 添加到充值订单表
                 $ros = M('MemberRecharge')->add($orderData);
 
@@ -422,6 +413,17 @@ class AccountController extends CommonController{
     }
 
     /**
+     * 上传凭证
+     */
+    public function upCredence(){
+
+        //>> 查询支付方式
+        $payMode = M('Pay')->select();
+        $this->assign('pay',$payMode);
+        $this->display('account/credence');
+    }
+
+    /**
      * 获取当月最后一天
      */
     function getTheMonth()
@@ -430,5 +432,30 @@ class AccountController extends CommonController{
         $lastDay = date('Y-m-d', strtotime("$firstDay +1 month -1 day"));
 
         return $lastDay;
+    }
+
+    /**
+     * 上传方法
+     */
+    public function upToQiniu(){
+
+        $config = [
+            'exts'          =>  array('jpg','png','gif','bmp'), //允许上传的文件后缀
+            'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
+            'rootPath'      =>  'Upload/', //保存根路径
+        ];
+        $upload = new Upload($config);
+        $res = $upload->uploadOne(array_shift($_FILES));
+        // 判断是否上传成功
+        if(!$res){
+            $this->ajaxReturn([
+                'status' => 0,
+                'msg' => $upload->getError()
+            ]);
+        }
+        $this->ajaxReturn([
+            'status' => 1,
+            'url' => $res['url']
+        ]);
     }
 }
