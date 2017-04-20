@@ -343,9 +343,7 @@ class MoneyController extends CommonController
             if (!$projectInfo) {// 项目不存在
                 continue;
             }
-            if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 1) {
-                continue;
-            }
+
 
             // 判断项目在线在线状态 在线就可以进行分红  不在线查看 目标金额是否达到 未达到 则分红失败
             if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
