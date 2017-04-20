@@ -575,7 +575,7 @@ class PersonalController extends CommonController{
         $pgNum = $paramArr['pgNum'];
         $pgSize = 4;
 
-        $rows =  M('MemberSupport as a')->field('a.*,b.*')
+        $rows =  M('MemberSupport as a')->field('a.id as aid,a.support_money,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id']])
             ->select();

@@ -126,16 +126,16 @@
 										</div>
 									</div>
 								</volist>
-							<div id="cancel_div" style="display: none;">
-								<h3>亲爱的用户:</h3>
-								<p>根据我们的用户协议规定:退出影片的支持</p>
-								<p>将扣除所有收益和10%的手续费，可在7-15个工作日到账</p>
-								<p><input type="button" class="sure_input" value="确定"><input type="button" class="cancek_input" value="取消"></p>
-							</div>	
+
 							<input type="hidden" name="page_1" value="{$count_1}">
 							<p id="demo8" style="position: absolute;left:5%;top: 450px;"></p>
 						</div>
-
+						<div id="cancel_div" style="display: none;">
+							<h3>亲爱的用户:</h3>
+							<p>根据我们的用户协议规定:退出影片的支持</p>
+							<p>将扣除所有收益和10%的手续费，可在7-15个工作日到账</p>
+							<p><input type="button" class="sure_input" value="确定"><input type="button" class="cancek_input" value="取消"></p>
+						</div>
 						<div class="my_collect" style="display: none;">
 							<volist name="collection" id="c">
 								<div><img src="{$c['image_url']}" style="height: 100%;width: 100%;" alt="">
@@ -873,8 +873,6 @@
 									'pgSize':4
 								},
 								success:function(result){
-									var clonediv = $('#cancel_div').clone();
-									console.log(clonediv)
 
 									$('div[class = my_suport] > div').remove();
 									$.each(result.rows,function(k,v){
@@ -886,13 +884,11 @@
 										'<p>'+ v.director+'</p>'+
 										'<p><span>'+ v.support_number+'</span>人支持</p>'+
 										'<p>已支持<span>'+ v.support_money+'</span></p>'+
-												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.id+'"></p>'+
+												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.aid+'"></p>'+
 										'</div>'+
 										'</div>');
 									});
 
-									console.log(clonediv)
-									$('div[class = my_suport]').append(clonediv)
 								}
 							});
 						}

@@ -718,10 +718,12 @@ header .nav{
 	background: white;
 	border-radius: 3px;
 	position: absolute;
-	top:0; left: 5%;
+	top:90px; left: 5%;
 	z-index: 10; 
 	margin-left: 0;
 	margin-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 #cancel_div>p{
 	color: #666;
