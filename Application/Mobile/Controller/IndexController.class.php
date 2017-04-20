@@ -129,4 +129,12 @@ class IndexController extends CommonController {
         }
     }
 
+
+    public function share(){
+        // 取到当前用户的推荐嘛 http://mobile.a.com/login/index.html
+        $invite_key =$this->userInfo['invite_key'];
+        $this->assign('$key',$invite_key);
+        $this->display('share');
+    }
+
 }

@@ -16,6 +16,11 @@ header{
 	height: 0.9rem;
 	line-height: 0.9rem;
 }
+header a img{
+	width: 0.25rem;
+	height: 0.43rem;
+	margin-right: 0.2rem;
+}
 header a{
 	display: inline-block;
 	width: 2rem;
