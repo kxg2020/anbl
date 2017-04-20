@@ -36,12 +36,18 @@ class IndexController extends CommonController {
         $this->display('detail');
     }
 
+    /**
+     * 协议
+     */
     public function apply(){
         $id = I('get.id');
         $this->assign('id',$id);
         $this->display('apply');
     }
 
+    /**
+     * 支持订单
+     */
     public function support(){
         if(IS_POST && IS_AJAX){
             //判断会员是否已经登录
@@ -130,6 +136,9 @@ class IndexController extends CommonController {
     }
 
 
+    /**
+     * 分享注册
+     */
     public function share(){
         if($this->isLogin == 0){
 
@@ -140,6 +149,22 @@ class IndexController extends CommonController {
         $invite_key =$this->userInfo['invite_key'];
         $this->assign('key',$invite_key);
         $this->display('share');
+    }
+
+
+    public function userProject(){
+        if($this->isLogin == 0){
+            $this->redirect('login/index');
+            exit;
+        }
+        // 查询出我支持的订单
+        $projectInfo = M('MemberSupport as a')
+            ->field('a.*,b.name,b.star,b.director,b.target_amount,b.money,b.image_url,b.star_num')
+            ->join('left join an_project as b on b.id=a.project_id')
+            ->where(['a.member_id'=>$this->userInfo['id']])
+            ->select();
+        $this->assign('projectInfo',$projectInfo);
+        $this->display('project');
     }
 
 }

@@ -180,6 +180,16 @@ class MoneyController extends CommonController
     {
 
         if ($parent_id == 0) {
+            $rest = M('MemberSupport')
+                ->where(['id' => $info['id']])
+                ->save([
+                    'is_fy' => 1,
+                    'is_ok' => 1,
+                ]);
+            if ($rest === false) {
+                M()->rollback();
+                $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
+            }
             return;
         }
         $projectInfo = $projectInfox;

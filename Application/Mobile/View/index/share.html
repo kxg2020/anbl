@@ -14,7 +14,7 @@
 	</header>
 	<div class="url">
 		<p>分享链接 :</p>
-		<input type="text" value="http://wap.com/login/index?invite_key={$key}"><span>点击复制</span>
+		<input type="text" id="biao1" value="http://wap.com/login/index?invite_key={$key}"><span onClick="copyUrl2()">点击复制</span>
 	</div>
 	<div class="share_img">
 		<div id="qrcode">
@@ -33,19 +33,27 @@
 	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
 	<script src='__PUBLIC__/wang/share/share.js'></script>
 	<script src="__PUBLIC__/js/qrcode.js"></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
 	<script type="text/javascript">
 		var qrcode = new QRCode(document.getElementById("qrcode"), {
 			width: 180,
 			height: 180
 		});
 		qrcode.makeCode("http://wap.com/login/index?invite_key={$key}");
+	</script>
 
-
-		$('.download').on('click',function(){
-			var url = $('#qrcode>img').attr('src');
-			$(this).attr('href',url)
-			$(this).attr('download',url)
-		});
+	<script type="text/javascript">
+		function copyUrl2()
+		{
+			var Url2=document.getElementById("biao1");
+			Url2.select();
+			document.execCommand("Copy");
+			layer.open({
+				content: "复制成功",
+				skin: 'msg',
+				time: 2 //2秒后自动关闭
+			});
+		}
 	</script>
 </body>
 </html>
