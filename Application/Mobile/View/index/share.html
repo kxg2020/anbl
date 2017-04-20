@@ -14,11 +14,14 @@
 	</header>
 	<div class="url">
 		<p>分享链接 :</p>
-		<input type="text" value="http://wap.com/login/index/invite_key/{$key}.html"><span>点击复制</span>
+		<input type="text" value="http://wap.com/login/index?invite_key={$key}"><span>点击复制</span>
 	</div>
 	<div class="share_img">
-		<img src="" alt="">
-		<p class="download">点击下载保存到手机</p>
+		<div id="qrcode">
+
+		</div>
+
+		<a class="download">长按二维码保存、分享注册</a>
 	</div>
 	<div class="guide">
 		<span>操作指南:</span>
@@ -29,5 +32,20 @@
 	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
 	<script src='__PUBLIC__/wang/share/share.js'></script>
+	<script src="__PUBLIC__/js/qrcode.js"></script>
+	<script type="text/javascript">
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			width: 180,
+			height: 180
+		});
+		qrcode.makeCode("http://wap.com/login/index?invite_key={$key}");
+
+
+		$('.download').on('click',function(){
+			var url = $('#qrcode>img').attr('src');
+			$(this).attr('href',url)
+			$(this).attr('download',url)
+		});
+	</script>
 </body>
 </html>

@@ -64,19 +64,22 @@ header a img{
 	line-height: 0.8rem;
 }
 .share_img{
+	padding-top: 0.3rem;
 	width: 100%;
 	height: 6.1rem;
 	border-top: 1px solid #666;
 	border-bottom: 1px solid #666;
 	text-align: center;
 }
-.share_img>img{
+.share_img img{
 	width: 4rem;
 	height: 4rem;
-	margin-top: 0.3rem;
-	margin-bottom: 0.6rem;
+
+
+	margin: auto;
 }
 .download{
+	margin-top: 0.6rem;
 	width: 4rem;
 	height: 0.6rem;
 	text-align: center;
