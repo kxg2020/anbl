@@ -22,6 +22,7 @@ class PayController extends CommonController
             $payInfo = [
                 'name' => $_data['name'],
                 'image_url' => $_data['image_url'],
+                'account' => $_data['account'],
                 'create_time' => time(),
             ];
             // 添加到数据库
@@ -62,6 +63,7 @@ class PayController extends CommonController
             $performerInfo = [
                 'name' => $_data['name'],
                 'image_url' => $_data['image_url'],
+                'account' => $_data['account'],
             ];
 
             // 将项目基本信息保存到数据库 an_project表
