@@ -25,20 +25,20 @@
 		<li><p>支持人数</p><span>{$info['support_number']}人</span></li>
 	</ul>
 	<div class="movie movie1">
-		<h3>预期回报</h3>
-		<p>{:htmlspecialchars_decode($info['expected_return'])}</p>
-	</div>
-	<div class="movie movie1">
-		<h3>故事结构</h3>
+		<h3>剧情简介</h3>
 		<p>{:htmlspecialchars_decode($info['story'])}</p>
 	</div>
 	<div class="movie movie1">
-		<h3>故事分析</h3>
+		<h3>演艺阵容</h3>
 		<p>{:htmlspecialchars_decode($info['analysis'])}</p>
 	</div>
-	<div class="movie movie1" style="padding-bottom: 1.1rem;">
-		<h3>专业影评</h3>
+	<div class="movie movie1">
+		<h3>受众定位</h3>
 		<p>{:htmlspecialchars_decode($info['film_critic'])}</p>
+	</div>
+	<div class="movie movie1" style="padding-bottom: 1.1rem;">
+		<h3>预期回报</h3>
+		<p>{:htmlspecialchars_decode($info['expected_return'])}</p>
 	</div>
 	<a href="#header" class="now_suport">立即支持</a>	
 	<div class="bg" style="display: none;">
@@ -47,12 +47,7 @@
 			<div class="fenghong"><input type="radio" value="1" name='xin' id="lei1" checked><label for="lei1">固定型 </label><input type="radio" value="2" name="xin" id="lei2"><label for="lei2">票房型 </label></div>
 			<p>选择支持阿纳豆:</p>
 			<div class="jifeng">
-				<input type="radio" name="money" id="money1" value="100" checked><label for="money1">100</label>
-				<input type="radio" name="money" id="money2" value="500"><label for="money2">500</label>
-				<input type="radio" name="money" id="money3" value="1000"><label for="money3">1000</label>
-				<br>
-				<input type="radio" name="money" id="money4" value="5000"><label for="money4">5000</label>
-				<input type="radio" name="money" id="money5" value="10000"><label for="money5">10000</label>
+				<input type="number" name="money" placeholder="支持100-10000且需为100整数" style="width: 230px"  />
 			</div>
 			<div id="apply"><input type="checkbox" id="xieyi"><label for="xieyi">我同意<a href="{:U('index/apply',['id'=>$info['id']])}">《阿纳巴里用户协议》</a></label></div>
 			<p id="suport">立即支持</p>
@@ -102,7 +97,23 @@
 			var fh = $(".fenghong>input[type='radio']:checked").val();
 
 			// 选择积分多少
-			var money = $(".jifeng>input[type='radio']:checked").val();
+			var money = $(".jifeng>input[type='number']").val();
+			if(money<100 || money>10000){
+				layer.open({
+					content: '阿纳豆不能少于100或者大于10000',
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				return false
+			}
+			if(money%100 != 0){
+				layer.open({
+					content: '阿纳豆必须是100的倍数',
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				return false
+			}
 
 			var project_id="{$info['id']}";
 			var _data = {
@@ -128,5 +139,7 @@
 			});
 		})
 	</script>
+
+
 </body>
 </html>
