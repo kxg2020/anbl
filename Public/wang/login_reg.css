@@ -46,7 +46,7 @@ a{
 	background: rgba(255,255,255,0.4);
 	color: #babcbb;
 	width: 280px;
-	height: 60px;
+	height: 50px;
 	font-size: 20px;
 	margin-bottom: 45px;
 }
@@ -62,7 +62,7 @@ a{
 	height: 26px;
 	background: url(img/user.png);
 	position: absolute;
-	top: 17px;
+	top: 12px;
 	left: 24px;
 }
 .pwd i{
@@ -71,7 +71,7 @@ a{
 	height: 26px;
 	background: url(img/pwd.png);
 	position: absolute;
-	top: 17px;
+	top: 12px;
 	left: 24px;
 }
 .login{
@@ -130,7 +130,7 @@ color: #c5c6c6;
 	padding-right: 5px;
 	font-size: 12px;
 	width: 100px;
-	height: 62px;
+	height: 52px;
 	line-height: 62px;
 }
 #reg_content #repeat_get{
