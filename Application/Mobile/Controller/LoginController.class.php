@@ -8,7 +8,7 @@ class LoginController extends CommonController{
      */
     public function index(){
 
-//>> 判断是否登录过了
+        //>> 判断是否登录过了
         if($this->isLogin == 1){
 
             $this->redirect('Index/index');
@@ -139,5 +139,14 @@ class LoginController extends CommonController{
 
         }
 
+    }
+
+    /**
+     * 退出登录
+     */
+    public function logout(){
+        session(md5('home'), null);
+        cookie(md5('home'), null);
+        $this->redirect('login/index');
     }
 }
