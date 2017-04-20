@@ -23,22 +23,21 @@
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        充值订单
+                        会员问答
                     </header>
                     <div class="panel-body">
 <input type="hidden" value="{$count}" name="count">
                         <!--搜索开始-->
                         <form class="form-inline" action="{:U('admin/Member/question')}" method="get">
                             <div class="form-group">
-                                <label>充值用户</label>
+                                <label>提问用户</label>
                                 <input type="text" class="form-control" name="username" value="{:I('get.username')}" placeholder="请输入电话号码">
                             </div>
                             <div class="form-group">
-                                <label>充值开始时间</label>
+                                <label>提问开始时间</label>
                                 <input type="date" class="form-control" name="start_time" value="{:I('get.start_time')}" placeholder="请输入时间">
                             </div>
                             <button type="submit" class="btn btn-primary">搜索</button>
-                            <button type="button" class="btn btn-primary" id="exportExcel">导出</button>
                             <span>共计：{$count}条记录</span>
                         </form>
                         <!--搜索结束-->
