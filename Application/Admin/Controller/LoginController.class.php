@@ -75,6 +75,7 @@ class LoginController extends CommonController{
     public function logout(){
         session(md5('admin'), null);
         cookie(md5('admin'), null);
+        $this->isLogin = 0;
         $this->redirect('admin/login/index');
     }
 }

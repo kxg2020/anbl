@@ -204,6 +204,7 @@ class LoginController extends CommonController{
     public function logout(){
         session(md5('home'), null);
         cookie(md5('home'), null);
+        $this->isLogin = 0;
         $this->redirect('home/login/index');
     }
 }
