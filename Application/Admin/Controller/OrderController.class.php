@@ -500,7 +500,7 @@ class OrderController extends CommonController
                 ]);
 
                 if($res){
-
+                    sendSMSTemp($user['username'],'', $this->systemInfo,1775846);
                     $this->ajaxReturn(['status'=>1]);
 
                 }else{
@@ -693,7 +693,27 @@ class OrderController extends CommonController
     }
 
     /**
-     * 提现订单(tp自带分页)
+     * 拒绝充值
      */
+    public function sorryy(){
+
+        $paramArr = $_REQUEST;
+
+
+        $member_id = $paramArr['id'];
+        $user = M('Member')->where(['id'=>$member_id])->find();
+
+        $id = $paramArr['oId'];
+
+        $res = M('MemberRecharge')->where(['member_id'=>$member_id,'id'=>$id])->save(['is_pass'=>2]);
+        if($res === false){
+
+            $this->ajaxReturn(['status'=>0]);
+        }else{
+            //>> 发短信
+            sendSMSTemp($user['username'], ('#phone#') . "=" . urlencode($paramArr['text']), $this->systemInfo,1775922);
+            $this->ajaxReturn(['status'=>1]);
+        }
+    }
 
 }

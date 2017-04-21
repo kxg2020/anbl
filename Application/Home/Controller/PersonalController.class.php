@@ -665,7 +665,7 @@ class PersonalController extends CommonController{
 
             //>> 将消费信息写入数据库
             $data = [
-                'money'=>70000,
+                'money'=>$paramArr['money'],
                 'create_time'=>time(),
                 'member_id'=>$this->userInfo['id'],
                 'type'=>'演员申请',
@@ -694,7 +694,7 @@ class PersonalController extends CommonController{
             ];
 
             $res = M('MemberStar')->add($insertData);
-            $re = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money'] - 70000]);
+            $re = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money'] - $paramArr['money']]);
             if($res && $re){
 
                 M('Member')->commit();

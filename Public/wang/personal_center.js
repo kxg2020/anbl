@@ -478,11 +478,7 @@ $(function(){
 		$('.body_right>ul').show();
 	})
 	$('#actor').click(function(){
-		//>> 点击我要当演员
-			integral = $('input[name = jifen]').val();
-			if(integral < 70000){
-				layer.msg('剩余积分大于70000才能申请');return false;
-			}
+
 		$('.body_right>ul').hide();
 		$('.body_right>div').hide();
 		$('.actor').show();
@@ -508,6 +504,18 @@ $(function(){
 		$('.apply_role').hide();
 	})
 	$('.goToform').click(function(){
+		//>> 获取当前余额
+		integral = $('input[name = jifen]').val();
+		//>> 获取所需余额
+		needintegral = $('.needand').text();
+
+		if(integral < needintegral){
+			layer.tips('需要'+needintegral+'阿纳豆才能申请该角色', '.goToform', {
+				tips: [3, 'black'],
+				time: 4000
+			});
+			return false;
+		}
 		$('.movie_list').hide();
 		$('.movie_intr').hide();
 		$('.apply_role').show();
