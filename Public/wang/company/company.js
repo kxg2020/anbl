@@ -1,14 +1,14 @@
 $(function(){
-	$('.bg>p').click(function () {
+	$('.bg>li').click(function () {
 			var id=$(this)[0].id;
 			$('.content_right>div>p').css({
 				visibility: 'hidden',
 				animationName: 'none'
 			}).removeClass('animated')
-			$('.bg>p').removeClass('p_choice');
+			$('.bg>li').removeClass('p_choice');
 			$('.content_right>div').hide();
 			if(id=='title1'){
-				$('.bg>p').eq(0).addClass('p_choice');
+				$('.bg>li').eq(0).addClass('p_choice');
 			    $('.content_right>div').eq(0).show();
 			    $('.content_right>div:nth-child(1)>p').css({
 			    	visibility: 'visible',
@@ -16,7 +16,7 @@ $(function(){
 			    }).addClass('animated');
 			}
 			if(id=='title2'){
-				$('.bg>p').eq(1).addClass('p_choice');
+				$('.bg>li').eq(1).addClass('p_choice');
 			    $('.content_right>div').eq(1).show();
 			    $('.content_right>div:nth-child(2)>p').css({
 			    	visibility: 'visible',
@@ -24,7 +24,7 @@ $(function(){
 			    }).addClass('animated');
 			}
 			if(id=='title3'){
-				$('.bg>p').eq(2).addClass('p_choice');
+				$('.bg>li').eq(2).addClass('p_choice');
 			    $('.content_right>div').eq(2).show();
 			    $('.content_right>div:nth-child(3)>p').css({
 			    	visibility: 'visible',
@@ -32,7 +32,7 @@ $(function(){
 			    }).addClass('animated');
 			}
 			if(id=='title4'){
-				$('.bg>p').eq(3).addClass('p_choice');
+				$('.bg>li').eq(3).addClass('p_choice');
 			    $('.content_right>div').eq(3).show();
 			    $('.content_right>div:nth-child(4)>p').css({
 			    	visibility: 'visible',

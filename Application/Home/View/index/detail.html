@@ -56,7 +56,7 @@
 			</div>
 			<div class="suport">
 				<p>已支持阿纳豆</p>
-				<p> <span>{:floor($info['money'])}</span></p>
+				<p> <span>{:floor($info['money'])}</span><span style="color: black;margin-top: 21px; width: auto;height: 30px;float: right;font-size: 25px;line-height: 30px;">正在进行</span></p>
 				<p>该项目在{:date('Y/m/d',$info['end_time'])}募集到{:floor($info['target_amount'])}阿纳豆视为成功！</p>
 				<div class='view_suport'><p style="color: #e50909;margin-top: 15px;">项目支持进展</p><p class='progress_bar'><span style="width: {:($info['money']/$info['target_amount'])*100}%"></span></p></div>
 				<ul class="suport_inform">

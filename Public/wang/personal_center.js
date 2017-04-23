@@ -182,7 +182,7 @@ $(function(){
 
 //>> 验证表单
 	$('#save').click(function(){
-
+		  //console.log($('#bind_bank').val())	
 		var phone = $('input[name = phone]').val();
 		var email = $('input[name = email]').val();
 		var realname = $('input[name = realname]').val();

@@ -1,4 +1,4 @@
-body{
+html body{
   font-family: 'Microsoft Yahei';
   font-size: 16px;
   min-width: 1200px;
@@ -46,12 +46,12 @@ header .nav{
   width: 590px;
   height: 120px;
   float: left;
-  margin-left: 100px;
+  margin-left: 115px;
 }
 .top_nav li{
   float: left;
   padding-top: 40px;
-  font-size: 20px;
+  font-size: 16px;
   padding-right: 50px;
   height: 80px;
 }
@@ -100,6 +100,7 @@ header .nav{
   height: 120px;
   float: right;
   color: white;
+  font-size: 16px;
 }
 .login_reg li{
   position: relative;
@@ -162,12 +163,24 @@ header .nav{
 .body_left>div>div{
 	width: 400px;
 	height: 420px;
-	padding-top: 20%;
+	padding-top: 13%;
 	margin:auto;
 }
 
 .body_left .username{
 	font-size: 45px;
+}
+#user_lv{
+	display: block;
+	float: right;
+	width: 50px;
+	height: 40px;
+	background-image: url(img/level1.png);
+	background-size: 100%;
+	margin-top: 10px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 40px;
 }
 .leval{
 	line-height: 35px;
@@ -265,7 +278,7 @@ header .nav{
 	position: absolute;
 	left: 50%;
 	margin-left: -60px;
-	bottom: 107px;
+	bottom: 90px;
 	color: #ccc;
 	letter-spacing: 2px;
 	width: 120px;
@@ -390,11 +403,11 @@ header .nav{
 	bottom: 10px;
 }
 .body_right>div>p:nth-child(2){
-	right: 74px;
+	right: 90px;
 }
 .body_right>div>p:nth-child(3){
-	right: 55px;
-	bottom: 32px;
+	right: 52px;
+	bottom: 26px;
 }
 .body_right>div>p:nth-child(4){
 	right: 10px;
@@ -428,8 +441,9 @@ header .nav{
   color: #e50909;
 }
 .people_data,.safe_center{
-  padding-left: 148px;
+  padding-left: 108px;
   padding-top: 27px;
+  height: 620px;
 }
 .people_data span{
   color: white;
@@ -580,12 +594,12 @@ header .nav{
 }
 .safe_center>div{
 	border-radius: 3px;
-	margin-bottom: 30px;
+	margin-bottom: 23px;
 }
 .safe_center input{
 	border-radius: 3px;
 	padding: 0 0 0 36px;
-	width: 160px;
+	width: 190px;
 	height: 30px;
 	border: 1px solid #999;
 	color: white;
@@ -614,7 +628,7 @@ header .nav{
 	color: #ccc;
 }
 #line{
-	width: 395px;
+	width: 492px;
 	border-bottom: 1px solid #ccc;
 }
 .bind_idcard i{
@@ -624,6 +638,16 @@ header .nav{
 .bind_bankname i{
 	width: 15px;
 	background: url(img/name02.png);
+}
+#bind_bank{
+	width: 228px;
+	height: 32px;
+	background: rgba(0,0,0,0);
+	color: white;
+	margin-right: 50px;
+}
+#bind_bank option{
+	background: #333;
 }
 .bind_bankcard i{
 	width: 18px;
@@ -1317,7 +1341,7 @@ margin-top: 25px;
 	position: absolute;
 	left: 50%;
 	margin-left: -50px;
-	bottom: 0;
+	bottom: 10px;
 	width: 100px;
 	height: 30px;
 	color: #e50909;

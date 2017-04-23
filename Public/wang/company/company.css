@@ -46,12 +46,12 @@ header .nav{
   width: 590px;
   height: 120px;
   float: left;
-  margin-left: 100px;
+  margin-left: 115px;
 }
 .top_nav li{
   float: left;
   padding-top: 40px;
-  font-size: 20px;
+  font-size: 16px;
   padding-right: 50px;
   height: 80px;
 }
@@ -100,6 +100,7 @@ header .nav{
   height: 120px;
   float: right;
   color: white;
+  font-size: 16px;
 }
 .login_reg li{
   position: relative;
@@ -158,14 +159,16 @@ header .nav{
   height: 100%;
   overflow: hidden;
 }
-.bg>p{
+.bg>li{
   font-size: 26px;
   margin-bottom: 50px;
-  text-align: center;
+  text-align: left;
+  padding-left: 25px;
   color: white;
     cursor: pointer;
+    list-style: disc;
 }
-.bg>p:first-child{
+.bg>li:first-child{
     margin-top: 150px;
   }
 .bg .p_choice{

@@ -46,12 +46,12 @@ header .nav{
   width: 590px;
   height: 120px;
  float: left;
-  margin-left: 100px;
+  margin-left: 115px;
 }
 .top_nav li{
   float: left;
   padding-top: 40px;
-  font-size: 20px;
+  font-size: 16px;
   padding-right: 50px;
   height: 80px;
 }
@@ -100,6 +100,7 @@ header .nav{
   height: 120px;
   float: right;
   color: white;
+  font-size: 16px;
 }
 .login_reg li{
   position: relative;

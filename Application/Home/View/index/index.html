@@ -136,10 +136,36 @@
 	/* ==== start script ==== */
 	slider.init();
 
+
+	function init(){
+		$('#slider>div').eq(1).css({
+			left:'20%'
+		})
+		$('#slider>div').eq(2).css({
+			left:'38.5%'
+		})
+		$('#slider>div:nth-child(1)>a>img').css({
+			opacity:1
+		})
+		$('#slider>div:nth-child(2)>a>img').css({
+			opacity:1
+		})
+
+	}
+
+	init();
+
+
+	$('.body').on('mouseenter',function(){
+		setTimeout('init()',1000)
+		
+	})
+
+
 	  $(document).ready(function(){
-      $(".main").tiltedpage_scroll({
-        angle: 20
-      });
+	      $(".main").tiltedpage_scroll({
+	        angle: 20
+	      });
 		});
 	</script>
 </body>

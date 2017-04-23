@@ -20,7 +20,14 @@
   <script src="__JS__/html5shiv.js"></script>
   <script src="__JS__/respond.min.js"></script>
   <![endif]-->
-
+    <style>
+        .li_choice{         
+            background: #2a323f;
+            }
+           .custom-nav .sub-menu-list  .li_choice>a{
+                   color: #65cea7;
+             }
+    </style>
 </head>
 
 <body class="sticky-header">
@@ -63,83 +70,83 @@
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li class="active"><a href="{:U('admin/Index/index')}"><i class="fa fa-home"></i> <span>首页</span></a></li>
                 <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/User/index')}">用户列表</a></li>
-                        <li><a href="{:U('admin/User/add')}">用户添加</a></li>
+                    <ul class="sub-menu-list" id="0">
+                        <li><a href="{:U('admin/User/index?id=0-0')}">用户列表</a></li>
+                        <li><a href="{:U('admin/User/add?id=0-1')}">用户添加</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>会员管理</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/Member/select')}">会员列表</a></li>
-                        <li><a href="{:U('admin/Member/addMember')}">会员添加</a></li>
-                        <li><a href="{:U('admin/Member/getProfit')}">会员收益</a></li>
-                        <li><a href="{:U('admin/Member/integral')}">升级规则</a></li>
-                        <li><a href="{:U('admin/Member/question')}">会员问答</a></li>
+                    <ul class="sub-menu-list" id="1">
+                        <li><a href="{:U('admin/Member/select?id=1-0')}">会员列表</a></li>
+                        <li><a href="{:U('admin/Member/addMember?id=1-1')}">会员添加</a></li>
+                        <li><a href="{:U('admin/Member/getProfit?id=1-2')}">会员收益</a></li>
+                        <li><a href="{:U('admin/Member/integral?id=1-3')}">升级规则</a></li>
+                        <li><a href="{:U('admin/Member/question?id=1-4')}">会员问答</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-folder-o"></i> <span>电影管理</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/Project/index')}">电影列表</a></li>
-                        <li><a href="{:U('admin/Project/add')}">电影添加</a></li>
-                        <li><a href="{:U('admin/ProjectCategory/index')}">电影分类</a></li>
+                    <ul class="sub-menu-list" id="2">
+                        <li><a href="{:U('admin/Project/index?id=2-0')}">电影列表</a></li>
+                        <li><a href="{:U('admin/Project/add?id=2-1')}">电影添加</a></li>
+                        <li><a href="{:U('admin/ProjectCategory/index?id=2-2')}">电影分类</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-gear"></i> <span>明星管理</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/PageConfig/select')}">优秀作品</a></li>
+                    <ul class="sub-menu-list" id="3">
+                        <li><a href="{:U('admin/PageConfig/select?id=3-0')}">优秀作品</a></li>
 
                        
-                        <li><a href="{:U('admin/Works/index')}">优秀演员</a></li>
+                        <li><a href="{:U('admin/Works/index?id=3-1')}">优秀演员</a></li>
 
-                        <li><a href="{:U('admin/PageConfig/director')}">优秀导演</a></li>
+                        <li><a href="{:U('admin/PageConfig/director?id=3-2')}">优秀导演</a></li>
                         
 
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-building-o"></i> <span>订单管理</span></a>
-                    <ul class="sub-menu-list">
+                    <ul class="sub-menu-list" id="4">
 
-                        <li><a href="{:U('admin/order/orderRecharge')}">充值订单</a></li>
-                        <li><a href="{:U('admin/order/cash')}">提现订单</a></li>
+                        <li><a href="{:U('admin/order/orderRecharge?id=4-0')}">充值订单</a></li>
+                        <li><a href="{:U('admin/order/cash?id=4-1')}">提现订单</a></li>
                         <!--<li><a href="{:U('admin/order/downloadOrder')}">下载订单</a></li>-->
-                        <li><a href="{:U('admin/order/supportOrder')}">支持订单</a></li>
+                        <li><a href="{:U('admin/order/supportOrder?id=4-2')}">支持订单</a></li>
 
 
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>数据管理</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/Count/memberCount')}">会员数据</a></li>
-                        <li><a href="{:U('admin/Count/projectCount')}">电影数据</a></li>
-                        <li><a href="{:U('admin/Count/payCount')}">销售数据</a></li>
-                        <li><a href="{:U('admin/Count/financeCount')}">财务数据</a></li>
+                    <ul class="sub-menu-list" id="5">
+                        <li><a href="{:U('admin/Count/memberCount?id=5-0')}">会员数据</a></li>
+                        <li><a href="{:U('admin/Count/projectCount?id=5-1')}">电影数据</a></li>
+                        <li><a href="{:U('admin/Count/payCount?id=5-2')}">销售数据</a></li>
+                        <li><a href="{:U('admin/Count/financeCount?id=5-3')}">财务数据</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>明星招募</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/Role/add')}">添加角色</a></li>
-                        <li><a href="{:U('admin/Role/index')}">招募列表</a></li>
-                        <li><a href="{:U('admin/Role/film')}">添加招募</a></li>
-                        <li><a href="{:U('admin/Member/memberStar')}">申请列表</a></li>
+                    <ul class="sub-menu-list" id="6">
+                        <li><a href="{:U('admin/Role/add?id=6-0')}">添加角色</a></li>
+                        <li><a href="{:U('admin/Role/index?id=6-1')}">招募列表</a></li>
+                        <li><a href="{:U('admin/Role/film?id=6-2')}">添加招募</a></li>
+                        <li><a href="{:U('admin/Member/memberStar?id=6-3')}">申请列表</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-gears"></i> <span>后台系统</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/System/index')}">网站基本设置</a></li>
-                        <li><a href="{:U('admin/System/cooperation')}">合作机构设置</a></li>
+                    <ul class="sub-menu-list" id="7">
+                        <li><a href="{:U('admin/System/index?id=7-0')}">网站基本设置</a></li>
+                        <li><a href="{:U('admin/System/cooperation?id=7-1')}">合作机构设置</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-rss"></i> <span>信息发布</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/Category/index')}">分类管理</a></li>
-                        <li><a href="{:U('admin/Article/index')}">信息列表</a></li>
+                    <ul class="sub-menu-list" id="8">
+                        <li><a href="{:U('admin/Category/index?id=8-0')}">分类管理</a></li>
+                        <li><a href="{:U('admin/Article/index?id=8-1')}">信息列表</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-gears"></i> <span>支付管理</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="{:U('admin/Pay/index')}">支付列表</a></li>
+                    <ul class="sub-menu-list" id="9">
+                        <li><a href="{:U('admin/Pay/index?id=9-0')}">支付列表</a></li>
                     </ul>
                 </li>
                 <li><a href="{:U('admin/Login/logout')}"><i class="fa fa-sign-in"></i> <span>退出</span></a></li>
@@ -284,7 +291,18 @@
 
             }
         });
+    }   
+
+    var  url= window.location.href;
+    var number = url.slice(url.indexOf('/id/')+4,url.indexOf('/id/')+7);
+    var choiceArry=number.split('-');
+   // console.log(choiceArry)
+    if(number!='p'){
+          $('.menu-list').eq(choiceArry[0]).addClass('nav-active')
+          $('.menu-list').eq(choiceArry[0]).children('.sub-menu-list').children().eq(choiceArry[1]).addClass('li_choice')
     }
+    
+
 </script>
 </body>
 </html>

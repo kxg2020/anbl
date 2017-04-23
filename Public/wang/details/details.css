@@ -1,4 +1,4 @@
-body{
+html body{
   font-family: 'Microsoft Yahei';
   font-size: 16px;
   min-width: 1200px;
@@ -46,12 +46,12 @@ header .nav{
   width: 590px;
   height: 120px;
   float: left;
-  margin-left: 100px;
+  margin-left: 115px;
 }
 .top_nav li{
   float: left;
   padding-top: 40px;
-  font-size: 20px;
+  font-size: 16px;
   padding-right: 50px;
   height: 80px;
 }
@@ -100,6 +100,7 @@ header .nav{
   height: 120px;
   float: right;
   color: white;
+  font-size: 16px;
 }
 .login_reg li{
   position: relative;
@@ -416,14 +417,14 @@ margin-right: 8px;
 }
 .argement{
   width: 840px;
-  height: 660px;
+  height: 710px;
   background: white;
   position: absolute;
   top:180px;
   left: 50%;
   margin-left: -420px;
   color: #666;
-  z-index: 20px;
+  z-index: 20;
   background: white;
 }
 .argement h3{
