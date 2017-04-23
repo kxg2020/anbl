@@ -95,12 +95,12 @@
 
 							<div id="line"></div>
 							<div> <select  id="bind_bank">
-										<option value="中国银行">中国银行</option>
-										<option value="工商银行">工商银行</option>
-										<option value="农业银行">农业银行</option>
-										<option value="建设银行">建设银行</option>
-										<option value="中国邮政储蓄银行">中国邮政储蓄银行</option>
-										<option value="招商银行">招商银行</option>
+										<option value="中国银行"   <if condition="$userInfo['bank_name'] eq '中国银行'">selected</if>>中国银行</option>
+										<option value="工商银行"  <if condition="$userInfo['bank_name'] eq '工商银行'">selected</if>>工商银行</option>
+										<option value="农业银行"  <if condition="$userInfo['bank_name'] eq '农业银行'">selected</if>>农业银行</option>
+										<option value="建设银行"  <if condition="$userInfo['bank_name'] eq '建设银行'">selected</if>>建设银行</option>
+										<option value="中国邮政储蓄银行"  <if condition="$userInfo['bank_name'] eq '中国邮政储蓄银行'">selected</if>>中国邮政储蓄银行</option>
+										<option value="招商银行"  <if condition="$userInfo['bank_name'] eq '招商银行'">selected</if>>招商银行</option>
 									</select>
 									<label>开户银行</label>
 							</div>

@@ -182,8 +182,8 @@ $(function(){
 
 //>> 验证表单
 	$('#save').click(function(){
-		  //console.log($('#bind_bank').val())	
 		var phone = $('input[name = phone]').val();
+		var bank = $('#bind_bank').val();
 		var email = $('input[name = email]').val();
 		var realname = $('input[name = realname]').val();
 		var id_card = $('input[name = id_card]').val();
@@ -262,7 +262,8 @@ $(function(){
 										'bank_card_name':bank_card_name,
 										'bank_card':bank_card,
 										'city':city,
-										'address':address
+										'address':address,
+										'bank_name':bank
 									},
 									success:function(result){
 										if(result.status == 1){
@@ -505,7 +506,7 @@ $(function(){
 	})
 	$('.goToform').click(function(){
 		//>> 获取当前余额
-		integral = $('input[name = jifen]').val();
+		integral = parseInt($('input[name = jifen]').val());
 		//>> 获取所需余额
 		needintegral = $('.needand').text();
 

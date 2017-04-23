@@ -330,6 +330,49 @@ class MemberController extends  CommonController{
     }
 
     /**
+     * 角色制度
+     */
+    public function roleUp(){
+
+        $paramArr = $_REQUEST;
+        $model = M('RoleUp');
+        if(!empty($paramArr)){
+
+            $updateData_1 = [
+                'support'=>$paramArr['zhichi_touzi'],
+                'follower'=>$paramArr['zhichi_zhitui'],
+                'group'=>$paramArr['zhichi_tuandui'],
+            ];
+            $updateData_2 = [
+                'support'=>$paramArr['jingji_touzi'],
+                'follower'=>$paramArr['jingji_zhitui'],
+                'group'=>$paramArr['jingji_tuandui'],
+            ];
+            $updateData_3 = [
+                'support'=>$paramArr['zhipian_touzi'],
+                'follower'=>$paramArr['zhipian_zhitui'],
+                'group'=>$paramArr['zhipian_tuandui'],
+            ];
+            $updateData_4 = [
+                'support'=>$paramArr['chupin_touzi'],
+                'follower'=>$paramArr['chupin_zhitui'],
+                'group'=>$paramArr['chupin_tuandui'],
+            ];
+
+            for($i = 1;$i<=4;++$i){
+                $res_1 = $model->where(['role'=>'支持者'])->save($updateData_1);
+                $res_2 = $model->where(['role'=>'经纪人'])->save($updateData_2);
+                $res_3 = $model->where(['role'=>'制片人'])->save($updateData_3);
+                $res_4 = $model->where(['role'=>'出品人'])->save($updateData_4);
+            }
+            $this->ajaxReturn(['status'=>1,'msg'=>'保存成功']);
+        }else{
+
+            $this->ajaxReturn(['status'=>0]);
+        }
+    }
+
+    /**
      * 积分制度
      */
     public function integral(){
@@ -354,7 +397,10 @@ class MemberController extends  CommonController{
         }else{
 
             $rows = M('IntegralInstitution')->select();
+            //>> 角色制度
+            $roles = M('RoleUp')->select();
             $this->assign('row',$rows);
+            $this->assign('roles',$roles);
             $this->display('member/integral');
         }
     }

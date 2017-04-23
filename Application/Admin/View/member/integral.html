@@ -1,6 +1,9 @@
 <extend name="public:tpl" />
 <block name="css">
     <style>
+        body{
+            min-width: 1200px;
+        }
         .ms-drop input[type="checkbox"] {
             margin-right: 3px;
         }
@@ -86,40 +89,80 @@
         </ul>
     </div>
     <section class="wrapper">
-        <!-- page start-->
+    <!-- page start-->
 
-        <div class="row">
-            <div class="col-lg-12">
-                <section class="panel">
-                    <div class="panel-body">
-                        <form action="" class="form-horizontal adminex-form" method="post" id="projectForm">
+    <div class="row">
+        <div class="col-lg-6">
+            <section class="panel">
+                <div class="panel-body">
+                    <form action="" class="form-horizontal adminex-form" method="post" id="projectForm">
 
-                            <div class="tab-content">
-                                <!--项目基本信息-->
-                                <div class="tab-pane active" id="baseInfo">
-                                    <volist name="row" id="r" key="k">
+                        <div class="tab-content">
+                            <h2>会员升级积分设置</h2>
+                            <!--项目基本信息-->
+                            <div class="tab-pane active" id="">
+                                <volist name="row" id="r" key="k">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Lv.{$r['level']}*所需积分</label>
                                         <div class="col-sm-4 col-md-4">
                                             <input type="text"  name="" data-id="{$r['level']}" <if condition="$k-1 eq 0">disabled</if> data-in="1" class="form-control" placeholder="" value="{$r['integral']}">
                                         </div>
                                     </div>
-                                    </volist>
-                                    <br>
-                                </div>
+                                </volist>
                                 <br>
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-10">
-                                        <input type="button" class="btn btn-primary " value="添加" id="submit">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <input type="button" class="btn btn-primary " value="保存" id="submit">
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </section>
-            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
         </div>
-    </section>
+
+        <div class="col-lg-6">
+            <section class="panel">
+                <div class="panel-body">
+                    <form action="" class="form-horizontal adminex-form" method="post" id="">
+
+                        <div class="tab-content">
+                            <h2>会员角色升级设置</h2>
+                            <!--项目基本信息-->
+                            <div class="tab-pane active" id="baseInfo">
+                                <volist name="roles" id="rol">
+                                    <div class="form-group">
+
+                                        <label class="col-sm-2 col-sm-2 control-label">{$rol['role']}条件:</label><br>
+                                        <div class="col-sm-4 col-md-4">
+                                          投资 <input type="number"  name="{$rol['name']}_touzi"  class="form-control" placeholder="" value="">
+
+                                           直推 <input type="number"  name="{$rol['name']}_zhitui"  class="form-control" placeholder="" value="">
+                                           团队 <input type="number"  name="{$rol['name']}_tuandui"  class="form-control" placeholder="" value="">
+                                        </div>
+
+                                    </div>
+                            </volist>
+                                <br>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <input type="button" class="btn btn-primary " value="保存" id="role">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
 </block>
 <block name="js">
     <!--<js href="__PUBLIC__/uploadify/jquery.uploadify.min.js"/>-->
@@ -150,6 +193,55 @@ $(function(){
             'url':url,
             'data':{
                 'integral':arr,
+            },
+            success:function(result){
+                if(result.status != ''){
+                    layer.msg(result.msg);
+                }
+            }
+        });
+    });
+
+    $('#role').click(function(){
+            var  zhichi_touzi = $('input[name=zhichi_touzi]').val();
+            var  zhichi_zhitui = $('input[name=zhichi_zhitui]').val();
+            var  zhichi_tuandui = $('input[name=zhichi_tuandui]').val();
+
+
+            var  jingji_touzi = $('input[name=jingji_touzi]').val();
+            var  jingji_zhitui = $('input[name=jingji_zhitui]').val();
+            var  jingji_tuandui = $('input[name=jingji_tuandui]').val();
+
+
+            var  zhipian_touzi = $('input[name=zhipian_touzi]').val();
+            var  zhipian_zhitui = $('input[name=zhipian_zhitui]').val();
+            var  zhipian_tuandui = $('input[name=zhipian_tuandui]').val();
+
+
+            var  chuping_touzi = $('input[name=chuping_touzi]').val();
+            var  chuping_zhitui = $('input[name=chuping_zhitui]').val();
+            var  chuping_tuandui = $('input[name=chuping_tuandui]').val();
+
+        $.ajax({
+            'type':'post',
+            'dataType':'json',
+            'url':location.protocol+'//'+window.location.host+'/admin/Member/roleUp',
+            'data':{
+                'zhichi_touzi':zhichi_touzi,
+                'zhichi_zhitui':zhichi_zhitui,
+                'zhichi_tuandui':zhichi_tuandui,
+
+                'jingji_touzi':jingji_touzi,
+                'jingji_zhitui':jingji_zhitui,
+                'jingji_tuandui':jingji_tuandui,
+
+                'zhipian_touzi':zhipian_touzi,
+                'zhipian_zhitui':zhipian_zhitui,
+                'zhipian_tuandui':zhipian_tuandui,
+
+                'chuping_touzi':chuping_touzi,
+                'chuping_zhitui':chuping_zhitui,
+                'chuping_tuandui':chuping_tuandui,
             },
             success:function(result){
                 if(result.status != ''){

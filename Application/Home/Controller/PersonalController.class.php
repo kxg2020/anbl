@@ -324,6 +324,7 @@ class PersonalController extends CommonController{
             if($_res['is_bind_phone'] == 0 && $_res['is_bind_email'] == 1){
                 $updateData = [
                     'is_true'=>isset($paramArr['realname']) ? 1 : 0,
+                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
                     'phone'=>$paramArr['phone'],
                     'realname'=>$paramArr['realname'],
                     'id_card'=>$paramArr['id_card'],
@@ -338,6 +339,7 @@ class PersonalController extends CommonController{
 
                 $updateData = [
                     'is_true'=>isset($paramArr['realname']) ? 1 : 0,
+                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
                     'email'=>$paramArr['email'],
                     'realname'=>$paramArr['realname'],
                     'id_card'=>$paramArr['id_card'],
@@ -351,6 +353,7 @@ class PersonalController extends CommonController{
             }elseif($_res['is_bind_email'] == 0 && $_res['is_bind_phone'] == 0){
                 $updateData = [
                     'is_true'=>isset($paramArr['realname']) ? 1 : 0,
+                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
                     'email'=>$paramArr['email'],
                     'phone'=>$paramArr['phone'],
                     'realname'=>$paramArr['realname'],
@@ -366,6 +369,7 @@ class PersonalController extends CommonController{
             }else{
                 $updateData = [
                     'is_true'=>isset($paramArr['realname']) ? 1 : 0,
+                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
                     'realname'=>$paramArr['realname'],
                     'id_card'=>$paramArr['id_card'],
                     'bank_card_name'=>$paramArr['bank_card_name'],
