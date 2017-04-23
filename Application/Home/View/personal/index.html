@@ -417,7 +417,7 @@
 							<volist name="films" id="fi">
 							<div>
 								<div><img src="{$fi['image_url']}" alt=""><p> &nbsp;{$fi['name']}</p></div>
-								<p>申请阿纳豆<span>70000</span>分</p>
+								<p>申请阿纳豆<span id="needand"></span>分</p>
 								<input class="goTodetail" type="button" value="立即申请" data-id="{$fi['id']}">
 							</div>
 							</volist>
@@ -429,7 +429,7 @@
 								<div class="movie_topright">
 									<p>电影名称: <span class="filmname"></span></p>
 
-									<p>申请阿纳豆: <span>70000</span></p>
+									<p>申请阿纳豆: <span class="needand">70000</span></p>
 									<label style="font-size: 16px;">选择申请角色:</label><select name="role">
 									</select>
 									<p><input class="goToform" type="button" value="点击申请"></p>				
@@ -553,7 +553,7 @@
 								$(function(){
 
 									$('#sure_apply').click(function(){
-
+										var needintegral = $('.needand').text();
 										var name = $('input[name = name]').val();
 										var sex = $('input[name = sex01]').val();
 										var volk = $('input[name = volk]').val();
@@ -642,6 +642,7 @@
 												'skill':skill,
 												'ex':ex,
 												'image_url':image_url,
+												'money':needintegral ? needintegral : 0,
 											},
 											success:function(result){
 												if(result.status == 1){
@@ -726,7 +727,6 @@
 					'url':location.protocol+'//'+window.location.host+'/Home/Personal/filmDetail',
 					'data':{'id':film_id},
 					success:function(e){
-						console.log(e);
 						$('.filmname').text(e.film.name);
 						$('select[name = role]').html('');
 						$.each(e.role,function(k,v){
@@ -735,6 +735,7 @@
 						$('.intro').text(e.roleDetail.intro);
 						$('.feature').text(e.roleDetail.feature);
 						$('.figure').text(e.roleDetail.figure);
+						$('.needand').text(e.roleDetail.money);
 					}
 				});
 
@@ -755,10 +756,12 @@
 							$('.intro').text(e.data.intro);
 							$('.feature').text(e.data.feature);
 							$('.figure').text(e.data.figure);
+							$('.needand').text(e.data.money);
 						}else{
 							$('.intro').text('');
 							$('.feature').text('');
 							$('.figure').text('');
+							$('.needand').text('');
 						}
 					}
 				});

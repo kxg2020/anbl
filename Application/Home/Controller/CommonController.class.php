@@ -63,8 +63,8 @@ class CommonController extends Controller{
             $row = M('Member')->where(['session_token'=>$session])->find();
             if(!empty($row)){
                 //>> 查询投资
-                $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
-                //>> 判断投资是否满700
+                $support = M('MemberSupport')->where(['member_id'=>$row['id']])->sum('support_money');
+                //>> 判断投资是否满700,满700升级为投资者
                 if($support['support_money'] >= 700){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
@@ -74,23 +74,24 @@ class CommonController extends Controller{
                 $count = $this->group($row['id']);
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
-                if($count >= 5){
+
+                //>> 直推5人，升级为经纪人
+                if($count >= 2){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
                 //>> 如果投资35000以上,直推10人,团队100人升级为制片人
-                if($support['support_money'] >= 35000 && $count >= 10 && $all >= 100){
+                if($support >= 35000 && $count >= 10 && $all >= 100){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
                 //>> 如果个人投资70000 直推50人 团队500人 升级出品人
-                if($support['support_money'] >= 70000 && $count >= 50 && $all >= 500){
+                if($support >= 70000 && $count >= 50 && $all >= 500){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
-
 
                 $this->isLogin = 1;
                 $this->userInfo = $row;
@@ -128,7 +129,7 @@ class CommonController extends Controller{
     }
 
     /**
-     * 团队
+     * 团队(1.直推一部分，然后下线发展一部分。2.直推一人，再下线发展)
      */
     private function allMembers($id){
 
@@ -141,7 +142,7 @@ class CommonController extends Controller{
                 $this->allMembers($v['id']);
             }
         }
-        return $sum/2;
+        return $sum;
     }
 
 

@@ -117,6 +117,7 @@ class RoleController extends CommonController{
                             'intro'=>$paramArr['intro'] ? $paramArr['intro'] : '',
                             'feature'=>$paramArr['feature'] ? $paramArr['feature'] : '',
                             'figure'=>$paramArr['figure'] ? $paramArr['figure'] : '',
+                            'money'=>$paramArr['money'],
                         ]);
                     }else{
                         //>> 如果没有这个电影的角色,添加角色描述
@@ -127,6 +128,7 @@ class RoleController extends CommonController{
                             'role_id'=>$paramArr['roles'][0],
                             'recruit_id'=>$result['id'],
                             'member_id'=>$this->userInfo['id'],
+                            'money'=>$paramArr['money'],
                         ];
                         $row = M('RoleDescription')->add($inData);
                     }

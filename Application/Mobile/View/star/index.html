@@ -15,7 +15,7 @@
 	<div class="content">
 		<volist name="recruit" id="na">
 		<div class="movielist">
-			<a href="../actordetail/actordetail.html" class="movie" >
+			<a href="{:U('Star/starInfo',['id'=>$na['id']])}" class="movie" >
 				<img src="{$na['image_url']}" alt="">
 				<p>{$na['name']}</p>
 			</a>

@@ -14,7 +14,7 @@ class IndexController extends CommonController {
         $model = M('project');
         $projectInfo = $model->where($where)->order('sort')->select();
         $this->assign('projectInfo',$projectInfo);
-        $this->display('index');
+        $this->display('index/index');
     }
 
     /**
@@ -33,7 +33,7 @@ class IndexController extends CommonController {
         }
 
         $this->assign('info',$info);
-        $this->display('detail');
+        $this->display('index/detail');
     }
 
     /**
@@ -42,7 +42,7 @@ class IndexController extends CommonController {
     public function apply(){
         $id = I('get.id');
         $this->assign('id',$id);
-        $this->display('apply');
+        $this->display('index/apply');
     }
 
     /**
@@ -148,7 +148,7 @@ class IndexController extends CommonController {
         // 取到当前用户的推荐嘛 http://mobile.a.com/login/index.html
         $invite_key =$this->userInfo['invite_key'];
         $this->assign('key',$invite_key);
-        $this->display('share');
+        $this->display('index/share');
     }
 
 
@@ -164,7 +164,7 @@ class IndexController extends CommonController {
             ->where(['a.member_id'=>$this->userInfo['id']])
             ->select();
         $this->assign('projectInfo',$projectInfo);
-        $this->display('project');
+        $this->display('index/project');
     }
 
 }

@@ -106,9 +106,13 @@
                                         </if>
                                     </td>
                                     <td style="vertical-align: middle">
-                                        <if condition="$o.is_pass eq 0"><span class="label label-danger">等待审核</span><else/><span class="label label-success">通过审核</span></if>
+                                        <if condition="$o.is_pass eq 0"><span class="label label-danger">等待审核</span><elseif condition="$o.is_pass eq 1"/><span class="label label-success">通过审核</span>
+                                            <elseif condition="$o.is_pass eq 2"/><span class="label label-warning">已拒绝</span>
+                                        </if>
                                     </td>
-                                    <td style="vertical-align: middle"><input type="button" data-id="{$o['id']}" class="btn btn-xs btn-info detail" value="查看"  ></td>
+                                    <td style="vertical-align: middle"><input type="button" data-id="{$o['id']}" class="btn btn-xs btn-info detail" value="查看"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <if condition="$o['is_pass'] eq 0"><input type="submit" class="btn btn-xs btn-danger refuse" data-oid="{$o['id']}" value="拒绝" data-id="{$o['member_id']}"></if>
+                                    </td>
                                 </tr>
                                 </volist>
                                 </tbody>
@@ -149,6 +153,51 @@
     <script src="__JS__/layer/layui.js"></script>
     <script src="__JS__/layer/laypage.js"></script>
     <script>
+
+        $('.refuse').click(function(){
+            mem_id = $(this).attr('data-id');
+            oId = $(this).attr('data-oid');
+            layer.prompt({
+                formType: 2,
+                title: '请输入拒绝充值原因',
+            }, function(value, index, elem){
+                $.ajax({
+                    'type':'post',
+                    'dataType':'json',
+                    'url':location.protocol+'//'+window.location.host+'/admin/Order/sorryy',
+                    'data':{
+                        'id':mem_id,
+                        'oId':oId,
+                        'text':value
+                    },
+                    success:function(){
+
+                        location.reload();
+                    }
+                });
+
+            });
+
+
+            var id = $('input[name = member]').val();
+            var url = location.protocol +'//'+ window.location.host+'/admin/Order/sorry';
+            $.ajax({
+                'type':'post',
+                'dataType':'json',
+                'url':url,
+                'data':{
+                    'id':id,
+                    'money':$('input[name = remoney]').val()
+                },
+                success:function(result){
+                    if(result){
+                        var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                        //parent.layer.close(index); //执行关闭
+                    }
+
+                }
+            });
+        });
         $('body').on('click','.detail',function(){
             var id = $(this).attr('data-id');
             layer.open({
