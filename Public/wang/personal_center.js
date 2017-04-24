@@ -42,6 +42,7 @@ $(function(){
 		$('.get_money').hide();
 		$('.money_record').hide();
 		$('.money_deal').hide();
+		$('.zhuanzhang').hide();
 	})
 	$('#post_cash').click(function(){
 		$('.money_content>ul').eq(0).show();
@@ -55,6 +56,20 @@ $(function(){
 		$('.get_money').show();
 		$('.money_record').hide();
 		$('.money_deal').hide();
+		$('.zhuanzhang').hide();
+	})
+	$('#zhuanzhang').click(function(){
+		$('.money_content>ul').eq(0).show();
+		$('.money_content>ul').eq(1).hide();
+		$('.body_right>ul').hide();
+		$('.body_right>div').hide();
+		$('.money_operat').show();
+		$('.money_content>ul>li').removeClass('choice');
+		$('.money_content>ul>li').eq(2).addClass('choice');
+		$('.put_money').hide();
+		$('.get_money').hide();
+		$('.money_record').hide();
+		$('.zhuanzhang').show();
 	})
 	// 不同头部的li之间的div切换
 	$('.identity_content>ul>li').click(function(){
@@ -94,7 +109,7 @@ $(function(){
 			$('.put_money').show();
 			$('.get_money').hide();
 			$('.money_record').hide();
-			$('.money_deal').hide();
+			$('.zhuanzhang').hide();
 		}
 		if(txt=='提现'){
 			$('.money_content>ul>li').removeClass('choice');
@@ -102,7 +117,16 @@ $(function(){
 			$('.put_money').hide();
 			$('.get_money').show();
 			$('.money_record').hide();
-			$('.money_deal').hide();
+			$('.zhuanzhang').hide();
+		}
+
+		if(txt=='转账'){
+			$('.money_content>ul>li').removeClass('choice');
+			$('.money_content>ul>li').eq(2).addClass('choice');
+			$('.put_money').hide();
+			$('.get_money').hide();
+			$('.money_record').hide();
+			$('.zhuanzhang').show();
 		}
 
 		if(txt=='充值记录'){
@@ -111,17 +135,10 @@ $(function(){
 			$('.put_money').hide();
 			$('.get_money').hide();
 			$('.money_record').show();
-			$('.money_deal').hide();
+			$('.zhuanzhang').hide();
 
 		}
-		if(txt=='消费明细'){
-			$('.money_content>ul:nth-child(2)>li').removeClass('choice');
-			$('.money_content>ul:nth-child(2)>li').eq(1).addClass('choice');
-			$('.put_money').hide();
-			$('.get_money').hide();
-			$('.money_record').hide();
-			$('.money_deal').show();
-		}
+		
 
 
 	})
@@ -132,6 +149,7 @@ $(function(){
 		$('.put_money').hide();
 		$('.get_money').hide();
 		$('.money_record').show();
+		$('.zhuanzhang').hide();
 	});
 
 
@@ -143,7 +161,7 @@ $(function(){
 		$('.money_record').hide();
 		$('.money_content>ul>li').removeClass('choice');
 		$('.money_content>ul>li').eq(0).addClass('choice');
-		$('.money_deal').hide();
+		$('.zhuanzhang').hide();
 	});
 	//性别选择
 	$('.sex>span>p').click(function(){
@@ -574,5 +592,16 @@ $(function(){
 	}).on('mouseleave',function(){
 		$('.get_money>p:nth-child(2)>span').css({display:'none'})
 	})
+
+
+	$('.phone01').on('keyup',function(){
+		if(/^1(3|4|5|7|8)\d{9}$/.test($('.phone01').val())){
+			$(".yanzhen").attr("disabled", false);
+		}else{
+			$(".yanzhen").attr("disabled", true);
+		}
+	})	
+
+	
 
 });
