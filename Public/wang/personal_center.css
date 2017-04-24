@@ -730,7 +730,7 @@ header .nav{
 	padding-right: 20px;
 	margin-bottom: 8px;
 }
-.cancel_suport{
+.cancel_suport,.cancel_collect{
 	width: 80px;
 	height: 25px;
 	background: #e50909;
@@ -739,6 +739,9 @@ header .nav{
 	cursor: pointer;
 	border-radius:3px;
 	border: none;
+}
+.cancel_collect{
+	clear: both
 }
 #cancel_div{
 	width: 90%;
