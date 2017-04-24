@@ -479,7 +479,7 @@ $(function(){
 	})
 
 	//点击替换背景
-	var bgArry=['/Public/wang/img/bg.jpg','/Public/wang/img/bg1.jpg','/Public/wang/img/bg2.jpg','/Public/wang/img/bg3.jpg','/Public/wang/img/bg4.jpg','/Public/wang/img/bg5.jpg','/Public/wang/img/bg6.jpg'];
+	var bgArry=['/Public/wang/img/bg.jpg','/Public/wang/img/bg1.jpg','/Public/wang/img/bg2.jpg','/Public/wang/img/bg3.jpg'];
 	var imgNumber=1;
 	$('#repeat_bg').click(function(){
 		$('.body_left').css({

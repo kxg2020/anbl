@@ -324,7 +324,7 @@
 			 });
 		 })
 
-		 function collect(_id){
+		 function collect(){
 			 var _id = $('#fast_collect').attr('data-id');
 			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
 				 if (data.status == 0) {
