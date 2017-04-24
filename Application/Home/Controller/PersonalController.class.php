@@ -950,4 +950,109 @@ class PersonalController extends CommonController{
             ]);
         }
     }
+
+    /**
+     * 转账账号
+     */
+    public function checkAccount(){
+
+        $paramArr = $_REQUEST;
+        if(!empty($paramArr)){
+
+            //>> 根据账号查询
+            $row = M('Member')->where(['username'=>$paramArr['username']])->find();
+
+            if(!empty($row)){
+
+                $this->ajaxReturn(['status'=>1,'msg'=>'请求成功']);
+            }else{
+
+                $this->ajaxReturn(['status'=>0,'msg'=>'请求失败']);
+            }
+        }else{
+
+            $this->ajaxReturn(['status'=>0,'msg'=>'数据为空']);
+        }
+    }
+
+    /**
+     * 转入账户
+     */
+    public function changeMoney(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+           //>> 验证验证码
+            $captcha = session('change_code'.$this->userInfo['username']);
+
+            if($captcha != $paramArr['captcha'] || empty($captcha)){
+
+                $this->ajaxReturn(['status'=>1,'msg'=>'验证码错误']);
+            }else{
+                //>> 开启事务
+                M()->startTrans();
+                //>> 扣除当前用户的余额
+                $res = M('Member')->where(['username'=>$this->userInfo['username']])->save(['money'=>['exp','money-'.$paramArr['money']]]);
+                $ros = M('Member')->where(['username'=>$paramArr['username']])->save(['money'=>['exp','money+'.$paramArr['money']]]);
+                if($res === false || $ros === false){
+
+                    M()->rollback();
+                }else{
+
+                    M()->commit();
+                    session('change_code'.$this->userInfo['username'],null);
+                    $this->ajaxReturn(['status'=>1,'msg'=>'操作成功']);
+                }
+            }
+        }else{
+
+            $this->ajaxReturn(['status'=>0,'msg'=>'数据为空']);
+        }
+    }
+
+    /**
+     * 发送短信
+     */
+    public function sendMessage(){
+
+        $phone = $this->userInfo['username'];
+
+        //>> 判断发短信时间是否大于60秒
+        $crrtime = time();
+
+        if($crrtime -  session('change_code_time'.$phone) < 60){
+
+            $this->ajaxReturn(['msg'=>'请60秒以后再发送','status'=>0]);
+        }
+
+        $str = '0123456789';
+
+        $strArr = str_split($str);
+
+        shuffle($strArr);
+
+        //>> 截取8位
+        $endArr = array_slice($strArr,0,6);
+
+        $code = implode('',$endArr);
+
+        //>> 将验证码保存到session中
+        session('change_code'.$phone,$code);
+        session('change_code_time'.$phone,time());
+        $res = sendSMS($phone,$code,$this->systemInfo,1);
+        if($res){
+
+            //>> 保发送时间
+            session('create_time'.$phone,time());
+
+            die($this->_printSuccess());
+
+        }else{
+
+            die($this->_printError('1002'));
+
+        }
+    }
 }

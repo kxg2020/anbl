@@ -232,17 +232,19 @@
 
 						<div class="zhuanzhang" style="display: none;">
 							<div class="div1">
-								<label >请输入转入帐号</label>	<input type="text" class="username01" style="margin-left: 15px;"> <input type="button" value="验证">
-								<p class="search_result">帐号不存在</p>
+								<label ><span style="color:red;">*</span>请输入转入帐号</label>	<input type="text" class="username01" style="margin-left: 15px;"> <input type="button" value="验证" id="check_1">
+								<br><br>
 							</div>
 							<div class="div2">
-									<label >请输入转入金额</label><input class="money01" type="text">
+									<label ><span style="color:red;">*</span>请输入转入金额</label><input class="money01" type="text" value="">
+								<br><br>
 							</div>
 							<div class="div3">
-									<label>请输入手机验证码</label><input class="phone01" type="text"><input class="yanzhen" type="button" disabled="disabled" value="获取验证码">
+									<label><span style="color:red;">*</span>请输入手机验证码</label><input class="phone01" type="text" value="">
+								<input class="yanzhen" type="button"  value="获取验证码" >
 							</div>
 							<div class="div4">
-									<input type="button" value="确定">
+									<input type="button" value="确定" id="queding">
 							</div>
 						</div>
 
@@ -317,6 +319,112 @@
 							$('textarea[name  = rcontent]').val(content);
 							$('textarea[name  = rdcontent]').val(reply);
 						});
+
+						//>> 转账
+						$('#check_1').click(function(){
+							username = $('.username01').val();
+							reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
+							if(!reg.test(username)){
+								layer.tips('请填写正确的手机号', '.username01',{
+									tips:[3,'orange'],
+									time:2000,
+									end:function(){
+										$('.username01').val('').focus();
+									}
+								});
+								return false;
+							}
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':location.protocol+'//'+window.location.host+'/Home/Personal/checkAccount',
+								'data':{'username':username},
+								success:function(e){
+									if(e.status == 1){
+										layer.tips('通过验证', '.username01',{
+											tips:[3,'green'],
+											time:5000,
+										});
+									}else{
+										layer.tips('账号不存在', '.username01',{
+											tips:[3,'red'],
+											time:3000,
+											end:function(){
+												$('.username01').val('').focus();
+											}
+										});
+									}
+								}
+							});
+						});
+
+						//>> 点击验证
+						$('.yanzhen').click(function(){
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':location.protocol+'//'+window.location.host+'/Home/Personal/sendMessage',
+							});
+
+						});
+						//>> 点击确定
+						$('#queding').click(function(){
+							username = $('.username01').val();
+							_money = $('.money01').val();
+							_phone = $('.phone01').val();
+							reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
+							if(!reg.test(username) || username == ''){
+								layer.tips('请填写正确的手机号', '.username01',{
+									tips:[3,'orange'],
+									time:2000,
+									end:function(){
+										$('.username01').val('').focus();
+									}
+								});
+								return false;
+							}
+							if(_money == '' || isNaN(_money) || _money <= 0){
+								layer.tips('请填写正确金额', '.money01',{
+									tips:[3,'orange'],
+									time:2000,
+									end:function(){
+										$('.money01').val('').focus();
+									}
+								});
+								return false;
+							}
+
+							if(_phone == '' || _phone.length > 6){
+								layer.tips('请填写正确的验证码', '.phone01',{
+									tips:[3,'orange'],
+									time:2000,
+									end:function(){
+										$('.phone01').val('').focus();
+									}
+								});
+								return false;
+							}
+
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':location.protocol+'//'+window.location.host+'/Home/Personal/changeMoney',
+								'data':{'username':username,'money':_money,'captcha':_phone},
+								success:function(e){
+									if(e.status == 1){
+											layer.msg('操作成功', {
+												time: 0, //20s后自动关闭
+												btn: ['确定'],
+												yes:function(){
+													location.reload();
+												}
+											});
+									}else{
+										layer.msg(e.msg);
+									}
+								}
+							});
+						});
 					});
 				</script>
 			</div>
@@ -339,28 +447,28 @@
 							<volist name="allget" id="al">
 								<tr>
 									<td>{:date('Y-m-d',$al['create_time'])}</td>
-									<td >{$al.money}</td>
+									<td >+{$al.money}</td>
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
 								</tr>
 							</volist>
 							<volist name="consume_1" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>{$c.money}</td>
+									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
 							<volist name="consume_2" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>{$c.money}</td>
+									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
 							<volist name="consume_3" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>{$c.money}</td>
+									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
