@@ -151,7 +151,7 @@
 										<p>{$c['country']}/{$c['duration']}分钟</p>
 										<p>{$c['date']}/{$c['showaddress']}</p>
 										<p style="color: #e50909; float: right;"><i></i>已收藏</p>
-										<p style="text-align: right;"><input style="float: right;" type="button" class="cancel_collect" value="取消收藏"></p>
+										<p style="text-align: right;"><input style="float: right;" type="button" data-id="{$c['id']}" class="cancel_collect" value="取消收藏"></p>
 									</div>
 								</div>
 							</volist>
@@ -1179,6 +1179,32 @@
 				});
 
 			});
+
+
+				//>> 点击"取消收藏"
+				$('.cancel_collect').click(function(){
+					$.ajax({
+						'type':'post',
+						'dataType':'json',
+						'url':location.protocol+'//'+window.location.host+'/Home/Personal/cancel',
+						'data':{
+							'id':$(this).attr('data-id'),
+						},
+						success:function(e){
+							if(e.status == 1){
+
+								layer.msg('取消成功',function(){
+									location.reload();
+								});
+							}else{
+								layer.msg(e.msg,function(){
+									location.reload();
+								});
+							}
+						}
+					});
+				});
+
 		});
 	</script>
 </body>

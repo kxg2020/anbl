@@ -80,7 +80,7 @@
 						<li _type="3" class="chk">故事</li>
 						<li _type="4" class="chk">后期</li>
 					</ul>
-					<div class="loginorreg"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></div>
+					<div class="loginorreg"><if condition="$isLogin eq 0"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></if></div>
 					<input type="hidden" value="{$count}" id="count">
 					<textarea name="name" rows="8" cols="80" placeholder="输入我的想法" id="mainContent"></textarea>
 					<div class="publish now_suport" id="ok">发表</div>
@@ -98,7 +98,7 @@
 		<div class="suport_bg" style="display: none;">
 			<div  id="suport">
 				<p>回报类型:</p>
-				<p class="fenghong"><input type="radio" name="fenhong" value="1" checked><span style="margin-right: 100px;">固定</span><input type="radio" name="fenhong" value="2"><span>浮动</span></p>
+				<p class="fenghong"><input type="radio" name="fenhong" value="1" checked><span style="margin-right: 100px;">月酬</span><input type="radio" name="fenhong" value="2"><span>票房</span></p>
 				<p>输入支持阿纳豆:</p>
 				<p class="jifeng">
 					<input type="number" name="money" placeholder="支持700-70000且需为100整数" style="width: 230px"  />

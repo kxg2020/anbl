@@ -994,4 +994,16 @@ class PersonalController extends CommonController{
 
         }
     }
+
+    public function cancel(){
+        if(IS_POST && IS_AJAX){
+            $id = intval(i('post.id'));
+            $rest = M('MemberCollection')->where(['id'=>$id])->delete();
+            if($rest === false){
+                $this->ajaxReturn(['msg'=>"取消失败",'status'=>0]);
+            }else{
+                $this->ajaxReturn(['msg'=>"取消成功",'status'=>1]);
+            }
+        }
+    }
 }
