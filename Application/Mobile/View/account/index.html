@@ -24,7 +24,7 @@
 		<p>账户:{$secretPhone}</p>
 		<p class="shiming">实名:
 			<if condition="$personal['is_true'] eq 0"> <span style="color: red;">未实名</span>
-			<else/><span style="color: forestgreen;"> 已实名</span></if><if condition="$personal['is_true'] eq 0"> <a href="../name/name.html" style="color: orange">马上认证>></a></if></p>
+			<else/><span style="color: forestgreen;"> 已实名</span></if><if condition="$personal['is_true'] eq 0"> <a href="{:U('Account/checkTrue')}" style="color: orange">马上认证>></a></if></p>
 	</div>
 	<footer>
 		<a href="{:U('Account/rechargeIndex')}">提现</a>
