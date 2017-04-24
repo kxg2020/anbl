@@ -270,8 +270,8 @@ header .nav{
 	color: white;
 }
 #post_cash{
-	border: 1px solid #e50909;
-	color: #e50909;
+	background: #e50909;
+	color: white;
 }
 #zhuanzhang{
 	background: #e50909;
@@ -730,7 +730,7 @@ header .nav{
 	padding-right: 20px;
 	margin-bottom: 8px;
 }
-.cancel_suport{
+.cancel_suport,.cancel_collect{
 	width: 80px;
 	height: 25px;
 	background: #e50909;
@@ -739,6 +739,9 @@ header .nav{
 	cursor: pointer;
 	border-radius:3px;
 	border: none;
+}
+.cancel_collect{
+	clear: both
 }
 #cancel_div{
 	width: 90%;
@@ -920,7 +923,7 @@ header .nav{
 	display: inline-block;
 	width: 150px;
 	text-align: left;
-	color: #666;
+	color: white;
 }
 .zhuanzhang>div input[type=text]{
     border-radius: 3px;

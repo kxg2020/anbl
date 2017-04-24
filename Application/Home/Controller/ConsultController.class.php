@@ -6,7 +6,7 @@ use Think\Controller;
 class ConsultController extends CommonController{
 
     /**
-     * �û���ѯ
+     *
      */
     public function add(){
 
@@ -21,6 +21,7 @@ class ConsultController extends CommonController{
                 'image_url'=>$paramArr['image_url'],
                 'create_time'=>time(),
                 'member_id'=>$this->userInfo['id'],
+                'reply'=>'',
             ];
 
             $res = M('MemberConsult')->add($insertData);
@@ -37,7 +38,9 @@ class ConsultController extends CommonController{
             }
         }else{
 
-            die();
+            $this->ajaxReturn([
+                'status'=>0
+            ]);
         }
     }
 }

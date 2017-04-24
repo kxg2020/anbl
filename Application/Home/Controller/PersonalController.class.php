@@ -203,9 +203,9 @@ class PersonalController extends CommonController{
         $orderList = $this->pagination($orderLst,$pgNum,$pgSize);
         //>> 账户安全等级
         $safePercent = [
-            '1'=>'25%',
-            '2'=>'50%',
-            '3'=>'75%'
+            '1'=>'35%',
+            '2'=>'65%',
+            '3'=>'100%'
         ];
         $safeLevel = $safePercent[$row['safe_level']];
         //>> 组装电话号码
@@ -307,66 +307,6 @@ class PersonalController extends CommonController{
 
         if(!empty($paramArr)){
             $memberModel = M('Member');
-
-            if(!empty($paramArr['phone'])){
-                //>> 判断手机号是否已经绑定过账号
-                $res = $memberModel->where(['phone'=>$paramArr['phone']])->select();
-
-                if(!empty($res)){
-
-                    die($this->_printError('1042'));
-                }
-            }
-
-            //>> 判断该账号是否已经有手机绑定
-            $_res = $memberModel->where(['id'=>$this->userInfo['id']])->find();
-
-            if($_res['is_bind_phone'] == 0 && $_res['is_bind_email'] == 1){
-                $updateData = [
-                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
-                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
-                    'phone'=>$paramArr['phone'],
-                    'realname'=>$paramArr['realname'],
-                    'id_card'=>$paramArr['id_card'],
-                    'bank_card_name'=>$paramArr['bank_card_name'],
-                    'bank_card'=>$paramArr['bank_card'],
-                    'city'=>$paramArr['city'],
-                    'address'=>$paramArr['address'],
-                    'is_bind_phone'=>$paramArr['phone'] ? 1 : 0,
-                    'safe_level'=>3
-                ];
-            }elseif($_res['is_bind_email'] == 0 && $_res['is_bind_phone'] == 1){
-
-                $updateData = [
-                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
-                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
-                    'email'=>$paramArr['email'],
-                    'realname'=>$paramArr['realname'],
-                    'id_card'=>$paramArr['id_card'],
-                    'bank_card_name'=>$paramArr['bank_card_name'],
-                    'bank_card'=>$paramArr['bank_card'],
-                    'city'=>$paramArr['city'],
-                    'address'=>$paramArr['address'],
-                    'is_bind_email'=>$paramArr['email'] ? 1 : 0,
-                    'safe_level'=>3
-                ];
-            }elseif($_res['is_bind_email'] == 0 && $_res['is_bind_phone'] == 0){
-                $updateData = [
-                    'is_true'=>isset($paramArr['realname']) ? 1 : 0,
-                    'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
-                    'email'=>$paramArr['email'],
-                    'phone'=>$paramArr['phone'],
-                    'realname'=>$paramArr['realname'],
-                    'id_card'=>$paramArr['id_card'],
-                    'bank_card_name'=>$paramArr['bank_card_name'],
-                    'bank_card'=>$paramArr['bank_card'],
-                    'city'=>$paramArr['city'],
-                    'address'=>$paramArr['address'],
-                    'is_bind_email'=>$paramArr['email'] ? 1 : 0,
-                    'is_bind_phone'=>$paramArr['phone'] ? 1: 0,
-                    'safe_level'=>3
-                ];
-            }else{
                 $updateData = [
                     'is_true'=>isset($paramArr['realname']) ? 1 : 0,
                     'bank_name'=>isset($paramArr['bank_name']) ? $paramArr['bank_name'] : '',
@@ -378,12 +318,11 @@ class PersonalController extends CommonController{
                     'address'=>$paramArr['address'],
                     'safe_level'=>3
                 ];
-            }
-
             $res = $memberModel->where(['id'=>$this->userInfo['id']])->save($updateData);
-            if($res != 0){
-                die($this->_printSuccess());
+            if($res === false){
+                $this->ajaxReturn(['status'=>0]);
             }
+            $this->ajaxReturn(['status'=>1]);
         }
     }
 
