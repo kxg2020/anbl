@@ -5,6 +5,6 @@ $(function () {
 		$('.menu').toggle()
 	})
 	$('.content').click(function(){
-		$('.menu').toggle()
+		$('.menu').hide()
 	})
 })
