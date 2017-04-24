@@ -155,12 +155,14 @@
 
 	init();
 
-
+	var timer;
 	$('#center').on('mouseleave',function(){
-		setTimeout('init()',2000)
+	 timer = setTimeout('init()',2000)
 		
 	})
-
+	$('#center').on('mouseenter',function(){
+		clearTimeout(timer)		
+	})
 
 	  $(document).ready(function(){
 	      $(".main").tiltedpage_scroll({
