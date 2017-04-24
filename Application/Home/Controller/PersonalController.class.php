@@ -243,7 +243,7 @@ class PersonalController extends CommonController{
             'safeLevel'=>$safeLevel,
             'count_1'=>$count_1,
             'supportSituation'=>$rows,
-            'supportMoney'=>$supportMoney,
+            'supportMoney'=>$supportMoney ? $supportMoney : 0.00,
             'secretPhone'=>$secretPhone,
         ]);
         $this->display('personal/index');
