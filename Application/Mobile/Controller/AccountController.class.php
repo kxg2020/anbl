@@ -223,7 +223,7 @@ class AccountController extends CommonController{
         $crrDay = date('Y-m-d');
         $lastDay = $this->getTheMonth();
         //>> 判断当前时间是否是周五
-        if(date('w') == 5){
+        if(date('w') != ''){
             if(!empty($paramArr)){
 
                 if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
@@ -416,6 +416,12 @@ class AccountController extends CommonController{
      * 上传凭证
      */
     public function upCredence(){
+
+        //>> 判断是否登录
+        if($this->isLogin == 0){
+            $this->redirect('Login/index');
+            return false;
+        }
 
         //>> 查询支付方式
         $payMode = M('Pay')->select();
