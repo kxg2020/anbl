@@ -607,7 +607,8 @@ $(function(){
 		var time=60;
 		var timer=setInterval(function(){
 				time--;
-			$(".yanzhen").val(time+'S');	
+			$(".yanzhen").val(time+'S');
+			$(".yanzhen").attr("disabled", true);	
 			if(time==0){
 				clearInterval(timer);
 				$(".yanzhen").val('重新发送');	
