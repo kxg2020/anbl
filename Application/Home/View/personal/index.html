@@ -189,7 +189,7 @@
 									<p>开户支行:{$userInfo['address']}</p>
 									<img src="__PUBLIC__/wang/img/choice.png" alt="">
 								</div>
-								<p>充值金额: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
+								<p>充值阿纳豆: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
 								<p>交易凭证:<span style="margin-left: 20px;"><span style="height: 50px;width: 50px; text-align:center; line-height:50px;color:#e05959;cursor: pointer;display: inline-block;border: 1px dashed red" >+</span><input id="file_upload" style="cursor: pointer; width: 160px; height: 50px;"  class="money_file" type="file"></span></p>
 
 								<div id="container1"></div>
@@ -210,7 +210,7 @@
 							<p><span>充值时间</span>
 							<span>充值方式</span>
 							<span style="color: white;">交易号</span>
-							<span style="color: white;">充值金额</span>
+							<span style="color: white;">充值阿纳豆</span>
 							<span>交易状态</span></p>
 							<div id="ls">
 							<volist name="orderList" id="o">
@@ -230,7 +230,7 @@
 								<br><br>
 							</div>
 							<div class="div2">
-									<label ><span style="color:red;">*</span>请输入转入金额</label><input class="money01" type="text" value="">
+									<label ><span style="color:red;">*</span>请输入转入阿纳豆</label><input class="money01" type="text" value="">
 								<br><br>
 							</div>
 							<div class="div3">
@@ -378,7 +378,7 @@
 								return false;
 							}
 							if(_money == '' || isNaN(_money) || _money <= 0){
-								layer.tips('请填写正确金额', '.money01',{
+								layer.tips('请填写正确阿纳豆数额', '.money01',{
 									tips:[3,'orange'],
 									time:2000,
 									end:function(){
