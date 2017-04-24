@@ -21,6 +21,7 @@ class ConsultController extends CommonController{
                 'image_url'=>$paramArr['image_url'],
                 'create_time'=>time(),
                 'member_id'=>$this->userInfo['id'],
+                'reply'=>'',
             ];
 
             $res = M('MemberConsult')->add($insertData);
