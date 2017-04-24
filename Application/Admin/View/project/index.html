@@ -105,9 +105,9 @@
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                         <input type="button" class="btn btn-xs btn-info" data-id="{$tag.id}" data-rate-2="{$tag.float_rate}" data-rate-1="{$tag.fixed_rate}" value="分红比例" name="rate">
 
-                                        <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已返还</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">浮动分红</a></if>
+                                        <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已返还</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">票房分红</a></if>
 
-                                        <if condition="$tag['is_fy'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分佣</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-xs fyBtn">立即分佣</a></if>
+                                        <if condition="$tag['is_fy'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分佣</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-xs fyBtn">票房分佣</a></if>
                                     </td>
                                 </tr>
                                 </volist>
@@ -219,7 +219,7 @@
                         layer.msg(data.msg);
                     }else{
                         layer.msg(data.msg);
-                        window.location.href = "{:U('admin/order/supportOrder')}";
+                       // window.location.href = "{:U('admin/order/supportOrder')}";
                     }
                 });
             })

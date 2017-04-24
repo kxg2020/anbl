@@ -19,12 +19,12 @@
 	<div class="zhifubao">
 		<img src="{$ali['image_url']}" alt="">
 		<br>
-		<p>账号:<span style="color: #e50909;">{$ali['account']}</span></p><span>点击复制</span>
+		<p><span>账号:</span><input type="text" id="biao1" value="{$ali['account']}"></p><span class="btn1" data-clipboard-target="#biao1">点击复制</span>
 	</div>
 	<div class="weixing" style="display: none;">
 		<img src="{$weixin['image_url']}" alt="">
 		<br>
-		<p>账号:<span style="color: #e50909;">{$weixin['account']}</span></p><span>点击复制</span>
+		<p><span>账号:</span><input type="text" id="biao2" value="{$weixin['account']}"></p><span class="btn2" data-clipboard-target="#biao2">点击复制</span>
 	</div>
 	<div class="step">
 		<h4>第一步</h4>
@@ -44,5 +44,47 @@
 	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
 	<script src='__PUBLIC__/wang/putmoney/putmoney.js'></script>
+	<script src="__PUBLIC__/js/clipboard.min.js"></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+	<script type="text/javascript">
+		$('.btn1').click(function(){
+			var clipboard = new Clipboard('.btn1');
+			//优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+			clipboard.on('success', function(e) {
+				layer.open({
+					content: "复制成功",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				e.clearSelection();
+			});
+			clipboard.on('error', function(e) {
+				layer.open({
+					content: "请选择“拷贝”进行复制!",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+			});
+		});
+		$('.btn2').click(function(){
+			var clipboard = new Clipboard('.btn2');
+			//优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+			clipboard.on('success', function(e) {
+				layer.open({
+					content: "复制成功",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				e.clearSelection();
+			});
+			clipboard.on('error', function(e) {
+				layer.open({
+					content: "请选择“拷贝”进行复制!",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+			});
+		});
+	</script>
 </body>
 </html>

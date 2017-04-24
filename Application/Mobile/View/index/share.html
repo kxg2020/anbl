@@ -14,7 +14,7 @@
 	</header>
 	<div class="url">
 		<p>分享链接 :</p>
-		<input type="text" id="biao1" value="http://wap.com/login/index?invite_key={$key}"><span onClick="copyUrl2()">点击复制</span>
+		<input type="text" id="biao1" value="http://mobile.araberrimovie.com/login/index?invite_key={$key}"><span class="btn" data-clipboard-target="#biao1">点击复制</span>
 	</div>
 	<div class="share_img">
 		<div id="qrcode">
@@ -33,17 +33,18 @@
 	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
 	<script src='__PUBLIC__/wang/share/share.js'></script>
 	<script src="__PUBLIC__/js/qrcode.js"></script>
+	<script src="__PUBLIC__/js/clipboard.min.js"></script>
 	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
 	<script type="text/javascript">
 		var qrcode = new QRCode(document.getElementById("qrcode"), {
 			width: 180,
 			height: 180
 		});
-		qrcode.makeCode("http://wap.com/login/index?invite_key={$key}");
+		qrcode.makeCode("http://mobile.araberrimovie.com/index?invite_key={$key}");
 	</script>
 
 	<script type="text/javascript">
-		function copyUrl2()
+		/*function copyUrl2()
 		{
 			var Url2=document.getElementById("biao1");
 			Url2.select();
@@ -53,7 +54,27 @@
 				skin: 'msg',
 				time: 2 //2秒后自动关闭
 			});
-		}
+		}*/
+		$('.btn').click(function(){
+			var clipboard = new Clipboard('.btn');
+			//优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+			clipboard.on('success', function(e) {
+				layer.open({
+					content: "复制成功",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				e.clearSelection();
+			});
+			clipboard.on('error', function(e) {
+				layer.open({
+					content: "请选择“拷贝”进行复制!",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+			});
+		});
+
 	</script>
 </body>
 </html>

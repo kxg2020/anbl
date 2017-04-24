@@ -77,9 +77,27 @@
                             </div>
                             <div class="form-group">
                                 <label>每页显示条数</label>
-                                <input type="text" class="form-control" name="show_page_size"
-                                       value="{$info.show_page_size}">
+                                <input type="text" class="form-control" name="show_page_size" value="{$info.show_page_size}">
                             </div>
+                            <div class="form-group" style="clear: both">
+                                <label>制片人新增业绩比例设置</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="number" name="zrate" class="form-control" value="{$info.zrate}">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="clear: both">
+                                <label>出品人新增业绩比例设置</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="number" name="crate" class="form-control" value="{$info.crate}">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label>提现协议</label>
                                 <textarea id="container"  name="tixian" cols="200" rows="10">{$info.tixian}</textarea>

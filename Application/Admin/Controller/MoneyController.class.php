@@ -57,7 +57,6 @@ class MoneyController extends CommonController
                     'money' => $money,
                     'create_time' => time(),
                     'type' => 1,
-                    'support_id' => $info['id'],
                     'is_ok' => 1,
                     'remark' => $projectInfo['name'] . "影片本金返还及浮动分红",
                 ]);
@@ -79,12 +78,6 @@ class MoneyController extends CommonController
                 }
 
             }
-            /*// 修改项目分红状态
-            $rest = M('Project')->where(['id' => $projectInfo['id']])->save(['is_fh' => 1]);
-            if ($rest === false) {
-                M()->rollback();
-                $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
-            }*/
             M()->commit();
 
             $this->ajaxReturn(['msg' => "返还成功", 'status' => 1]);
@@ -92,11 +85,12 @@ class MoneyController extends CommonController
     }
 
     /**
-     * 分发支持佣金
+     * 分发支持佣金 票房
      */
     public function fy()
     {
         if (IS_POST && IS_AJAX) {
+
             $id = intval(I('post.id'));
             // 判断项目是否存在
             $projectInfo = M('Project')->find($id);
@@ -114,7 +108,7 @@ class MoneyController extends CommonController
                 $this->ajaxReturn(['msg' => "分佣参数未设置", 'status' => 0]);
             }
             if ($projectInfo['is_active'] == 1) {
-                $this->ajaxReturn(['msg' => "项目还未下架，不能进行分佣", 'status' => 0]);
+                $this->ajaxReturn(['msg' => "项目还未下架，不能进行票房分佣", 'status' => 0]);
             }
 
             // 查询出所有会员
@@ -123,17 +117,19 @@ class MoneyController extends CommonController
                 $this->ajaxReturn(['msg' => "该系统没有注册会员", 'status' => 0]);
             }
 
-            //查询出所有支持订单且状态为未分佣的订单
+            //查询出所有支持订单且状态为未票房分佣的订单
             $where = [
                 'project_id' => $projectInfo['id'],//当前项目
-                'is_fy' => 0,//未分佣的订单
-                'is_fh' => 1,//已分红订单
+                'is_pf' => 0,//未分佣的订单
+                'is_fh' => 1,//已浮动分红订单
+                'type' =>2,
             ];
 
             $supportInfo = M('MemberSupport')->where($where)->select();
 
+
             if (!$supportInfo) {
-                $this->ajaxReturn(['msg' => "该项目没有未分佣的订单", 'status' => 0]);
+                $this->ajaxReturn(['msg' => "该项目没有票房分佣的订单", 'status' => 0]);
             }
 
 
@@ -147,21 +143,15 @@ class MoneyController extends CommonController
                 // 查询出当前会员信息
                 $memberInfo = M('Member')->find($member_id);
 
-                if ($info['type'] == 1) {//固定分红类型
-                    $box = 0;
-                } else {
-                    $box = $info['expect_return'];
+                $box = $info['float'];// 票房收益
+
+                if($box<=0){
+                    continue;
                 }
+
                 //进行分佣
                 $this->genCommission($info, $box, $projectInfo, $memberInfo['parent_id'], 1);
             }
-
-            /*// 修改项目分红状态
-            $rest = M('Project')->where(['id' => $projectInfo['id']])->save(['is_fy' => 1]);
-            if ($rest === false) {
-                M()->rollback();
-                $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
-            }*/
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg' => "分佣成功", 'status' => 1]);
@@ -183,7 +173,7 @@ class MoneyController extends CommonController
             $rest = M('MemberSupport')
                 ->where(['id' => $info['id']])
                 ->save([
-                    'is_fy' => 1,
+                    'is_pf' => 1,
                     'is_ok' => 1,
                 ]);
             if ($rest === false) {
@@ -203,7 +193,7 @@ class MoneyController extends CommonController
                 }
                 if ($level == 1) {//第一父
                     // 计算佣金
-                    $commission = $info['support_money'] * ($projectInfo['first_rate'] / 100) + $roi * ($projectInfo['first_rate'] / 100);//一代投资额的5%  一代票房收益的5%
+                    $commission = $roi * ($projectInfo['first_rate'] / 100);//一代投资额的5%  一代票房收益的5%
                     // 操作数据库
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
@@ -215,13 +205,13 @@ class MoneyController extends CommonController
                 }
                 if ($level == 1) {//第一父
                     // 计算佣金
-                    $commission = $info['support_money'] * ($projectInfo['first_rate'] / 100) + $roi * ($projectInfo['first_rate'] / 100);// 5%
+                    $commission = $roi * ($projectInfo['first_rate'] / 100);// 5%
 
 
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
                 if ($level == 2) {//第二父
-                    $commission = $info['support_money'] * ($projectInfo['two_rate'] / 100) + $roi * ($projectInfo['two_rate'] / 100);//  3%
+                    $commission = $roi * ($projectInfo['two_rate'] / 100);//  3%
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
 
@@ -234,18 +224,18 @@ class MoneyController extends CommonController
                 }
                 if ($level == 1) {
                     // 计算佣金
-                    $commission = $info['support_money'] * ($projectInfo['first_rate'] / 100) + $roi * ($projectInfo['first_rate'] / 100);// 5%
+                    $commission =  $roi * ($projectInfo['first_rate'] / 100);// 5%
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
 
                 }
                 if ($level == 2) {
 
-                    $commission = $info['support_money'] * ($projectInfo['two_rate'] / 100) + $roi * ($projectInfo['two_rate'] / 100);// 3%
+                    $commission = $roi * ($projectInfo['two_rate'] / 100);// 3%
 
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
                 if ($level == 3) {
-                    $commission = $info['support_money'] * ($projectInfo['three_rate'] / 100) + $roi * ($projectInfo['three_rate'] / 100);// 1%
+                    $commission =  $roi * ($projectInfo['three_rate'] / 100);// 1%
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
 
@@ -257,15 +247,15 @@ class MoneyController extends CommonController
                 }
                 if ($level == 1) {
                     // 计算佣金
-                    $commission = $info['support_money'] * ($projectInfo['first_rate'] / 100) + $roi * ($projectInfo['first_rate'] / 100);// 5%
+                    $commission = $roi * ($projectInfo['first_rate'] / 100);// 5%
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
                 if ($level == 2) {
-                    $commission = $info['support_money'] * ($projectInfo['two_rate'] / 100) + $roi * ($projectInfo['two_rate'] / 100);// 3%
+                    $commission = $roi * ($projectInfo['two_rate'] / 100);// 3%
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
                 if ($level == 3) {
-                    $commission = $info['support_money'] * ($projectInfo['three_rate'] / 100) + $roi * ($projectInfo['three_rate'] / 100);// 1%
+                    $commission = $roi * ($projectInfo['three_rate'] / 100);// 1%
                     $this->insertDb($info, $commission, $parent, $projectInfo['name']);
                 }
                 break;
@@ -288,7 +278,7 @@ class MoneyController extends CommonController
         $rest = M('MemberSupport')
             ->where(['id' => $info['id']])
             ->save([
-                'is_fy' => 1,
+                'is_pf' => 1,
                 'is_ok' => 1,
             ]);
         if ($rest === false) {
@@ -310,7 +300,7 @@ class MoneyController extends CommonController
             'create_time' => time(),
             'support_id' =>$info['id'],
             'type' => 2,
-            'remark' => $projectName . "影片分佣",
+            'remark' => $projectName . "影片票房分佣",
         ]);
         if ($rest === false) {
             M()->rollback();
@@ -553,7 +543,7 @@ class MoneyController extends CommonController
             // 生成收益详情
             $rest = M('MemberProfit')->add([
                 'member_id' => $info['id'],
-                'money' => $money*(4/100),
+                'money' => $money*($this->systemInfo['crate']/100),
                 'create_time' => time(),
                 'type' => 3,
                 'remark' => "新增业绩分佣",
@@ -577,7 +567,7 @@ class MoneyController extends CommonController
             // 生成收益详情
             $rest = M('MemberProfit')->add([
                 'member_id' => $info['id'],
-                'money' => $money*(2/100),
+                'money' => $money*($this->systemInfo['zrate']/100),
                 'create_time' => time(),
                 'type' => 3,
                 'remark' => "新增业绩分佣",
