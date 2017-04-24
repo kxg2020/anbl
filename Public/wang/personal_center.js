@@ -602,6 +602,19 @@ $(function(){
 			$(".yanzhen").attr("disabled", true);
 		}
 	})	
+	$(".yanzhen").click(function(){
+		$(".yanzhen").attr("disabled", true);
+		var time=60;
+		var timer=setInterval(function(){
+				time--;
+			$(".yanzhen").val(time+'S');	
+			if(time==0){
+				clearInterval(timer);
+				$(".yanzhen").val('重新发送');	
+				$(".yanzhen").attr("disabled", false);
+			}
+		},1000)
+	})
 
 	
 
