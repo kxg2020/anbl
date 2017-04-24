@@ -39,6 +39,7 @@ class StarController extends CommonController{
             $roleInfo = M('RoleDescription')->where(['recruit_id'=>$paramArr['id'],'role_id'=>$roleId[0]])->find();
 
             $this->assign('movie',$movie);
+            $this->assign('userInfo',$this->userInfo);
             $this->assign('roles',$roles);
             $this->assign('roleInfo',$roleInfo);
             $this->assign('movieId',$paramArr['id']);
@@ -92,8 +93,10 @@ class StarController extends CommonController{
         //>> 查询余额
         $row  = M('Member')->where(['id'=>$this->userInfo['id']])->find();
 
+        //>> 根据电影id和角色id查询需要消耗的阿纳豆
+        $needMoney = M('RoleDescription')->where(['recruit_id'=>$paramArr['movieId'],'role_id'=>$paramArr['roleId']])->find();
         $money = $row['money'];
-        if($money < 70000){
+        if($money < $needMoney['money']){
 
             die($this->_printError('1064'));
         }
@@ -120,7 +123,7 @@ class StarController extends CommonController{
                 'create_time'=>time(),
             ];
             $res = M('MemberStar')->add($insertData);
-            $re = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money'] - 70000]);
+            $re = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money' => ['exp', 'money-' .$needMoney['money']]]);
             if($res && $re){
                 M()->commit();
                 die($this->_printSuccess());

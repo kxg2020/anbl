@@ -45,6 +45,15 @@ $(function(){
                             location.reload();
                         }
                     });
+                }else{
+                    layer.open({
+                        content: e.msg,
+                        style:'color:black'
+                        ,btn: ['确定'],
+                        yes:function(){
+                            location.reload();
+                        }
+                    });
                 }
             }
         });

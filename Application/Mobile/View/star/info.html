@@ -22,11 +22,12 @@
 			<option value="{$rol['id']}">{$rol['name']}</option>
 			</volist>
 		</select></p>
-		<p>申请阿纳豆: <span style="color: #e50909;">70000</span>	</p>
+		<p>申请阿纳豆: <span style="color: #e50909;" class="needMoney">{$roleInfo['money']}</span>	</p>
 	</div>
 	<div class="div">
 		<h3 >角色性格</h3>
 		<p class="intro">{$roleInfo['intro']}</p>
+		<input type="hidden" value="{$userInfo['money']}" name="crrMoney">
 	</div>
 	<div class="div">
 		<h3 >角色特征</h3>
@@ -37,11 +38,12 @@
 		<p class="figure">{$roleInfo['figure']}</p>
 	</div>
 	<footer>
-		<p>消耗阿纳豆:<span> 70000</span></p>
+		<p>消耗阿纳豆:<span class="needMoney ned">{$roleInfo['money']}</span></p>
 		<a href="{:U('Star/application',['id'=>$movieId])}" id="ok">立即申请</a>
 	</footer>
 	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
 	<script src='__PUBLIC__/wang/actordetail/actordetail.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
 </body>
 </html>
