@@ -41,10 +41,6 @@ class PageConfigController extends  CommonController{
             $worksList = $this->pagination($list,$pgNum,$pgSize);
 
 
-        }else{
-
-            return false;
-
         }
 
         if(IS_AJAX){
