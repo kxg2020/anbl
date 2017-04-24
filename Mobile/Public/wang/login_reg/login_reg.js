@@ -172,9 +172,10 @@ $(function(){
 
 	//判断进来的是否是注册用户
 	var url=window.location.href;
-	//console.log(url.indexOf('?url='))
-	var txt=url.slice(url.indexOf('?url=')+5);
-	if(txt=='reg'){
+	console.log(url)
+	var txt=url.slice(url.indexOf('/xt/')+4,url.indexOf('/xt/')+5);
+	console.log(txt)
+	if(txt==1){
 		$('.loginorreg>p').removeClass('choice')
 		$('.loginorreg>p').eq(1).addClass('choice');
 		$('.login').hide();

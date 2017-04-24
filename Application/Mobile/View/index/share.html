@@ -14,7 +14,7 @@
 	</header>
 	<div class="url">
 		<p>分享链接 :</p>
-		<input type="text" id="biao1" value="http://mobile.araberrimovie.com/login/index?invite_key={$key}"><span class="btn" data-clipboard-target="#biao1">点击复制</span>
+		<input type="text" id="biao1" value="http://mobile.araberrimovie.com/login/index/invite_key/{$key}/xt/1"><span class="btn" data-clipboard-target="#biao1">点击复制</span>
 	</div>
 	<div class="share_img">
 		<div id="qrcode">
@@ -40,7 +40,7 @@
 			width: 180,
 			height: 180
 		});
-		qrcode.makeCode("http://mobile.araberrimovie.com/index?invite_key={$key}");
+		qrcode.makeCode("http://mobile.araberrimovie.com/index?invite_key={$key}&xt=1");
 	</script>
 
 	<script type="text/javascript">
