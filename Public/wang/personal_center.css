@@ -270,8 +270,8 @@ header .nav{
 	color: white;
 }
 #post_cash{
-	border: 1px solid #e50909;
-	color: #e50909;
+	background: #e50909;
+	color: white;
 }
 #zhuanzhang{
 	background: #e50909;
@@ -920,7 +920,7 @@ header .nav{
 	display: inline-block;
 	width: 150px;
 	text-align: left;
-	color: #666;
+	color: white;
 }
 .zhuanzhang>div input[type=text]{
     border-radius: 3px;
