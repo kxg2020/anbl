@@ -359,12 +359,10 @@ class MemberController extends  CommonController{
                 'group'=>$paramArr['chupin_tuandui'],
             ];
 
-            for($i = 1;$i<=4;++$i){
-                $res_1 = $model->where(['role'=>'支持者'])->save($updateData_1);
-                $res_2 = $model->where(['role'=>'经纪人'])->save($updateData_2);
-                $res_3 = $model->where(['role'=>'制片人'])->save($updateData_3);
-                $res_4 = $model->where(['role'=>'出品人'])->save($updateData_4);
-            }
+                $res_1 = $model->where(['name'=>'zhichi'])->save($updateData_1);
+                $res_2 = $model->where(['name'=>'jingji'])->save($updateData_2);
+                $res_3 = $model->where(['name'=>'zhipian'])->save($updateData_3);
+                $res_4 = $model->where(['name'=>'chupin'])->save($updateData_4);
             $this->ajaxReturn(['status'=>1,'msg'=>'保存成功']);
         }else{
 
@@ -397,6 +395,7 @@ class MemberController extends  CommonController{
         }else{
 
             $rows = M('IntegralInstitution')->select();
+
             //>> 角色制度
             $roles = M('RoleUp')->select();
             $this->assign('row',$rows);
