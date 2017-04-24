@@ -97,20 +97,27 @@ class CommonController extends Controller{
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
 
+                //>> 多少经纪人
+                $jingji = $this->getJingJiRen($row['id']);
+
+                //>> 多少制片人
+                $zhipian = $this->getZhiPianRen($row['id']);
+
                 //>> 直推xxx人，升级为经纪人
                 if($count >= $jjArr['follower']){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
-                //>> 如果投资35000以上,直推10人,团队100人升级为制片人
-                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group']){
+
+                //>> 如果投资35000以上,直推10名支持者,团队100人升级为制片人,2名经纪人
+                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && $zpArr['follower_jingji'] > $jingji){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
-                //>> 如果个人投资xxx 直推xx人 团队xx人 升级出品人
-                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group']){
+                //>> 如果个人投资70000 直推30人支持者 团队500人 2名制片人
+                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $cpArr['follower_zhipian'] > $zhipian){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
@@ -165,6 +172,26 @@ class CommonController extends Controller{
             }
         }
         return $sum;
+    }
+
+    /**
+     * 查询下线经纪人
+     */
+    public function getJingJiRen($id){
+
+        $rows = M('Member')->where(['parent_id'=>$id,'role'=>2])->count();
+
+        return $rows;
+    }
+
+    /**
+     * 查询下线制片人人
+     */
+    public function getZhiPianRen($id){
+
+        $rows = M('Member')->where(['parent_id'=>$id,'role'=>3])->count();
+
+        return $rows;
     }
 
 

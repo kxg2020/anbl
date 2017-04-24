@@ -335,28 +335,41 @@ class MemberController extends  CommonController{
     public function roleUp(){
 
         $paramArr = $_REQUEST;
+
         $model = M('RoleUp');
         if(!empty($paramArr)){
 
             $updateData_1 = [
                 'support'=>$paramArr['zhichi_touzi'],
-                'follower'=>$paramArr['zhichi_zhitui'],
-                'group'=>$paramArr['zhichi_tuandui'],
+                'follower'=>0,
+                'group'=>0,
+                'follower_jingji'=>0,
+                'follower_zhipian'=>0,
+                'follower_zhichi'=>0,
             ];
             $updateData_2 = [
-                'support'=>$paramArr['jingji_touzi'],
+                'support'=>0,
                 'follower'=>$paramArr['jingji_zhitui'],
-                'group'=>$paramArr['jingji_tuandui'],
+                'group'=>0,
+                'follower_jingji'=>0,
+                'follower_zhipian'=>0,
+                'follower_zhichi'=>0,
             ];
             $updateData_3 = [
                 'support'=>$paramArr['zhipian_touzi'],
-                'follower'=>$paramArr['zhipian_zhitui'],
+                'follower'=>0,
                 'group'=>$paramArr['zhipian_tuandui'],
+                'follower_jingji'=>$paramArr['zhipian_jingjiren'],
+                'follower_zhipian'=>0,
+                'follower_zhichi'=>$paramArr['zhipian_zhichizhe'],
             ];
             $updateData_4 = [
                 'support'=>$paramArr['chupin_touzi'],
-                'follower'=>$paramArr['chupin_zhitui'],
+                'follower'=>0,
                 'group'=>$paramArr['chupin_tuandui'],
+                'follower_jingji'=>0,
+                'follower_zhipian'=>$paramArr['chupin_zhipianren'],
+                'follower_zhichi'=>$paramArr['chupin_zhichizhe'],
             ];
 
                 $res_1 = $model->where(['name'=>'zhichi'])->save($updateData_1);
@@ -398,6 +411,7 @@ class MemberController extends  CommonController{
 
             //>> 角色制度
             $roles = M('RoleUp')->select();
+
             $this->assign('row',$rows);
             $this->assign('roles',$roles);
             $this->display('member/integral');

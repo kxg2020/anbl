@@ -17,7 +17,7 @@
 		 <div>
 			<p class="username"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if> <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
-			您当前的累计阿纳豆为:{$allInfo['integral']}
+			支持者Lv{$personal['level']}:{$allInfo['integral']}阿纳豆
 			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
 			<div class="money"><p>已支持阿纳豆: <span>{$supportMoney}</span></p><p>剩余阿纳豆: <span>{$personal['money']}</span></p></div>
@@ -299,6 +299,7 @@
 							<div><label >回复内容</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="rdcontent"></textarea></div>
 							<input class="back_title" type="button" value="返回到标题">
 							<input type="hidden" value="" id="question" name="question">
+							<input type="hidden" value="{$personal['username']}"  name="wode">
 						</form>
 					</div>
 				</div>
@@ -321,6 +322,7 @@
 						//>> 转账
 						$('#check_1').click(function(){
 							username = $('.username01').val();
+							crrnam = $('input[name = wode]').val();
 							reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
 							if(!reg.test(username)){
 								layer.tips('请填写正确的手机号', '.username01',{
@@ -332,6 +334,18 @@
 								});
 								return false;
 							}
+
+							if(username == crrnam){
+								layer.tips('不能填写自己的账号', '.username01',{
+									tips:[3,'orange'],
+									time:2000,
+									end:function(){
+										$('.username01').val('').focus();
+									}
+								});
+								return false;
+							}
+
 							$.ajax({
 								'type':'post',
 								'dataType':'json',

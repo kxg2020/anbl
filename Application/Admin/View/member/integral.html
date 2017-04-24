@@ -133,19 +133,56 @@
                             <h2>会员角色升级设置</h2>
                             <!--项目基本信息-->
                             <div class="tab-pane active" id="baseInfo">
-                                <volist name="roles" id="rol">
+
                                     <div class="form-group">
 
-                                        <label class="col-sm-2 col-sm-2 control-label">{$rol['role']}条件:</label><br>
+                                        <label class="col-sm-2 col-sm-2 control-label">支持者条件:</label><br>
                                         <div class="col-sm-4 col-md-4">
-                                          投资 <input type="number"  name="{$rol['name']}_touzi"  class="form-control" placeholder="" value="{$rol['support']}">
+                                          投资 <input type="number"  name="zhichi_touzi"  class="form-control" placeholder="" value="{$roles['0']['support']}">
 
-                                           直推 <input type="number"  name="{$rol['name']}_zhitui" <if condition="$rol['name'] eq 'zhichi'">disabled</if>  class="form-control" placeholder="" value="{$rol['follower']}">
-                                           团队 <input type="number"  name="{$rol['name']}_tuandui" <if condition="($rol['name'] eq 'zhichi') or ($rol['name'] eq 'jingji')  ">disabled</if>  class="form-control" placeholder="" value="{$rol['group']}">
                                         </div>
 
                                     </div>
-                            </volist>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 col-sm-2 control-label">经纪人条件:</label><br>
+                                    <div class="col-sm-4 col-md-4">
+                                        直推 <input type="number"  name="jingji_zhitui"  class="form-control" placeholder="" value="{$roles['1']['follower']}">
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 col-sm-2 control-label">制片人条件:</label><br>
+                                    <div class="col-sm-4 col-md-4">
+                                        投资 <input type="number"  name="zhipian_touzi"  class="form-control" placeholder="" value="{$roles[2]['support']}">
+
+                                        直推支持者 <input type="number"  name="zhipian_zhichizhe"   class="form-control" placeholder="" value="{$roles[2]['follower_zhichi']}">
+
+                                        直推经纪人 <input type="number"  name="zhipian_jingjiren"   class="form-control" placeholder="" value="{$roles[2]['follower_jingji']}">
+
+                                        团队 <input type="number"  name="zhipian_tuandui"   class="form-control" placeholder="" value="{$roles[2]['group']}">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 col-sm-2 control-label">出品人条件:</label><br>
+                                    <div class="col-sm-4 col-md-4">
+                                        投资 <input type="number"  name="chupin_touzi"  class="form-control" placeholder="" value="{$roles[3]['support']}">
+
+                                        直推支持者 <input type="number"  name="chupin_zhichizhe"   class="form-control" placeholder="" value="{$roles[3]['follower_zhichi']}">
+
+                                        直推制片人 <input type="number"  name="chupin_zhipianren"   class="form-control" placeholder="" value="{$roles[3]['follower_zhipian']}">
+
+                                        团队 <input type="number"  name="chupin_tuandui"   class="form-control" placeholder="" value="{$roles[3]['group']}">
+                                    </div>
+
+                                </div>
+
                                 <br>
                             </div>
                             <br>
@@ -204,22 +241,22 @@ $(function(){
 
     $('#role').click(function(){
             var  zhichi_touzi = $('input[name=zhichi_touzi]').val();
-            var  zhichi_zhitui = $('input[name=zhichi_zhitui]').val();
-            var  zhichi_tuandui = $('input[name=zhichi_tuandui]').val();
 
 
-            var  jingji_touzi = $('input[name=jingji_touzi]').val();
+
             var  jingji_zhitui = $('input[name=jingji_zhitui]').val();
-            var  jingji_tuandui = $('input[name=jingji_tuandui]').val();
+
 
 
             var  zhipian_touzi = $('input[name=zhipian_touzi]').val();
-            var  zhipian_zhitui = $('input[name=zhipian_zhitui]').val();
+            var  zhipian_zhichizhe = $('input[name=zhipian_zhichizhe]').val();
+            var  zhipian_jingjiren = $('input[name=zhipian_jingjiren]').val();
             var  zhipian_tuandui = $('input[name=zhipian_tuandui]').val();
 
 
             var  chupin_touzi = $('input[name=chupin_touzi]').val();
-            var  chupin_zhitui = $('input[name=chupin_zhitui]').val();
+            var  chupin_zhichizhe = $('input[name=chupin_zhichizhe]').val();
+            var  chupin_zhipianren = $('input[name=chupin_zhipianren]').val();
             var  chupin_tuandui = $('input[name=chupin_tuandui]').val();
 
         $.ajax({
@@ -228,19 +265,19 @@ $(function(){
             'url':location.protocol+'//'+window.location.host+'/admin/Member/roleUp',
             'data':{
                 'zhichi_touzi':zhichi_touzi,
-                'zhichi_zhitui':zhichi_zhitui,
-                'zhichi_tuandui':zhichi_tuandui,
 
-                'jingji_touzi':jingji_touzi,
-                'jingji_zhitui':jingji_zhitui,
-                'jingji_tuandui':jingji_tuandui,
+
+                'jingji_zhitui': jingji_zhitui,
+
 
                 'zhipian_touzi':zhipian_touzi,
-                'zhipian_zhitui':zhipian_zhitui,
+                'zhipian_zhichizhe':zhipian_zhichizhe,
+                'zhipian_jingjiren':zhipian_jingjiren,
                 'zhipian_tuandui':zhipian_tuandui,
 
                 'chupin_touzi':chupin_touzi,
-                'chupin_zhitui':chupin_zhitui,
+                'chupin_zhichizhe':chupin_zhichizhe,
+                'chupin_zhipianren':chupin_zhipianren,
                 'chupin_tuandui':chupin_tuandui,
             },
             success:function(result){
