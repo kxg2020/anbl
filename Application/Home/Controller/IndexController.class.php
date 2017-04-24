@@ -49,6 +49,10 @@ class IndexController extends CommonController{
         $commentModel = M('Comment');
         //>> 默认查询导演
         $rows = $commentModel->where(['type'=>1,'movie_id'=>$id])->order('create_time desc')->select();
+        foreach($rows as &$row){
+            $row['username']= telephoneNumber($row['username']);
+        }
+        unset($row);
         $directorArr = [];
         $count = 0;
 
@@ -94,7 +98,10 @@ class IndexController extends CommonController{
                 $pgSize = 12;
             }
             $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'] ,'type'=>$paramArr['type']])->order('create_time desc')->select();
-
+            foreach($rows as &$row){
+                $row['username']= telephoneNumber($row['username']);
+            }
+            unset($row);
             if(!empty($rows)){
                 $directorArr = $this->pagination($rows,$pgNum,$pgSize);
                 $this->ajaxReturn([
