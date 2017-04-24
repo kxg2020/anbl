@@ -233,6 +233,13 @@ $(function(){
 						tips:4
 					});
 				}else{
+
+					if(bank_card_name != realname){
+						layer.tips('开户名必须和真实姓名一致','input[name = bank_card_name]',{
+							tips:4
+						});
+						return false;
+					}
 					if(bank_card == ''){
 						layer.tips('请输入银行卡号','input[name = bank_card]',{
 							tips:4
@@ -330,7 +337,7 @@ $(function(){
 		}
 		if(money == ''){
 
-			layer.tips('充值积分不能为空!','input[name = rechargeMoney]');
+			layer.tips('充值阿纳豆不能为空!','input[name = rechargeMoney]');
 		}else{
 			//>> 判断是否是数字
 			var isNum = /^[0-9]*$/;

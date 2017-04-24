@@ -218,7 +218,7 @@
 									<span><if condition="$o['type'] eq 1">微信</if><if condition="$o['type'] eq 2">支付宝</if><if condition="$o['type'] eq 3">银行转账</if></span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>
-									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png" style="border-radius:50%;height: 18px;width: 18px"></span></p>
+									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png"  style="border-radius:50%;height: 18px;width: 18px"></span></p>
 							</volist>
 						 </div>
 							<div id="demo6" style="margin-left: 42px;"></div>
@@ -600,7 +600,7 @@
 											});
 										}
 									}else{
-										layer.tips('请输入提现积分','input[name = exMoney]');
+										layer.tips('请输入提现阿纳豆数额','input[name = exMoney]');
 										return false;
 									}
 								});
@@ -612,7 +612,7 @@
 									data = $(this).val();
 
 									if(data == ''){
-										layer.tips('请输入充值积分','input[name = rechargeMoney]');
+										layer.tips('请输入充值阿纳豆数额','input[name = rechargeMoney]');
 										return false;
 									}
 									if(!isNaN(data)){
