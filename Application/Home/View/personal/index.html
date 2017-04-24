@@ -31,9 +31,8 @@
 				<if condition="$personal['safe_level'] eq 3">
 					<span>高</span>
 				</if>
-				<span class="up_btn">点击提升</span></div>
+				<if condition="($personal['safe_level'] eq 1 ) or ($personal['safe_level'] eq 2 )"><span class="up_btn">点击提升</span></if></div>
 			<div class="user_inform" id="phone">{$secretPhone}</div>
-			<div class="user_inform" id="email"><if condition="$personal['is_bind_email'] eq 0 ">未绑定<else/><span style="color: forestgreen">已绑定</span></if></div>
 			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
 			<div><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span></div>
 		 </div>
@@ -85,10 +84,6 @@
 							<div class="save_update" id="sex">保存更新</div>
 						</div>
 						<div class="safe_center"  style="display: none;" >
-							<div class="bind_phone"><span>手机:</span><span><if condition="$userInfo['is_bind_phone'] eq 0 "><a id="bind_phone">绑定手机</a><else/><a style="color: forestgreen;text-decoration: none">已绑定</a></if></span><span style="display: none;"><input type="text" placeholder="请输入您的手机" name="phone" value=""></span></div>
-
-							<div class="bind_email"><span>邮箱:</span><if condition="$userInfo['is_bind_email'] eq 0"><span><a id="bind_email">绑定邮箱</a></span><else/><span><a style="color: forestgreen;text-decoration: none">已绑定</a></span></if><span style="display: none;"><input type="text" placeholder="请输入您的邮箱" name="email" value=""></span></div>
-
 							<div class="bind_username"><span><i></i><if condition="$userInfo['realname'] eq ''"><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}"><else/><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}" disabled></if></span><label>*注意：必须是真实姓名</label></div>
 							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
 
@@ -206,8 +201,8 @@
 							</div>
 						</if>
 						<div class="get_money" style="display: none;">
-							<p>提现金额: <input type="text" name="exMoney" placeholder="0.00"></p>
-							<p>可提余额{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
+							<p>提现阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
+							<p>可提阿纳豆数目:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
 							<div class="question_div"></div>
 							<input type="button" value="确定" id="get_btn" class="ex" >
 						</div>

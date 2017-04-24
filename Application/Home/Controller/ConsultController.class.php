@@ -6,7 +6,7 @@ use Think\Controller;
 class ConsultController extends CommonController{
 
     /**
-     * �û���ѯ
+     *
      */
     public function add(){
 
@@ -37,7 +37,9 @@ class ConsultController extends CommonController{
             }
         }else{
 
-            die();
+            $this->ajaxReturn([
+                'status'=>0
+            ]);
         }
     }
 }

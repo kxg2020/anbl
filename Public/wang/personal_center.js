@@ -200,9 +200,8 @@ $(function(){
 
 //>> 验证表单
 	$('#save').click(function(){
-		var phone = $('input[name = phone]').val();
+
 		var bank = $('#bind_bank').val();
-		var email = $('input[name = email]').val();
 		var realname = $('input[name = realname]').val();
 		var id_card = $('input[name = id_card]').val();
 		var bank_card_name = $('input[name = bank_card_name]').val();
@@ -210,17 +209,7 @@ $(function(){
 		var city = $('input[name = city]').val();
 		var address = $('input[name = address]').val();
 
-		//>> 验证手机号
-		if(phone != ''){
-			var reg_1 = /^0?(13|14|15|17|18)[0-9]{9}$/;
-			if(!reg_1.test(phone)){layer.tips('手机号格式不正确','input[name = phone]'); return false;}
 
-		}
-		if(email != ''){
-			var reg_2 = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-			if(!reg_2.test(email)){layer.tips('邮箱格式不正确','input[name = email]');return false;}
-
-		}
 		if(realname == ''){
 			layer.tips('请输入真实姓名','input[name = realname]',{
 				tips:4
@@ -273,8 +262,6 @@ $(function(){
 									'dataType':'json',
 									'url':url_,
 									'data':{
-										'phone':phone ? phone : '',
-										'email':email? email : '',
 										'realname':realname,
 										'id_card':id_card,
 										'bank_card_name':bank_card_name,
