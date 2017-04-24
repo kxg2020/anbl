@@ -73,7 +73,7 @@ class ProjectController extends CommonController
                 $this->ajaxReturnError('影片封面图必须上传',__LINE__);
             }
             if(!$_data['analysis']){
-                $this->ajaxReturnError('故事分析必须填写',__LINE__);
+                $this->ajaxReturnError('剧情简介必须填写',__LINE__);
             }
 
             // 获取项目基本信息
@@ -183,6 +183,7 @@ class ProjectController extends CommonController
                 'showaddress' => $_data['showaddress'],
                 'showtime' => $_data['showtime'],
                 'duration' => $_data['duration'],
+                'speed' => $_data['speed'],
                 'star_num' => $_data['star_num']>5?5:$_data['star_num'],
                 'title' => $_data['title'],
                 'mode' => $_data['mode'],
