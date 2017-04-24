@@ -15,7 +15,7 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			<p class="username">{$personal['username']} <span id="user_lv"></span></p>
+			<p class="username">{$personal['username']} <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			您当前的累计阿纳豆为:{$allInfo['integral']}
 			</if></div>
@@ -35,7 +35,7 @@
 			<div class="user_inform" id="phone">{$secretPhone}</div>
 			<div class="user_inform" id="email"><if condition="$personal['is_bind_email'] eq 0 ">未绑定<else/><span style="color: forestgreen">已绑定</span></if></div>
 			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
-			<div><if condition="$userInfo['is_allowed_recharge'] eq 1 and $userInfo['bank_card'] neq ''"><span id="recharge">充值</span><span id="post_cash">提现</span><else/><span class="up_btn" style="border: 1px solid #e50909;
+			<div><if condition="$userInfo['is_allowed_recharge'] eq 1 and $userInfo['bank_card'] neq ''"><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span><else/><span class="up_btn" style="border: 1px solid #e50909;
     color: #e50909;">请完善信息</span></if></div>
 		 </div>
 			<p id="repeat_bg">点击替换背景</p>
@@ -80,7 +80,7 @@
 								$('#d').css('left',arr[lv]);
 								$('#d').text(brr[lv]);
 								$('#bg_1').css({'background':'url('+'__PUBLIC__/wang/img/level'+lvR+'.png)','left':arr[lv]});
-								$('#user_lv').css({'backgroundImage':'url('+'__PUBLIC__/wang/img/level'+lvR+'.png)','left':arr[lv]});
+								
 								//console.log(lvR)
 							</script>
 							<div class="save_update" id="sex">保存更新</div>
@@ -169,13 +169,14 @@
 				<p>R</p>
 				<p>B</p>
 		    </div>
-		    <div class="money_operat" style="display:none;">
+		    <div class="money_operat" style="display:block;">
 				<div class="bg">
 				<div class="close_money"></div>
 					<div class="money_content">
 						<ul>
 							<li class="choice">充值</li>
 							<li>提现</li>
+							<li>转账</li>
 							<li class="put_record">充值记录<span>>></span></li>
 						</ul>
 						<ul style="display: none;">
@@ -183,7 +184,7 @@
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
 						<if condition="$userInfo['bank_card'] neq '' ">
-							<div class="put_money">
+							<div class="put_money" style="display: none;">
 								<p>选择充值方式: <span class="apply_style apply_style_choice" data-id="1">微信</span><span class="apply_style" data-id="2">支付宝</span><span class="apply_style" data-id="3">个人银联</span></p>
 								<div id="feiyinglian">
 									<img id="weixing" src="{$weixin['image_url']}" alt="">
@@ -229,30 +230,20 @@
 							<div id="demo6" style="margin-left: 42px;"></div>
 					</div>
 
-
-						<div class="money_deal" style="display: none;">
-
-							<p><span>交易时间</span>
-								<span>交易类型</span>
-								<span style="color: white;">交易号</span>
-								<span style="color: white;">交易金额</span>
-
-								<volist name="consume" id="c">
-									<p><span>{:date('Y-m-d',$c['create_time'])}</span>
-										<span>电影下载</span>
-										<span>{$c.order_number}</span>
-										<span>{$c.money}</span>
-										<span>{$c.is_pass}</span></p>
-								</volist>
-
-
-								<volist name="consume_1" id="e">
-									<p><span></span>
-										<span>电影支持</span>
-										<span>{$e.order_number}</span>
-										<span></span>
-								</volist>
-
+						<div class="zhuanzhang" style="display: none;">
+							<div class="div1">
+								<label >请输入转入帐号</label>	<input type="text" class="username01" style="margin-left: 15px;"> <input type="button" value="验证">
+								<p class="search_result">帐号不存在</p>
+							</div>
+							<div class="div2">
+									<label >请输入转入金额</label><input class="money01" type="text">
+							</div>
+							<div class="div3">
+									<label>请输入手机验证码</label><input class="phone01" type="text"><input class="yanzhen" type="button" disabled="disabled" value="获取验证码">
+							</div>
+							<div class="div4">
+									<input type="button" value="确定">
+							</div>
 						</div>
 
 					</div>
