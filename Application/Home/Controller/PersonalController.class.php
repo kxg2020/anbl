@@ -118,9 +118,8 @@ class PersonalController extends CommonController{
         $topLeader = $row;
 
 
-        //>> 所有消费
-
-
+        //>> 所有收益
+        $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
 
 
         //>> 查询当前用户的支持情况
@@ -229,6 +228,7 @@ class PersonalController extends CommonController{
             'weixin'=>$weixin,
             'ali'=>$ali,
             'films'=>$films,
+            'allget'=>$allGet,
             'follower'=>$follower,
             'recruit'=>$recruit,
             'topLeader'=>$topLeader,

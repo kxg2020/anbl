@@ -339,12 +339,19 @@
 
 							<thead>
 								<tr>
-									<th>消费时间</th>
-									<th>消费阿纳豆</th>
-									<th>消费类型</th>
+									<th>时间</th>
+									<th>阿纳豆</th>
+									<th>类型</th>
 								</tr>								
 							</thead>
 							<tbody>
+							<volist name="allget" id="al">
+								<tr>
+									<td>{:date('Y-m-d',$al['create_time'])}</td>
+									<td >{$al.money}</td>
+									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
+								</tr>
+							</volist>
 							<volist name="consume_1" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
