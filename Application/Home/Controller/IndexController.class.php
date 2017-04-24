@@ -58,6 +58,7 @@ class IndexController extends CommonController{
         }
         // 查看项目是否存在
         $info = M('project as a')
+            ->field('a.*,b.story,b.analysis,b.film_critic,b.expected_return')
             ->join('left join an_project_survey as b on b.project_id = a.id')
             ->where(['a.id'=>$id])
             ->find();
@@ -70,6 +71,7 @@ class IndexController extends CommonController{
             'comment'=>$directorArr,
             'count'=>$count,
         ]);
+
         $this->display('index/detail');
     }
 

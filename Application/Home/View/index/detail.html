@@ -52,7 +52,7 @@
 			<div class="collect">
 				<p>#{$info['title']}</p>
 				<p>{:date('Y-m-d',$info['start_time'])} 至 {:date('Y-m-d',$info['end_time'])}</p>
-				<p><span id="skl">{$info.collection_number}</span>人收藏 <input id="fast_collect" type="button" onclick="collect({$info['id']})" value="立即收藏"></p>
+				<p><span id="skl">{$info.collection_number}</span>人收藏 <input id="fast_collect" type="button" data-id="{$info['id']}" onclick="collect()" value="立即收藏"></p>
 			</div>
 			<div class="suport">
 				<p>已支持阿纳豆</p>
@@ -324,8 +324,8 @@
 			 });
 		 })
 
-		 function collect(_id){
-			 var _id = _id;
+		 function collect(){
+			 var _id = $('#fast_collect').attr('data-id');
 			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
 				 if (data.status == 0) {
 					 layer.confirm('您还没有登录！', {
