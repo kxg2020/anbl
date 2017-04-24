@@ -205,3 +205,16 @@ function getProjectSpeed($level)
     }
     return $levelName;
 }
+
+/**
+ * 电话号
+ */
+function telephoneNumber($tel){
+
+    if(empty($tel)) return false;
+
+    $phone = substr($tel,0,3).'****'.substr($tel,7,4);
+
+    return $phone;
+
+}

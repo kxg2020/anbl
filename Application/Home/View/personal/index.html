@@ -15,7 +15,7 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			<p class="username">{$personal['username']} <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
+			<p class="username"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if> <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			您当前的累计阿纳豆为:{$allInfo['integral']}
 			</if></div>
