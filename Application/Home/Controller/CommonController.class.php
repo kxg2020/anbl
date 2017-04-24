@@ -187,11 +187,22 @@ class CommonController extends Controller{
     /**
      * 查询下线制片人人
      */
-    public function getZhiPianRen($id){
+    public function getZhiPianRen($id)
+    {
 
-        $rows = M('Member')->where(['parent_id'=>$id,'role'=>3])->count();
+        $rows = M('Member')->where(['parent_id' => $id, 'role' => 3])->count();
 
         return $rows;
+    }
+
+    /*
+     * 空操作
+     */
+    public function _empty()
+    {
+        // 显示404 页面
+        $this->display('Error:404');
+
     }
 
 

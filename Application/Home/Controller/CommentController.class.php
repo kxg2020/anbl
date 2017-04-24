@@ -48,6 +48,7 @@ class CommentController extends CommonController{
                 if(isset($paramArr['type']) && !empty($paramArr['type']) && is_numeric($paramArr['type'])){
                     //>> 查询所有评论
                     $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'],'type'=>$paramArr['type']])->select();
+
                     if(!empty($rows)){
 
                         $pgNum = $paramArr['pgNum'] ? $paramArr['pgNum'] : 1;
