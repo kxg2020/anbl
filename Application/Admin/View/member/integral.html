@@ -138,10 +138,10 @@
 
                                         <label class="col-sm-2 col-sm-2 control-label">{$rol['role']}条件:</label><br>
                                         <div class="col-sm-4 col-md-4">
-                                          投资 <input type="number"  name="{$rol['name']}_touzi"  class="form-control" placeholder="" value="">
+                                          投资 <input type="number"  name="{$rol['name']}_touzi"  class="form-control" placeholder="" value="{$rol['support']}">
 
-                                           直推 <input type="number"  name="{$rol['name']}_zhitui"  class="form-control" placeholder="" value="">
-                                           团队 <input type="number"  name="{$rol['name']}_tuandui"  class="form-control" placeholder="" value="">
+                                           直推 <input type="number"  name="{$rol['name']}_zhitui" <if condition="$rol['name'] eq 'zhichi'">disabled</if>  class="form-control" placeholder="" value="{$rol['follower']}">
+                                           团队 <input type="number"  name="{$rol['name']}_tuandui" <if condition="($rol['name'] eq 'zhichi') or ($rol['name'] eq 'jingji')  ">disabled</if>  class="form-control" placeholder="" value="{$rol['group']}">
                                         </div>
 
                                     </div>
@@ -218,9 +218,9 @@ $(function(){
             var  zhipian_tuandui = $('input[name=zhipian_tuandui]').val();
 
 
-            var  chuping_touzi = $('input[name=chuping_touzi]').val();
-            var  chuping_zhitui = $('input[name=chuping_zhitui]').val();
-            var  chuping_tuandui = $('input[name=chuping_tuandui]').val();
+            var  chupin_touzi = $('input[name=chupin_touzi]').val();
+            var  chupin_zhitui = $('input[name=chupin_zhitui]').val();
+            var  chupin_tuandui = $('input[name=chupin_tuandui]').val();
 
         $.ajax({
             'type':'post',
@@ -239,9 +239,9 @@ $(function(){
                 'zhipian_zhitui':zhipian_zhitui,
                 'zhipian_tuandui':zhipian_tuandui,
 
-                'chuping_touzi':chuping_touzi,
-                'chuping_zhitui':chuping_zhitui,
-                'chuping_tuandui':chuping_tuandui,
+                'chupin_touzi':chupin_touzi,
+                'chupin_zhitui':chupin_zhitui,
+                'chupin_tuandui':chupin_tuandui,
             },
             success:function(result){
                 if(result.status != ''){

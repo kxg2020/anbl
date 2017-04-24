@@ -59,13 +59,35 @@ class CommonController extends Controller{
         //>> 拿session
         $session = session(md5('home'));
         if(!empty($session)){
+            //>> 查询会员角色升级规则
+            $condition = M('RoleUp')->select();
+            $zcArr = [];
+            $jjArr = [];
+            $zpArr = [];
+            $cpArr = [];
+            foreach($condition as $key => $value){
+                switch($value['name']){
+                    case 'zhichi':
+                        $zcArr = $value;
+                        break;
+                    case 'jingji':
+                        $jjArr = $value;
+                        break;
+                    case 'chupin':
+                        $zpArr = $value;
+                        break;
+                    case 'zhipian':
+                        $cpArr = $value;
+                        break;
+                }
+            }
             //>> 查询用户
             $row = M('Member')->where(['session_token'=>$session])->find();
             if(!empty($row)){
                 //>> 查询投资
                 $support = M('MemberSupport')->where(['member_id'=>$row['id']])->sum('support_money');
-                //>> 判断投资是否满700,满700升级为投资者
-                if($support['support_money'] >= 700){
+                //>> 判断投资是否满xx,满xx升级为支持者
+                if($support['support_money'] >= $zcArr['support']){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
                 }
@@ -75,28 +97,20 @@ class CommonController extends Controller{
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
 
-                //>> 查询会员角色升级规则
-                $condition = M('RoleUp')->select();
-                $upArr = [];
-                foreach($condition as $key => $value){
-                    if($value['name'] == '支持者'){
-                        
-                    }
-                }
-                //>> 直推5人，升级为经纪人
-                if($count >= 2){
+                //>> 直推xxx人，升级为经纪人
+                if($count >= $jjArr['follower']){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
                 //>> 如果投资35000以上,直推10人,团队100人升级为制片人
-                if($support >= 35000 && $count >= 10 && $all >= 100){
+                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group']){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
-                //>> 如果个人投资70000 直推50人 团队500人 升级出品人
-                if($support >= 70000 && $count >= 50 && $all >= 500){
+                //>> 如果个人投资xxx 直推xx人 团队xx人 升级出品人
+                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group']){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
