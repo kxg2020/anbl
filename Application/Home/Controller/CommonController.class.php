@@ -75,6 +75,14 @@ class CommonController extends Controller{
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
 
+                //>> 查询会员角色升级规则
+                $condition = M('RoleUp')->select();
+                $upArr = [];
+                foreach($condition as $key => $value){
+                    if($value['name'] == '支持者'){
+                        
+                    }
+                }
                 //>> 直推5人，升级为经纪人
                 if($count >= 2){
                     //>> 升级为经纪人
