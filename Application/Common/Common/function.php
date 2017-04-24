@@ -181,3 +181,27 @@ function getUserLevelsName($level)
     }
     return $levelName;
 }
+
+/**
+ * 获取项目进度
+ *
+ * @param $level
+ *
+ * @return string
+ */
+function getProjectSpeed($level)
+{
+    $levelName = '';
+    switch ($level) {
+        case 1:
+            $levelName = '正在进行';
+            break;
+        case 2:
+            $levelName = '拍摄中';
+            break;
+        case 3:
+            $levelName = '已结束';
+            break;
+    }
+    return $levelName;
+}

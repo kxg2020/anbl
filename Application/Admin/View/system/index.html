@@ -103,6 +103,10 @@
                                 <textarea id="container"  name="tixian" cols="200" rows="10">{$info.tixian}</textarea>
                             </div>
                             <div class="form-group">
+                                <label>注册协议</label>
+                                <textarea id="container2"  name="zhuce" cols="200" rows="10">{$info.zhuce}</textarea>
+                            </div>
+                            <div class="form-group">
                                 <label>充值协议</label>
                                 <textarea id="container1"  name="chonzhi" cols="200" rows="10">{$info.chonzhi}</textarea>
                             </div>
@@ -133,6 +137,16 @@
             autoFloatEnabled: true
         });
         var ue1 = UE.getEditor('container1', {
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo', 'bold','indent','snapscreen', 'italic', 'underline', 'strikethrough','formatmatch','fontfamily',
+                    'fontsize', 'paragraph', 'simpleupload', 'insertimage','justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor',
+                    'backcolor', 'insertorderedlist', 'insertunorderedlist','imagecenter', 'wordimage', 'lineheight'
+                ]
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+        var ue1 = UE.getEditor('container2', {
             toolbars: [
                 ['fullscreen', 'source', 'undo', 'redo', 'bold','indent','snapscreen', 'italic', 'underline', 'strikethrough','formatmatch','fontfamily',
                     'fontsize', 'paragraph', 'simpleupload', 'insertimage','justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor',

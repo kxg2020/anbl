@@ -280,4 +280,5 @@ class IndexController extends CommonController{
         $this->assign('new',$new);
         $this->display('index/news');
     }
+
 }
