@@ -101,7 +101,7 @@
 				<p class="fenghong"><input type="radio" name="fenhong" value="1" checked><span style="margin-right: 100px;">固定</span><input type="radio" name="fenhong" value="2"><span>浮动</span></p>
 				<p>输入支持阿纳豆:</p>
 				<p class="jifeng">
-					<input type="number" name="money" placeholder="支持100-10000且需为100整数" style="width: 230px"  />
+					<input type="number" name="money" placeholder="支持700-70000且需为100整数" style="width: 230px"  />
 				</p>
 				<p><input type="checkbox" id="is_true"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></p>
 				<div><span id="sure_suport">确定支持</span><span id="cancel">取消</span></div>
@@ -297,8 +297,8 @@
 
 			 // 选择积分多少
 			 var money = $(".jifeng>input[type='number']").val();
-			 if(money<100 || money>10000){
-				 layer.msg('阿纳豆不能少于100或者大于10000');
+			 if(money<700 || money>70000){
+				 layer.msg('阿纳豆不能少于700或者大于70000');
 				 return false
 			 }
 			 if(money%100 != 0){

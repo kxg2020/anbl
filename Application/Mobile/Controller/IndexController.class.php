@@ -24,6 +24,7 @@ class IndexController extends CommonController {
         $id = intval($id);
         // 查看项目是否存在
         $info = M('project as a')
+            ->field('a.*,b.story,b.analysis,b.film_critic,b.expected_return')
             ->join('left join an_project_survey as b on b.project_id = a.id')
             ->where(['a.id'=>$id])
             ->find();
@@ -31,7 +32,6 @@ class IndexController extends CommonController {
             $this->error('项目不存在');
             exit;
         }
-
         $this->assign('info',$info);
         $this->display('index/detail');
     }
@@ -60,7 +60,7 @@ class IndexController extends CommonController {
 
             // 判断用户余额够不够
             if($support_money>$this->userInfo['money']){
-                $this->ajaxReturn(['msg'=>"对不起，积分不足！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，阿纳豆不足！！！",'status'=>0]);
             }
             // 会员id
             $member_id = $this->userInfo['id'];
@@ -74,7 +74,7 @@ class IndexController extends CommonController {
 
             // 判断目标金额是否达到
             if($projectInfo['target_amount'] <= $projectInfo['money']){
-                $this->ajaxReturn(['msg'=>"积分已达到，不能进行支持",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"阿纳豆已达到，不能进行支持",'status'=>0]);
             }
 
             if(($support_money+$projectInfo['money'])>$projectInfo['target_amount']){

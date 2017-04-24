@@ -32,7 +32,7 @@
 							<li ><a id="login" href="{:U('Home/Login/index')}">登录 |</a></li>
 							<else/>
 							<li class="login_out"><a href="{:U('Home/Login/logout')}">退出登录</a></li>
-							<li class="user_img" style="color: white">{$userInfo['username']}</li>
+							<li class="user_img" style="color: white">{:telephoneNumber($userInfo['username'])}</li>
 						</if>
 						<li class='search_li' style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
 					</ul>
