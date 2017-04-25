@@ -265,8 +265,9 @@ class OrderController extends CommonController
         }
 
         //>> 查询充值订单
-        $orderLst = M('Member_recharge as a')->field('a.*,b.username')
+        $orderLst = M('Member_recharge as a')->field('a.*,b.username,c.name as payname')
                 ->join('left join an_member as b on a.member_id = b.id')
+                ->join('left join an_pay as c on c.id=a.type')
                 ->where($where)->select();
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
@@ -550,16 +551,18 @@ class OrderController extends CommonController
        }
 
         $count = M('MemberRecharge as a ')
-            ->field('a.*,b.username')
+            ->field('a.*,b.username,c.name as payname')
             ->join('left join an_member as b on a.member_id = b.id')
+            ->join('left join an_pay as c on c.id=a.type')
             ->where($where)
             ->count();
 
         // 实列化一个分页工具类
         $page = new Page($count,15);
-        $rows = M('MemberRecharge as a ')->field('a.*,b.username')
+        $rows = M('MemberRecharge as a ')->field('a.*,b.username,c.name as payname')
             ->where($where)
             ->join('left join an_member as b on a.member_id = b.id')
+            ->join('left join an_pay as c on c.id=a.type')
             ->limit($page->firstRow, $page->listRows)
             ->select();
 

@@ -13,8 +13,12 @@
 		<a href="{:U('Index/index')}"><img src="__PUBLIC__/wang/common_img/logo.png" alt=""></a>
 	</div>
 	<div class="loginorreg">
-		<p class="choice">登录<i></i></p>
-		<p >注册<i></i></p>
+		<if condition="!empty($parent_id)">
+			<p class="choice">登录<i></i></p>
+			<p >注册<i></i></p>
+			<else />
+			<p class="choice" style="width: 100%">登录<i></i></p>
+		</if>
 	</div>
 	<div class="login" >
 		<div><i class="userimg"></i><input type="text" placeholder="用户名" name="username"></div>
