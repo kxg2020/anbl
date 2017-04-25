@@ -1232,7 +1232,7 @@ margin-top: 25px;
 	margin-bottom: 10px;
 	padding-left: 10px;
 	cursor: pointer;
-	font-size: 20px;
+	font-size: 14px;
 }
 .answer_div>p span{
 	display: inline-block;
@@ -1254,7 +1254,7 @@ margin-top: 25px;
 .team_content{
 	padding-top: 2%;
 	width: 80%;
-	height: 95%;
+	height: 90%;
 	margin: auto;
 	overflow: auto;
 	color: white;
@@ -1403,8 +1403,8 @@ margin-top: 25px;
  }
 
 .join,.close_modal>input{
-	position: absolute;
-	left: 50%;
+	position: fixed;
+	left: 65%;
 	margin-left: -50px;
 	bottom: 10px;
 	width: 100px;

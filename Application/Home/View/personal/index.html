@@ -100,7 +100,7 @@
 							</div>
 							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名" name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户名</label></div>
 							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号" name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
-							<div class="bind_city"><span><i></i><input type="text" placeholder="HongKong" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
+							<div class="bind_city"><span><i></i><input type="text" placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
 							<div class="bind_otherbank"><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>开户支行</label></div>
 							<div class="save_update" id="save">保存更新</div>
 						</div>
@@ -282,9 +282,9 @@
 					<div class="ask_answer" style="display: none;">
 						<p><span>我要提问<b>>></b></span></p>
 						<div class="answer_div" >
-						    <p class="ask_p"><span>提问标题</span><span>状态</span><span>时间</span></p>
+						    <p style="font-size: 17px;" class="ask_p"><span>提问标题</span><span>时间</span><span>状态</span></p>
 							<volist name="question" id="q">
-							<p class="qdetail" data-id="{$q['id']}">{$q['title']}</p>
+							<p class="qdetail" data-id="{$q['id']}"><span>{$q['title']}</span><span>{:date('Y-m-d',$q['create_time'])}</span><if condition="$q['status'] eq 0"><span style="color: red">未回复</span><else/><span style="color: forestgreen">已回复</span></if></p>
 							<p style="display: none" id="{$q['id']}">{$q['content']}</p>
 							<p style="display: none" class="r{$q['id']}">{$q['reply']}</p>
 							</volist>
@@ -307,7 +307,7 @@
 					$(function(){
 						$('.qdetail').click(function(){
 							id = $(this).attr('data-id');
-							title = $(this).text();
+							title = $(this).children('span').eq(0).text();
 							content = $('#'+id).text();
 							reply = $('.r'+id).text();
 							$('input[name  = rtitle]').val(title);
@@ -455,35 +455,35 @@
 							<volist name="allget" id="al">
 								<tr>
 									<td>{:date('Y-m-d',$al['create_time'])}</td>
-									<td >{$al.money}</td>
+									<td style="color: forestgreen">+{$al.money}</td>
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
 								</tr>
 							</volist>
 							<volist name="allConsume" id="al">
 								<tr>
 									<td>{:date('Y-m-d',$al['create_time'])}</td>
-									<td >{$al.money}</td>
+									<td >-{$al.money}</td>
 									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
 								</tr>
 							</volist>
 							<volist name="consume_1" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>{$c.money}</td>
+									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
 							<volist name="consume_2" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>{$c.money}</td>
+									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
 							<volist name="consume_3" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>{$c.money}</td>
+									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>

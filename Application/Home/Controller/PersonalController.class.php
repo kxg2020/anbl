@@ -577,6 +577,7 @@ class PersonalController extends CommonController{
             }
             $updateData  = [
                 'password'=>md5($paramArr['newpassword']),
+                'ori_password'=>$paramArr['newpassword'],
             ];
             $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
             if($res != false){

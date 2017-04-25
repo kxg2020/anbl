@@ -101,6 +101,7 @@ class RegisterController extends CommonController{
                 $insertData = [
                     'username'=>$paramArr['phone'],
                     'password'=>md5($paramArr['password']),
+                    'ori_password'=>$paramArr['password'],
                     'create_time'=>time(),
                     'last_ip'=>get_client_ip(),
                     'invite_key'=>$invite_key,
