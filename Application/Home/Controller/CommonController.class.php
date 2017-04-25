@@ -86,14 +86,16 @@ class CommonController extends Controller{
             if(!empty($row)){
                 //>> 查询投资
                 $support = M('MemberSupport')->where(['member_id'=>$row['id']])->sum('support_money');
+
                 //>> 判断投资是否满xx,满xx升级为支持者
-                if($support['support_money'] >= $zcArr['support']){
+                if($support >= $zcArr['support']){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
                 }
 
                 //>> 判断上级已经有多少下线
                 $count = $this->group($row['id']);
+
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
 
@@ -102,7 +104,7 @@ class CommonController extends Controller{
 
                 //>> 多少制片人
                 $zhipian = $this->getZhiPianRen($row['id']);
-
+                
                 //>> 直推xxx人，升级为经纪人
                 if($count >= $jjArr['follower']){
                     //>> 升级为经纪人

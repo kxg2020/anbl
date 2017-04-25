@@ -129,6 +129,7 @@ class PersonalController extends CommonController{
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id'],'a.is_fh'=>0])
             ->select();
+
         $count_1 = ceil(count($rows)/4);
         $rows = $this->pagination($rows,1,4);
         //>> 查询积分制度表

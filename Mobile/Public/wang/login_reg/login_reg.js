@@ -115,6 +115,13 @@ $(function(){
 			success:function(e){
 				if(e.status == 1){
 					window.location.href = location.protocol+'//'+window.location.host+'/login/index';
+				}else{
+					layer.open({
+						content: e.msg,
+						style: 'color:black;'
+						,time:2
+					});
+					return false;
 				}
 			}
 		});
