@@ -168,18 +168,21 @@ header .nav{
 }
 
 .body_left .username{
-	font-size: 45px;
+	font-size: 40px;
+	overflow: hidden;
+	width: 100%;
+	height: auto;
 }
 #user_lv{
 	display: block;
-	float: right;
+	float: left;
 	width: auto;
-	height: 40px;
-	margin-top: 10px;
-	font-size: 20px;
+	height: 40px;f
+	font-size: 40px;
 	text-align: center;
 	line-height: 40px;
 	color: #e50909;
+	margin-top: 5px;
 }
 .leval{
 	line-height: 35px;
@@ -856,7 +859,6 @@ header .nav{
 .put_money>div:nth-child(2){
 	width: 108px;
 	height: 108px;
-	border: 1px solid red;
 	margin-top: 12px;
 	margin-bottom: 25px;
 	margin-left: 100px;
@@ -1134,13 +1136,13 @@ margin-top: 25px;
 	position: absolute;
 	left: 126px;
 	width: 100px;
-	height: 40px;
+	height: 30px;
 	background: #e50909;
 	color: white;
 	text-align: center;
-	line-height: 40px;
-	top:0;
-	border-radius:5px; 
+	line-height: 30px;
+	top:5px;
+	border-radius:3px; 
 }
 .ask_content>form input[type='file']{
 	position: absolute;
@@ -1153,13 +1155,13 @@ margin-top: 25px;
 }
 #ask_btn{
 	width: 100px;
-	height: 40px;
+	height: 30px;
 	background: #e50909;
 	color: white;
 	text-align: center;
-	line-height: 40px;
+	line-height: 30px;
 	margin-left: 150px;
-	border-radius: 5px;
+	border-radius: 3px;
 	font-size: 20px;
 	cursor: pointer;
 }

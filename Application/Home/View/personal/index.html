@@ -15,7 +15,7 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			<p class="username"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if> <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
+			<p class="username"><span style="float: right;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}经纪人</span></p>
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			支持者Lv{$personal['level']}:{$personal['money']}阿纳豆
 			</if></div>
@@ -273,7 +273,7 @@
 					<div class="ask_content">
 						<p>查看信箱<span>>></span></p>
 						<form class="ask_form">
-							<div> <label >问题标题</label><input style="height: 24px;" type="text" name="question"></div>
+							<div> <label >问题标题</label><input style="width: 262px; height: 34px;" type="text" name="question"></div>
 							<div style="height: 40px;"> <label style="line-height: 40px;">上传问题图片</label><input type="file" id="upload"><div class="choice_file">选取文件</div></div>
 							<div> <label >问题详情</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="content"></textarea></div>
 							<div><input type="button" id="ask_btn" value='提交'></div>
