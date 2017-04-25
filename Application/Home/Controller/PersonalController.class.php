@@ -121,6 +121,8 @@ class PersonalController extends CommonController{
         //>> 所有收益
         $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
 
+        //>> 转账消费
+        $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
 
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,b.*')
@@ -225,6 +227,7 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'allConsume'=>$allConsume,
             'weixin'=>$weixin,
             'ali'=>$ali,
             'films'=>$films,
@@ -928,14 +931,32 @@ class PersonalController extends CommonController{
 
             if($captcha != $paramArr['captcha'] || empty($captcha)){
 
-                $this->ajaxReturn(['status'=>1,'msg'=>'验证码错误']);
+                $this->ajaxReturn(['status'=>0,'msg'=>'验证码错误']);
             }else{
                 //>> 开启事务
                 M()->startTrans();
                 //>> 扣除当前用户的余额
                 $res = M('Member')->where(['username'=>$this->userInfo['username']])->save(['money'=>['exp','money-'.$paramArr['money']]]);
+                $insertDataA = [
+                    'member_id'=>$this->userInfo['id'],
+                    'money'=>$paramArr['money'],
+                    'type'=>'转出',
+                    'create_time'=>time(),
+                ];
+                $res_1 = M('MemberConsume')->add($insertDataA);
                 $ros = M('Member')->where(['username'=>$paramArr['username']])->save(['money'=>['exp','money+'.$paramArr['money']]]);
-                if($res === false || $ros === false){
+
+                $user = M('Member')->where(['username'=>$paramArr['username']])->find();
+                $insertDataB = [
+                    'member_id'=>$user['id'],
+                    'type'=>4,
+                    'money'=>$paramArr['money'],
+                    'create_time'=>time(),
+                    'remark'=>'转入',
+                    'is_ok'=>1
+                ];
+               $res_2 =  M('MemberProfit')->add($insertDataB);
+                if($res === false || $ros === false || $res_1 === false || $res_2 === false){
 
                     M()->rollback();
                 }else{

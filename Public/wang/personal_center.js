@@ -588,14 +588,6 @@ $(function(){
 		$('.get_money>p:nth-child(2)>span').css({display:'none'})
 	})
 
-
-	$('.phone01').on('keyup',function(){
-		if(/^1(3|4|5|7|8)\d{9}$/.test($('.phone01').val())){
-			$(".yanzhen").attr("disabled", false);
-		}else{
-			$(".yanzhen").attr("disabled", true);
-		}
-	})	
 	$(".yanzhen").click(function(){
 		$(".yanzhen").attr("disabled", true);
 		var time=60;

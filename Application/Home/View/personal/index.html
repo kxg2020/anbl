@@ -178,7 +178,6 @@
 							<li>充值记录</li>
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
-						<if condition="$userInfo['bank_card'] neq '' ">
 							<div class="put_money" style="display: none;">
 								<p>选择充值方式: <span class="apply_style apply_style_choice" data-id="1">微信</span><span class="apply_style" data-id="2">支付宝</span><span class="apply_style" data-id="3">个人银联</span></p>
 								<div id="feiyinglian">
@@ -196,11 +195,7 @@
 								<div id="container1"></div>
 								<div id="put_btn" class="rechargeOk">确定</div>
 							</div>
-							<else/>
-							<div class="first_bind" style="width: 100%;height: 300px;text-align: center; line-height: 300px;">
-								请先绑定用户信息
-							</div>
-						</if>
+
 						<div class="get_money" style="display: none;">
 
 							<p>阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
@@ -230,16 +225,16 @@
 
 						<div class="zhuanzhang" style="display: none;">
 							<div class="div1">
-								<label ><span style="color:red;">*</span>请输入转入帐号</label>	<input type="text" class="username01" style="margin-left: 15px;"> <input type="button" value="验证" id="check_1">
+								<label ><span style="color:red;">*</span>请输入转入帐号</label>	<input type="text" placeholder="请输入转入帐号" class="username01" style="margin-left: 15px;"> <input type="button" value="验证" id="check_1">
 								<br><br>
 							</div>
 							<div class="div2">
-									<label ><span style="color:red;">*</span>请输入转入阿纳豆</label><input class="money01" type="text" value="">
+									<label ><span style="color:red;">*</span>请输入转入阿纳豆</label><input class="money01" type="text" value="" placeholder="请输入转入阿纳豆">
 								<br><br>
 							</div>
 							<div class="div3">
-									<label><span style="color:red;">*</span>请输入手机验证码</label><input class="phone01" type="text" value="">
-								<input class="yanzhen" type="button"  disabled="disabled" value="获取验证码" >
+									<label><span style="color:red;">*</span>请输入手机验证码</label><input class="phone01" type="text" value="" placeholder="请输入验证码">
+								<input class="yanzhen" type="button"   value="获取验证码" >
 							</div>
 							<div class="div4">
 									<input type="button" value="确定" id="queding">
@@ -459,28 +454,35 @@
 							<volist name="allget" id="al">
 								<tr>
 									<td>{:date('Y-m-d',$al['create_time'])}</td>
-									<td >+{$al.money}</td>
+									<td >{$al.money}</td>
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
+								</tr>
+							</volist>
+							<volist name="allConsume" id="al">
+								<tr>
+									<td>{:date('Y-m-d',$al['create_time'])}</td>
+									<td >{$al.money}</td>
+									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
 								</tr>
 							</volist>
 							<volist name="consume_1" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>-{$c.money}</td>
+									<td>{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
 							<volist name="consume_2" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>-{$c.money}</td>
+									<td>{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
 							<volist name="consume_3" id="c">
 								<tr>
 									<td>{:date('Y-m-d',$c['create_time'])}</td>
-									<td>-{$c.money}</td>
+									<td>{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
 							</volist>
