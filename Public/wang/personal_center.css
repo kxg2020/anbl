@@ -1280,7 +1280,7 @@ margin-top: 25px;
 .team_content{
 	padding-top: 2%;
 	width: 80%;
-	height: 90%;
+	height: 88%;
 	margin: auto;
 	overflow: auto;
 	color: white;
@@ -1639,4 +1639,28 @@ margin-top: 25px;
 #choice_apply option{
 	
 	background:#333;
+}
+#team_nav{
+	width: 80%;
+	height: 50px;
+	 border-bottom: 1px solid #ccc;
+	 margin: auto;
+}
+#team_nav li{
+    float: left;
+    font-size: 14px;
+    height: 100%;
+    line-height: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 20px;
+    color: white;
+    cursor: pointer;
+}
+#team_nav li:nth-child(1){
+	margin-left: 35px;
+}
+#team_nav .teamChoice{
+     border-bottom: 1px solid #e50909;
+    color: #e50909;
 }

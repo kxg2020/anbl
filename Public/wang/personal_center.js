@@ -647,23 +647,29 @@ $(function(){
 	})
 
 
-	$("#choice_apply").change(function(){
-        var value = $(this).val();
+	$("#team_nav>li").click(function(){
+        var value = $(this).text();
+        $("#team_nav>li").removeClass('teamChoice');
         $('.team_content').hide();
-        if(value=='1'){
+        if(value=='收益'){
+        	$("#team_nav>li").eq(0).addClass('teamChoice')
         	$('.apply_1').show();
         }
-         if(value=='2'){
+         if(value=='投票'){
+         	$("#team_nav>li").eq(1).addClass('teamChoice')
         	$('.apply_2').show();
         }
 
-         if(value=='3'){
+         if(value=='转账'){
+         	$("#team_nav>li").eq(2).addClass('teamChoice')
         	$('.apply_3').show();
         }
-         if(value=='4'){
+         if(value=='支持'){
+         	$("#team_nav>li").eq(3).addClass('teamChoice')
         	$('.apply_4').show();
         }
-         if(value=='5'){
+         if(value=='演员声请'){
+         	$("#team_nav>li").eq(4).addClass('teamChoice')
         	$('.apply_5').show();
         }
     });
