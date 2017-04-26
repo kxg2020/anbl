@@ -662,9 +662,10 @@ class MemberController extends  CommonController{
         //搜索条件
         $where =[];
         $phone = I('get.phone');
+
         $type =  I('get.type_id');
         if($phone){
-            $where['b.phone'] = ['like',"%$phone%"];
+            $where['b.username'] = ['like',"%$phone%"];
         }
         if($type){
             $where['a.type'] = ['like',"%$type%"];
