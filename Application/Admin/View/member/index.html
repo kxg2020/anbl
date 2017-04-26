@@ -69,6 +69,7 @@
                 <td>密码</td>
                 <td>余额</td>
                 <td>等级</td>
+                <td>角色</td>
                 <td>充值权限</td>
                 <td>是否绑定</td>
                 <td>是否实名</td>
@@ -83,6 +84,7 @@
                     <td>{$l.password}</td>
                     <td>{$l.money}</td>
                     <td>{$l.level}</td>
+                    <td><if condition="$l['role'] eq 0">暂无<elseif condition="$l.role eq 1"/>支持者<elseif condition="$l.role eq 2"/>经纪人<elseif condition="$l.role eq 3"/>制片人<elseif condition="$l.role eq 4"/>出品人</if></td>
                     <td><img id="allowed" style="cursor: pointer;" data-re="{$l.id}" data-id="{$l.is_allowed_recharge}" src="__IMG__/{$l.is_allowed_recharge}.gif"></td>
                     <td>
                             <img src="__IMG__/{$l.is_bind_phone}.gif">
