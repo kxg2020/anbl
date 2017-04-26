@@ -668,7 +668,7 @@ $(function(){
          	$("#team_nav>li").eq(3).addClass('teamChoice')
         	$('.apply_4').show();
         }
-         if(value=='演员声请'){
+         if(value=='演员申请'){
          	$("#team_nav>li").eq(4).addClass('teamChoice')
         	$('.apply_5').show();
         }
