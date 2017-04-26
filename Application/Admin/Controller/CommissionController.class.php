@@ -53,6 +53,7 @@ class CommissionController extends CommonController
 
             $supportInfo = M('MemberSupport')->where($where)->select();
 
+
             if (!$supportInfo) {
                 $this->ajaxReturn(['msg' => "该项目没有未分佣的订单", 'status' => 0]);
             }
@@ -101,6 +102,7 @@ class CommissionController extends CommonController
                 // 查询投资项目
                 $projectInfo = M('Project')->where(['id'=>$info['project_id']])->find();
 
+
                 //进行分佣
                 $this->genCommission($info, $projectInfo, $memberInfo['parent_id'], 1);
             }
@@ -135,6 +137,7 @@ class CommissionController extends CommonController
         $projectInfo = $projectInfox;
 
         $parent = M('Member')->where(['id' => $parent_id])->find();
+
 
         switch ($parent['role']) {
             case "1":
@@ -256,6 +259,121 @@ class CommissionController extends CommonController
             M()->rollback();
             $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
         }
+    }
+
+    /**
+     * 制片人的会员新增业绩分佣
+     */
+    public function zYj()
+    {
+        // 查询出等级为 制片人的会员
+        $memberInfos = M('Member')->where(['role' => 3])->select();
+
+        foreach ($memberInfos as $info) {
+            $parent_id = $info['id'];
+            // 根据parent_id 找下级
+            $money = $this->sum($parent_id);
+
+            if (!$money) {
+                continue;
+            }
+            // 生成收益详情
+            $rest = M('MemberProfit')->add([
+                'member_id' => $info['id'],
+                'money' => $money*($this->systemInfo['zrate']/100),
+                'create_time' => time(),
+                'type' => 3,
+                'remark' => "制片人新增业绩分佣",
+                'is_ok' => 1,
+            ]);
+
+            // 更新余额
+            $rest = M('Member')->where(['id' => $info['id']])->save(['money' => ['exp', 'money+' . $money]]);
+        }
+
+
+    }
+
+
+    private function sum($id){
+
+        $firstDay=date('Y-m-01', strtotime(date("Y-m-d")));
+
+        $lastDay = date('Y-m-d', strtotime("$firstDay +1 month -1 day"));
+
+
+        $lastMonthFirstDay = date('Y-m-01', strtotime('-1 month'));
+        $lastMonthLastDay = date('Y-m-t', strtotime('-1 month'));
+
+        $dataArr = $this->difference($id);
+
+        static $nowArr = [];
+        $nowSum = 0;
+        static $beforeArr = [];
+        $beforeSum = 0;
+
+
+        foreach($dataArr as $key => $value){
+
+            foreach($value as $k => $j){
+                if(strtotime($firstDay) <= $j['create_time'] && $j['create_time'] <= strtotime($lastDay)){
+
+                    $nowArr[] = $j;
+                }
+            }
+        }
+
+
+        foreach($dataArr as $ke => $val){
+
+            foreach($val as $i => $o){
+
+                if(strtotime($lastMonthFirstDay) <= $o['create_time'] && $o['create_time'] <= strtotime($lastMonthLastDay)){
+
+                    $beforeArr[] = $o;
+                }
+            }
+        }
+
+        foreach($nowArr as $s => $x){
+            $nowSum += $x['money'];
+        }
+        foreach($beforeArr as $t => $p){
+            $beforeSum += $p['money'];
+        }
+
+        //>> 差值
+        $difference = ($nowSum - $beforeSum) > 0 ? ($nowSum - $beforeSum):0;
+        $nowSum = 0;
+        $beforeSum = 0;
+        return $difference;
+    }
+
+    private function difference($id,$level = 0){
+
+        if(empty($id) || !is_numeric($id)) return false;
+
+        static $group = [];
+        $where = [
+            'parent_id'=>$id
+        ];
+        $child = M('Member')->where($where)->select();
+
+
+        if(!empty($child)){
+            $level += 1;
+            if($level > 3){
+                $children = [];
+                foreach($child as $key => $value){
+                    $children = M('MemberRecharge')->where(['member_id'=>$value['id']])->select();
+                }
+                $group[] = $children;
+            }
+            foreach($child as $k => $v){
+                $this->difference($v['id'],$level);
+            }
+        }
+        return $group;
     }
 
 }

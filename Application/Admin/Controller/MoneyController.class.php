@@ -430,17 +430,22 @@ class MoneyController extends CommonController
                     continue;
                 }
 
+                if($info['fixed']+($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30>$bigMony){
+                    $money =$bigMony-$info['fixed'];
+                }else{
+                    $money =($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30;
+                }
+
                 $rest = M('MemberSupport')
                     ->where(['id' => $info['id']])
                     ->save([
-                        'fixed' => ($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30 + $info['fixed'],//每天的收益
+                        'fixed' => $money + $info['fixed'],//每天的收益
                         'num' => $info['num'] + 1
                     ]);
                 if ($rest === false) {
                     M()->rollback();
                     exit;
                 }
-                $money = ($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30;//每天的收益
 
                 // 向会员收益表追加一条记录
                 $rest = M('MemberProfit')->add([
@@ -516,6 +521,7 @@ class MoneyController extends CommonController
      * 返还固定分红会员的本金
      */
     public function benjin(){
+
         // 未分红的订单
         $where = [
             'is_true'=>0,//未返还本金的
@@ -573,9 +579,9 @@ class MoneyController extends CommonController
 
 
     /**
-     * 新增业绩分佣
+     * 出品人的会员新增业绩
      */
-    public function newsYj()
+    public function cYj()
     {
         // 查询出等级为 出品人的会员
         $memberInfo = M('Member')->where(['role' => 4])->select();
@@ -584,6 +590,7 @@ class MoneyController extends CommonController
             $parent_id = $info['id'];
             // 根据parent_id 找下级
             $money = $this->sum($parent_id);
+
             if (!$money) {
                 continue;
             }
@@ -593,45 +600,20 @@ class MoneyController extends CommonController
                 'money' => $money*($this->systemInfo['crate']/100),
                 'create_time' => time(),
                 'type' => 3,
-                'remark' => "新增业绩分佣",
+                'remark' => "出品人新增业绩分佣",
                 'is_ok' => 1,
             ]);
 
             // 更新余额
             $rest = M('Member')->where(['id' => $info['id']])->save(['money' => ['exp', 'money+' . $money]]);
         }
-
-        // 查询出等级为 制片人的会员
-        $memberInfos = M('Member')->where(['role' => 3])->select();
-
-        foreach ($memberInfos as $info) {
-            $parent_id = $info['id'];
-            // 根据parent_id 找下级
-            $money = $this->sum($parent_id);
-            if (!$money) {
-                continue;
-            }
-            // 生成收益详情
-            $rest = M('MemberProfit')->add([
-                'member_id' => $info['id'],
-                'money' => $money*($this->systemInfo['zrate']/100),
-                'create_time' => time(),
-                'type' => 3,
-                'remark' => "新增业绩分佣",
-                'is_ok' => 1,
-            ]);
-
-            // 更新余额
-            $rest = M('Member')->where(['id' => $info['id']])->save(['money' => ['exp', 'money+' . $money]]);
-        }
-
-
     }
 
 
     private function sum($id){
 
         $firstDay=date('Y-m-01', strtotime(date("Y-m-d")));
+
         $lastDay = date('Y-m-d', strtotime("$firstDay +1 month -1 day"));
 
 
@@ -677,6 +659,8 @@ class MoneyController extends CommonController
 
         //>> 差值
         $difference = ($nowSum - $beforeSum) > 0 ? ($nowSum - $beforeSum):0;
+        $nowSum = 0;
+        $beforeSum = 0;
         return $difference;
     }
 
@@ -690,6 +674,7 @@ class MoneyController extends CommonController
         ];
         $child = M('Member')->where($where)->select();
 
+
         if(!empty($child)){
             $level += 1;
             if($level > 3){
@@ -700,7 +685,6 @@ class MoneyController extends CommonController
                 $group[] = $children;
             }
             foreach($child as $k => $v){
-
                 $this->difference($v['id'],$level);
             }
         }

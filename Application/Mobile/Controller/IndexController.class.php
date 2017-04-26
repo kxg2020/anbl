@@ -5,7 +5,10 @@ class IndexController extends CommonController {
 
 
     public function index(){
-
+        if($this->isLogin == 0){
+            $this->redirect('login/index');
+            exit;
+        }
         $where[] = [
             'end_time'   => [['egt', time()], '0', 'or'],// 结束时间 大于等于当前时间 或 为0
             'start_time' => ['elt', time()],// 开始时间 小于等于当前时间
@@ -61,6 +64,10 @@ class IndexController extends CommonController {
             // 判断用户余额够不够
             if($support_money>$this->userInfo['money']){
                 $this->ajaxReturn(['msg'=>"对不起，阿纳豆不足",'status'=>0]);
+            }
+            $allMoney = M('MemberSupport')->where(['member'=>$this->userInfo['id'],'project_id'=>$data['project_id']])->count('support_money');
+            if(($support_money+$allMoney)>70000){
+                $this->ajaxReturn(['msg'=>"对不起，你的投资额已满",'status'=>0]);
             }
             // 会员id
             $member_id = $this->userInfo['id'];
