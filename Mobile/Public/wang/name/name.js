@@ -4,6 +4,7 @@ $(function(){
         id_card = $('input[name = id_card]').val();
         bank_card = $('input[name = bank_card]').val();
         bank_name = $('#bind_bank').val();
+        bank_address = $('input[name = bank_card1]').val();
 
         if(realname == ''){
             layer.open({
@@ -60,11 +61,20 @@ $(function(){
             return false;
         }
 
+        if(bank_address == ''){
+            layer.open({
+                content: '开户支行必须填写',
+                style:'color:black'
+                ,time: 2,
+            });
+            return false;
+        }
+
         $.ajax({
             'type':'post',
             'dataType':'json',
             'url':location.protocol+'//'+window.location.host+'/Account/checkTrue',
-            'data':{'realname':realname,'id_card':id_card,'bank_card':bank_card,'bank_name':bank_name},
+            'data':{'realname':realname,'id_card':id_card,'bank_card':bank_card,'bank_name':bank_name,'bank_address':bank_address},
             success:function(e){
                 if(e.status == 1){
                     layer.open({
