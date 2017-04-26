@@ -174,15 +174,12 @@ header .nav{
 	height: auto;
 }
 #user_lv{
-	display: block;
-	float: left;
+	display: inline-block;
 	width: auto;
-	height: 52px;
-	margin-right: 17px;
-	font-size: 40px;
+	margin-left: 17px;
+	font-size: 24px;
 	text-align: center;
-	line-height: 52px;
-	color: #e50909;
+	color: #f4e38e;
 }
 .leval{
 	line-height: 35px;
@@ -553,7 +550,7 @@ header .nav{
   width: 39px;
   height: 31px;
   left: 15%;
-  background: url(img/level.png);
+  background: url(img/level1.png);
 }
 .save_update{
 	border-radius: 3px;
@@ -734,7 +731,10 @@ header .nav{
 	left: 15px;  bottom: 15px;
 	z-index: 15;
 	color: black;
-	font-size: 25px;
+	font-size: 20px;
+}
+.detail_search:hover{
+	color: #e50909;
 }
 .attend_content>div>div>img{
 	width: 100% !important;
@@ -774,7 +774,7 @@ header .nav{
 	border-radius: 3px;
 	position: absolute;
 	top:90px; left: 5%;
-	z-index: 10; 
+	z-index: 20; 
 	margin-left: 0;
 	margin-bottom: 0;
 	padding-left: 0;
@@ -1010,7 +1010,7 @@ margin-top: 25px;
 	margin-left: 15px;
 }
 .get_money p:nth-child(2){
-	margin-left: 90px;
+	margin-left: 75px;
 	color: #959595;
 	margin-top: 10px;
 	font-size: 15px;
@@ -1035,7 +1035,7 @@ margin-top: 25px;
 	background: #e50909;
 	color: white;
 	cursor: pointer;
-	margin-left: 94px;
+	margin-left: 75px;
 	margin-top: 25px;
 }
 
@@ -1632,7 +1632,8 @@ margin-top: 25px;
 	margin: auto;
 }
 #choice_apply{
-	width: 100px;
+	border-radius: 3px;
+	width: 150px;
 	background: rgba(0,0,0,0);
 }
 #choice_apply option{
