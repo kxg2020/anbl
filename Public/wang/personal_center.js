@@ -512,7 +512,6 @@ $(function(){
 		$('.body_right>div').hide();
 		$('.close_modal').hide();
 		$('.team>.bg').show();
-		$('.money_modal').hide()
 		$('.team').show();
 	})
 
@@ -646,6 +645,28 @@ $(function(){
 			}
 		},1000)
 	})
+
+
+	$("#choice_apply").change(function(){
+        var value = $(this).val();
+        $('.team_content').hide();
+        if(value=='1'){
+        	$('.apply_1').show();
+        }
+         if(value=='2'){
+        	$('.apply_2').show();
+        }
+
+         if(value=='3'){
+        	$('.apply_3').show();
+        }
+         if(value=='4'){
+        	$('.apply_4').show();
+        }
+         if(value=='5'){
+        	$('.apply_5').show();
+        }
+    });
 
 	
 
