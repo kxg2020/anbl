@@ -31,9 +31,6 @@ class RegisterController extends CommonController{
 
             }
 
-            //>> 通过验证
-            session('verify_code'.$paramArr['phone'],null);
-
             //>> 检测验证码
             $captcha = session('verify_code'.$paramArr['phone']);
 
@@ -114,7 +111,7 @@ class RegisterController extends CommonController{
                 $res = $userModel->add($insertData);
 
                 if($res){
-
+                    session('verify_code'.$paramArr['phone'],null);
                     die($this->_printSuccess());
 
                 }else{

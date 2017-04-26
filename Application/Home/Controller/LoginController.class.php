@@ -106,6 +106,8 @@ class LoginController extends CommonController{
      */
     private function checkPassword($password){
 
+        return true;
+
         if(empty($password)){
 
             return false;
@@ -152,22 +154,25 @@ class LoginController extends CommonController{
                         if(isset($paramArr['password']) && !empty($paramArr['password'])){
                             //>> 检测密码
                             $_res = $this->checkPassword($paramArr['password']);
+
                             if($_res){
                                 //>> 检测两次密码是否一致
                                 if(isset($paramArr['repassword']) && !empty($paramArr['repassword'])){
                                    $result = $paramArr['password'] == $paramArr['repassword'] ? true : false;
                                     if($result){
-                                        $user = M('Member')->where(['username'=>$paramArr['phone']]);
+                                        $user = M('Member')->where(['username'=>$paramArr['phone']])->find();
+
                                         if(!empty($user)){
                                             //>> 查询数据库
                                             $data = [
                                                 'password'=>md5($paramArr['password']),
                                             ];
                                             $res = M('Member')->where(['username'=>$paramArr['phone']])->save($data);
-                                            if($res){
-                                                die($this->_printSuccess());
-                                            }else{
+                                            if($res === false){
                                                 die($this->_printError('1030'));
+
+                                            }else{
+                                                die($this->_printSuccess());
                                             }
                                         }else{
                                             die($this->_printError('1032'));

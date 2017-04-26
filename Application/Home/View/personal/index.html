@@ -16,6 +16,7 @@
 		<div>
 		 <div>
 			<p class="username"><span style="float: right;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
+
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			支持者Lv{$personal['level']}:{$personal['money']}阿纳豆
 			</if></div>
@@ -88,7 +89,7 @@
 							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
 
 							<div id="line"></div>
-							<div> <select  id="bind_bank">
+							<div class="bankcard1"> <i></i><select  id="bind_bank">
 										<option value="中国银行"   <if condition="$userInfo['bank_name'] eq '中国银行'">selected</if>>中国银行</option>
 										<option value="工商银行"  <if condition="$userInfo['bank_name'] eq '工商银行'">selected</if>>工商银行</option>
 										<option value="农业银行"  <if condition="$userInfo['bank_name'] eq '农业银行'">selected</if>>农业银行</option>
@@ -100,8 +101,13 @@
 							</div>
 							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名" name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户名</label></div>
 							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号" name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
+<<<<<<< HEAD
 							<div class="bind_city"><span><i></i><input type="text" placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
 							<div class="bind_otherbank"><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>开户支行</label></div>
+=======
+							<div class="bind_city"><span><i></i><input type="text" placeholder="HongKong" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
+							<div class="bind_otherbank"><i></i><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>开户支行</label></div>
+>>>>>>> 426719e605805e94b77091016e98333e1fd35b7e
 							<div class="save_update" id="save">保存更新</div>
 						</div>
 					</div>

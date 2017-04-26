@@ -443,7 +443,9 @@ class AccountController extends CommonController{
                $updateData = [
                    'reanlname'=>$paramArr['reanlname'],
                    'id_card'=>$paramArr['id_card'],
-                   'is_true'=>1
+                   'is_true'=>1,
+                   'bank_name'=>$paramArr['bank_name'],
+                   'bank_card'=>$paramArr['bank_card'],
                ];
                $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
                if($res === false){

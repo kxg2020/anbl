@@ -240,7 +240,7 @@ $(function(){
 
 				if(crrYear - tyear < 18){
 
-					layer.tips('持卡人必须年满18周岁','input[name = bank_card_name]',{
+					layer.tips('持卡人必须年满18周岁','input[name = id_card]',{
 						tips:4
 					});
 					return false;
