@@ -122,12 +122,6 @@ $('.warn>input[name=cancel]').click(function(){
       height:868
     })
   }
-  
 
-
-  // console.log($('.star_content').offset())
-  // $('.star_factory').css({
-  //   left:$('.star_content').offset().left+100
-  // })
 
 });

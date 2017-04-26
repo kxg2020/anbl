@@ -496,13 +496,13 @@ class MemberController extends  CommonController{
 
         $paramArr = $_REQUEST;
 
-        $res = M()->where(['id'=>$paramArr['id']])->delete();
+        $res = M('MemberConsult')->where(['id'=>$paramArr['id']])->delete();
         if($res){
 
-            $this->ajaxReturn(['status'=>1]);
+            $this->redirect('admin/Member/question');
         }else{
 
-            $this->ajaxReturn(['status'=>0]);
+            $this->redirect('admin/Member/question');
         }
     }
 
@@ -662,9 +662,10 @@ class MemberController extends  CommonController{
         //搜索条件
         $where =[];
         $phone = I('get.phone');
+
         $type =  I('get.type_id');
         if($phone){
-            $where['b.phone'] = ['like',"%$phone%"];
+            $where['b.username'] = ['like',"%$phone%"];
         }
         if($type){
             $where['a.type'] = ['like',"%$type%"];
@@ -675,7 +676,7 @@ class MemberController extends  CommonController{
             ->where($where)
             ->count();
 
-        $page = new Page($count,15);
+        $page = new Page($count,25);
         // 查询出会员收益
         $profit = M('MemberProfit as a')
             ->field('a.*,b.username')

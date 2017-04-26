@@ -108,7 +108,9 @@ $(function(){
                             },
                             success:function(result){
                                 if(result.status == 1){
-                                    window.location.href = location.protocol+'//'+window.location.host+'/Home/Login/index'
+                                   layer.msg('注册成功',function(){
+                                       window.location.href = location.protocol+'//'+window.location.host+'/Home/Login/index'
+                                   });
                                 }else{
                                     layer.msg(result.msg);
                                 }

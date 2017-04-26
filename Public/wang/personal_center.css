@@ -728,6 +728,14 @@ header .nav{
 
 	margin-left: 0;
 }
+.detail_search{
+	color: white;
+	position: absolute;
+	left: 15px;  bottom: 15px;
+	z-index: 15;
+	color: black;
+	font-size: 25px;
+}
 .attend_content>div>div>img{
 	width: 100% !important;
 	height: 100% !important;
