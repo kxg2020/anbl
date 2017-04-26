@@ -67,19 +67,24 @@
 					<p>支持人数</p>
 					<p>{$info['support_number']}人</p>
 				</li>
-				<div class="now_suport" id="fast_suport">立即支持</div>
+					<if condition="$info['target_amount'] gt $info['money']">
+						<input  style="border: none"  type="button"  class="now_suport" id="fast_suport" value="立即支持">
+						<else />
+						<input  style="border: none"  type="button" disabled  class="now_suport"  value="筹集成功">
+					</if>
+
 				</ul>
 				
 			</div>
 			<div class="comment">
 				<div>
 					<p class="title">评论</p>
-					<ul class="comment_ul">
+					<!--<ul class="comment_ul">
 						<li class="comment_choice chk" _type="1">导演</li>
 						<li _type="2" class="chk">演员</li>
 						<li _type="3" class="chk">故事</li>
 						<li _type="4" class="chk">后期</li>
-					</ul>
+					</ul>-->
 					<div class="loginorreg"><if condition="$isLogin eq 0"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></if></div>
 					<input type="hidden" value="{$count}" id="count">
 					<textarea name="name" rows="8" cols="80" placeholder="输入我的想法" id="mainContent"></textarea>
@@ -273,7 +278,7 @@
 			 var  isLogin = "{$isLogin}";
 			 console.log(isLogin);
 			 if(isLogin == 0){
-				 layer.confirm('您还没有登录！', {
+				 layer.confirm('您还没有登录', {
 					 btn: ['登录','取消'] //按钮
 				 }, function(){
 					 window.location.href = "{:U('Home/Login/index')}"
@@ -289,7 +294,7 @@
 
 			 // 判断用户是否同意协议
 			 if(!$("#is_true").is(':checked')){
-				 layer.msg('请同意服务协议！');
+				 layer.msg('请同意服务协议');
 				 return false
 			 }
 			 // 选择分红方式
@@ -328,7 +333,7 @@
 			 var _id = $('#fast_collect').attr('data-id');
 			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
 				 if (data.status == 0) {
-					 layer.confirm('您还没有登录！', {
+					 layer.confirm('您还没有登录', {
 						 btn: ['登录','取消'] //按钮
 					 }, function(){
 						 window.location.href = "{:U('Home/Login/index')}"

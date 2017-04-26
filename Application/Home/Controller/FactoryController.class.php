@@ -109,7 +109,7 @@ class FactoryController extends CommonController
         if(IS_POST && IS_AJAX){
             //判断会员是否已经登录
             if(!$this->isLogin){
-                $this->ajaxReturn(['msg'=>"对不起，您还没有登录！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，您还没有登录",'status'=>0]);
             }
             $data = I('post.');
             $type_id = intval($data['type']);

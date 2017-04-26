@@ -52,7 +52,7 @@ class IndexController extends CommonController {
         if(IS_POST && IS_AJAX){
             //判断会员是否已经登录
             if(!$this->isLogin){
-                $this->ajaxReturn(['msg'=>"对不起，您还没有登录！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，您还没有登录",'status'=>0]);
             }
             $data = i('post.');
             // 支持金额
@@ -60,7 +60,7 @@ class IndexController extends CommonController {
 
             // 判断用户余额够不够
             if($support_money>$this->userInfo['money']){
-                $this->ajaxReturn(['msg'=>"对不起，阿纳豆不足！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，阿纳豆不足",'status'=>0]);
             }
             // 会员id
             $member_id = $this->userInfo['id'];
@@ -69,7 +69,7 @@ class IndexController extends CommonController {
 
             $projectInfo = M('Project')->find($project_id);
             if(!$projectInfo){
-                $this->ajaxReturn(['msg'=>"项目不存在！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"项目不存在",'status'=>0]);
             }
 
             // 判断目标金额是否达到
@@ -107,14 +107,14 @@ class IndexController extends CommonController {
             $rest = M('MemberSupport')->add($supportInfo);
             if(!$rest){
                 M()->rollback();
-                $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"订单保存失败",'status'=>0]);
             }
 
             // 更新用户余额
             $rest = M('Member')->where(['id' => $member_id])->save(['money' => ['exp', 'money-' . $support_money]]);
             if(!$rest){
                 M()->rollback();
-                $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"订单保存失败",'status'=>0]);
             }
 
             // 更新支持人数 //支持金额
@@ -126,12 +126,12 @@ class IndexController extends CommonController {
                 ]);
             if(!$rest){
                 M()->rollback();
-                $this->ajaxReturn(['msg'=>"订单保存失败！！！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"订单保存失败",'status'=>0]);
             }
 
             //提交事物
             M()->commit();
-            $this->ajaxReturn(['msg'=>"支持成功！！！",'status'=>1]);
+            $this->ajaxReturn(['msg'=>"支持成功",'status'=>1]);
         }
     }
 

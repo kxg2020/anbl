@@ -134,6 +134,7 @@
 						</ul>
 						<div class="my_suport" >
 								<volist name="supportSituation" id="s">
+
 									<div>
 										<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
 										<div class="movie_content">
@@ -143,8 +144,10 @@
 											<p><span>{$s['support_number']}</span>人支持</p>
 											<p>已支持<span>{$s['support_money']}</span>阿纳豆</p>
 											<p><input type="button" class="cancel_suport" value="取消支持" data-id="{$s['aid']}"></p>
+											<a href="{:U('home/index/detail',['id'=>$s['project_id']])}" class="detail_search">查看详情</a>
 										</div>
 									</div>
+
 								</volist>
 
 							<input type="hidden" name="page_1" value="{$count_1}">
@@ -165,7 +168,7 @@
 										<p>{$c['country']}/{$c['duration']}分钟</p>
 										<p>{$c['date']}/{$c['showaddress']}</p>
 										<p style="color: #e50909; float: right;"><i></i>已收藏</p>
-										<p style="text-align: right;"><input style="float: right;" type="button" data-id="{$c['id']}" class="cancel_collect" value="取消收藏"></p>
+										<p style="text-align: right;"><input style="float: right;" type="button" data-id="{$c['cid']}" class="cancel_collect" value="取消收藏"></p>
 									</div>
 								</div>
 							</volist>
@@ -1221,7 +1224,7 @@
 									location.reload();
 								});
 							}else{
-								layer.msg(e.msg,function(){
+								layer.msg(e.msg,{time:3},function(){
 									location.reload();
 								});
 							}

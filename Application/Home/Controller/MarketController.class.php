@@ -29,7 +29,7 @@ class MarketController extends CommonController
 
             // 判断用户是否已经登录
             if (!$this->isLogin) {
-                $this->ajaxReturn(['msg'=>"对不起，您还没有登录！",'status'=>0]);
+                $this->ajaxReturn(['msg'=>"对不起，您还没有登录",'status'=>0]);
             }
             $user_id = $this->userInfo['id'];
             $project_id = $data['project_id'];
@@ -46,11 +46,11 @@ class MarketController extends CommonController
                 ->find();
 
             if ($rest) {
-                $this->ajaxReturn(['msg' => "您已支持该项目可免费下载！", 'status' => 1,'info'=>['dl'=>"您已支持该项目可免费下载！"],'id'=>$projectInfo['id'],'infot'=>$projectInfo]);
+                $this->ajaxReturn(['msg' => "您已支持该项目可免费下载", 'status' => 1,'info'=>['dl'=>"您已支持该项目可免费下载"],'id'=>$projectInfo['id'],'infot'=>$projectInfo]);
             } else {
                 //判断用户余额
                 if($projectInfo['dl']>$this->userInfo['money']){
-                    $this->ajaxReturn(['msg'=>"对不起，积分不足！",'status'=>0]);
+                    $this->ajaxReturn(['msg'=>"对不起，积分不足",'status'=>0]);
                 }
                 $this->ajaxReturn(['msg' => "付费下载", 'status' => 2,'info'=>$projectInfo]);
             }
@@ -72,12 +72,12 @@ class MarketController extends CommonController
             //判断下载类型 2 扣费
             if($type_id == 2){
                 if($projectInfo['dl']>$this->userInfo['money']){
-                    $this->error("对不起，余额不足！！！");
+                    $this->error("对不起，余额不足");
                     exit;
                 }
                 $rest = M('Member')->where(['id'=>$this->userInfo['id']])->save(['money'=>$this->userInfo['money']-$projectInfo['dl']]);
                 if(!$rest){
-                    $this->error("订单保存失败！！！");
+                    $this->error("订单保存失败");
                 }
                 // 生成订单
                 $order_number = 'XZ'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
@@ -91,7 +91,7 @@ class MarketController extends CommonController
                 ];
                 $rest = M('MemberDownload')->add($downloadInfo1);
                 if(!$rest){
-                    $this->error("订单生成失败！！！");
+                    $this->error("订单生成失败");
                     exit;
                 }
 
@@ -107,7 +107,7 @@ class MarketController extends CommonController
                 ];
                 $rest = M('MemberDownload')->add($downloadInfo2);
                 if(!$rest){
-                    $this->error("订单生成失败！！！");
+                    $this->error("订单生成失败");
                     exit;
                 }
             }

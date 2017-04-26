@@ -313,7 +313,51 @@ class MoneyController extends CommonController
      */
     public function test()
     {
-        // 未分红的订单
+        // 判断已分红的订单
+        $where1 = [
+            'is_fh' => 1,//未分红的订单或者分红还未结束的订单
+            'type' => 1,//未分红固定分红方式的订单
+        ];
+        $supportInfo1 = M('MemberSupport')
+            ->where($where1)
+            ->select();
+        foreach ($supportInfo1 as &$info) {
+            // 查询出当前项目
+            $projectInfo = M('Project')->find($info['project_id']);
+            if (!$projectInfo) {// 项目不存在
+                continue;
+            }
+            // 判断项目在线在线状态 在线就可以进行分红  不在线查看 目标金额是否达到 未达到 则分红失败
+            if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
+
+                // 当前订单用户的收益全部失效
+                $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
+                foreach ($profits as $profit) {
+                    // 修改收益状态
+                    $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
+                    // 扣除用户余额
+                    $money = $profit['money'];
+                    $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+                }
+                // 修改订单状态
+                $rest = M('MemberSupport')
+                    ->where(['id' => $info['id']])
+                    ->save([
+                        'fixed' => 0,//每天的收益
+                        'is_fh' => 2,//失效订单
+                        'is_fy' => 2,//失效订单
+                    ]);
+                if ($rest === false) {
+                    M()->rollback();
+                    exit;
+                }
+                continue;
+            }
+        }
+
+
+
+        // 未分红的订单 进行分红
         $where = [
             'is_fh' => 0,//未分红的订单或者分红还未结束的订单
             'type' => 1,//未分红固定分红方式的订单
@@ -365,10 +409,13 @@ class MoneyController extends CommonController
             // 获取影片拍摄周期
             $end_time = $projectInfo['cycle'];// 周期时间 例如6个月
 
+            $bigMony = $info['support_money']*($projectInfo['fixed_rate'] / 100)*3;
+
+
             // 获取系统当前时间
             $time = time();
 
-            if ($end_time > 3 && $time < $projectInfo['end_time']) {
+            if ($end_time > 3 && $time < $projectInfo['end_time'] && $bigMony>$info['fixed']) {
                 // 查看分红时间是不是已经够 3个月
                 if ($info['num'] >= 90) {//不在进行分红 //修改订单状态
                     $rest = M('MemberSupport')
@@ -416,7 +463,7 @@ class MoneyController extends CommonController
                     exit;
                 }
 
-            } elseif ($end_time <= 3 && $time < $projectInfo['end_time']) {
+            } elseif ($end_time <= 3 && $time < $projectInfo['end_time'] && $bigMony>$info['fixed']) {
                 $rest = M('MemberSupport')
                     ->where(['id' => $info['id']])
                     ->save([
