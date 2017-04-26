@@ -177,12 +177,12 @@ header .nav{
 	display: block;
 	float: left;
 	width: auto;
-	height: 40px;f
+	height: 52px;
+	margin-right: 17px;
 	font-size: 40px;
 	text-align: center;
-	line-height: 40px;
+	line-height: 52px;
 	color: #e50909;
-	margin-top: 5px;
 }
 .leval{
 	line-height: 35px;
@@ -622,9 +622,12 @@ header .nav{
 	text-decoration: underline;
 	cursor: pointer;
 }
+.bankcard1,.bind_otherbank{
+	position: relative;
+}
 .safe_center i{
 	position: absolute;
-	top: 0px;
+	top: 4px;
 	left: 10px;
 	display: block;
 	width: 15px;
@@ -647,11 +650,13 @@ header .nav{
 	background: url(img/name02.png);
 }
 #bind_bank{
+	padding-left: 36px;
 	width: 228px;
 	height: 32px;
 	background: rgba(0,0,0,0);
 	color: white;
 	margin-right: 50px;
+	border-radius: 3px;
 }
 #bind_bank option{
 	background: #333;
@@ -660,6 +665,14 @@ header .nav{
 	width: 18px;
 	height: 14px;
 	background: url(img/bankcard.png);
+}
+.bankcard1 i,.bind_otherbank i{
+	display: block;
+	width: 18px;
+	height: 14px;
+	background: url(img/bankcard.png);
+	top:9px;
+	left: 10px;
 }
 .bind_city i{
 	width: 12px;
