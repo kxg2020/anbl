@@ -265,7 +265,7 @@ class ProjectController extends CommonController
         }
 
         // 判断该项目是否存在还没有处理完的订单
-        $supportInfo = M('MemberSupport')->where(['is_ok'=>0,'project_id'=>$info['id']])->find();
+        $supportInfo = M('MemberSupport')->where(['is_ok'=>0,'project_id'=>$info['id']])->select();
         if($supportInfo){
             $this->error('该项目还存在未处理完成的订单，不能删除!');
             exit;
@@ -283,6 +283,15 @@ class ProjectController extends CommonController
         if(!$rest){
             $this->error('删除失败！');
             exit;
+        }
+
+        // 删除收益信息
+        foreach($supportInfo as $info){
+            $rest = M('MemberProfit')->where(['support_id'=>$info['id']])->delete();
+            if(!$rest){
+                $this->error('删除失败！');
+                exit;
+            }
         }
 
         // 删除关联表数据

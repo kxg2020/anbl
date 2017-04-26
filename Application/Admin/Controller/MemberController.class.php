@@ -642,7 +642,7 @@ class MemberController extends  CommonController{
             ->where($where)
             ->count();
 
-        $page = new Page($count,15);
+        $page = new Page($count,25);
         // 查询出会员收益
         $profit = M('MemberProfit as a')
             ->field('a.*,b.username')

@@ -123,7 +123,7 @@ class PersonalController extends CommonController{
 
 
         //>> 查询当前用户的支持情况
-        $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,b.*')
+        $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id'],'a.is_fh'=>0])
             ->select();
@@ -158,9 +158,11 @@ class PersonalController extends CommonController{
 
 
         //>> 查询收藏情况
-        $collection = $personModel->where(['member_id'=>$this->userInfo['id']])
+        $collection = $personModel
+                   ->field('a.*,b.id as cid,c.*')
                     ->join('left join an_member_collection as b on a.id = b.member_id')
                     ->join('left join an_project as c on b.project_id = c.id')
+                    ->where(['member_id'=>$this->userInfo['id']])
                     ->select();
         foreach($collection as $key => &$value){
             $value['date'] = date('Y-m-d',$value['showtime']);
@@ -537,9 +539,10 @@ class PersonalController extends CommonController{
 
         $paramArr = $_REQUEST;
         //>> 查询收藏情况
-        $collection = M('Member as a')->where(['member_id'=>$this->userInfo['id']])
+        $collection = M('Member as a')
             ->join('left join an_member_collection as b on a.id = b.member_id')
             ->join('left join an_project as c on b.project_id = c.id')
+            ->where(['member_id'=>$this->userInfo['id']])
             ->select();
         foreach($collection as $key => &$value){
             $value['date'] = date('Y-m-d',$value['showtime']);

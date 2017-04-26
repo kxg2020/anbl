@@ -13,7 +13,7 @@
 			<a href="{:U('Index/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
 			<a href="{:U('Index/share')}">分享注册<img src="__PUBLIC__/wang/home/share.png" alt=""></a>
 		</div>
-		<p style="clear: both;overflow: hidden; width: 2.5rem;text-align:center;margin: auto;" class="name">{:telephoneNumber($personal['username'])}</p>
+		<p style="clear: both;overflow: hidden; width: 2.5rem;text-align:center;margin: auto;" class="name"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></p>
 		<p style="clear: both;" class="lv"><img src="__PUBLIC__/wang/account/level{$personal['level']}.png" alt=""><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			您当前的累计阿纳豆为:{$allInfo['integral']}
 		</if></p>
