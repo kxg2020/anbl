@@ -74,11 +74,18 @@ $(function(){
                 layer.tips('密码不能为空!', 'input[name = password]');
 
             }else{
-                var e = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/ ;
-                if(!e.test(password)){
-                    layer.tips('密码格式不正确!', 'input[name = password]');
+                //var e = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/ ;
 
-                    return ;
+                //if(!e.test(password)){
+                //    layer.tips('密码格式不正确!', 'input[name = password]');
+                //
+                //    return ;
+                //}
+
+                if(password.length < 6){
+                    layer.tips('密码长度至少6位!', 'input[name = password]');
+
+                    return  false;
                 }
                 //>> 验证验证码
                 if(captcha == ''){

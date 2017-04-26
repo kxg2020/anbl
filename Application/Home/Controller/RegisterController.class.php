@@ -43,8 +43,8 @@ class RegisterController extends CommonController{
 
             }else{
 
-                //>> 检测用户名和密码
-                $res = $this->checkUser($paramArr['password']);
+                //>> 检测密码
+                //$res = $this->checkUser($paramArr['password']);
 
                 //>> 检测手机号
                 $row = $this->checkPhone($paramArr['phone']);
@@ -54,11 +54,11 @@ class RegisterController extends CommonController{
                     die($this->_printError('1006'));
 
                 }
-                if(!$res){
-
-                    die($this->_printError('1010'));
-
-                }
+//                if(!$res){
+//
+//                    die($this->_printError('1010'));
+//
+//                }
 
                 if(isset($paramArr['invite_key']) && !empty($paramArr['invite_key']) && strlen($paramArr['invite_key']) < 10){
 

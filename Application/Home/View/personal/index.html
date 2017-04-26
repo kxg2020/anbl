@@ -15,7 +15,7 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			<p class="username"><span style="float: right;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}经纪人</span></p>
+			<p class="username"><span style="float: right;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			支持者Lv{$personal['level']}:{$personal['money']}阿纳豆
 			</if></div>
@@ -254,9 +254,9 @@
 								<ul><li>密码管理</li>
 								</ul>
 								<div class="update_password">
-									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password"><label>输入当前的登录密码</label></p>
-									<p><input type="password" placeholder="8-16位数字,字母组合" name="newpassword"><label>新密码</label></p>
-									<p><input type="password" placeholder="再输入一次密码" name="repassword"><label>确认新密码</label></p>
+									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password" placeholder="请输入当前密码"><label>输入当前的登录密码</label></p>
+									<p><input type="password" placeholder="请输入密码" name="newpassword"><label>请输入新密码</label></p>
+									<p><input type="password" placeholder="请再次输入" name="repassword"><label>请再次输入</label></p>
 									<div class="save_update" id="editPassword">保存更新</div>
 								</div>
 						</div>
@@ -1157,7 +1157,7 @@
 				password = $('input[name = password]').val();
 				newpassword = $('input[name = newpassword]').val();
 				repassword = $('input[name = repassword]').val();
-				var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+				//var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
 				if(password == ''){
 					layer.tips('当前密码不能为空','input[name = password]');return;
 				}
@@ -1171,8 +1171,8 @@
 
 					layer.msg('两次输入的密码不一致');return;
 				}
-				if(!reg.test(password) || !reg.test(repassword) || !reg.test(newpassword)){
-					layer.msg('密码格式不正确');return;
+				if(password.length < 6 || newpassword.length < 6 || repassword.length < 6){
+					layer.msg('密码长度至少6位');return;
 				}
 				$.ajax({
 					'type':'post',

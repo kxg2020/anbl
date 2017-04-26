@@ -44,18 +44,18 @@ class LoginController extends CommonController{
             }
 
             //>>检测密码
-            if(isset($paramArr['password']) && !empty($paramArr['password']) && strlen($paramArr['password']) <= 16){
-
-                $res = $this->checkPassword($paramArr['password']);
-                if(!$res){
-
-                    die($this->_printError('1010'));
-                }
-
-            }else{
-
-                die($this->_printError('1020'));
-            }
+//            if(isset($paramArr['password']) && !empty($paramArr['password']) && strlen($paramArr['password']) <= 16){
+//
+//                $res = $this->checkPassword($paramArr['password']);
+//                if(!$res){
+//
+//                    die($this->_printError('1010'));
+//                }
+//
+//            }else{
+//
+//                die($this->_printError('1020'));
+//            }
 
             //>> 查询数据库
             $row = $userModel->where(['username'=>$paramArr['username'],'password'=>md5($paramArr['password'])])->find();
