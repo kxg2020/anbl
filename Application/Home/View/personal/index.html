@@ -61,7 +61,7 @@
 						</ul>
 						<div class="people_data">
 							<div class="user"><input type="text" value="{$personal['username']}" disabled></div>
-							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;">邀请码:</span><span style="color: green;">adfsdf</span></div>
+							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;">邀请码:</span><span style="color: green;">{$personal['invite_key']}</span></div>
 							<div class="real_name"><span>实名:</span><if condition="$personal['is_true'] eq 0"><span>未实名</span><else/><span style="color: forestgreen">已实名</span></if></div>
 							<div class="sex">
 								<span>性别:</span>
@@ -113,8 +113,8 @@
 						</div>
 						<div class="update_password" style="display: none;">
 									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password"><label>输入当前的登录密码</label></p>
-									<p><input type="password" placeholder="8-16位数字,字母组合" name="newpassword"><label>新密码</label></p>
-									<p><input type="password" placeholder="再输入一次密码" name="repassword"><label>确认新密码</label></p>
+									<p><input type="password" placeholder="请输入密码" name="newpassword"><label>新密码</label></p>
+									<p><input type="password" placeholder="请再次输入" name="repassword"><label>确认新密码</label></p>
 									<div class="save_update" id="editPassword">保存更新</div>
 						</div>
 
