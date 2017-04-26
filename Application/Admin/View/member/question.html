@@ -85,7 +85,9 @@
                                     <td style="vertical-align: middle">{$q.title}</td>
                                     <td style="vertical-align: middle">{:mb_substr($q['content'], 0, 15, 'utf-8')}</td>
                                     <td style="vertical-align: middle"><if condition="$q['status'] eq 0"><span class="label label-danger">未回复</span><else/><span class="label label-success">已回复</span></if></td>
-                                    <td style="vertical-align: middle"><input type="button" data-id="{$q['id']}" class="btn btn-xs btn-info detail" value="查看"  ></td>
+                                    <td style="vertical-align: middle"><input type="button" data-id="{$q['id']}" class="btn btn-xs btn-info detail" value="查看"  >
+                                       <a href="{:U('')}"><input type="button" data-id="{$q['id']}" class="btn btn-xs btn-danger delete" value="删除"  ></a>
+                                    </td>
                                 </tr>
                                 </volist>
                                 </tbody>

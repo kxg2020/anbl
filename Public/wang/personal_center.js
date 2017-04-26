@@ -229,13 +229,49 @@ $(function(){
 				});
 			}else{
 				//>> 验证身份证格式
-				var reg = /\d{14}(\d{4}|(\d{3}[xX])|\d{1})/;
+				var reg = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
 				if(!reg.test(id_card)){
 					layer.tips('身份证格式不正确','input[name = id_card]',{
 						tips:4
 					});
 					return ;
 				}
+
+				//>> 截取生日
+				tyear = parseInt(id_card.substr(6,4));
+				tmonth = parseInt(id_card.substr(10,2));
+				tday = parseInt(id_card.substr(12,2));
+
+				//>> 获取当前的年
+				crrDate = new Date();
+				crrYear = crrDate.getFullYear();
+
+				if(crrYear - tyear < 18){
+
+					layer.tips('持卡人必须年满18周岁','input[name = id_card]',{
+						tips:4
+					});
+					return false;
+				}
+				if(tmonth < 0 || tmonth > 12){
+					layer.tips('身份证出生日期不正确','input[name = bank_card_name]',{
+						tips:4
+					});
+					return false;
+				}
+
+				crrAllDate = new Date(tyear,tmonth,0);
+				crrAllDate = crrAllDate.getDate();
+
+
+				if(tday < 0 || tmonth > crrAllDate){
+					layer.tips('身份证出生日期不正确','input[name = bank_card_name]',{
+						tips:4
+					});
+					return false;
+				}
+
+
 				if(bank_card_name == ''){
 					layer.tips('请输入开户名','input[name = bank_card_name]',{
 						tips:4

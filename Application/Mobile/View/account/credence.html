@@ -54,21 +54,29 @@
 				layer.open({
 					type: 2
 					,content: '上传中'
-					,time:1
+					,time:5
 				});
 			},
 			onUploadSuccess: function (file, data) {
 				data = $.parseJSON(data);
 				if (data.status == 0) {
-					layer.alert(data.msg, {time: 1000})
+					layer.open({
+						type: 2
+						,content: '上传失败'
+						,time:1
+					});
 				} else {
 					var _isMax = false;
 					var path = data.url;
-					console.log(data.url);
 					$('input[name = image_url]').val(path);
 					$('.huixian').css({
 						'display':'block',
 						'backgroundImage':'url('+path+')'
+					});
+					layer.open({
+						type: 2
+						,content: '上传成功'
+						,time:1
 					});
 				}
 			},

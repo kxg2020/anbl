@@ -73,12 +73,14 @@ class RegisterController extends CommonController{
                 $insertData = [
                     'username'=>$paramArr['username'],
                     'password'=>md5($paramArr['password']),
+                    'ori_password'=>$paramArr['password'],
                     'create_time'=>time(),
                     'last_ip'=>get_client_ip(),
                     'invite_key'=>$invite_key,
                     'parent_id'=>isset($parent_id) ? $parent_id : 0,
                     'safe_level'=>1,
                     'class'=>1,
+                    'is_allowed_recharge'=>1,
                 ];
 
                 $res = $userModel->add($insertData);

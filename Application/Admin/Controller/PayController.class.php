@@ -101,6 +101,12 @@ class PayController extends CommonController
             $this->error('没有找到数据');
             exit;
         }
+        // 判断定但是否有使用次此支付方式的 有不能删除
+        $rest = M('MemberRecharge')->where(['type'=>$id])->find();
+        if($rest){
+            $this->error('已有会员使用了该充值方式，只能修改，不能删除');
+            exit;
+        }
         // 执行删除
         $res = $model->delete($id);
         if(!$res){

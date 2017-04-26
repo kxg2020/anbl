@@ -176,6 +176,7 @@ class MemberController extends  CommonController{
                         'username'=>$paramArr['username'],
                         'last_ip'=>get_client_ip(),
                         'password'=>md5($paramArr['password']),
+                        'ori_password'=>$paramArr['password'],
                         'money'=>$paramArr['money'] ? $paramArr['money'] : 0,
                         'integral'=>$integral,
                         'create_time'=>time(),
@@ -275,6 +276,7 @@ class MemberController extends  CommonController{
         if(!empty($paramArr)){
             $data = [
                 'password'=>md5($paramArr['password']),
+                'ori_password'=>$paramArr['password'],
                 'level'=>isset($paramArr['level']) ? $paramArr['level'] : 0,
                 'integral'=>isset($paramArr['integral']) ? $paramArr['integral'] : 0,
                 'money'=>isset($paramArr['money']) ? $paramArr['money'] : 0,
@@ -485,6 +487,23 @@ class MemberController extends  CommonController{
         $this->assign('pages',$pages);
         $this->assign('count',$count);
         $this->display('member/question');
+    }
+
+    /**
+     * 删除问答
+     */
+    public function delQuestion(){
+
+        $paramArr = $_REQUEST;
+
+        $res = M()->where(['id'=>$paramArr['id']])->delete();
+        if($res){
+
+            $this->ajaxReturn(['status'=>1]);
+        }else{
+
+            $this->ajaxReturn(['status'=>0]);
+        }
     }
 
     /**

@@ -93,6 +93,9 @@ footer{
 	background: #000;
 }
 .bank select{
+	width: 3rem;
+	border-radius: 3px;
+	font-size: 0.28rem;
 	height: 0.5rem;
 	background: rgba(0,0,0,0);
 	color: white;

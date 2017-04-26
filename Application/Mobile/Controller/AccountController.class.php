@@ -387,6 +387,7 @@ class AccountController extends CommonController{
                     'image_url'=>$paramArr['image_url'],
                 ];
 
+
                 //>> 添加到充值订单表
                 $ros = M('MemberRecharge')->add($orderData);
 
@@ -425,6 +426,7 @@ class AccountController extends CommonController{
 
         //>> 查询支付方式
         $payMode = M('Pay')->select();
+
         $this->assign('pay',$payMode);
         $this->display('account/credence');
     }
@@ -441,7 +443,9 @@ class AccountController extends CommonController{
                $updateData = [
                    'reanlname'=>$paramArr['reanlname'],
                    'id_card'=>$paramArr['id_card'],
-                   'is_true'=>1
+                   'is_true'=>1,
+                   'bank_name'=>$paramArr['bank_name'],
+                   'bank_card'=>$paramArr['bank_card'],
                ];
                $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
                if($res === false){

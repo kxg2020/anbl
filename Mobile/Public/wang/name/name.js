@@ -2,6 +2,9 @@ $(function(){
     $('#tijiao').click(function(){
        realname = $('input[name = realname]').val();
         id_card = $('input[name = id_card]').val();
+        bank_card = $('input[name = bank_card]').val();
+        bank_name = $('#bind_bank').val();
+
         if(realname == ''){
             layer.open({
                 content: '真实姓名必填',
@@ -36,7 +39,7 @@ $(function(){
             });
             return false;
         }
-        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        var reg = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
         if(!reg.test(id_card)){
             layer.open({
                 content: '身份证号格式不正确',
@@ -45,11 +48,23 @@ $(function(){
             });
             return false;
         }
+
+        var reg_1 = /^\d{19}$/g;
+
+        if(!reg_1.test(bank_card)){
+            layer.open({
+                content: '银行卡号格式不正确',
+                style:'color:black'
+                ,time: 2,
+            });
+            return false;
+        }
+
         $.ajax({
             'type':'post',
             'dataType':'json',
             'url':location.protocol+'//'+window.location.host+'/Account/checkTrue',
-            'data':{'realname':realname,'id_card':id_card},
+            'data':{'realname':realname,'id_card':id_card,'bank_card':bank_card,'bank_name':bank_name},
             success:function(e){
                 if(e.status == 1){
                     layer.open({

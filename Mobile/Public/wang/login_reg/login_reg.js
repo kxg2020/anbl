@@ -73,7 +73,7 @@ $(function(){
 			});
 			return false;
 		}
-		if(password.length < 8 || password.length > 16){
+		if(password.length < 6){
 			layer.open({
 				content: '密码格式不正确',
 				style: 'color:black;'
@@ -89,9 +89,9 @@ $(function(){
 			});
 			return false;
 		}
-		if(rePassword.length < 8 || rePassword.length > 16){
+		if(rePassword.length < 6){
 			layer.open({
-				content: '确认密码格式不正确',
+				content: '确认密码长度至少为6位',
 				style: 'color:black;'
 				,time:2
 			});
@@ -115,6 +115,13 @@ $(function(){
 			success:function(e){
 				if(e.status == 1){
 					window.location.href = location.protocol+'//'+window.location.host+'/login/index';
+				}else{
+					layer.open({
+						content: e.msg,
+						style: 'color:black;'
+						,time:2
+					});
+					return false;
 				}
 			}
 		});

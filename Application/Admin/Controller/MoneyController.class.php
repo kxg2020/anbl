@@ -488,7 +488,7 @@ class MoneyController extends CommonController
                 continue;
             }
             // 项目下架自动返还本金
-            if($projectInfo['is_active'] == 0 && $info['is_true']==0){
+            if($projectInfo['is_active'] == 0){
 
                 // 更新会员余额
                 $money = $info['support_money'];

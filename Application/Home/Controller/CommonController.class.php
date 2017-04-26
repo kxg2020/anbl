@@ -83,17 +83,20 @@ class CommonController extends Controller{
             }
             //>> 查询用户
             $row = M('Member')->where(['session_token'=>$session])->find();
+
             if(!empty($row)){
                 //>> 查询投资
                 $support = M('MemberSupport')->where(['member_id'=>$row['id']])->sum('support_money');
+
                 //>> 判断投资是否满xx,满xx升级为支持者
-                if($support['support_money'] >= $zcArr['support']){
+                if($support >= $zcArr['support']){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
                 }
 
                 //>> 判断上级已经有多少下线
                 $count = $this->group($row['id']);
+
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
 

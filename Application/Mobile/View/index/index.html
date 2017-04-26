@@ -43,7 +43,7 @@
 			<a href="{:U('Star/index')}"><img style="width: 0.26rem;height: 0.42rem;" src="__PUBLIC__/wang/common_img/actor.png" alt="">我要当演员</a>
 			<a href="{:U('Account/upCredence')}"><img style="width: 0.33rem;height: 0.33rem;" src="__PUBLIC__/wang/common_img/apply.png" alt="">上传凭证</a>
 			<div class="body_bottom">
-				<div><if condition="$isLogin eq 1"><span>{$userInfo['username']}</span><else /><a href="{:U('login/index')}">登录</a></if></div>
+				<div><if condition="$isLogin eq 1"><span>{:telephoneNumber($userInfo['username'])}</span><else /><a href="{:U('login/index')}">登录</a></if></div>
 				<div><if condition="$isLogin eq 1"><a href="{:U('Login/logout')}">退出账户</a><else /><a href="{:U('login/index',['xt'=>1])}">注册</a></if></div>
 			</div>
 		</div>

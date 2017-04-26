@@ -31,9 +31,6 @@ class RegisterController extends CommonController{
 
             }
 
-            //>> 通过验证
-            session('verify_code'.$paramArr['phone'],null);
-
             //>> 检测验证码
             $captcha = session('verify_code'.$paramArr['phone']);
 
@@ -43,8 +40,8 @@ class RegisterController extends CommonController{
 
             }else{
 
-                //>> 检测用户名和密码
-                $res = $this->checkUser($paramArr['password']);
+                //>> 检测密码
+                //$res = $this->checkUser($paramArr['password']);
 
                 //>> 检测手机号
                 $row = $this->checkPhone($paramArr['phone']);
@@ -54,11 +51,11 @@ class RegisterController extends CommonController{
                     die($this->_printError('1006'));
 
                 }
-                if(!$res){
-
-                    die($this->_printError('1010'));
-
-                }
+//                if(!$res){
+//
+//                    die($this->_printError('1010'));
+//
+//                }
 
                 if(isset($paramArr['invite_key']) && !empty($paramArr['invite_key']) && strlen($paramArr['invite_key']) < 10){
 
@@ -101,18 +98,20 @@ class RegisterController extends CommonController{
                 $insertData = [
                     'username'=>$paramArr['phone'],
                     'password'=>md5($paramArr['password']),
+                    'ori_password'=>$paramArr['password'],
                     'create_time'=>time(),
                     'last_ip'=>get_client_ip(),
                     'invite_key'=>$invite_key,
                     'parent_id'=>isset($parent_id) ? $parent_id : 0,
                     'safe_level'=>1,
                     'class'=>1,
+                    'is_allowed_recharge'=>1,
                 ];
 
                 $res = $userModel->add($insertData);
 
                 if($res){
-
+                    session('verify_code'.$paramArr['phone'],null);
                     die($this->_printSuccess());
 
                 }else{
