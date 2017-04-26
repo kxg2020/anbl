@@ -268,6 +268,7 @@ class OrderController extends CommonController
         $orderLst = M('Member_recharge as a')->field('a.*,b.username,c.name as payname')
                 ->join('left join an_member as b on a.member_id = b.id')
                 ->join('left join an_pay as c on c.id=a.type')
+                ->order('a.create_time desc')
                 ->where($where)->select();
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
@@ -362,6 +363,7 @@ class OrderController extends CommonController
             ->field('a.*,b.username,b.bank_card_name,b.bank_card,b.address')
             ->join('left join an_member as b on a.member_id = b.id')
             ->where($where)
+            ->order('a.create_time desc')
             ->limit($page->firstRow,$page->listRows)
             ->select();
 

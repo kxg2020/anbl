@@ -77,8 +77,8 @@
                                     <th class="text-center">支持用户</th>
                                     <th class="text-center">支持项目</th>
                                     <th class="text-center">支持金额</th>
-                                    <th class="text-center">固定收益</th>
-                                    <th class="text-center">浮动收益</th>
+                                    <th class="text-center">月酬收益</th>
+                                    <th class="text-center">票房收益</th>
                                     <th class="text-center">是否已分红</th>
                                     <th class="text-center">本金是否返还</th>
                                     <th class="text-center">是否分佣</th>
@@ -97,7 +97,7 @@
                                 <tr class="gradeX">
                                     <td style="vertical-align: middle">{$tag.id}</td>
                                     <td style="vertical-align: middle">{$tag.order_number}</td>
-                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">固定分红<else />浮动分红</if></td>
+                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">月酬<else />票房</if></td>
                                     <td style="vertical-align: middle">{$tag.username}</td>
                                     <td style="vertical-align: middle">{$tag.project_name}</td>
                                     <td style="vertical-align: middle">{$tag.support_money}</td>
