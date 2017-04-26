@@ -1076,8 +1076,11 @@ margin-top: 25px;
   margin-right: 70px;
 }
 .update_password{
-  padding-left: 180px;
-  padding-top: 33px;
+  padding-left: 108px;
+  padding-top: 27px;
+}
+.update_password label{
+	color: #ccc;
 }
 .update_password>p{
   margin-bottom: 24px;
@@ -1096,7 +1099,7 @@ margin-top: 25px;
 .update_password>p>i{
   display: inline-block;
   position: absolute;
-  top: 3px;
+  top: 7px;
   left: 5px;
   width: 18px;
   height: 18px;

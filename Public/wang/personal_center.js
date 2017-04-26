@@ -79,11 +79,19 @@ $(function(){
 			$('.identity_content>ul>li').eq(0).addClass('choice');
 			$('.people_data').show();
 			$('.safe_center').hide();
+			$('.update_password').hide()
 		}
 		if(txt=='安全中心'){
 			$('.identity_content>ul>li').eq(1).addClass('choice');
 			$('.people_data').hide();
 			$('.safe_center').show();
+			$('.update_password').hide()
+		}
+		if(txt=='密码管理'){
+			$('.identity_content>ul>li').eq(2).addClass('choice');
+			$('.people_data').hide();
+			$('.safe_center').hide();
+			$('.update_password').show()
 		}
 	})
 	$('.attend_content>ul>li').click(function(){
