@@ -352,7 +352,7 @@ class MemberController extends  CommonController{
                 'follower_zhichi'=>0,
             ];
             $updateData_2 = [
-                'support'=>0,
+                'support'=>$paramArr['jingji_touzi'],
                 'follower'=>$paramArr['jingji_zhitui'],
                 'group'=>0,
                 'follower_jingji'=>0,

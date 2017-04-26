@@ -148,6 +148,7 @@
 
                                     <label class="col-sm-2 col-sm-2 control-label">经纪人条件:</label><br>
                                     <div class="col-sm-4 col-md-4">
+                                        投资 <input type="number"  name="jingji_touzi"  class="form-control" placeholder="" value="{$roles['1']['support']}">
                                         直推 <input type="number"  name="jingji_zhitui"  class="form-control" placeholder="" value="{$roles['1']['follower']}">
 
                                     </div>
@@ -245,6 +246,7 @@ $(function(){
 
 
             var  jingji_zhitui = $('input[name=jingji_zhitui]').val();
+            var  jingji_touzi = $('input[name=jingji_touzi]').val();
 
 
 
@@ -268,6 +270,7 @@ $(function(){
 
 
                 'jingji_zhitui': jingji_zhitui,
+                'jingji_touzi': jingji_touzi,
 
 
                 'zhipian_touzi':zhipian_touzi,

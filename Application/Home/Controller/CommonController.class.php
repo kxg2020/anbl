@@ -107,7 +107,7 @@ class CommonController extends Controller{
                 $zhipian = $this->getZhiPianRen($row['id']);
 
                 //>> 直推xxx人，升级为经纪人
-                if($count >= $jjArr['follower']){
+                if($count >= $jjArr['follower'] && $support >= $jjArr['support'] ){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
