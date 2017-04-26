@@ -496,13 +496,13 @@ class MemberController extends  CommonController{
 
         $paramArr = $_REQUEST;
 
-        $res = M()->where(['id'=>$paramArr['id']])->delete();
+        $res = M('MemberConsult')->where(['id'=>$paramArr['id']])->delete();
         if($res){
 
-            $this->ajaxReturn(['status'=>1]);
+            $this->redirect('admin/Member/question');
         }else{
 
-            $this->ajaxReturn(['status'=>0]);
+            $this->redirect('admin/Member/question');
         }
     }
 
