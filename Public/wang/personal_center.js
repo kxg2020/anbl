@@ -402,7 +402,7 @@ $(function(){
 					success:function(result){
 						if(result.status == 1){
 							$('#images').val('');
-							layer.msg('充值成功!,请等待工作人员与您联系',function(){
+							layer.msg('提交成功!,请等待工作人员与您联系',function(){
 								$('input[name = rechargeMoney]').val('');
 							});
 						}else{
