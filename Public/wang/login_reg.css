@@ -101,6 +101,10 @@ a{
 	font-size: 20px;
 	cursor: pointer;
 }
+#reg_content{
+	height: 680px;
+	margin-top: -340px;
+}
 #reg_content input{
 	padding-left: 20px;
 	margin-bottom: 20px;
