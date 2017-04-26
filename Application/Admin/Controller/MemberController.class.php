@@ -361,19 +361,19 @@ class MemberController extends  CommonController{
             ];
             $updateData_3 = [
                 'support'=>$paramArr['zhipian_touzi'],
-                'follower'=>0,
+                'follower'=>$paramArr['zhipian_zhichizhe'],
                 'group'=>$paramArr['zhipian_tuandui'],
                 'follower_jingji'=>$paramArr['zhipian_jingjiren'],
                 'follower_zhipian'=>0,
-                'follower_zhichi'=>$paramArr['zhipian_zhichizhe'],
+                'follower_zhichi'=>0,
             ];
             $updateData_4 = [
                 'support'=>$paramArr['chupin_touzi'],
-                'follower'=>0,
+                'follower'=>$paramArr['chupin_zhichizhe'],
                 'group'=>$paramArr['chupin_tuandui'],
                 'follower_jingji'=>0,
                 'follower_zhipian'=>$paramArr['chupin_zhipianren'],
-                'follower_zhichi'=>$paramArr['chupin_zhichizhe'],
+                'follower_zhichi'=>0,
             ];
 
                 $res_1 = $model->where(['name'=>'zhichi'])->save($updateData_1);

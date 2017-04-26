@@ -62,6 +62,99 @@ class PersonalController extends CommonController{
     }
 
 
+    public function personalCenterPaginationA(){
+
+        $paramArr = $_REQUEST;
+        //>> 所有收益
+        $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
+        $allGet = $this->pagination($allGet,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
+        foreach($allGet as $key => &$value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+        }
+        unset($value);
+        if(IS_AJAX){
+            $this->ajaxReturn($allGet);
+        }
+    }
+
+    public function personalCenterPaginationB(){
+
+        $paramArr = $_REQUEST;
+        $personModel = M('Member as a');
+        $consume_3 = $personModel->field('a.username,b.*')
+            ->join('inner join an_member_consume as b on a.id = b.member_id')
+            ->where(['a.id'=>$this->userInfo['id'],'b.type'=>'投票'])
+            ->select();
+        $consume_3 = $this->pagination($consume_3,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
+        foreach($consume_3 as $key => &$value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+        }
+        unset($value);
+        if(IS_AJAX){
+            $this->ajaxReturn($consume_3);
+        }
+    }
+
+    public function personalCenterPaginationC(){
+
+        $paramArr = $_REQUEST;
+        $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
+        $allConsume = $this->pagination($allConsume,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
+        foreach($allConsume as $key => &$value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+        }
+        unset($value);
+        if(IS_AJAX){
+            $this->ajaxReturn($allConsume);
+        }
+    }
+
+    public function personalCenterPaginationD(){
+
+        $paramArr = $_REQUEST;
+        $personModel = M('Member as a');
+        $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number')
+            ->join('inner join an_member_support as b on a.id = b.member_id')
+            ->where(['a.id'=>$this->userInfo['id']])
+            ->select();
+        if(!empty($consume_1)){
+            foreach($consume_1 as $key => &$value){
+                $value['type'] = '电影支持';
+                $value['money'] = $value['support_money'];
+                $value['create_time'] = date('Y-m-d',$value['create_time']);
+            }
+            unset($value);
+        }
+
+        $consume_1 = $this->pagination($consume_1,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
+        if(IS_AJAX){
+            $this->ajaxReturn($consume_1);
+        }
+    }
+
+    public function personalCenterPaginationE(){
+
+        $paramArr = $_REQUEST;
+        $personModel = M('Member as a');
+        $consume_2 = $personModel->field('b.*')
+            ->join('inner join an_member_consume as b on a.id = b.member_id and b.type="演员申请"')
+            ->where(['a.id'=>$this->userInfo['id']])
+            ->select();
+
+
+        if(isset($consume_2)){
+            foreach($consume_2 as $key => &$value){
+                $value['type'] = '演员申请';
+                $value['create_time'] =date('Y-m-d',$value['create_time']);
+            }
+            unset($value);
+        }
+        $consume_2 = $this->pagination($consume_2,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
+        if(IS_AJAX){
+            $this->ajaxReturn($consume_2);
+        }
+    }
+
     /**
      * 个人中心
      */
@@ -90,9 +183,12 @@ class PersonalController extends CommonController{
            }
            unset($value);
        }
+
+        $consume_count_1 = ceil(count($consume_1) / 17);
+        $consume_1 = $this->pagination($consume_1,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         //>> 查询消费情况(当演员)
         $consume_2 = $personModel->field('b.*')
-            ->join('inner join an_member_star as b on a.id = b.member_id')
+            ->join('inner join an_member_consume as b on a.id = b.member_id and b.type="演员申请"')
             ->where(['a.id'=>$this->userInfo['id']])
             ->select();
 
@@ -100,19 +196,19 @@ class PersonalController extends CommonController{
         if(isset($consume_2)){
             foreach($consume_2 as $key => &$value){
                 $value['type'] = '演员申请';
-                $value['money'] = 70000;
             }
             unset($value);
         }
-
+        $consume_count_2 = ceil(count($consume_2) / 17);
+        $consume_2 = $this->pagination($consume_2,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
 
         //>> 投票记录
-        $consume_3 = $personModel->field('a.username,b.*,sum(b.money) as money')
+        $consume_3 = $personModel->field('a.username,b.*')
             ->join('inner join an_member_consume as b on a.id = b.member_id')
             ->where(['a.id'=>$this->userInfo['id'],'b.type'=>'投票'])
-            ->group('a.id')
             ->select();
-
+        $consume_count = ceil(count($consume_3) / 17);
+        $consume_3 = $this->pagination($consume_3,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
 
         //>> 查最上级
         $topLeader = $row;
@@ -120,9 +216,13 @@ class PersonalController extends CommonController{
 
         //>> 所有收益
         $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
+        $allc = ceil(count($allGet) / 17);
+        $allGet = $this->pagination($allGet,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
 
         //>> 转账消费
         $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
+        $allcon = ceil(count($allConsume) / 17);
+        $allConsume = $this->pagination($allConsume,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
 
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,b.*')
@@ -235,6 +335,11 @@ class PersonalController extends CommonController{
             'ali'=>$ali,
             'films'=>$films,
             'allget'=>$allGet,
+            'allc'=>$allc,
+            'allcon'=>$allcon,
+            'consume_count_1'=>$consume_count_1,
+            'consume_count_2'=>$consume_count_2,
+            'consume_count'=>$consume_count,
             'follower'=>$follower,
             'recruit'=>$recruit,
             'topLeader'=>$topLeader,
@@ -620,7 +725,7 @@ class PersonalController extends CommonController{
                 'create_time'=>time(),
                 'member_id'=>$this->userInfo['id'],
                 'type'=>'演员申请',
-                'project_Id'=>isset($paramArr['id']) ? $paramArr['id'] : 0,
+                'project_id'=>isset($paramArr['id']) ? $paramArr['id'] : 0,
             ];
 
             M('MemberConsume')->add($data);

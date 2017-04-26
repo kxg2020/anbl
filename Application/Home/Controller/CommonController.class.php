@@ -73,10 +73,10 @@ class CommonController extends Controller{
                     case 'jingji':
                         $jjArr = $value;
                         break;
-                    case 'chupin':
+                    case 'zhipian':
                         $zpArr = $value;
                         break;
-                    case 'zhipian':
+                    case 'chupin':
                         $cpArr = $value;
                         break;
                 }
@@ -112,15 +112,14 @@ class CommonController extends Controller{
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
-
-                //>> 如果投资35000以上,直推10名支持者,团队100人升级为制片人,2名经纪人
-                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && $zpArr['follower_jingji'] > $jingji){
+                //>> 如果投资35000以上,直推10名,团队100人升级为制片人,2名经纪人
+                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && $jingji >= $zpArr['follower_jingji']  ){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
-                //>> 如果个人投资70000 直推30人支持者 团队500人 2名制片人
-                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $cpArr['follower_zhipian'] > $zhipian){
+                //>> 如果个人投资70000 直推30人 团队500人 2名制片人
+                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $zhipian >= $cpArr['follower_zhipian']){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
