@@ -144,6 +144,11 @@ class IndexController extends CommonController{
             if($support_money>$this->userInfo['money']){
                 $this->ajaxReturn(['msg'=>"对不起，阿纳豆不足",'status'=>0]);
             }
+            // 判断通一会员的支持额 小于70000
+            $allMoney = M('MemberSupport')->where(['member'=>$this->userInfo['id'],'project_id'=>$data['project_id']])->count('support_money');
+            if(($support_money+$allMoney)>70000){
+                $this->ajaxReturn(['msg'=>"对不起，你的投资额已满",'status'=>0]);
+            }
             // 会员id
             $member_id = $this->userInfo['id'];
             // 项目id
