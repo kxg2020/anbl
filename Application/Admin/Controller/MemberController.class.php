@@ -480,8 +480,10 @@ class MemberController extends  CommonController{
         $rows = M('MemberConsult as a')->field('a.*,b.username')
             ->join('left join an_member as b on a.member_id = b.id')
             ->where($where)
+            ->order('a.status,create_time desc')
             ->limit($page->firstRow,$page->listRows)
             ->select();
+
         $pages = $page->show();
         $this->assign('question',$rows);
         $this->assign('pages',$pages);
