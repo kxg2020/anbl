@@ -9,6 +9,14 @@ class IndexController extends CommonController{
      */
     public function index(){
 
+
+        //>> 判断是否登录
+        if($this->isLogin == 0){
+
+            $this->redirect('Home/login/index');
+            exit;
+        }
+
         // 查询出首页轮播 项目
         $model = M('project');
         $lunbos = $model

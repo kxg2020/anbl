@@ -5,6 +5,14 @@ namespace Home\Controller;
 class MarketController extends CommonController
 {
     public function index(){
+
+        //>> 判断是否登录
+        if($this->isLogin == 0){
+
+            $this->redirect('Home/login/index');
+            exit;
+        }
+
         $model = M('project');
         //查询所有上线项目
         $where[] = [

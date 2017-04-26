@@ -7,6 +7,15 @@ class FactoryController extends CommonController
 {
 
     public function index(){
+
+
+        //>> 判断是否登录
+        if($this->isLogin == 0){
+
+            $this->redirect('Home/login/index');
+            exit;
+        }
+
         $name = I('get.name');
         $where = [];
         if($name){
