@@ -15,6 +15,14 @@
 	<div class="name">
 		<div class="realname"><label>姓名</label><input type="text" placeholder="请填写真实姓名" name="realname"></div>
 		<div class="realid"><label>身份证号</label><input type="text" placeholder="请填写真实身份证号码" name="id_card"></div>
+		<div class="bank"><label>选择银行卡</label><select value='' id="bind_bank">
+										<option value="中国银行"   <if condition="$userInfo['bank_name'] eq '中国银行'">selected</if>>中国银行</option>
+										<option value="工商银行"  <if condition="$userInfo['bank_name'] eq '工商银行'">selected</if>>工商银行</option>
+										<option value="农业银行"  <if condition="$userInfo['bank_name'] eq '农业银行'">selected</if>>农业银行</option>
+										<option value="建设银行"  <if condition="$userInfo['bank_name'] eq '建设银行'">selected</if>>建设银行</option>
+										<option value="中国邮政储蓄银行"  <if condition="$userInfo['bank_name'] eq '中国邮政储蓄银行'">selected</if>>中国邮政储蓄银行</option>
+										<option value="招商银行"  <if condition="$userInfo['bank_name'] eq '招商银行'">selected</if>>招商银行</option></select></div>
+		<div class="bank_card"><label>银行卡号</label><input type="text" placeholder="请填写真实银行卡号"></div>
 	</div>
 	<footer id="tijiao">
 		提交

@@ -84,3 +84,21 @@ footer{
 	left: 0;
 	bottom: 0;
 }
+.bank,.bank_card{
+    border-top: 1px solid #666;
+	background: #000;
+}
+.bank{
+    border-top: 1px solid #666;
+	background: #000;
+}
+.bank select{
+	height: 0.5rem;
+	background: rgba(0,0,0,0);
+	color: white;
+	margin-right: 50px;
+}
+
+.bank select option{
+	background: #333;
+}
