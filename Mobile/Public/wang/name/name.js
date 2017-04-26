@@ -84,7 +84,7 @@ $(function(){
             'type':'post',
             'dataType':'json',
             'url':location.protocol+'//'+window.location.host+'/Account/checkTrue',
-            'data':{'realname':realname,'id_card':id_card,'bank_card':bank_card,'bank_name':bank_name,'bank_address':bank_address},
+            'data':{'realname':realname,'id_card':id_card,'bank_card':bank_card,'bank_name':bank_name,'bank_address':bank_address,'bank_card_name';bank_card_name},
             success:function(e){
                 if(e.status == 1){
                     layer.open({
