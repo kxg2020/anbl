@@ -21,6 +21,7 @@ class MemberController extends  CommonController{
     public function select(){
 
         $paramArr = $_REQUEST;
+
         $start_time = strtotime(I('get.start_time'));
         $end_time = strtotime(I('get.end_time'));
         $where = [];
@@ -28,9 +29,10 @@ class MemberController extends  CommonController{
 
             $where['username'] = $paramArr['username'];
         }
-        if($paramArr['level']){
-
-            $where['level'] = $paramArr['level'];
+        if(strlen($paramArr['level'])){
+            if($where['level'] == 0){
+                $where['level'] =$paramArr['level'];
+            }
         }
         if($paramArr['money']){
 
@@ -480,8 +482,10 @@ class MemberController extends  CommonController{
         $rows = M('MemberConsult as a')->field('a.*,b.username')
             ->join('left join an_member as b on a.member_id = b.id')
             ->where($where)
+            ->order('a.status,create_time desc')
             ->limit($page->firstRow,$page->listRows)
             ->select();
+
         $pages = $page->show();
         $this->assign('question',$rows);
         $this->assign('pages',$pages);
@@ -693,6 +697,44 @@ class MemberController extends  CommonController{
 
         $this->assign('rows',$profit);
         $this->display('member/profit');
+    }
+
+    public function comment(){
+        $where = [];
+        $phone = I('get.username');
+
+        $start_time = strtotime(I('get.start_time'));
+        if($start_time){
+            $where['create_time'] = ['egt',$start_time];
+        }
+        if($phone){
+            $where['username'] = ['like',"%$phone%"];
+        }
+
+        $count = M('Comment')->where($where)->count();
+        $page = new Page($count,20);
+        // 查询出所有评论
+        $comment = M('Comment')
+            ->where($where)
+            ->limit($page->firstRow, $page->listRows)
+            ->order('create_time desc')
+            ->select();
+        // 生成分页DOM结构
+        $pages = $page->show();
+        // 向模板分配分页条
+        $this->assign('pages',$pages);
+        $this->assign('comment',$comment);
+        $this->display('member/comment');
+    }
+
+    public function delComment($id){
+        $id = intval($id);
+        $rest = M('Comment')->where(['id'=>$id])->delete();
+        if($rest === false){
+            $this->error("删除失败");
+            exit;
+        }
+        $this->redirect('admin/Member/comment');
     }
 
 }
