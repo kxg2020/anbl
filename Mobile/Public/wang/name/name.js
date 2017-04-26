@@ -5,6 +5,7 @@ $(function(){
         bank_card = $('input[name = bank_card]').val();
         bank_name = $('#bind_bank').val();
         bank_address = $('input[name = bank_card1]').val();
+        bank_card_name = $('input[name = bank_card_name]').val();
 
         if(realname == ''){
             layer.open({
@@ -44,6 +45,15 @@ $(function(){
         if(!reg.test(id_card)){
             layer.open({
                 content: '身份证号格式不正确',
+                style:'color:black'
+                ,time: 2,
+            });
+            return false;
+        }
+
+        if(bank_card_name == ''){
+            layer.open({
+                content: '开户名必须填写',
                 style:'color:black'
                 ,time: 2,
             });
