@@ -86,7 +86,7 @@ class CommonController extends Controller{
 
             if(!empty($row)){
                 //>> 查询投资
-                $support = M('MemberSupport')->where(['member_id'=>$row['id']])->sum('support_money');
+                $support = $row['all_support_money'];
 
                 //>> 判断投资是否满xx,满xx升级为支持者
                 if($support >= $zcArr['support']){
