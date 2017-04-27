@@ -124,7 +124,7 @@ class IndexController extends CommonController {
                 $this->ajaxReturn(['msg'=>"订单保存失败",'status'=>0]);
             }
 
-            $rest = M('Member')->where(['id' => $member_id])->save(['money' => ['exp', 'all_support_money+' . $support_money]]);
+            $rest = M('Member')->where(['id' => $member_id])->save(['all_support_money' => ['exp', 'all_support_money+' . $support_money]]);
             if(!$rest){
                 M()->rollback();
                 $this->ajaxReturn(['msg'=>"订单保存失败",'status'=>0]);
