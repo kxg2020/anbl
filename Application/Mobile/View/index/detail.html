@@ -40,7 +40,11 @@
 		<h3>预期回报</h3>
 		<p>{:htmlspecialchars_decode($info['expected_return'])}</p>
 	</div>
-	<a href="#header" class="now_suport">立即支持</a>	
+	<if condition="$info['target_amount'] gt $info['money']">
+		<a href="#header" class="now_suport">立即支持</a>
+		<else />
+		<a href="#header" class="now_suportone">筹集成功</a>
+	</if>
 	<div class="bg" style="display: none;">
 		<div id="suport_div">
 			<p>回报类型:</p>
