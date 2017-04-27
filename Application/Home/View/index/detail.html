@@ -85,7 +85,7 @@
 						<li _type="3" class="chk">故事</li>
 						<li _type="4" class="chk">后期</li>
 					</ul>-->
-					<div class="loginorreg"><if condition="$isLogin eq 0"><a href="{:U('Home/Login/index')}"><span>登录</span></a> | <a href="{:U('Home/Register/index')}"><span>注册</span></a></if></div>
+					<div class="loginorreg"><if condition="$isLogin eq 0"><a href="{:U('Login/index')}"><span>登录</span></a> | <a href="{:U('Register/index')}"><span>注册</span></a></if></div>
 					<input type="hidden" value="{$count}" id="count">
 					<textarea name="name" rows="8" cols="80" placeholder="输入我的想法" id="mainContent"></textarea>
 					<div class="publish now_suport" id="ok">发表</div>
@@ -165,7 +165,7 @@
 					$.ajax({
 						'type':'post',
 						'dataType':'json',
-						'url':"{:U('Home/Index/pageSelect')}",
+						'url':"{:U('Index/pageSelect')}",
 						'data':{
 							'movie_id':id,
 							'type':type,
@@ -214,7 +214,7 @@
 					$.ajax({
 						'type':'post',
 						'dataType':'json',
-						'url':"{:U('Home/Comment/add')}",
+						'url':"{:U('Comment/add')}",
 						'data':{
 							'content':content,
 							'movie_id':id,
@@ -242,7 +242,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':"{:U('Home/Index/pageSelect')}",
+					'url':"{:U('Index/pageSelect')}",
 					'data':{
 						'movie_id':id,
 						'type':type,
@@ -281,7 +281,7 @@
 				 layer.confirm('您还没有登录', {
 					 btn: ['登录','取消'] //按钮
 				 }, function(){
-					 window.location.href = "{:U('Home/Login/index')}"
+					 window.location.href = "{:U('Login/index')}"
 				 }, function(){
 				 });
 				 return false;
@@ -317,7 +317,7 @@
 				 project_id : project_id,
 				 type : fh
 			 };
-			 $.post("{:U('home/index/support')}",_data,function (data) {
+			 $.post("{:U('index/support')}",_data,function (data) {
 				 if (data.status == 0) {
 					 layer.alert(data.msg);
 				 } else {
@@ -331,12 +331,12 @@
 
 		 function collect(){
 			 var _id = $('#fast_collect').attr('data-id');
-			 $.post("{:U('home/index/collect')}",{project_id:_id},function (data) {
+			 $.post("{:U('index/collect')}",{project_id:_id},function (data) {
 				 if (data.status == 0) {
 					 layer.confirm('您还没有登录', {
 						 btn: ['登录','取消'] //按钮
 					 }, function(){
-						 window.location.href = "{:U('Home/Login/index')}"
+						 window.location.href = "{:U('Login/index')}"
 					 }, function(){
 					 });
 				 } else if(data.status == 2) {

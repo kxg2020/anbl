@@ -164,7 +164,7 @@ class PersonalController extends CommonController{
 
        //>> 判断用户是否登录
         if($this->isLogin != 1){
-            $this->redirect('Home/Login/index');
+            $this->redirect('Login/index');
             exit;
         }
         $personModel = M('Member as a');

@@ -13,12 +13,12 @@
 	<div class="content">
 		<if condition="empty($searchInfos)">
 			<div>
-				<img src="__PUBLIC__/wang/search/img/search_noresult_01.png" alt=""> <span>很抱歉没有找到"<a style="margin: 0px">{$searchno}</a>"相关的内容</span><a href="{:U('home/index/index')}">点击此处回到首页</a>
+				<img src="__PUBLIC__/wang/search/img/search_noresult_01.png" alt=""> <span>很抱歉没有找到"<a style="margin: 0px">{$searchno}</a>"相关的内容</span><a href="{:U('index/index')}">点击此处回到首页</a>
 			</div>
 		</if>
 		<volist name="searchInfos" id="info">
 		<ul>
-			<li><a href="{:U('home/index/detail',['id'=>$info['id']])}">
+			<li><a href="{:U('index/detail',['id'=>$info['id']])}">
 				                        <div class="movie_content">
 											<p>{$info['name']}</p>
 											<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>

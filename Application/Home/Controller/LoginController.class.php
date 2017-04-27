@@ -13,7 +13,7 @@ class LoginController extends CommonController{
         //>> 判断是否登录过了
         if($this->isLogin == 1){
 
-            $this->redirect('home/index/index');
+            $this->redirect('index/index');
         }
 
         $this->display('login/index');
@@ -210,6 +210,6 @@ class LoginController extends CommonController{
         session(md5('home'), null);
         cookie(md5('home'), null);
         $this->isLogin = 0;
-        $this->redirect('home/login/index');
+        $this->redirect('login/index');
     }
 }

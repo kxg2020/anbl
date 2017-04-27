@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<div class="top">
-			<a class="logo" href="/home/index/index.html"><img src="/Public/wang/img/logo.png"></a>
+			<a class="logo" href="{:U('Index/index')}"><img src="/Public/wang/img/logo.png"></a>
 			<div class="title"><p>电影超市</p><span>MOVIE STORE</span></div>
 			<div class="menu_logo">
 				<div class="burger2 menu">
@@ -29,21 +29,21 @@
 				<div class="hide_menu">
 					<ul class="login_reg">
 						<if condition="$userInfo['username'] eq ''">
-							<li ><a href="{:U('Home/Register/index')}">注册</a></li>
-							<li ><a id="login" href="{:U('Home/Login/index')}">登录 |</a></li>
+							<li ><a href="{:U('Register/index')}">注册</a></li>
+							<li ><a id="login" href="{:U('Login/index')}">登录 |</a></li>
 							<else/>
-							<li class="login_out"><a href="{:U('Home/Login/logout')}">退出登录</a></li>
+							<li class="login_out"><a href="{:U('Login/logout')}">退出登录</a></li>
 							<li class="user_img"><span>{:telephoneNumber($userInfo['username'])}</span></li>
 						</if>
 						<li class='search_li' style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
 					</ul>
-					<p><a href="{:U('home/index/index')}">首页</a></p>
-					<p style="margin-bottom: 22px;"><a href="{:U('home/company/index')}">公司介绍</a></p>
-					<div><span></span><a href="{:U('home/company/about')}">关于我们</a></div>
+					<p><a href="{:U('index/index')}">首页</a></p>
+					<p style="margin-bottom: 22px;"><a href="{:U('company/index')}">公司介绍</a></p>
+					<div><span></span><a href="{:U('company/about')}">关于我们</a></div>
 					<div style="margin-bottom:43px;"><span></span><a href="">公司文化</a></div>
-					<p><a href="{:U('home/market/index')}">电影超市</a></p>
-					<p><a href="{:U('home/factory/index')}">星工场</a></p>
-					<p><a href="{:U('Home/Personal/index')}">个人中心</a></p>
+					<p><a href="{:U('market/index')}">电影超市</a></p>
+					<p><a href="{:U('factory/index')}">星工场</a></p>
+					<p><a href="{:U('Personal/index')}">个人中心</a></p>
 					<div class="declar">Copyright 2017 阿纳巴里国际影业</div>
 				</div>
 			</div>
@@ -58,21 +58,21 @@
 			  <div  class="mk-carousel" id="mkCarousel">
 				  <volist name="projectInfo" id="info" key="k">
 					  <if condition="$info['type_id'] eq 1">
-	            <div <if condition="$key eq 1">class="active"</if>><div class="detail"><a href="{:U('home/index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"><div class="movie_star"><for start="0" end="$info['star_num']"><i class="star"></i></for></div> </div>
+	            <div <if condition="$key eq 1">class="active"</if>><div class="detail"><a href="{:U('index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"><div class="movie_star"><for start="0" end="$info['star_num']"><i class="star"></i></for></div> </div>
 					  </if>
 				  </volist>
 	         </div>
 	        <div  class="mk-carousel" id="mkCarousel1" style='display: none;'>
 				<volist name="projectInfo" id="info" key="k">
 					<if condition="$info['type_id'] eq 2">
-	            <div <if condition="$key eq 1">class="active"</if>><div class="detail"><a href="{:U('home/index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"> <div class="movie_type">院线</div></div>
+	            <div <if condition="$key eq 1">class="active"</if>><div class="detail"><a href="{:U('index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"> <div class="movie_type">院线</div></div>
 					</if>
 				</volist>
 			</div>
 	        <div  class="mk-carousel" id="mkCarousel2" style="display: none;">
 				<volist name="projectInfo" id="info" key="k">
 					<if condition="$info['type_id'] eq 3">
-	            <div <if condition="$key eq 2">class="active"</if>><div class="detail"><a href="{:U('home/index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"> <div class="movie_type">网络剧</div></div>
+	            <div <if condition="$key eq 2">class="active"</if>><div class="detail"><a href="{:U('index/detail',['id'=>$info['id']])}">查看详情</a></div><img src="{$info.image_url}"> <div class="movie_type">网络剧</div></div>
 					</if>
 				</volist>
 			</div>
@@ -122,7 +122,7 @@
 
 					var _project_id = $(this).attr('_id');
 					//判断用户权限
-					$.post("{:U('home/market/test')}",{project_id:_project_id},function (data) {
+					$.post("{:U('market/test')}",{project_id:_project_id},function (data) {
 						if (data.status == 0) {
 							layer.alert(data.msg,{skin: 'layui-layer-lan',shade : [0.5 , '#000' , true]});
 						}else{
@@ -153,7 +153,7 @@
 						var _type_id = $(this).attr('type_id');
 					console.log(_project_id);
 					console.log(_type_id);
-					$.post("{:U('home/market/download')}",{project_id:_project_id,type_id:_type_id},function (data) {
+					$.post("{:U('market/download')}",{project_id:_project_id,type_id:_type_id},function (data) {
 
 					});
 				})

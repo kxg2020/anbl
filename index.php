@@ -19,6 +19,7 @@ define('APP_DEBUG',True);
 
 // 定义应用目录
 define('APP_PATH','./Application/');
+define('BIND_MODULE','Home');
 
 
 define('URL', 'www.a.com');
