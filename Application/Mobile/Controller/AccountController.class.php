@@ -441,7 +441,7 @@ class AccountController extends CommonController{
            if(!empty($paramArr)){
 
                $updateData = [
-                   'reanlname'=>$paramArr['reanlname'],
+                   'reanlname'=>$paramArr['realname'],
                    'id_card'=>$paramArr['id_card'],
                    'is_true'=>1,
                    'bank_name'=>$paramArr['bank_name'],
@@ -449,6 +449,7 @@ class AccountController extends CommonController{
                    'address'=>$paramArr['bank_address'],
                    'bank_card_name'=>$paramArr['bank_card_name'],
                ];
+               
                $res = M('Member')->where(['id'=>$this->userInfo['id']])->save($updateData);
                if($res === false){
                    $this->ajaxReturn(['status'=>0,'msg'=>'保存失败']);

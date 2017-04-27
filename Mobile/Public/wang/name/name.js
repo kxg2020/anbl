@@ -59,6 +59,14 @@ $(function(){
             });
             return false;
         }
+        if(bank_card_name != realname){
+            layer.open({
+                content: '开户名必须和真实姓名一致',
+                style:'color:black'
+                ,time: 2,
+            });
+            return false;
+        }
 
         var reg_1 = /^\d{19}$/g;
 
