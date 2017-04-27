@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<a class="logo" href="/home/index/index.html"><img src="/Public/wang/img/logo.png"></a>
+		<a class="logo" href="{:U('Index/index')}"><img src="/Public/wang/img/logo.png"></a>
 		<div class="star_factory">
 			
 		</div>
@@ -28,21 +28,21 @@
 				<div class="hide_menu">
 					<ul class="login_reg">
 						<if condition="$userInfo['username'] eq ''">
-							<li ><a href="{:U('Home/Register/index')}">注册</a></li>
-							<li ><a id="login" href="{:U('Home/Login/index')}">登录 |</a></li>
+							<li ><a href="{:U('Register/index')}">注册</a></li>
+							<li ><a id="login" href="{:U('Login/index')}">登录 |</a></li>
 							<else/>
-							<li class="login_out"><a href="{:U('Home/Login/logout')}">退出登录</a></li>
+							<li class="login_out"><a href="{:U('Login/logout')}">退出登录</a></li>
 							<li class="user_img" style="color: white">{:telephoneNumber($userInfo['username'])}</li>
 						</if>
 						<li class='search_li' style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
 					</ul>
-					<p><a href="{:U('home/index/index')}">首页</a></p>
+					<p><a href="{:U('index/index')}">首页</a></p>
 					<p style="margin-bottom: 22px;"><a href="">公司介绍</a></p>
-					<div><span></span><a href="{:U('home/company/about')}">关于我们</a></div>
-					<div style="margin-bottom:43px;"><span></span><a href="{:U('home/company/index')}">公司文化</a></div>
-					<p><a href="{:U('home/market/index')}">电影超市</a></p>
-					<p><a href="{:U('home/factory/index')}">星工场</a></p>
-					<p><a href="{:U('Home/Personal/index')}">个人中心</a></p>
+					<div><span></span><a href="{:U('company/about')}">关于我们</a></div>
+					<div style="margin-bottom:43px;"><span></span><a href="{:U('company/index')}">公司文化</a></div>
+					<p><a href="{:U('market/index')}">电影超市</a></p>
+					<p><a href="{:U('factory/index')}">星工场</a></p>
+					<p><a href="{:U('Personal/index')}">个人中心</a></p>
 					<div class="declar">Copyright 2017 阿纳巴里国际影业</div>
 				</div>
 			</div>
@@ -259,12 +259,12 @@
 					id : _id,
 					type : _type
 				};
-				$.post("{:U('home/factory/vote')}",_data,function (data) {
+				$.post("{:U('factory/vote')}",_data,function (data) {
 					if (data.status == 0) {
 						layer.confirm('您还没有登录', {
 							btn: ['登录','取消'] //按钮
 						}, function(){
-							window.location.href = "{:U('Home/Login/index')}"
+							window.location.href = "{:U('Login/index')}"
 						}, function(){
 						});
 					} else {

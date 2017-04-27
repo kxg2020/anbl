@@ -39,7 +39,7 @@ $(function(){
                 layer.tips('手机号码格式不正确', 'input[name = phone]');
                 return ;
             }
-            var url = location.protocol+'//'+window.location.host+'/Home/Register/sendMessage';
+            var url = location.protocol+'//'+window.location.host+'/Register/sendMessage';
             $.ajax({
                 'type':'post',
                 'dataType':'json',
@@ -95,7 +95,7 @@ $(function(){
                     if(invite_key == ''){
                         layer.tips('邀请码不能为空!', 'input[name = invite_key]');
                     }else{
-                        var url_ = location.protocol+'//'+window.location.host+'/Home/Register/register';
+                        var url_ = location.protocol+'//'+window.location.host+'/Register/register';
                         $.ajax({
                             'type':'post',
                             'dataType':'json',
@@ -109,7 +109,7 @@ $(function(){
                             success:function(result){
                                 if(result.status == 1){
                                    layer.msg('注册成功',function(){
-                                       window.location.href = location.protocol+'//'+window.location.host+'/Home/Login/index'
+                                       window.location.href = location.protocol+'//'+window.location.host+'/Login/index'
                                    });
                                 }else{
                                     layer.msg(result.msg);

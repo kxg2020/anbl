@@ -12,7 +12,7 @@ class FactoryController extends CommonController
         //>> 判断是否登录
         if($this->isLogin == 0){
 
-            $this->redirect('Home/login/index');
+            $this->redirect('login/index');
             exit;
         }
 
