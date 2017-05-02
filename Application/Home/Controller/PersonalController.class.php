@@ -225,7 +225,7 @@ class PersonalController extends CommonController{
         $allConsume = $this->pagination($allConsume,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
 
         //>> 查询当前用户的支持情况
-        $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,b.*')
+        $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,a.type as atype,a.float,a.fixed,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
             ->where(['a.member_id'=>$this->userInfo['id'],'a.is_fh'=>0])
             ->select();

@@ -142,6 +142,7 @@
 											<p>{$s['englishname']}</p>
 											<p>{$s['director']}/导演</p>
 											<p><span>{$s['support_number']}</span>人支持</p>
+											<p>类型:<span><if condition="$s['atype'] eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益:<span><if condition="$s['atype'] eq 1">{$s['fixed']}<else />{$s['float']}</if></span></p>
 											<p>已支持<span>{$s['support_money']}</span>阿纳豆</p>
 											<p><input type="button" class="cancel_suport" value="取消支持" data-id="{$s['aid']}"></p>
 											<a href="{:U('home/index/detail',['id'=>$s['project_id']])}" class="detail_search">查看详情</a>
