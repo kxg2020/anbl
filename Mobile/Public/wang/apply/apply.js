@@ -29,6 +29,14 @@ $(function(){
             });
             return false;
         }
+        if(number < 350){
+            layer.open({
+                content: '阿纳豆数目必须大于350',
+                style:'color:black'
+                ,time: 2
+            });
+            return false;
+        }
 
         $.ajax({
             'type':'post',

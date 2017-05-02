@@ -72,6 +72,9 @@ class RegisterController extends CommonController{
                         die($this->_printError('1040'));
                     }
 
+                }else{
+
+                    die($this->_printError('1068'));
                 }
                 //>> 生成一个推荐码
                 $str = '012345679ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';

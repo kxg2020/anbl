@@ -424,19 +424,24 @@ $(function(){
 
 		if(money == ''){
 
-			 layer.tips('请输入提现金额','input[name = exMoney]');
+			 layer.tips('请输入提现阿纳豆','input[name = exMoney]');
 		}else{
 
 			//>> 检测是否为0
 			if(money == 0){
-				layer.tips('金额不能为0','input[name = exMoney]');
+				layer.tips('提现阿纳豆不能为0','input[name = exMoney]');
+				return;
+			}
+			//>> 检测是否大于350
+			if(money < 350){
+				layer.tips('提现阿纳豆不能小于350','input[name = exMoney]');
 				return;
 			}
 			//>> 检测金额是否是数字
 			var reg = /^[0-9]+.?[0-9]*$/;
 			if(!reg.test(money)){
 
-				layer.tips('请输入正确的金额','input[name = exMoney]');
+				layer.tips('请输入正确的阿纳豆数额','input[name = exMoney]');
 			}else{
 
 				var url =  location.protocol +'//'+ window.location.host+'/Home/Personal/cash';
@@ -450,8 +455,9 @@ $(function(){
 					success:function(result){
 						if(result.status == 1){
 							$('input[name = exMoney]').val('0');
-							layer.msg('提现申请成功,请等待审核',function(){
+							layer.msg('提现申请成功,请等待审核',{time:1000},function(){
 								$('input[name = exMoney]').val('');
+								location.reload();
 							});
 						}else{
 							layer.msg(result.msg,function(){
