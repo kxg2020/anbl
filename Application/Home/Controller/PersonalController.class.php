@@ -635,9 +635,9 @@ class PersonalController extends CommonController{
         $pgNum = $paramArr['pgNum'];
         $pgSize = 4;
 
-        $rows =  M('MemberSupport as a')->field('a.id as aid,a.support_money,b.*')
+        $rows =  M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,a.type as atype,a.float,a.fixed,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
-            ->where(['a.member_id'=>$this->userInfo['id']])
+            ->where(['a.member_id'=>$this->userInfo['id'],'a.is_fh'=>0])
             ->select();
 
         $rows = $this->pagination($rows,$pgNum,$pgSize);

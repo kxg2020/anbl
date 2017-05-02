@@ -1362,7 +1362,7 @@
 										'<p>'+ v.englishname+'</p>'+
 										'<p>'+ v.director+'</p>'+
 										'<p><span>'+ v.support_number+'</span>人支持</p>'+
-										'<p>已支持<span>'+ v.support_money+'</span></p>'+
+														'<p>类型:<span><if condition="'+ v.atype+' eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益:<span><if condition="'+ v.atype+' eq 1">'+ v.fixed+'<else />'+ v.float+'</if></span></p>'+
 												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.aid+'"></p>'+
 										        "<a class='detail_search' href='{:U('home/index/detail')}?id="+ v.id+"'> 查看详情</a>"+
 										'</div>');
