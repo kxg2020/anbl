@@ -712,8 +712,9 @@ header .nav{
 	position: relative;
 }
 .attend_content>div>div{
+	border-radius: 3px;
 	width: 320px;
-	height: 200px;
+	height: 212px;
 	position: relative;
 	float: left;
 	margin-bottom: 20px;
@@ -739,6 +740,7 @@ header .nav{
 	height: 100% !important;
 }
 .attend_content>div>div>div{
+	border-radius: 3px;
 	position: absolute;
 	top: 0;
 	left:0;
@@ -767,7 +769,7 @@ header .nav{
 }
 #cancel_div{
 	width: 690px;
-	height: 420px;
+	height: 450px;
 	background: white;
 	border-radius: 3px;
 	position: absolute;
