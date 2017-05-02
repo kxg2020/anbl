@@ -508,7 +508,7 @@
 							<tbody id="tbody_1">
 							<volist name="allget" id="al">
 								<tr>
-									<td>{:date('Y-m-d',$al['create_time'])}</td>
+									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
 									<td style="color: forestgreen">+{$al.money}</td>
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
 								</tr>
@@ -532,7 +532,7 @@
 							<tbody id="tbody_2">
 							<volist name="consume_3" id="al">
 								<tr>
-									<td>{:date('Y-m-d',$al['create_time'])}</td>
+									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
 									<td style="color: red">-{$al.money}</td>
 									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
 								</tr>
@@ -556,7 +556,7 @@
 							<tbody id="tbody_3">
 							<volist name="allConsume" id="al">
 								<tr>
-									<td>{:date('Y-m-d',$al['create_time'])}</td>
+									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
 									<td >-{$al.money}</td>
 									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
 								</tr>
@@ -581,7 +581,7 @@
 
 							<volist name="consume_1" id="c">
 								<tr>
-									<td>{:date('Y-m-d',$c['create_time'])}</td>
+									<td>{:date('Y-m-d H:i:s',$c['create_time'])}</td>
 									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
@@ -605,7 +605,7 @@
 							<tbody id="tbody_5">
 							<volist name="consume_2" id="c">
 								<tr>
-									<td>{:date('Y-m-d',$c['create_time'])}</td>
+									<td>{:date('Y-m-d H:i:s',$c['create_time'])}</td>
 									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
 								</tr>
@@ -1363,7 +1363,7 @@
 										'<p>'+ v.director+'</p>'+
 										'<p><span>'+ v.support_number+'</span>人支持</p>'+
 														'<p>类型:<span><if condition="'+ v.atype+' eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益:<span><if condition="'+ v.atype+' eq 1">'+ v.fixed+'<else />'+ v.float+'</if></span></p>'+
-												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.aid+'"></p>'+
+												'<p>已支持<span>'+ v.support_money+'</span>阿纳豆</p>'+												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.aid+'"></p>'+
 										        "<a class='detail_search' href='{:U('home/index/detail')}?id="+ v.id+"'> 查看详情</a>"+
 										'</div>');
 									});

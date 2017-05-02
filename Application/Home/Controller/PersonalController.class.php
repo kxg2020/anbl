@@ -69,7 +69,7 @@ class PersonalController extends CommonController{
         $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
         $allGet = $this->pagination($allGet,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($allGet as $key => &$value){
-            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
         }
         unset($value);
         if(IS_AJAX){
@@ -87,7 +87,7 @@ class PersonalController extends CommonController{
             ->select();
         $consume_3 = $this->pagination($consume_3,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($consume_3 as $key => &$value){
-            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
         }
         unset($value);
         if(IS_AJAX){
@@ -101,7 +101,7 @@ class PersonalController extends CommonController{
         $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
         $allConsume = $this->pagination($allConsume,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($allConsume as $key => &$value){
-            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
         }
         unset($value);
         if(IS_AJAX){
@@ -121,7 +121,7 @@ class PersonalController extends CommonController{
             foreach($consume_1 as $key => &$value){
                 $value['type'] = '电影支持';
                 $value['money'] = $value['support_money'];
-                $value['create_time'] = date('Y-m-d',$value['create_time']);
+                $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
             }
             unset($value);
         }
@@ -145,7 +145,7 @@ class PersonalController extends CommonController{
         if(isset($consume_2)){
             foreach($consume_2 as $key => &$value){
                 $value['type'] = '演员申请';
-                $value['create_time'] =date('Y-m-d',$value['create_time']);
+                $value['create_time'] =date('Y-m-d H:i:s',$value['create_time']);
             }
             unset($value);
         }
