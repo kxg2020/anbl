@@ -107,7 +107,7 @@
                                     <td style="vertical-align: middle"><if condition="$tag['is_true'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_fy'] eq 1">已分佣<elseif condition="$tag['is_fy'] eq 2"/>失效<else /><span style="color: red">未分佣</span></if></td>
                                     <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 1">已返还<else /><span style="color: red">未返还</span></if></td>
-                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                    <td style="vertical-align: middle">{:date('Y-m-d H:i:s',$tag['create_time'])}</td>
                                     <!--<td style="vertical-align: middle">
                                         <a href="156415" class="btn btn-xs btn-success">结算收益</a>
                                     </td>-->
