@@ -8,6 +8,9 @@ class LoginController extends CommonController{
      */
     public function index(){
 
+        //>> 判断是否是由链接传过来的invite_key
+        $invite_key = I('get.invite_key');
+
         //>> 判断是否登录过了
         if($this->isLogin == 1){
 
@@ -15,15 +18,14 @@ class LoginController extends CommonController{
             exit;
         }
 
-        //>> 判断是否是由链接传过来的invite_key
-        $invite_key = I('get.invite_key');
         if(!empty($invite_key)){
+
             //>> 查询id作为parent_id
             $parent_id = M('Member')->where(['invite_key'=>$invite_key])->find();
-            if(!empty($parent_id)){
-                $this->assign('parent_id',$parent_id);
-            }
+
+            $this->assign('parent_id',$parent_id);
         }
+
         $this->display('login/index');
     }
 

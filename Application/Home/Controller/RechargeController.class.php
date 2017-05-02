@@ -14,7 +14,7 @@ class RechargeController extends CommonController{
 
         //>> 判断用户是否登录
         if($this->isLogin == 0){
-            $this->redirect('Login/index');
+            $this->redirect('Home/Login/index');
             exit;
         }
         //>> 判断用户是否有权限充值

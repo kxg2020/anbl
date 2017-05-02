@@ -49,6 +49,7 @@
                                     <th class="text-center">会员</th>
                                     <th class="text-center">内容</th>
                                     <th class="text-center">时间</th>
+                                    <th class="text-center">状态</th>
                                     <th class="text-center">操作</th>
                                 </tr>
                                 </thead>
@@ -64,8 +65,10 @@
                                     <td style="vertical-align: middle">{$q.username}</td>
                                     <td style="vertical-align: middle">{$q.content}</td>
                                     <td style="vertical-align: middle">{:date('Y-m-d',$q['create_time'])}</td>
+                                    <td style="vertical-align: middle"><if condition="$q['is_pass'] eq 0">未审核<else />已审核</if></td>
                                     <td style="vertical-align: middle">
                                         <a data-href="{:U('admin/Member/delComment',['id'=>$q['id']])}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                        <a href="{:U('admin/Member/okComment',['id'=>$q['id']])}"  class="btn btn-info btn-xs">通过审核</a>
                                     </td>
                                 </tr>
                                 </volist>

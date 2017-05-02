@@ -181,7 +181,7 @@ class ProjectController extends CommonController
                 'country' => $_data['country'],
                 'englishname' => $_data['englishname'],
                 'showaddress' => $_data['showaddress'],
-                'showtime' => $_data['showtime'],
+                'showtime' => strtotime($_data['showtime']),
                 'duration' => $_data['duration'],
                 'speed' => $_data['speed'],
                 'star_num' => $_data['star_num']>5?5:$_data['star_num'],

@@ -46,6 +46,7 @@ class CommonController extends Controller{
         '1060'=>['你还没有选择角色','你还没有选择角色'],
         '1062'=>['请阅读并同意用户协议后再申请','请阅读并同意用户协议后再申请'],
         '1064'=>['余额不足70000阿纳豆，不能申请','余额不足70000阿纳豆，不能申请'],
+        '1066'=>['邀请码不存在','邀请码不存在'],
 
     ];
 
@@ -97,6 +98,11 @@ class CommonController extends Controller{
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
 
+                //>> 如果是管理员账号，直接升级为出品人
+                if($row['is_admin'] == 1){
+                    //>> 升级为出品人
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
+                }
 
                 $this->isLogin = 1;
                 $this->userInfo = $row;

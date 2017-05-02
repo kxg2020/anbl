@@ -629,7 +629,7 @@ class MemberController extends  CommonController{
 
                 case 1:
                     $body ="<p>".'亲爱的会员，恭喜你通过我们的明星筛选，我们稍后将安排工作人员联系您'."</p>" ;
-                    $res = $this->sendEmail($paramArr['email'],'关于明星会员的回复',$body);
+                    $res = $this->sendEmail($paramArr['email'],'阿纳巴里明星会员申请结果',$body);
                     if($res){
                         M('MemberStar')->where(['id'=>$paramArr['id']])->save(['is_pass'=>1,'status'=>1]);
                         $this->ajaxReturn(['status'=>1]);
@@ -639,11 +639,12 @@ class MemberController extends  CommonController{
                     break;
                 case 0:
                     $body ="<p>".'亲爱的会员，很抱歉您未能通过我们的明星筛选，请再接再厉哦'."</p>" ;
-                    $res = $this->sendEmail($paramArr['email'],'明星会员申请结果',$body);
+                    $res = $this->sendEmail($paramArr['email'],'阿纳巴里明星会员申请结果',$body);
 
                     if($res){
                         //>> 退还申请的金额
-                        M('Member')->where(['id'=>$paramArr['member_id']])->save(['money' => ['exp', 'money+' . 70000]]);
+                        $res = M('MemberConsume')->where(['member_id'=>$paramArr['member_id']])->find();
+                        M('Member')->where(['id'=>$paramArr['member_id']])->save(['money' => ['exp', 'money+' . $res['money']]]);
                         M('MemberStar')->where(['id'=>$paramArr['id']])->save(['is_pass'=>0,'status'=>1]);
                         $this->ajaxReturn(['status'=>1]);
                     }else{
@@ -732,6 +733,16 @@ class MemberController extends  CommonController{
         $rest = M('Comment')->where(['id'=>$id])->delete();
         if($rest === false){
             $this->error("删除失败");
+            exit;
+        }
+        $this->redirect('admin/Member/comment');
+    }
+
+    public function okComment($id){
+        $id = intval($id);
+        $rest = M('Comment')->where(['id'=>$id])->save(['is_pass'=>1]);
+        if($rest === false){
+            $this->error("审核失败");
             exit;
         }
         $this->redirect('admin/Member/comment');

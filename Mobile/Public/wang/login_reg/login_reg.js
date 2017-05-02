@@ -114,7 +114,14 @@ $(function(){
 			'data':{'username':username,'password':password,'captcha':captcha,'parent_id':parent_id},
 			success:function(e){
 				if(e.status == 1){
-					window.location.href = location.protocol+'//'+window.location.host+'/login/index';
+					layer.open({
+						content: '注册成功',
+						style: 'color:black;'
+						,btn:'确定',
+						yes:function(){
+							window.location.href = location.protocol+'//'+window.location.host+'/login/index';
+						}
+					});
 				}else{
 					layer.open({
 						content: e.msg,

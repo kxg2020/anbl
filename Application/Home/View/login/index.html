@@ -9,12 +9,12 @@
 <body>
 	<div class="bg">
 		<div class="content">
-			<div class="logo"><a class="logo" href="{:U('index/index')}"><img src="__PUBLIC__/wang/img/logimg.png" alt=""></a></div>
+			<div class="logo"><a class="logo" href="{:U('home/index/index')}"><img src="__PUBLIC__/wang/img/logimg.png" alt=""></a></div>
 			<p class="title">用户登录</p>
 			<div class="user"><input type="text" name="username"><i></i></div>
 			<div class="pwd"><input type="password" name="password"><i></i></div>
 			<div class="login">立即登录</div>
-			<div class="reg_forget"><p class="fast_reg"><a href="{:U('register/index')}">快速注册</a></p><p class="forget_pwd"><a href="{:U('login/forget')}">忘记密码?</a></p></div>
+			<div class="reg_forget"><p class="fast_reg"><a href="{:U('home/register/index')}">快速注册</a></p><p class="forget_pwd"><a href="{:U('home/login/forget')}">忘记密码?</a></p></div>
 		</div>
 	</div>
 	<script src='__PUBLIC__/wang/jquery-1.12.4.min.js'></script>
@@ -48,14 +48,14 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':"{:U('login/login')}",
+								'url':"{:U('home/login/login')}",
 								'data':{
 									'username':username,
 									'password':password
 								},
 								success:function(result){
 									if(result.status == 1){
-										window.location.href = "{:U('index/index')}";
+										window.location.href = "{:U('home/index/index')}";
 									}else{
 										layer.msg(result.msg);
 									}

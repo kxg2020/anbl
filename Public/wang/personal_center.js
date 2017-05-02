@@ -307,7 +307,7 @@ $(function(){
 									tips:4
 								});
 							}else{
-								var url_ = location.protocol+'//'+window.location.host+'/Personal/safeInfo';
+								var url_ = location.protocol+'//'+window.location.host+'/Home/Personal/safeInfo';
 								$.ajax({
 									'type':'post',
 									'dataType':'json',
@@ -344,7 +344,7 @@ $(function(){
 
 	//>> 获取性别
 	$('#sex').click(function(){
-		var url = location.protocol+'//'+window.location.host+'/Personal/save';
+		var url = location.protocol+'//'+window.location.host+'/Home/Personal/save';
 
 		var sex = $('input[type = radio]:checked').attr('data-sex');
 
@@ -389,7 +389,7 @@ $(function(){
 
 				layer.tips('请输入正确的数字!','input[name = rechargeMoney]');
 			}else{
-				var chargeUrl = location.protocol+'//'+window.location.host+'/Recharge/recharge';
+				var chargeUrl = location.protocol+'//'+window.location.host+'/Home/Recharge/recharge';
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
@@ -439,7 +439,7 @@ $(function(){
 				layer.tips('请输入正确的金额','input[name = exMoney]');
 			}else{
 
-				var url =  location.protocol +'//'+ window.location.host+'/Personal/cash';
+				var url =  location.protocol +'//'+ window.location.host+'/Home/Personal/cash';
 				$.ajax({
 					'type':'post',
 					'dataType':'json',

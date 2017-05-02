@@ -39,7 +39,7 @@ $(function(){
                 layer.tips('手机号码格式不正确', 'input[name = phone]');
                 return ;
             }
-            var url = location.protocol+'//'+window.location.host+'/Register/sendMessage';
+            var url = location.protocol+'//'+window.location.host+'/Home/Register/sendMessage';
             $.ajax({
                 'type':'post',
                 'dataType':'json',
@@ -55,6 +55,7 @@ $(function(){
     });
     function regto(){
         var password = $('input[name = password]').val();
+        var repassword = $('input[name = repassword]').val();
         var captcha = $('input[name = captcha]').val();
         var phone = $('input[name = phone]').val();
         var invite_key = $('input[name = invite_key]').val();
@@ -87,6 +88,17 @@ $(function(){
 
                     return  false;
                 }
+                if(repassword == ''){
+                    layer.tips('确认密码不能为空!', 'input[name = repassword]');
+
+                    return  false;
+                }
+                if(password != repassword){
+                    layer.tips('两次输入的密码不一致!', 'input[name = repassword]');
+
+                    return  false;
+                }
+
                 //>> 验证验证码
                 if(captcha == ''){
                     layer.tips('验证码不能为空!', 'input[name = captcha]');
@@ -95,7 +107,7 @@ $(function(){
                     if(invite_key == ''){
                         layer.tips('邀请码不能为空!', 'input[name = invite_key]');
                     }else{
-                        var url_ = location.protocol+'//'+window.location.host+'/Register/register';
+                        var url_ = location.protocol+'//'+window.location.host+'/Home/Register/register';
                         $.ajax({
                             'type':'post',
                             'dataType':'json',
@@ -108,8 +120,8 @@ $(function(){
                             },
                             success:function(result){
                                 if(result.status == 1){
-                                   layer.msg('注册成功',function(){
-                                       window.location.href = location.protocol+'//'+window.location.host+'/Login/index'
+                                   layer.msg('注册成功',{time:2000},function(){
+                                       window.location.href = location.protocol+'//'+window.location.host+'/Home/Login/index'
                                    });
                                 }else{
                                     layer.msg(result.msg);

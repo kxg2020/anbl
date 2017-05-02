@@ -84,6 +84,7 @@ class CommonController extends Controller{
             //>> 查询用户
             $row = M('Member')->where(['session_token'=>$session])->find();
 
+
             if(!empty($row)){
                 //>> 查询投资
                 $support = $row['all_support_money'];
@@ -121,6 +122,12 @@ class CommonController extends Controller{
                 //>> 如果个人投资70000 直推30人 团队500人 2名制片人
                 if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $zhipian >= $cpArr['follower_zhipian']){
                     //>> 升级为经纪人
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
+                }
+
+                //>> 如果是管理员账号，直接升级为出品人
+                if($row['is_admin'] == 1){
+                    //>> 升级为出品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
 

@@ -13,7 +13,7 @@ class IndexController extends CommonController{
         //>> 判断是否登录
         if($this->isLogin == 0){
 
-            $this->redirect('login/index');
+            $this->redirect('Home/login/index');
             exit;
         }
 
@@ -38,6 +38,7 @@ class IndexController extends CommonController{
         ];
         $projectInfo = $model
             ->where($where)
+            ->order('star_num desc')
             ->select();
 
         // 查询出所有新闻
@@ -56,7 +57,7 @@ class IndexController extends CommonController{
         $id = intval($id);
         $commentModel = M('Comment');
         //>> 默认查询导演
-        $rows = $commentModel->where(['type'=>1,'movie_id'=>$id])->order('create_time desc')->select();
+        $rows = $commentModel->where(['type'=>1,'movie_id'=>$id,'is_pass'=>1])->order('create_time desc')->select();
         foreach($rows as &$row){
             $row['username']= telephoneNumber($row['username']);
         }

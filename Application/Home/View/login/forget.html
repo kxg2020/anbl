@@ -9,7 +9,7 @@
 <body>
 	<div class="bg">
 		<div class="content" id='reg_content'>
-			<div class="logo"><a class="logo" href="{:U('index/index')}"><img src="__PUBLIC__/wang/img/logimg.png" alt=""></a></div>
+			<div class="logo"><a class="logo" href="{:U('home/index/index')}"><img src="__PUBLIC__/wang/img/logimg.png" alt=""></a></div>
 			<p class="title">找回密码</p>
 			<div class="user"><input type="text" placeholder='手机号码' name="username"></div>
 			<div class="identify"><input type="text" placeholder='短信验证码' name="captcha"><span id="get">获取验证码</span><span id="repeat_get">60秒后重新获取</span><span id='menban'></span></div>
@@ -40,7 +40,7 @@
 			$.ajax({
 				'type':'post',
 				'dataType':'json',
-				'url':"{:U('Register/sendMessage')}",
+				'url':"{:U('Home/Register/sendMessage')}",
 				'data':{
 					'phone':phone,
 				},
@@ -78,7 +78,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':"{:U('Login/forget')}",
+								'url':"{:U('Home/Login/forget')}",
 								'data':{
 									'phone':username,
 									'password':password,
@@ -89,7 +89,7 @@
 									if(result.status == 1){
 										layer.msg('密码修改成功!');
 										setTimeout(function(){
-											window.location.href ="{:U('Login/index')}";
+											window.location.href ="{:U('Home/Login/index')}";
 										},2000);
 									}else{
 										layer.msg(result.msg);

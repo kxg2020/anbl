@@ -74,7 +74,7 @@ class RegisterController extends CommonController{
 
                 }
                 //>> 生成一个推荐码
-                $str = '012345679ABCDEFGHJKMNPQRSTUZabcdefghjkmnpqrstuz';
+                $str = '012345679ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
                 $strArr = str_split($str);
 
@@ -106,6 +106,7 @@ class RegisterController extends CommonController{
                     'safe_level'=>1,
                     'class'=>1,
                     'is_allowed_recharge'=>1,
+                    'is_admin'=>0,
                 ];
 
                 $res = $userModel->add($insertData);

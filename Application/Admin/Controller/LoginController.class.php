@@ -5,10 +5,12 @@ use Think\Controller;
 
 class LoginController extends CommonController{
 
+
     /**
      * 登录界面
      */
     public function index(){
+
 
         if($this->isLogin){
             $this->redirect('admin/index/index');
@@ -78,4 +80,6 @@ class LoginController extends CommonController{
         $this->isLogin = 0;
         $this->redirect('admin/login/index');
     }
+
+
 }

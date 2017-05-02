@@ -25,8 +25,8 @@ $(function(){
         right:-right
       })
 
-       var backflag=true;
-      var frameworkflag=false;
+       var backflag=false;
+      var frameworkflag=true;
       var analyseflag=true;
       var commentflag=true;
   $('.movie_introduce>p').click(function(){

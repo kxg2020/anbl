@@ -9,7 +9,7 @@ class MarketController extends CommonController
         //>> 判断是否登录
         if($this->isLogin == 0){
 
-            $this->redirect('login/index');
+            $this->redirect('Home/login/index');
             exit;
         }
 

@@ -19,6 +19,7 @@ class CommentController extends CommonController{
                     'username'=>$this->userInfo['username'],
                     'user_id'=>$this->userInfo['id'],
                     'movie_id'=>$paramArr['movie_id'],
+                    'is_pass'=>0,
                     'create_time'=>time(),
                     'type'=>$paramArr['type'] ? $paramArr['type'] : 1,
                 ];
@@ -47,7 +48,7 @@ class CommentController extends CommonController{
 
                 if(isset($paramArr['type']) && !empty($paramArr['type']) && is_numeric($paramArr['type'])){
                     //>> 查询所有评论
-                    $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'],'type'=>$paramArr['type']])->select();
+                    $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'],'type'=>$paramArr['type'],'is_pass'=>1])->select();
 
                     if(!empty($rows)){
 

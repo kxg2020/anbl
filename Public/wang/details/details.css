@@ -197,8 +197,7 @@ header .nav{
 }
 .movie_introduce>div{
   clear: both;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 22px;
   color: #666;
   background: #f4f4f4;
   display: none;
@@ -208,7 +207,7 @@ header .nav{
   color: #666;
 }
 .expect p{
-  margin-top: 30px;
+  margin-top: 22px;
 }
 .collect{
   margin-top: 100px;

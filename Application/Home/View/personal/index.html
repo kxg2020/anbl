@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no"/>
 	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/wang/personal_center.css">
 	<link href="__CSS__/layui.css" rel="stylesheet">
@@ -18,7 +19,7 @@
 			<p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
 
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
-			支持者Lv{$personal['level']}:{$personal['money']}阿纳豆
+			Lv{$personal['level']}:{$personal['money']}阿纳豆
 			</if></div>
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
 			<div class="money"><p>已支持阿纳豆: <span>{$supportMoney}</span></p><p>剩余阿纳豆: <span>{$personal['money']}</span></p></div>
@@ -143,7 +144,7 @@
 											<p><span>{$s['support_number']}</span>人支持</p>
 											<p>已支持<span>{$s['support_money']}</span>阿纳豆</p>
 											<p><input type="button" class="cancel_suport" value="取消支持" data-id="{$s['aid']}"></p>
-											<a href="{:U('index/detail',['id'=>$s['project_id']])}" class="detail_search">查看详情</a>
+											<a href="{:U('home/index/detail',['id'=>$s['project_id']])}" class="detail_search">查看详情</a>
 										</div>
 									</div>
 
@@ -280,7 +281,7 @@
 									<tr style="color: white" align="center">
 										<td>{$fo['username']}</td>
 										<td>{$fo['level']}</td>
-										<td>{$fo['realname']}</td>
+										<td><if condition="$fo['realname'] eq '' ">未实名<else/>{$fo['realname']}</if></td>
 										<td><if condition="$fo['role'] eq 0">无
 											<elseif condition="$fo['role'] eq 1" />经纪人
 											<elseif condition="$fo['role'] eq 2" />经纪人
@@ -378,7 +379,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':location.protocol+'//'+window.location.host+'/Personal/checkAccount',
+								'url':location.protocol+'//'+window.location.host+'/Home/Personal/checkAccount',
 								'data':{'username':username},
 								success:function(e){
 									if(e.status == 1){
@@ -404,7 +405,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':location.protocol+'//'+window.location.host+'/Personal/sendMessage',
+								'url':location.protocol+'//'+window.location.host+'/Home/Personal/sendMessage',
 							});
 
 						});
@@ -461,7 +462,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':location.protocol+'//'+window.location.host+'/Personal/changeMoney',
+								'url':location.protocol+'//'+window.location.host+'/Home/Personal/changeMoney',
 								'data':{'username':username,'money':_money,'captcha':_phone},
 								success:function(e){
 									if(e.status == 1){
@@ -700,7 +701,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Personal/personalCenterPaginationA')}",
+														'url':"{:U('Home/Personal/personalCenterPaginationA')}",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -731,7 +732,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Personal/personalCenterPaginationB')}",
+														'url':"{:U('Home/Personal/personalCenterPaginationB')}",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -762,7 +763,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Personal/personalCenterPaginationC')}",
+														'url':"{:U('Home/Personal/personalCenterPaginationC')}",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -793,7 +794,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Personal/personalCenterPaginationD')}",
+														'url':"{:U('Home/Personal/personalCenterPaginationD')}",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -824,7 +825,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Personal/personalCenterPaginationE')}",
+														'url':"{:U('Home/Personal/personalCenterPaginationE')}",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -860,7 +861,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':location.protocol+'//'+window.location.host+'/Personal/exportAgree',
+														'url':location.protocol+'//'+window.location.host+'/Home/Personal/exportAgree',
 														'data':{
 															'export':$('input[type = checkbox]:checked').val()
 														},
@@ -905,7 +906,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':location.protocol+'//'+window.location.host+'/Personal/agree',
+														'url':location.protocol+'//'+window.location.host+'/Home/Personal/agree',
 														'data':{
 															'agree':$('input[type = checkbox]:checked').val()
 														},
@@ -1004,7 +1005,7 @@
 												}
 											}
 										}}
-										 url = location.protocol+'//'+window.location.host+'/Personal/star';
+										 url = location.protocol+'//'+window.location.host+'/Home/Personal/star';
 										$.ajax({
 											'type':'post',
 											'dataType':'json',
@@ -1033,7 +1034,7 @@
 														shadeClose: true,
 														shade: 0.8,
 														area: ['380px', '30%'],
-														content: "{:U('Personal/tips')}", //iframe的url
+														content: "{:U('Home/Personal/tips')}", //iframe的url
 														btn1:function(){
 															location.reload();
 														}
@@ -1078,7 +1079,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':location.protocol+'//'+window.location.host+'/Personal/feedBack',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/feedBack',
 					'data':{
 						'orderId':cancel_id,
 					},
@@ -1104,7 +1105,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':location.protocol+'//'+window.location.host+'/Personal/filmDetail',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/filmDetail',
 					'data':{'id':film_id},
 					success:function(e){
 						$('.filmname').text(e.film.name);
@@ -1126,7 +1127,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':location.protocol+'//'+window.location.host+'/Personal/getFilm',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/getFilm',
 					'data':{
 						'film_id':$('input[name = film_id]').val(),
 						'role_id':$(this).val(),
@@ -1153,7 +1154,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':location.protocol+'//'+window.location.host+'/Personal/saveId',
+					'url':location.protocol+'//'+window.location.host+'/Home/Personal/saveId',
 					'data':{'roleId':rid},
 					success:function(e){
 
@@ -1167,7 +1168,7 @@
 			});
 
 			$("#file_upload").h5upload({
-				url: "{:U('Personal/upload')}",
+				url: "{:U('Home/Personal/upload')}",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1201,7 +1202,7 @@
 				}
 			});
 			$("#upload").h5upload({
-				url: "{:U('Personal/upload')}",
+				url: "{:U('Home/Personal/upload')}",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1234,7 +1235,7 @@
 			});
 			var  path = [];
 			$("#uploadStar").h5upload({
-				url: "{:U('Personal/upload')}",
+				url: "{:U('Home/Personal/upload')}",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1303,7 +1304,7 @@
 			$('#ask_btn').click(function(){
 				title = $('input[name = question]').val();
 				content = $('textarea[name = content]').val();
-				url = location.protocol+'//'+window.location.host+'/Consult/add';
+				url = location.protocol+'//'+window.location.host+'/Home/Consult/add';
 				if(title == ''){
 					layer.msg('提问标题不能为空');
 					return false;
@@ -1344,7 +1345,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':"{:U('Personal/mySupport')}",
+								'url':"{:U('Home/Personal/mySupport')}",
 								'data':{
 									'pgNum':obj.curr,
 									'pgSize':4
@@ -1362,7 +1363,7 @@
 										'<p><span>'+ v.support_number+'</span>人支持</p>'+
 										'<p>已支持<span>'+ v.support_money+'</span></p>'+
 												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.aid+'"></p>'+
-										        "<a class='detail_search' href='{:U('index/detail')}?id="+ v.id+"'> 查看详情</a>"+
+										        "<a class='detail_search' href='{:U('home/index/detail')}?id="+ v.id+"'> 查看详情</a>"+
 										'</div>');
 									});
 
@@ -1385,7 +1386,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':"{:U('Personal/myCollection')}",
+								'url':"{:U('Home/Personal/myCollection')}",
 								'data':{
 									'pgNum':obj.curr,
 									'pgSize':4
@@ -1436,7 +1437,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':"{:U('Personal/editPassword')}",
+					'url':"{:U('Home/Personal/editPassword')}",
 					'data':{
 						'password':password,
 						'newpassword':newpassword,
@@ -1462,7 +1463,7 @@
 					$.ajax({
 						'type':'post',
 						'dataType':'json',
-						'url':location.protocol+'//'+window.location.host+'/Personal/cancel',
+						'url':location.protocol+'//'+window.location.host+'/Home/Personal/cancel',
 						'data':{
 							'id':$(this).attr('data-id'),
 						},

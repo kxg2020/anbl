@@ -2,16 +2,16 @@
 return array(
     // 配置数据库连接
     'DB_TYPE'               =>  'mysql',     // 数据库类型
-    'DB_HOST'               =>  '192.168.16.72', // 服务器地址
+    'DB_HOST'               =>  '127.0.0.1', // 服务器地址
     'DB_NAME'               =>  'an_db',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
     'DB_PWD'                =>  'root',          // 密码
     'DB_PORT'               =>  3306,        // 端口
     'DB_PREFIX'             =>  'an_',    // 数据库表前缀
 
-    'SEND_EMAIL_HOST' => 'smtp.sina.com',
-    'SEND_EMAIL_USER' => 'kxg2020@sina.com',
-    'SEND_EMAIL_PWD' => 'a8268168',
+    'SEND_EMAIL_HOST' => '',
+    'SEND_EMAIL_USER' => '',
+    'SEND_EMAIL_PWD' => '',
     'SEND_EMAIL_SECURE' => 'ssl',
     'SEND_EMAIL_PORT' => 465,
     'SEND_EMAIL_SENDER' => '阿纳巴里官方',

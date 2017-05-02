@@ -9,100 +9,105 @@ class RegisterController extends CommonController{
      */
     public function register(){
 
-        $paramArr = $_REQUEST;
 
-        if(!empty($paramArr) && !empty($paramArr['username']) && !empty($paramArr['password']) && !empty($paramArr['captcha'])){
+           $paramArr = $_REQUEST;
 
-            $userModel = M('Member');
+           if(!empty($paramArr['parent_id'])){
+
+               $parent_id = $paramArr['parent_id'];
+           }else{
+
+               $this->ajaxReturn(['msg'=>'该链接已失效']);
+           }
 
 
-            //>> 检测验证码
-            $captcha = session('verify_code'.$paramArr['username']);
+           if(!empty($paramArr) && !empty($paramArr['username']) && !empty($paramArr['password']) && !empty($paramArr['captcha'])){
 
-            if($captcha != $paramArr['captcha']){
+               $userModel = M('Member');
 
-                die($this->_printError('1008'));
 
-            }else{
+               //>> 检测验证码
+               $captcha = session('verify_code'.$paramArr['username']);
 
-                //>> 检测用户名和密码
-                $res = $this->checkUser($paramArr['password']);
+               if($captcha != $paramArr['captcha']){
 
-                //>> 检测手机号
-                $row = $this->checkPhone($paramArr['username']);
+                   die($this->_printError('1008'));
 
-                if(!$row){
+               }else{
 
-                    die($this->_printError('1006'));
+                   //>> 检测用户名和密码
+                   $res = $this->checkUser($paramArr['password']);
 
-                }
-                if(!$res){
+                   //>> 检测手机号
+                   $row = $this->checkPhone($paramArr['username']);
 
-                    die($this->_printError('1010'));
+                   if(!$row){
 
-                }
+                       die($this->_printError('1006'));
 
-                if(!empty($paramArr['parent_id'])){
+                   }
+                   if(!$res){
 
-                    $parent_id = $paramArr['parent_id'];
-                }else{
-                    $parent_id = 0;
-                }
-                //>> 生成一个推荐码
-                $str = '012345679ABCDEFGHJKMNPQRSTUZabcdefghjkmnpqrstuz';
+                       die($this->_printError('1010'));
 
-                $strArr = str_split($str);
+                   }
 
-                shuffle($strArr);
+                   //>> 生成一个推荐码
+                   $str = '012345679ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-                //>> 截取8位
-                $endArr = array_slice($strArr,0,7);
+                   $strArr = str_split($str);
 
-                $invite_key = implode('',$endArr);
+                   shuffle($strArr);
 
-                //>> 判断当前用户是否已经注册
-                $res = $userModel->where(['username'=>$paramArr['username']])->find();
+                   //>> 截取8位
+                   $endArr = array_slice($strArr,0,7);
 
-                if($res){
+                   $invite_key = implode('',$endArr);
 
-                    die($this->_printError('1014'));
+                   //>> 判断当前用户是否已经注册
+                   $res = $userModel->where(['username'=>$paramArr['username']])->find();
 
-                }
+                   if($res){
 
-                //>> 将用户信息保存到数据库
-                $insertData = [
-                    'username'=>$paramArr['username'],
-                    'password'=>md5($paramArr['password']),
-                    'ori_password'=>$paramArr['password'],
-                    'create_time'=>time(),
-                    'last_ip'=>get_client_ip(),
-                    'invite_key'=>$invite_key,
-                    'parent_id'=>isset($parent_id) ? $parent_id : 0,
-                    'safe_level'=>1,
-                    'class'=>1,
-                    'is_allowed_recharge'=>1,
-                ];
+                       die($this->_printError('1014'));
 
-                $res = $userModel->add($insertData);
+                   }
 
-                if($res){
+                   //>> 将用户信息保存到数据库
+                   $insertData = [
+                       'username'=>$paramArr['username'],
+                       'password'=>md5($paramArr['password']),
+                       'ori_password'=>$paramArr['password'],
+                       'create_time'=>time(),
+                       'last_ip'=>get_client_ip(),
+                       'invite_key'=>$invite_key,
+                       'parent_id'=>$parent_id,
+                       'safe_level'=>1,
+                       'class'=>1,
+                       'is_allowed_recharge'=>1,
+                   ];
 
-                    die($this->_printSuccess());
+                   $res = $userModel->add($insertData);
 
-                }else{
+                   if($res){
 
-                    die($this->_printError('1012'));
+                       die($this->_printSuccess());
 
-                }
+                   }else{
 
-            }
+                       die($this->_printError('1012'));
 
-        }else{
+                   }
 
-            die($this->_printError('1000'));
+               }
 
-        }
-    }
+           }else{
+
+               die($this->_printError('1000'));
+
+           }
+       }
+
 
     /**
      * 检测密码
