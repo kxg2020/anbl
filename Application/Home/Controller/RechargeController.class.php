@@ -25,6 +25,12 @@ class RechargeController extends CommonController{
         if($row['is_allowed_recharge'] != 1){
 
             die($this->_printError('1046'));
+    }
+        //>> 判断用户是否已经有还未审核的充值订单，如果有，就不能再继续充值了
+        $rechargeOrder = M('MemberRecharge')->where(['member_id'=>$row['id'],'is_pass'=>0])->find();
+
+        if(!empty($rechargeOrder)){
+            die($this->_printError('1064'));
         }
 
         if(!empty($paramArr)){
