@@ -53,16 +53,7 @@ class RegisterController extends CommonController{
                    }
 
                    //>> 生成一个推荐码
-                   $str = '012345679ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
-                   $strArr = str_split($str);
-
-                   shuffle($strArr);
-
-                   //>> 截取8位
-                   $endArr = array_slice($strArr,0,7);
-
-                   $invite_key = implode('',$endArr);
+                   $invite_key = $this->inviteCode();
 
                    //>> 判断当前用户是否已经注册
                    $res = $userModel->where(['username'=>$paramArr['username']])->find();
@@ -108,6 +99,33 @@ class RegisterController extends CommonController{
            }
        }
 
+
+    /**
+     * 生成推荐码
+     */
+    public function inviteCode(){
+        //>> 生成一个推荐码
+        $str = '012345679ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        $strArr = str_split($str);
+
+        shuffle($strArr);
+
+        //>> 截取8位
+        $endArr = array_slice($strArr,0,7);
+
+        $invite_key = implode('',$endArr);
+
+        //>> 查询数据库，判断是否已经有了该字符串
+        $res = M('Member')->where(['invite_key'=>$invite_key])->find();
+
+        if(!empty($res)){
+
+            $this->inviteCode();
+        }
+
+        return $invite_key;
+    }
 
     /**
      * 检测密码
