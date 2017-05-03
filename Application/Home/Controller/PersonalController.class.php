@@ -284,6 +284,7 @@ class PersonalController extends CommonController{
         //>> 支付方式
         $weixin = M('Pay')->where(['name'=>'微信'])->find();
         $ali = M('Pay')->where(['name'=>'支付宝'])->find();
+        $yinlian = M('Pay')->where(['name'=>'公司银联'])->select();
 
         //>> 查询招募电影
         $recruit = M('ProjectRecruit')->select();
@@ -332,6 +333,7 @@ class PersonalController extends CommonController{
         $this->assign([
             'allConsume'=>$allConsume,
             'weixin'=>$weixin,
+            'yinlian'=>$yinlian,
             'ali'=>$ali,
             'films'=>$films,
             'allget'=>$allGet,

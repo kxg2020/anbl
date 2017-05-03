@@ -10,6 +10,11 @@ class PermissionController extends CommonController{
 
             $paramArr = $_REQUEST;
 
+            if(empty($paramArr)){
+
+                $this->ajaxReturn(['status'=>0]);
+            }
+
             $db = new DbMysqlLogic();
             $ns = new NestedSets($db, 'an_user_permission', 'lft', 'rght', 'parent_id', 'id', 'level');
             $parent_id = $paramArr['parent_id'];

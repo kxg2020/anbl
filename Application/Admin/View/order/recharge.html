@@ -98,7 +98,7 @@
                                     <td style="vertical-align: middle">{$o.id}</td>
                                     <td style="vertical-align: middle">{$o.order_number}</td>
                                     <td style="vertical-align: middle">{$o.username}</td>
-                                    <td style="vertical-align: middle"><if condition="$o['type'] eq 3">个人银联<else />{$o['payname']}</if></td>
+                                    <td style="vertical-align: middle"><if condition="$o['type'] eq 3">公司银联<else />{$o['payname']}</if></td>
                                     <td style="vertical-align: middle">{:date('Y-m-d H:i:s',$o['create_time'])}</td>
                                     <td style="vertical-align: middle">
                                         <if condition="$o['money'] egt 700"><span style="color: red">{$o['money']}</span><else/>

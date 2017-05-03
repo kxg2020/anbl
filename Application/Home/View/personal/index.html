@@ -197,37 +197,17 @@
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
 							<div class="put_money" style="display: none;">
-								<p>选择充值方式: <!--<span class="apply_style apply_style_choice" data-id="{$weixin['id']}">微信</span>--><span class="apply_style apply_style_choice" data-id="{$ali['id']}">支付宝</span><span class="apply_style" data-id="$yinlian['id']">公司银联</span></p>
+								<p>选择充值方式: <!--<span class="apply_style apply_style_choice" data-id="{$weixin['id']}">微信</span>--><span class="apply_style apply_style_choice" data-id="{$ali['id']}">支付宝</span><span class="apply_style" data-id="3">公司银联</span></p>
 								<div id="feiyinglian">
 									<!--<img id="weixing" src="{$weixin['image_url']}" alt="">-->
 									<img id="zhifubao" style="display: block;" src="{$ali['image_url']}" alt="">
 								</div>
-
-								<div class="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
-									<p>卡号:{$userInfo['bank_card']}</p>
-									<p>开户支行:{$userInfo['address']}</p>
+								<volist name="yinlian" id="yin">
+								<div class="yinglian" style="display: none;"><p>户主:{$yin['username']}</p>
+									<p>卡号:{$yin['account']}</p>
+									<p>开户支行:{$yin['bank']}</p>
 								</div>
-								<div class="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
-									<p>卡号:{$userInfo['bank_card']}</p>
-									<p>开户支行:{$userInfo['address']}</p>
-								</div>
-								<div class="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
-									<p>卡号:{$userInfo['bank_card']}</p>
-									<p>开户支行:{$userInfo['address']}</p>
-								</div>
-								<div class="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
-									<p>卡号:{$userInfo['bank_card']}</p>
-									<p>开户支行:{$userInfo['address']}</p>
-								</div>
-								<div class="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
-									<p>卡号:{$userInfo['bank_card']}</p>
-									<p>开户支行:{$userInfo['address']}</p>
-								</div>
-								<div class="yinglian" style="display: none;"><p>户主:{$userInfo['bank_card_name']}</p>
-									<p>卡号:{$userInfo['bank_card']}</p>
-									<p>开户支行:{$userInfo['address']}</p>
-								</div>
-
+								</volist>
 
 
 
