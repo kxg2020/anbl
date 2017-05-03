@@ -66,34 +66,69 @@ class CommonController extends Controller{
         //>> 拿session
         $session = session(md5('home'));
         if(!empty($session)){
+
+            //>> 查询会员角色升级规则
+            $condition = M('RoleUp')->select();
+            $zcArr = [];
+            $jjArr = [];
+            $zpArr = [];
+            $cpArr = [];
+            foreach($condition as $key => $value){
+                switch($value['name']){
+                    case 'zhichi':
+                        $zcArr = $value;
+                        break;
+                    case 'jingji':
+                        $jjArr = $value;
+                        break;
+                    case 'zhipian':
+                        $zpArr = $value;
+                        break;
+                    case 'chupin':
+                        $cpArr = $value;
+                        break;
+                }
+            }
+
+
             //>> 查询用户
             $row = M('Member')->where(['session_token'=>$session])->find();
             if(!empty($row)){
                 //>> 查询投资
-                $support = M('MemberSupport')->where(['member_id'=>$row['id']])->find();
-                //>> 判断投资是否满700
-                if($support['support_money'] >= 700){
+                $support = $row['all_support_money'];
+
+                //>> 判断投资是否满xx,满xx升级为支持者
+                if($support >= $zcArr['support']){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>1]);
                 }
 
                 //>> 判断上级已经有多少下线
                 $count = $this->group($row['id']);
+
+
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
-                if($count >= 5){
+
+                //>> 多少经纪人
+                $jingji = $this->getJingJiRen($row['id']);
+
+                //>> 多少制片人
+                $zhipian = $this->getZhiPianRen($row['id']);
+
+                if($count >= $jjArr['follower'] && $support >= $jjArr['support'] ){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
                 //>> 如果投资35000以上,直推10人,团队100人升级为制片人
-                if($support['support_money'] >= 35000 && $count >= 10 && $all >= 100){
+                if($support  >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && $jingji >= $zpArr['follower_jingji'] ){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
                 //>> 如果个人投资70000 直推50人 团队500人 升级出品人
-                if($support['support_money'] >= 70000 && $count >= 50 && $all >= 500){
+                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $zhipian >= $cpArr['follower_zhipian']){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
@@ -123,6 +158,28 @@ class CommonController extends Controller{
         $this->assign('isLogin',$this->isLogin);
 
 
+    }
+
+
+    /**
+     * 查询下线经纪人
+     */
+    public function getJingJiRen($id){
+
+        $rows = M('Member')->where(['parent_id'=>$id,'role'=>2])->count();
+
+        return $rows;
+    }
+
+    /**
+     * 查询下线制片人人
+     */
+    public function getZhiPianRen($id)
+    {
+
+        $rows = M('Member')->where(['parent_id' => $id, 'role' => 3])->count();
+
+        return $rows;
     }
 
 

@@ -425,7 +425,7 @@ class AccountController extends CommonController{
         }
 
         //>> 查询支付方式
-        $payMode = M('Pay')->select();
+        $payMode = M('Pay')->where(['name'=>'支付宝'])->select();
 
         $this->assign('pay',$payMode);
         $this->display('account/credence');
