@@ -290,7 +290,7 @@ $(function(){
 						});
 					}else{
 						//>> 验证银行卡
-						var reg_ = /^\d{19}$/g;
+						var reg_ = /^\d{10,25}$/g;
 						if(!reg_.test(bank_card)){
 							layer.tips('银行卡格式不正确','input[name = bank_card]',{
 								tips:4
@@ -614,19 +614,19 @@ $(function(){
 			$('#weixing').show();
 			$('#zhifubao').hide();
 			$('#feiyinglian').show();
-			$('#yinglian').hide();
+			$('.yinglian').hide();
 		}if($(this).html()=='支付宝'){
 			$(this).addClass('apply_style_choice');
 			$('#weixing').hide();
 			$('#zhifubao').show();
 			$('#feiyinglian').show();
-			$('#yinglian').hide();
-		}if($(this).html()=='个人银联'){
+			$('.yinglian').hide();
+		}if($(this).html()=='公司银联'){
 			$(this).addClass('apply_style_choice');
 			$('#weixing').hide();
 			$('#zhifubao').hide();
 			$('#feiyinglian').hide();
-			$('#yinglian').show();
+			$('.yinglian').show();
 		}
 	})
 
