@@ -186,11 +186,6 @@ header .nav{
 	font-size: 15px;
 	color: #ccc;
 }
-.leval:before{
-	content: url(img/level.png);
-	float: left;
-	margin-right: 17px;
-}
 .money{
 	margin-top: 37px;
 }
