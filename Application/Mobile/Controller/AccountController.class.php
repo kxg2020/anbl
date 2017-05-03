@@ -495,4 +495,67 @@ class AccountController extends CommonController{
             'url' => $res['url']
         ]);
     }
+
+    public function test(){
+
+        //>> 判断是否登录
+        if($this->isLogin == 0){
+            $this->redirect('Login/index');
+            return false;
+        }
+
+        //>> 查询支付方式
+        $payMode = M('Pay')->select();
+
+        $this->assign('pay',$payMode);
+        $this->display('account/test');
+    }
+
+    public function upload1(){
+        $str = $_POST['str'];
+        $type = $_POST['type'];
+
+
+        switch($type){
+            case 'image/png':
+                $ext='.png';
+                break;
+            case 'image/jpeg';
+                $ext='.jpeg';
+                break;
+            case 'image/jpeg':
+                $ext='.jpg';
+                break;
+            case 'image/bmp':
+                $ext='.bmp';
+                break;
+            default:
+                $ext='.jpg';
+        }
+        $file_path='./Uploads/'.date('Ymd').'/'.time().$ext;
+        if(!file_exists(dirname($file_path))){
+            mkdir(dirname($file_path),0777,true);
+        }
+        $img_content = str_replace('data:'.$type.';base64,','',$str);
+        $img_content = base64_decode($img_content);
+        $result =file_put_contents($file_path,$img_content);
+        $this->ajaxReturn([
+            'status' => 1,
+            'url' => "http://mobile.araberrimovie.com".$file_path
+        ]);
+
+    }
+
+    public function upToken(){
+        require '../ThinkPHP/Library/Vendor/Qiniu/autoload.php';
+        // 用于签名的公钥和私钥
+        $accessKey = 'Z5oNrz5L2D_XZXW4sEAv_KHOVflPgUKaAXukAKvB';
+        $secretKey = 'V9vJxZ7Wc5AeZKXq0XbnJStPDovpLQsKX8qCUeQr';
+        // 初始化签权对象
+        $auth = new \Qiniu\Auth($accessKey, $secretKey);
+        $bucket = 'macarin';
+        // 生成上传Token
+        $token = $auth->uploadToken($bucket,null,600);
+        $this->ajaxReturn(['uptoken'=>$token]);
+    }
 }

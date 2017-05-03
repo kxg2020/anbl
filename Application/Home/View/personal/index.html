@@ -503,14 +503,18 @@
 									<th>时间</th>
 									<th>阿纳豆</th>
 									<th>类型</th>
-								</tr>								
+									<th>状态</th>
+									<th>备注</th>
+								</tr>
 							</thead>
 							<tbody id="tbody_1">
 							<volist name="allget" id="al">
 								<tr>
 									<td>{:date('Y-m-d',$al['create_time'])}</td>
-									<td style="color: forestgreen">+{$al.money}</td>
+									<td <if condition="$al['is_ok'] eq 1">style="color: forestgreen"<else />style="color: red"</if>><if condition="$al['is_ok'] eq 1">+<else />-</if>{$al.money}</td>
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
+									<td <if condition="$al['is_ok'] eq 1">style="color: forestgreen"<else />style="color: red"</if>><if condition="$al['is_ok'] eq 1">正常<else />失效</if></td>
+									<td style="color: forestgreen">{$al.intro}</td>
 								</tr>
 							</volist>
 							</tbody>

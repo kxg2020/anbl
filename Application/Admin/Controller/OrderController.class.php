@@ -242,6 +242,45 @@ class OrderController extends CommonController
         $this->exportExcel(date('Y-m-d') . '_支持订单', $xlsCell, $rows);
     }
 
+    public function remove($id){
+        $id = intval($id);
+        // 判断是否传了ID
+        if(!$id){
+            // 没有ID，报错
+            $this->error('没有找到数据');
+            exit;
+        }
+        // 实例化模型类
+        $model = D('MemberSupport');
+        // 通过ID主键 查询标签信息
+        $info = $model->find($id);
+        if(!$info){
+            // 没有在数据库中找到数据，报错
+            $this->error('没有找到数据');
+            exit;
+        }
+        // 当前订单所有收益失效
+        // 当前订单用户的收益全部失效
+        $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
+        foreach ($profits as $profit) {
+            // 扣除用户余额
+            $money = $profit['money'];
+            $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+            // 删除记录
+            $rest = M('MemberProfit')->where(['id' => $profit['id']])->delete();
+        }
+        // 返还用户投资额
+        $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $info['support_money']]]);
+        // 执行删除
+        $res = $model->delete($id);
+        if(!$res){
+            $this->error('删除失败！');
+            exit;
+        }
+        // 删除成功直接回到首页
+        $this->redirect('admin/order/supportOrder');
+    }
+
 
     /**
      * 充值订单
