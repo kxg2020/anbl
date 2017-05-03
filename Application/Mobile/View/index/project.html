@@ -28,6 +28,7 @@
 			<div class="right">
 				<p>{$info['name']}</p>
 				<p>支持阿纳豆: <span> {$info['support_money']}</span></p>
+				<p>类型: <span><if condition="$info['type'] eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益: <span><if condition="$info['type'] eq 1">{$info['fixed']}<else />{$info['float']}</if></span></p>
 				<p>状态: <span><if condition="$info['target_amount'] gt $info['money']">正在进行中<else />完成</if></span></p>
 				<p>导演:{$info['director']}</p>
 				<p>主演:{$info['star']}</p>

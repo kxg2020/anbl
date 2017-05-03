@@ -53,14 +53,22 @@
                             <form  method="post" action="{:U('admin/pay/add')}" id="projectForm">
                                 <div class="form-group">
                                     <label>支付名称</label>
-                                    <input type="text" class="form-control" name="name" placeholder="请输入支付名称：微信">
+                                    <input type="text" class="form-control" name="name" placeholder="请输入支付名称：微信、支付宝、银联">
                                 </div>
                                 <div class="form-group">
-                                    <label>账户</label>
-                                    <input type="text" class="form-control" name="account" placeholder="请输入微信账户">
+                                    <label>户主(银联必填)</label>
+                                    <input type="text" class="form-control" name="username" placeholder="请输入户主：张先生">
                                 </div>
                                 <div class="form-group">
-                                    <label>上传二维码</label>
+                                    <label>开户行(银联必填)</label>
+                                    <input type="text" class="form-control" name="bank" placeholder="请输入开户行：成都">
+                                </div>
+                                <div class="form-group">
+                                    <label>账户(银联必填)</label>
+                                    <input type="text" class="form-control" name="account" placeholder="请输入账户">
+                                </div>
+                                <div class="form-group">
+                                    <label>上传二维码或图片</label>
                                         <span class="loadfile" id="file_upload">+</span>
                                 </div>
                                 <div class="form-group clearfix">

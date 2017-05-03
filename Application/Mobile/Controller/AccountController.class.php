@@ -477,7 +477,7 @@ class AccountController extends CommonController{
     public function upToQiniu(){
 
         $config = [
-            'exts'          =>  array('jpg','png','gif','bmp'), //允许上传的文件后缀
+            'exts'          =>  array('jpg','png','gif','bmp','jpeg'), //允许上传的文件后缀
             'subName'       =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
             'rootPath'      =>  'Upload/', //保存根路径
         ];

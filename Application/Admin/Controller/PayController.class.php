@@ -23,6 +23,8 @@ class PayController extends CommonController
                 'name' => $_data['name'],
                 'image_url' => $_data['image_url'],
                 'account' => $_data['account'],
+                'username' => $_data['username'],
+                'bank' => $_data['bank'],
                 'create_time' => time(),
             ];
             // 添加到数据库
@@ -63,6 +65,8 @@ class PayController extends CommonController
             $performerInfo = [
                 'name' => $_data['name'],
                 'image_url' => $_data['image_url'],
+                'username' => $_data['username'],
+                'bank' => $_data['bank'],
                 'account' => $_data['account'],
             ];
 
