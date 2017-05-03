@@ -19,9 +19,10 @@ class MoneyController extends CommonController
             if ($projectInfo['is_active'] == 1) {
                 $this->ajaxReturn(['msg' => "项目还未下架，不能浮动分红", 'status' => 0]);
             }
-            if (!$projectInfo['float_rate']) {
+
+          /*  if (!$projectInfo['float_rate']) {
                 $this->ajaxReturn(['msg' => "项目未设置浮动分红比例", 'status' => 0]);
-            }
+            }*/
 
 
             //=============================== 立即分红===========================//
@@ -315,7 +316,7 @@ class MoneyController extends CommonController
     {
         // 判断已分红的订单
         $where1 = [
-            'is_fh' => 1,//未分红的订单或者分红还未结束的订单
+            'is_fh' => 1,//已分红的订单
             'type' => 1,//未分红固定分红方式的订单
         ];
         $supportInfo1 = M('MemberSupport')
