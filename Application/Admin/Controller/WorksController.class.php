@@ -1,6 +1,8 @@
 <?php
 namespace Admin\Controller;
 
+use Think\Cache\Driver\Redis;
+
 class WorksController extends  CommonController
 {
     public function _initialize(){
@@ -12,6 +14,7 @@ class WorksController extends  CommonController
         }
     }
     public function index(){
+
         //查看是否有查询
         $name = I('get.name','','strip_tags');
         // 创建查询条件

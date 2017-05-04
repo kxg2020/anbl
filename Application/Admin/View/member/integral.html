@@ -160,7 +160,7 @@
                                     <div class="col-sm-4 col-md-4">
                                         投资 <input type="number"  name="zhipian_touzi"  class="form-control" placeholder="" value="{$roles[2]['support']}">
 
-                                        直推 <input type="number"  name="zhipian_zhichizhe"   class="form-control" placeholder="" value="{$roles[2]['follower_zhichi']}">
+                                        直推 <input type="number"  name="zhipian_zhichizhe"   class="form-control" placeholder="" value="{$roles[2]['follower']}">
 
                                         直推经纪人 <input type="number"  name="zhipian_jingjiren"   class="form-control" placeholder="" value="{$roles[2]['follower_jingji']}">
 
@@ -175,7 +175,7 @@
                                     <div class="col-sm-4 col-md-4">
                                         投资 <input type="number"  name="chupin_touzi"  class="form-control" placeholder="" value="{$roles[3]['support']}">
 
-                                        直推 <input type="number"  name="chupin_zhichizhe"   class="form-control" placeholder="" value="{$roles[3]['follower_zhichi']}">
+                                        直推 <input type="number"  name="chupin_zhichizhe"   class="form-control" placeholder="" value="{$roles[3]['follower']}">
 
                                         直推制片人 <input type="number"  name="chupin_zhipianren"   class="form-control" placeholder="" value="{$roles[3]['follower_zhipian']}">
 
@@ -285,7 +285,9 @@ $(function(){
             },
             success:function(result){
                 if(result.status != ''){
-                    layer.msg(result.msg);
+                    layer.msg(result.msg,{time:500},function () {
+                        location.reload();
+                    });
                 }
             }
         });
