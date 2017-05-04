@@ -271,6 +271,10 @@ class OrderController extends CommonController
         }
         // 返还用户投资额
         $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $info['support_money']]]);
+
+        // 改变项目投资状态
+        $rest = M('Project')->where(['id' => $info['project_id']])->save(['money' => ['exp', 'money-' . $info['support_money']]]);
+        $rest = M('Project')->where(['id' => $info['project_id']])->save(['support_number' => ['exp', 'support_number-' . 1]]);
         // 执行删除
         $res = $model->delete($id);
         if(!$res){
