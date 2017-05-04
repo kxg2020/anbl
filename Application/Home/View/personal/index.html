@@ -515,7 +515,7 @@
 							<volist name="allget" id="al">
 								<tr>
 
-									<td>{:date('Y-m-d',$al['create_time'])}</td>
+									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
 									<td <if condition="$al['is_ok'] eq 1">style="color: forestgreen"<else />style="color: red"</if>><if condition="$al['is_ok'] eq 1">+<else />-</if>{$al.money}</td>
 
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
@@ -699,6 +699,10 @@
 							<script src="__JS__/layer/layui.js"></script>
 							<script src="__JS__/layer/laypage.js"></script>
 							<script>
+
+							
+							</script>
+							<script>
 								//>> 分页
 								$(function(){
 									layui.use(['laypage', 'layer'], function(){
@@ -720,10 +724,11 @@
 														success:function(result){
 															$('#tbody_1').html('');
 															$.each(result,function(k,v){
-																$('#tbody_1').append('<tr>'+
-																		'<td>'+ v.create_time+'</td>'+
-																	'<td style="color: forestgreen">+'+ v.money+'</td>'+
-														'<td >'+ v.remark+'</td>'+
+					$('#tbody_1').append('<tr>'+
+			'<td>'+ v.create_time+'</td>'+'<td  style="color: forestgreen"><img src="__PUBLIC__/wang/img/status_1/'+ v.is_ok+'.png">'+ v.money+'</td>'+
+			'<td >'+ v.remark+'</td>'+ '<td><img src="__PUBLIC__/wang/img/status/'+ v.is_ok+'.png"></td>'+
+													'<td style="color: forestgreen">'+ v.intro+'</td>'+
+
 												'</tr>');
 															});
 														}

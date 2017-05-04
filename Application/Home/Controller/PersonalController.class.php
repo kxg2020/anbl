@@ -67,6 +67,7 @@ class PersonalController extends CommonController{
         $paramArr = $_REQUEST;
         //>> 所有收益
         $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
+
         $allGet = $this->pagination($allGet,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($allGet as $key => &$value){
             $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
