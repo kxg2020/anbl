@@ -271,6 +271,10 @@ class OrderController extends CommonController
         }
         // 返还用户投资额
         $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $info['support_money']]]);
+
+        // 改变项目投资状态
+        $rest = M('Project')->where(['id' => $info['project_id']])->save(['money' => ['exp', 'money-' . $info['support_money']]]);
+        $rest = M('Project')->where(['id' => $info['project_id']])->save(['support_number' => ['exp', 'support_number-' . 1]]);
         // 执行删除
         $res = $model->delete($id);
         if(!$res){
@@ -585,10 +589,15 @@ class OrderController extends CommonController
            if(!empty($paramArr['end_time'])){
                $where['a.create_time'] = ['elt',strtotime($paramArr['end_time'])];
            }
-
            if(!empty($paramArr['id'])){
                $where['a.id'] = $paramArr['id'];
            }
+           if(strlen($paramArr['is_pass'])){
+               if($where['a.is_pass'] == 0){
+                   $where['a.is_pass'] =$paramArr['is_pass'];
+               }
+           }
+
        }
 
         $count = M('MemberRecharge as a ')
@@ -758,6 +767,41 @@ class OrderController extends CommonController
             sendSMSTemp($user['username'], ('#phone#') . "=" . urlencode($paramArr['text']), $this->systemInfo,1775922);
             $this->ajaxReturn(['status'=>1]);
         }
+    }
+
+    public function removereg($id){
+        $id = intval($id);
+        // 判断是否传了ID
+        if(!$id){
+            // 没有ID，报错
+            $this->error('没有找到数据');
+            exit;
+        }
+        // 实例化模型类
+        $model = D('MemberRecharge');
+        // 通过ID主键 查询标签信息
+        $info = $model->find($id);
+
+        if(!$info){
+            // 没有在数据库中找到数据，报错
+            $this->error('没有找到数据');
+            exit;
+        }
+        // 扣除充值
+        $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money-' . $info['money']]]);
+        if(!$rest){
+            $this->error('删除失败！');
+            exit;
+        }
+
+        // 执行删除
+        $res = $model->delete($id);
+        if(!$res){
+            $this->error('删除失败！');
+            exit;
+        }
+        // 删除成功直接回到首页
+        $this->redirect('admin/order/recharge');
     }
 
 }

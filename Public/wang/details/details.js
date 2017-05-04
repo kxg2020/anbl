@@ -29,51 +29,49 @@ $(function(){
       var frameworkflag=true;
       var analyseflag=true;
       var commentflag=true;
-  $('.movie_introduce>p').click(function(){
-
-      var text=$(this)[0].innerText.slice(1);
-      
-      if(text=='剧情简介'){
-        $('.back').fadeToggle('slow')
-        if(backflag){
-          $('#back>span').text('-');
-          backflag=false;
-        }else{
-          $('#back>span').text('+');
-          backflag=true;
+    $('.movie_introduce>p').click(function(){
+        var id = $(this)[0].id;
+        if(id=='back'){
+            $('.back').fadeToggle('slow')
+            if(backflag){
+                $('#back>span').text('-');
+                backflag=false;
+            }else{
+                $('#back>span').text('+');
+                backflag=true;
+            }
         }
-      }
-      if(text=='演艺阵容'){
-        $('.framework').fadeToggle('slow')
-        if(frameworkflag){
-          $('#framework>span').text('-');
-          frameworkflag=false;
-        }else{
-          $('#framework>span').text('+');
-          frameworkflag=true;
+        if(id=='framework'){
+            $('.framework').fadeToggle('slow')
+            if(frameworkflag){
+                $('#framework>span').text('-');
+                frameworkflag=false;
+            }else{
+                $('#framework>span').text('+');
+                frameworkflag=true;
+            }
         }
-      }
-      if(text=='受众定位'){
-        $('.analyse').fadeToggle('slow')
-        if(analyseflag){
-          $('#analyse>span').text('-');
-          analyseflag=false;        
-        }else{
-          $('#analyse>span').text('+');
-          analyseflag=true;
+        if(id=='analyse'){
+            $('.analyse').fadeToggle('slow')
+            if(analyseflag){
+                $('#analyse>span').text('-');
+                analyseflag=false;
+            }else{
+                $('#analyse>span').text('+');
+                analyseflag=true;
+            }
         }
-      }
-      if(text=='预期回报'){
-        $('.comment_film').fadeToggle('slow')
-        if(commentflag){
-          $('#comment_film>span').text('-');
-          commentflag=false;
-        }else{
-          $('#comment_film>span').text('+');
-          commentflag=true;
+        if(id=='comment_film'){
+            $('.comment_film').fadeToggle('slow')
+            if(commentflag){
+                $('#comment_film>span').text('-');
+                commentflag=false;
+            }else{
+                $('#comment_film>span').text('+');
+                commentflag=true;
+            }
         }
-      }
-  });
+    });
 
 $('#anbl_argement').click(function(){
   $('.argement').fadeIn('slow');

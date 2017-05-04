@@ -174,7 +174,7 @@ class IndexController extends CommonController {
         $projectInfo = M('MemberSupport as a')
             ->field('a.*,b.name,b.star,b.director,b.target_amount,b.money,b.image_url,b.star_num')
             ->join('left join an_project as b on b.id=a.project_id')
-            ->where(['a.member_id'=>$this->userInfo['id']])
+            ->where(['a.member_id'=>$this->userInfo['id'],'b.is_active'=>1])
             ->select();
         $this->assign('projectInfo',$projectInfo);
         $this->display('index/project');

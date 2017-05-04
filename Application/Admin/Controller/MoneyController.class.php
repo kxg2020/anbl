@@ -30,7 +30,7 @@ class MoneyController extends CommonController
             // 查询出当前项目所有支持订单
             $where = [
                 'project_id' => $projectInfo['id'],//当前项目
-                'is_fh' => 0,//已分红的订单
+//                'is_fh' => 0,//已分红的订单
                 'is_true' => 0,//未返回金额
                 'type'=>2     //订单为浮动分红方式的用户
             ];
