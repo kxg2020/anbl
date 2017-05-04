@@ -589,10 +589,15 @@ class OrderController extends CommonController
            if(!empty($paramArr['end_time'])){
                $where['a.create_time'] = ['elt',strtotime($paramArr['end_time'])];
            }
-
            if(!empty($paramArr['id'])){
                $where['a.id'] = $paramArr['id'];
            }
+           if(strlen($paramArr['is_pass'])){
+               if($where['a.is_pass'] == 0){
+                   $where['a.is_pass'] =$paramArr['is_pass'];
+               }
+           }
+
        }
 
         $count = M('MemberRecharge as a ')

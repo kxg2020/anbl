@@ -49,6 +49,14 @@
                                 <label>充值结束时间</label>
                                 <input type="date" class="form-control" name="end_time" value="{:I('get.end_time')}" placeholder="请输入订单时间">
                             </div>
+                            <div class="form-group">
+                                <select name="is_pass" class="form-control">
+                                    <option value="">--全部状态--</option>
+                                    <option value="1" <if condition="I('get.is_pass') eq 1"> selected="selected"</if>>已通过</option>
+                                    <option value="0" <if condition="I('get.is_pass') eq 0"> selected="selected"</if>>未审核</option>
+                                    <option value="2" <if condition="I('get.is_pass') eq 2"> selected="selected"</if>>已拒绝</option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary">搜索</button>
                             <button type="button" class="btn btn-primary" id="exportExcel">导出</button>
                             <span>共计：{$count}条记录</span>
