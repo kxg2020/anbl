@@ -327,4 +327,16 @@ class CommonController extends Controller
         }
     }
 
+    public function pagination($data = [],$pgNum,$pgSize){
+
+        if(empty($data))return false;
+
+        $start = ($pgNum - 1) * $pgSize;
+
+        $sliceArr = array_slice($data,$start,$pgSize);
+
+        return $sliceArr;
+
+    }
+
 }
