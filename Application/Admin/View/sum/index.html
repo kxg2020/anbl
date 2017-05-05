@@ -1,0 +1,368 @@
+<extend name="public:tpl" />
+<block name="css">
+
+</block>
+<block name="main">
+    <!-- page heading start-->
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/index/index')}">后台首页</a>
+            </li>
+            <li class="active">
+                <a href="{:U('admin/project/index')}">会员管理</a>
+            </li>
+            <li class="active"> 会员明细</li>
+        </ul>
+    </div>
+    <section class="wrapper">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading custom-tab turquoise-tab">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#recharge" data-toggle="tab">充值</a>
+                            </li>
+                            <li>
+                                <a href="#withdrawals" data-toggle="tab">提现</a>
+                            </li>
+                            <li>
+                                <a href="#profit" data-toggle="tab">收益</a>
+                            </li>
+                            <li class="">
+                                <a href="#investment" data-toggle="tab">投资</a>
+                            </li>
+                            <li class="">
+                                <a href="#vote" data-toggle="tab">投票</a>
+                            </li>
+                            <li class="">
+                                <a href="#accounts" data-toggle="tab">转账</a>
+                            </li>
+                            <li class="">
+                                <a href="#apply" data-toggle="tab">演员申请</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="panel-body">
+                            <div class="tab-content">
+                                <!--充值-->
+                                <div class="tab-pane  active" id="recharge">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--提现-->
+                                <div class="tab-pane" id="withdrawals">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped" >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--收益-->
+                                <div class="tab-pane" id="profit">
+
+                                    <!--搜索开始-->
+                                    <form class="form-inline" action="" method="get">
+                                        <div class="form-group">
+                                            <label>累计收益</label>
+                                            <input type="text" class="form-control" disabled  placeholder="">
+                                            <label>今日收益</label>
+                                            <input type="text" class="form-control" disabled  placeholder="">
+                                        </div>
+
+                                    </form>
+
+                                    <!--搜索结束-->
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--投资-->
+                                <div class="tab-pane" id="investment">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--投票-->
+                                <div class="tab-pane" id="vote">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--转账-->
+                                <div class="tab-pane" id="accounts">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--演员申请-->
+                                <div class="tab-pane" id="apply">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($performerInfos)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="performerInfos" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                                    <td style="vertical-align: middle">{$tag.works}</td>
+                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">
+                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="js">
+
+
+</block>
