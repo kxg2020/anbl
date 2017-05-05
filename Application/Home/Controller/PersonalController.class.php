@@ -275,7 +275,7 @@ class PersonalController extends CommonController{
         $collectionCount = ceil(count($collection)/4);
         $collectionList = $this->pagination($collection,1,4);
 
-        $supportMoney = M('MemberSupport')->where(['member_id'=>$this->userInfo['id']])->sum('support_money');
+        $supportMoney = M('MemberSupport')->where(['member_id'=>$this->userInfo['id'],'is_true'=>0])->sum('support_money');
 
 
         //>> 查询提问
@@ -946,6 +946,7 @@ class PersonalController extends CommonController{
 
 
             }else{
+                $rest = M('Member')->where(['id' => $order['member_id']])->save(['all_support_money' => ['exp', 'all_support_money-' . $order['support_money']]]);
                 $re = M('Member')->where(['id' => $order['member_id']])->save(['money' => ['exp', 'money+' . $order['support_money'] * 0.9]]);
 
                 if($re === false){
