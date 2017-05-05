@@ -104,11 +104,9 @@ class MemberController extends  CommonController{
 
         $count = M('Member')->where($where)->order('create_time desc ')->count();
 
-        $page = new Page($count,15);
-
-        $memberList = M('Member')->where($where)->order('create_time desc ')->limit($page->firstRow,$page->listRows)->select();
+        $memberList = M('Member')->where($where)->order('create_time desc ')->select();
         foreach ($memberList as &$info){
-            $info['create_time'] = date('Y-m-d',$info['create_time']);
+            $info['create_time'] = date('Y-m-d H:i:s',$info['create_time']);
         }
         unset($info);
 

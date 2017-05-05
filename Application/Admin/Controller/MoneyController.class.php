@@ -51,6 +51,8 @@ class MoneyController extends CommonController
                     M()->rollback();
                     $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+                // 减掉累计投资额
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['all_support_money' => ['exp', 'all_support_money-' . $info['support_money']]]);
 
                 // 向会员收益表追加一条记录
                 $rest = M('MemberProfit')->add([
@@ -551,6 +553,9 @@ class MoneyController extends CommonController
                     M()->rollback();
                     $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+                // 减掉累计支持额 all_support_money
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['all_support_money' => ['exp', 'all_support_money-' . $money]]);
+
                 // 向会员收益表追加一条记录
                 $rest = M('MemberProfit')->add([
                     'member_id' => $info['member_id'],
@@ -572,6 +577,8 @@ class MoneyController extends CommonController
                     M()->rollback();
                     $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+            }else{
+                dump('项目还未下架，无法返还本金');
             }
         }
         M()->commit();
@@ -690,6 +697,39 @@ class MoneyController extends CommonController
             }
         }
         return $group;
+    }
+
+
+
+    public function mm(){
+        $where = ['project_id'=>'45684156'];
+        // 查询出撸啊撸的订单
+        $supportInfo = M('MemberSupport')
+            ->where($where)
+            ->select();
+        if (!$supportInfo) {
+            exit;
+        }
+
+
+        M()->startTrans();
+        foreach ($supportInfo as $info) {
+            $projectInfo = M('Project')->find($info['project_id']);
+            if (!$projectInfo) {// 项目不存在
+                continue;
+            }
+            // 项目下架自动返还本金
+            if($projectInfo['is_active'] == 0){
+                // 更新会员余额
+                $money = $info['support_money'];
+
+                // 减掉累计支持额 all_support_money
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['all_support_money' => ['exp', 'all_support_money-' . $money]]);
+
+            }else{
+                dump('项目还未下架');
+            }
+        }
     }
 
 

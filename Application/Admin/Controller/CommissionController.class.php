@@ -12,13 +12,16 @@ class CommissionController extends CommonController
             $where = [
                 'is_fy' => 1,//已分佣的订单
             ];
-
+            // 查询出订单信息
             $supportInfo = M('MemberSupport')->where($where)->select();
+           // 遍历订单
             foreach($supportInfo as $info){
+                // 订单投资项目
                 $projectInfo = M('Project')->find($info['project_id']);
                 if (!$projectInfo) {// 项目不存在
                     continue;
                 }
+                // 项目项目下架，目标金额未达到 当前订单所有收益失效
                 if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
                     // 当前订单用户的收益全部失效
