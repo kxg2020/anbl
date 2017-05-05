@@ -163,6 +163,7 @@ class PersonalController extends CommonController{
 
         $paramArr = $_REQUEST;
 
+
        //>> 判断用户是否登录
         if($this->isLogin != 1){
             $this->redirect('Home/Login/index');
@@ -294,7 +295,11 @@ class PersonalController extends CommonController{
         $follower = M('Member')->where(['parent_id'=>$this->userInfo['id']])->select();
 
         //>> 查询充值订单
-        $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
+        $orderLst = M('MemberRecharge as a')->field('a.*,b.name as payname')
+            ->join('left join an_pay as b on a.type = b.id')
+            ->where(['member_id'=>$this->userInfo['id']])
+            ->select();
+
         $count = ceil(count($orderLst)/12);
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
