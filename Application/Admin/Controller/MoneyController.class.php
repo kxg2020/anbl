@@ -572,6 +572,8 @@ class MoneyController extends CommonController
                     M()->rollback();
                     $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+            }else{
+                dump('项目还未下架，无法返还本金');
             }
         }
         M()->commit();

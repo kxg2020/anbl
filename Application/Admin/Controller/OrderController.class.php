@@ -140,6 +140,8 @@ class OrderController extends CommonController
         $name = I('get.project_name','','strip_tags');
         $start_time = strtotime(I('get.start_time'));
         $end_time = strtotime(I('get.end_time'));
+        $type = intval(I('get.type'));
+
         if($order_number){
             $where['a.order_number'] = ['like',"%$order_number%"];
         }
@@ -148,6 +150,9 @@ class OrderController extends CommonController
         }
         if($name){
             $where['b.name'] = ['like',"%$name%"];
+        }
+        if($type){
+            $where['a.type'] = $type;
         }
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
@@ -199,6 +204,7 @@ class OrderController extends CommonController
         $name = I('get.project_name', '', 'strip_tags');
         $start_time = strtotime(I('get.start_time'));
         $end_time = strtotime(I('get.end_time'));
+        $type = intval(I('get.type'));
         if ($order_number) {
             $where['a.order_number'] = ['like', "%$order_number%"];
         }
@@ -207,6 +213,9 @@ class OrderController extends CommonController
         }
         if ($name) {
             $where['b.name'] = ['like', "%$name%"];
+        }
+        if($type){
+            $where['a.type'] = $type;
         }
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
@@ -226,7 +235,13 @@ class OrderController extends CommonController
             ->where($where)
             ->select();
         foreach ($rows as &$info) {
-            $info['create_time'] = date('Y-m-d', $info['create_time']);
+            $info['create_time'] = date('Y-m-d H:i:s', $info['create_time']);
+            if($info['type'] == 1){
+                $info['type'] = "月酬";
+            }else{
+                $info['type'] = "票房";
+            }
+
         }
         unset($info);
 
@@ -234,6 +249,7 @@ class OrderController extends CommonController
             array('id', '编号'),
             array('order_number', '订单号'),
             array('username', '支持用户'),
+            array('type', '投资类型'),
             array('project_name', '支持项目'),
             array('support_money', '支持金额'),
             array('create_time', '支持时间'),

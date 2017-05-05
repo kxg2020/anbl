@@ -94,7 +94,7 @@ $(function(){
 	var marginLeft=0;
 	var maxLeft=0;
 	for (var i = 0; i < $('.news_carousel>div>a').length; i++) {
-		maxLeft=maxLeft+$('.news_carousel>div>a').eq(i).width()
+		maxLeft=maxLeft+$('.news_carousel>div>a').eq(i).width()+30
 	}
 	//console.log(-maxLeft)
 	setInterval(function(){
