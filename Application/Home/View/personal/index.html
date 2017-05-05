@@ -230,14 +230,16 @@
 							<span>充值方式</span>
 							<span style="color: white;">交易号</span>
 							<span style="color: white;">充值阿纳豆</span>
-							<span>交易状态</span></p>
+							<span>交易状态</span>
+							<span>备注</span></p>
 							<div id="ls">
 							<volist name="orderList" id="o">
 								<p><span>{:date('Y-m-d',$o['create_time'])}</span>
 									<span><if condition="$o['type'] eq 1">微信</if><if condition="$o['type'] eq 2">支付宝</if><if condition="$o['type'] eq 3">银行转账</if></span>
 									<span>{$o.order_number}</span>
 									<span>{$o.money}</span>
-									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png"  style="height: auto;width: 40px"></span></p>
+									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png"  style="height: auto;width: 40px"></span>
+									<span>{$o.remark}</span></p>
 							</volist>
 						 </div>
 							<div id="demo6" style="margin-left: 42px;"></div>
