@@ -16,6 +16,78 @@
             <li class="active"> 充值订单 </li>
         </ul>
     </div>
+    <div class="col-md-12">
+        <!--statistics start-->
+        <div class="row state-overview">
+            <div class="col-md-4 col-xs-12 col-sm-6">
+                <div class="panel purple">
+                    <div class="symbol">
+                        <i class="fa fa-gavel"></i>
+                    </div>
+                    <div class="state-value">
+                        <div class="value">{$allRefuseMoney}</div>
+                        <div class="title">累计拒绝充值金额</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-6">
+                <div class="panel purple">
+                    <div class="symbol">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <div class="state-value">
+                        <div class="value">{$allPassMoney}</div>
+                        <div class="title">累计已充值金额</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-6">
+                <div class="panel purple">
+                    <div class="symbol">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <div class="state-value">
+                        <div class="value">{$allNotPassMoney}</div>
+                        <div class="title">累计等待审核金额</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-6">
+                <div class="panel green">
+                    <div class="symbol">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <div class="state-value">
+                        <div class="value">{$toDayPass}</div>
+                        <div class="title">今日已充值金额</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-6">
+                <div class="panel green">
+                    <div class="symbol">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <div class="state-value">
+                        <div class="value">{$toDayRefuse}</div>
+                        <div class="title">今日已拒绝金额</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-6">
+                <div class="panel green">
+                    <div class="symbol">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <div class="state-value">
+                        <div class="value">{$toDayRecharge}</div>
+                        <div class="title">今日等待审核金额</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--statistics end-->
+    </div>
     <!-- page heading end-->
 
     <div class="wrapper">
@@ -70,6 +142,7 @@
                             <input type="hidden" class="form-control" name="money" value="{:I('get.money')}">
                             <input type="hidden" class="form-control" name="start_time" value="{:I('get.start_time')}" >
                             <input type="hidden" class="form-control" name="end_time" value="{:I('get.end_time')}">
+                            <input type="hidden" class="form-control" name="is_pass" value="{:I('get.is_pass')}">
                         </form>
                         <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
                         <script>
@@ -106,7 +179,7 @@
                                     <td style="vertical-align: middle">{$o.id}</td>
                                     <td style="vertical-align: middle">{$o.order_number}</td>
                                     <td style="vertical-align: middle">{$o.username}</td>
-                                    <td style="vertical-align: middle"><if condition="$o['type'] eq 3">个人银联<else />{$o['payname']}</if></td>
+                                    <td style="vertical-align: middle"><if condition="$o['type'] eq 3">公司银联<else />{$o['payname']}</if></td>
                                     <td style="vertical-align: middle">{:date('Y-m-d H:i:s',$o['create_time'])}</td>
                                     <td style="vertical-align: middle">
                                         <if condition="$o['money'] egt 700"><span style="color: red">{$o['money']}</span><else/>
@@ -120,7 +193,10 @@
                                     </td>
                                     <td style="vertical-align: middle"><input type="button" data-id="{$o['id']}" class="btn btn-xs btn-info detail" value="查看"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <if condition="$o['is_pass'] eq 0"><input type="submit" class="btn btn-xs btn-danger refuse" data-oid="{$o['id']}" value="拒绝" data-id="{$o['member_id']}"></if>
+
+
                                         <if condition="$o['is_pass'] eq 1"><a data-href="{:U('admin/Order/removereg', array('id' => $o['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a></if>
+
                                     </td>
                                 </tr>
                                 </volist>
@@ -174,6 +250,7 @@
             layer.prompt({
                 formType: 2,
                 title: '请输入拒绝充值原因',
+                value:'',
             }, function(value, index, elem){
                 $.ajax({
                     'type':'post',

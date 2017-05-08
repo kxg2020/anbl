@@ -504,6 +504,19 @@ class OrderController extends CommonController
             $res = M('MemberRecharge')->where(['id'=>$paramArr['id']])->find();
             $row = M('Member')->where(['id'=>$res['member_id']])->find();
             $res['username'] = $row['username'];
+
+            //>> 判断图片地址是否完整
+            $image_url = $res['image_url'];
+            $subUrl = substr($image_url,0,strpos($image_url,'%')).'%';
+
+            if($subUrl == 'http://oomv52gxr.bkt.clouddn.com/image%'){
+
+                //>> 截取地址
+                $url = substr($image_url,0,strpos($image_url,'%')).'%25'.substr($image_url,strpos($image_url,'%')+1);
+                $res['image_url'] = $url;
+
+            }
+
         }
 
         $this->assign('detail',$res);
@@ -630,11 +643,68 @@ class OrderController extends CommonController
             ->join('left join an_member as b on a.member_id = b.id')
             ->join('left join an_pay as c on c.id=a.type')
             ->limit($page->firstRow, $page->listRows)
+            ->order('create_time desc')
             ->select();
+        $rowes = M('MemberRecharge as a ')->field('a.*,b.username,c.name as payname')
+            ->join('left join an_member as b on a.member_id = b.id')
+            ->join('left join an_pay as c on c.id=a.type')
+            ->limit($page->firstRow, $page->listRows)
+            ->order('create_time desc')
+            ->select();
+
+        $allPassMoney = 0;
+        $allRefuseMoney = 0;
+        $allNotPassMoney = 0;
+        $toDayRecharge = 0;
+        $toDayRefuse = 0;
+        $toDayPass = 0;
+        //>> 对审核通过的和未通过的金额求和
+        foreach ($rowes as $key => $value){
+            switch ($value['is_pass']){
+
+                case 1:
+
+                    $allPassMoney += $value['money'];
+
+                    break;
+
+                case 0:
+
+                    $allRefuseMoney += $value['money'];
+
+                    break;
+                case 2:
+
+                    $allNotPassMoney += $value['money'];
+
+                    break;
+            }
+            if(date('Y-m-d',$value['create_time']) == date('Y-m-d',time()) && $value['is_pass'] == 1){
+
+                $toDayPass += $value['money'];
+            }
+            if(date('Y-m-d',$value['create_time']) == date('Y-m-d',time()) && $value['is_pass'] == 0){
+
+                $toDayRefuse += $value['money'];
+            }
+            if(date('Y-m-d',$value['create_time']) == date('Y-m-d',time()) && $value['is_pass'] == 2){
+
+                $toDayRecharge += $value['money'];
+            }
+        }
+
 
         // 生成分页DOM结构
         $pages = $page->show();
         // 向模板分配分页条
+        $this->assign([
+            'allRefuseMoney'=>$allRefuseMoney,
+            'allPassMoney'=>$allPassMoney,
+            'allNotPassMoney'=>$allNotPassMoney,
+            'toDayPass'=>$toDayPass,
+            'toDayRefuse'=>$toDayRefuse,
+            'toDayRecharge'=>$toDayRecharge
+        ]);
         $this->assign('pages',$pages);
         $this->assign('order',$rows);
         $this->assign('count',$count);
@@ -646,13 +716,14 @@ class OrderController extends CommonController
      */
     public function exportDataRecharge()
     {
-
+        $paramArr = $_REQUEST;
         $where = ['1=1'];
         $order_number = I('get.order_number', '', 'strip_tags');
         $username = I('get.username', '', 'strip_tags');
         $money = I('get.money', '', 'strip_tags');
         $start_time = strtotime(I('get.start_time'));
         $end_time = strtotime(I('get.end_time'));
+        $is_pass = intval(I('get.is_pass'));
         if ($order_number) {
             $where['a.order_number'] = ['like', "%$order_number%"];
         }
@@ -664,6 +735,11 @@ class OrderController extends CommonController
         }
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
+        }
+        if(strlen($paramArr['is_pass'])){
+            if($where['a.is_pass'] == 0){
+                $where['a.is_pass'] =$paramArr['is_pass'];
+            }
         }
         if($start_time && $end_time ){
             $where['a.create_time'] = [
@@ -679,7 +755,16 @@ class OrderController extends CommonController
             ->where($where)
             ->select();
         foreach ($rows as &$info) {
-            $info['create_time'] = date('Y-m-d', $info['create_time']);
+            $info['create_time'] = date('Y-m-d H:i:s', $info['create_time']);
+            if($info['is_pass'] == 0){
+                $info['is_pass'] = "未审核";
+            }
+            if($info['is_pass'] == 1){
+                $info['is_pass'] = "已通过";
+            }
+            if($info['is_pass'] == 2){
+                $info['is_pass'] = "已拒绝";
+            }
         }
         unset($info);
 
@@ -779,7 +864,9 @@ class OrderController extends CommonController
 
             $this->ajaxReturn(['status'=>0]);
         }else{
-            //>> 发短信
+            //>> 发短信,将拒绝的理由保存到数据库
+            M('MemberRecharge')->where(['member_id'=>$member_id,'id'=>$id,'is_pass'=>2])->save(['remark'=>$paramArr['text']]);
+
             sendSMSTemp($user['username'], ('#phone#') . "=" . urlencode($paramArr['text']), $this->systemInfo,1775922);
             $this->ajaxReturn(['status'=>1]);
         }

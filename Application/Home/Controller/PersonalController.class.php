@@ -67,9 +67,10 @@ class PersonalController extends CommonController{
         $paramArr = $_REQUEST;
         //>> 所有收益
         $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
+
         $allGet = $this->pagination($allGet,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($allGet as $key => &$value){
-            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
         }
         unset($value);
         if(IS_AJAX){
@@ -87,7 +88,7 @@ class PersonalController extends CommonController{
             ->select();
         $consume_3 = $this->pagination($consume_3,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($consume_3 as $key => &$value){
-            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
         }
         unset($value);
         if(IS_AJAX){
@@ -101,7 +102,7 @@ class PersonalController extends CommonController{
         $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
         $allConsume = $this->pagination($allConsume,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
         foreach($allConsume as $key => &$value){
-            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
         }
         unset($value);
         if(IS_AJAX){
@@ -121,7 +122,7 @@ class PersonalController extends CommonController{
             foreach($consume_1 as $key => &$value){
                 $value['type'] = '电影支持';
                 $value['money'] = $value['support_money'];
-                $value['create_time'] = date('Y-m-d',$value['create_time']);
+                $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
             }
             unset($value);
         }
@@ -145,7 +146,7 @@ class PersonalController extends CommonController{
         if(isset($consume_2)){
             foreach($consume_2 as $key => &$value){
                 $value['type'] = '演员申请';
-                $value['create_time'] =date('Y-m-d',$value['create_time']);
+                $value['create_time'] =date('Y-m-d H:i:s',$value['create_time']);
             }
             unset($value);
         }
@@ -160,7 +161,9 @@ class PersonalController extends CommonController{
      */
     public function index(){
 
+
         $paramArr = $_REQUEST;
+
 
        //>> 判断用户是否登录
         if($this->isLogin != 1){
@@ -284,6 +287,7 @@ class PersonalController extends CommonController{
         //>> 支付方式
         $weixin = M('Pay')->where(['name'=>'微信'])->find();
         $ali = M('Pay')->where(['name'=>'支付宝'])->find();
+        $yinlian = M('Pay')->where(['name'=>'公司银联'])->select();
 
         //>> 查询招募电影
         $recruit = M('ProjectRecruit')->select();
@@ -292,7 +296,11 @@ class PersonalController extends CommonController{
         $follower = M('Member')->where(['parent_id'=>$this->userInfo['id']])->select();
 
         //>> 查询充值订单
-        $orderLst = M('MemberRecharge')->where(['member_id'=>$this->userInfo['id']])->select();
+        $orderLst = M('MemberRecharge as a')->field('a.*,b.name as payname')
+            ->join('left join an_pay as b on a.type = b.id')
+            ->where(['member_id'=>$this->userInfo['id']])
+            ->select();
+
         $count = ceil(count($orderLst)/12);
 
         if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
@@ -332,6 +340,7 @@ class PersonalController extends CommonController{
         $this->assign([
             'allConsume'=>$allConsume,
             'weixin'=>$weixin,
+            'yinlian'=>$yinlian,
             'ali'=>$ali,
             'films'=>$films,
             'allget'=>$allGet,
@@ -467,6 +476,12 @@ class PersonalController extends CommonController{
                     if($paramArr['money'] > $row['money']){
 
                         die($this->_printError('1052'));
+                    }
+
+                    //>> 提现金额加手续费是否大于余额，如果大于则不能提现
+                    if(($paramArr['money'] + $paramArr['money'] * 0.1) > $row['money']){
+
+                        die($this->_printError('1070'));
                     }
 
                     //>> 判断金额和协议
@@ -1056,6 +1071,7 @@ class PersonalController extends CommonController{
                 $res = M('Member')->where(['username'=>$this->userInfo['username']])->save(['money'=>['exp','money-'.$paramArr['money']]]);
                 $insertDataA = [
                     'member_id'=>$this->userInfo['id'],
+                    'to_username'=>$paramArr['username'],
                     'money'=>$paramArr['money'],
                     'type'=>'转出',
                     'create_time'=>time(),
@@ -1066,6 +1082,7 @@ class PersonalController extends CommonController{
                 $user = M('Member')->where(['username'=>$paramArr['username']])->find();
                 $insertDataB = [
                     'member_id'=>$user['id'],
+                    'from_username'=>$this->userInfo['username'],
                     'type'=>4,
                     'money'=>$paramArr['money'],
                     'create_time'=>time(),

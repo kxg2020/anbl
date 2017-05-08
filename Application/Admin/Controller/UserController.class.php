@@ -122,4 +122,5 @@ class UserController extends CommonController
         // 删除成功直接回到首页
         $this->redirect('admin/user/index');
     }
+
 }

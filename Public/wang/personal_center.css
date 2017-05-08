@@ -707,8 +707,9 @@ header .nav{
 	position: relative;
 }
 .attend_content>div>div{
+	border-radius: 3px;
 	width: 320px;
-	height: 200px;
+	height: 212px;
 	position: relative;
 	float: left;
 	margin-bottom: 20px;
@@ -734,6 +735,7 @@ header .nav{
 	height: 100% !important;
 }
 .attend_content>div>div>div{
+	border-radius: 3px;
 	position: absolute;
 	top: 0;
 	left:0;
@@ -762,7 +764,7 @@ header .nav{
 }
 #cancel_div{
 	width: 690px;
-	height: 420px;
+	height: 450px;
 	background: white;
 	border-radius: 3px;
 	position: absolute;
@@ -839,6 +841,12 @@ header .nav{
 	width: 80%;
 	margin:auto;
 }
+.money_content .put_money{
+	height: 555px;
+	overflow: auto;
+}
+
+
 .money_content>ul .choice{
 	    border-bottom: 1px solid #e50909;
     color: #e50909;
@@ -888,37 +896,31 @@ header .nav{
 	margin-bottom: 30px;
 }
 
-#yinglian{
-	width: 300px;
-	height: 108px;
+.yinglian{
+	width: 230px;
+	height: 88px;
 	background: white;
 	border: 1px solid red;
 	margin-top: 12px;
-	margin-bottom: 25px;
-	margin-left: 100px;
+	margin-left: 10px;
 	border-radius: 5px;
 	position: relative;
 	padding-top: 12px;
+	display: inline-block;
 }
-#yinglian>p{
+.yinglian>p{
 	padding-left: 10px;
 	color: black;
 	font-size: 15px;
 	margin-bottom: 5px;
 }
-#yinglian img{
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	right: 5px;
-	bottom: 5px;
-}
-.put_money>p:nth-child(4) {
+
+.put_money .apply01 {
 	height: 30px;
 	line-height: 30px;
 	margin-bottom: 30px;
 }
-.put_money>p:nth-child(4) input{
+.put_money .apply01 input{
 	border-radius: 3px;
 	border: 1px solid white;
 	background: rgba(255,255,255,0);
@@ -927,7 +929,7 @@ header .nav{
 	color: white;
 	margin-left: 20px;
 }
-.put_money>p:nth-child(5){
+.put_money .recharge001{
 	position: relative;
 }
 .zhuanzhang>div{
@@ -1045,7 +1047,7 @@ margin-top: 25px;
 }
 .money_record span,.money_deal span{
 	display: inline-block;
-	width: 18%;
+	width: 15%;
 	font-size: 14px;
 	text-align: center;
 }

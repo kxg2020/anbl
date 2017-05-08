@@ -68,7 +68,7 @@ $(function(){
             return false;
         }
 
-        var reg_1 = /^\d{19}$/g;
+        var reg_1 = /^\d{10,25}$/g;
 
         if(!reg_1.test(bank_card)){
             layer.open({

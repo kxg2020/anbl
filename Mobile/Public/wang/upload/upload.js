@@ -68,7 +68,7 @@ $(function(){
 
                 }else{
                     layer.open({
-                        content: '充值失败',
+                        content: e.msg,
                         style:'color:black'
                         ,time:2
                     });
