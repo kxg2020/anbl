@@ -680,6 +680,113 @@ $(function(){
         }
     });
 
+    $('#close_search').click(function(){
+        //console.log(13)
+        $('.search_div').hide();
+    });
+
+
+    //我的团队
+    $('.people_top').click(function(){
+    	id = $(this).attr('data-id');
+        var parent = $(this).parent().parent();
+        //console.log(parent.children())
+        for(var i=parent.children().length;i>0;i--){
+            parent.children().eq(i).remove()
+        }
+		$.ajax({
+			'type':'post',
+			'dataType':'json',
+			'url':location.protocol+'//'+window.location.host+'/home/Personal/groupInfo',
+			'data':{'id':id},
+			success:function (e) {
+                //ajax sunccess函数
+                var width=e.length*25+115;
+                if(width>700){
+
+                    var html='<div style="width:'+width+'px">';
+                }
+                else{
+                    var html='<div>';
+                }
+                $.each(e.res,function(v,k){
+                    html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>收益:<span>"+k.sum+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+                })
+                html+'</div>';
+                $('.team_total').append(html)
+            }
+		});
+
+    })
+
+    //下级会员点击的时候
+    $('.team_total').on('click','h3',function(){
+        //获取 id
+        var people_id = $(this).attr('people_id');
+
+        //点击这H3 变色以及div变长
+        if($(this).css("background-color")=='rgb(0, 0, 0)'){
+            var father=$(this).parent().parent();
+            for(var i=0;i<father.children().length;i++){
+                father.children().eq(i).animate({
+                    width:25
+                },'slow');
+                father.children().eq(i).children().eq(4).css({
+                    backgroundColor:'black'
+                })
+            }
+            $(this).parent().animate({
+                width:140
+            },'slow');
+            $(this).css({
+                backgroundColor:'#e50909'
+            })
+            last_id=people_id;
+
+            //移除所有后一级
+            var father = $(this).parent().parent();
+            if(father.next().length!==0){
+                for(var i=father.parent().children().length;i>father.index();i--){
+                    father.parent().children().eq(i).remove()
+                }
+            }
+
+            if(father.index()<3){
+                $.ajax({
+                    'type':'post',
+                    'dataType':'json',
+                    'url':location.protocol+'//'+window.location.host+'/home/Personal/groupInfo',
+                    'data':{'id':people_id},
+                    success:function (e) {
+                    	console.log(e);
+                        //ajax sunccess函数
+                        var width=e.length*25+115;
+                        if(width>700){
+
+                            var html='<div style="width:'+width+'px">';
+                        }
+                        else{
+                            var html='<div>';
+                        }
+                        $.each(e.res,function(v,k){
+                        	console.log(k.realname)
+                            html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>收益:<span>"+k.sum+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+                        })
+                        html+'</div>';
+                        $('.team_total').append(html)
+                    }
+                });
+
+            }
+
+
+
+        }
+    })
+
+
+
+
 	
 
 });

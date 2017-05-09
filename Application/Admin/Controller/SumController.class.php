@@ -19,7 +19,7 @@ class SumController extends CommonController
         if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
             $pgSize = $paramArr['pgSize'];
         }else{
-            $pgSize = 12;
+            $pgSize = 17;
         }
 
         // 查看会员是否存在
@@ -83,27 +83,61 @@ class SumController extends CommonController
 
         //>> 所有收益
         $allGet = M('MemberProfit')->where(['member_id'=>$id])->order('create_time desc')->select();
+
+        foreach ($allGet as &$value){
+
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+        }
+        unset($value);
         $allc = ceil(count($allGet) / 17);
         $allGet = $this->pagination($allGet,$pgNum ? $pgNum: 1,$pgSize ? $pgSize :17);
 
         //>> 转账消费
         $allConsume = M('MemberConsume')->where(['member_id'=>$id,'type'=>'转出'])->select();
+
+        foreach ($allConsume as &$value){
+
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+        }
+        unset($value);
         $allcon = ceil(count($allConsume) / 17);
         $allConsume = $this->pagination($allConsume,$pgNum ? $pgNum : 1,$pgSize ? $pgSize :17);
 
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,a.type as atype,a.float,a.fixed,b.*')
             ->join('left join an_project as b on a.project_id = b.id')
-            ->where(['a.member_id'=>$this->userInfo['id'],'a.is_fh'=>0])
+            ->where(['a.member_id'=>$id,'a.is_fh'=>0])
             ->select();
 
-        $count_1 = ceil(count($rows)/4);
-        $rows = $this->pagination($rows,1,4);
+        foreach ($rows as &$value){
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+        }
+        unset($value);
+
+        $count_1 = ceil(count($rows)/17);
+        $rows = $this->pagination($rows,$pgNum,$pgSize);
+
+
         //>> 查询积分制度表
         $integral = M('IntegralInstitution')->select();
 
         //>> 查询提现
         $tiXian = M('MemberCash')->where(['member_id'=>$id])->select();
+
+        //>> 将时间转换
+        foreach ($tiXian as &$value){
+
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+        }
+
+        unset($value);
+
+        $countTixian = ceil(count($tiXian)/17);
+
+        $tiXian = $this->pagination($tiXian,$pgNum,$pgSize);
+
 
         //>> 取出当前用户的积分
         $crrIntegral = $row['integral'];
@@ -168,20 +202,38 @@ class SumController extends CommonController
             ->where(['a.member_id'=>$id,'a.is_pass'=>1])
             ->select();
 
+        //>> 将时间转换
+        foreach ($orderLst as &$value){
 
-        $count = ceil(count($orderLst)/12);
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+            $value['payname'] = $value['payname'] ? $value['payname'] : '';
+        }
+        unset($value);
 
-        if(isset($paramArr['pgNum']) && !empty($paramArr['pgNum']) && is_numeric($paramArr['pgNum'])){
-            $pgNum = $paramArr['pgNum'];
-        }else{
-            $pgNum = 1;
-        }
-        if(isset($paramArr['pgSize']) && !empty($paramArr['pgSize']) && is_numeric($paramArr['pgSize'])){
-            $pgSize = $paramArr['pgSize'];
-        }else{
-            $pgSize = 12;
-        }
+        $count = ceil(count($orderLst)/17);
+
+
         $orderList = $this->pagination($orderLst,$pgNum,$pgSize);
+
+        if(IS_AJAX){
+
+            $this->ajaxReturn([
+                'count'=>$count,
+                'orderList'=>$orderList,
+                'tixian'=>$tiXian,
+                'allget'=>$allGet,
+                'touzi'=>$rows,
+                'zhuanzhang'=>$allConsume
+            ]);
+        }
+
+        $this->assign([
+            'count_chongzhi'=>$count,
+            'orderList'=>$orderList,
+            'count_tixian'=>$countTixian,
+            'count_touzi'=>$count_1,
+        ]);
+
         //>> 账户安全等级
         $safePercent = [
             '1'=>'35%',
@@ -191,18 +243,6 @@ class SumController extends CommonController
         $safeLevel = $safePercent[$row['safe_level']];
         //>> 组装电话号码
         $secretPhone = substr($row['username'],0,3).'****'.substr($row['username'],7,4);
-        if(IS_AJAX){
-
-            $this->ajaxReturn([
-                'count'=>$count,
-                'orderList'=>$orderList,
-            ]);
-        }
-        $this->assign([
-            'count'=>$count,
-            'orderList'=>$orderList,
-        ]);
-
 
 
         $this->assign([

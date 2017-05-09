@@ -293,7 +293,10 @@ class PersonalController extends CommonController{
         $recruit = M('ProjectRecruit')->select();
 
         //>> 查询我的下级
-        $follower = M('Member')->where(['parent_id'=>$this->userInfo['id']])->select();
+        $follower = M('Member')->where(['parent_id'=>$this->userInfo['id'],'is_true'=>1])->select();
+        //>> 查询我的团队
+        $group = $this->allMembers($this->userInfo['id']);
+
 
         //>> 查询充值订单
         $orderLst = M('MemberRecharge as a')->field('a.*,b.name as payname')
@@ -338,6 +341,7 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'group'=>$group,
             'allConsume'=>$allConsume,
             'weixin'=>$weixin,
             'yinlian'=>$yinlian,
@@ -367,6 +371,35 @@ class PersonalController extends CommonController{
             'secretPhone'=>$secretPhone,
         ]);
         $this->display('personal/index');
+    }
+
+    /**
+     * 查询直推详情
+     */
+    public function groupInfo(){
+
+        $paramArr = $_REQUEST;
+
+
+        $res = M('Member')->where(['parent_id'=>$paramArr['id'],'is_true'=>1])->select();
+
+        foreach ($res as &$value){
+            //>> 所有收益
+            $value['sum'] = M('MemberProfit')->where(['member_id'=>$value['id']])->sum('money');
+            $value['sum'] = $value['sum'] ? $value['sum'] :0;
+
+            //>> 直属下级
+            $value['children'] = M('Member')->where(['parent_id'=>$value['id'],'is_true'=>1])->count();
+            $value['children'] = $value['children'] ? $value['children'] : 0;
+        }
+        unset($value);
+
+        if(!empty($res)){
+
+            $this->ajaxReturn([
+                'res'=>$res
+            ]);
+        }
     }
 
     /**

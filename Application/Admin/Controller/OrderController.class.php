@@ -658,6 +658,7 @@ class OrderController extends CommonController
         $toDayRecharge = 0;
         $toDayRefuse = 0;
         $toDayPass = 0;
+
         //>> 对审核通过的和未通过的金额求和
         foreach ($rowes as $key => $value){
             switch ($value['is_pass']){
@@ -687,11 +688,14 @@ class OrderController extends CommonController
 
                 $toDayRefuse += $value['money'];
             }
-            if(date('Y-m-d',$value['create_time']) == date('Y-m-d',time()) && $value['is_pass'] == 2){
+            if((date('Y-m-d',$value['create_time']) == date('Y-m-d',time())) && ($value['is_pass'] == 2)){
 
                 $toDayRecharge += $value['money'];
             }
+
         }
+
+
 
 
         // 生成分页DOM结构
