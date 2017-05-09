@@ -235,28 +235,28 @@ class PersonalController extends CommonController{
 
         $count_1 = ceil(count($rows)/4);
         $rows = $this->pagination($rows,1,4);
-        //>> 查询积分制度表
-        $integral = M('IntegralInstitution')->select();
-
-        //>> 取出当前用户的积分
-        $crrIntegral = $row['integral'];
-
-        //>> 取出当前用户等级
-        $crrLevel = $row['level'];
-
-        //>> 取出积分表下一个等级对应的积分
-        $allInfo = ['status'=>0,'integral'=>$row['integral']];
-        foreach($integral as $key => $value){
-            if($value['level'] == $crrLevel + 1 ){
-                $expIntegral = $value['integral'];
-                $allInfo['level'] = $value['level'];
-                //>> 算出还需要多少积分
-                $needIntegral = $expIntegral - $crrIntegral;
-                $allInfo['integral'] = $needIntegral;
-                $allInfo['status'] = 1;
-
-            }
-        }
+//        //>> 查询积分制度表
+//        $integral = M('IntegralInstitution')->select();
+//
+//        //>> 取出当前用户的积分
+//        $crrIntegral = $row['integral'];
+//
+//        //>> 取出当前用户等级
+//        $crrLevel = $row['level'];
+//
+//        //>> 取出积分表下一个等级对应的积分
+//        $allInfo = ['status'=>0,'integral'=>$row['integral']];
+//        foreach($integral as $key => $value){
+//            if($value['level'] == $crrLevel + 1 ){
+//                $expIntegral = $value['integral'];
+//                $allInfo['level'] = $value['level'];
+//                //>> 算出还需要多少积分
+//                $needIntegral = $expIntegral - $crrIntegral;
+//                $allInfo['integral'] = $needIntegral;
+//                $allInfo['status'] = 1;
+//
+//            }
+//        }
 
 
        //>> 电影招募演员
@@ -293,7 +293,10 @@ class PersonalController extends CommonController{
         $recruit = M('ProjectRecruit')->select();
 
         //>> 查询我的下级
-        $follower = M('Member')->where(['parent_id'=>$this->userInfo['id']])->select();
+        $follower = M('Member')->where(['parent_id'=>$this->userInfo['id'],'is_true'=>1])->select();
+        //>> 查询我的团队
+        $group = $this->allMembers($this->userInfo['id']);
+
 
         //>> 查询充值订单
         $orderLst = M('MemberRecharge as a')->field('a.*,b.name as payname')
@@ -338,6 +341,7 @@ class PersonalController extends CommonController{
 
 
         $this->assign([
+            'group'=>$group,
             'allConsume'=>$allConsume,
             'weixin'=>$weixin,
             'yinlian'=>$yinlian,
@@ -356,7 +360,7 @@ class PersonalController extends CommonController{
             'consume_2'=>$consume_2,
             'consume_1'=>$consume_1,
             'question'=>$question,
-            'allInfo'=>$allInfo,
+            //'allInfo'=>$allInfo,
             'personal'=>$row,
             'collectionCount'=>$collectionCount,
             'collection'=>$collectionList,
@@ -367,6 +371,53 @@ class PersonalController extends CommonController{
             'secretPhone'=>$secretPhone,
         ]);
         $this->display('personal/index');
+    }
+
+    /**
+     * 查询直推详情
+     */
+    public function groupInfo(){
+
+        $paramArr = $_REQUEST;
+
+
+        $res = M('Member')->where(['parent_id'=>$paramArr['id'],'is_true'=>1])->select();
+
+        foreach ($res as &$value){
+            //>> 所有收益
+            $value['sum'] = M('MemberProfit')->where(['member_id'=>$value['id'],'is_ok'=>1])->sum('money');
+            $value['sum'] = $value['sum'] ? $value['sum'] :0;
+
+            //>> 直属下级
+            $value['children'] = M('Member')->where(['parent_id'=>$value['id'],'is_true'=>1])->count();
+            $value['children'] = $value['children'] ? $value['children'] : 0;
+
+            switch ($value['role']){
+                case 0:
+                    $value['role'] = '暂无';
+                    break;
+                case 1:
+                    $value['role'] = '支持者';
+                    break;
+                case 2:
+                    $value['role'] = '经纪人';
+                    break;
+                case 3:
+                    $value['role'] = '制片人';
+                    break;
+                case 4:
+                    $value['role'] = '出品人';
+                    break;
+            }
+        }
+        unset($value);
+
+        if(!empty($res)){
+
+            $this->ajaxReturn([
+                'res'=>$res
+            ]);
+        }
     }
 
     /**
@@ -478,11 +529,6 @@ class PersonalController extends CommonController{
                         die($this->_printError('1052'));
                     }
 
-                    //>> 提现金额加手续费是否大于余额，如果大于则不能提现
-                    if(($paramArr['money'] + $paramArr['money'] * 0.1) > $row['money']){
-
-                        die($this->_printError('1070'));
-                    }
 
                     //>> 判断金额和协议
                     if($paramArr['money'] <= 700){
@@ -496,7 +542,7 @@ class PersonalController extends CommonController{
 
                     //>> 提取现金，生成订单
                     $updateData = [
-                        'money'=>$row['money'] - $paramArr['money']-$paramArr['money']*0.1,
+                        'money'=>$row['money'] - $paramArr['money'],
                     ];
 
                     M('Member')->startTrans();

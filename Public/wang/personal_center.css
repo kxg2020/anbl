@@ -1310,12 +1310,131 @@ margin-top: 25px;
 } 
 .money_modal{
 	width: 100%;
-	height: 90%;
-
-
-	overflow: auto;
+	height: auto;
 	color: #666;
 	background:#333;
+	position: relative;
+}
+.money_modal>span .search_xiaji{
+	width: 120px;
+	height: 30px;
+	background: rgba(0,0,0,0);
+	border-radius: 3px;
+	font-size: 13px;
+	border: 1px solid white;
+	outline: none;
+	color: white;
+	padding-left: 10px;
+	margin-left: 75px;
+}
+.money_modal>span #search_xiaji{
+	width: 60px;
+	height: 32px;
+	font-size: 16px;
+	background: #e50909;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	color: white;
+	border-radius: 3px; 
+	margin-left: 15px;
+}
+.team_total{
+	width: 100%;
+	height: 570px;
+	position: relative;
+	z-index: 10;
+	margin-top: 25px;
+	overflow: auto;
+}
+.team_total>div{
+	width: auto;
+	height: 100px;
+	text-align: center;
+	margin-bottom: 40px;
+}
+.team_total>div .people_top{
+	width: 200px;
+	height: 50px;
+	color: white;
+	 margin:auto;
+	 text-align: center;
+	 line-height: 50px;
+	 background: #111;
+	 font-size: 18px;
+	 border-radius: 3px;
+	 cursor: pointer;
+}
+.team_total>div>div{
+	overflow: hidden;
+	position: relative;
+	width: 25px;
+	display: inline-block;
+	height: 100px;
+	font-size: 12px;
+	background: white;
+}
+.team_total>div>div:first-child {
+	border-radius: 3px 0 0 3px;
+}
+.team_total>div>div:last-child {
+	border-radius: 0 3px 3px 0;
+}
+.team_total>div>div>p{
+	text-align: left;
+	margin-bottom: 8px;
+}
+.team_total>div>div>p span{
+	color: #e50909;
+}
+.team_total>div>div>h3{
+	position: absolute;
+	top:0; right: 0;
+	width: 25px;
+	height: 95px;
+	background: black;
+	color: white;
+	padding-top: 5px;
+	word-wrap:break-word;
+	cursor: pointer;
+}
+.search_div{
+	width: 700px;
+	height: 560px;
+	position: absolute;
+	z-index: 100;
+	top:40px; left: 0;
+	background: white;
+}
+.search_div h3{
+	font-size: 25px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+.search_div div{
+	width: 150px;
+	height: auto;
+	margin: auto;
+}
+.search_div div p{
+	margin-bottom: 10px;
+}
+.search_div div p span{
+	color: #e50909;
+}
+#close_search{
+	width: 120px;
+	height: 30px;
+	border-radius: 3px;
+	border: none;outline: none;
+	background: #e50909;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+	position: absolute;
+	left: 50%;
+	margin-left: -60px;
+	bottom: 10px;
 }
 .close_modal{
 	width: 100%;

@@ -189,7 +189,7 @@ class CommonController extends Controller{
      */
     private function group($id){
 
-        $res = M('Member')->where(['parent_id'=>$id])->select();
+        $res = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
 
         if(!empty($res)){
 
@@ -203,7 +203,7 @@ class CommonController extends Controller{
     private function allMembers($id){
 
         static $sum = 0;
-        $rows = M('Member')->where(['parent_id'=>$id])->select();
+        $rows = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
         if(!empty($rows)){
             $count = count($rows);
             $sum += $count;

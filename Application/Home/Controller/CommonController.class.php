@@ -105,6 +105,7 @@ class CommonController extends Controller{
                 //>> 团队一共多少人
                 $all = $this->allMembers($row['id']);
 
+
                 //>> 多少经纪人
                 $jingji = $this->getJingJiRen($row['id']);
 
@@ -158,11 +159,11 @@ class CommonController extends Controller{
 
 
     /**
-     * 查询直推
+     * 查询直推人数
      */
     private function group($id){
 
-        $res = M('Member')->where(['parent_id'=>$id])->select();
+        $res = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
 
         if(!empty($res)){
 
@@ -170,21 +171,25 @@ class CommonController extends Controller{
         }
     }
 
+
     /**
      * 团队(1.直推一部分，然后下线发展一部分。2.直推一人，再下线发展)
      */
-    private function allMembers($id){
+    protected function allMembers($id){
 
         static $sum = 0;
-        $rows = M('Member')->where(['parent_id'=>$id])->select();
+        $rows = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+
         if(!empty($rows)){
+
             $count = count($rows);
             $sum += $count;
+
             foreach($rows as $k => $v){
                 $this->allMembers($v['id']);
             }
         }
-        return $sum;
+        return ($sum / 2);
     }
 
     /**

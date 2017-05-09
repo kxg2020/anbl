@@ -1,6 +1,6 @@
 <extend name="public:tpl" />
 <block name="css">
-
+    <link href="__CSS__/layui.css" rel="stylesheet">
 </block>
 <block name="main">
     <!-- page heading start-->
@@ -48,19 +48,9 @@
                     </header>
                     <div class="panel-body">
                             <div class="tab-content">
-                                <!--搜索开始-->
-                                <form class="form-inline" action="" method="get">
-                                    <div class="form-group">
-                                        <label>累计充值</label>
-                                        <input type="text" class="form-control" disabled  placeholder="" value="200">
-                                        <label>今日充值</label>
-                                        <input type="text" class="form-control" disabled  placeholder="" value="100">
-                                    </div>
-
-                                </form>
 
                                 <!--搜索结束-->
-                                <hr/>
+
                                 <!--充值-->
                                 <div class="tab-pane  active" id="recharge">
                                     <hr/>
@@ -75,7 +65,7 @@
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="tbody_1">
                                             <if condition="empty(orderList)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
@@ -87,13 +77,16 @@
                                                     <td style="vertical-align: middle">{$tag.money}</td>
                                                     <td style="vertical-align: middle">{$tag.payname}</td>
                                                     <td style="vertical-align: middle"><span class="label label-success">充值成功</span></td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d H:i:s',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
                                             </tbody>
                                         </table>
                                         {$pages}
                                     </div>
+                                    <input type="hidden" value="{$count_chongzhi}" name="count_chongzhi">
+                                    <input type="hidden" value="{:I('get.id')}" name="member_id">
+                                    <div id="demo1"></div>
 
                                 </div>
                                 <!--提现-->
@@ -111,7 +104,7 @@
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="tbody_2">
                                             <if condition="empty($tixian)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
@@ -123,72 +116,53 @@
                                                     <td style="vertical-align: middle">{$tag.money}</td>
                                                     <td style="vertical-align: middle">{$tag.charge}</td>
                                                     <td style="vertical-align: middle">{$tag['money'] - $tag['charge']}</td>
-                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0">拒绝<elseif condition="$tag.is_pass eq 2">未审核<elseif condition="$tag.is_pass eq 1"/>通过 </if></td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0">拒绝<elseif condition="$tag.is_pass eq 2"/>未审核<elseif condition="$tag.is_pass eq 1"/>通过 </if></td>
                                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                                    <td style="vertical-align: middle">
-                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                                    </td>
                                                 </tr>
                                             </volist>
                                             </tbody>
                                         </table>
-                                        {$pages}
+                                        <input type="hidden" value="{$count_tixian}" name="count_tixian">
+                                        <div id="demo2"></div>
                                     </div>
 
                                 </div>
                                 <!--收益-->
                                 <div class="tab-pane" id="profit">
-
-                                    <!--搜索开始-->
-                                    <form class="form-inline" action="" method="get">
-                                        <div class="form-group">
-                                            <label>累计收益</label>
-                                            <input type="text" class="form-control" disabled  placeholder="">
-                                            <label>今日收益</label>
-                                            <input type="text" class="form-control" disabled  placeholder="">
-                                        </div>
-
-                                    </form>
-
-                                    <!--搜索结束-->
-                                    <hr/>
+                                    <hr>
                                     <div class="adv-table text-center">
                                         <table  class="display table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th class="text-center">会员</th>
+                                                <th class="text-center">编号</th>
                                                 <th class="text-center">阿纳豆</th>
                                                 <th class="text-center">类型</th>
-                                                <th class="text-center">状态</th>
                                                 <th class="text-center">备注</th>
+                                                <th class="text-center">状态</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <if condition="empty($performerInfos)">
+                                            <tbody id="tbody_3">
+                                            <if condition="empty($allget)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
                                                 </tr>
                                             </if>
-                                            <volist name="performerInfos" id="tag">
+                                            <volist name="allget" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.name}</td>
-                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
-                                                    <td style="vertical-align: middle">{$tag.type}</td>
-                                                    <td style="vertical-align: middle">{$tag.works}</td>
-                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">分红<elseif condition="$tag['type'] eq 2"/>分佣<elseif condition="$tag['type'] eq 4"/>转账 </if></td>
+                                                    <td style="vertical-align: middle">{$tag.remark}</td>
+                                                    <td style="vertical-align: middle">{$tag.is_ok}</td>
                                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                                    <td style="vertical-align: middle">
-                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                                    </td>
+
                                                 </tr>
                                             </volist>
                                             </tbody>
                                         </table>
-                                        {$pages}
+                                        <input type="hidden" name="allc" value="{$allc}">
+                                        <div id="demo3"></div>
                                     </div>
 
                                 </div>
@@ -199,38 +173,32 @@
                                         <table  class="display table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th class="text-center">会员</th>
+                                                <th class="text-center">编号</th>
                                                 <th class="text-center">阿纳豆</th>
                                                 <th class="text-center">类型</th>
-                                                <th class="text-center">状态</th>
-                                                <th class="text-center">备注</th>
+                                                <th class="text-center">电影名</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <if condition="empty($performerInfos)">
+                                            <tbody id="tbody_4">
+                                            <if condition="empty($consume_1)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
                                                 </tr>
                                             </if>
-                                            <volist name="performerInfos" id="tag">
+                                            <volist name="supportSituation" id="tag">
                                                 <tr class="gradeX">
-                                                    <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.name}</td>
-                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
-                                                    <td style="vertical-align: middle">{$tag.type}</td>
-                                                    <td style="vertical-align: middle">{$tag.works}</td>
-                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                                    <td style="vertical-align: middle">
-                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                                    </td>
+                                                    <td style="vertical-align: middle">{$tag.aid}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">电影支持</td>
+                                                    <td style="vertical-align: middle">{$tag.cname}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
                                             </tbody>
                                         </table>
-                                        {$pages}
+                                        <input type="hidden" name="count_touzi" value="{$count_touzi}">
+                                        <div id="demo4"></div>
                                     </div>
 
                                 </div>
@@ -241,33 +209,25 @@
                                         <table  class="display table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th class="text-center">会员</th>
+                                                <th class="text-center">编号</th>
                                                 <th class="text-center">阿纳豆</th>
                                                 <th class="text-center">类型</th>
-                                                <th class="text-center">状态</th>
-                                                <th class="text-center">备注</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <if condition="empty($performerInfos)">
+                                            <if condition="empty($consume_3)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
                                                 </tr>
                                             </if>
-                                            <volist name="performerInfos" id="tag">
+                                            <volist name="consume_3" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.name}</td>
-                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
-                                                    <td style="vertical-align: middle">{$tag.type}</td>
-                                                    <td style="vertical-align: middle">{$tag.works}</td>
-                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">投票</td>
                                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                                    <td style="vertical-align: middle">
-                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                                    </td>
+
                                                 </tr>
                                             </volist>
                                             </tbody>
@@ -283,38 +243,32 @@
                                         <table  class="display table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th class="text-center">会员</th>
+                                                <th class="text-center">编号</th>
                                                 <th class="text-center">阿纳豆</th>
                                                 <th class="text-center">类型</th>
-                                                <th class="text-center">状态</th>
-                                                <th class="text-center">备注</th>
+                                                <th class="text-center">转出账户</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <if condition="empty($performerInfos)">
+                                            <tbody id="tbody_5">
+                                            <if condition="empty($allConsume)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
                                                 </tr>
                                             </if>
-                                            <volist name="performerInfos" id="tag">
+                                            <volist name="allConsume" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.name}</td>
-                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
-                                                    <td style="vertical-align: middle">{$tag.type}</td>
-                                                    <td style="vertical-align: middle">{$tag.works}</td>
-                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">转账</td>
+                                                    <td style="vertical-align: middle">{$tag['to_username']}</td>
                                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                                    <td style="vertical-align: middle">
-                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                                    </td>
                                                 </tr>
                                             </volist>
                                             </tbody>
                                         </table>
-                                        {$pages}
+                                        <input type="hidden" name="allcon" value="{$allcon}">
+                                        <div id="demo5"></div>
                                     </div>
 
                                 </div>
@@ -325,33 +279,24 @@
                                         <table  class="display table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th class="text-center">会员</th>
+                                                <th class="text-center">编号</th>
                                                 <th class="text-center">阿纳豆</th>
                                                 <th class="text-center">类型</th>
-                                                <th class="text-center">状态</th>
-                                                <th class="text-center">备注</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <if condition="empty($performerInfos)">
+                                            <if condition="empty($consume_2)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
                                                 </tr>
                                             </if>
-                                            <volist name="performerInfos" id="tag">
+                                            <volist name="consume_2" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.name}</td>
-                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
-                                                    <td style="vertical-align: middle">{$tag.type}</td>
-                                                    <td style="vertical-align: middle">{$tag.works}</td>
-                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">演员申请</td>
                                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
-                                                    <td style="vertical-align: middle">
-                                                        <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
-                                                        <a data-href="{:U('admin/works/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
-                                                    </td>
                                                 </tr>
                                             </volist>
                                             </tbody>
@@ -368,6 +313,189 @@
     </section>
 </block>
 <block name="js">
+    <script src="__JS__/layer/layui.js"></script>
+    <script src="__JS__/layer/laypage.js"></script>
+    <script>
+        $(function(){
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo1'
+                    ,pages: $('input[name = count_chongzhi]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
 
+                                },
+                                success:function(result){
+                                    $('#tbody_1').html('');
+                                    $.each(result.orderList,function (k,v) {
+                                        $('#tbody_1').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                       '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                       ' <td style="vertical-align: middle">'+v.payname+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.is_pass+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                        '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo2'
+                    ,pages: $('input[name = count_tixian]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_2').html('');
+                                    $.each(result.tixian,function (k,v) {
+                                        $('#tbody_2').append('  <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                            '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.is_pass+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                            '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo3'
+                    ,pages: $('input[name = allc]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_3').html('');
+                                    $.each(result.allget,function (k,v) {
+                                        $('#tbody_3').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                       '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                        '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                        '<td style="vertical-align: middle">'+v.remark+'</td>'+
+                                        '<td style="vertical-align: middle">'+v.is_ok+'</td>'+
+                                       '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+
+                                        '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo4'
+                    ,pages: $('input[name = count_touzi]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_4').html('');
+                                    $.each(result.touzi,function (k,v) {
+                                        $('#tbody_4').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.aid+'</td>'+
+                                        '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                        '<td style="vertical-align: middle">电影支持</td>'+
+                                           ' <td style="vertical-align: middle">'+v.name+'</td>'+
+                                       ' <td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                        '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo5'
+                    ,pages: $('input[name = allcon]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_5').html('');
+                                    $.each(result.zhuanzhang,function (k,v) {
+                                        $('#tbody_5').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                            '<td style="vertical-align: middle">转账</td>'+
+                                            ' <td style="vertical-align: middle">'+v.to_username+'</td>'+
+                                            ' <td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                            '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
 </block>
