@@ -17,10 +17,11 @@
 		<div>
 		 <div>
 			<p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
-
+<!--
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			Lv{$personal['level']}:{$personal['money']}阿纳豆
 			</if></div>
+			-->
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
 			<div class="money"><p>已支持阿纳豆: <span>{$supportMoney}</span></p><p>剩余阿纳豆: <span>{$personal['money']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>

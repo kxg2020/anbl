@@ -684,6 +684,10 @@ $(function(){
         //console.log(13)
         $('.search_div').hide();
     });
+    $('#search_xiaji').click(function(){
+        //console.log(13)
+        $('.search_div').show();
+    });
 
 
     //我的团队
@@ -710,7 +714,7 @@ $(function(){
                     var html='<div>';
                 }
                 $.each(e.res,function(v,k){
-                    html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>收益:<span>"+k.sum+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+                    html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
                 })
                 html+'</div>';
                 $('.team_total').append(html)
@@ -770,7 +774,7 @@ $(function(){
                         }
                         $.each(e.res,function(v,k){
                         	console.log(k.realname)
-                            html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>收益:<span>"+k.sum+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+                            html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
                         })
                         html+'</div>';
                         $('.team_total').append(html)
