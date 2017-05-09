@@ -16,7 +16,7 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			<p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv">{:getUserLevelsName($personal['role'])}</span></p>
+			 <p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv" <if condition="$personal['role'] eq 1">style="color:#4693EC"<elseif condition="$personal['role'] eq 2"/>style="color:purple"<elseif condition="$personal['role'] eq 3"/>style="color:#ff005a"<elseif condition="$personal['role'] eq 4"/>style="color:#fff38e"</if> >{:getUserLevelsName($personal['role'])}</span></p>
 <!--
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			Lv{$personal['level']}:{$personal['money']}阿纳豆
@@ -544,7 +544,7 @@
 									<th>时间</th>
 									<th>阿纳豆</th>
 									<th>类型</th>
-								</tr>								
+								</tr>
 							</thead>
 							<tbody id="tbody_2">
 							<volist name="consume_3" id="al">
@@ -568,7 +568,8 @@
 									<th>时间</th>
 									<th>阿纳豆</th>
 									<th>类型</th>
-								</tr>								
+									<th>转出账户</th>
+								</tr>
 							</thead>
 							<tbody id="tbody_3">
 							<volist name="allConsume" id="al">
@@ -576,6 +577,7 @@
 									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
 									<td >-{$al.money}</td>
 									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
+									<td >{$al['to_username']}</td>
 								</tr>
 							</volist>
 							</tbody>
@@ -591,7 +593,8 @@
 									<th>时间</th>
 									<th>阿纳豆</th>
 									<th>类型</th>
-								</tr>								
+									<th>支持影片</th>
+								</tr>
 							</thead>
 							<tbody id="tbody_4">
 
@@ -601,6 +604,7 @@
 									<td>{:date('Y-m-d H:i:s',$c['create_time'])}</td>
 									<td>-{$c.money}</td>
 									<td>{$c.type}</td>
+									<td>{$c.cname}</td>
 								</tr>
 							</volist>
 
@@ -617,7 +621,8 @@
 									<th>时间</th>
 									<th>阿纳豆</th>
 									<th>类型</th>
-								</tr>								
+									<th>申请影片</th>
+								</tr>
 							</thead>
 							<tbody id="tbody_5">
 							<volist name="consume_2" id="c">
@@ -1222,7 +1227,7 @@
 						// 获取图片列表
 						$('#images').val(path);
 						$('#container1').html('');
-						$('#container1').html('<div style="padding-left: 94px;margin-top: 10px; width: auto;height: 200px;"><img src="'+path+'" alt=""></div>');
+						$('#container1').html('<div style=" width: 100%;height: 200px;"><img src="'+path+'" alt=""></div>');
 						if (_isMax == false) {
 							layer.msg('上传成功', {time: 1000})
 
