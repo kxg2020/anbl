@@ -42,10 +42,10 @@ class MoneyController extends CommonController
             }
             M()->startTrans();
             // 静态分红
-            foreach ($supportInfo as &$info) {
+            foreach ($supportInfo as $info) {
 
-                // 更新会员余额
-                $money = $info['support_money'] + $info['support_money'] * ($projectInfo['float_rate'] / 100);
+                // 返还本金
+                $money = $info['support_money'];
                 $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
                 if ($rest === false) {
                     M()->rollback();
@@ -59,12 +59,35 @@ class MoneyController extends CommonController
                     'create_time' => time(),
                     'type' => 1,
                     'is_ok' => 1,
-                    'remark' => $projectInfo['name'] . "影片本金返还及浮动分红",
+                    'remark' => $projectInfo['name'] . "影片本金返还",
                 ]);
                 if ($rest === false) {
                     M()->rollback();
                     $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+
+                // 产生票房收益
+                $money1 = $info['support_money'] * ($projectInfo['float_rate'] / 100);
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['profit' => ['exp', 'profit+' . $money1]]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+
+                // 向会员收益表追加一条记录
+                $rest = M('MemberProfit')->add([
+                    'member_id' => $info['member_id'],
+                    'money' => $money1,
+                    'create_time' => time(),
+                    'type' => 1,
+                    'is_ok' => 1,
+                    'remark' => $projectInfo['name'] . "影片票房分红",
+                ]);
+                if ($rest === false) {
+                    M()->rollback();
+                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                }
+
                 // 修改订单状态
                 $rest = M('MemberSupport')
                     ->where(['id' => $info['id']])
@@ -288,7 +311,7 @@ class MoneyController extends CommonController
         }
         // 更新会员余额
         $money = $commission;
-        $rest = M('Member')->where(['id' => $parent['id']])->save(['money' => ['exp', 'money+' . $money]]);
+        $rest = M('Member')->where(['id' => $parent['id']])->save(['commission' => ['exp', 'commission+' . $money]]);
         if ($rest === false) {
             M()->rollback();
             $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
@@ -331,14 +354,95 @@ class MoneyController extends CommonController
             // 判断项目在线在线状态 在线就可以进行分红  不在线查看 目标金额是否达到 未达到 则分红失败
             if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
-                // 当前订单用户的收益全部失效
-                $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
-                foreach ($profits as $profit) {
-                    // 修改收益状态
-                    $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
-                    // 扣除用户余额
-                    $money = $profit['money'];
-                    $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+                // 当前订单用户的分红收益全部失效
+                $profits = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>1])->select();
+                // 统计要扣除的收益
+                $memberInfo = M('Member')->where(['id' => $info['member_id']])->find();
+
+                // 统计收益共计金额
+                $count = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>1])->sum('money');
+
+                // 当前钱包收益余额
+                $profitMoney = $memberInfo['profit'];
+
+                if($profitMoney>$count){// 够扣，直接减去
+                    $money = $info['support_money'];
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "本金返还失败", 'status' => 0]);
+                    }
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' => $info['member_id'],
+                        'money' => $money,
+                        'create_time' => time(),
+                        'type' => 1,
+                        'remark' => $projectInfo['name'] . "影片本金返还",
+                    ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    foreach ($profits as $profit) {
+                        // 修改收益状态
+                        $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
+                        // 扣除用户收益余额
+                        $money = $profit['money'];
+                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['profit' => ['exp', 'profit-' . $money]]);
+                    }
+                }else{// 钱包不够扣 从本金中扣除 后返回剩余本金
+
+                     // 返还本金
+                    $money = $info['support_money'];
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' => $info['member_id'],
+                        'money' => $money,
+                        'create_time' => time(),
+                        'type' => 1,
+                        'remark' => $projectInfo['name'] . "影片本金返还",
+                    ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    // 减去收益  从本金从补差
+                    $bucha = $count-$profitMoney;
+
+                    // 生成补差记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' => $info['member_id'],
+                        'money' => $bucha,
+                        'create_time' => time(),
+                        'type' => 4,
+                        'is_ok' => 0,
+                        'remark' => $projectInfo['name'] . "收益失效补差",
+                    ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money-' . $bucha]]);// 减去余额钱包
+
+                    foreach ($profits as $profit) {
+                        // 修改收益状态
+                        $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
+                        // 扣除用户收益钱包
+                        $money = $profit['money'];
+                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['profit' => ['exp', 'profit-' . $money]]);
+
+                    }
                 }
                 // 修改订单状态
                 $rest = M('MemberSupport')
@@ -346,7 +450,8 @@ class MoneyController extends CommonController
                     ->save([
                         'fixed' => 0,//每天的收益
                         'is_fh' => 2,//失效订单
-                        'is_fy' => 2,//失效订单
+                      //  'is_fy' => 2,//失效订单
+                        'is_true' => 1,//本金已返还
                     ]);
                 if ($rest === false) {
                     M()->rollback();
@@ -355,7 +460,6 @@ class MoneyController extends CommonController
                 continue;
             }
         }
-
 
 
         // 未分红的订单 进行分红
@@ -379,18 +483,99 @@ class MoneyController extends CommonController
                 continue;
             }
 
-
             // 判断项目在线在线状态 在线就可以进行分红  不在线查看 目标金额是否达到 未达到 则分红失败
             if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
                 // 当前订单用户的收益全部失效
-                $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
-                foreach ($profits as $profit) {
-                    // 修改收益状态
-                    $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
-                    // 扣除用户余额
-                    $money = $profit['money'];
-                    $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+                $profits = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>1])->select();
+                // 统计要扣除的收益
+                $memberInfo = M('Member')->where(['id' => $info['member_id']])->find();
+
+                // 统计收益共计金额
+                $count = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>1])->sum('money');
+
+
+                // 当前钱包收益余额
+                $profitMoney = $memberInfo['profit'];
+
+
+                if($profitMoney>=$count){// 够扣，直接减去
+
+                    $money = $info['support_money'];
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' => $info['member_id'],
+                        'money' => $money,
+                        'create_time' => time(),
+                        'type' => 1,
+                        'remark' => $projectInfo['name'] . "影片本金返还",
+                    ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    foreach ($profits as $profit) {
+                        // 修改收益状态
+                        $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
+                        // 扣除用户余额
+                        $money = $profit['money'];
+                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['profit' => ['exp', 'profit-' . $money]]);
+                    }
+                }else{// 钱包不够扣 从本金中扣除 后返回剩余本金
+
+                    // 返还本金
+                    $money = $info['support_money'];
+
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    // 向会员收益表追加一条记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' => $info['member_id'],
+                        'money' => $money,
+                        'create_time' => time(),
+                        'type' => 1,
+                        'remark' => $projectInfo['name'] . "影片本金返还",
+                    ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    // 减去收益  从本金从补差
+                    $bucha = $count-$profitMoney;
+
+                    // 生成补差记录
+                    $rest = M('MemberProfit')->add([
+                        'member_id' => $info['member_id'],
+                        'money' => $bucha,
+                        'create_time' => time(),
+                        'type' => 4,
+                        'is_ok' => 0,
+                        'remark' => $projectInfo['name'] . "收益失效补差",
+                    ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                    }
+
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money-' . $bucha]]);// 减去余额钱包
+
+                    foreach ($profits as $profit) {
+                        // 修改收益状态
+                        $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
+                    }
+                    $rest = M('Member')->where(['id' => $info['member_id']])->save(['profit' => ['exp', 'profit-' . $profitMoney]]);
                 }
                 // 修改订单状态
                 $rest = M('MemberSupport')
@@ -398,7 +583,8 @@ class MoneyController extends CommonController
                     ->save([
                         'fixed' => 0,//每天的收益
                         'is_fh' => 2,//失效订单
-                        'is_fy' => 2,//失效订单
+                     //   'is_fy' => 2,//失效订单
+                        'is_true' => 1,//本金已返还
                     ]);
                 if ($rest === false) {
                     M()->rollback();
@@ -462,8 +648,8 @@ class MoneyController extends CommonController
                     M()->rollback();
                     exit;
                 }
-                // 更新用户余额
-                $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                // 更新用户收益余额
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['profit' => ['exp', 'profit+' . $money]]);
                 if ($rest === false) {
                     M()->rollback();
                     exit;
@@ -496,7 +682,7 @@ class MoneyController extends CommonController
                     M()->rollback();
                     exit;
                 }
-                $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $money]]);
+                $rest = M('Member')->where(['id' => $info['member_id']])->save(['profit' => ['exp', 'profit+' . $money]]);
                 if ($rest === false) {
                     M()->rollback();
                     exit;
@@ -542,7 +728,7 @@ class MoneyController extends CommonController
                 continue;
             }
             // 项目下架自动返还本金
-            if($projectInfo['is_active'] == 0){
+            if($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 1){
 
                 // 更新会员余额
                 $money = $info['support_money'];

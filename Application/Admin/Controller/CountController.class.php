@@ -132,10 +132,28 @@ class CountController extends CommonController
         $bmoney = M('MemberCash')->where(array_merge($where,['is_pass'=>1]))->sum('money');
         $this->assign('bmoney',$bmoney);
         //统计会员分红金额
-        $cmoney = M('MemberProfit')->where(array_merge($where,['type'=>1]))->sum('money');
+        $cmoneyInfo = M('MemberProfit')->where(array_merge($where,['type'=>1],['is_ok'=>1]))->select();
+        $cmoney = 0;
+        if($cmoneyInfo){
+            foreach($cmoneyInfo as $info){
+                if(!empty($info['support_id'])){
+                    $cmoney+=$info['money'];
+                }
+            }
+        }
+
         $this->assign('cmoney',$cmoney);
         //统计会员分佣金额
-        $dmoney = M('MemberProfit')->where(array_merge($where,['type'=>2]))->sum('money');
+        $dmoneyInfo = M('MemberProfit')->where(array_merge($where,['type'=>2],['is_ok'=>1]))->select();
+        $dmoney = 0;
+        if($dmoneyInfo){
+            foreach($dmoneyInfo as $info){
+                if(!empty($info['support_id'])){
+                    $dmoney+=$info['money'];
+                }
+            }
+        }
+
         $this->assign('dmoney',$dmoney);
 
         $this->display('count/finance');

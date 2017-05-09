@@ -112,7 +112,7 @@ class AccountController extends CommonController{
         $collectionCount = ceil(count($collection)/4);
         $collectionList = $this->pagination($collection,1,4);
 
-        $supportMoney = M('MemberSupport')->where(['member_id'=>$this->userInfo['id']])->sum('support_money');
+        $supportMoney = M('MemberSupport')->where(['member_id'=>$this->userInfo['id'],'is_true'=>0])->sum('support_money');
 
 
         //>> 查询提问
