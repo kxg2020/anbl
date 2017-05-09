@@ -376,18 +376,18 @@ $(function(){
 		var path = $('#images').val();
 		var type = $('.apply_style_choice').attr('data-id');
 		if(path.length == 0){
-			layer.msg('请上传凭证!');
+			layer.tips('请上传凭证','#file_upload');
 			return false;
 		}
 		if(money == ''){
 
-			layer.tips('充值阿纳豆不能为空!','input[name = rechargeMoney]');
+			layer.tips('充值阿纳豆不能为空','input[name = rechargeMoney]');
 		}else{
 			//>> 判断是否是数字
 			var isNum = /^[0-9]*$/;
 			if(!isNum.test(money)){
 
-				layer.tips('请输入正确的数字!','input[name = rechargeMoney]');
+				layer.tips('请输入正确的数字','input[name = rechargeMoney]');
 			}else{
 				var chargeUrl = location.protocol+'//'+window.location.host+'/Home/Recharge/recharge';
 				$.ajax({

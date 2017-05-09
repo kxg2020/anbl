@@ -842,8 +842,9 @@ header .nav{
 	margin:auto;
 }
 .money_content .put_money{
-	height: 555px;
-	overflow: auto;
+	height: 518px;
+
+	position: relative;
 }
 
 
@@ -973,7 +974,7 @@ header .nav{
 } 
 #put_btn{
 	border-radius: 3px;
-  width: 100px;
+  width: 52px;
 height: 30px;
 text-align: center;
 line-height: 30px;
@@ -981,7 +982,15 @@ background: #e50909;
 color: white;
 cursor: pointer;
 margin-left: 94px;
-margin-top: 25px;
+	position: absolute;
+	left: 0;
+	bottom: -30px;
+}
+#container1{
+	width: 200px;
+	height:200px;
+	position: absolute;
+	left:320px; bottom: 0;
 }
 .money_file{
 	position: absolute;

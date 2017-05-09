@@ -175,10 +175,12 @@ class PersonalController extends CommonController{
 
         //>> 查询消费情况(支持)
 
-        $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number')
+        $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number,c.name as cname')
             ->join('inner join an_member_support as b on a.id = b.member_id')
+            ->join('inner join an_project as c on b.project_id = c.id')
             ->where(['a.id'=>$this->userInfo['id']])
             ->select();
+
        if(!empty($consume_1)){
            foreach($consume_1 as $key => &$value){
                $value['type'] = '电影支持';
@@ -210,6 +212,7 @@ class PersonalController extends CommonController{
             ->join('inner join an_member_consume as b on a.id = b.member_id')
             ->where(['a.id'=>$this->userInfo['id'],'b.type'=>'投票'])
             ->select();
+
         $consume_count = ceil(count($consume_3) / 17);
         $consume_3 = $this->pagination($consume_3,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
 
@@ -226,6 +229,8 @@ class PersonalController extends CommonController{
         $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
         $allcon = ceil(count($allConsume) / 17);
         $allConsume = $this->pagination($allConsume,$paramArr['pgNum'] ? $paramArr['pgNum'] : 1,$paramArr['pgSize'] ? $paramArr['pgSize'] :17);
+
+
 
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,a.type as atype,a.float,a.fixed,b.*')
