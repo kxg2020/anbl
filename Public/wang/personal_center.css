@@ -653,6 +653,15 @@ header .nav{
 #bind_bank option{
 	background: #333;
 }
+#city_choice select{
+	height: 32px;
+	background: rgba(0,0,0,0);
+	color: white;
+	border-radius: 3px;
+}
+#city_choice select option{
+	background: #333;
+}
 .bind_bankcard i{
 	width: 18px;
 	height: 14px;
@@ -1408,6 +1417,7 @@ margin-left: 94px;
 	cursor: pointer;
 }
 .search_div{
+	border-radius: 3px;
 	width: 700px;
 	height: 560px;
 	position: absolute;
@@ -1418,12 +1428,14 @@ margin-left: 94px;
 .search_div h3{
 	font-size: 25px;
 	text-align: center;
-	margin-bottom: 15px;
+	margin-bottom: 100px;
+	margin-top: 20px;
 }
 .search_div div{
 	width: 150px;
 	height: auto;
 	margin: auto;
+	font-size: 20px;
 }
 .search_div div p{
 	margin-bottom: 10px;
@@ -1568,7 +1580,7 @@ margin-left: 94px;
 	font-size: 20px;
 }
 .money_modal>span{
-	font-size: 25px;text-align: center;display: inline-block;
+	font-size: 18px;text-align: center;display: inline-block;
 	width: 100%;
 }
 #table{

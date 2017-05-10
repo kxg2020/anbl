@@ -178,7 +178,8 @@ class CommonController extends Controller{
     protected function allMembers($id){
 
         static $sum = 0;
-        $rows = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $model = M('Member');
+        $rows = $model ->where(['parent_id'=>$id,'is_true'=>1])->select();
 
         if(!empty($rows)){
 
@@ -191,6 +192,33 @@ class CommonController extends Controller{
         }
         return ($sum / 2);
     }
+
+
+    /**
+     * 团队(1.直推一部分，然后下线发展一部分。2.直推一人，再下线发展)
+     */
+    protected function notTrue($id){
+
+        static $sum = 0;
+
+        $model = M('Member');
+
+        $rows = $model ->where(['parent_id'=>$id])->select();
+
+
+        if(!empty($rows)){
+
+            foreach($rows as $k => $v){
+                if($v['is_true'] == 0){
+                    $sum ++;
+                }
+                $this->notTrue($v['id']);
+            }
+
+        }
+        return $sum;
+    }
+
 
     /**
      * 查询下线经纪人
