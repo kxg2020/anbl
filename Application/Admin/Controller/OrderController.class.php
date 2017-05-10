@@ -597,7 +597,8 @@ class OrderController extends CommonController
     public function orderRecharge(){
 
         $paramArr = $_REQUEST;
-
+        $start_time = strtotime(I('get.start_time'));
+        $end_time = strtotime(I('get.end_time'))+86400;
         $where = [];
        if(!empty($paramArr)){
            //>> 查询记录
@@ -612,12 +613,19 @@ class OrderController extends CommonController
 
                $where['a.money'] = $paramArr['money'];
            }
-           if(!empty($paramArr['start_time'])){
-               $where['a.create_time'] = ['egt',strtotime($paramArr['start_time'])];
+
+
+           if($start_time){
+               $where['a.create_time'] = ['egt',$start_time];
            }
-           if(!empty($paramArr['end_time'])){
-               $where['a.create_time'] = ['elt',strtotime($paramArr['end_time'])];
+           if($start_time && $end_time ){
+               $where['a.create_time'] = [
+                   ['egt',$start_time],
+                   ['elt',$end_time]
+               ];
            }
+
+
            if(!empty($paramArr['id'])){
                $where['a.id'] = $paramArr['id'];
            }
@@ -726,8 +734,7 @@ class OrderController extends CommonController
         $username = I('get.username', '', 'strip_tags');
         $money = I('get.money', '', 'strip_tags');
         $start_time = strtotime(I('get.start_time'));
-        $end_time = strtotime(I('get.end_time'));
-        $is_pass = intval(I('get.is_pass'));
+        $end_time = strtotime(I('get.end_time'))+86400;
         if ($order_number) {
             $where['a.order_number'] = ['like', "%$order_number%"];
         }
@@ -740,17 +747,18 @@ class OrderController extends CommonController
         if($start_time){
             $where['a.create_time'] = ['egt',$start_time];
         }
-        if(strlen($paramArr['is_pass'])){
-            if($where['a.is_pass'] == 0){
-                $where['a.is_pass'] =$paramArr['is_pass'];
-            }
-        }
         if($start_time && $end_time ){
             $where['a.create_time'] = [
                 ['egt',$start_time],
                 ['elt',$end_time]
             ];
         }
+        if(strlen($paramArr['is_pass'])){
+            if($where['a.is_pass'] == 0){
+                $where['a.is_pass'] =$paramArr['is_pass'];
+            }
+        }
+
 
         //查询出所有下载订单
         $rows = M('MemberRecharge as a')

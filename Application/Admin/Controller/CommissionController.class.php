@@ -24,21 +24,21 @@ class CommissionController extends CommonController
                 // 项目项目下架，目标金额未达到 当前订单所有收益失效
                 if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
-                    // 当前订单用户的佣金收益全部失效
-                    $profits = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>2])->select();
+                    // 当前订单用户的收益全部失效
+                    $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
                     foreach ($profits as $profit) {
                         // 修改收益状态
                         $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
                         // 扣除用户余额
                         $money = $profit['money'];
-                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['commission' => ['exp', 'commission-' . $money]]);
+                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
                     }
                     // 修改订单状态
                     $rest = M('MemberSupport')
                         ->where(['id' => $info['id']])
                         ->save([
                             'fixed' => 0,//每天的收益
-                          //  'is_fh' => 2,//失效订单
+                            'is_fh' => 2,//失效订单
                             'is_fy' => 2,//失效订单
                         ]);
                     if ($rest === false) {
@@ -74,20 +74,20 @@ class CommissionController extends CommonController
                 if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
                     // 当前订单用户的收益全部失效
-                    $profits = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>2])->select();
+                    $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
                     foreach ($profits as $profit) {
                         // 修改收益状态
                         $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
                         // 扣除用户余额
                         $money = $profit['money'];
-                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['commission' => ['exp', 'commission-' . $money]]);
+                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
                     }
                     // 修改订单状态
                     $rest = M('MemberSupport')
                         ->where(['id' => $info['id']])
                         ->save([
                             'fixed' => 0,//每天的收益
-                           // 'is_fh' => 2,//失效订单
+                            'is_fh' => 2,//失效订单
                             'is_fy' => 2,//失效订单
                         ]);
                     if ($rest === false) {
@@ -243,7 +243,7 @@ class CommissionController extends CommonController
         }
         // 更新会员余额
         $money = $commission;
-        $rest = M('Member')->where(['id' => $parent['id']])->save(['commission' => ['exp', 'commission+' . $money]]);
+        $rest = M('Member')->where(['id' => $parent['id']])->save(['money' => ['exp', 'money+' . $money]]);
         if ($rest === false) {
             M()->rollback();
             $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
