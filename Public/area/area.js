@@ -1873,7 +1873,7 @@ var cityJson = [
     {"item_code":"411425","item_name":"虞城县"},
     {"item_code":"411426","item_name":"夏邑县"},
     {"item_code":"411481","item_name":"永城市"},
-    {"item_code":"411502","item_name":"?河区"},
+    {"item_code":"411502","item_name":"浉河区"},
     {"item_code":"411503","item_name":"平桥区"},
     {"item_code":"411521","item_name":"罗山县"},
     {"item_code":"411522","item_name":"光山县"},
@@ -3255,7 +3255,7 @@ $(function() {
     $.each(cityJson,
         function(i, val) {
             if (val.item_code.substr(2, 4) == '0000') {
-                sb.append("<option value='" + val.item_code + "'>" + val.item_name + "</option>");
+                sb.append("<option value='" + val.item_code + "' data-area='"+val.item_name+"'>" + val.item_name + "</option>");
             }
         });
     $("#choosePro").after(sb.toString());
@@ -3280,7 +3280,7 @@ function doProvAndCityRelation() {
     $.each(cityJson,
         function(i, val) {
             if (val.item_code.substr(0, 2) == $("#province").val().substr(0, 2) && val.item_code.substr(2, 4) != '0000' && val.item_code.substr(4, 2) == '00') {
-                sb.append("<option value='" + val.item_code + "'>" + val.item_name + "</option>");
+                sb.append("<option value='" + val.item_code + "'  data-area='"+val.item_name+"'>" + val.item_name + "</option>");
             }
         });
     $("#chooseCity").after(sb.toString());
@@ -3299,11 +3299,11 @@ function doCityAndCountyRelation() {
         function(i, val) {
             if (cityVal == '110100' || cityVal == "120100" || cityVal == "310100" || cityVal == "500100") {
                 if (val.item_code.substr(0, 3) == cityVal.substr(0, 3) && val.item_code.substr(4, 2) != '00') {
-                    sb.append("<option value='" + val.item_code + "'>" + val.item_name + "</option>");
+                    sb.append("<option value='" + val.item_code + "' data-area='"+val.item_name+"'>" + val.item_name + "</option>");
                 }
             } else {
                 if (val.item_code.substr(0, 4) == cityVal.substr(0, 4) && val.item_code.substr(4, 2) != '00') {
-                    sb.append("<option value='" + val.item_code + "'>" + val.item_name + "</option>");
+                    sb.append("<option value='" + val.item_code + "' data-area='"+val.item_name+"'>" + val.item_name + "</option>");
                 }
             }
         });

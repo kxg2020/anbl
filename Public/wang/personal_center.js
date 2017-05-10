@@ -214,8 +214,9 @@ $(function(){
 		var id_card = $('input[name = id_card]').val();
 		var bank_card_name = $('input[name = bank_card_name]').val();
 		var bank_card = $('input[name = bank_card]').val();
-		var city = $('input[name = city]').val();
+		var city = $('#province ').find("option:selected").attr('data-area')+$('#citys ').find("option:selected").attr('data-area')+$('#county ').find("option:selected").attr('data-area');
 		var address = $('input[name = address]').val();
+
 
 
 		if(realname == ''){
@@ -298,14 +299,25 @@ $(function(){
 							return ;
 						}
 						if(city == ''){
-							layer.tips('请输入开户城市','input[name = city]',{
+							layer.tips('请选择开户地址','input[name = city]',{
 								tips:4
 							});
+
 						}else{
+
+                            if(($('#province ').find("option:selected").attr('data-area') == -1) || ($('#citys ').find("option:selected").attr('data-area') == -1) || ($('#county ').find("option:selected").attr('data-area') == -1)){
+
+                                layer.tips('请选择开户地址','#province',{
+                                    tips:4
+                                });
+                                return false;
+                            }
+
 							if(address == ''){
 								layer.tips('请输入支行地址','input[name = address]',{
 									tips:4
 								});
+								return false;
 							}else{
 								var url_ = location.protocol+'//'+window.location.host+'/Home/Personal/safeInfo';
 								$.ajax({

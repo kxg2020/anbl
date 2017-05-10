@@ -95,7 +95,7 @@
 						</div>
 						<div class="safe_center"  style="display: none;" >
 							<div class="bind_username"><span><i></i><if condition="$userInfo['realname'] eq ''"><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}"><else/><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}" disabled></if></span><label>*注意：必须是真实姓名</label></div>
-							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
+							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" value="510722199112171554" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
 
 							<div id="line"></div>
 							<div class="bankcard1"> <i></i><select  id="bind_bank">
@@ -108,35 +108,38 @@
 									</select>
 									<label>开户银行</label>
 							</div>
-							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名" name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户名</label></div>
-							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号" name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
+							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名"  name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户姓名</label></div>
+							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号"  name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
 
-							<div class="bind_city"><span><input type="hidden"  placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
+							<div style="display: none;"><span><input type="hidden"  placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label></label></div>
 
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 23px;" id="city_choice"><label>开户地址</label>
+							<div>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 23px;" id="city_choice">
 
 								<tr>
 
 									<td>
 
 										<select class="" id="province" name="province" onchange="doProvAndCityRelation();">
-											　　　　　　　　<option id="choosePro" value="-1">请选择省份</option>　　　　　　</select>
+											　　　　　　　　<option id="choosePro" value="-1" data-area="-1">请选择省份</option>　　　　　　</select>
 									</td>
 									<td>
 										<select id="citys" name="city" onchange="doCityAndCountyRelation();">
-											　　　　　　　　<option id='chooseCity' value='-1'>请选择城市</option>
+											　　　　　　　　<option id='chooseCity' value='-1' data-area="-1">请选择城市</option>
 											　　　　　　</select>
 									</td>
 									<td>
 										<select id="county" name="county">
-											　　　　　　　　<option id='chooseCounty' value='-1'>请选择区/县</option>
+											　　　　　　　　<option id='chooseCounty' value='-1' data-area="-1">请选择区/县</option>
 											　　　　　　</select>
+									</td>
+									<td>
+										<label>开户地</label>
 									</td>
 								</tr>
 
 							</table>
-
+							</div>
 
 
 
