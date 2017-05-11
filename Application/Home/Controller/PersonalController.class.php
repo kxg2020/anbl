@@ -745,6 +745,7 @@ class PersonalController extends CommonController
         $paramArr = $_REQUEST;
         //>> 查询收藏情况
         $collection = M('Member as a')
+            ->field('a.*,b.id as cid,c.*')
             ->join('left join an_member_collection as b on a.id = b.member_id')
             ->join('left join an_project as c on b.project_id = c.id')
             ->where(['member_id' => $this->userInfo['id']])

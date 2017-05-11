@@ -28,26 +28,44 @@ class LoginController extends CommonController{
 
         $paramArr = $_REQUEST;
 
+       if(empty($paramArr['captcha'])){
+          $this->ajaxReturn(['status'=>0,'msg'=>'验证码错误']);
+       }
+
+        //>> 检测验证码
+        $code = session('captcha');
+        if($code != strtolower($paramArr['captcha']) ){
+
+            $this->ajaxReturn(['status'=>0,'msg'=>'验证码错误']);
+        }
+
         if(empty($paramArr['username']) || empty($paramArr['password'])){
 
-            $this->error('用户名或密码不能为空!');
-
-            exit;
+            $this->ajaxReturn(['status'=>0,'msg'=>'用户名或密码不能为空']);
         }
 
         if(!isset($paramArr['username']) && strlen($paramArr['username']) > 16 && !isset($paramArr['password'])){
 
-            $this->error('用户名或密码格式不正确!');
+            $this->ajaxReturn(['status'=>0,'msg'=>'用户名或密码格式不正确']);
         }
 
+        $paramArr['password'] = addslashes($paramArr['password']);
+        $paramArr['username'] = addslashes($paramArr['username']);
+
+        //>> 根据用户名取盐
         $where = [
             'username'=>$paramArr['username'],
-            'password'=>md5($paramArr['password']),
         ];
 
+        //>> 对比用户名的密码和盐密码
         $res = M('User')->where($where)->find();
 
-        if(!empty($res)){
+        //>> 取出盐和盐密码
+        $salt = $res['salt'];
+
+        $saltPassword = md5($paramArr['password'].$salt);
+
+        if($saltPassword == $res['password']){
 
             $token = md5(microtime().'!@#$$%^'.rand(0,1000));
             session(md5('admin'),$token);
@@ -63,11 +81,11 @@ class LoginController extends CommonController{
                 M('User')->where(['id'=>$res['id']])->save(['remember_token'=>$rememberToken]);
             }
 
-            $this->redirect('admin/Index/index');
+            $this->ajaxReturn(['status'=>1]);
 
         }else{
 
-            $this->error('用户名或密码错误!');
+            $this->ajaxReturn(['status'=>0,'msg'=>'用户名或密码错误']);
         }
     }
 
@@ -81,5 +99,30 @@ class LoginController extends CommonController{
         $this->redirect('admin/login/index');
     }
 
+    /**
+     * 验证码
+     */
+    public function captcha(){
+
+       require_once "./ThinkPHP/Library/Vendor/Captcha/Captcha.php";
+
+       $config = [
+           'width'=>100,
+           'height'=>30,
+           'num'=>5
+       ];
+
+        $captcha = new \Captcha($config);
+
+        //>> 获取产生的验证码
+        $code = $captcha->getCheckCode();
+
+        if($code){
+            //>> 保存到session中
+            session('captcha',strtolower($code));
+            //>> 调用方法输出
+            $captcha->showImage();
+        }
+    }
 
 }

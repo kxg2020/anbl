@@ -58,6 +58,7 @@ class CommonController extends Controller{
      * 初始化
      */
     public function _initialize(){
+
         // 获取系统设置信息
         $this->getSystemInfo();
         //>> 拿session

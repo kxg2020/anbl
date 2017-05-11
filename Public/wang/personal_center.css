@@ -547,6 +547,25 @@ header .nav{
   left: 15%;
   background: url(img/level1.png);
 }
+.people_data  .copy{
+	width: 80px;
+	height: 25px;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	background-color: #e50909;
+
+	color: white;
+	cursor: pointer;
+}
+#copy_content{
+	margin:  15px 0;
+	background: rgba(0,0,0,0);
+	border: none; outline: none;
+	width: 100%;
+	padding: 0;
+	color: green;
+}
 .save_update{
 	border-radius: 3px;
   width: 108px;

@@ -23,7 +23,7 @@
 
 <div class="container">
 
-    <form class="form-signin" action="{:U('admin/login/login')}" method="post">
+    <form class="form-signin">
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">阿纳巴里后台登录</h1>
             <img src="__IMG__/login-logo.png" alt=""/>
@@ -31,17 +31,12 @@
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
             <input type="password" class="form-control" placeholder="密码" name="password">
+            <input type="text" style="height: 38px;outline: none;margin-right: 33px" placeholder="验证码" name="captcha"><img style="cursor: pointer" src="{:U('admin/Login/captcha')}" id="captcha">
 
-            <button class="btn btn-lg btn-login btn-block" type="submit">
+
+            <button class="btn btn-lg btn-login btn-block" type="button" id="submit">
                 <i class="fa fa-check"></i>
             </button>
-
-            <div class="registration">
-                还没有账户?
-                <a class="" href="registration.html">
-                    注册
-                </a>
-            </div>
             <label class="checkbox">
                 <input type="checkbox" value="1" name="remember"> 记住我的登录信息
                 <span class="pull-right">
@@ -86,6 +81,47 @@
 <script src="__JS__/jquery-1.10.2.min.js"></script>
 <script src="__JS__/bootstrap.min.js"></script>
 <script src="__JS__/modernizr.min.js"></script>
+<script src='__PUBLIC__/layer/layer.js'></script>
+<script>
+    $(function () {
+        $('#captcha').click(function () {
+            $(this).attr({'src':location.protocol+'//'+window.location.host+'/admin/Login/captcha/id/'+Math.random(0,999)});
+        });
+        $('#submit').click(function () {
+            username = $('input[name = username]').val();
+            password = $('input[name = password]').val();
+            captcha = $('input[name = captcha]').val();
+            if(username == ''){
+
+                layer.tips('用户名不能为空','input[name = username]');
+                return false;
+            }
+            if(password == ''){
+
+                layer.tips('密码不能为空','input[name = password]');
+                return false;
+            }
+            if(captcha == ''){
+
+                layer.tips('验证码不能为空','input[name = captcha]',{tips:4});
+                return false;
+            }
+            $.ajax({
+                'type':'post',
+                'dataType':'json',
+                'url':location.protocol+'//'+window.location.host+'/admin/Login/login',
+                'data':{'username':username,'password':password,'captcha':captcha},
+                success:function (e) {
+                    if(e.status == 1){
+                        window.location.href = location.protocol+'//'+window.location.host+'/admin/Index/index'
+                    }else {
+                        layer.msg(e.msg);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
