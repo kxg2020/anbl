@@ -38,6 +38,8 @@ return array(
     // 指定缓存的存储方式
    // 'DATA_CACHE_TYPE' =>  'Redis',
 
+    'TMPL_EXCEPTION_FILE'=>'/Public/404.html', // 定义错误跳转页面URL地址
+
     // 发送短信配置
     'PHONE_API_APP_KEY'=>'a7cacd2316e124a3bc0d07d97bf969eb',
     'VERIFY_CODE_TPL'=>'【阿纳巴里】您的验证码是{验证码}',

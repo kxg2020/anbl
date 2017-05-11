@@ -218,8 +218,9 @@ $(function(){
 		var id_card = $('input[name = id_card]').val();
 		var bank_card_name = $('input[name = bank_card_name]').val();
 		var bank_card = $('input[name = bank_card]').val();
-		var city = $('input[name = city]').val();
+		var city = $('#province ').find("option:selected").attr('data-area')+$('#citys ').find("option:selected").attr('data-area')+$('#county ').find("option:selected").attr('data-area');
 		var address = $('input[name = address]').val();
+
 
 
 		if(realname == ''){
@@ -302,14 +303,25 @@ $(function(){
 							return ;
 						}
 						if(city == ''){
-							layer.tips('请输入开户城市','input[name = city]',{
+							layer.tips('请选择开户地址','input[name = city]',{
 								tips:4
 							});
+
 						}else{
+
+                            if(($('#province ').find("option:selected").attr('data-area') == -1) || ($('#citys ').find("option:selected").attr('data-area') == -1) || ($('#county ').find("option:selected").attr('data-area') == -1)){
+
+                                layer.tips('请选择开户地址','#province',{
+                                    tips:4
+                                });
+                                return false;
+                            }
+
 							if(address == ''){
 								layer.tips('请输入支行地址','input[name = address]',{
 									tips:4
 								});
+								return false;
 							}else{
 								var url_ = location.protocol+'//'+window.location.host+'/Home/Personal/safeInfo';
 								$.ajax({
@@ -689,16 +701,45 @@ $(function(){
         $('.search_div').hide();
     });
     $('#search_xiaji').click(function(){
-        //console.log(13)
-        $('.search_div').show();
+
+    	//>> 获取输入框内容
+		 memberInfo = $('.search_xiaji').val();
+
+		 if(memberInfo == ''){
+             $('.search_xiaji').focus();
+             return false;
+		 }
+		 $.ajax({
+			 'type':'post',
+			 'dataType':'json',
+			 'url':location.protocol+'//'+window.location.host+'/home/Personal/findMemberByTel',
+			 'data':{'username':memberInfo},
+			 success:function (e) {
+
+                 $('.search_div').show();
+				 if(e.status == 1){
+                     $('.realname').text(e.memberInfo.realname);
+                     $('.all_support_money').text(e.memberInfo.all_support_money);
+                     $('.role').text(e.memberInfo.role);
+                     $('.group').text('000');
+					 $('.sh').show();
+					 $('#notFound').hide();
+				 }else {
+                     $('.sh').hide();
+                     $('#notFound').show();
+				 }
+
+             }
+
+		 });
+
+
     });
 
 
     //我的团队
-    $('.people_top').click(function(){
-    	id = $(this).attr('data-id');
-        var parent = $(this).parent().parent();
-        //console.log(parent.children())
+    	var crrId = $('.people_top').attr('data-id');
+        var parent = $('.people_top').parent().parent();
         for(var i=parent.children().length;i>0;i--){
             parent.children().eq(i).remove()
         }
@@ -706,10 +747,10 @@ $(function(){
 			'type':'post',
 			'dataType':'json',
 			'url':location.protocol+'//'+window.location.host+'/home/Personal/groupInfo',
-			'data':{'id':id},
+			'data':{'id':crrId},
 			success:function (e) {
                 //ajax sunccess函数
-                var width=e.length*25+115;
+                var width=e.res.length*25+115;
                 if(width>700){
 
                     var html='<div style="width:'+width+'px">';
@@ -717,15 +758,20 @@ $(function(){
                 else{
                     var html='<div>';
                 }
+
                 $.each(e.res,function(v,k){
-                    html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+                	if(k.is_true == 1){
+                        html+="<div><p>账户:<span>"+k.username+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+					}else {
+                        html+="<div><p>账户:<span>"+k.username+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+" style='color:#ff8b0f'>"+k.realname+"</h3></div>";
+					}
+
                 })
                 html+'</div>';
                 $('.team_total').append(html)
             }
 		});
 
-    })
 
     //下级会员点击的时候
     $('.team_total').on('click','h3',function(){
@@ -766,9 +812,8 @@ $(function(){
                     'url':location.protocol+'//'+window.location.host+'/home/Personal/groupInfo',
                     'data':{'id':people_id},
                     success:function (e) {
-                    	console.log(e);
                         //ajax sunccess函数
-                        var width=e.length*25+115;
+                        var width=e.res.length*25+115;
                         if(width>700){
 
                             var html='<div style="width:'+width+'px">';
@@ -777,8 +822,12 @@ $(function(){
                             var html='<div>';
                         }
                         $.each(e.res,function(v,k){
-                        	console.log(k.realname)
-                            html+="<div><p>账户:<span>"+k.realname+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+                            if(k.is_true == 1){
+
+                                html+="<div><p>账户:<span>"+k.username+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+">"+k.realname+"</h3></div>";
+							}else {
+                                html+="<div><p>账户:<span>"+k.username+"</span></p><p>支持:<span>"+k.all_support_money+"</span></p><p>角色:<span>"+k.role+"</span></p><p>团队: <span>"+k.children+"人</span></p><h3 people_id="+k.id+" style='color:#ff8b0f'>"+k.realname+"</h3></div>";
+							}
                         })
                         html+'</div>';
                         $('.team_total').append(html)

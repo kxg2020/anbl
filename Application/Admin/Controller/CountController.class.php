@@ -63,8 +63,18 @@ class CountController extends CommonController
         // 会员累计下载金额
         $dlMoney = M('MemberDownload')->sum('money');
         $this->assign('dlMoney',$dlMoney);
+
         // 会员累计支持金额
-        $spMoney = M('MemberSupport')->sum('support_money');
+        $spMoneyInfo = M('MemberSupport')->select();
+        $spMoney = 0;
+        foreach ($spMoneyInfo as $value){
+            $projectInfo = M('Project')->where(['id'=>$value['project_id']])->find();
+            if($projectInfo['is_active'] == 1 || ($projectInfo['is_active'] == 0  && $projectInfo['is_ok'] == 1)){
+
+                $spMoney += $value['support_money'];
+            }
+
+        }
         $this->assign('spMoney',$spMoney);
 
        //查看是否有查询

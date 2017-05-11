@@ -16,13 +16,15 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			 <p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv" <if condition="$personal['role'] eq 1">style="color:#4693EC"<elseif condition="$personal['role'] eq 2"/>style="color:purple"<elseif condition="$personal['role'] eq 3"/>style="color:#ff005a"<elseif condition="$personal['role'] eq 4"/>style="color:#fff38e"</if> >{:getUserLevelsName($personal['role'])}</span></p>
+			 <p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv"  >{:getUserLevelsName($personal['role'])}</span></p>
 <!--
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			Lv{$personal['level']}:{$personal['money']}阿纳豆
 			</if></div>
 			-->
+
 			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
+
 			<div class="money"><p>已支持阿纳豆: <span>{$supportMoney}</span></p><p>剩余阿纳豆: <span>{$personal['money']}</span></p></div>
 			<div class="money"><p>收益阿纳豆: <span>{$personal['profit']}</span></p><p>佣金阿纳豆: <span>{$personal['commission']}</span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
@@ -65,6 +67,11 @@
 						<div class="people_data">
 							<div class="user"><input type="text" value="{$personal['username']}" disabled></div>
 							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;">邀请码:</span><span style="color: green;">{$personal['invite_key']}</span></div>
+							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;width: 80px;display: inline-block;">推广链接:</span><input type="button" value="点击复制" class="copy" data-clipboard-target="#copy_content">
+								<br>
+								<input type="text" id="copy_content" readonly value="http://www.araberrimovie.com/home/register/index/invite_key/{$personal['invite_key']}">	</div>
+
+
 							<div class="real_name"><span>实名:</span><if condition="$personal['is_true'] eq 0"><span>未实名</span><else/><span style="color: forestgreen">已实名</span></if></div>
 							<div class="sex">
 								<span>性别:</span>
@@ -91,7 +98,7 @@
 						</div>
 						<div class="safe_center"  style="display: none;" >
 							<div class="bind_username"><span><i></i><if condition="$userInfo['realname'] eq ''"><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}"><else/><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}" disabled></if></span><label>*注意：必须是真实姓名</label></div>
-							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>身份证号必须正确</label></div>
+							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" value="510722199112171554" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>*身份证号必须正确</label></div>
 
 							<div id="line"></div>
 							<div class="bankcard1"> <i></i><select  id="bind_bank">
@@ -102,13 +109,50 @@
 										<option value="中国邮政储蓄银行"  <if condition="$userInfo['bank_name'] eq '中国邮政储蓄银行'">selected</if>>中国邮政储蓄银行</option>
 										<option value="招商银行"  <if condition="$userInfo['bank_name'] eq '招商银行'">selected</if>>招商银行</option>
 									</select>
-									<label>开户银行</label>
+									<label>*开户银行</label>
 							</div>
-							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名" name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>开户名</label></div>
-							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号" name="bank_card" value="{$userInfo['bank_card']}"></span><label>银行卡号</label></div>
+							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名"  name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>*开户姓名</label></div>
+							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号"  name="bank_card" value="{$userInfo['bank_card']}"></span><label>*银行卡号</label></div>
 
-							<div class="bind_city"><span><i></i><input type="text" placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label>开户城市与当初办理的一致</label></div>
-							<div class="bind_otherbank"><i></i><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>开户支行</label></div>
+							<div style="display: none"><span><input type="hidden"  placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label></label></div>
+
+							<div class="bind_otherbank">
+
+								<if condition="!empty($userInfo['city'])"><i></i><input type="text" value="{$userInfo['city']}" disabled><lable style="color: #ccc; margin-left: 50px;">*开户地址</lable><else/>
+
+									<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 23px;" id="city_choice">
+
+										<tr>
+
+											<td>
+
+												<select class="" id="province" name="province" onchange="doProvAndCityRelation();">
+													　　　　　　　　<option id="choosePro" value="-1" data-area="-1">请选择省份</option>　　　　　　</select>
+											</td>
+											<td>
+												<select id="citys" name="city" onchange="doCityAndCountyRelation();">
+													　　　　　　　　<option id='chooseCity' value='-1' data-area="-1">请选择城市</option>
+													　　　　　　</select>
+											</td>
+											<td>
+												<select id="county" name="county">
+													　　　　　　　　<option id='chooseCounty' value='-1' data-area="-1">请选择区/县</option>
+													　　　　　　</select>
+											</td>
+											<td>
+												<label>*开户地址</label>
+											</td>
+										</tr>
+
+									</table>
+
+								</if>
+							</div>
+
+
+
+
+							<div class="bind_otherbank"><i></i><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>*开户支行</label></div>
 
 
 							<div class="save_update" id="save">保存更新</div>
@@ -297,7 +341,7 @@
 					<div class="close_password"></div>
 						<div class="password_content">
 							<div class='money_modal'>
-								<span style="color: white;margin: 0 auto">我的成员:{:count($follower)}人<span style="margin-left: 60px;">我的团队:{$group}人</span><input class="search_xiaji" type="text" placeholder="搜索我的下级成员"><input id="search_xiaji" type="button" value="搜索"></span>
+								<span style="color: white;margin: 0 auto">直推:{:count($follower)}人<span style="margin-left: 55px;">未实名:{$notTrue}人</span><span style="margin-left: 55px;">团队:{$group}人</span><input class="search_xiaji" type="text" placeholder="请输入成员的手机号" value=""><input id="search_xiaji" type="button" value="搜索"></span>
 								<div class="team_total">
 									<div>
 										<div class="people_top" style="border-radius: 3px;" data-id="{$personal['id']}"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{$personal['username']}</if></div>
@@ -305,8 +349,8 @@
 								</div>
 								<div class="search_div" style="display: none;">
 									<h3>搜索结果</h3>
-									<div><p>账户:<span>老王</span></p><p>支持:<span>3000000.00</span></p><p>收益:<span>10000000.00</span></p><p>团队: <span>200人</span></p></div>
-									<div style="font-size: 30px;color: red;width: 220px;">没有匹配的下级</div>
+									<div class="sh"><p>账户:<span class="realname">老王</span></p><p>支持:<span class="all_support_money">3000000.00</span></p><p>角色:<span class="role">10000000.00</span></p><p>团队: <span class="group">200人</span></p></div>
+									<div style="font-size: 20px;color: red;width: 100%;text-align: center; margin-top:15px;" id="notFound">没有匹配的成员</div>
 									<input type="button" value="关闭" id="close_search">
 								</div>
 							</div>
@@ -1113,6 +1157,7 @@
 		</div>
 	</div>
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+	<script src='__PUBLIC__/area/area.js'></script>
 	<script src='__PUBLIC__/wang/common_js/common.js'></script>
 	<script src='__PUBLIC__/wang/personal_center.js'></script>
 	<script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
@@ -1120,8 +1165,21 @@
 	<script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
 	<script src="__JS__/layer/layui.js"></script>
 	<script src="__JS__/layer/laypage.js"></script>
+	<script src="__PUBLIC__/js/clipboard.min.js"></script>
 	<script type="text/javascript">
 		$(function () {
+
+            $('.copy').click(function(){
+                var clipboard = new Clipboard('.copy');
+                //优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+                clipboard.on('success', function(e) {
+                    layer.msg('复制成功');
+                    e.clearSelection();
+                });
+                clipboard.on('error', function(e) {
+                   layer.msg('复制失败');
+                });
+            });
 
 
 
@@ -1457,6 +1515,7 @@
 										'<p>'+ v.country+'/'+ v.duration+'分钟</p>'+
 										'<p>'+ v.date+'/'+ v.showaddress+'</p>'+
 										'<p style="color: #e50909;"><i></i>'+ '已收藏'+'</p>'+
+											'<p style="text-align: right;"><input style="float: right;" type="button" data-id="'+v.cid+'" class="cancel_collect" value="取消收藏"></p>'+
 										'</div>'+
 										'</div>');
 									});
@@ -1514,7 +1573,7 @@
 
 
 				//>> 点击"取消收藏"
-				$('.cancel_collect').click(function(){
+            $('body').on('click','.cancel_collect',function(){
 					$.ajax({
 						'type':'post',
 						'dataType':'json',

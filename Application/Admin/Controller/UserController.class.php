@@ -27,12 +27,14 @@ class UserController extends CommonController
         if(IS_POST && IS_AJAX) {
             // 获取数据
             $_data = i('post.');
+            $salt = substr(uniqid(rand()),-6);
             $userInfo = [
                 'username' => $_data['name'],
-                'password' => md5($_data['password']),
+                'password' => md5($_data['password'].$salt),
                 'phone' => $_data['phone'],
                 'image_url' => $_data['image_url'],
                 'create_time' => time(),
+                'salt'=>$salt,
             ];
             // 添加到数据库
             $ret = M('User')->add($userInfo);
@@ -59,6 +61,7 @@ class UserController extends CommonController
         if (IS_POST && IS_AJAX) {
             // 获取数据
             $_data = i('post.');
+            $salt = substr(uniqid(rand()),-6);
 
             // 获取项目数据
             $performerInfo = $projectModel->find($_data['id']);
@@ -66,9 +69,10 @@ class UserController extends CommonController
             // 判断数据是否存在
             if (!$performerInfo) {
                 $this->ajaxReturnError('用户不存在',__LINE__);
+
             }
             if(!empty($_data['password'])){
-                $password = md5($_data['password']);
+                $password = md5($_data['password'].$salt);
             }
             // 获取项目基本信息
             $performerInfo = [

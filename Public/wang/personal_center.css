@@ -440,7 +440,7 @@ header .nav{
   color: #e50909;
 }
 .people_data,.safe_center{
-  padding-left: 108px;
+  padding-left: 60px;
   padding-top: 27px;
   height: 620px;
 }
@@ -547,6 +547,25 @@ header .nav{
   left: 15%;
   background: url(img/level1.png);
 }
+.people_data  .copy{
+	width: 80px;
+	height: 25px;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	background-color: #e50909;
+
+	color: white;
+	cursor: pointer;
+}
+#copy_content{
+	margin:  15px 0;
+	background: rgba(0,0,0,0);
+	border: none; outline: none;
+	width: 100%;
+	padding: 0;
+	color: green;
+}
 .save_update{
 	border-radius: 3px;
   width: 108px;
@@ -651,6 +670,15 @@ header .nav{
 	border-radius: 3px;
 }
 #bind_bank option{
+	background: #333;
+}
+#city_choice select{
+	height: 32px;
+	background: rgba(0,0,0,0);
+	color: white;
+	border-radius: 3px;
+}
+#city_choice select option{
 	background: #333;
 }
 .bind_bankcard i{
@@ -1423,22 +1451,25 @@ margin-left: 94px;
 	cursor: pointer;
 }
 .search_div{
+	border-radius: 3px;
 	width: 700px;
-	height: 560px;
+	height: 440px;
 	position: absolute;
 	z-index: 100;
-	top:40px; left: 0;
+	top:160px; left: 0;
 	background: white;
 }
 .search_div h3{
 	font-size: 25px;
 	text-align: center;
-	margin-bottom: 15px;
+	margin-bottom: 100px;
+	margin-top: 20px;
 }
 .search_div div{
 	width: 150px;
 	height: auto;
 	margin: auto;
+	font-size: 20px;
 }
 .search_div div p{
 	margin-bottom: 10px;
@@ -1583,7 +1614,7 @@ margin-left: 94px;
 	font-size: 20px;
 }
 .money_modal>span{
-	font-size: 25px;text-align: center;display: inline-block;
+	font-size: 18px;text-align: center;display: inline-block;
 	width: 100%;
 }
 #table{

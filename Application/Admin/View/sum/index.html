@@ -113,11 +113,11 @@
                                             <volist name="tixian" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 1" ><span style="color: red">-{$tag.money}</span><elseif condition="$tag['is_pass'] eq 2" /><span style="color: forestgreen">+{$tag.money}</span><else/><span style="color: orange">{$tag.money}</span></if></td>
                                                     <td style="vertical-align: middle">{$tag.charge}</td>
                                                     <td style="vertical-align: middle">{$tag['money'] - $tag['charge']}</td>
-                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0">拒绝<elseif condition="$tag.is_pass eq 2"/>未审核<elseif condition="$tag.is_pass eq 1"/>通过 </if></td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0"><span class="label label-warning">未审核</span><elseif condition="$tag.is_pass eq 2"/><span class="label label-danger">拒绝</span><elseif condition="$tag.is_pass eq 1"/><span class="label label-success">警告标签</span></if></td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
                                             </tbody>
@@ -151,11 +151,11 @@
                                             <volist name="allget" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 0 "><span style="color: red">-{$tag.money}</span><else/><span style="color: forestgreen">+{$tag.money}</span></if></td>
                                                     <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">分红<elseif condition="$tag['type'] eq 2"/>分佣<elseif condition="$tag['type'] eq 4"/>转账 </if></td>
-                                                    <td style="vertical-align: middle">{$tag.remark}</td>
-                                                    <td style="vertical-align: middle">{$tag.is_ok}</td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">{$tag.intro}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 0 "><span class="label label-danger">失效</span><else/><span class="label label-success">正常</span></if></td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
 
                                                 </tr>
                                             </volist>
@@ -189,9 +189,9 @@
                                             <volist name="supportSituation" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.aid}</td>
-                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">{$tag.support_money}</td>
                                                     <td style="vertical-align: middle">电影支持</td>
-                                                    <td style="vertical-align: middle">{$tag.cname}</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
                                                     <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
@@ -226,7 +226,7 @@
                                                     <td style="vertical-align: middle">{$tag.id}</td>
                                                     <td style="vertical-align: middle">{$tag.money}</td>
                                                     <td style="vertical-align: middle">投票</td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
 
                                                 </tr>
                                             </volist>
@@ -262,7 +262,7 @@
                                                     <td style="vertical-align: middle">{$tag.money}</td>
                                                     <td style="vertical-align: middle">转账</td>
                                                     <td style="vertical-align: middle">{$tag['to_username']}</td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
                                             </tbody>
@@ -296,7 +296,7 @@
                                                     <td style="vertical-align: middle">{$tag.id}</td>
                                                     <td style="vertical-align: middle">{$tag.money}</td>
                                                     <td style="vertical-align: middle">演员申请</td>
-                                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
                                             </tbody>
@@ -373,14 +373,36 @@
                                 success:function(result){
                                     $('#tbody_2').html('');
                                     $.each(result.tixian,function (k,v) {
-                                        $('#tbody_2').append('  <tr class="gradeX">'+
-                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
-                                            '<td style="vertical-align: middle">'+v.money+'</td>'+
-                                            '<td style="vertical-align: middle">'+v.charge+'</td>'+
-                                            '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
-                                            '<td style="vertical-align: middle">'+v.is_pass+'</td>'+
-                                            '<td style="vertical-align: middle">'+v.create_time+'</td>'+
-                                            '</tr>');
+                                        if(v.is_pass == 0){
+                                            $('#tbody_2').append('  <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: orange">'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                                '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-warning">未审核</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                                '</tr>');
+                                        }
+                                        if(v.is_pass == 1){
+                                            $('#tbody_2').append('  <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: red">-'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                                '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-success">通过</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                                '</tr>');
+                                        }
+                                        if(v.is_pass == 2){
+                                            $('#tbody_2').append('  <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: forestgreen">+'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                                '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-danger">拒绝</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                                '</tr>');
+                                        }
                                     });
                                 }
                             });
@@ -409,15 +431,28 @@
                                 success:function(result){
                                     $('#tbody_3').html('');
                                     $.each(result.allget,function (k,v) {
-                                        $('#tbody_3').append(' <tr class="gradeX">'+
-                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
-                                       '<td style="vertical-align: middle">'+v.money+'</td>'+
-                                        '<td style="vertical-align: middle">'+v.type+'</td>'+
-                                        '<td style="vertical-align: middle">'+v.remark+'</td>'+
-                                        '<td style="vertical-align: middle">'+v.is_ok+'</td>'+
-                                       '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                        if(v.is_ok == 0){
+                                            $('#tbody_3').append(' <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: red">-'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.intro+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-danger">失效</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
 
-                                        '</tr>');
+                                                '</tr>');
+                                        }
+                                        if(v.is_ok == 1){
+                                            $('#tbody_3').append(' <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: forestgreen">+'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.intro+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-success">正常</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+
+                                                '</tr>');
+                                        }
                                     });
                                 }
                             });
