@@ -126,6 +126,10 @@ $(function(){
 			$('.get_money').show();
 			$('.money_record').hide();
 			$('.zhuanzhang').hide();
+			$('.get_money>input').removeClass('apply_choice')
+			$('.get_money>input:first-child').addClass('apply_choice')
+			$('.get_money>div').hide();
+			$('.get_money .apply_yuer').show();
 		}
 
 		if(txt=='转账'){
@@ -631,10 +635,10 @@ $(function(){
 	})
 
 	//支付方式说明
-	$('.get_money>p:nth-child(2)>img').on('mouseenter',function(){
-		$('.get_money>p:nth-child(2)>span').show();
+	$('.get_money p:nth-child(2)>img').on('mouseenter',function(){
+		$('.get_money p:nth-child(2)>span').show();
 	}).on('mouseleave',function(){
-		$('.get_money>p:nth-child(2)>span').css({display:'none'})
+		$('.get_money p:nth-child(2)>span').css({display:'none'})
 	})
 
 	$(".yanzhen").click(function(){
@@ -789,7 +793,22 @@ $(function(){
     })
 
 
-
+//提现方式的3种选择
+	$('.get_money>input').click(function(){
+		var choice=$(this)[0].id;
+		$('.get_money>input').removeClass('apply_choice');
+		$('.get_money>div').hide();
+		$(this).addClass('apply_choice');
+		if(choice=='apply_yuer'){
+			$('.apply_yuer').show();
+		}
+		if(choice=='apply_shouyi'){
+			$('.apply_shouyi').show();
+		}
+		if(choice=='apply_yongjing'){
+			$('.apply_yongjing').show();
+		}
+	})
 
 	
 

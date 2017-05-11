@@ -1001,6 +1001,21 @@ margin-left: 94px;
 .get_money{
 	position: relative;
 }
+.get_money>input{
+	width: 100px;
+	height: 30px;
+	background: #e50909;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 3px;
+	color: #fff;
+	margin-right: 20px;
+}
+.get_money input.apply_choice{
+	background: #0077b3;
+}
 .get_money p:nth-child(1){
 	margin-top: 30px;
 }
@@ -1028,7 +1043,7 @@ margin-left: 94px;
 	color: #e50909;
 	display: none;
 }
-#get_btn{
+#get_btn,#get_btn1,#get_btn2{
 	border-radius: 3px;
 	width: 120px;
 	height: 30px;
