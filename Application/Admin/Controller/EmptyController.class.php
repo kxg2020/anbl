@@ -1,5 +1,5 @@
 <?php
-    namespace Home\Controller;
+    namespace Admin\Controller;
 
 
     /**

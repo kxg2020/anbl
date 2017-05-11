@@ -339,4 +339,14 @@ class CommonController extends Controller
 
     }
 
+    /*
+ * 空操作
+ */
+    public function _empty()
+    {
+        // 显示404 页面
+        $this->display('Error:404');
+
+    }
+
 }

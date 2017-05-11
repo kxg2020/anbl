@@ -24,21 +24,78 @@ class CommissionController extends CommonController
                 // 项目项目下架，目标金额未达到 当前订单所有收益失效
                 if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
-                    // 当前订单用户的收益全部失效
-                    $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
+                    // 当前订单用户的佣金收益全部失效
+                    $profits = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>2])->select();
+
                     foreach ($profits as $profit) {
                         // 修改收益状态
                         $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
-                        // 扣除用户余额
+                        // 扣除用户佣金钱包余额
                         $money = $profit['money'];
-                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+                        // 获取会员信息
+                        $memberInfos=M('Member')->where(['id' => $profit['member_id']])->find();
+                        // 获取会员当前佣金钱包金额
+                        $commissionMoney = $memberInfos['commission'];
+
+                        if($commissionMoney>=$money){//佣金钱包够扣，直接扣除
+
+                            $rest = M('Member')->where(['id' => $profit['member_id']])->save(['commission' => ['exp', 'commission-' . $money]]);
+
+                        }else{//佣金钱包不够扣，从会员余额钱包补差
+
+                            $bucha = $money-$commissionMoney;// 待补差金额balance
+
+                            // 获取用户当前余额钱包金额
+                            $balance = $memberInfos['money'];
+                            if($balance>=$bucha){//钱包余额够扣除补差金额
+
+                                // 减去余额钱包补差金额
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['money' => ['exp', 'money-' . $bucha]]);
+                                // 生成补差记录
+                                $rest = M('MemberProfit')->add([
+                                    'member_id' => $memberInfos['id'],
+                                    'money' => $bucha,
+                                    'create_time' => time(),
+                                    'type' => 4,
+                                    'is_ok' => 0,
+                                    'remark' => $projectInfo['name'] . "佣金失效补差",
+                                ]);
+                                if ($rest === false) {
+                                    M()->rollback();
+                                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                                }
+
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['commission' => ['exp', 'commission-' . $commissionMoney]]);
+
+
+                            }else{//钱包余额不够扣除补差金额
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['money' => ['exp', 'money-' . $balance]]);
+                                // 生成补差记录
+                                $rest = M('MemberProfit')->add([
+                                    'member_id' => $memberInfos['id'],
+                                    'money' => $balance,
+                                    'create_time' => time(),
+                                    'type' => 4,
+                                    'is_ok' => 0,
+                                    'remark' => $projectInfo['name'] . "佣金失效补差",
+                                ]);
+                                if ($rest === false) {
+                                    M()->rollback();
+                                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                                }
+
+                                $realMoney = $money-$balance;
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['commission' => ['exp', 'commission-' . $realMoney]]);
+
+                            }
+                        }
                     }
                     // 修改订单状态
                     $rest = M('MemberSupport')
                         ->where(['id' => $info['id']])
                         ->save([
                             'fixed' => 0,//每天的收益
-                            'is_fh' => 2,//失效订单
+                          //  'is_fh' => 2,//失效订单
                             'is_fy' => 2,//失效订单
                         ]);
                     if ($rest === false) {
@@ -74,20 +131,76 @@ class CommissionController extends CommonController
                 if ($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 0) {
 
                     // 当前订单用户的收益全部失效
-                    $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
+                    $profits = M('MemberProfit')->where(['support_id' => $info['id'],'type'=>2])->select();
                     foreach ($profits as $profit) {
                         // 修改收益状态
                         $rest = M('MemberProfit')->where(['id' => $profit['id']])->save(['is_ok' => 0, 'intro' => $projectInfo['name'] . "目标金额未达到",]);
-                        // 扣除用户余额
+                        // 扣除用户佣金钱包余额
                         $money = $profit['money'];
-                        $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+                        // 获取会员信息
+                        $memberInfos=M('Member')->where(['id' => $profit['member_id']])->find();
+                        // 获取会员当前佣金钱包金额
+                        $commissionMoney = $memberInfos['commission'];
+
+                        if($commissionMoney>=$money){//佣金钱包够扣，直接扣除
+
+                            $rest = M('Member')->where(['id' => $profit['member_id']])->save(['commission' => ['exp', 'commission-' . $money]]);
+
+                        }else{//佣金钱包不够扣，从会员余额钱包补差
+
+                            $bucha = $money-$commissionMoney;// 待补差金额balance
+
+                            // 获取用户当前余额钱包金额
+                            $balance = $memberInfos['money'];
+                            if($balance>=$bucha){//钱包余额够扣除补差金额
+
+                                // 减去余额钱包补差金额
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['money' => ['exp', 'money-' . $bucha]]);
+                                // 生成补差记录
+                                $rest = M('MemberProfit')->add([
+                                    'member_id' => $memberInfos['id'],
+                                    'money' => $bucha,
+                                    'create_time' => time(),
+                                    'type' => 4,
+                                    'is_ok' => 0,
+                                    'remark' => $projectInfo['name'] . "佣金失效补差",
+                                ]);
+                                if ($rest === false) {
+                                    M()->rollback();
+                                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                                }
+
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['commission' => ['exp', 'commission-' . $commissionMoney]]);
+
+
+                            }else{//钱包余额不够扣除补差金额
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['money' => ['exp', 'money-' . $balance]]);
+                                // 生成补差记录
+                                $rest = M('MemberProfit')->add([
+                                    'member_id' => $memberInfos['id'],
+                                    'money' => $balance,
+                                    'create_time' => time(),
+                                    'type' => 4,
+                                    'is_ok' => 0,
+                                    'remark' => $projectInfo['name'] . "佣金失效补差",
+                                ]);
+                                if ($rest === false) {
+                                    M()->rollback();
+                                    $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
+                                }
+
+                                $realMoney = $money-$balance;
+                                $rest = M('Member')->where(['id' => $memberInfos['id']])->save(['commission' => ['exp', 'commission-' . $realMoney]]);
+
+                            }
+                        }
                     }
                     // 修改订单状态
                     $rest = M('MemberSupport')
                         ->where(['id' => $info['id']])
                         ->save([
                             'fixed' => 0,//每天的收益
-                            'is_fh' => 2,//失效订单
+                           // 'is_fh' => 2,//失效订单
                             'is_fy' => 2,//失效订单
                         ]);
                     if ($rest === false) {
@@ -243,7 +356,7 @@ class CommissionController extends CommonController
         }
         // 更新会员余额
         $money = $commission;
-        $rest = M('Member')->where(['id' => $parent['id']])->save(['money' => ['exp', 'money+' . $money]]);
+        $rest = M('Member')->where(['id' => $parent['id']])->save(['commission' => ['exp', 'commission+' . $money]]);
         if ($rest === false) {
             M()->rollback();
             $this->ajaxReturn(['msg' => "分佣失败", 'status' => 0]);
@@ -272,11 +385,11 @@ class CommissionController extends CommonController
         // 查询出等级为 制片人的会员
         $memberInfos = M('Member')->where(['role' => 3])->select();
 
+
         foreach ($memberInfos as $info) {
             $parent_id = $info['id'];
             // 根据parent_id 找下级
             $money = $this->sum($parent_id);
-
             if (!$money) {
                 continue;
             }
@@ -290,8 +403,8 @@ class CommissionController extends CommonController
                 'is_ok' => 1,
             ]);
 
-            // 更新余额
-            $rest = M('Member')->where(['id' => $info['id']])->save(['money' => ['exp', 'money+' . $money]]);
+            // 更新佣金钱包余额
+            $rest = M('Member')->where(['id' => $info['id']])->save(['commission' => ['exp', 'commission+' . $money]]);
         }
 
 
