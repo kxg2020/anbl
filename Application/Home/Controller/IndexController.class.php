@@ -106,10 +106,11 @@ class IndexController extends CommonController{
             }else{
                 $pgSize = 12;
             }
-            $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'] ,'type'=>$paramArr['type']])->order('create_time desc')->select();
+            $rows = M('Comment')->where(['movie_id'=>$paramArr['movie_id'] ,'type'=>$paramArr['type'] ? $paramArr['type'] : 1])->order('create_time desc')->select();
             foreach($rows as &$row){
                 $row['username']= telephoneNumber($row['username']);
             }
+
             unset($row);
             if(!empty($rows)){
                 $directorArr = $this->pagination($rows,$pgNum,$pgSize);
@@ -123,7 +124,7 @@ class IndexController extends CommonController{
                 die($this->_printError('1000'));
             }
         }else{
-            die($this->_printError('1000'));
+            die($this->_printError('1002'));
         }
     }
 
