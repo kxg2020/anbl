@@ -106,4 +106,23 @@ $('.argement').click(function(){
         }
 
     })
+
+    //项目进度 收益预测 评论的li之间的切换
+
+    $('.switch>li').click(function(){
+        var id=$(this)[0].id;
+        $('.switch>li').removeClass('choice');
+        $('.comment>div').hide();
+        $(this).addClass('choice');
+        if(id=='schedule'){
+            $('.schedule').show();
+        }
+        if(id=='forecast'){
+            $('.forecast').show();
+        }
+        if(id=='commentLi'){
+            $('.commentLi').show();
+        }
+    })
+
 });

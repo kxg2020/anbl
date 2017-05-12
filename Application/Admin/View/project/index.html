@@ -103,6 +103,7 @@
                                         <a href="javascript:;" onclick="checkRecommend('{:U('admin/project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
                                     </if></td>
                                     <td style="vertical-align: middle">
+                                        <a href="{:U('admin/dynamic/add', array('id' => $tag['id']))}" class="btn btn-xs btn-warning">增加动态</a>
                                         <a href="{:U('admin/project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
                                         <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
                                         <input type="button" class="btn btn-xs btn-info" data-id="{$tag.id}" data-rate-2="{$tag.float_rate}" data-rate-1="{$tag.fixed_rate}" value="分红比例" name="rate">

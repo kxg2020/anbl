@@ -77,8 +77,13 @@
 				
 			</div>
 			<div class="comment">
-				<div>
-					<p class="title">评论</p>
+				<ul class="switch">
+					<li id="schedule" class="choice">项目进度</li>
+					<li id="forecast">收益预测</li>
+					<li id="commentLi">评论</li>
+				</ul>
+				<div class="commentLi" style="display: none;">
+
 					<!--<ul class="comment_ul">
 						<li class="comment_choice chk" _type="1">导演</li>
 						<li _type="2" class="chk">演员</li>
@@ -97,7 +102,14 @@
 					</div>
 					<div class="tcdPageCode"></div>
 				</div>
+				<div class="schedule">
+					<volist name="dynamic" id="info">
+					<li><time>{:date('Y-m-d',$info['create_time'])}<img src="__PUBLIC__/wang/details/img/sound.png" ></time><div>{:htmlspecialchars_decode($info['content'])}</div></li>
+					</volist>
+				</div>
+				<div class="forecast" style="display: none">
 
+				</div>
 			</div>
 		</div>
 		<div class="suport_bg" style="display: none;">
@@ -144,6 +156,7 @@
 		</div>
 		<input type="hidden" value="{$count_1}" name="pages_1">
 	</div>
+
 	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
 	<script src='__PUBLIC__/wang/common_js/common.js'></script>
 	<script src='__PUBLIC__/wang/details/details.js'></script>
@@ -200,6 +213,7 @@
 					layer.msg('请先登录再评论');
 					return ;
 				}
+
 				//>> 获取评论内容
 				var content = $('#mainContent').val();
 				var id = $('input[name = movie_id]').val();

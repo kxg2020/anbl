@@ -321,21 +321,7 @@ margin-right: 8px;
   text-align: center;
   margin-bottom: 37px;
 }
-.comment ul{
-  width: 100%;
-  height: 70px;
-}
-.comment ul li{
-  width: 25%;
-  float: left;
-  text-align: center;
-  font-size: 30px;
-  color: #999;
-  cursor: pointer;
-}
-.comment ul .comment_choice{
-  color: #e50909
-}
+
 .loginorreg span:nth-child(1){
   color: #67c1fe;
 }
@@ -459,4 +445,51 @@ margin-right: 8px;
   background: #e89108;
   border-radius: 5px;
   cursor: pointer;
+}
+.comment ul.switch{
+  width: 95%;
+  height: auto;
+  margin:15px auto;
+  background: #e7ebef;
+  overflow: hidden;
+
+}
+.comment ul.switch li{
+  float: left;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+.comment ul.switch li.choice{
+  background: white;
+}
+.schedule li{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.schedule li time{
+  float: left;
+  color: #666;
+  display: block;
+  width: 20%;
+  word-wrap: break-word;
+  font-size: 14px;
+  height: 29px;
+  line-height: 29px;
+}
+.schedule li time img{
+  margin-left: 8px;
+  vertical-align: top;
+  margin-top: 5px;
+}
+.schedule li div{
+  width: 75%;
+  float: right;
+  border-bottom: 1px solid #999;
+  word-wrap: break-word;
+  padding-bottom: 15px;
+  font-size: 14px;
 }
