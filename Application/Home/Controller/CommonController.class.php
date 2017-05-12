@@ -213,7 +213,7 @@ class CommonController extends Controller{
 
         static $sum = 0;
         $model = M('Member');
-        $rows = $model ->where(['parent_id'=>$id])->select();
+        $rows = $model ->where(['parent_id'=>$id,'all_support_money'=>['egt',100]])->select();
 
         if(!empty($rows)){
 
