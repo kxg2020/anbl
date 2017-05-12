@@ -125,7 +125,7 @@
                                 <select name="is_pass" class="form-control">
                                     <option value="">--全部状态--</option>
                                     <option value="1" <if condition="I('get.is_pass') eq 1"> selected="selected"</if>>已通过</option>
-                                    <option value="0" <if condition="I('get.is_pass') eq 0"> selected="selected"</if>>未审核</option>
+                                    <option value="0" <if condition="I('get.is_pass') === '0'"> selected="selected"</if>>未审核</option>
                                     <option value="2" <if condition="I('get.is_pass') eq 2"> selected="selected"</if>>已拒绝</option>
                                 </select>
                             </div>

@@ -426,7 +426,7 @@ header .nav{
 }
 .identity_content>ul>li{
   float: left;
-  font-size: 14px;
+  font-size: 16px;
   height: 100%;
   line-height: 58px;
   padding-left: 15px;
@@ -714,7 +714,7 @@ header .nav{
 }
 .attend_content>ul>li{
 	    float: left;
-    font-size: 14px;
+    font-size: 16px;
     height: 100%;
     line-height: 58px;
     padding-left: 15px;
@@ -882,7 +882,7 @@ header .nav{
 }
 .money_content>ul>li{
 	float: left;
-    font-size: 14px;
+    font-size: 16px;
     height: 100%;
     line-height: 38px;
     padding-left: 15px;
@@ -1143,9 +1143,9 @@ margin-left: 94px;
 }
 .update_password>p>input{
 	border-radius: 3px;
-  width: 206px;
+  width: 174px;
   height: 30px;
-  padding-left: 5px;
+  padding-left: 37px;
   border: 1px solid #999;
   background: rgba(255, 255, 255, 0);
   color: white;
@@ -1341,7 +1341,7 @@ margin-left: 94px;
 	font-size: 16px;
 }
 .team_content table thead {
-	font-size: 20px;
+	font-size: 15px;
 	padding-top: 50px;
 }
 .team_content table tbody td:nth-child(2){
@@ -1818,7 +1818,7 @@ margin-left: 94px;
 }
 #team_nav li{
     float: left;
-    font-size: 14px;
+    font-size: 16px;
     height: 100%;
     line-height: 50px;
     padding-left: 15px;

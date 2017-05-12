@@ -73,6 +73,12 @@ class SumController extends CommonController
             ->join('inner join an_member_consume as b on a.id = b.member_id')
             ->where(['a.id'=>$id,'b.type'=>'投票'])
             ->select();
+        foreach ($consume_3 as &$value){
+
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+        }
+        unset($value);
         $consume_count = ceil(count($consume_3) / 17);
         $consume_3 = $this->pagination($consume_3,$pgNum ? $pgNum : 1,$pgSize ? $pgSize :17);
 

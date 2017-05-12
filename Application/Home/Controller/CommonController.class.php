@@ -101,10 +101,10 @@ class CommonController extends Controller{
                 }
 
                 //>> 判断上级已经有多少下线
-                $count = $this->group($row['id']);
+                $count = $this->groupTrue($row['id']);
 
                 //>> 团队一共多少人
-                $all = $this->allMembers($row['id']);
+                $all = $this->allMembersTrue($row['id']);
 
 
                 //>> 多少经纪人
@@ -172,6 +172,39 @@ class CommonController extends Controller{
         }
     }
 
+    /**
+     * 查询直推人数
+     */
+    private function groupTrue($id){
+
+        $res = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+
+        if(!empty($res)){
+
+            return count($res);
+        }
+    }
+
+    /**
+     * 团队(1.直推一部分，然后下线发展一部分。2.直推一人，再下线发展)
+     */
+    protected function allMembersTrue($id){
+
+        static $sum = 0;
+        $model = M('Member');
+        $rows = $model ->where(['parent_id'=>$id,'is_true'=>1])->select();
+
+        $count = count($rows);
+        $sum += $count;
+
+        if(!empty($rows)){
+            foreach($rows as $k => $v){
+
+                $this->allMembersTrue($v['id']);
+            }
+        }
+        return $sum;
+    }
 
     /**
      * 团队(1.直推一部分，然后下线发展一部分。2.直推一人，再下线发展)
@@ -180,7 +213,7 @@ class CommonController extends Controller{
 
         static $sum = 0;
         $model = M('Member');
-        $rows = $model ->where(['parent_id'=>$id])->select();
+        $rows = $model ->where(['parent_id'=>$id,'all_support_money'=>['egt',100]])->select();
 
         if(!empty($rows)){
 
@@ -191,7 +224,7 @@ class CommonController extends Controller{
                 $this->allMembers($v['id']);
             }
         }
-        return ($sum / 2);
+        return $sum;
     }
 
 

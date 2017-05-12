@@ -158,9 +158,9 @@
 							<div class="save_update" id="save">保存更新</div>
 						</div>
 						<div class="update_password" style="display: none;">
-									<p><i></i><input style='padding-left:37px;width:174px;' name="password" type="password"><label>输入当前的登录密码</label></p>
-									<p><input type="password" placeholder="请输入密码" name="newpassword"><label>新密码</label></p>
-									<p><input type="password" placeholder="请再次输入" name="repassword"><label>确认新密码</label></p>
+									<p><i></i><input style='padding-left:37px;width:174px;' placeholder="请输入当前密码" name="password" type="password"><label>输入当前的登录密码</label></p>
+									<p><i></i><input type="password" placeholder="请输入新密码" name="newpassword"><label>新密码</label></p>
+									<p><i></i><input type="password" placeholder="请再次输入" name="repassword"><label>确认新密码</label></p>
 									<div class="save_update" id="editPassword">保存更新</div>
 						</div>
 
@@ -341,7 +341,7 @@
 					<div class="close_password"></div>
 						<div class="password_content">
 							<div class='money_modal'>
-								<span style="color: white;margin: 0 auto">直推:{:count($follower)}人<span style="margin-left: 55px;">未实名:{$notTrue}人</span><span style="margin-left: 55px;">团队:{$group}人</span><input class="search_xiaji" type="text" placeholder="请输入成员的手机号" value=""><input id="search_xiaji" type="button" value="搜索"></span>
+								<span style="color: white;margin: 0 auto">直推:{$follower}人<span style="margin-left: 55px;">未实名:{$notTrue}人</span><span style="margin-left: 55px;">团队:{$group}人</span><input class="search_xiaji" type="text" placeholder="请输入成员的手机号" value=""><input id="search_xiaji" type="button" value="搜索"></span>
 								<div class="team_total">
 									<div>
 										<div class="people_top" style="border-radius: 3px;" data-id="{$personal['id']}"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{$personal['username']}</if></div>

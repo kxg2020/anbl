@@ -13,17 +13,16 @@
 	<div class="content">
 		<if condition="empty($searchInfos)">
 			<div>
-				<img src="__PUBLIC__/wang/search/img/search_noresult_01.png" alt=""> <span>很抱歉没有找到"<a style="margin: 0px">{$searchno}</a>"相关的内容</span><a href="{:U('home/index/index')}">点击此处回到首页</a>
+				<img src="__PUBLIC__/wang/search/img/search_noresult_01.jpg" style="width: 220px;height: 220px" alt=""> <span>很抱歉没有找到"<a style="margin: 0px">{$searchno}</a>"相关的内容</span><a href="{:U('home/index/index')}">点击此处回到首页</a>
 			</div>
 		</if>
 		<volist name="searchInfos" id="info">
 		<ul>
 			<li><a href="{:U('home/index/detail',['id'=>$info['id']])}">
 				                        <div class="movie_content">
-											<p>{$info['name']}</p>
-											<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p>
+											<p>{$info['name']}</p><br>
+											<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p><br>
 											<p>出品单位：{$info.company}</p>
-											<p>剩余名额：<span>{$info['total_num']-$info['support_number']}</span> 人</p>
 											<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
 											<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
           								</div>
