@@ -341,6 +341,7 @@
 							<input class="back_title" type="button" value="返回到标题">
 							<input type="hidden" value="" id="question" name="question">
 							<input type="hidden" value="{$personal['username']}"  name="wode">
+							<input type="hidden" value="{$personal['money']}"  name="crrMoney">
 						</form>
 					</div>
 				</div>
@@ -422,6 +423,7 @@
 						});
 						//>> 点击确定
 						$('#queding').click(function(){
+						    crrMoney = parseInt($('input[name = crrMoney]').val());
 							username = $('.username01').val();
 							wodeusername = $('input[name = wode]').val();
 							_money = $('.money01').val();
@@ -458,6 +460,16 @@
 								});
 								return false;
 							}
+                            if(_money > crrMoney){
+                                layer.tips('转账阿纳豆不能大于当前余额', '.money01',{
+                                    tips:[3,'orange'],
+                                    time:2000,
+                                    end:function(){
+                                        $('.money01').val('').focus();
+                                    }
+                                });
+                                return false;
+                            }
 
 							if(_phone == '' || _phone.length > 6){
 								layer.tips('请填写正确的验证码', '.phone01',{

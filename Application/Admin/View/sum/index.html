@@ -103,28 +103,27 @@
                                         <table  class="display table table-bordered table-striped" >
                                             <thead>
                                             <tr>
-                                                <th class="text-center">会员</th>
-                                                <th class="text-center">阿纳豆</th>
-                                                <th class="text-center">类型</th>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">提现阿纳豆</th>
+                                                <th class="text-center">手续费</th>
+                                                <th class="text-center">实际提现</th>
                                                 <th class="text-center">状态</th>
-                                                <th class="text-center">备注</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <if condition="empty($performerInfos)">
+                                            <if condition="empty($tixian)">
                                                 <tr>
                                                     <td colspan="9">暂无数据</td>
                                                 </tr>
                                             </if>
-                                            <volist name="performerInfos" id="tag">
+                                            <volist name="tixian" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.name}</td>
-                                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
-                                                    <td style="vertical-align: middle">{$tag.type}</td>
-                                                    <td style="vertical-align: middle">{$tag.works}</td>
-                                                    <td style="vertical-align: middle">{$tag.fans_number}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">{$tag.charge}</td>
+                                                    <td style="vertical-align: middle">{$tag['money'] - $tag['charge']}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0">拒绝<elseif condition="$tag.is_pass eq 2">未审核<elseif condition="$tag.is_pass eq 1"/>通过 </if></td>
                                                     <td style="vertical-align: middle">{:date('Y-m-d',$tag['create_time'])}</td>
                                                     <td style="vertical-align: middle">
                                                         <a href="{:U('admin/works/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>

@@ -5,6 +5,7 @@ class SumController extends CommonController
 {
 
     public function index($id){
+
         // 接收会员id
         $id = intval($id);
 
@@ -98,6 +99,9 @@ class SumController extends CommonController
         $rows = $this->pagination($rows,1,4);
         //>> 查询积分制度表
         $integral = M('IntegralInstitution')->select();
+
+        //>> 查询提现
+        $tiXian = M('MemberCash')->where(['member_id'=>$id])->select();
 
         //>> 取出当前用户的积分
         $crrIntegral = $row['integral'];
@@ -227,6 +231,7 @@ class SumController extends CommonController
             'supportSituation'=>$rows,
             'supportMoney'=>$supportMoney ? $supportMoney : 0.00,
             'secretPhone'=>$secretPhone,
+            'tixian'=>$tiXian
         ]);
 
         $this->display('sum/index');

@@ -161,6 +161,7 @@ class PersonalController extends CommonController{
      */
     public function index(){
 
+
         $paramArr = $_REQUEST;
 
 
@@ -475,6 +476,12 @@ class PersonalController extends CommonController{
                     if($paramArr['money'] > $row['money']){
 
                         die($this->_printError('1052'));
+                    }
+
+                    //>> 提现金额加手续费是否大于余额，如果大于则不能提现
+                    if(($paramArr['money'] + $paramArr['money'] * 0.1) > $row['money']){
+
+                        die($this->_printError('1070'));
                     }
 
                     //>> 判断金额和协议
@@ -1064,6 +1071,7 @@ class PersonalController extends CommonController{
                 $res = M('Member')->where(['username'=>$this->userInfo['username']])->save(['money'=>['exp','money-'.$paramArr['money']]]);
                 $insertDataA = [
                     'member_id'=>$this->userInfo['id'],
+                    'to_username'=>$paramArr['username'],
                     'money'=>$paramArr['money'],
                     'type'=>'转出',
                     'create_time'=>time(),
@@ -1074,6 +1082,7 @@ class PersonalController extends CommonController{
                 $user = M('Member')->where(['username'=>$paramArr['username']])->find();
                 $insertDataB = [
                     'member_id'=>$user['id'],
+                    'from_username'=>$this->userInfo['username'],
                     'type'=>4,
                     'money'=>$paramArr['money'],
                     'create_time'=>time(),
