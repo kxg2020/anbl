@@ -614,10 +614,13 @@ class OrderController extends CommonController
     public function orderRecharge(){
 
         $paramArr = $_REQUEST;
+
+
         $start_time = strtotime(I('get.start_time'));
         $end_time = strtotime(I('get.end_time'))+86400;
         $where = [];
        if(!empty($paramArr)){
+
            //>> 查询记录
            if(!empty($paramArr['order_number'])){
                $where['a.order_number'] = $paramArr['order_number'];
@@ -646,13 +649,13 @@ class OrderController extends CommonController
            if(!empty($paramArr['id'])){
                $where['a.id'] = $paramArr['id'];
            }
-           if(strlen($paramArr['is_pass'])){
-               if($where['a.is_pass'] == 0){
-                   $where['a.is_pass'] =$paramArr['is_pass'];
-               }
-           }
+
+           if (I('get.is_pass', '') || I('get.is_pass', '')==='0' ) {
+           $where['a.is_pass'] = I('get.is_pass', '');
+       }
 
        }
+
 
         $count = M('MemberRecharge as a ')
             ->field('a.*,b.username,c.name as payname')
@@ -667,8 +670,8 @@ class OrderController extends CommonController
         $rows = M('MemberRecharge as a ')->field('a.*,b.username,c.name as payname')
             ->join('left join an_member as b on a.member_id = b.id')
             ->join('left join an_pay as c on c.id=a.type')
-            ->where(['is_pass'=>1])
             ->order('create_time desc')
+            ->where($where)
             ->select();
 
         $allPassMoney = 0;
@@ -933,7 +936,8 @@ class OrderController extends CommonController
             exit;
         }
         // 删除成功直接回到首页
-        $this->redirect('admin/order/recharge');
+        $this->redirect('admin/order/orderRecharge');
+        exit;
     }
 
 }
