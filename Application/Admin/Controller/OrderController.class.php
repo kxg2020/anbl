@@ -825,7 +825,7 @@ class OrderController extends CommonController
             $user = M('Member')->where(['id'=>$userId])->find();
             //>>将用户的余额重新恢复
             $updateData = [
-                'money'=>$paramArr['charge'] + $paramArr['money'] + $user['money']
+                'money'=>$paramArr['money'] + $user['money']
             ];
             $re = M('Member')->where(['id'=>$userId])->save($updateData);
             if($res && $re){

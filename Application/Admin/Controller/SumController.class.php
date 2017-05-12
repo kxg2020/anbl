@@ -37,8 +37,9 @@ class SumController extends CommonController
 
         //>> 查询消费情况(支持)
 
-        $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number')
+        $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number,c.name as cname')
             ->join('inner join an_member_support as b on a.id = b.member_id')
+            ->join('inner join an_project as c on c.id = b.project_id')
             ->where(['a.id'=>$id])
             ->select();
         if(!empty($consume_1)){
@@ -70,7 +71,7 @@ class SumController extends CommonController
         //>> 投票记录
         $consume_3 = $personModel->field('a.username,b.*')
             ->join('inner join an_member_consume as b on a.id = b.member_id')
-            ->where(['a.id'=>$this->userInfo['id'],'b.type'=>'投票'])
+            ->where(['a.id'=>$id,'b.type'=>'投票'])
             ->select();
         $consume_count = ceil(count($consume_3) / 17);
         $consume_3 = $this->pagination($consume_3,$pgNum ? $pgNum : 1,$pgSize ? $pgSize :17);
@@ -79,13 +80,14 @@ class SumController extends CommonController
         $topLeader = $row;
 
 
+
         //>> 所有收益
-        $allGet = M('MemberProfit')->where(['member_id'=>$this->userInfo['id']])->order('create_time desc')->select();
+        $allGet = M('MemberProfit')->where(['member_id'=>$id])->order('create_time desc')->select();
         $allc = ceil(count($allGet) / 17);
         $allGet = $this->pagination($allGet,$pgNum ? $pgNum: 1,$pgSize ? $pgSize :17);
 
         //>> 转账消费
-        $allConsume = M('MemberConsume')->where(['member_id'=>$this->userInfo['id'],'type'=>'转出'])->select();
+        $allConsume = M('MemberConsume')->where(['member_id'=>$id,'type'=>'转出'])->select();
         $allcon = ceil(count($allConsume) / 17);
         $allConsume = $this->pagination($allConsume,$pgNum ? $pgNum : 1,$pgSize ? $pgSize :17);
 

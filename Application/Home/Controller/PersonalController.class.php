@@ -478,11 +478,6 @@ class PersonalController extends CommonController{
                         die($this->_printError('1052'));
                     }
 
-                    //>> 提现金额加手续费是否大于余额，如果大于则不能提现
-                    if(($paramArr['money'] + $paramArr['money'] * 0.1) > $row['money']){
-
-                        die($this->_printError('1070'));
-                    }
 
                     //>> 判断金额和协议
                     if($paramArr['money'] <= 700){
@@ -496,7 +491,7 @@ class PersonalController extends CommonController{
 
                     //>> 提取现金，生成订单
                     $updateData = [
-                        'money'=>$row['money'] - $paramArr['money']-$paramArr['money']*0.1,
+                        'money'=>$row['money'] - $paramArr['money'],
                     ];
 
                     M('Member')->startTrans();
