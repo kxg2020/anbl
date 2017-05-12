@@ -1419,10 +1419,10 @@ margin-left: 94px;
 .search_div{
 	border-radius: 3px;
 	width: 700px;
-	height: 560px;
+	height: 440px;
 	position: absolute;
 	z-index: 100;
-	top:40px; left: 0;
+	top:160px; left: 0;
 	background: white;
 }
 .search_div h3{

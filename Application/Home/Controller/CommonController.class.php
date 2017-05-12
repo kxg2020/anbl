@@ -163,7 +163,7 @@ class CommonController extends Controller{
      */
     private function group($id){
 
-        $res = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $res = M('Member')->where(['parent_id'=>$id])->select();
 
         if(!empty($res)){
 
@@ -179,7 +179,7 @@ class CommonController extends Controller{
 
         static $sum = 0;
         $model = M('Member');
-        $rows = $model ->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $rows = $model ->where(['parent_id'=>$id])->select();
 
         if(!empty($rows)){
 

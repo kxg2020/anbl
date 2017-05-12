@@ -307,7 +307,7 @@ class PersonalController extends CommonController
         $recruit = M('ProjectRecruit')->select();
 
         //>> 查询我的下级
-        $follower = M('Member')->where(['parent_id' => $this->userInfo['id'], 'is_true' => 1])->select();
+        $follower = M('Member')->where(['parent_id' => $this->userInfo['id']])->select();
 
         //>> 查询我的团队,实名后的
         $group = $this->allMembers($this->userInfo['id']);

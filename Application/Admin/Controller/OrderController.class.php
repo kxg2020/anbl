@@ -477,6 +477,20 @@ class OrderController extends CommonController
             ->select();
         foreach ($rows as &$info) {
             $info['create_time'] = date('Y-m-d', $info['create_time']);
+            $info['bank_card'] = strval($info['bank_card']);
+            $info['username'] = strval($info['username']);
+           switch ($info['is_pass']){
+               case 0:
+                   $info['is_pass'] = '拒绝';
+                   break;
+               case 1:
+               $info['is_pass'] = '通过';
+               break;
+               case 2:
+                   $info['is_pass'] = '未审核';
+                   break;
+
+           }
         }
         unset($info);
 
@@ -487,6 +501,9 @@ class OrderController extends CommonController
             array('money', '提现金额'),
             array('create_time', '提现时间'),
             array('is_pass', '状态'),
+            array('bank_card', '银行卡'),
+            array('bank_card_name', '开户名'),
+            array('address', '开户支行'),
         );
         $this->exportExcel(date('Y-m-d') . '_提现订单', $xlsCell, $rows);
     }
@@ -646,17 +663,11 @@ class OrderController extends CommonController
 
         // 实列化一个分页工具类
         $page = new Page($count,15);
+
         $rows = M('MemberRecharge as a ')->field('a.*,b.username,c.name as payname')
-            ->where($where)
             ->join('left join an_member as b on a.member_id = b.id')
             ->join('left join an_pay as c on c.id=a.type')
-            ->limit($page->firstRow, $page->listRows)
-            ->order('create_time desc')
-            ->select();
-        $rowes = M('MemberRecharge as a ')->field('a.*,b.username,c.name as payname')
-            ->join('left join an_member as b on a.member_id = b.id')
-            ->join('left join an_pay as c on c.id=a.type')
-            ->limit($page->firstRow, $page->listRows)
+            ->where(['is_pass'=>1])
             ->order('create_time desc')
             ->select();
 
@@ -667,8 +678,8 @@ class OrderController extends CommonController
         $toDayRefuse = 0;
         $toDayPass = 0;
 
-        //>> 对审核通过的和未通过的金额求和
-        foreach ($rowes as $key => $value){
+        //>> 对审核通过的和未通过的金额求和,2是拒绝，1是通过，0是未审核
+        foreach ($rows as $key => $value){
             switch ($value['is_pass']){
 
                 case 1:
@@ -679,12 +690,12 @@ class OrderController extends CommonController
 
                 case 0:
 
-                    $allRefuseMoney += $value['money'];
+                     $allNotPassMoney += $value['money'];
 
                     break;
                 case 2:
 
-                    $allNotPassMoney += $value['money'];
+                    $allRefuseMoney += $value['money'];
 
                     break;
             }
@@ -704,7 +715,13 @@ class OrderController extends CommonController
         }
 
 
-
+        $rowes = M('MemberRecharge as a ')->field('a.*,b.username,c.name as payname')
+            ->join('left join an_member as b on a.member_id = b.id')
+            ->join('left join an_pay as c on c.id=a.type')
+            ->limit($page->firstRow, $page->listRows)
+            ->where($where)
+            ->order('create_time desc')
+            ->select();
 
         // 生成分页DOM结构
         $pages = $page->show();
@@ -718,7 +735,7 @@ class OrderController extends CommonController
             'toDayRecharge'=>$toDayRecharge
         ]);
         $this->assign('pages',$pages);
-        $this->assign('order',$rows);
+        $this->assign('order',$rowes);
         $this->assign('count',$count);
         $this->display('order/recharge');
     }
