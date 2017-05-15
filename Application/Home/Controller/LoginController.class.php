@@ -26,10 +26,23 @@ class LoginController extends CommonController{
 
         $paramArr = $_REQUEST;
 
+
+        foreach ($paramArr as &$value){
+
+            //>> 对特殊字符加转义
+            $value = addslashes($value);
+
+            //>> 对html标签加过滤
+            $value = htmlspecialchars($value);
+        }
+        unset($value);
+
         if(!empty($paramArr)){
 
             $userModel = M('Member');
             if(isset($paramArr['username']) && !empty($paramArr['username']) && is_numeric($paramArr['username'])){
+
+
 
                 //>> 判断用户名
                 $res = $this->checkPhone($paramArr['username']);

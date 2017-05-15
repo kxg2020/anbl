@@ -94,6 +94,11 @@ class CommonController extends Controller{
                 //>> 查询投资
                 $support = $row['all_support_money'];
 
+
+                if($support == 0){
+
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>0]);
+                }
                 //>> 判断投资是否满xx,满xx升级为支持者
                 if($support >= $zcArr['support']){
 
@@ -113,8 +118,10 @@ class CommonController extends Controller{
                 //>> 多少制片人
                 $zhipian = $this->getZhiPianRen($row['id']);
 
+
                 //>> 直推xxx人，升级为经纪人
                 if($count >= $jjArr['follower'] && $support >= $jjArr['support'] ){
+
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }

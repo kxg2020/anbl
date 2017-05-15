@@ -401,7 +401,7 @@ class PersonalController extends CommonController
         $paramArr = $_REQUEST;
 
 
-        $res = M('Member')->where(['parent_id' => $paramArr['id'],])->order('is_true')->select();
+        $res = M('Member')->field('username,role,all_support_money,realname,id,is_true')->where(['parent_id' => $paramArr['id'],])->order('is_true')->select();
         $sum = 0;
         foreach ($res as &$value) {
             //>> 所有收益
