@@ -1132,6 +1132,47 @@
 										layer.tips('请输入正确的数字','input[name = rechargeMoney]');
 									}
 								});
+								$('input[name = rechargeMoney1]').blur(function(){
+									//>> 获取内容
+									data = $(this).val();
+									console.log(data)	
+									if(data == ''){
+										layer.tips('请输入充值阿纳豆数额','input[name = rechargeMoney1]');
+										return false;
+									}
+									if(!isNaN(data)){
+										//>> 判断当前的数字值
+										if(data <= 700 ){
+											//在这里面输入任何合法的js语句
+											layer.open({
+												btn:['确定'],
+												btn1:function(){
+													$.ajax({
+														'type':'post',
+														'dataType':'json',
+														'url':location.protocol+'//'+window.location.host+'/Home/Personal/agree',
+														'data':{
+															'agree':$('input[type = checkbox]:checked').val()
+														},
+														complete:function(){
+															layer.closeAll('page');
+														}
+													});
+
+												},
+												btnAlign: 'c',
+												type: 1 //Page层类型
+												,area: ['500px', '700px']
+												,title: '阿纳巴里用户协议'
+												,shade: 0.6 //遮罩透明度
+												,anim: 1 //0-6的动画形式，-1不开启
+												,content: '<div style="padding:50px;overflow: auto">{:htmlspecialchars_decode($systemInfo['chonzhi'])}<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+											});
+										}
+									}else{
+										layer.tips('请输入正确的数字','input[name = rechargeMoney1]');
+									}
+								});
 
 								//这里弹出层显示的内容你 来写快一点 就是下面的字
 								$(function(){
