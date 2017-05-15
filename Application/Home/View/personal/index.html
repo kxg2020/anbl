@@ -589,7 +589,7 @@
 
 									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
 									<td <if condition="$al['is_ok'] eq 1">style="color: forestgreen"<else />style="color: red"</if>><if condition="$al['is_ok'] eq 1">正常<else />失效</if></td>
-									<td style="color: red">{$al.intro}</td>
+									<td style="color: red"><if condition="$al['type'] eq 4">转入账户 :{$al.from_username}<else/>{$al.intro}</if></td>
 								</tr>
 							</volist>
 							</tbody>
@@ -1425,6 +1425,13 @@
 				if(content == ''){
 
 					layer.msg('问题内容不能为空');
+					return false;
+				}
+				
+				//>> 正则过滤js
+				reg = /^[^\|"'<>/]*$/;
+				if(reg.test(content) || reg.test(title)){
+				layer.msg('含非法字符,请重新输入');
 					return false;
 				}
 				$.ajax({

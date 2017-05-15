@@ -223,7 +223,7 @@ class AccountController extends CommonController{
         $crrDay = date('Y-m-d');
         $lastDay = $this->getTheMonth();
         //>> 判断当前时间是否是周五
-        if(date('w') != ''){
+        if(date('w') == 5){
             if(!empty($paramArr)){
 
                 if(isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])){
@@ -238,11 +238,16 @@ class AccountController extends CommonController{
 
                         die($this->_printError('1052'));
                     }
+                    //>> 判断余额是否大于350
+                    if ($row['money'] < 350) {
+
+                        die($this->_printError('1066'));
+                    }
 
 
                     //>> 提取现金，生成订单
                     $updateData = [
-                        'money'=>$row['money'] - $paramArr['money']-$paramArr['money']*0.1,
+                        'money'=>$row['money'] - $paramArr['money'],
                     ];
 
                     M('Member')->startTrans();
@@ -295,7 +300,7 @@ class AccountController extends CommonController{
 
                     //>> 提取现金，生成订单
                     $updateData = [
-                        'money'=>$row['money'] - $paramArr['money'] - $paramArr['money'] * 0,
+                        'money'=>$row['money'] - $paramArr['money'],
                     ];
 
                     M('Member')->startTrans();

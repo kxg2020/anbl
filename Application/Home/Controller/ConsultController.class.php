@@ -14,6 +14,15 @@ class ConsultController extends CommonController{
 
         if(!empty($paramArr)){
 
+            //>> 将提交的内容反编译
+            $paramArr['title'] = htmlspecialchars_decode($paramArr['title']);
+            $paramArr['content'] = htmlspecialchars_decode($paramArr['content']);
+
+            //>> 正则过滤
+            $paramArr['title'] = preg_replace("/<(.*?)>/","",$paramArr['title']);
+
+            $paramArr['content'] = preg_replace("/<(.*?)>/","",$paramArr['content']);
+
             $insertData = [
                 'title'=>$paramArr['title'],
                 'content'=>$paramArr['content'],

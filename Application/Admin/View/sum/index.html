@@ -116,7 +116,7 @@
                                                     <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 1" ><span style="color: red">-{$tag.money}</span><elseif condition="$tag['is_pass'] eq 2" /><span style="color: forestgreen">+{$tag.money}</span><else/><span style="color: orange">{$tag.money}</span></if></td>
                                                     <td style="vertical-align: middle">{$tag.charge}</td>
                                                     <td style="vertical-align: middle">{$tag['money'] - $tag['charge']}</td>
-                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0"><span class="label label-warning">未审核</span><elseif condition="$tag.is_pass eq 2"/><span class="label label-danger">拒绝</span><elseif condition="$tag.is_pass eq 1"/><span class="label label-success">警告标签</span></if></td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0"><span class="label label-warning">未审核</span><elseif condition="$tag.is_pass eq 2"/><span class="label label-danger">拒绝</span><elseif condition="$tag.is_pass eq 1"/><span class="label label-success">通过</span></if></td>
                                                     <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
                                             </volist>
