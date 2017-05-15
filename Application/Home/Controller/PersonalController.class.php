@@ -188,7 +188,7 @@ class PersonalController extends CommonController
         $consume_1 = $personModel->field('a.username,b.support_money,b.create_time,b.order_number,c.name as cname')
             ->join('inner join an_member_support as b on a.id = b.member_id')
             ->join('inner join an_project as c on b.project_id = c.id')
-            ->where(['a.id' => $this->userInfo['id']])
+            ->where(['a.id' => $this->userInfo['id'],'b.is_true'=>0])
             ->select();
 
         if (!empty($consume_1)) {
@@ -401,7 +401,7 @@ class PersonalController extends CommonController
         $paramArr = $_REQUEST;
 
 
-        $res = M('Member')->field('username,role,all_support_money,realname,id,is_true')->where(['parent_id' => $paramArr['id'],])->order('is_true')->select();
+        $res = M('Member')->field('username,role,all_support_money,realname,id,is_true')->where(['parent_id' => $paramArr['id']])->order('is_true')->select();
         $sum = 0;
         foreach ($res as &$value) {
             //>> 所有收益
