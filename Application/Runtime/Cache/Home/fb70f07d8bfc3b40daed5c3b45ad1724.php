@@ -1,45 +1,64 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no"/>
-	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
-	<link rel="stylesheet" href="__PUBLIC__/wang/personal_center.css">
-	<link href="__CSS__/layui.css" rel="stylesheet">
+	<link rel="stylesheet" href="/Public/wang/common_css/reset.css">
+	<link rel="stylesheet" href="/Public/wang/personal_center.css">
+	<link href="/Public/css/layui.css" rel="stylesheet">
 	<title>阿纳巴里</title>
 </head>
 <body>
 	<header>
-		<include file="layout:header" />
+		<div class="nav">
+    <div>
+        <a class="logo" href="<?php echo U('home/index/index');?>"><img src="/Public/wang/img/logo.png" alt=""></a>
+        <ul class="top_nav">
+            <li><a href="<?php echo U('home/index/index');?>"><p>首页</p><p>Home</p></a></li>
+            <li style="position: relative;"><a href="#"><p>公司介绍</p><p>Company</p></a>
+                <dl>
+                    <dd><a href="<?php echo U('home/company/about');?>">关于我们</a></dd>
+                    <dd><a href="<?php echo U('home/company/index');?>">公司文化</a></dd>
+                </dl>
+            </li>
+            <li><a href="<?php echo U('home/market/index');?>"><p>电影超市</p><p>Movie store</p></a></li>
+            <li><a href="<?php echo U('home/factory/index');?>"><p>星工场</p><p>Star Factory</p></a></li>
+            <li><a href="<?php echo U('Home/Personal/index');?>"><p>个人中心</p><p>Personal Center</p></a></li>
+        </ul>
+        <ul class="login_reg">
+            <li  class="search_li" style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
+            <?php if($userInfo['username'] == ''): ?><li ><a id="login" href="<?php echo U('Home/Login/index');?>">登录 |</a></li>
+                <li ><a href="<?php echo U('Home/Register/index');?>">注册</a></li><?php else: ?>
+                <li class="user_img"><span><?php echo telephoneNumber($userInfo['username']);?></span></li>
+                <li class="login_out"><a href="<?php echo U('Home/Login/logout');?>">退出登录</a></li><?php endif; ?>
+
+        </ul>
+    </div>
+</div>
+<script src='/Public/wang/common_js/jquery-1.12.4.min.js'></script>
+<script type="application/javascript"></script>
 	</header>
 	<div class="body">
 		<div class="body_left">
 		<div>
 		 <div>
-			 <p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv"  >{:getUserLevelsName($personal['role'])}</span></p>
+			 <p class="username"><span style="margin-left: 17px;"><?php if($personal['is_true'] == 1): echo ($personal['realname']); else: echo telephoneNumber($personal['username']); endif; ?></span>   <span id="user_lv"  ><?php echo getUserLevelsName($personal['role']);?></span></p>
 <!--
-			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
-			Lv{$personal['level']}:{$personal['money']}阿纳豆
-			</if></div>
+			<div class="leval"><?php if($allInfo['status'] == 1): ?>还差<?php echo ($allInfo['integral']); ?>个阿纳豆，您就升到Lv<?php echo ($allInfo['level']); ?>啦<?php else: ?>
+			Lv<?php echo ($personal['level']); ?>:<?php echo ($personal['money']); ?>阿纳豆<?php endif; ?></div>
 			-->
 
-			 <input type="hidden" name="safeLevel" value="{$safeLevel}">
+			 <input type="hidden" name="safeLevel" value="<?php echo ($safeLevel); ?>">
 
-			<div class="money"><p>已支持阿纳豆: <span>{$supportMoney}</span></p><p>剩余阿纳豆: <span>{$personal['money']}</span></p></div>
-			<div class="money"><p>收益阿纳豆: <span>{$personal['profit']}</span></p><p>佣金阿纳豆: <span>{$personal['commission']}</span></p></div>
+			<div class="money"><p>已支持阿纳豆: <span><?php echo ($supportMoney); ?></span></p><p>剩余阿纳豆: <span><?php echo ($personal['money']); ?></span></p></div>
+			<div class="money"><p>收益阿纳豆: <span><?php echo ($personal['profit']); ?></span></p><p>佣金阿纳豆: <span><?php echo ($personal['commission']); ?></span></p></div>
 			<div class="safe">账户安全等级<span><i style="" id="safe"></i></span>
-				<if condition="$personal['safe_level'] eq 1">
-					<span>低</span>
-				</if>
-				<if condition="$personal['safe_level'] eq 2">
-					<span>中</span>
-				</if>
-				<if condition="$personal['safe_level'] eq 3">
-					<span>高</span>
-				</if>
-				<if condition="($personal['safe_level'] eq 1 ) or ($personal['safe_level'] eq 2 )"><span class="up_btn">点击提升</span></if></div>
-			<div class="user_inform" id="phone">{$secretPhone}</div>
-			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
+				<?php if($personal['safe_level'] == 1): ?><span>低</span><?php endif; ?>
+				<?php if($personal['safe_level'] == 2): ?><span>中</span><?php endif; ?>
+				<?php if($personal['safe_level'] == 3): ?><span>高</span><?php endif; ?>
+				<?php if(($personal['safe_level'] == 1 ) or ($personal['safe_level'] == 2 )): ?><span class="up_btn">点击提升</span><?php endif; ?></div>
+			<div class="user_inform" id="phone"><?php echo ($secretPhone); ?></div>
+			<div class="user_inform" id="name"><?php if($personal['is_true'] == 0): ?>未实名<?php else: ?><span style="color: forestgreen">已实名</span><?php endif; ?></div>
 			<div><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span></div>
 		 </div>
 			<p id="repeat_bg">点击替换背景</p>
@@ -65,21 +84,21 @@
 							<li>密码管理</li>
 						</ul>
 						<div class="people_data">
-							<div class="user"><input type="text" value="{$personal['username']}" disabled></div>
-							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;">邀请码:</span><span style="color: green;">{$personal['invite_key']}</span></div>
+							<div class="user"><input type="text" value="<?php echo ($personal['username']); ?>" disabled></div>
+							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;">邀请码:</span><span style="color: green;"><?php echo ($personal['invite_key']); ?></span></div>
 							<div style="margin-bottom: 38px;"><span style="margin-right: 23px;width: 80px;display: inline-block;">推广链接:</span><input type="button" value="点击复制" class="copy" data-clipboard-target="#copy_content">
 								<br>
-								<input type="text" id="copy_content" readonly value="http://www.araberrimovie.com/home/register/index/invite_key/{$personal['invite_key']}">	</div>
+								<input type="text" id="copy_content" readonly value="http://www.araberrimovie.com/home/register/index/invite_key/<?php echo ($personal['invite_key']); ?>">	</div>
 
 
-							<div class="real_name"><span>实名:</span><if condition="$personal['is_true'] eq 0"><span>未实名</span><else/><span style="color: forestgreen">已实名</span></if></div>
+							<div class="real_name"><span>实名:</span><?php if($personal['is_true'] == 0): ?><span>未实名</span><?php else: ?><span style="color: forestgreen">已实名</span><?php endif; ?></div>
 							<div class="sex">
 								<span>性别:</span>
-								<span><input type="radio" name="sex" value="" data-sex="1" <if condition="$userInfo['sex'] eq 1">checked="checked"</if>>男</span>
+								<span><input type="radio" name="sex" value="" data-sex="1" <?php if($userInfo['sex'] == 1): ?>checked="checked"<?php endif; ?>>男</span>
 </span>
-								<span><input type="radio" name="sex" value="" data-sex="2" <if condition="$userInfo['sex'] eq 2">checked="checked"</if>>女</span>
+								<span><input type="radio" name="sex" value="" data-sex="2" <?php if($userInfo['sex'] == 2): ?>checked="checked"<?php endif; ?>>女</span>
 							</div>
-							<input type="hidden" value="{$personal['level']}" id="dengji">
+							<input type="hidden" value="<?php echo ($personal['level']); ?>" id="dengji">
 							<div class="user_leval"><span >用户等级:</span><p><i id="bg_1"></i><span id="d" style="border-radius: 10px">
 
 							</span></p></div>
@@ -90,35 +109,35 @@
 								var lvR = $('#dengji').val();
 								$('#d').css('left',arr[lv]);
 								$('#d').text(brr[lv]);
-								$('#bg_1').css({'background':'url('+'__PUBLIC__/wang/img/level'+lvR+'.png)','left':arr[lv]});
+								$('#bg_1').css({'background':'url('+'/Public/wang/img/level'+lvR+'.png)','left':arr[lv]});
 								
 								//console.log(lvR)
 							</script>
 							<div class="save_update" id="sex">保存更新</div>
 						</div>
 						<div class="safe_center"  style="display: none;" >
-							<div class="bind_username"><span><i></i><if condition="$userInfo['realname'] eq ''"><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}"><else/><input type="text" placeholder="请输入您的姓名" name="realname" value="{$userInfo['realname']}" disabled></if></span><label>*注意：必须是真实姓名</label></div>
-							<div class="bind_idcard"><span><i></i><if condition="$userInfo['id_card'] eq ''"><input type="text" placeholder="请输入您的身份证号" value="510722199112171554" name="id_card"><else/><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="{$userInfo['id_card']}"></if></span><label>*身份证号必须正确</label></div>
+							<div class="bind_username"><span><i></i><?php if($userInfo['realname'] == ''): ?><input type="text" placeholder="请输入您的姓名" name="realname" value="<?php echo ($userInfo['realname']); ?>"><?php else: ?><input type="text" placeholder="请输入您的姓名" name="realname" value="<?php echo ($userInfo['realname']); ?>" disabled><?php endif; ?></span><label>*注意：必须是真实姓名</label></div>
+							<div class="bind_idcard"><span><i></i><?php if($userInfo['id_card'] == ''): ?><input type="text" placeholder="请输入您的身份证号" value="510722199112171554" name="id_card"><?php else: ?><input type="text" placeholder="请输入您的身份证号" name="id_card" disabled value="<?php echo ($userInfo['id_card']); ?>"><?php endif; ?></span><label>*身份证号必须正确</label></div>
 
 							<div id="line"></div>
 							<div class="bankcard1"> <i></i><select  id="bind_bank">
-										<option value="中国银行"   <if condition="$userInfo['bank_name'] eq '中国银行'">selected</if>>中国银行</option>
-										<option value="工商银行"  <if condition="$userInfo['bank_name'] eq '工商银行'">selected</if>>工商银行</option>
-										<option value="农业银行"  <if condition="$userInfo['bank_name'] eq '农业银行'">selected</if>>农业银行</option>
-										<option value="建设银行"  <if condition="$userInfo['bank_name'] eq '建设银行'">selected</if>>建设银行</option>
-										<option value="中国邮政储蓄银行"  <if condition="$userInfo['bank_name'] eq '中国邮政储蓄银行'">selected</if>>中国邮政储蓄银行</option>
-										<option value="招商银行"  <if condition="$userInfo['bank_name'] eq '招商银行'">selected</if>>招商银行</option>
+										<option value="中国银行"   <?php if($userInfo['bank_name'] == '中国银行'): ?>selected<?php endif; ?>>中国银行</option>
+										<option value="工商银行"  <?php if($userInfo['bank_name'] == '工商银行'): ?>selected<?php endif; ?>>工商银行</option>
+										<option value="农业银行"  <?php if($userInfo['bank_name'] == '农业银行'): ?>selected<?php endif; ?>>农业银行</option>
+										<option value="建设银行"  <?php if($userInfo['bank_name'] == '建设银行'): ?>selected<?php endif; ?>>建设银行</option>
+										<option value="中国邮政储蓄银行"  <?php if($userInfo['bank_name'] == '中国邮政储蓄银行'): ?>selected<?php endif; ?>>中国邮政储蓄银行</option>
+										<option value="招商银行"  <?php if($userInfo['bank_name'] == '招商银行'): ?>selected<?php endif; ?>>招商银行</option>
 									</select>
 									<label>*开户银行</label>
 							</div>
-							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名"  name="bank_card_name" value="{$userInfo['bank_card_name']}"></span><label>*开户姓名</label></div>
-							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号"  name="bank_card" value="{$userInfo['bank_card']}"></span><label>*银行卡号</label></div>
+							<div class="bind_bankname"><span><i></i><input type="text" placeholder="请输入开户名"  name="bank_card_name" value="<?php echo ($userInfo['bank_card_name']); ?>"></span><label>*开户姓名</label></div>
+							<div class="bind_bankcard"><span><i></i><input type="text" placeholder="请输入开户卡号"  name="bank_card" value="<?php echo ($userInfo['bank_card']); ?>"></span><label>*银行卡号</label></div>
 
-							<div style="display: none"><span><input type="hidden"  placeholder="如:香港" name="city" value="{$userInfo['city']}"></span><label></label></div>
+							<div style="display: none"><span><input type="hidden"  placeholder="如:香港" name="city" value="<?php echo ($userInfo['city']); ?>"></span><label></label></div>
 
 							<div class="bind_otherbank">
 
-								<if condition="!empty($userInfo['city'])"><i></i><input type="text" value="{$userInfo['city']}" disabled><lable style="color: #ccc; margin-left: 50px;">*开户地址</lable><else/>
+								<?php if(!empty($userInfo['city'])): ?><i></i><input type="text" value="<?php echo ($userInfo['city']); ?>" disabled><lable style="color: #ccc; margin-left: 50px;">*开户地址</lable><?php else: ?>
 
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 23px;" id="city_choice">
 
@@ -144,15 +163,13 @@
 											</td>
 										</tr>
 
-									</table>
-
-								</if>
+									</table><?php endif; ?>
 							</div>
 
 
 
 
-							<div class="bind_otherbank"><i></i><span><input type="text"  name="address" value="{$userInfo['address']}"></span><label>*开户支行</label></div>
+							<div class="bind_otherbank"><i></i><span><input type="text"  name="address" value="<?php echo ($userInfo['address']); ?>"></span><label>*开户支行</label></div>
 
 
 							<div class="save_update" id="save">保存更新</div>
@@ -179,25 +196,21 @@
 							<li>我的收藏</li>
 						</ul>
 						<div class="my_suport" >
-								<volist name="supportSituation" id="s">
-
-									<div>
-										<img src="{$s['image_url']}" alt="" style="height: 180px;width: 420px">
+								<?php if(is_array($supportSituation)): $i = 0; $__LIST__ = $supportSituation;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$s): $mod = ($i % 2 );++$i;?><div>
+										<img src="<?php echo ($s['image_url']); ?>" alt="" style="height: 180px;width: 420px">
 										<div class="movie_content">
-											<p>片名:{$s['name']}</p>
-											<p>{$s['englishname']}</p>
-											<p>{$s['director']}/导演</p>
-											<p><span>{$s['support_number']}</span>人支持</p>
-											<p>类型:<span><if condition="$s['atype'] eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益:<span><if condition="$s['atype'] eq 1">{$s['fixed']}<else />{$s['float']}</if></span></p>
-											<p>已支持<span>{$s['support_money']}</span>阿纳豆</p>
-											<p><input type="button" class="cancel_suport" value="取消支持" data-id="{$s['aid']}"></p>
-											<a href="{:U('home/index/detail',['id'=>$s['project_id']])}" class="detail_search">查看详情</a>
+											<p>片名:<?php echo ($s['name']); ?></p>
+											<p><?php echo ($s['englishname']); ?></p>
+											<p><?php echo ($s['director']); ?>/导演</p>
+											<p><span><?php echo ($s['support_number']); ?></span>人支持</p>
+											<p>类型:<span><?php if($s['atype'] == 1): ?>月酬<?php else: ?>票房<?php endif; ?></span>&nbsp;&nbsp;收益:<span><?php if($s['atype'] == 1): echo ($s['fixed']); else: echo ($s['float']); endif; ?></span></p>
+											<p>已支持<span><?php echo ($s['support_money']); ?></span>阿纳豆</p>
+											<p><input type="button" class="cancel_suport" value="取消支持" data-id="<?php echo ($s['aid']); ?>"></p>
+											<a href="<?php echo U('home/index/detail',['id'=>$s['project_id']]);?>" class="detail_search">查看详情</a>
 										</div>
-									</div>
+									</div><?php endforeach; endif; else: echo "" ;endif; ?>
 
-								</volist>
-
-							<input type="hidden" name="page_1" value="{$count_1}">
+							<input type="hidden" name="page_1" value="<?php echo ($count_1); ?>">
 							<p id="demo8" style="position: absolute;left:5%;top: 450px;"></p>
 						</div>
 						<div id="cancel_div" style="display: none;">
@@ -207,19 +220,17 @@
 							<p><input type="button" class="sure_input" value="确定"><input type="button" class="cancek_input" value="取消"></p>
 						</div>
 						<div class="my_collect" style="display: none;">
-							<volist name="collection" id="c">
-								<div><img src="{$c['image_url']}" style="height: 100%;width: 100%;" alt="">
+							<?php if(is_array($collection)): $i = 0; $__LIST__ = $collection;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><div><img src="<?php echo ($c['image_url']); ?>" style="height: 100%;width: 100%;" alt="">
 									<div class="movie_content">
-										<p>片名:{$c['name']}</p>
-										<p>{$c['englishname']}</p>
-										<p>{$c['country']}/{$c['duration']}分钟</p>
-										<p>{$c['date']}/{$c['showaddress']}</p>
+										<p>片名:<?php echo ($c['name']); ?></p>
+										<p><?php echo ($c['englishname']); ?></p>
+										<p><?php echo ($c['country']); ?>/<?php echo ($c['duration']); ?>分钟</p>
+										<p><?php echo ($c['date']); ?>/<?php echo ($c['showaddress']); ?></p>
 										<p style="color: #e50909; float: right;"><i></i>已收藏</p>
-										<p style="text-align: right;"><input style="float: right;" type="button" data-id="{$c['cid']}" class="cancel_collect" value="取消收藏"></p>
+										<p style="text-align: right;"><input style="float: right;" type="button" data-id="<?php echo ($c['cid']); ?>" class="cancel_collect" value="取消收藏"></p>
 									</div>
-								</div>
-							</volist>
-							<input type="hidden" name="page_2" value="{$collectionCount}">
+								</div><?php endforeach; endif; else: echo "" ;endif; ?>
+							<input type="hidden" name="page_2" value="<?php echo ($collectionCount); ?>">
 							<p id="demo9" style="position: absolute;left:5%;top: 450px;"></p>
 						</div>
 					</div>
@@ -243,12 +254,12 @@
 							<li class="now_put">立即充值<span>>></span></li>
 						</ul>
 							<div class="put_money" style="display: none;">
-								<p>选择充值方式: <!--<span class="apply_style apply_style_choice" data-id="{$weixin['id']}">微信</span>--><span class="apply_style apply_style_choice" data-id="{$ali['id']}">支付宝</span><span class="apply_style" data-id="3">公司银联</span></p>
+								<p>选择充值方式: <!--<span class="apply_style apply_style_choice" data-id="<?php echo ($weixin['id']); ?>">微信</span>--><span class="apply_style apply_style_choice" data-id="<?php echo ($ali['id']); ?>">支付宝</span><span class="apply_style" data-id="3">公司银联</span></p>
 								<div id="zhifubaoDiv" style="display: block;">
 									<div class="apply11">
 									<div id="feiyinglian">
-										<!--<img id="weixing" src="{$weixin['image_url']}" alt="">-->
-										<img id="zhifubao" style="display: block;" src="{$ali['image_url']}" alt="">
+										<!--<img id="weixing" src="<?php echo ($weixin['image_url']); ?>" alt="">-->
+										<img id="zhifubao" style="display: block;" src="<?php echo ($ali['image_url']); ?>" alt="">
 								    </div>
 								    <p class="apply01">充值阿纳豆: <input type="text" name="rechargeMoney" placeholder="0.00"></p>
 									<div class="recharge001" style="position:relative;">交易凭证:<span style="margin-left: 20px;"><span style="height: 50px;width: 50px; text-align:center; line-height:50px;color:#e05959;cursor: pointer;display: inline-block;border: 1px dashed red" >+</span><input id="file_upload" style="cursor: pointer; width: 160px; height: 50px;"  class="money_file" type="file"></span>
@@ -260,12 +271,10 @@
 								</div>
 								<div id="yinlianDiv" style="display: none;">
 									 <div class="apply11">
-										 <volist name="yinlian" id="yin">
-											<div class="yinglian"><p>户主:{$yin['username']}</p>
-												<p>卡号:{$yin['account']}</p>
-												<p>开户支行:{$yin['bank']}</p>
-											</div>
-										</volist>
+										 <?php if(is_array($yinlian)): $i = 0; $__LIST__ = $yinlian;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$yin): $mod = ($i % 2 );++$i;?><div class="yinglian"><p>户主:<?php echo ($yin['username']); ?></p>
+												<p>卡号:<?php echo ($yin['account']); ?></p>
+												<p>开户支行:<?php echo ($yin['bank']); ?></p>
+											</div><?php endforeach; endif; else: echo "" ;endif; ?>
 										<p class="apply01" style="margin-top: 30px;">充值阿纳豆: <input type="text" name="rechargeMoney1" placeholder="0.00"></p>
 									    <div class="recharge001">交易凭证:<span style="margin-left: 20px;"><span style="height: 50px;width: 50px; text-align:center; line-height:50px;color:#e05959;cursor: pointer;display: inline-block;border: 1px dashed red" >+</span><input id="file_upload2" style="cursor: pointer; width: 160px; height: 50px;"  class="money_file" type="file"></span> 
 										<div id="container2"></div>
@@ -283,19 +292,19 @@
 							<input id="apply_yongjing" type="button" value="提现佣金">
 							<div class="apply_yuer">
 								<p>余额阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
-								<p>可提余额阿纳豆:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
+								<p>可提余额阿纳豆:<?php echo ($userInfo['money']); ?> <img src="/Public/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
 								<div class="question_div"></div>
 								<input type="button" value="确定" id="get_btn" class="ex" >
 							</div>
 							<div class="apply_shouyi" style="display: none">
 								<p>收益阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
-								<p>可提收益阿纳豆:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
+								<p>可提收益阿纳豆:<?php echo ($userInfo['money']); ?> <img src="/Public/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
 								<div class="question_div"></div>
 								<input type="button" value="确定" id="get_btn1" class="ex" >
 							</div>
 							<div class="apply_yongjing" style="display: none;">
 								<p>佣金阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
-								<p>可提佣金阿纳豆:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，免手续费。</span></p>
+								<p>可提佣金阿纳豆:<?php echo ($userInfo['money']); ?> <img src="/Public/wang/img/question.png" alt=""><span>每周五才可以提现，免手续费。</span></p>
 								<div class="question_div"></div>
 								<input type="button" value="确定" id="get_btn2" class="ex" >
 							</div>
@@ -311,16 +320,14 @@
 
 							</p>
 							<div id="ls">
-							<volist name="orderList" id="o">
-								<p>
-									<span>{:date('Y-m-d H:i:s',$o['create_time'])}</span>
-									<span>{$o.payname}</span>
-									<span>{$o.order_number}</span>
-									<span>{$o.money}</span>
-									<span><img src="__PUBLIC__/images/status/{$o.is_pass}.png"  style="height: auto;width: 40px"></span>
-									<span>{:mb_substr($o['remark'],0,12,'utf-8')}</span>
-								</p>
-							</volist>
+							<?php if(is_array($orderList)): $i = 0; $__LIST__ = $orderList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$o): $mod = ($i % 2 );++$i;?><p>
+									<span><?php echo date('Y-m-d H:i:s',$o['create_time']);?></span>
+									<span><?php echo ($o["payname"]); ?></span>
+									<span><?php echo ($o["order_number"]); ?></span>
+									<span><?php echo ($o["money"]); ?></span>
+									<span><img src="/Public/images/status/<?php echo ($o["is_pass"]); ?>.png"  style="height: auto;width: 40px"></span>
+									<span><?php echo mb_substr($o['remark'],0,12,'utf-8');?></span>
+								</p><?php endforeach; endif; else: echo "" ;endif; ?>
 						 </div>
 							<div id="demo60" style="margin-left: 42px;"></div>
 					</div>
@@ -354,10 +361,10 @@
 					<div class="close_password"></div>
 						<div class="password_content">
 							<div class='money_modal'>
-								<span style="color: white;margin: 0 auto">直推:{$follower}人<span style="margin-left: 55px;">未实名:{$notTrue}人</span><span style="margin-left: 55px;">团队:{$group}人</span><input class="search_xiaji" type="text" placeholder="请输入成员的手机号" value=""><input id="search_xiaji" type="button" value="搜索"></span>
+								<span style="color: white;margin: 0 auto">直推:<?php echo ($follower); ?>人<span style="margin-left: 55px;">未实名:<?php echo ($notTrue); ?>人</span><span style="margin-left: 55px;">团队:<?php echo ($group); ?>人</span><input class="search_xiaji" type="text" placeholder="请输入成员的手机号" value=""><input id="search_xiaji" type="button" value="搜索"></span>
 								<div class="team_total">
 									<div>
-										<div class="people_top" style="border-radius: 3px;" data-id="{$personal['id']}"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{$personal['username']}</if></div>
+										<div class="people_top" style="border-radius: 3px;" data-id="<?php echo ($personal['id']); ?>"><?php if($personal['is_true'] == 1): echo ($personal['realname']); else: echo ($personal['username']); endif; ?></div>
 									</div>
 								</div>
 								<div class="search_div" style="display: none;">
@@ -370,7 +377,7 @@
 						</div>
 
 						<input type="hidden" value="" id="images">
-						<input type="hidden" value="{$count}" id="count">
+						<input type="hidden" value="<?php echo ($count); ?>" id="count">
 					</div>
 					<p>A</p>
 					<p>R</p>
@@ -392,11 +399,9 @@
 						<p><span>我要提问<b>>></b></span></p>
 						<div class="answer_div" >
 						    <p style="font-size: 17px;" class="ask_p"><span>提问标题</span><span>时间</span><span>状态</span></p>
-							<volist name="question" id="q">
-							<p class="qdetail" data-id="{$q['id']}"><span>{$q['title']}</span><span>{:date('Y-m-d',$q['create_time'])}</span><if condition="$q['status'] eq 0"><span style="color: red">未回复</span><else/><span style="color: forestgreen">已回复</span></if></p>
-							<p style="display: none" id="{$q['id']}">{$q['content']}</p>
-							<p style="display: none" class="r{$q['id']}">{$q['reply']}</p>
-							</volist>
+							<?php if(is_array($question)): $i = 0; $__LIST__ = $question;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$q): $mod = ($i % 2 );++$i;?><p class="qdetail" data-id="<?php echo ($q['id']); ?>"><span><?php echo ($q['title']); ?></span><span><?php echo date('Y-m-d',$q['create_time']);?></span><?php if($q['status'] == 0): ?><span style="color: red">未回复</span><?php else: ?><span style="color: forestgreen">已回复</span><?php endif; ?></p>
+							<p style="display: none" id="<?php echo ($q['id']); ?>"><?php echo ($q['content']); ?></p>
+							<p style="display: none" class="r<?php echo ($q['id']); ?>"><?php echo ($q['reply']); ?></p><?php endforeach; endif; else: echo "" ;endif; ?>
 						</div>
 						<form class="answer_form" style="display: none;">
 							<div><label >问题标题</label><input type="text" name="rtitle" style="height: 30px"></div>
@@ -404,8 +409,8 @@
 							<div><label >回复内容</label><textarea style="resize: none; padding: 5px;" cols="30" rows="10" name="rdcontent"></textarea></div>
 							<input class="back_title" type="button" value="返回到标题">
 							<input type="hidden" value="" id="question" name="question">
-							<input type="hidden" value="{$personal['username']}"  name="wode">
-							<input type="hidden" value="{$personal['money']}"  name="crrMoney">
+							<input type="hidden" value="<?php echo ($personal['username']); ?>"  name="wode">
+							<input type="hidden" value="<?php echo ($personal['money']); ?>"  name="crrMoney">
 						</form>
 					</div>
 				</div>
@@ -596,17 +601,15 @@
 								</tr>
 							</thead>
 							<tbody id="tbody_1">
-							<volist name="allget" id="al">
-								<tr>
+							<?php if(is_array($allget)): $i = 0; $__LIST__ = $allget;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$al): $mod = ($i % 2 );++$i;?><tr>
 
-									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
-									<td <if condition="$al['is_ok'] eq 1">style="color: forestgreen"<else />style="color: red"</if>><if condition="$al['is_ok'] eq 1">+<else />-</if>{$al.money}</td>
+									<td><?php echo date('Y-m-d H:i:s',$al['create_time']);?></td>
+									<td <?php if($al['is_ok'] == 1): ?>style="color: forestgreen"<?php else: ?>style="color: red"<?php endif; ?>><?php if($al['is_ok'] == 1): ?>+<?php else: ?>-<?php endif; echo ($al["money"]); ?></td>
 
-									<td >{:mb_substr($al['remark'],0,12,'utf-8')}</td>
-									<td <if condition="$al['is_ok'] eq 1">style="color: forestgreen"<else />style="color: red"</if>><if condition="$al['is_ok'] eq 1">正常<else />失效</if></td>
-									<td style="color: red"><if condition="$al['type'] eq 4">转入账户 :{$al.from_username}<else/>{$al.intro}</if></td>
-								</tr>
-							</volist>
+									<td ><?php echo mb_substr($al['remark'],0,12,'utf-8');?></td>
+									<td <?php if($al['is_ok'] == 1): ?>style="color: forestgreen"<?php else: ?>style="color: red"<?php endif; ?>><?php if($al['is_ok'] == 1): ?>正常<?php else: ?>失效<?php endif; ?></td>
+									<td style="color: red"><?php if($al['type'] == 4): ?>转入账户 :<?php echo ($al["from_username"]); else: echo ($al["intro"]); endif; ?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 							</tbody>
 						</table>
 						<div id="demo1"></div>
@@ -624,13 +627,11 @@
 								</tr>
 							</thead>
 							<tbody id="tbody_2">
-							<volist name="consume_3" id="al">
-								<tr>
-									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
-									<td style="color: red">-{$al.money}</td>
-									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
-								</tr>
-							</volist>
+							<?php if(is_array($consume_3)): $i = 0; $__LIST__ = $consume_3;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$al): $mod = ($i % 2 );++$i;?><tr>
+									<td><?php echo date('Y-m-d H:i:s',$al['create_time']);?></td>
+									<td style="color: red">-<?php echo ($al["money"]); ?></td>
+									<td ><?php echo mb_substr($al['type'],0,12,'utf-8');?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
 							</tbody>
 						</table>
@@ -649,14 +650,12 @@
 								</tr>
 							</thead>
 							<tbody id="tbody_3">
-							<volist name="allConsume" id="al">
-								<tr>
-									<td>{:date('Y-m-d H:i:s',$al['create_time'])}</td>
-									<td >-{$al.money}</td>
-									<td >{:mb_substr($al['type'],0,12,'utf-8')}</td>
-									<td >{$al['to_username']}</td>
-								</tr>
-							</volist>
+							<?php if(is_array($allConsume)): $i = 0; $__LIST__ = $allConsume;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$al): $mod = ($i % 2 );++$i;?><tr>
+									<td><?php echo date('Y-m-d H:i:s',$al['create_time']);?></td>
+									<td >-<?php echo ($al["money"]); ?></td>
+									<td ><?php echo mb_substr($al['type'],0,12,'utf-8');?></td>
+									<td ><?php echo ($al['to_username']); ?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 							</tbody>
 						</table>
 						<div id="demo3"></div>
@@ -676,14 +675,12 @@
 							<tbody id="tbody_4">
 
 
-							<volist name="consume_1" id="c">
-								<tr>
-									<td>{:date('Y-m-d H:i:s',$c['create_time'])}</td>
-									<td>-{$c.money}</td>
-									<td>{$c.type}</td>
-									<td>{$c.cname}</td>
-								</tr>
-							</volist>
+							<?php if(is_array($consume_1)): $i = 0; $__LIST__ = $consume_1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><tr>
+									<td><?php echo date('Y-m-d H:i:s',$c['create_time']);?></td>
+									<td>-<?php echo ($c["money"]); ?></td>
+									<td><?php echo ($c["type"]); ?></td>
+									<td><?php echo ($c["cname"]); ?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
 							</tbody>
 						</table>
@@ -702,13 +699,11 @@
 								</tr>
 							</thead>
 							<tbody id="tbody_5">
-							<volist name="consume_2" id="c">
-								<tr>
-									<td>{:date('Y-m-d H:i:s',$c['create_time'])}</td>
-									<td>-{$c.money}</td>
-									<td>{$c.type}</td>
-								</tr>
-							</volist>
+							<?php if(is_array($consume_2)): $i = 0; $__LIST__ = $consume_2;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><tr>
+									<td><?php echo date('Y-m-d H:i:s',$c['create_time']);?></td>
+									<td>-<?php echo ($c["money"]); ?></td>
+									<td><?php echo ($c["type"]); ?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 							</tbody>
 						</table>
 						<div id="demo5"></div>
@@ -728,16 +723,14 @@
 								</tr>
 							</thead>
 							<tbody id="tbody_6">
-							<volist name="orderList" id="o">
-								<tr>
-									<td>{:date('Y-m-d H:i:s',$o['create_time'])}</td>
-									<td>{$o.payname}</td>
-									<td>{$o.order_number}</td>
-									<td>{$o.money}</td>
-									<td><img src="__PUBLIC__/images/status/{$o.is_pass}.png"  style="height: auto;width: 40px"></td>
-									<td>{:mb_substr($o['remark'],0,12,'utf-8')}</td>
-								</tr>
-							</volist>
+							<?php if(is_array($orderList)): $i = 0; $__LIST__ = $orderList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$o): $mod = ($i % 2 );++$i;?><tr>
+									<td><?php echo date('Y-m-d H:i:s',$o['create_time']);?></td>
+									<td><?php echo ($o["payname"]); ?></td>
+									<td><?php echo ($o["order_number"]); ?></td>
+									<td><?php echo ($o["money"]); ?></td>
+									<td><img src="/Public/images/status/<?php echo ($o["is_pass"]); ?>.png"  style="height: auto;width: 40px"></td>
+									<td><?php echo mb_substr($o['remark'],0,12,'utf-8');?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 							</tbody>
 						</table>
 						<div id="demo6"></div>
@@ -755,13 +748,11 @@
 								</tr>
 							</thead>
 							<tbody id="tbody_7">
-							<volist name="consume_2" id="c">
-								<tr>
-									<td>{:date('Y-m-d H:i:s',$c['create_time'])}</td>
-									<td>-{$c.money}</td>
-									<td>{$c.type}</td>
-								</tr>
-							</volist>
+							<?php if(is_array($consume_2)): $i = 0; $__LIST__ = $consume_2;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><tr>
+									<td><?php echo date('Y-m-d H:i:s',$c['create_time']);?></td>
+									<td>-<?php echo ($c["money"]); ?></td>
+									<td><?php echo ($c["type"]); ?></td>
+								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 							</tbody>
 						</table>
 						<div id="demo7"></div>
@@ -776,24 +767,22 @@
 			</div>
 
 
-<input type="hidden" value="{$personal['money']}" name="jifen">
+<input type="hidden" value="<?php echo ($personal['money']); ?>" name="jifen">
 			<div class="actor" style="display: none;">
 				<div class="bg">
 					<div class="close_actor"></div>
 					<div class="actor_content">
 						<div class='movie_list' style="display: block;">
-							<volist name="films" id="fi">
-							<div>
-								<div><img src="{$fi['image_url']}" alt=""><p> &nbsp;{$fi['name']}</p></div>
+							<?php if(is_array($films)): $i = 0; $__LIST__ = $films;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$fi): $mod = ($i % 2 );++$i;?><div>
+								<div><img src="<?php echo ($fi['image_url']); ?>" alt=""><p> &nbsp;<?php echo ($fi['name']); ?></p></div>
 								<p >需消耗阿纳豆<span id="needand"></span></p>
-								<input class="goTodetail" type="button" value="立即申请" data-id="{$fi['id']}">
-							</div>
-							</volist>
+								<input class="goTodetail" type="button" value="立即申请" data-id="<?php echo ($fi['id']); ?>">
+							</div><?php endforeach; endif; else: echo "" ;endif; ?>
 						</div>
 						<div class='movie_intr' style="display: none;">
 							<p class='mianbao'><span class="backTo1">电影列表</span><b>></b><span class="backTo2 mianbaoChoice">电影详情</span></p>
 							<div class="movie_details">
-								<div class="movie_topleft"><img src="__PUBLIC__/wang/home_img/homeimg03.jpg" alt=""></div>
+								<div class="movie_topleft"><img src="/Public/wang/home_img/homeimg03.jpg" alt=""></div>
 								<div class="movie_topright">
 									<p>电影名称: <span class="filmname"></span></p>
 
@@ -832,14 +821,14 @@
 							<div><label style='float: left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自我评价:</label><textarea  cols="30" rows="10" name="skill"></textarea></div>
 							<div><label style='float: left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的特长:</label><textarea  cols="30" rows="10" name="ex"></textarea></div>
 
-<input type="hidden" value="{$allc}" name="allc">
-<input type="hidden" value="{$allcon}" name="allcon">
-<input type="hidden" value="{$consume_count}" name="consume_count">
-<input type="hidden" value="{$consume_count_1}" name="consume_count_1">
-<input type="hidden" value="{$consume_count_2}" name="consume_count_2">
+<input type="hidden" value="<?php echo ($allc); ?>" name="allc">
+<input type="hidden" value="<?php echo ($allcon); ?>" name="allcon">
+<input type="hidden" value="<?php echo ($consume_count); ?>" name="consume_count">
+<input type="hidden" value="<?php echo ($consume_count_1); ?>" name="consume_count_1">
+<input type="hidden" value="<?php echo ($consume_count_2); ?>" name="consume_count_2">
 							<input type="button" value="确定申请" id="sure_apply">
-							<script src="__JS__/layer/layui.js"></script>
-							<script src="__JS__/layer/laypage.js"></script>
+							<script src="/Public/js/layer/layui.js"></script>
+							<script src="/Public/js/layer/laypage.js"></script>
 							<script>
 
 
@@ -858,7 +847,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Home/Personal/personalCenterPaginationA')}",
+														'url':"<?php echo U('Home/Personal/personalCenterPaginationA');?>",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -899,7 +888,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Home/Personal/personalCenterPaginationB')}",
+														'url':"<?php echo U('Home/Personal/personalCenterPaginationB');?>",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -930,7 +919,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Home/Personal/personalCenterPaginationC')}",
+														'url':"<?php echo U('Home/Personal/personalCenterPaginationC');?>",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -961,7 +950,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Home/Personal/personalCenterPaginationD')}",
+														'url':"<?php echo U('Home/Personal/personalCenterPaginationD');?>",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -992,7 +981,7 @@
 													$.ajax({
 														'type':'post',
 														'dataType':'json',
-														'url':"{:U('Home/Personal/personalCenterPaginationE')}",
+														'url':"<?php echo U('Home/Personal/personalCenterPaginationE');?>",
 														'data':{
 															'pgNum':obj.curr,
 															'pgSize':17,
@@ -1038,7 +1027,7 @@
 																		'<td style="color: red">-'+ '银行转账'+'</td>'+
 																		'<td >'+  v.order_number+'</td>'+
 																		'<td >'+   v.money+'</td>'+
-																		'<td >'+   '<img style="height:18px;width:18px;border-radius:50%" src="__PUBLIC__/images/status/'+ v.is_pass+'.png">'+'</td>'+
+																		'<td >'+   '<img style="height:18px;width:18px;border-radius:50%" src="/Public/images/status/'+ v.is_pass+'.png">'+'</td>'+
 																		'<td >'+   ''+'</td>'+
 																		'</tr>');
 															});
@@ -1080,7 +1069,7 @@
 												,title: '阿纳巴里用户协议'
 												,shade: 0.6 //遮罩透明度
 												,anim: 1 //0-6的动画形式，-1不开启
-												,content: '<div style="padding:50px;overflow: auto">{:htmlspecialchars_decode($systemInfo['tixian'])}<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+												,content: '<div style="padding:50px;overflow: auto"><?php echo htmlspecialchars_decode($systemInfo['tixian']);?><div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
 											});
 										}
 									}else{
@@ -1125,7 +1114,7 @@
 												,title: '阿纳巴里用户协议'
 												,shade: 0.6 //遮罩透明度
 												,anim: 1 //0-6的动画形式，-1不开启
-												,content: '<div style="padding:50px;overflow: auto">{:htmlspecialchars_decode($systemInfo['chonzhi'])}<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+												,content: '<div style="padding:50px;overflow: auto"><?php echo htmlspecialchars_decode($systemInfo['chonzhi']);?><div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
 											});
 										}
 									}else{
@@ -1237,7 +1226,7 @@
 														shadeClose: true,
 														shade: 0.8,
 														area: ['380px', '30%'],
-														content: "{:U('Home/Personal/tips')}", //iframe的url
+														content: "<?php echo U('Home/Personal/tips');?>", //iframe的url
 														btn1:function(){
 															location.reload();
 														}
@@ -1260,16 +1249,16 @@
 			<input type="hidden"  value="" name="film_id">
 		</div>
 	</div>
-	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
-	<script src='__PUBLIC__/area/area.js'></script>
-	<script src='__PUBLIC__/wang/common_js/common.js'></script>
-	<script src='__PUBLIC__/wang/personal_center.js'></script>
-	<script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
+	<script src='/Public/wang/common_js/jquery-1.12.4.min.js'></script>
+	<script src='/Public/area/area.js'></script>
+	<script src='/Public/wang/common_js/common.js'></script>
+	<script src='/Public/wang/personal_center.js'></script>
+	<script src="/Public/code/js/jquery.html5upload.js"></script>
 	<!--layer.js-->
-	<script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
-	<script src="__JS__/layer/layui.js"></script>
-	<script src="__JS__/layer/laypage.js"></script>
-	<script src="__PUBLIC__/js/clipboard.min.js"></script>
+	<script src="/Public/layer/layer.js" type="text/javascript"></script>
+	<script src="/Public/js/layer/layui.js"></script>
+	<script src="/Public/js/layer/laypage.js"></script>
+	<script src="/Public/js/clipboard.min.js"></script>
 	<script type="text/javascript">
 		$(function () {
 
@@ -1385,7 +1374,7 @@
 			});
 
 			$("#file_upload").h5upload({
-				url: "{:U('Home/Personal/upload')}",
+				url: "<?php echo U('Home/Personal/upload');?>",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1419,7 +1408,7 @@
 				}
 			});
 			$("#file_upload2").h5upload({
-				url: "{:U('Home/Personal/upload')}",
+				url: "<?php echo U('Home/Personal/upload');?>",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1453,7 +1442,7 @@
 				}
 			});
 			$("#upload").h5upload({
-				url: "{:U('Home/Personal/upload')}",
+				url: "<?php echo U('Home/Personal/upload');?>",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1486,7 +1475,7 @@
 			});
 			var  path = [];
 			$("#uploadStar").h5upload({
-				url: "{:U('Home/Personal/upload')}",
+				url: "<?php echo U('Home/Personal/upload');?>",
 				fileObjName: 'image',
 				fileTypeExts: 'jpg,png,gif,bmp,jpeg',
 				multi: true,
@@ -1569,7 +1558,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':"{:U('Home/Personal/mySupport')}",
+								'url':"<?php echo U('Home/Personal/mySupport');?>",
 								'data':{
 									'pgNum':obj.curr,
 									'pgSize':4
@@ -1585,9 +1574,9 @@
 										'<p>'+ v.englishname+'</p>'+
 										'<p>'+ v.director+'</p>'+
 										'<p><span>'+ v.support_number+'</span>人支持</p>'+
-														'<p>类型:<span><if condition="'+ v.atype+' eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益:<span><if condition="'+ v.atype+' eq 1">'+ v.fixed+'<else />'+ v.float+'</if></span></p>'+
+														'<p>类型:<span><?php if('+ v.atype+' == 1): ?>月酬<?php else: ?>票房<?php endif; ?></span>&nbsp;&nbsp;收益:<span><?php if('+ v.atype+' == 1): ?>'+ v.fixed+'<?php else: ?>'+ v.float+'<?php endif; ?></span></p>'+
 												'<p>已支持<span>'+ v.support_money+'</span>阿纳豆</p>'+												'<p><input type="button" class="cancel_suport" value="取消支持" data-id="'+ v.aid+'"></p>'+
-										        "<a class='detail_search' href='{:U('home/index/detail')}?id="+ v.id+"'> 查看详情</a>"+
+										        "<a class='detail_search' href='<?php echo U('home/index/detail');?>?id="+ v.id+"'> 查看详情</a>"+
 										'</div>');
 									});
 
@@ -1610,7 +1599,7 @@
 							$.ajax({
 								'type':'post',
 								'dataType':'json',
-								'url':"{:U('Home/Personal/myCollection')}",
+								'url':"<?php echo U('Home/Personal/myCollection');?>",
 								'data':{
 									'pgNum':obj.curr,
 									'pgSize':4
@@ -1662,7 +1651,7 @@
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
-					'url':"{:U('Home/Personal/editPassword')}",
+					'url':"<?php echo U('Home/Personal/editPassword');?>",
 					'data':{
 						'password':password,
 						'newpassword':newpassword,

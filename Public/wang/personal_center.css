@@ -891,9 +891,9 @@ header .nav{
     color: white;
     cursor: pointer;
 }
-.money_content>ul>li:last-child{
+/*.money_content>ul>li:last-child{
 	float: right;
-}
+}*/
 .money_content>ul>li:last-child span{
 	color: #e50909;
 }
@@ -907,13 +907,16 @@ header .nav{
 .apply_style_choice{
 	color: gold;
 }
-.put_money>div:nth-child(2){
+#zhifubaoDiv{
+	width: 100%;
+	height: auto;
+}
+#feiyinglian img{
 	width: 200px;
 	height: 200px;
-	margin-top: 12px;
-	margin-bottom: 25px;
 	margin-left: 100px;
-	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 .put_money>div img{
 	width: 100%;
@@ -1002,23 +1005,21 @@ header .nav{
 } 
 #put_btn{
 	border-radius: 3px;
-  width: 52px;
+  width: 100px;
 height: 30px;
 text-align: center;
 line-height: 30px;
 background: #e50909;
 color: white;
 cursor: pointer;
-margin-left: 94px;
-	position: absolute;
-	left: 0;
-	bottom: -30px;
+margin-left: 50px;
+	margin-top: 60px;
 }
-#container1{
-	width: 200px;
+#container1,#container2{
+	width: 100px;
 	height:200px;
 	position: absolute;
-	left:320px; bottom: 0;
+	left:195px; top: 0;
 }
 .money_file{
 	position: absolute;
@@ -1818,7 +1819,7 @@ margin-left: 94px;
 }
 #team_nav li{
     float: left;
-    font-size: 16px;
+    font-size: 14px;
     height: 100%;
     line-height: 50px;
     padding-left: 15px;

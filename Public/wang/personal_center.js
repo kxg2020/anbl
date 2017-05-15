@@ -433,6 +433,51 @@ $(function(){
 		}
 	});
 
+$('.rechargeOk1').click(function(){
+		var money = $('input[name = rechargeMoney1]').val();
+		var path = $('#images').val();
+		var type = $('.apply_style_choice').attr('data-id');
+		if(path.length == 0){
+			layer.tips('请上传凭证','#file_upload2');
+			return false;
+		}
+		if(money == ''){
+
+			layer.tips('充值阿纳豆不能为空','input[name = rechargeMoney1]');
+		}else{
+			//>> 判断是否是数字
+			var isNum = /^[0-9]*$/;
+			if(!isNum.test(money)){
+
+				layer.tips('请输入正确的数字','input[name = rechargeMoney1]');
+			}else{
+				var chargeUrl = location.protocol+'//'+window.location.host+'/Home/Recharge/recharge';
+				$.ajax({
+					'type':'post',
+					'dataType':'json',
+					'url':chargeUrl,
+					'data':{
+						'money':money,
+						'image_url':path,
+						'type':type
+					},
+					success:function(result){
+						if(result.status == 1){
+							$('#images').val('');
+							layer.msg('提交成功!,请等待工作人员与您联系',function(){
+								$('input[name = rechargeMoney1]').val('');
+							});
+						}else{
+							layer.msg(result.msg,function(){
+								$('input[name = rechargeMoney1]').val('');
+							});
+						}
+					}
+				});
+
+			}
+		}
+	});
 
 
 	$('.ex').click(function(){
@@ -625,6 +670,7 @@ $(function(){
 	//选择支付方式
 	$('.apply_style').click(function(){
 		$('.apply_style').removeClass('apply_style_choice');
+		$('.put_money>div').hide();
 		if($(this).html()=='微信'){
 			$(this).addClass('apply_style_choice');
 			$('#weixing').show();
@@ -633,16 +679,10 @@ $(function(){
 			$('.yinglian').hide();
 		}if($(this).html()=='支付宝'){
 			$(this).addClass('apply_style_choice');
-			$('#weixing').hide();
-			$('#zhifubao').show();
-			$('#feiyinglian').show();
-			$('.yinglian').hide();
-		}if($(this).html()=='公司银联'){
+			$('#zhifubaoDiv').show();
+		}if($(this).html()=='公司银联'){		
 			$(this).addClass('apply_style_choice');
-			$('#weixing').hide();
-			$('#zhifubao').hide();
-			$('#feiyinglian').hide();
-			$('.yinglian').show();
+			$('#yinlianDiv').show();
 		}
 	})
 
@@ -693,6 +733,14 @@ $(function(){
          if(value=='演员申请'){
          	$("#team_nav>li").eq(4).addClass('teamChoice')
         	$('.apply_5').show();
+        }
+        if(value=='充值'){
+         	$("#team_nav>li").eq(5).addClass('teamChoice')
+        	$('.apply_6').show();
+        }
+        if(value=='提现'){
+         	$("#team_nav>li").eq(6).addClass('teamChoice')
+        	$('.apply_7').show();
         }
     });
 
