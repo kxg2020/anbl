@@ -434,30 +434,28 @@ $(function(){
 	});
 
 
+	var data_id = 1;
+	$('.tiqu').click(function(){
+		data_id = $(this).attr('data-id');
+	});
 
 	$('.ex').click(function(){
-		var money = $('input[name = exMoney]').val();
+		var money = $('input[name = exMoney'+data_id+']').val();
 
 		if(money == ''){
-
-			 layer.tips('请输入提现阿纳豆','input[name = exMoney]');
+			 layer.tips('请输入提现阿纳豆','input[name = exMoney'+data_id+']');
 		}else{
 
 			//>> 检测是否为0
-			if(money == 0){
-				layer.tips('提现阿纳豆不能为0','input[name = exMoney]');
-				return;
-			}
-			//>> 检测是否大于350
-			if(money < 350){
-				layer.tips('提现阿纳豆不能小于350','input[name = exMoney]');
+			if(money <= 0){
+				layer.tips('提现阿纳豆不能为0或负数','input[name = exMoney'+data_id+']');
 				return;
 			}
 			//>> 检测金额是否是数字
 			var reg = /^[0-9]+.?[0-9]*$/;
 			if(!reg.test(money)){
 
-				layer.tips('请输入正确的阿纳豆数额','input[name = exMoney]');
+				layer.tips('请输入正确的阿纳豆数额','input[name = exMoney'+data_id+']');
 			}else{
 
 				var url =  location.protocol +'//'+ window.location.host+'/Home/Personal/cash';
@@ -466,7 +464,8 @@ $(function(){
 					'dataType':'json',
 					'url':url,
 					'data':{
-						'money':money
+						'money':money,
+						'id':data_id
 					},
 					success:function(result){
 						if(result.status == 1){

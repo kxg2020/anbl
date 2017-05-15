@@ -265,23 +265,23 @@
 							</div>
 
 						<div class="get_money" style="display: none; padding-top: 20px;">
-							<input id="apply_yuer" class="apply_choice" type="button" value="提现余额">
-							<input id="apply_shouyi" type="button" value="提现收益">
-							<input id="apply_yongjing" type="button" value="提现佣金">
+							<input id="apply_yuer" class="apply_choice tiqu" type="button" value="提现余额" data-id="1">
+							<input id="apply_shouyi" type="button" class="tiqu" value="提现收益" data-id="2">
+							<input id="apply_yongjing" type="button" class="tiqu" value="提现佣金" data-id="3">
 							<div class="apply_yuer">
-								<p>余额阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
+								<p>余额阿纳豆: <input type="text" name="exMoney1" placeholder="0.00"></p>
 								<p>可提余额阿纳豆:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
 								<div class="question_div"></div>
 								<input type="button" value="确定" id="get_btn" class="ex" >
 							</div>
 							<div class="apply_shouyi" style="display: none">
-								<p>收益阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
+								<p>收益阿纳豆: <input type="text" name="exMoney2" placeholder="0.00"></p>
 								<p>可提收益阿纳豆:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，手续费为10%，但是每月月底可以免费提现一次哦！</span></p>
 								<div class="question_div"></div>
 								<input type="button" value="确定" id="get_btn1" class="ex" >
 							</div>
 							<div class="apply_yongjing" style="display: none;">
-								<p>佣金阿纳豆: <input type="text" name="exMoney" placeholder="0.00"></p>
+								<p>佣金阿纳豆: <input type="text" name="exMoney3" placeholder="0.00" value=""></p>
 								<p>可提佣金阿纳豆:{$userInfo['money']} <img src="__PUBLIC__/wang/img/question.png" alt=""><span>每周五才可以提现，免手续费。</span></p>
 								<div class="question_div"></div>
 								<input type="button" value="确定" id="get_btn2" class="ex" >
@@ -402,6 +402,8 @@
 				<p>B</p>
 				<script>
 					$(function(){
+
+
 						$('.qdetail').click(function(){
 							id = $(this).attr('data-id');
 							title = $(this).children('span').eq(0).text();
@@ -779,6 +781,10 @@
 							<script>
 								//>> 分页
 								$(function(){
+
+
+
+
 									layui.use(['laypage', 'layer'], function(){
 										var laypage = layui.laypage,layer = layui.layer;
 										laypage({
@@ -947,10 +953,13 @@
 								});
 
 
+
+
 								//>> 提现输入框失去焦点事件
-								$('input[name = exMoney]').blur(function(){
+								$('body').on('blur','input[name = exMoney1]',function(){
+
 									//>> 获取值
-									e = $(this).val();
+									e = $('input[name = exMoney1]').val();
 									//>> 判断金额
 									if(e != '' && !isNaN(e)){
 										if(e <= 700){
@@ -962,7 +971,8 @@
 														'dataType':'json',
 														'url':location.protocol+'//'+window.location.host+'/Home/Personal/exportAgree',
 														'data':{
-															'export':$('input[type = checkbox]:checked').val()
+															'export':$('input[type = checkbox]:checked').val(),
+															'id':1
 														},
 														complete:function(){
 															layer.closeAll('page');
@@ -980,7 +990,83 @@
 											});
 										}
 									}else{
-										layer.tips('请输入提现阿纳豆数额','input[name = exMoney]');
+										layer.tips('请输入提现阿纳豆数额','input[name = exMoney'+data_id+']');
+										return false;
+									}
+								});
+								$('body').on('blur','input[name = exMoney2]',function(){
+
+									//>> 获取值
+									e = $('input[name = exMoney2]').val();
+									//>> 判断金额
+									if(e != '' && !isNaN(e)){
+										if(e <= 700){
+											layer.open({
+												btn:['确定'],
+												btn1:function(){
+													$.ajax({
+														'type':'post',
+														'dataType':'json',
+														'url':location.protocol+'//'+window.location.host+'/Home/Personal/exportAgree',
+														'data':{
+															'export':$('input[type = checkbox]:checked').val(),
+															'id':2
+														},
+														complete:function(){
+															layer.closeAll('page');
+														}
+													});
+
+												},
+												btnAlign: 'c',
+												type: 1 //Page层类型
+												,area: ['500px', '700px']
+												,title: '阿纳巴里用户协议'
+												,shade: 0.6 //遮罩透明度
+												,anim: 1 //0-6的动画形式，-1不开启
+												,content: '<div style="padding:50px;overflow: auto">{:htmlspecialchars_decode($systemInfo['shouyi'])}<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+											});
+										}
+									}else{
+										layer.tips('请输入提现阿纳豆数额','input[name = exMoney'+data_id+']');
+										return false;
+									}
+								});
+								$('body').on('blur','input[name = exMoney3]',function(){
+
+									//>> 获取值
+									e = $('input[name = exMoney3]').val();
+									//>> 判断金额
+									if(e != '' && !isNaN(e)){
+										if(e <= 700){
+											layer.open({
+												btn:['确定'],
+												btn1:function(){
+													$.ajax({
+														'type':'post',
+														'dataType':'json',
+														'url':location.protocol+'//'+window.location.host+'/Home/Personal/exportAgree',
+														'data':{
+															'export':$('input[type = checkbox]:checked').val(),
+															'id':3
+														},
+														complete:function(){
+															layer.closeAll('page');
+														}
+													});
+
+												},
+												btnAlign: 'c',
+												type: 1 //Page层类型
+												,area: ['500px', '700px']
+												,title: '阿纳巴里用户协议'
+												,shade: 0.6 //遮罩透明度
+												,anim: 1 //0-6的动画形式，-1不开启
+												,content: '<div style="padding:50px;overflow: auto">{:htmlspecialchars_decode($systemInfo['yongjin'])}<div style=";margin-top: 30px"><input type="checkbox" id="agree" value="1"><span>我同意<a id="anbl_argement" style="color: #666;cursor: pointer;">《阿纳巴里用户协议》</a></span></div>'
+											});
+										}
+									}else{
+										layer.tips('请输入提现阿纳豆数额','input[name = exMoney'+data_id+']');
 										return false;
 									}
 								});
