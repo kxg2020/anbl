@@ -8,9 +8,9 @@ class RegisterController extends CommonController{
      * 注册界面
      */
     public function index(){
-
+        $invite_key = I('get.invite_key');
+        $this->assign('invite_key',$invite_key);
         $this->display('register/index');
-
     }
 
     /**

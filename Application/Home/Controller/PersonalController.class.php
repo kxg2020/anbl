@@ -534,134 +534,288 @@ class PersonalController extends CommonController
 
         $crrDay = date('Y-m-d');
         $lastDay = $this->getTheMonth();
-        //>> 判断当前时间是否是周五
-        if (date('w') == 5) {
-            if (!empty($paramArr)) {
+       switch($paramArr['id']){
+           case 1:
+               //>> 余额提现
+               if (!empty($paramArr)) {
 
-                if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
-                    //>> 查询余额
-                    $row = M('Member')->where(['id' => $this->userInfo['id']])->find();
-                    if (empty($row)) {
+                   if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
+                       //>> 查询余额
+                       $row = M('Member')->where(['id' => $this->userInfo['id']])->find();
+                       if (empty($row)) {
 
-                        die($this->_printError('1056'));
-                    }
-                    //>> 判断余额是否大于350
-                    if ($row['money'] < 350) {
+                           die($this->_printError('1056'));
+                       }
 
-                        die($this->_printError('1066'));
-                    }
+                       //>> 判断金额是否大于余额
+                       if ($paramArr['money'] > $row['money']) {
 
-                    //>> 判断金额是否大于余额
-                    if ($paramArr['money'] > $row['money']) {
-
-                        die($this->_printError('1052'));
-                    }
+                           die($this->_printError('1052'));
+                       }
 
 
-                    //>> 判断金额和协议
-                    if ($paramArr['money'] <= 700) {
+                       //>> 判断金额和协议
+                       if ($paramArr['money'] <= 700) {
 
-                        $agree = session('export' . $this->userInfo['id']);
-                        if (!$agree) {
+                           $agree = session('export' . $this->userInfo['id'].$paramArr['id']);
+                           if (!$agree) {
 
-                            die($this->_printError('1062'));
-                        }
-                    }
+                               die($this->_printError('1062'));
+                           }
+                       }
 
-                    //>> 提取现金，生成订单
-                    $updateData = [
-                        'money' => $row['money'] - $paramArr['money'],
-                    ];
+                       //>> 提取现金，生成订单
+                       $updateData = [
+                           'money' => $row['money'] - $paramArr['money'],
+                       ];
 
-                    M('Member')->startTrans();
-                    $res = M('Member')->where(['id' => $this->userInfo['id']])->save($updateData);
-                    //>> 生成订单
-                    $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+                       M()->startTrans();
+                       $res = M('Member')->where(['id' => $this->userInfo['id']])->save($updateData);
+                       //>> 生成订单
+                       $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
 
-                    $insertData = [
-                        'money' => $paramArr['money'],
-                        'member_id' => $this->userInfo['id'],
-                        'create_time' => time(),
-                        'is_pass' => 0,
-                        'order_number' => $orderNumber,
-                        'charge' => $paramArr['money'] * 0.1
-                    ];
+                       $insertData = [
+                           'money' => $paramArr['money'],
+                           'member_id' => $this->userInfo['id'],
+                           'create_time' => time(),
+                           'is_pass' => 0,
+                           'order_number' => $orderNumber,
+                           'charge' => $paramArr['money'] * 0.1,
+                           'type'=>'余额提现'
+                       ];
 
-                    //>> 保存订单
-                    $ros = M('MemberCash')->add($insertData);
-                    if ($ros && $res) {
-                        M('Member')->commit();
-                        die($this->_printSuccess());
-                    } else {
+                       //>> 保存订单
+                       $ros = M('MemberCash')->add($insertData);
+                       if ($ros && $res) {
+                           M()->commit();
+                           die($this->_printSuccess());
+                       } else {
+                           M()->rollback();
+                           die($this->_printError('1056'));
+                       }
 
-                        die($this->_printError('1056'));
-                    }
+                   } else {
 
-                } else {
+                       die($this->_printError('1056'));
+                   }
+               } else {
 
-                    die($this->_printError('1056'));
-                }
-            } else {
+                   die($this->_printError('1056'));
+               }
+               break;
 
-                die($this->_printError('1056'));
-            }
-        } elseif ($crrDay == $lastDay) {
-            if (!empty($paramArr)) {
-                if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
-                    //>> 查询余额
-                    $row = M('Member')->where(['id' => $this->userInfo['id']])->find();
-                    if (empty($row)) {
+           //>> 收益提现
+           case 2:
+               //>> 判断当前时间是否是周五
+               if (date('w') == 5) {
+                   if (!empty($paramArr)) {
 
-                        die($this->_printError(''));
-                    }
-                    //>> 判断金额是否大于余额
-                    if ($paramArr['money'] > $row['money']) {
+                       if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
+                           //>> 查询余额
+                           $row = M('Member')->where(['id' => $this->userInfo['id']])->find();
+                           if (empty($row)) {
 
-                        die($this->_printError('1052'));
-                    }
+                               die($this->_printError('1056'));
+                           }
+                           //>> 判断余额是否大于350
+                           if ($row['money'] < 350) {
 
-                    //>> 提取现金，生成订单
-                    $updateData = [
-                        'money' => $row['money'] - $paramArr['money'] - $paramArr['money'] * 0,
-                    ];
+                               die($this->_printError('1066'));
+                           }
 
-                    M('Member')->startTrans();
-                    $res = M('Member')->where(['id' => $this->userInfo['id']])->save($updateData);
+                           //>> 判断金额是否大于余额
+                           if ($paramArr['money'] > $row['profit']) {
 
-                    //>> 生成订单
-                    $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+                               die($this->_printError('1052'));
+                           }
 
-                    $insertData = [
-                        'money' => $paramArr['money'],
-                        'member_id' => $this->userInfo['id'],
-                        'create_time' => time(),
-                        'is_pass' => 0,
-                        'order_number' => $orderNumber,
-                        'charge' => $paramArr['money'] * 0
-                    ];
 
-                    //>> 保存订单
-                    $ros = M('MemberCash')->add($insertData);
-                    if ($res && $ros) {
+                           //>> 判断金额和协议
+                           if ($paramArr['money'] <= 700) {
 
-                        M('Member')->commit();
-                        die($this->_printSuccess());
-                    } else {
+                               $agree = session('export' . $this->userInfo['id'].$paramArr['id']);
+                               if (!$agree) {
 
-                        die($this->_printError('1054'));
-                    }
+                                   die($this->_printError('1062'));
+                               }
+                           }
 
-                } else {
+                           //>> 提取现金，生成订单
+                           $updateData = [
+                               'profit' => $row['profit'] - $paramArr['money'],
+                           ];
 
-                    die($this->_printError('1054'));
-                }
-            } else {
+                           M('Member')->startTrans();
+                           $res = M('Member')->where(['id' => $this->userInfo['id']])->save($updateData);
+                           //>> 生成订单
+                           $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
 
-                die($this->_printError('1054'));
-            }
-        } else {
-            die($this->_printError('1056'));
-        }
+                           $insertData = [
+                               'money' => $paramArr['money'],
+                               'member_id' => $this->userInfo['id'],
+                               'create_time' => time(),
+                               'is_pass' => 0,
+                               'order_number' => $orderNumber,
+                               'charge' => $paramArr['money'] * 0.1,
+                               'type'=>'收益提现'
+                           ];
+
+                           //>> 保存订单
+                           $ros = M('MemberCash')->add($insertData);
+                           if ($ros && $res) {
+                               M('Member')->commit();
+                               die($this->_printSuccess());
+                           } else {
+
+                               die($this->_printError('1056'));
+                           }
+
+                       } else {
+
+                           die($this->_printError('1056'));
+                       }
+                   } else {
+
+                       die($this->_printError('1056'));
+                   }
+               } elseif ($crrDay == $lastDay) {
+                   if (!empty($paramArr)) {
+                       if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
+                           //>> 查询余额
+                           $row = M('Member')->where(['id' => $this->userInfo['id']])->find();
+                           if (empty($row)) {
+
+                               die($this->_printError(''));
+                           }
+                           //>> 判断金额是否大于余额
+                           if ($paramArr['money'] > $row['profit']) {
+
+                               die($this->_printError('1052'));
+                           }
+
+                           //>> 提取现金，生成订单
+                           $updateData = [
+                               'profit' => $row['profit'] - $paramArr['money'],
+                           ];
+
+                           M()->startTrans();
+                           $res = M('Member')->where(['id' => $this->userInfo['id']])->save($updateData);
+
+                           //>> 生成订单
+                           $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+
+                           $insertData = [
+                               'money' => $paramArr['money'],
+                               'member_id' => $this->userInfo['id'],
+                               'create_time' => time(),
+                               'is_pass' => 0,
+                               'order_number' => $orderNumber,
+                               'charge' => $paramArr['money'] * 0,
+                               'type'=>'收益提现'
+                           ];
+
+                           //>> 保存订单
+                           $ros = M('MemberCash')->add($insertData);
+                           if ($res && $ros) {
+
+                               M('Member')->commit();
+                               die($this->_printSuccess());
+                           } else {
+                               M()->rollback();
+                               die($this->_printError('1054'));
+                           }
+
+                       } else {
+
+                           die($this->_printError('1054'));
+                       }
+                   } else {
+
+                       die($this->_printError('1054'));
+                   }
+               } else {
+                   die($this->_printError('1056'));
+               }
+               break;
+
+           case 3:
+               //>> 佣金提现
+               if (date('w') == 5) {
+                   if (!empty($paramArr)) {
+
+                       if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
+                           //>> 查询余额
+                           $row = M('Member')->where(['id' => $this->userInfo['id']])->find();
+                           if (empty($row)) {
+
+                               die($this->_printError('1056'));
+                           }
+                           //>> 判断余额是否大于350
+                           if ($row['money'] < 350) {
+
+                               die($this->_printError('1066'));
+                           }
+
+                           //>> 判断金额是否大于余额
+                           if ($paramArr['money'] > $row['commission']) {
+
+                               die($this->_printError('1052'));
+                           }
+
+
+                           //>> 判断金额和协议
+                           if ($paramArr['money'] <= 700) {
+
+                               $agree = session('export' . $this->userInfo['id'].$paramArr['id']);
+                               if (!$agree) {
+
+                                   die($this->_printError('1062'));
+                               }
+                           }
+
+                           //>> 提取现金，生成订单
+                           $updateData = [
+                               'commission' => $row['commission'] - $paramArr['money'],
+                           ];
+
+                           M()->startTrans();
+                           $res = M('Member')->where(['id' => $this->userInfo['id']])->save($updateData);
+                           //>> 生成订单
+                           $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+
+                           $insertData = [
+                               'money' => $paramArr['money'],
+                               'member_id' => $this->userInfo['id'],
+                               'create_time' => time(),
+                               'is_pass' => 0,
+                               'order_number' => $orderNumber,
+                               'charge' => 0,
+                               'type'=>'佣金提现'
+                           ];
+
+                           //>> 保存订单
+                           $ros = M('MemberCash')->add($insertData);
+                           if ($ros && $res) {
+                               M()->commit();
+                               die($this->_printSuccess());
+                           } else {
+                               M()->rollback();
+                               die($this->_printError('1056'));
+                           }
+
+                       } else {
+
+                           die($this->_printError('1056'));
+                       }
+                   } else {
+
+                       die($this->_printError('1056'));
+                   }
+               }else{
+                   die($this->_printError('1050'));
+               }
+               break;
+       }
     }
 
     /**
@@ -971,11 +1125,11 @@ class PersonalController extends CommonController
         if (!empty($paramArr)) {
             if (isset($paramArr['export']) && !empty($paramArr['export']) && is_numeric($paramArr['export'])) {
                 //>> 保存到session中
-                session('export' . $this->userInfo['id'], $paramArr['export']);
+                session('export' . $this->userInfo['id'].$paramArr['id'], $paramArr['export']);
                 $this->ajaxReturn(['status' => 1]);
             } else {
 
-                session('export' . $this->userInfo['id'], null);
+                session('export' . $this->userInfo['id'].$paramArr['id'], null);
                 $this->ajaxReturn(['status' => 1]);
             }
         }
