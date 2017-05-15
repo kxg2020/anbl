@@ -1409,6 +1409,13 @@
 					layer.msg('问题内容不能为空');
 					return false;
 				}
+				
+				//>> 正则过滤js
+				reg = /^[^\|"'<>/]*$/;
+				if(reg.test(content) || reg.test(title)){
+				layer.msg('含非法字符,请重新输入');
+					return false;
+				}
 				$.ajax({
 					'type':'post',
 					'dataType':'json',
