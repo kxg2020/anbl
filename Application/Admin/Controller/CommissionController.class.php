@@ -258,7 +258,7 @@ class CommissionController extends CommonController
         switch ($parent['role']) {
             case "1":
                 if ($level > 1) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {//第一父
                     // 计算佣金
@@ -270,7 +270,7 @@ class CommissionController extends CommonController
 
             case "2":
                 if ($level > 2) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {//第一父
                     // 计算佣金
@@ -289,7 +289,7 @@ class CommissionController extends CommonController
             case "3"://制片人
                 //计算票房收益
                 if ($level > 3) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {
                     // 计算佣金
@@ -312,7 +312,7 @@ class CommissionController extends CommonController
 
             case "4"://出品人
                 if ($level > 3) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {
                     // 计算佣金
@@ -329,6 +329,9 @@ class CommissionController extends CommonController
                 }
                 break;
 
+        }
+        if($level>3){
+            return;
         }
         $this->genCommission($info,$projectInfo, $parent['parent_id'], $level + 1);
     }

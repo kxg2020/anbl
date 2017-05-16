@@ -108,7 +108,14 @@
 					</volist>
 				</div>
 				<div class="forecast" style="display: none">
-
+					<p>预期收益日期: <span>{:date('Y/m/d',$info['end_time'])}</span></p>
+					<p>预期回报周期: <span>{$info['cycle']}个月</span></p>
+					<div class="shouyi">
+						<p><span>电影投资额达到</span><span>预期收益率</span></p>
+						<volist name="priceTimes" id="priceTime">
+						<div><p>{$priceTime.time}</p><p>{$priceTime.price}%</p></div>
+						</volist>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -130,6 +130,58 @@ class ProjectController extends CommonController
                 $this->ajaxReturnError('数据保存失败',__LINE__);
             }
 
+            // 获取收益预测
+            $priceTimes = $_data['priceTimes'];
+            $prices = $_data['prices'];
+            // 存储所有价格数据的变量
+            $price = [];
+            // 循环处理数据 判断是否合法
+            foreach ($priceTimes as $key => $priceTime) {
+                // 判断均价日期是否为空
+                if ($priceTime == '') {
+                    M()->rollback();
+                    $this->Msg['msg'] = '添加失败，请将预测收益填写完整';
+                    $this->Msg['error_code'] = __LINE__;
+                    $this->ajaxReturn($this->Msg);
+                }
+                // 判断均价日期是否为空
+                if ($prices[$key] == '') {
+                    M()->rollback();
+                    $this->Msg['msg'] = '添加失败，请将预测收益填写完整';
+                    $this->Msg['error_code'] = __LINE__;
+                    $this->ajaxReturn($this->Msg);
+                }
+                // 判断是否有一样的 日期
+                if (isset($price[$priceTime]) == true) {
+                    M()->rollback();
+                    $this->Msg['msg'] = '添加失败，投资额不能一致';
+                    $this->Msg['error_code'] = __LINE__;
+                    $this->ajaxReturn($this->Msg);
+                }
+                // 添加到所有价格趋势变量中
+                $price[$priceTime] = $prices[$key];
+            }
+
+            if (empty($price)) {
+                M()->rollback();
+                $this->ajaxReturnError('数据保存失败',__LINE__);
+            }
+
+
+            // 获取价格走势值
+            $priceData = [
+                'project_id'  => $_id,
+                'priceTimes'  => json_encode($price),//价格走势图数据 json
+                'create_time' => time(),//创建时间
+            ];
+            $rst = M('ProjectPrice')->add($priceData);
+            if (!$rst) {
+                M()->rollback();
+                $this->ajaxReturnError('数据保存失败',__LINE__);
+            }
+
+
+
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg'=>'数据保存成功', 'status'=>1,]);
@@ -225,6 +277,61 @@ class ProjectController extends CommonController
                 $this->ajaxReturnError('数据更新失败',__LINE__);
             }
 
+            // 收益预测数据分析
+            $priceTimes = $_data['priceTimes'];
+
+            $prices = $_data['prices'];
+            // 存储所有价格数据的变量
+            $price = [];
+            // 循环处理数据 判断是否合法
+            foreach ($priceTimes as $key => $priceTime) {
+                // 判断均价日期是否为空
+                if ($priceTime == '') {
+                    M()->rollback();
+                    $this->ajaxReturnError('添加失败，请将预测收益填写完整',__LINE__);
+                }
+                // 判断均价日期是否为空
+                if ($prices[$key] == '') {
+                    M()->rollback();
+                    $this->ajaxReturnError('添加失败，请将预测收益填写完整',__LINE__);
+                }
+                // 判断是否有一样的 投资
+                if (isset($price[$priceTime]) == true) {
+                    M()->rollback();
+                    $this->ajaxReturnError('添加失败，重复投资额度',__LINE__);
+                }
+                // 添加到所有价格趋势变量中
+                $price[$priceTime] = $prices[$key];
+            }
+
+            if (empty($price)) {
+                M()->rollback();
+                $this->ajaxReturnError('添加失败，请将预测收益填写完整',__LINE__);
+            }
+
+
+            // 获取价格走势值
+            $priceData = [
+                'project_id' => $_data['id'],
+                'priceTimes' => json_encode($price),//价格走势图数据 json
+            ];
+
+
+            $projectPrice = M('ProjectPrice')->where(['project_id' => $_data['id']])->find();
+
+            if ($projectPrice) {
+                $rst = M('ProjectPrice')->where(['project_id' => $_data['id']])->save($priceData);
+
+            } else {
+                $priceData['create_time'] = time();
+                // 添加楼盘价格趋势到数据库中
+                $rst = M('ProjectPrice')->add($priceData);
+            }
+            if ($rst === false) {
+                M()->rollback();
+                $this->ajaxReturnError('编辑失败，请联系管理员 错误代码',__LINE__);
+            }
+
             // 提交事物
             M()->commit();
             $this->ajaxReturn(['msg'=>'数据更新成功', 'status'=>1,]);
@@ -238,6 +345,31 @@ class ProjectController extends CommonController
 
         // 获取项目分类
         $types = M('ProjectCategory')->select();
+
+
+        // 获取价格走势值
+        $projectPrice = M('ProjectPrice')
+            ->where([
+                'project_id' => $projectInfo['id']
+            ])
+            ->order('create_time desc')
+            ->find();
+        // 价格走势图数据分析
+        $priceTimes = json_decode($projectPrice['pricetimes'], true);
+        // 排序
+        ksort($priceTimes);
+        foreach ($priceTimes as $key => &$price) {
+            $price = [
+                'time'  => $key,
+                'price' => $price
+            ];
+        }
+        unset($price);
+        // 分配所有价格列表
+        $this->assign('priceTimes', $priceTimes);
+
+
+        $this->assign('projectPrice', $projectPrice);
 
         $this->assign('projectInfo',$projectInfo);
         $this->assign('surveys',$surveys);
@@ -298,7 +430,7 @@ class ProjectController extends CommonController
         $res = M('ProjectSurvey')
             ->where(['project_id'=>$id])
             ->delete();
-        if(!$res){
+        if($res===false){
             $this->error('删除失败！');
             exit;
         }
