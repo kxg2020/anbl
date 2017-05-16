@@ -219,3 +219,24 @@ function telephoneNumber($tel){
 
 }
 
+/**
+ * 记录管理员的操作日志
+ */
+function adminLogs($user,$type,$event,$create_time,$money,$remark,$left_money,$admin){
+
+    $insertData = [
+        'admin'=>$admin,
+        'user'=>$user,
+        'type'=>$type,
+        'event'=>$event,
+        'create_time'=>$create_time,
+        'money'=>$money,
+        'remark'=>$remark,
+        'left_money'=>$left_money,
+    ];
+
+    //>> 将记录写入数据库
+    M('AdminLogs')->add($insertData);
+
+}
+
