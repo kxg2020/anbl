@@ -260,6 +260,7 @@ class OrderController extends CommonController
 
     public function remove($id){
         $id = intval($id);
+
         // 判断是否传了ID
         if(!$id){
             // 没有ID，报错
@@ -270,35 +271,67 @@ class OrderController extends CommonController
         $model = D('MemberSupport');
         // 通过ID主键 查询标签信息
         $info = $model->find($id);
+
+
         if(!$info){
             // 没有在数据库中找到数据，报错
             $this->error('没有找到数据');
             exit;
         }
+        // 查询用户
+        $user = M('Member')->where(['id'=>$info['member_id']])->find();
         // 当前订单所有收益失效
         // 当前订单用户的收益全部失效
         $profits = M('MemberProfit')->where(['support_id' => $info['id']])->select();
-        foreach ($profits as $profit) {
-            // 扣除用户余额
-            $money = $profit['money'];
-            $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
-            // 删除记录
-            $rest = M('MemberProfit')->where(['id' => $profit['id']])->delete();
+
+        if(!empty($profits)){
+
+            foreach ($profits as $profit) {
+                // 扣除用户余额
+                $money = $profit['money'];
+                $rest = M('Member')->where(['id' => $profit['member_id']])->save(['money' => ['exp', 'money-' . $money]]);
+                // 删除记录
+                $rest = M('MemberProfit')->where(['id' => $profit['id']])->delete();
+            }
         }
+
         // 返还用户投资额
         $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money+' . $info['support_money']]]);
 
+
         // 改变项目投资状态
         $rest = M('Project')->where(['id' => $info['project_id']])->save(['money' => ['exp', 'money-' . $info['support_money']]]);
-        $rest = M('Project')->where(['id' => $info['project_id']])->save(['support_number' => ['exp', 'support_number-' . 1]]);
+
+        $rest = M('Project')->where(['id' => $info['project_id']])->save(['support_number' => ['exp', 'support_number-' . $rest]]);
+
+        $insertData = [
+            'admin'=>$this->userInfo['username'],
+            'user'=>$user['username'],
+            'type'=>'后台管理员操作',
+            'event'=>'删除支持订单',
+            'create_time'=>time(),
+            'money'=>$info['support_money'],
+            'remark'=>'无备注',
+            'left_money'=>$user['money'],
+        ];
+
+        //>> 将记录写入数据库
+        M('AdminLogs')->add($insertData);
+
         // 执行删除
         $res = $model->delete($id);
+
+
+
         if(!$res){
             $this->error('删除失败！');
             exit;
+        }else{
+
+            // 删除成功直接回到首页
+            $this->redirect('admin/Order/supportOrder');
+            exit;
         }
-        // 删除成功直接回到首页
-        $this->redirect('admin/order/supportOrder');
     }
 
 
@@ -547,8 +580,10 @@ class OrderController extends CommonController
         $paramArr = $_REQUEST;
         if(!empty($paramArr)){
             $id = $paramArr['id'];
+            $info = M('MemberCash as a')->field('a.username as aname,a.money as amoney,b.*')->join('left join an_member as b on a.member_id = b.id')->where(['id'=>$id])->find();
             $res = M('MemberCash')->where(['id'=>$id])->delete();
             if($res){
+                adminLogs($info['amoney'],'后台管理员操作','删除提现订单',time(),$info['amoney'],'无备注',$info['amoney'],$this->userInfo['username']);
 
                 $this->ajaxReturn(['status'=>1,'msg'=>'删除成功!']);
             }else{
@@ -592,6 +627,7 @@ class OrderController extends CommonController
                 ]);
 
                 if($res){
+                    adminLogs($user['username'],'后台管理员操作','用户充值通过',time(),$paramArr['money'],'无备注',$user['money'] + $paramArr['money'],$this->userInfo['username']);
                     sendSMSTemp($user['username'],'', $this->systemInfo,1775846);
                     $this->ajaxReturn(['status'=>1]);
 
@@ -821,6 +857,10 @@ class OrderController extends CommonController
 
             $res = M('MemberCash')->where(['id'=>$paramArr['id']])->save(['is_pass'=>1]);
 
+            //>> 查询当前用户
+            $user = M('Member')->where(['id'=>$res['member_id']])->find();
+            adminLogs($user['username'],'后台管理员操作','允许用户提现',time(),$res['money'],'无备注',$user['money'],$this->userInfo['username']);
+
           if($res != false){
 
               $this->ajaxReturn([
@@ -856,7 +896,6 @@ class OrderController extends CommonController
             $type = $casher['type'];
 
             $user = M('Member')->where(['id'=>$userId])->find();
-
             switch($type){
                 case '余额提现':
                     //>>将用户的余额重新恢复
@@ -910,9 +949,11 @@ class OrderController extends CommonController
                     }
                     break;
             }
-
+            adminLogs($user['username'],'后台管理员操作','拒绝用户提现',time(),$paramArr['money'],'无备注',$user['money'],$this->userInfo['username']);
+            $this->ajaxReturn([
+                'status'=>1
+            ]);
         }else{
-
             $this->ajaxReturn([
                 'status'=>0
             ]);
@@ -933,12 +974,15 @@ class OrderController extends CommonController
         $id = $paramArr['oId'];
 
         $res = M('MemberRecharge')->where(['member_id'=>$member_id,'id'=>$id])->save(['is_pass'=>2]);
+        $info = M('MemberRecharge')->where(['member_id'=>$member_id,'id'=>$id])->find();
         if($res === false){
 
             $this->ajaxReturn(['status'=>0]);
         }else{
             //>> 发短信,将拒绝的理由保存到数据库
             M('MemberRecharge')->where(['member_id'=>$member_id,'id'=>$id,'is_pass'=>2])->save(['remark'=>$paramArr['text']]);
+
+            adminLogs($user['username'],'后台管理员操作','拒绝用户充值',time(),$info['money'],$paramArr['text'],$user['money'],$this->userInfo['username']);
 
             sendSMSTemp($user['username'], ('#phone#') . "=" . urlencode($paramArr['text']), $this->systemInfo,1775922);
             $this->ajaxReturn(['status'=>1]);
@@ -965,6 +1009,7 @@ class OrderController extends CommonController
         }
         // 扣除充值
         $rest = M('Member')->where(['id' => $info['member_id']])->save(['money' => ['exp', 'money-' . $info['money']]]);
+        $user = M('Member')->where(['id' => $info['member_id']])->find();
         if(!$rest){
             $this->error('删除失败！');
             exit;
@@ -976,6 +1021,7 @@ class OrderController extends CommonController
             $this->error('删除失败！');
             exit;
         }
+        adminLogs($user['username'],'后台管理员操作','删除充值订单',time(),$info['money'],'无备注',$user['money'],$this->userInfo['username']);
         // 删除成功直接回到首页
         $this->redirect('admin/order/orderRecharge');
         exit;

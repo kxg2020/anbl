@@ -48,11 +48,21 @@
         </div>
         <br>
         <br>
-        <br>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">快捷回复</label>
+            <div class="col-sm-4 col-md-4 icheck minimal">
+                <select name="type_id" class="form-control" id="type">
+                    <option value="1">请选择快捷回复</option>
+                    <volist name="reply" id="t">
+                        <option value="{$t.id}">{$t.content}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-2 col-sm-2 control-label">回复</label>
             <div class="col-sm-10">
-                <textarea style="resize: none;width: 100%; padding: 5px;" cols="30" rows="10" name="reply">{$question.reply}</textarea>
+                <textarea id="text" style="resize: none;width: 100%; padding: 5px;" cols="30" rows="10" name="reply">{$question.reply}</textarea>
             </div>
         </div>
 
@@ -75,6 +85,11 @@
     <script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
     <script>
         $(function(){
+            $('#type').change(function () {
+                content = $(this).find("option:not(:eq(0)):selected").text();
+                $('#text').val(content);
+
+            });
             $('#save').click(function(){
                 var id = $('input[name = question]').val();
                 var url = location.protocol +'//'+ window.location.host+'/admin/Member/questionReply';
