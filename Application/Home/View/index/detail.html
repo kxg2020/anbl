@@ -74,7 +74,6 @@
 					</if>
 
 				</ul>
-				
 			</div>
 			<div class="comment">
 				<ul class="switch">
@@ -107,9 +106,13 @@
 					<li><time>{:date('Y-m-d',$info['create_time'])}<img src="__PUBLIC__/wang/details/img/sound.png" ></time><div>{:htmlspecialchars_decode($info['content'])}</div></li>
 					</volist>
 				</div>
+
 				<div class="forecast" style="display: none">
-					<p>预期收益日期: <span>{:date('Y/m/d',$info['end_time'])}</span></p>
-					<p>预期回报周期: <span>{$info['cycle']}个月</span></p>
+
+						<p>预期收益日期: <span>{:date('Y/m/d',$end_time)}</span></p>
+						<p>预期回报周期: <span>{$cycle}个月</span></p>
+
+
 					<div class="shouyi">
 						<p><span>电影投资额达到</span><span>预期收益率</span></p>
 						<volist name="priceTimes" id="priceTime">
@@ -331,8 +334,8 @@
 				 layer.msg('阿纳豆必须是100的倍数');
 				 return false
 			 }
+			 var project_id=$('input[name = movie_id]').val();
 
-			 var project_id="{$info['id']}";
 			 var _data = {
 				 money : money,
 				 project_id : project_id,

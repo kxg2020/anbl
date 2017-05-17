@@ -80,7 +80,6 @@ class IndexController extends CommonController{
             exit;
         }
 
-
         // 查询出项目最新动态
         $dynamic = M('ProjectDynamic')->where(['project_id'=>$id])->order('create_time desc')->select();
 
@@ -111,7 +110,8 @@ class IndexController extends CommonController{
         unset($price);
         // 分配所有价格列表
         $this->assign('priceTimes', $priceTimes);
-
+        $this->assign('cycle', $info['exp_cycle']);
+        $this->assign('end_time', $info['exp_date']);
 
         $this->assign('projectPrice', $projectPrice);
 
@@ -195,6 +195,7 @@ class IndexController extends CommonController{
             $member_id = $this->userInfo['id'];
             // 项目id
             $project_id = intval($data['project_id']);
+
 
             $projectInfo = M('Project')->find($project_id);
             if(!$projectInfo){

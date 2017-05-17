@@ -321,6 +321,20 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="price">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">
+                                            预期收益日期和回报周期
+                                        </label>
+                                        <div class="col-sm-2 col-sm-2 ">
+                                            <input type="date" class="form-control" name="exp_date"  value="{:date('Y-m-d',$projectInfo['exp_date'])}" >
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="input-group">
+                                                <input type="number" name="exp_cycle" class="form-control" value="{$projectInfo['exp_cycle']}">
+                                                <span class="input-group-addon">月</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <volist name="priceTimes" id="priceTime">
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">

@@ -307,7 +307,7 @@ margin-right: 8px;
   width: 100%;
   height: auto;
   background: #f4f4f4;
-  margin-top: 40px;
+  margin-bottom: 40px;
   overflow: hidden;
   margin-top: 80px;
 }
@@ -498,7 +498,9 @@ margin-right: 8px;
 }
 .forecast>p{
   color: #999;
-  margin-bottom: 10px;
+  float: left;
+  margin-left: 28px;
+  margin-bottom: 25px;
 }
 .forecast>p span{
   color:#000;
