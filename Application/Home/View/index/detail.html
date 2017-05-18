@@ -114,11 +114,20 @@
 
 
 					<div class="shouyi">
-						<p><span>电影投资额达到</span><span>预期收益率</span></p>
+						<p><span>电影票房达到</span><span>预期收益率</span></p>
 						<volist name="priceTimes" id="priceTime">
-						<div><p>{$priceTime.time}</p><p>{$priceTime.price}%</p></div>
+						<div><p>{$priceTime.time}</p><p>{$priceTime.price}</p></div>
 						</volist>
 					</div>
+					<script>
+						for(var i=0;i<$('.shouyi>div').length;i++) {
+							if ($('.shouyi>div').eq(i).children().eq(1).html() == '亏损') {
+								$('.shouyi>div').eq(i).children().eq(1).css({
+									color: 'green'
+								})
+							}
+						}
+					</script>
 				</div>
 			</div>
 		</div>
