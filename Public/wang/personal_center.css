@@ -1615,7 +1615,9 @@ margin-left: 50px;
 	font-size: 20px;
 }
 .money_modal>span{
-	font-size: 18px;text-align: center;display: inline-block;
+	font-size: 18px;
+	text-align: left;
+	display: inline-block;
 	width: 100%;
 }
 #table{
