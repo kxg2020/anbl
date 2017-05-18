@@ -90,6 +90,31 @@ class IndexController extends CommonController{
             'dynamic'=>$dynamic,
         ]);
 
+        // 获取收益预测
+        $projectPrice = M('ProjectPrice')
+            ->where([
+                'project_id' => $id
+            ])
+            ->order('create_time desc')
+            ->find();
+        // 价格走势图数据分析
+        $priceTimes = json_decode($projectPrice['pricetimes'], true);
+        // 排序
+        ksort($priceTimes);
+        foreach ($priceTimes as $key => &$price) {
+            $price = [
+                'time'  => $key,
+                'price' => $price
+            ];
+        }
+        unset($price);
+        // 分配所有价格列表
+        $this->assign('priceTimes', $priceTimes);
+        $this->assign('cycle', $info['exp_cycle']);
+        $this->assign('end_time', $info['exp_date']);
+
+        $this->assign('projectPrice', $projectPrice);
+
         $this->display('index/detail');
     }
 
@@ -170,6 +195,7 @@ class IndexController extends CommonController{
             $member_id = $this->userInfo['id'];
             // 项目id
             $project_id = intval($data['project_id']);
+
 
             $projectInfo = M('Project')->find($project_id);
             if(!$projectInfo){

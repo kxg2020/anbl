@@ -194,13 +194,19 @@ function getProjectSpeed($level)
     $levelName = '';
     switch ($level) {
         case 1:
-            $levelName = '正在进行';
+            $levelName = '筹备中';
             break;
         case 2:
-            $levelName = '拍摄中';
+            $levelName = '开拍';
             break;
         case 3:
-            $levelName = '已结束';
+            $levelName = '杀青';
+            break;
+        case 4:
+            $levelName = '公演';
+            break;
+        case 5:
+            $levelName = '下线';
             break;
     }
     return $levelName;

@@ -897,25 +897,64 @@ class OrderController extends CommonController
 
             $user = M('Member')->where(['id'=>$userId])->find();
 
-            //>>将用户的余额重新恢复
-            $updateData = [
-                'money'=>$paramArr['money'] + $user['money']
-            ];
-            $re = M('Member')->where(['id'=>$userId])->save($updateData);
-            if($res && $re){
-                M('MemberCash')->commit();
-                adminLogs($user['username'],'后台管理员操作','拒绝用户提现',time(),$paramArr['money'],'无备注',$user['money'],$this->userInfo['username']);
-                $this->ajaxReturn([
-                    'status'=>1
-                ]);
-            }else{
-                $this->ajaxReturn([
-                    'status'=>0
-                ]);
+            switch($type){
+                case '余额提现':
+                    //>>将用户的余额重新恢复
+                    $updateData = [
+                        'money'=>$paramArr['money'] + $user['money']
+                    ];
+                    $re = M('Member')->where(['id'=>$userId])->save($updateData);
+                    if($res && $re){
+                        M('MemberCash')->commit();
+                        $this->ajaxReturn([
+                            'status'=>1
+                        ]);
+                    }else{
+                        $this->ajaxReturn([
+                            'status'=>0
+                        ]);
+                    }
+                    break;
+                case '收益提现':
+                    //>>将用户的余额重新恢复
+                    $updateData = [
+                        'profit'=>$paramArr['money'] + $user['profit']
+                    ];
+                    $re = M('Member')->where(['id'=>$userId])->save($updateData);
+                    if($res && $re){
+                        M('MemberCash')->commit();
+                        $this->ajaxReturn([
+                            'status'=>1
+                        ]);
+                    }else{
+                        $this->ajaxReturn([
+                            'status'=>0
+                        ]);
+                    }
+                    break;
+                case '佣金提现':
+                    //>>将用户的余额重新恢复
+                    $updateData = [
+                        'commission'=>$paramArr['money'] + $user['commission']
+                    ];
+                    $re = M('Member')->where(['id'=>$userId])->save($updateData);
+                    if($res && $re){
+                        M('MemberCash')->commit();
+                        $this->ajaxReturn([
+                            'status'=>1
+                        ]);
+                    }else{
+                        $this->ajaxReturn([
+                            'status'=>0
+                        ]);
+                    }
+                    break;
             }
-
+            adminLogs($user['username'],'后台管理员操作','拒绝用户提现',time(),$paramArr['money'],'无备注',$user['money'],$this->userInfo['username']);
+            $this->ajaxReturn([
+                'status'=>1
+            ]);
         }else{
-
             $this->ajaxReturn([
                 'status'=>0
             ]);

@@ -99,6 +99,9 @@
                             <li class="">
                                 <a href="#details" data-toggle="tab">项目详情</a>
                             </li>
+                            <li class="">
+                                <a href="#price" data-toggle="tab">预测收益</a>
+                            </li>
                             <!--<li class="">
                                 <a href="#protocol" data-toggle="tab">视频上传</a>
                             </li>-->
@@ -279,9 +282,11 @@
                                             <div class="input-group">
                                                 <div class="checkbox ">
                                                     <label>
-                                                        <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 1">checked</if> value="1">正在进行
+                                                        <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 1">checked</if> value="1">筹备中
                                                         <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 2">checked</if> value="2">开拍中
-                                                        <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 3">checked</if> value="3">已结束
+                                                        <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 3">checked</if> value="3">杀青
+                                                        <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 3">checked</if> value="4">公演
+                                                        <input type="radio" name="speed" <if condition="$projectInfo['speed'] eq 3">checked</if> value="5">下线
                                                     </label>
                                                 </div>
                                             </div>
@@ -317,6 +322,76 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane" id="price">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">
+                                            预期收益日期和回报周期
+                                        </label>
+                                        <div class="col-sm-2 col-sm-2 ">
+                                            <input type="date" class="form-control" name="exp_date"  value="{:date('Y-m-d',$projectInfo['exp_date'])}" >
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="input-group">
+                                                <input type="number" name="exp_cycle" class="form-control" value="{$projectInfo['exp_cycle']}">
+                                                <span class="input-group-addon">月</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <volist name="priceTimes" id="priceTime">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">
+                                                请输入投资额和收益率
+                                            </label>
+                                            <div class="col-sm-2 col-sm-2 ">
+                                                <input type="text" class="form-control" name="priceTimes[]"  value="{$priceTime.time}">
+                                            </div>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-danger" type="button" onclick="$(this).parent().parent().parent().parent().remove()">删除</button>
+                                                </span>
+                                                    <input type="number" name="prices[]" class="form-control"
+                                                           placeholder="请输入预测收益率 " value="{$priceTime.price}">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </volist>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="button" class="btn btn-info" value="新增" onclick="addPrice(this)">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <script>
+                                    /**
+                                     * 添加项目均价
+                                     * @param e
+                                     */
+                                    function addPrice(e) {
+                                        var _data = '<div class="form-group">'+
+                                                '                                        <label class="col-sm-2 col-sm-2 control-label">'+
+                                                '                                            请输入投资额和收益率'+
+                                                '                                        </label>'+
+                                                '                                        <div class="col-sm-2 col-sm-2 ">'+
+                                                '                                            <input type="text" class="form-control" name="priceTimes[]" placeholder="请输入投资额" value="">'+
+                                                '                                        </div>'+
+                                                '                                        <div class="col-sm-4 col-md-4">'+
+                                                '                                            <div class="input-group">'+
+                                                '                                                <span class="input-group-btn">'+
+                                                '                                                    <button class="btn btn-danger" type="button" onclick="$(this).parent().parent().parent().parent().remove()">删除</button>'+
+                                                '                                                </span>'+
+                                                '                                                <input type="number" name="prices[]" class="form-control"'+
+                                                '                                                       placeholder="请输入预测收益率 ">'+
+                                                '                                                <span class="input-group-addon">%</span>'+
+                                                '                                            </div>'+
+                                                '                                        </div>'+
+                                                '                                    </div>';
+                                        $(e).parent().parent().before(_data);
+                                    }
+                                </script>
                                 <!--项目视频-->
                                 <!--<div class="tab-pane" id="protocol">
                                     <div class="form-group">
