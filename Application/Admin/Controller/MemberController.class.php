@@ -248,6 +248,9 @@ class MemberController extends  CommonController{
 
         //>> 查询数据库
         $res = $memberModel->where(['id'=>$paramArr['id'],'is_active'=>1])->find();
+
+        //>> 将当前用户余额保存在session中
+        session(base64_encode('member_current_info'),['money'=>$res['money'],'integral'=>$res['integral']]);
         if(!empty($res)){
 
             $res['date'] = date('Y-m-d',$res['create_time']);
@@ -278,7 +281,7 @@ class MemberController extends  CommonController{
                 'password'=>md5($paramArr['password']),
                 'ori_password'=>$paramArr['password'],
                 'level'=>isset($paramArr['level']) ? $paramArr['level'] : 0,
-                'integral'=>isset($paramArr['integral']) ? $paramArr['integral'] : 0,
+                'integral'=>isset($paramArr['money']) ? $paramArr['money'] : 0,
                 'money'=>isset($paramArr['money']) ? $paramArr['money'] : 0,
                 'phone'=>isset($paramArr['phone']) ? $paramArr['phone'] : '',
                 'realname'=>isset($paramArr['realname']) ? $paramArr['realname'] : '',
@@ -288,6 +291,25 @@ class MemberController extends  CommonController{
             ];
             $res = $memberModel->where(['id'=>$paramArr['id']])->save($data);
 
+            //>> 取出用户之前的余额
+            $beforeMoney = session(base64_encode('member_current_info'));
+            //>> 判断余额有没有变化
+            if($beforeMoney['money'] != $paramArr['money']){
+
+                $insertData = [
+                    'member_id'=>$paramArr['id'],
+                    'type'=>5,
+                    'money'=>abs($paramArr['money'] - $beforeMoney['money']),
+                    'create_time'=>time(),
+                    'remark'=>((int)$beforeMoney['money'] > (int)$paramArr['money']) ? '管理员后台扣除阿纳豆':'管理员后台充值阿纳豆',
+                    'is_ok'=>((int)$beforeMoney['money'] > (int)$paramArr['money']) ? 0 : 1,
+
+                    'from_username'=>0,
+                ];
+                //>> 记录管理员的操作
+                $res  = M('MemberProfit')->add($insertData);
+
+            }
             if($res){
 
                 $this->redirect('admin/member/select');
@@ -519,7 +541,13 @@ class MemberController extends  CommonController{
 
         $row = M('MemberConsult as a')->field('a.*,b.username')->join('left join an_member as b on a.member_id = b.id')->where(['a.id'=>$paramArr['id']])->find();
 
-        $this->assign('question',$row);
+        //>> 查询快捷回复
+        $result = M('QuestionReply')->select();
+
+        $this->assign([
+            'question'=>$row,
+            'reply'=>$result,
+        ]);
         $this->display('member/single');
     }
 
@@ -747,4 +775,49 @@ class MemberController extends  CommonController{
         $this->redirect('admin/Member/comment');
     }
 
+    /**
+     * 快速回复
+     */
+    public function addReply(){
+
+        //>> 查询所有回复
+        $result = M('QuestionReply')->order('create_time desc')->select();
+        $this->assign('list',$result);
+        $this->display('member/reply');
+    }
+
+    /**
+     * 快速回复
+     */
+    public function newReply(){
+
+        $paramArr  = $_REQUEST;
+
+        $insertData = [
+            'content'=>$paramArr['content'],
+            'create_time'=>time(),
+            'author'=>$this->userInfo['username'],
+        ];
+
+        $res = M('QuestionReply')->add($insertData);
+        if($res){
+            $this->ajaxReturn(['status'=>1]);
+        }else{
+            $this->ajaxReturn(['status'=>0]);
+        }
+    }
+    /**
+     * 快速回复
+     */
+    public function delReply(){
+
+        $paramArr  = $_REQUEST;
+
+
+
+        M('QuestionReply')->where(['id'=>$paramArr['id']])->delete();
+
+        $this->redirect('admin/Member/addReply');
+        exit;
+    }
 }
