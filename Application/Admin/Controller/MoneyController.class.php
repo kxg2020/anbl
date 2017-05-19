@@ -213,7 +213,7 @@ class MoneyController extends CommonController
         switch ($parent['role']) {
             case "1":
                 if ($level > 1) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {//第一父
                     // 计算佣金
@@ -225,7 +225,7 @@ class MoneyController extends CommonController
 
             case "2":
                 if ($level > 2) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {//第一父
                     // 计算佣金
@@ -244,7 +244,7 @@ class MoneyController extends CommonController
             case "3"://制片人
                 //计算票房收益
                 if ($level > 3) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {
                     // 计算佣金
@@ -267,7 +267,7 @@ class MoneyController extends CommonController
 
             case "4"://出品人
                 if ($level > 3) {
-                    return;
+                    break;
                 }
                 if ($level == 1) {
                     // 计算佣金
@@ -284,6 +284,9 @@ class MoneyController extends CommonController
                 }
                 break;
 
+        }
+        if($level>3){
+            return;
         }
         $this->genCommission($info, $roi, $projectInfo, $parent['parent_id'], $level + 1);
     }
@@ -427,7 +430,7 @@ class MoneyController extends CommonController
                         'member_id' => $info['member_id'],
                         'money' => $bucha,
                         'create_time' => time(),
-                        'type' => 4,
+                        'type' => 6,
                         'is_ok' => 0,
                         'remark' => $projectInfo['name'] . "收益失效补差",
                     ]);
@@ -565,7 +568,7 @@ class MoneyController extends CommonController
                         'member_id' => $info['member_id'],
                         'money' => $bucha,
                         'create_time' => time(),
-                        'type' => 4,
+                        'type' => 6,
                         'is_ok' => 0,
                         'remark' => $projectInfo['name'] . "收益失效补差",
                     ]);

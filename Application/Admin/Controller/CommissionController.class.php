@@ -56,7 +56,7 @@ class CommissionController extends CommonController
                                     'member_id' => $memberInfos['id'],
                                     'money' => $bucha,
                                     'create_time' => time(),
-                                    'type' => 4,
+                                    'type' => 6,
                                     'is_ok' => 0,
                                     'remark' => $projectInfo['name'] . "佣金失效补差",
                                 ]);
@@ -75,7 +75,7 @@ class CommissionController extends CommonController
                                     'member_id' => $memberInfos['id'],
                                     'money' => $balance,
                                     'create_time' => time(),
-                                    'type' => 4,
+                                    'type' => 6,
                                     'is_ok' => 0,
                                     'remark' => $projectInfo['name'] . "佣金失效补差",
                                 ]);
@@ -161,7 +161,7 @@ class CommissionController extends CommonController
                                     'member_id' => $memberInfos['id'],
                                     'money' => $bucha,
                                     'create_time' => time(),
-                                    'type' => 4,
+                                    'type' => 6,
                                     'is_ok' => 0,
                                     'remark' => $projectInfo['name'] . "佣金失效补差",
                                 ]);
@@ -180,7 +180,7 @@ class CommissionController extends CommonController
                                     'member_id' => $memberInfos['id'],
                                     'money' => $balance,
                                     'create_time' => time(),
-                                    'type' => 4,
+                                    'type' => 6,
                                     'is_ok' => 0,
                                     'remark' => $projectInfo['name'] . "佣金失效补差",
                                 ]);
