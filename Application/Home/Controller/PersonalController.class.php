@@ -635,7 +635,8 @@ class PersonalController extends CommonController
                                die($this->_printError('1056'));
                            }
                            //>> 判断余额是否大于350
-                           if ($row['money'] < 350) {
+
+                           if ($row['profit'] < 350) {
 
                                die($this->_printError('1066'));
                            }
@@ -768,7 +769,7 @@ class PersonalController extends CommonController
                                die($this->_printError('1056'));
                            }
                            //>> 判断余额是否大于350
-                           if ($row['money'] < 350) {
+                           if ($row['commission'] < 350) {
 
                                die($this->_printError('1066'));
                            }

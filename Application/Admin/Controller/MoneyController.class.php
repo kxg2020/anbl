@@ -604,13 +604,16 @@ class MoneyController extends CommonController
             // 获取影片拍摄周期
             $end_time = $projectInfo['cycle'];// 周期时间 例如6个月
 
-            $bigMony = $info['support_money']*($projectInfo['fixed_rate'] / 100)*3;
-
+            if($end_time>3){
+                $bigMony = $info['support_money']*($projectInfo['fixed_rate'] / 100)*3;
+            }else{
+                $bigMony = $info['support_money']*($projectInfo['fixed_rate'] / 100)*$end_time;
+            }
 
             // 获取系统当前时间
             $time = time();
 
-            if ($end_time > 3 && $time < $projectInfo['end_time'] && $bigMony>$info['fixed']) {
+            if ($end_time > 3 && $bigMony>$info['fixed']) {
                 // 查看分红时间是不是已经够 3个月
                 if ($info['num'] >= 90) {//不在进行分红 //修改订单状态
                     $rest = M('MemberSupport')
@@ -663,18 +666,36 @@ class MoneyController extends CommonController
                     exit;
                 }
 
-            } elseif ($end_time <= 3 && $time < $projectInfo['end_time'] && $bigMony>$info['fixed']) {
+            } elseif ($end_time <= 3&& $bigMony>$info['fixed']) {
+                if ($info['num'] >= $end_time*30) {//不在进行分红 //修改订单状态
+                    $rest = M('MemberSupport')
+                        ->where(['id' => $info['id']])
+                        ->save([
+                            'is_fh' => 1,//分红结束
+                        ]);
+                    if ($rest === false) {
+                        M()->rollback();
+                        exit;
+                    }
+                    continue;
+                }
+
+                if($info['fixed']+($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30>$bigMony){
+                    $money =$bigMony-$info['fixed'];
+                }else{
+                    $money =($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30;
+                }
+
                 $rest = M('MemberSupport')
                     ->where(['id' => $info['id']])
                     ->save([
-                        'fixed' => ($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30 + $info['fixed'],//每天的收益
+                        'fixed' => $money + $info['fixed'],//每天的收益
                         'num' => $info['num'] + 1
                     ]);
                 if ($rest === false) {
                     M()->rollback();
                     exit;
                 }
-                $money = ($info['support_money'] * ($projectInfo['fixed_rate'] / 100)) / 30;//每天的收益
 
                 // 向会员收益表追加一条记录
                 $rest = M('MemberProfit')->add([
@@ -716,16 +737,25 @@ class MoneyController extends CommonController
      * 返还固定分红会员的本金
      */
     public function benjin(){
+        $id = intval(I('post.id'));
+
+        // 判断项目是否存在
+        $projectInfo = M('Project')->find($id);
+        if (!$projectInfo) {
+            $this->ajaxReturn(['msg' => "项目不存在", 'status' => 0]);
+        }
 
         // 未分红的订单
         $where = [
             'is_true'=>0,//未返还本金的
             'type' => 1,//未分红固定分红方式的订单
+            'project_id' => $id,//当前项目
         ];
         $supportInfo = M('MemberSupport')
             ->where($where)
             ->select();
         if (!$supportInfo) {
+            $this->ajaxReturn(['msg' => "没有订单产生", 'status' => 0]);
             exit;
         }
 
@@ -736,7 +766,7 @@ class MoneyController extends CommonController
                 continue;
             }
             // 项目下架自动返还本金
-            if($projectInfo['is_active'] == 0 && $projectInfo['is_ok'] == 1){
+            if($projectInfo['is_ok'] == 1){
 
                 // 更新会员余额
                 $money = $info['support_money'];
@@ -767,6 +797,9 @@ class MoneyController extends CommonController
                     M()->rollback();
                     $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
                 }
+                $this->ajaxReturn(['msg' => "返还成功", 'status' => 1]);
+            }else{
+                $this->ajaxReturn(['msg' => "返还失败", 'status' => 0]);
             }
         }
         M()->commit();

@@ -42,7 +42,6 @@
                             </div>
                             <button type="submit" class="btn btn-primary">搜索</button>
                             <a  data-toggle="modal" data-target="#myModal3" class="btn btn-danger btn-ls fBtn">手动反红</a>
-                            <a  data-toggle="modal" data-target="#myModal4" class="btn btn-danger btn-ls bBtn">手动返本金</a>
                         </form>
 
                         <!--搜索结束-->
@@ -54,8 +53,8 @@
                                     <th class="text-center">编号</th>
                                     <th class="text-center">名称</th>
                                     <th class="text-center">类型</th>
-                                    <th class="text-center">固定分红比例</th>
-                                    <th class="text-center">浮动分红比例</th>
+                                    <!--<th class="text-center">固定分红比例</th>
+                                    <th class="text-center">浮动分红比例</th>-->
                                     <th class="text-center">项目图片</th>
                                     <th class="text-center">目标金额</th>
                                     <th class="text-center">已支持资金</th>
@@ -80,8 +79,8 @@
                                     <td style="vertical-align: middle">{$tag.id}</td>
                                     <td style="vertical-align: middle">{$tag.name}</td>
                                     <td style="vertical-align: middle">{$tag.type}</td>
-                                    <td style="vertical-align: middle">{$tag.fixed_rate}</td>
-                                    <td style="vertical-align: middle">{$tag.float_rate}</td>
+                                    <!--<td style="vertical-align: middle">{$tag.fixed_rate}</td>
+                                    <td style="vertical-align: middle">{$tag.float_rate}</td>-->
                                     <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
                                     <td style="vertical-align: middle">{$tag.target_amount}</td>
                                     <td style="vertical-align: middle">{$tag.money}</td>
@@ -111,6 +110,7 @@
                                         <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已返还</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">票房分红</a></if>
 
                                         <if condition="$tag['is_fy'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分佣</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-xs fyBtn">票房分佣</a></if>
+                                        <if condition="$tag['is_ok'] eq 1"><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal4" class="btn btn-danger btn-xs bBtn">返还本金</a></if>
                                     </td>
                                 </tr>
                                 </volist>
@@ -204,7 +204,7 @@
                     <h4 class="modal-title" id="myModalLabel4">提示：Notice!</h4>
                 </div>
                 <div class="modal-body">
-                    你确认要手动返还本金吗？系统会自动进行，手动返回可能会影响返还本金一天多次触发。
+                    你确认要返还本金吗？
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -256,13 +256,19 @@
                 }
             });
         });
+
+
+        $('.bBtn').click(function(){
+            var _id = $(this).attr('data-id');
+            $('#bTrue').attr('data-id',_id);
+        });
         $('#bTrue').click(function(){
-            $.post("{:U('admin/money/benjin')}",function (data) {
+            var _id = $(this).attr('data-id');
+            $.post("{:U('admin/money/benjin')}",{id:_id},function (data) {
                 if(data.status == 0){
                     layer.msg(data.msg);
                 }else{
                     layer.msg(data.msg);
-                    window.location.href = "{:U('admin/order/supportOrder')}";
                 }
             });
         });
@@ -287,7 +293,7 @@
         });
 
 
-        function checkState(url,e) {
+       /* function checkState(url,e) {
             $.get(url,function (data) {
                 if(data.status == 1){
                     if(data.value == 1){
@@ -298,7 +304,7 @@
                 }
                 layer.msg(data.msg);
             });
-        }
+        }*/
 
         function checkRecommend(url,e) {
             $.get(url,function (data) {
