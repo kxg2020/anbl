@@ -166,6 +166,9 @@ function getUserLevelsName($level)
 {
     $levelName = '';
     switch ($level) {
+        case 0:
+            $levelName = '会员';
+            break;
         case 1:
             $levelName = '支持者';
             break;

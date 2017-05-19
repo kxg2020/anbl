@@ -95,7 +95,7 @@ class CommonController extends Controller{
                 $support = $row['all_support_money'];
 
 
-                if($support == 0){
+                if($support < $zcArr['support']){
 
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>0]);
                 }
@@ -220,7 +220,7 @@ class CommonController extends Controller{
 
         static $sum = 0;
         $model = M('Member');
-        $rows = $model ->where(['parent_id'=>$id,'all_support_money'=>['egt',100]])->select();
+        $rows = $model ->where(['parent_id'=>$id])->select();
 
         if(!empty($rows)){
 
@@ -250,7 +250,7 @@ class CommonController extends Controller{
         if(!empty($rows)){
 
             foreach($rows as $k => $v){
-                if($v['is_true'] == 0){
+                if($v['role'] >= 1){
                     $sum ++;
                 }
                 $this->notTrue($v['id']);

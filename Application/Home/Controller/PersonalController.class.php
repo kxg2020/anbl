@@ -306,15 +306,31 @@ class PersonalController extends CommonController
         //>> 查询招募电影
         $recruit = M('ProjectRecruit')->select();
 
-        //>> 查询我的下级
-        $follower = M('Member')->where(['parent_id' => $this->userInfo['id'],'all_support_money'=>['egt',100]])->count();
+        //>> 查询总直推人数
+        $allFollowers = M('Member')->where(['parent_id' => $this->userInfo['id']])->count();
+
+        //>> 计算当月的新增业绩
 
 
-        //>> 查询我的团队
-        $group = $this->allMembers($this->userInfo['id']);
+        //>> 查询我的下级(有效)
+        $follower = M('Member')->where(['parent_id' => $this->userInfo['id'],'role'=>['egt',1]])->count();
+        
 
+        //>> 查询我的团队(总人数)
+        if(!S('group'.$this->userInfo['id'])){
 
-        $notTrue = $this->notTrue($this->userInfo['id']);
+            $group = $this->allMembers($this->userInfo['id']);
+            S('group'.$this->userInfo['id'],$group);
+        }
+        $group = S('group'.$this->userInfo['id']);
+
+        //>> 查询我的团队(有效)
+        if(!S('notTrue'.$this->userInfo['id'])){
+
+            $notTrue = $this->notTrue($this->userInfo['id']);
+            S('notTrue'.$this->userInfo['id'],$notTrue);
+        }
+        $notTrue = S('notTrue'.$this->userInfo['id']);
 
 
         //>> 查询充值订单
@@ -372,6 +388,7 @@ class PersonalController extends CommonController
             'consume_count_1' => $consume_count_1,
             'consume_count_2' => $consume_count_2,
             'consume_count' => $consume_count,
+            'allFollowers'=>$allFollowers,
             'follower' => $follower,
             'recruit' => $recruit,
             'topLeader' => $topLeader,
