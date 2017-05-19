@@ -16,7 +16,7 @@
 		<div class="body_left">
 		<div>
 		 <div>
-			 <p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv"  >{:getUserLevelsName($personal['role'])}</span></p>
+			 <p class="username"><span style="margin-left: 17px;"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if></span>   <span id="user_lv" style="font-size: 14px;"> {:getUserLevelsName($personal['role'])}<span style="font-size: 14px;display: block;">vip</span></span></p>
 <!--
 			<div class="leval"><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
 			Lv{$personal['level']}:{$personal['money']}阿纳豆
@@ -40,8 +40,9 @@
 				<if condition="($personal['safe_level'] eq 1 ) or ($personal['safe_level'] eq 2 )"><span class="up_btn">点击提升</span></if></div>
 			<div class="user_inform" id="phone">{$secretPhone}</div>
 			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
-			<div><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span></div>
+			<div><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span></div>		
 		 </div>
+		 	<p style="width: 100%;text-align: center;position: absolute;left: 0;bottom: 25.5%;">当月新增总业绩5000.00阿纳豆</p>
 			<p id="repeat_bg">点击替换背景</p>
 			<p class="footer">Copyright 2017 阿纳巴里国际影业</p>
 		</div>
@@ -52,7 +53,7 @@
 				<li id="team"><div>账户明细</div></li>
 				<li id="password"><div>我的团队</div></li>
 				<li id="ask"><div>问题留言</div></li>
-				<li id="actor"><div>演艺申请</div></li>
+				<li id="actor"><div>演艺申请</div></li> 
 				<li id="attend"><div>我的参与</div></li>
 			</ul>
 			<div class="identity" style="display: none;">
