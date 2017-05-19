@@ -108,6 +108,11 @@ class RegisterController extends CommonController{
                 $res = $userModel->add($insertData);
 
                 if($res){
+                   if($row){
+                       //>> 删除上级的缓存
+                       S('group'.$row['id'],null);
+                       S('notTrue'.$row['id'],null);
+                   }
                     session('verify_code'.$paramArr['phone'],null);
                     die($this->_printSuccess());
 

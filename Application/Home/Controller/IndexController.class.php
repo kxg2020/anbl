@@ -27,7 +27,7 @@ class IndexController extends CommonController{
                 'is_active'      => 1,
                 ])
             ->limit(0,3)
-            ->order('money desc')
+            ->order('sort')
             ->select();
 
         // 查询出星级项目
@@ -79,7 +79,6 @@ class IndexController extends CommonController{
             $this->error('项目不存在');
             exit;
         }
-
         // 查询出项目最新动态
         $dynamic = M('ProjectDynamic')->where(['project_id'=>$id])->order('create_time desc')->select();
 

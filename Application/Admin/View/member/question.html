@@ -145,32 +145,5 @@
                 }
             });
         });
-        $('').click(function(){
-            $.ajax({
-                'type':'post',
-                'dataType':'json',
-                'url':"{:U('admin/Order/recharge')}",
-                'data':{
-                    'order_number':$('input[name = order_number]').val(),
-                },
-                success:function(result){
-                    $('#body').html('');
-                    $.each(result.data,function(k,v){
-                        $('#body').append(
-                                '<tr align="center">'+
-                                '<td>'+ v.id+'</td>'+
-                                '<td>'+ v.order_number+'</td>'+
-                                '<td>'+ v.username+'</td>'+
-                                '<td>'+ v.create_time+'</td>'+
-                                '<td>'+ v.money+'</td>'+
-                                '<td>'+'<img src="__PUBLIC__/images/status/'+v.is_pass+'.png" style="width: 18px;height: 18px;border-radius: 50%>'+'</td>'+
-                                '<td>'+'<input type="button" class="btn btn-xs btn-info detail" value="查看" data-id="'+ v.id+'">'+'</td>'+
-                                "</tr>"
-                        );
-                    });
-
-                }
-            });
-        });
     </script>
 </block>

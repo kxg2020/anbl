@@ -310,7 +310,7 @@ class MemberController extends  CommonController{
                 $res  = M('MemberProfit')->add($insertData);
 
             }
-            if($res){
+            if($res !== false){
 
                 $this->redirect('admin/member/select');
 
