@@ -249,3 +249,106 @@ function adminLogs($user,$type,$event,$create_time,$money,$remark,$left_money,$a
 
 }
 
+/**
+ * 获取新增业绩
+ * @param $role 角色
+ * @param $member_id 会员id
+ * @return int 返回新增业绩
+ */
+function get_achievement($role,$member_id){
+
+    $memberInfo = M('Member')->where(['id' => $member_id])->find();
+
+    // 制片人
+    if($role == 3){
+        $money = sum($memberInfo['id']);
+        return $money;
+    }
+    // 出品人
+    if($role == 4){
+        $money = sum($memberInfo['id']);
+        return $money;
+    }
+}
+
+function sum($id){
+
+    $firstDay=date('Y-m-01', strtotime(date("Y-m-d")));
+
+    $lastDay = date('Y-m-d', strtotime("$firstDay +1 month -1 day"));
+
+
+    $lastMonthFirstDay = date('Y-m-01', strtotime('-1 month'));
+    $lastMonthLastDay = date('Y-m-t', strtotime('-1 month'));
+
+    $dataArr = difference($id);
+
+    static $nowArr = [];
+    $nowSum = 0;
+    static $beforeArr = [];
+    $beforeSum = 0;
+
+
+    foreach($dataArr as $key => $value){
+
+        foreach($value as $k => $j){
+            if(strtotime($firstDay) <= $j['create_time'] && $j['create_time'] <= strtotime($lastDay)){
+
+                $nowArr[] = $j;
+            }
+        }
+    }
+
+
+    foreach($dataArr as $ke => $val){
+
+        foreach($val as $i => $o){
+
+            if(strtotime($lastMonthFirstDay) <= $o['create_time'] && $o['create_time'] <= strtotime($lastMonthLastDay)){
+
+                $beforeArr[] = $o;
+            }
+        }
+    }
+
+    foreach($nowArr as $s => $x){
+        $nowSum += $x['money'];
+    }
+    foreach($beforeArr as $t => $p){
+        $beforeSum += $p['money'];
+    }
+
+    //>> 差值
+    //  $difference = ($nowSum - $beforeSum) > 0 ? ($nowSum - $beforeSum):0;
+    $difference = $nowSum > 0 ? $nowSum:0;
+    $nowSum = 0;
+    $beforeSum = 0;
+    return $difference;
+}
+
+function difference($id,$level = 0){
+
+    if(empty($id) || !is_numeric($id)) return false;
+
+    static $group = [];
+    $where = [
+        'parent_id'=>$id
+    ];
+    $child = M('Member')->where($where)->select();
+
+
+    if(!empty($child)){
+        $level += 1;
+        if($level > 3){
+            $children = [];
+            foreach($child as $key => $value){
+                $children = M('MemberRecharge')->where(['member_id'=>$value['id'],'is_pass'=>1])->select();
+            }
+            $group[] = $children;
+        }
+        foreach($child as $k => $v){
+            difference($v['id'],$level);
+        }
+    }
+    return $group;
+}
