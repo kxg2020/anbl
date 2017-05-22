@@ -539,6 +539,7 @@ class MemberController extends  CommonController{
 
         $paramArr = $_REQUEST;
 
+
         $row = M('MemberConsult as a')->field('a.*,b.username')->join('left join an_member as b on a.member_id = b.id')->where(['a.id'=>$paramArr['id']])->find();
 
         //>> 查询快捷回复

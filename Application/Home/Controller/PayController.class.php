@@ -16,17 +16,20 @@ class PayController extends  Controller{
 
     public function doPay(){
 
+
         $alipay_config=C('alipay_config');
         $payment_type = "1"; //>> 支付类型 //必填，不能修改
         $notify_url = C('alipay.notify_url'); //>> 服务器异步通知页面路径
         $return_url = C('alipay.return_url'); //>> 页面跳转同步通知页面路径
         $seller_email = C('alipay.seller_email');//>>卖家支付宝帐户必填
+
         $out_trade_no = $_POST['trade_no'];//>> 商户订单号 通过支付页面的表单进行传递，注意要唯一！
         $subject = $_POST['ordsubject'];  //>> 订单名称 // 必填 通过支付页面的表单进行传递
-        $total_fee = $_POST['ordtotal_fee'];   //>> 付款金额  //>> 必填 通过支付页面的表单进行传递
-        $body = $_POST['ordbody'];  //>> 订单描述 通过支付页面的表单进行传递
+        $total_fee = $_POST['ordtotal_fee'];   //>> 付款金额,必填,通过支付页面的表单进行传递
+        $body = $_POST['ordbody'];  //>> 订单描述,通过支付页面的表单进行传递
         $show_url = $_POST['ordshow_url'];  //>> 商品展示地址 通过支付页面的表单进行传递
-        $anti_phishing_key = "";//防钓鱼时间戳 //>> 若要使用请调用类文件submit中的query_timestamp函数
+
+        $anti_phishing_key = "";//>> 防钓鱼时间戳,若要使用请调用类文件submit中的query_timestamp函数
         $exter_invoke_ip = get_client_ip(); //>> 客户端的IP地址
 
         //>> 构造要请求的参数数组
@@ -146,6 +149,24 @@ class PayController extends  Controller{
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
             echo "支付失败！";
         }
+    }
+
+    /**
+     *测试
+     */
+    public function example(){
+
+
+        $this->display('example/index');
+    }
+
+    public function successPage(){
+
+
+    }
+
+    public function failedPage(){
+
     }
 
 }
