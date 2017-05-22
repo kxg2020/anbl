@@ -64,6 +64,7 @@ class RegisterController extends CommonController{
                     ];
                     //>> 查询当前用户的上级
                     $row = $userModel->where($where)->find();
+
                     if(!empty($row)){
 
                         $parent_id = $row['id'];
@@ -110,8 +111,8 @@ class RegisterController extends CommonController{
                 if($res){
                    if($row){
                        //>> 删除上级的缓存
-                       S('group'.$row['id'],null);
-                       S('notTrue'.$row['id'],null);
+                       //S('group'.$row['id'],null);
+                       //S('notTrue'.$row['id'],null);
                    }
                     session('verify_code'.$paramArr['phone'],null);
                     die($this->_printSuccess());

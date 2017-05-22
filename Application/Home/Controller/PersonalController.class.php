@@ -317,20 +317,14 @@ class PersonalController extends CommonController
         
 
         //>> 查询我的团队(总人数)
-        if(!S('group'.$this->userInfo['id'])){
+        $group = $this->allMembers($this->userInfo['id']);
 
-            $group = $this->allMembers($this->userInfo['id']);
-            S('group'.$this->userInfo['id'],$group);
-        }
-        $group = S('group'.$this->userInfo['id']);
+
 
         //>> 查询我的团队(有效)
-        if(!S('notTrue'.$this->userInfo['id'])){
 
-            $notTrue = $this->notTrue($this->userInfo['id']);
-            S('notTrue'.$this->userInfo['id'],$notTrue);
-        }
-        $notTrue = S('notTrue'.$this->userInfo['id']);
+        $notTrue = $this->notTrue($this->userInfo['id']);
+
 
 
         //>> 查询充值订单

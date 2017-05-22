@@ -118,6 +118,9 @@ class CommonController extends Controller{
                 //>> 多少制片人
                 $zhipian = $this->getZhiPianRen($row['id']);
 
+                //>> 多少出品人
+                $chupin = $this->getChuPinRen($row['id']);
+
 
                 //>> 直推xxx人，升级为经纪人
                 if($count >= $jjArr['follower'] && $support >= $jjArr['support'] ){
@@ -127,13 +130,13 @@ class CommonController extends Controller{
                 }
 
                 //>> 如果投资35000以上,直推10名,团队100人升级为制片人,2名经纪人
-                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && $jingji >= $zpArr['follower_jingji']  ){
+                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && (($jingji+$zhipian+$chupin) >= $zpArr['follower_jingji'] )  ){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
                 //>> 如果个人投资70000 直推30人 团队500人 2名制片人
-                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $zhipian >= $cpArr['follower_zhipian']){
+                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && ($zhipian+$chupin >= $cpArr['follower_zhipian'])){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
@@ -184,7 +187,7 @@ class CommonController extends Controller{
      */
     private function groupTrue($id){
 
-        $res = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $res = M('Member')->where(['parent_id'=>$id,'role'=>['egt',1]])->select();
 
         if(!empty($res)){
 
@@ -199,7 +202,7 @@ class CommonController extends Controller{
 
         static $sum = 0;
         $model = M('Member');
-        $rows = $model ->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $rows = $model ->where(['parent_id'=>$id,'role'=>['egt',1]])->select();
 
         $count = count($rows);
         $sum += $count;
@@ -244,18 +247,17 @@ class CommonController extends Controller{
 
         $model = M('Member');
 
-        $rows = $model ->where(['parent_id'=>$id])->select();
+        $rows = $model ->where(['parent_id'=>$id,'role'=>['egt',1]])->select();
 
 
         if(!empty($rows)){
 
+            $count = count($rows);
+            $sum += $count;
+
             foreach($rows as $k => $v){
-                if($v['role'] >= 1){
-                    $sum ++;
-                }
                 $this->notTrue($v['id']);
             }
-
         }
         return $sum;
     }
@@ -278,6 +280,16 @@ class CommonController extends Controller{
     {
 
         $rows = M('Member')->where(['parent_id' => $id, 'role' => 3])->count();
+
+        return $rows;
+    }
+
+    /**
+     * 查询下线出品人
+     */
+    public function getChuPinRen($id){
+
+        $rows = M('Member')->where(['parent_id'=>$id,'role'=>4])->count();
 
         return $rows;
     }
