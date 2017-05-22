@@ -407,7 +407,7 @@ class CommissionController extends CommonController
             ]);
 
             // 更新佣金钱包余额
-            $rest = M('Member')->where(['id' => $info['id']])->save(['commission' => ['exp', 'commission+' . $money]]);
+            $rest = M('Member')->where(['id' => $info['id']])->save(['commission' => ['exp', 'commission+' . $money*($this->systemInfo['zrate']/100)]]);
         }
 
 
@@ -462,7 +462,8 @@ class CommissionController extends CommonController
         }
 
         //>> 差值
-        $difference = ($nowSum - $beforeSum) > 0 ? ($nowSum - $beforeSum):0;
+       // $difference = ($nowSum - $beforeSum) > 0 ? ($nowSum - $beforeSum):0;
+        $difference = $nowSum > 0 ? $nowSum:0;
         $nowSum = 0;
         $beforeSum = 0;
         return $difference;
@@ -484,7 +485,7 @@ class CommissionController extends CommonController
             if($level > 3){
                 $children = [];
                 foreach($child as $key => $value){
-                    $children = M('MemberRecharge')->where(['member_id'=>$value['id']])->select();
+                    $children = M('MemberRecharge')->where(['member_id'=>$value['id'],'is_pass'=>1])->select();
                 }
                 $group[] = $children;
             }
