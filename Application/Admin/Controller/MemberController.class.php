@@ -47,6 +47,9 @@ class MemberController extends  CommonController{
                 ['elt',$end_time]
             ];
         }
+        if($paramArr['province'] || $paramArr['city'] || $paramArr['county']){
+            $where['city'] = ['like',"%".$paramArr['province'].$paramArr['city'].$paramArr['county']."%"];
+        }
 
 
         $count = M('Member')->where($where)->order('create_time desc ')->count();
@@ -101,20 +104,47 @@ class MemberController extends  CommonController{
                 ['elt',$end_time]
             ];
         }
+        if($paramArr['province'] || $paramArr['city'] || $paramArr['county']){
+            $where['city'] = ['like',"%".$paramArr['province'].$paramArr['city'].$paramArr['county']."%"];
+        }
+
 
         $count = M('Member')->where($where)->order('create_time desc ')->count();
 
         $memberList = M('Member')->where($where)->order('create_time desc ')->select();
         foreach ($memberList as &$info){
             $info['create_time'] = date('Y-m-d H:i:s',$info['create_time']);
+            switch ($info['role']){
+                case 0:
+                    $info['role'] = '会员';
+                    break;
+                case 1:
+                    $info['role'] = '支持者';
+                    break;
+                case 2:
+                    $info['role'] = '经纪人';
+                    break;
+                case 3:
+                    $info['role'] = '制片人';
+                    break;
+                case 4:
+                    $info['role'] = '出品人';
+                    break;
+
+            }
         }
         unset($info);
 
         $xlsCell  = array(
             array('id','编号'),
             array('username','账户'),
+            array('realname','真实姓名'),
+            array('username','电话'),
+            array('role','角色'),
             array('money','余额'),
-            array('phone','电话'),
+            array('profit','收益'),
+            array('commission','佣金'),
+            array('city','地址'),
             array('create_time','加入时间'),
         );
 
