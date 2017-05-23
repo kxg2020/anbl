@@ -416,17 +416,19 @@ class ProjectController extends CommonController
 
         // 删除相关订单信息
         $rest = M('MemberSupport')->where(['project_id'=>$info['id']])->delete();
-        if(!$rest){
+        if($rest === false){
             $this->error('删除失败！');
             exit;
         }
 
         // 删除收益信息
-        foreach($supportInfo as $info){
-            $rest = M('MemberProfit')->where(['support_id'=>$info['id']])->delete();
-            if(!$rest){
-                $this->error('删除失败！');
-                exit;
+        if(!$supportInfo){
+            foreach($supportInfo as $info){
+                $rest = M('MemberProfit')->where(['support_id'=>$info['id']])->delete();
+                if(!$rest){
+                    $this->error('删除失败！');
+                    exit;
+                }
             }
         }
 
