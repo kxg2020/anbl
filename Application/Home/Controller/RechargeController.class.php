@@ -47,6 +47,24 @@ class RechargeController extends CommonController{
                     }
                 }
 
+                //>> 判断用户是新增的订单还是重新提交被拒绝的订单
+                $token = session(md5('order'.$this->userInfo['username']));
+
+                if(!empty($token)){
+
+                    //>> 直接更新
+                   $res =  M('MemberRecharge')->where(['order_number'=>session(md5('order'.$this->userInfo['username'])),'member_id'=>$this->userInfo['id']])->save(['is_pass'=>0,'image_url'=>$paramArr['image_url'],'remark'=>'','create_time'=>time(),'money'=>$paramArr['money']]);
+
+                   if($res === false){
+
+                       die($this->_printError('1048'));
+                   }else{
+
+                       session(md5('order'.$this->userInfo['username']),null);
+                       $this->ajaxReturn(['status'=>3,'msg'=>'更新成功,请等待管理员审核']);
+                   }
+                }
+
                 M()->startTrans();
                 //>> 生成流水号
                 $orderNumber = 'RE'.date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);

@@ -1457,4 +1457,49 @@ class PersonalController extends CommonController
         }
         $this->ajaxReturn(['status'=>0]);
     }
+
+
+    /**
+     * 查询是否有拒绝订单
+     */
+    public function checkHasRefuse(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr)){
+
+            $order = M('MemberRecharge')->where(['member_id'=>$paramArr['username'],['is_pass'=>2],['create_time'=>['egt',1495209600]]])->find();
+            if(!empty($order)){
+
+                $create_time = date('Y-m-d  H:i:s',$order['create_time']);
+                $this->ajaxReturn(['status'=>1,'order'=>$order['order_number'],'create_time'=>$create_time]);
+            }else{
+
+
+                $this->ajaxReturn(['status'=>0]);
+            }
+
+        }else{
+
+            $this->ajaxReturn(['status'=>0]);
+        }
+    }
+
+    /**
+     * 如果有拒绝订单
+     */
+    public function ifHasRefuse(){
+
+        $paramArr = $_REQUEST;
+
+        if(!empty($paramArr) && is_numeric($paramArr['username'])){
+
+            $user = M('Member')->field('username')->where(['id'=>$paramArr['username']])->find();
+
+            if(!empty($user)){
+
+                session(md5('order'.$user['username']),$paramArr['order']);
+            }
+        }
+    }
 }

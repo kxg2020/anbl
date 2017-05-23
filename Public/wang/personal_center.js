@@ -421,10 +421,17 @@ $(function(){
 							layer.msg('提交成功!,请等待工作人员与您联系',function(){
 								$('input[name = rechargeMoney]').val('');
 							});
+							return false;
+						}
+						if(result.status == 3){
+                            $('#images').val('');
+                            layer.msg(result.msg,function(){
+                                $('input[name = rechargeMoney]').val('');
+                            });
 						}else{
-							layer.msg(result.msg,function(){
-								$('input[name = rechargeMoney]').val('');
-							});
+                            layer.msg(result.msg,function(){
+                                $('input[name = rechargeMoney]').val('');
+                            });
 						}
 					}
 				});
@@ -433,11 +440,50 @@ $(function(){
 		}
 	});
 
-
 	var data_id = 1;
 	$('.tiqu').click(function(){
 		data_id = $(this).attr('data-id');
 	});
+
+    /**
+	 * 点击"充值",判断是否有被拒绝的订单
+     */
+    $('#recharge').click(function () {
+    	username = $('input[name = myTelephone]').val();
+		$.ajax({
+			'type':'post',
+			'dataType':'json',
+			'url':location.protocol+'//'+window.location.host+'/Home/Personal/checkHasRefuse',
+			'data':{'username':username},
+			success:function (e) {
+				if(e.status==1){
+                    layer.open({
+						btn:['确定','取消'],
+                        type: 1,
+						title:'阿纳巴里提示',
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['420px', '180px'], //宽高
+                        content: '<p>亲爱的用户,系统检测到您于'+e.create_time+'有被拒绝的订单,需要重新上传凭证吗?</p>',
+						btn1:function (k) {
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':location.protocol+'//'+window.location.host+'/Home/Personal/ifHasRefuse',
+                                'data':{'username':username,'order':e.order},
+                                complete:function () {
+                                    layer.closeAll();
+                                }
+                            });
+                        },
+                        btn2:function () {
+							location.reload();
+                        }
+                    });
+				}
+            }
+		});
+    });
+
 
 	$('.ex').click(function(){
 		var money = $('input[name = exMoney'+data_id+']').val();
