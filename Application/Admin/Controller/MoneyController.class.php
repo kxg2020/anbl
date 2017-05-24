@@ -348,7 +348,7 @@ class MoneyController extends CommonController
         $supportInfo1 = M('MemberSupport')
             ->where($where1)
             ->select();
-        foreach ($supportInfo1 as &$info) {
+        foreach ($supportInfo1 as $info) {
             // 查询出当前项目
             $projectInfo = M('Project')->find($info['project_id']);
             if (!$projectInfo) {// 项目不存在
@@ -610,12 +610,10 @@ class MoneyController extends CommonController
                 $bigMony = $info['support_money']*($projectInfo['fixed_rate'] / 100)*$end_time;
             }
 
-            // 获取系统当前时间
-            $time = time();
 
             if ($end_time > 3 && $bigMony>$info['fixed']) {
                 // 查看分红时间是不是已经够 3个月
-                if ($info['num'] >= 90) {//不在进行分红 //修改订单状态
+                if ($info['num'] > 90) {//不在进行分红 //修改订单状态
                     $rest = M('MemberSupport')
                         ->where(['id' => $info['id']])
                         ->save([
@@ -667,7 +665,7 @@ class MoneyController extends CommonController
                 }
 
             } elseif ($end_time <= 3&& $bigMony>$info['fixed']) {
-                if ($info['num'] >= $end_time*30) {//不在进行分红 //修改订单状态
+                if ($info['num'] > $end_time*30) {//不在进行分红 //修改订单状态
                     $rest = M('MemberSupport')
                         ->where(['id' => $info['id']])
                         ->save([
@@ -734,7 +732,7 @@ class MoneyController extends CommonController
 
 
     /**
-     * 返还固定分红会员的本金
+     * 手动返还返还固定分红会员的本金（目标金额已达到的项目）
      */
     public function benjin(){
         $id = intval(I('post.id'));
