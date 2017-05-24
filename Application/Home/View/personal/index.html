@@ -45,7 +45,7 @@
 			<div><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span></div>
 		 </div>
 			<if condition="$personal['role'] gt 2">
-			<p style="width: 100%;color: #F4E36D;font-size: 20px;text-align: center;position: absolute;left: 0;bottom: 25.5%;">当月新增总业绩: <span style="color: red">{:floor(get_achievement($personal['role'],$personal['id']))}</span> 阿纳豆</p>
+				<p style="width: 100%;color: #F4E36D;font-size: 20px;text-align: center;position: absolute;left: 0;bottom: 25.5%;">当月新增总业绩: <span style="color: red">{:floor(get_achievement($personal['role'],$personal['id']))}</span> 阿纳豆</p>
 			</if>
 			<p id="repeat_bg">点击替换背景</p>
 			<p class="footer">Copyright 2017 阿纳巴里国际影业</p>
@@ -558,13 +558,12 @@
 								'data':{'username':username,'money':_money,'captcha':_phone},
 								success:function(e){
 									if(e.status == 1){
-											layer.msg('操作成功', {
-												time: 0, //20s后自动关闭
-												btn: ['确定'],
-												yes:function(){
-													location.reload();
-												}
-											});
+                                        layer.confirm('转账成功', {
+                                            btn: ['确定'], //按钮
+											yes:function () {
+												location.reload();
+                                            }
+                                        });
 									}else{
 										layer.msg(e.msg);
 									}

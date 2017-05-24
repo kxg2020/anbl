@@ -9,7 +9,7 @@ class CommentController extends CommonController{
      * 添加评论
      */
     public function add(){
-
+        
         $paramArr = $_REQUEST;
 
         if(!empty($paramArr)){
