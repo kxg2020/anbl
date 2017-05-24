@@ -277,17 +277,10 @@ function sum($id){
 
     $lastDay = date('Y-m-d', strtotime("$firstDay +1 month -1 day"));
 
-
-    $lastMonthFirstDay = date('Y-m-01', strtotime('-1 month'));
-    $lastMonthLastDay = date('Y-m-t', strtotime('-1 month'));
-
-    $dataArr = difference($id);
+    $dataArr =  difference($id);
 
     static $nowArr = [];
     $nowSum = 0;
-    static $beforeArr = [];
-    $beforeSum = 0;
-
 
     foreach($dataArr as $key => $value){
 
@@ -299,55 +292,42 @@ function sum($id){
         }
     }
 
-
-    foreach($dataArr as $ke => $val){
-
-        foreach($val as $i => $o){
-
-            if(strtotime($lastMonthFirstDay) <= $o['create_time'] && $o['create_time'] <= strtotime($lastMonthLastDay)){
-
-                $beforeArr[] = $o;
-            }
-        }
-    }
-
     foreach($nowArr as $s => $x){
         $nowSum += $x['money'];
     }
-    foreach($beforeArr as $t => $p){
-        $beforeSum += $p['money'];
-    }
 
-    //>> 差值
-    //  $difference = ($nowSum - $beforeSum) > 0 ? ($nowSum - $beforeSum):0;
+
     $difference = $nowSum > 0 ? $nowSum:0;
     $nowSum = 0;
-    $beforeSum = 0;
     return $difference;
 }
 
-function difference($id,$level = 0){
+function difference($id,$level = 1){
 
     if(empty($id) || !is_numeric($id)) return false;
 
-    static $group = [];
+    static   $group = [];
     $where = [
         'parent_id'=>$id
     ];
+
+    //>> 查询一代下级
     $child = M('Member')->where($where)->select();
 
-
+    //>> 如果存在，递归查询后代
     if(!empty($child)){
-        $level += 1;
+        //>> 如果是第四代，开始
         if($level > 3){
-            $children = [];
             foreach($child as $key => $value){
                 $children = M('MemberRecharge')->where(['member_id'=>$value['id'],'is_pass'=>1])->select();
+                if (!empty($children)) {
+                    $group[] = $children;
+                }
             }
-            $group[] = $children;
         }
+        //>> 循环查询后代
         foreach($child as $k => $v){
-            difference($v['id'],$level);
+            difference($v['id'],$level+1);
         }
     }
     return $group;
