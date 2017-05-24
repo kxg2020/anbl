@@ -330,6 +330,7 @@ class CommissionController extends CommonController
                 break;
 
         }
+
         $this->genCommission($info,$projectInfo, $parent['parent_id'], $level + 1);
     }
 

@@ -59,8 +59,8 @@
                                             <thead>
                                             <tr>
                                                 <th class="text-center">会员</th>
-                                                <th class="text-center">阿纳豆</th>
-                                                <th class="text-center">类型</th>
+                                                <th class="text-center">充值阿纳豆</th>
+                                                <th class="text-center">充值方式</th>
                                                 <th class="text-center">状态</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
@@ -74,7 +74,7 @@
                                             <volist name="orderList" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">+{$tag.money}</td>
                                                     <td style="vertical-align: middle">{$tag.payname}</td>
                                                     <td style="vertical-align: middle"><span class="label label-success">充值成功</span></td>
                                                     <td style="vertical-align: middle">{$tag['create_time']}</td>
@@ -176,9 +176,9 @@
                                             <thead>
                                             <tr>
                                                 <th class="text-center">编号</th>
-                                                <th class="text-center">阿纳豆</th>
-                                                <th class="text-center">类型</th>
-                                                <th class="text-center">电影名</th>
+                                                <th class="text-center">投资阿纳豆</th>
+                                                <th class="text-center">消费类型</th>
+                                                <th class="text-center">投资影片</th>
                                                 <th class="text-center">时间</th>
                                             </tr>
                                             </thead>
@@ -191,8 +191,8 @@
                                             <volist name="supportSituation" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.aid}</td>
-                                                    <td style="vertical-align: middle">{$tag.support_money}</td>
-                                                    <td style="vertical-align: middle">电影支持</td>
+                                                    <td style="vertical-align: middle">-{$tag.support_money}</td>
+                                                    <td style="vertical-align: middle">影片投资</td>
                                                     <td style="vertical-align: middle">{$tag.name}</td>
                                                     <td style="vertical-align: middle">{$tag['create_time']}</td>
                                                 </tr>
@@ -226,7 +226,7 @@
                                             <volist name="consume_3" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">-{$tag.money}</td>
                                                     <td style="vertical-align: middle">投票</td>
                                                     <td style="vertical-align: middle">{$tag['create_time']}</td>
 
@@ -261,7 +261,7 @@
                                             <volist name="allConsume" id="tag">
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
-                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">-{$tag.money}</td>
                                                     <td style="vertical-align: middle">转账</td>
                                                     <td style="vertical-align: middle">{$tag['to_username']}</td>
                                                     <td style="vertical-align: middle">{$tag['create_time']}</td>
@@ -342,7 +342,7 @@
                                     $.each(result.orderList,function (k,v) {
                                         $('#tbody_1').append(' <tr class="gradeX">'+
                                             '<td style="vertical-align: middle">'+v.id+'</td>'+
-                                       '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                       '<td style="vertical-align: middle">+'+v.money+'</td>'+
                                        ' <td style="vertical-align: middle">'+v.payname+'</td>'+
                                             '<td style="vertical-align: middle">'+v.is_pass+'</td>'+
                                             '<td style="vertical-align: middle">'+v.create_time+'</td>'+
@@ -485,8 +485,8 @@
                                     $.each(result.touzi,function (k,v) {
                                         $('#tbody_4').append(' <tr class="gradeX">'+
                                             '<td style="vertical-align: middle">'+v.aid+'</td>'+
-                                        '<td style="vertical-align: middle">'+v.money+'</td>'+
-                                        '<td style="vertical-align: middle">电影支持</td>'+
+                                        '<td style="vertical-align: middle">-'+v.money+'</td>'+
+                                        '<td style="vertical-align: middle">影片投资</td>'+
                                            ' <td style="vertical-align: middle">'+v.name+'</td>'+
                                        ' <td style="vertical-align: middle">'+v.create_time+'</td>'+
                                         '</tr>');
@@ -520,7 +520,7 @@
                                     $.each(result.zhuanzhang,function (k,v) {
                                         $('#tbody_5').append(' <tr class="gradeX">'+
                                             '<td style="vertical-align: middle">'+v.id+'</td>'+
-                                            '<td style="vertical-align: middle">'+v.money+'</td>'+
+                                            '<td style="vertical-align: middle">-'+v.money+'</td>'+
                                             '<td style="vertical-align: middle">转账</td>'+
                                             ' <td style="vertical-align: middle">'+v.to_username+'</td>'+
                                             ' <td style="vertical-align: middle">'+v.create_time+'</td>'+
