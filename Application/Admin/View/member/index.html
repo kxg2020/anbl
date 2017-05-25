@@ -23,14 +23,24 @@
                 <label>电话号码</label>
                 <input type="text" class="form-control" name="username" value="{:I('get.username')}" placeholder="">
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label>会员等级</label>
                 <input type="text" class="form-control" name="level" value="{:I('get.level')}" placeholder="">
-            </div>
+            </div>-->
             <div class="form-group">
+                <select name="role" class="form-control">
+                    <option value="">--会员等级--</option>
+                    <option value="0" <if condition="I('get.role') === '0'"> selected="selected"</if>>会员</option>
+                    <option value="1" <if condition="I('get.role') eq 1"> selected="selected"</if>>支持者</option>
+                    <option value="2" <if condition="I('get.role') eq 2"> selected="selected"</if>>经纪人</option>
+                    <option value="3" <if condition="I('get.role') eq 3"> selected="selected"</if>>制片人</option>
+                    <option value="4" <if condition="I('get.role') eq 4"> selected="selected"</if>>出品人</option>
+                </select>
+            </div>
+            <!--<div class="form-group">
                 <label>充值金额</label>
                 <input type="text" class="form-control" name="money" value="{:I('get.money')}" placeholder="">
-            </div>
+            </div>-->
             <div class="form-group">
                 <label>注册开始时间</label>
                 <input type="date" class="form-control" name="start_time" value="{:I('get.start_time')}" placeholder="">
@@ -43,7 +53,7 @@
             <input type="hidden" name="city" value="">
             <input type="hidden" name="county" value="">
             <div class="form-group">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 23px;" id="city_choice">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0px;" id="city_choice">
 
                     <tr>
 
@@ -85,6 +95,7 @@
             <input type="hidden" class="form-control" name="money" value="{:I('get.money')}">
             <input type="hidden" class="form-control" name="start_time" value="{:I('get.start_time')}" >
             <input type="hidden" class="form-control" name="end_time" value="{:I('get.end_time')}">
+            <input type="hidden" class="form-control" name="role" value="{:I('get.role')}">
 
 
             <input type="hidden" class="form-control" name="province" value="{:I('get.province')}">
@@ -138,7 +149,7 @@
                     <td>{$l.city}</td>
                     <td>{$l.money}</td>
                     <td>{$l.level}</td>
-                    <td><if condition="$l['role'] eq 0">暂无<elseif condition="$l.role eq 1"/>支持者<elseif condition="$l.role eq 2"/>经纪人<elseif condition="$l.role eq 3"/>制片人<elseif condition="$l.role eq 4"/>出品人</if></td>
+                    <td><if condition="$l['role'] eq 0">会员<elseif condition="$l.role eq 1"/>支持者<elseif condition="$l.role eq 2"/>经纪人<elseif condition="$l.role eq 3"/>制片人<elseif condition="$l.role eq 4"/>出品人</if></td>
                     <td><img id="allowed" style="cursor: pointer;" data-re="{$l.id}" data-id="{$l.is_allowed_recharge}" src="__IMG__/{$l.is_allowed_recharge}.gif"></td>
                     <td>
                             <img src="__IMG__/{$l.is_bind_phone}.gif">

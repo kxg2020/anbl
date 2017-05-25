@@ -29,10 +29,13 @@ class MemberController extends  CommonController{
 
             $where['username'] = $paramArr['username'];
         }
-        if(strlen($paramArr['level'])){
+        /*if(strlen($paramArr['level'])){
             if($where['level'] == 0){
                 $where['level'] =$paramArr['level'];
             }
+        }*/
+        if (I('get.role', '') || I('get.role', '')==='0' ) {
+            $where['role'] = I('get.role', '');
         }
         if($paramArr['money']){
 
@@ -78,9 +81,12 @@ class MemberController extends  CommonController{
 
             $where['username'] = $paramArr['username'];
         }
-        if($paramArr['level']){
+        /*if($paramArr['level']){
 
             $where['level'] = $paramArr['level'];
+        }*/
+        if (I('get.role', '') || I('get.role', '')==='0' ) {
+            $where['role'] = I('get.role', '');
         }
         if($paramArr['money']){
 

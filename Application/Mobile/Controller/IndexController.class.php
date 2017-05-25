@@ -9,13 +9,25 @@ class IndexController extends CommonController {
             $this->redirect('login/index');
             exit;
         }
+        $where = [];
         $where[] = [
             'end_time'   => [['egt', time()], '0', 'or'],// 结束时间 大于等于当前时间 或 为0
             'start_time' => ['elt', time()],// 开始时间 小于等于当前时间
             'is_active'      => 1,//上架状态
+
         ];
         $model = M('project');
-        $projectInfo = $model->where($where)->order('sort')->select();
+        $projectInfo1 = $model
+            ->where($where)
+            ->order('star_num desc')
+            ->select();
+
+        $projectInfo2 = $model
+            ->where(['is_ok'=>1])
+            ->order('star_num desc')
+            ->select();
+
+        $projectInfo = array_merge($projectInfo1,$projectInfo2);
         $this->assign('projectInfo',$projectInfo);
         $this->display('index/index');
     }
