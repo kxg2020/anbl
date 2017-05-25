@@ -818,7 +818,6 @@ class MoneyController extends CommonController
             $parent_id = $info['id'];
             // 根据parent_id 找下级
             $money = $this->sum($parent_id);
-
             if (!$money) {
                 continue;
             }
