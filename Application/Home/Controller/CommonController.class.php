@@ -88,8 +88,6 @@ class CommonController extends Controller{
             }
             //>> 查询用户
             $row = M('Member')->where(['session_token'=>$session])->find();
-
-
             if(!empty($row)){
                 //>> 查询投资
                 $support = $row['all_support_money'];

@@ -214,10 +214,19 @@ $(function(){
 		var id_card = $('input[name = id_card]').val();
 		var bank_card_name = $('input[name = bank_card_name]').val();
 		var bank_card = $('input[name = bank_card]').val();
-		var city = $('#province ').find("option:selected").attr('data-area')+$('#citys ').find("option:selected").attr('data-area')+$('#county ').find("option:selected").attr('data-area');
+		var obtain = $('#county ').find("option:selected").attr('data-area');
+		if(obtain == -1){
+			obtain = '';
+		}
+		var city = $('#province ').find("option:selected").attr('data-area')+$('#citys ').find("option:selected").attr('data-area')+obtain;
 		var address = $('input[name = address]').val();
 
+		var ifCity = $('#ifCity').val();
 
+		if(ifCity != 'NaN' && ifCity != '' && ifCity != 'undifined'){
+
+            city = ifCity
+		}
 
 		if(realname == ''){
 			layer.tips('请输入真实姓名','input[name = realname]',{
@@ -305,7 +314,7 @@ $(function(){
 
 						}else{
 
-                            if(($('#province ').find("option:selected").attr('data-area') == -1) || ($('#citys ').find("option:selected").attr('data-area') == -1) || ($('#county ').find("option:selected").attr('data-area') == -1)){
+                            if(($('#province ').find("option:selected").attr('data-area') == -1) || ($('#citys ').find("option:selected").attr('data-area') == -1)){
 
                                 layer.tips('请选择开户地址','#province',{
                                     tips:4

@@ -25,7 +25,7 @@ define('BIND_MODULE', 'Mobile');
 require '../ThinkPHP/ThinkPHP.php';
 
 $agent = $_SERVER['HTTP_USER_AGENT'];
-
-if(strpos($agent,"comFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS")) header("Location:http://www.araberrimovie.com");
+//
+//if(strpos($agent,"comFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS")) header("Location:http://www.araberrimovie.com");
 
 // 亲^_^ 后面不需要任何代码了 就是如此简单

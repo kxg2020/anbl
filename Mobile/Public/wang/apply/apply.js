@@ -2,7 +2,19 @@ $(function(){
 
     $('.apply').click(function(){
 
-        number = $('input[name = number]').val();
+       var  type = $('input[name = type]:checked').val();
+
+       var  number = $('input[name = number]').val();
+
+
+        if(!type){
+            layer.open({
+                content: '请选择提现类型',
+                style:'color:black'
+                ,time:2
+            });
+            return false;
+        }
         if(number == ''){
             layer.open({
                 content: '请填写提现阿纳豆数目',
@@ -42,7 +54,7 @@ $(function(){
             'type':'post',
             'dataType':'json',
             'url':location.protocol+'//'+window.location.host+'/Account/cash',
-            'data':{'money':number},
+            'data':{'money':number,'type':type},
             success:function(e){
                 if(e.status == 1){
                     layer.open({

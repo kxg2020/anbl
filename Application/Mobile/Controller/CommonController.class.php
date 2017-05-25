@@ -41,13 +41,15 @@ class CommonController extends Controller{
         '1050'=>['只有每周星期五才能提现!','只有每周星期五才能提现!'],
         '1052'=>['提现金额不能大于余额!','提现金额不能大于余额!'],
         '1054'=>['提现失败!','提现失败!'],
-        '1056'=>['只有周五或月末才能提现','只有周五或月末才能提现'],
+        '1056'=>['账户不存在','账户不存在'],
         '1058'=>['请选择申请的角色','请选择申请的角色'],
         '1060'=>['你还没有选择角色','你还没有选择角色'],
         '1062'=>['请阅读并同意用户协议后再申请','请阅读并同意用户协议后再申请'],
         '1064'=>['余额不足70000阿纳豆，不能申请','余额不足70000阿纳豆，不能申请'],
         '1066'=>['邀请码不存在','邀请码不存在'],
         '1068'=>['您还有未审核的充值订单，待审核通过以后才能继续充值','您还有未审核的充值订单，待审核通过以后才能继续充值'],
+        '1070'=>['提现失败','提现失败'],
+        '1072'=>['剩余阿纳豆大于350才能提现','剩余阿纳豆大于350才能提现'],
 
     ];
 
@@ -97,7 +99,10 @@ class CommonController extends Controller{
             if(!empty($row)){
                 //>> 查询投资
                 $support = $row['all_support_money'];
+                if($support < $zcArr['support']){
 
+                    M('Member')->where(['id'=>$row['id']])->save(['role'=>0]);
+                }
                 //>> 判断投资是否满xx,满xx升级为支持者
                 if($support >= $zcArr['support']){
 
@@ -117,19 +122,24 @@ class CommonController extends Controller{
                 //>> 多少制片人
                 $zhipian = $this->getZhiPianRen($row['id']);
 
+                //>> 多少出品人
+                $chupin = $this->getChuPinRen($row['id']);
+
+                //>> 直推xxx人，升级为经纪人
                 if($count >= $jjArr['follower'] && $support >= $jjArr['support'] ){
+
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>2]);
                 }
 
-                //>> 如果投资35000以上,直推10人,团队100人升级为制片人
-                if($support  >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && $jingji >= $zpArr['follower_jingji'] ){
+                //>> 如果投资35000以上,直推10名,团队100人升级为制片人,2名经纪人
+                if($support >= $zpArr['support'] && $count >= $zpArr['follower'] && $all >= $zpArr['group'] && (($jingji+$zhipian+$chupin) >= $zpArr['follower_jingji'] )  ){
                     //>> 升级为制品人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>3]);
                 }
 
-                //>> 如果个人投资70000 直推50人 团队500人 升级出品人
-                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && $zhipian >= $cpArr['follower_zhipian']){
+                //>> 如果个人投资70000 直推30人 团队500人 2名制片人
+                if($support >= $cpArr['support'] && $count >= $cpArr['follower'] && $all >= $cpArr['group'] && ($zhipian+$chupin >= $cpArr['follower_zhipian'])){
                     //>> 升级为经纪人
                     M('Member')->where(['id'=>$row['id']])->save(['role'=>4]);
                 }
@@ -183,13 +193,23 @@ class CommonController extends Controller{
         return $rows;
     }
 
+    /**
+     * 查询下线出品人
+     */
+    public function getChuPinRen($id){
+
+        $rows = M('Member')->where(['parent_id'=>$id,'role'=>4])->count();
+
+        return $rows;
+    }
+
 
     /**
      * 查询直推
      */
     private function group($id){
 
-        $res = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $res = M('Member')->where(['parent_id'=>$id,'role'=>['egt',1]])->select();
 
         if(!empty($res)){
 
@@ -203,15 +223,19 @@ class CommonController extends Controller{
     private function allMembers($id){
 
         static $sum = 0;
-        $rows = M('Member')->where(['parent_id'=>$id,'is_true'=>1])->select();
+        $model = M('Member');
+        $rows = $model ->where(['parent_id'=>$id,'role'=>['egt',1]])->select();
+
+        $count = count($rows);
+        $sum += $count;
+
         if(!empty($rows)){
-            $count = count($rows);
-            $sum += $count;
             foreach($rows as $k => $v){
+
                 $this->allMembers($v['id']);
             }
         }
-        return $sum/2;
+        return $sum;
     }
 
 
