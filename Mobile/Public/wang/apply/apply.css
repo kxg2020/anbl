@@ -51,7 +51,14 @@ header p{
 	margin-top: 0.2rem;
 	margin-bottom: 0.15rem;
 }
-.content input{
+#type{
+	margin-bottom: 0.15rem;
+}
+#type label{
+	margin-right: 0.2rem;
+	font-size: 0.3rem;
+}
+.content > input{
 	width: 6.5rem;
 	height: 0.8rem;
 	background: #333;

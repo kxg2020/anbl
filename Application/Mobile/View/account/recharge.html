@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
@@ -13,7 +14,8 @@
 		<p>申请提现</p>
 	</header>
 	<div class="content">
-		<h3 style="font-size: 0.3rem;margin-top: 0.2rem;margin-bottom: 0.15rem">请填写提现的阿纳豆数目</h3>
+		<p>请选择提现的类型:	</p>
+		<p id="type"><input type="radio" id="type1" name="type" value="1"><label for="type1">提现余额</label><input name="type" type="radio" id="type2" value="2"><label for="type2">提现收益</label><input name="type" type="radio" id="type3" value="3"><label for="type3">提现佣金</label></p>
 		<input type="text" placeholder="提现数目须为100的倍数" name="number">
 		<p>您当前可提数目为<span>{$user['money']}</span>阿纳豆</p>
 	</div>
