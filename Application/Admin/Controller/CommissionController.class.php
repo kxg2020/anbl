@@ -402,7 +402,7 @@ class CommissionController extends CommonController
                 'money' => $money*($this->systemInfo['zrate']/100),
                 'create_time' => time(),
                 'type' => 3,
-                'remark' => "制片人新增业绩分佣",
+                'remark' => "制片人新增业绩分佣($money)",
                 'is_ok' => 1,
             ]);
 

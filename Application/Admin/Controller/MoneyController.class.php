@@ -827,7 +827,7 @@ class MoneyController extends CommonController
                 'money' => $money*($this->systemInfo['crate']/100),
                 'create_time' => time(),
                 'type' => 3,
-                'remark' => "出品人新增业绩分佣",
+                'remark' => "出品人新增业绩分佣($money)",
                 'is_ok' => 1,
             ]);
 
