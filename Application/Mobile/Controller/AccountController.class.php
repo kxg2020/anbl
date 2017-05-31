@@ -404,7 +404,7 @@ class AccountController extends CommonController{
                         die($this->_printError('1054'));
                     }
                 } else {
-                    die($this->_printError('1056'));
+                    die($this->_printError('1050'));
                 }
                 break;
 

@@ -92,9 +92,12 @@
     <script src="__PUBLIC__/validate/dist/jquery.validate.js" type="text/javascript"></script>
     <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
     <script type="text/javascript" src="__ZTREE__/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="__ZTREE__/js/jquery.ztree.excheck.js"></script>
     <SCRIPT type="text/javascript">
         var setting = {
+
             treeId: 'treeDemo',
+
             data: {
                 key: {
                     title:"t"
@@ -104,13 +107,15 @@
                 }
             },
             callback: {
-                onClick: onClick
-            }
+                onClick: onClick,
+
+            },
+
         };
         var _str = '{$list}';
         var zNodes = $.parseJSON(_str);
-        var log, className = "dark";
         function onClick(event, treeId, treeNode, clickFlag) {
+
             var _obj = $('input[name="parent_name"]').val(treeNode.name);
             if(treeNode.id <= 0){
                 $('input[name="parent_id"]').val(0);
@@ -118,6 +123,10 @@
                 $('input[name="parent_id"]').val(treeNode.id);
             }
         }
+
+
+
+
 
         //>> 初始化树
         $(document).ready(function(){

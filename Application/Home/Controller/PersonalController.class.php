@@ -1160,6 +1160,12 @@ class PersonalController extends CommonController
 
             $res = M('MemberProfit')->where(['support_id' => $paramArr['orderId'], 'is_ok' => 1])->select();
             $order = M('MemberSupport')->where(['id' => $paramArr['orderId']])->find();
+            $project = M('Project')->where(['id'=>$order['project_id']])->find();
+
+            if($project['is_ok'] ==1 ){
+
+                $this->ajaxReturn(['msg' => '筹集成功项目不能撤单', 'status' => 0]);exit;
+            }
 
             M()->startTrans();
             if (!empty($res)) {
