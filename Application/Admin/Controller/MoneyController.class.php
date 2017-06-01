@@ -821,13 +821,15 @@ class MoneyController extends CommonController
             if (!$money) {
                 continue;
             }
+            $k = $this->systemInfo['crate'];
             // 生成收益详情
             $rest = M('MemberProfit')->add([
                 'member_id' => $info['id'],
                 'money' => $money*($this->systemInfo['crate']/100),
                 'create_time' => time(),
                 'type' => 3,
-                'remark' => "出品人新增业绩分佣($money)",
+                'remark' => "出品人新增业绩分佣",
+                'intro' => "出品人三代外当月新增业绩：".$money."，分红:".$k."%",
                 'is_ok' => 1,
             ]);
 

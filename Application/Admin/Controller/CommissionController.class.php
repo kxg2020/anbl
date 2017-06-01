@@ -396,6 +396,7 @@ class CommissionController extends CommonController
             if (!$money) {
                 continue;
             }
+            $k = $this->systemInfo['zrate'];
             // 生成收益详情
             $rest = M('MemberProfit')->add([
                 'member_id' => $info['id'],
@@ -403,6 +404,7 @@ class CommissionController extends CommonController
                 'create_time' => time(),
                 'type' => 3,
                 'remark' => "制片人新增业绩分佣($money)",
+                'intro' => "制片人三代外当月新增业绩：".$money."，分红:".$k."%",
                 'is_ok' => 1,
             ]);
 
