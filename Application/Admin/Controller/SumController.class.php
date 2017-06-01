@@ -88,7 +88,7 @@ class SumController extends CommonController
 
 
         //>> 所有收益
-        $allGet = M('MemberProfit')->where(['member_id'=>$id])->order('create_time desc')->select();
+        $allGet = M('MemberProfit as a')->field('b.role,a.*')->join('left join an_member as b on a.member_id = b.id')->where(['a.member_id'=>$id,'a.type != 4'])->order('a.create_time desc')->select();
 
         foreach ($allGet as &$value){
 
@@ -97,6 +97,7 @@ class SumController extends CommonController
 
                 $value['intro'] = '';
             }
+
 
             switch ($value['type']){
                 case 1:
@@ -107,6 +108,14 @@ class SumController extends CommonController
                     break;
                 case 3:
                     $value['type'] = '新增业绩';
+                    if($value['role'] == 3){
+
+                        $value['intro'] = '制片人三代外当月新增业绩：'.$value['money'] / 0.02.'，分红2%';
+                    }
+                    if($value['role'] == 4){
+
+                        $value['intro'] = '出品人三代外当月新增业绩：'.$value['money'] / 0.04.'，分红4%';
+                    }
                     break;
                 case 4:
                     $value['type'] = '转入';
@@ -124,16 +133,31 @@ class SumController extends CommonController
         $allc = ceil(count($allGet) / 17);
         $allGet = $this->pagination($allGet,$pgNum ? $pgNum: 1,$pgSize ? $pgSize :17);
 
+        $allGt = M('MemberProfit as a')->field('a.id,a.member_id,a.money,a.type,a.create_time,a.from_username')->join('left join an_member as b on a.member_id = b.id')->where(['a.member_id'=>$id,'a.type'=>4])->select();
+        foreach ($allGt as &$value){
+            $value['type'] = '转入';
+            $value['money'] = '+'.$value['money'];
+            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+            $value['to_username'] = $value['from_username'];
+        }
+        unset($value);
         //>> 转账消费
         $allConsume = M('MemberConsume')->where(['member_id'=>$id,'type'=>'转出'])->select();
 
         foreach ($allConsume as &$value){
 
             $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+            $value['money'] = '-'.$value['money'];
         }
         unset($value);
+
+        $allConsume = array_merge($allGt,$allConsume);
+
+
+
         $allcon = ceil(count($allConsume) / 17);
         $allConsume = $this->pagination($allConsume,$pgNum ? $pgNum : 1,$pgSize ? $pgSize :17);
+
 
         //>> 查询当前用户的支持情况
         $rows = M('MemberSupport as a')->field('a.id as aid,a.support_money,a.project_id,a.type as atype,a.float,a.fixed,b.*')
@@ -337,8 +361,9 @@ class SumController extends CommonController
             $where['a.member_id'] = $id;
         }
 
+        $where['a.type'] = ['neq',4];
 
-        $rows = M('MemberProfit as a')->field('a.*,b.username')->join('left join an_member as b on b.id = a.member_id')->where($where)->order('create_time desc')->select();
+        $rows = M('MemberProfit as a')->field('a.*,b.username,b.role')->join('left join an_member as b on b.id = a.member_id')->where($where)->order('create_time desc')->select();
 
 
         foreach ($rows as &$info){
@@ -351,6 +376,14 @@ class SumController extends CommonController
                     break;
                 case 3:
                     $info['type'] = '新增业绩';
+                    if($info['role'] == 3){
+
+                        $info['intro'] = '制片人三代外当月新增业绩：'.$info['money'] / 0.02.'，分红2%';
+                    }
+                    if($info['role'] == 4){
+
+                        $info['intro'] = '出品人三代外当月新增业绩：'.$info['money'] / 0.04.'，分红4%';
+                    }
                     break;
                 case 4:
                     $info['type'] = '转入';
@@ -362,6 +395,14 @@ class SumController extends CommonController
                     $info['type'] = '收益补差';
                     break;
             }
+            if($info['is_ok'] == 0){
+                $info['is_ok'] = '失效';
+                $info['money'] = '-'.$info['money'];
+            }else{
+                $info['is_ok'] = '正常';
+                $info['money'] = '+'.$info['money'];
+            }
+
             $info['create_time'] = date('Y-m-d',$info['create_time']);
         }
         unset($info);
@@ -370,7 +411,9 @@ class SumController extends CommonController
             array('id','编号'),
             array('username','会员 '),
             array('money','金额'),
-            array('remark','备注'),
+            array('remark','来源'),
+            array('intro','备注'),
+            array('is_ok','状态'),
             array('from_username','转入账号'),
             array('create_time','时间'),
         );

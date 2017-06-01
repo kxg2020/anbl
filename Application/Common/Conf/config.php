@@ -56,11 +56,11 @@ return array(
 
         //支付宝配置参数
     'alipay_config'=>array(
-        'partner' =>'2088612857586699',   //登录蚂蚁金服->商家中心->签约管理->查看PID
-        'key'=>'vrhxlwwa4mkhi7ztek9x092wnoh2bmfg',//登录蚂蚁金服->商家中心->签约管理->查看秘钥(有三种)
+        'partner' =>'2088711319251622',   //登录蚂蚁金服->商家中心->签约管理->查看PID
+        'key'=>'35ak6onj3kpqsmqjwbfq5ckxm3hck0z2',//登录蚂蚁金服->商家中心->签约管理->查看秘钥(有三种)
         'sign_type'=>strtoupper('MD5'),//填写你选择的秘钥类型
         'input_charset'=> strtolower('utf-8'),
-        'cacert'=> getcwd().'\\cacert.pem',
+        'cacert'=> THINK_PATH.'Library/Vendor/Alipay/cacert.pem',
         'transport'=> 'http',
     ),
 
@@ -68,14 +68,14 @@ return array(
 
     'alipay'   =>array(
         //这里是卖家的支付宝账号，也就是你申请接口时注册的支付宝账号
-        'seller_email'=>'psfxii7787@sandbox.com',
+        'seller_email'=>'2088711319251622',
         //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
         'notify_url'=>'http://www.a.com/Pay/notifyurl',
         //这里是页面跳转通知url，提交到项目的Pay控制器的returnurl方法；
         'return_url'=>'http://www.a.com/Pay/returnurl',
         //支付成功跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参payed（已支付列表）
-        'successpage'=>'Pay/successPage?ordtype=payed',
+        'successpage'=>'http://www.a.com/Pay/successPage?ordtype=payed',
         //支付失败跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参unpay（未支付列表）
-        'errorpage'=>'Pay/failedPage?ordtype=unpay',
+        'errorpage'=>'http://www.a.com/Pay/failedPage?ordtype=unpay',
     ),
 );
