@@ -286,4 +286,71 @@ class SumController extends CommonController
     }
 
 
+    /**
+     * 导出收益
+     */
+
+    public function exportSy(){
+
+
+        $where = [];
+        $start_time = strtotime(I('get.start_time'));
+        $end_time = strtotime(I('get.end_time'));
+        $id = I('get.username');
+        $user = M('Member')->where(['id'=>$id])->find();
+        if($start_time){
+            $where['a.create_time'] = ['egt',$start_time];
+        }
+        if($start_time && $end_time ){
+            $where['a.create_time'] = [
+                ['egt',$start_time],
+                ['elt',$end_time]
+            ];
+        }
+        if($id){
+
+            $where['a.member_id'] = $id;
+        }
+
+
+        $rows = M('MemberProfit as a')->field('a.*,b.username')->join('left join an_member as b on b.id = a.member_id')->where($where)->order('create_time desc')->select();
+
+
+        foreach ($rows as &$info){
+            switch ($info['type']){
+                case 1:
+                    $info['type'] = '分红';
+                    break;
+                case 2:
+                    $info['type'] = '佣金';
+                    break;
+                case 3:
+                    $info['type'] = '新增业绩';
+                    break;
+                case 4:
+                    $info['type'] = '转入';
+                    break;
+                case 5:
+                    $info['type'] = '管理员操作';
+                    break;
+                case 6:
+                    $info['type'] = '收益补差';
+                    break;
+            }
+            $info['create_time'] = date('Y-m-d',$info['create_time']);
+        }
+        unset($info);
+
+        $xlsCell  = array(
+            array('id','编号'),
+            array('username','会员 '),
+            array('money','金额'),
+            array('remark','备注'),
+            array('from_username','转入账号'),
+            array('create_time','时间'),
+        );
+
+        $this->exportExcel(date('Y-m-d').'会员'.$user['username'].'_收益',$xlsCell,$rows);
+    }
+
 }

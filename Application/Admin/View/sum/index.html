@@ -129,6 +129,28 @@
                                 </div>
                                 <!--收益-->
                                 <div class="tab-pane" id="profit">
+
+                                    <form id="exportForm" class="form-inline" action="{:U('admin/Sum/exportSy')}" method="get">
+
+                                        <div class="form-group">
+                                            <label>开始时间</label>
+                                            <input type="date" class="form-control" name="start_time" value="{:I('get.start_time')}" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>结束时间</label>
+                                            <input type="date" class="form-control" name="end_time" value="{:I('get.end_time')}" placeholder="">
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="exportExcel">导出</button>
+                                        <input type="hidden" value="{$personal['id']}" name="username">
+                                    </form>
+
+                                    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+                                    <script>
+                                        $('#exportExcel').click(function () {
+
+                                            $('#exportForm').submit();
+                                        });
+                                    </script>
                                     <hr>
                                     <div class="adv-table text-center">
                                         <table  class="display table table-bordered table-striped">

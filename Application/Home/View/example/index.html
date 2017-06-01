@@ -7,7 +7,7 @@
 <body>
 
 <form method="post" action="{:U('home/Pay/doPay')}">
-    金额:<input type="text" value="" name="money">
+    金额:<input type="text" value="" name="money" onkeyup="value=value.replace(/[^\d]/g,'')">
     <input type="hidden" value="20170519136521" name="trade_no">
     <input type="hidden" value="阿纳豆充值" name="ordsubject">
     <input type="hidden" value="0.01" name="ordtotal_fee">

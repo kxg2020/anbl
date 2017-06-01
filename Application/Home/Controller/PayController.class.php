@@ -157,8 +157,10 @@ class PayController extends  Controller{
     public function example(){
 
 
+
         $this->display('example/index');
     }
+
 
     public function successPage(){
 
