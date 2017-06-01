@@ -1171,7 +1171,12 @@ class PersonalController extends CommonController
             if (!empty($res)) {
 
                 foreach ($res as $value) {
-                    $res = M('Member')->where(['id' => $value['member_id']])->save(['money' => ['exp', 'money-' . $value['money']]]);
+                    if($value['type'] == 1){// 分红
+                        $res = M('Member')->where(['id' => $value['member_id']])->save(['profit' => ['exp', 'profit-' . $value['money']]]);
+                    }
+                    if($value['type'] == 2){// 佣金
+                        $res = M('Member')->where(['id' => $value['member_id']])->save(['commission' => ['exp', 'commission-' . $value['money']]]);
+                    }
 
                     if ($res === false) {
 

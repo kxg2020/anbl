@@ -271,8 +271,14 @@ class OrderController extends CommonController
         $model = D('MemberSupport');
         // 通过ID主键 查询标签信息
         $info = $model->find($id);
-
-
+        if($info['is_true'] == 1){
+            $this->error('订单本金已返还，无法删除');
+            exit;
+        }
+        if($info['is_fy'] == 2){
+            $this->error('订单已失效无法删除');
+            exit;
+        }
         if(!$info){
             // 没有在数据库中找到数据，报错
             $this->error('没有找到数据');
