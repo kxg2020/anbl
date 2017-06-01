@@ -175,7 +175,7 @@
                                                 <tr class="gradeX">
                                                     <td style="vertical-align: middle">{$tag.id}</td>
                                                     <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 0 "><span style="color: red">-{$tag.money}</span><else/><span style="color: forestgreen">+{$tag.money}</span></if></td>
-                                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">分红<elseif condition="$tag['type'] eq 2"/>分佣<elseif condition="$tag['type'] eq 4"/>转账 </if></td>
+                                                    <td style="vertical-align: middle">{$tag['type']}</td>
                                                     <td style="vertical-align: middle">{$tag.remark}</td>
                                                     <td style="vertical-align: middle">{$tag.intro}</td>
                                                     <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 0 "><span class="label label-danger">失效</span><else/><span class="label label-success">正常</span></if></td>
@@ -460,6 +460,7 @@
                                                 '<td style="vertical-align: middle">'+v.id+'</td>'+
                                                 '<td style="vertical-align: middle;color: red">-'+v.money+'</td>'+
                                                 '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.remark+'</td>'+
                                                 '<td style="vertical-align: middle">'+v.intro+'</td>'+
                                                 '<td style="vertical-align: middle">'+'<span class="label label-danger">失效</span>'+'</td>'+
                                                 '<td style="vertical-align: middle">'+v.create_time+'</td>'+
@@ -471,6 +472,7 @@
                                                 '<td style="vertical-align: middle">'+v.id+'</td>'+
                                                 '<td style="vertical-align: middle;color: forestgreen">+'+v.money+'</td>'+
                                                 '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.remark+'</td>'+
                                                 '<td style="vertical-align: middle">'+v.intro+'</td>'+
                                                 '<td style="vertical-align: middle">'+'<span class="label label-success">正常</span>'+'</td>'+
                                                 '<td style="vertical-align: middle">'+v.create_time+'</td>'+

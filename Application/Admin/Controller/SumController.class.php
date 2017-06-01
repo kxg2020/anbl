@@ -93,6 +93,31 @@ class SumController extends CommonController
         foreach ($allGet as &$value){
 
             $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+            if($value['intro']== null){
+
+                $value['intro'] = '';
+            }
+
+            switch ($value['type']){
+                case 1:
+                    $value['type'] = '分红';
+                    break;
+                case 2:
+                    $value['type'] = '佣金';
+                    break;
+                case 3:
+                    $value['type'] = '新增业绩';
+                    break;
+                case 4:
+                    $value['type'] = '转入';
+                    break;
+                case 5:
+                    $value['type'] = '管理员操作';
+                    break;
+                case 6:
+                    $value['type'] = '收益补差';
+                    break;
+            }
 
         }
         unset($value);
