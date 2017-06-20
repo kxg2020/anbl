@@ -62,7 +62,7 @@ else {
     echo "验证失败";
 }
 ?>
-        <title>支付宝即时到账交易接口</title>
+        <title>支付宝手机网站支付接口</title>
 	</head>
     <body>
     </body>

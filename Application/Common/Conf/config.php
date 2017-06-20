@@ -2,7 +2,7 @@
 return array(
     // 配置数据库连接
     'DB_TYPE'               =>  'mysql',     // 数据库类型
-    'DB_HOST'               =>  '192.168.16.72', // 服务器地址
+    'DB_HOST'               =>  '127.0.0.1', // 服务器地址
     'DB_NAME'               =>  'an_db',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
     'DB_PWD'                =>  'root',          // 密码
@@ -56,8 +56,8 @@ return array(
 
         //支付宝配置参数
     'alipay_config'=>array(
-        'partner' =>'2088711319251622',   //登录蚂蚁金服->商家中心->签约管理->查看PID
-        'key'=>'35ak6onj3kpqsmqjwbfq5ckxm3hck0z2',//登录蚂蚁金服->商家中心->签约管理->查看秘钥(有三种)
+        'partner' =>'2088102177363547',   //登录蚂蚁金服->商家中心->签约管理->查看PID
+        'key'=>'wcgf9kam5w2iwsnmk15w26stvr8ya24h',//登录蚂蚁金服->商家中心->签约管理->查看秘钥(有三种)
         'sign_type'=>strtoupper('MD5'),//填写你选择的秘钥类型
         'input_charset'=> strtolower('utf-8'),
         'cacert'=> THINK_PATH.'Library/Vendor/Alipay/cacert.pem',
@@ -68,7 +68,7 @@ return array(
 
     'alipay'   =>array(
         //这里是卖家的支付宝账号，也就是你申请接口时注册的支付宝账号
-        'seller_email'=>'2088711319251622',
+        'seller_email'=>'yangtao@ecshy.com',
         //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
         'notify_url'=>'http://www.a.com/Pay/notifyurl',
         //这里是页面跳转通知url，提交到项目的Pay控制器的returnurl方法；

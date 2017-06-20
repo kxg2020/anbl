@@ -68,6 +68,7 @@
 		}
 
 		public function upload($config, $file){
+
 			$uploadToken = $this->UploadToken($this->sk, $this->ak, $config);
 
 			$url 	= 	"{$this->QINIU_UP_HOST}";
@@ -96,6 +97,7 @@
 			$name 		= 	$file['name'];
 			$fileName 	= 	$file['fileName'];
 			$fileBody 	= 	$file['fileBody'];
+
 			$fileName 	= 	self::Qiniu_escapeQuotes($fileName);
 			array_push($data, "Content-Disposition: form-data; name=\"$name\"; filename=\"$fileName\"");
 			array_push($data, 'Content-Type: application/octet-stream');

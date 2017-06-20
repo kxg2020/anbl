@@ -1033,4 +1033,62 @@ class OrderController extends CommonController
         exit;
     }
 
+    /**
+     * 提现规则
+     */
+    public function cashRule(){
+
+        if(IS_AJAX){
+
+            $paramArr = $_POST['data'];
+
+            parse_str($paramArr,$data);
+
+            if(!empty($data)){
+
+                $insertData = [
+                    'yue_rate'=>$data['yuerate'],
+                    'shouyi_week'=>$data['shouyiweek'],
+                    'shouyi_rate'=>$data['shouyirate'],
+                    'shouyi_date'=>$data['shouyidate'],
+                    'yongjin_week'=>$data['yongjinweek'],
+                    'create_time'=>time(),
+                ];
+
+                // 判断数据库是否已经存在规则
+                $row = M('CashRule')->find();
+
+                if(empty($row)){
+
+                    $res = M('CashRule')->add($insertData);
+
+                    if($res){
+
+                        $this->ajaxReturn(['status'=>1]);
+                    }else{
+                        $this->ajaxReturn(['status'=>0]);
+                    }
+
+                }else{
+
+                    $res = M('CashRule')->where(['id'=>$row['id']])->save($insertData);
+
+
+                    if($res === false){
+
+                        $this->ajaxReturn(['status'=>0]);
+                    }else{
+
+                        $this->ajaxReturn(['status'=>1]);
+                    }
+                }
+
+            }
+        }
+
+        $rule = M('CashRule')->find();
+        $this->assign(['rule'=>$rule]);
+        $this->display('order/cashrule');
+    }
+
 }

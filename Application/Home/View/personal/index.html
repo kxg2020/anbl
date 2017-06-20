@@ -42,7 +42,7 @@
 				<if condition="($personal['safe_level'] eq 1 ) or ($personal['safe_level'] eq 2 )"><span class="up_btn">点击提升</span></if></div>
 			<div class="user_inform" id="phone">{$secretPhone}</div>
 			<div class="user_inform" id="name"><if condition="$personal['is_true'] eq 0">未实名<else/><span style="color: forestgreen">已实名</span></if></div>
-			<div><span id="recharge">充值</span><span id="post_cash">提现</span><span id="zhuanzhang">转账</span></div>
+			<div><span id="recharge">充值</span><span id="post_cash">提现</span></div>
 		 </div>
 			<if condition="$personal['role'] gt 2">
 				<p style="width: 100%;color: #F4E36D;font-size: 20px;text-align: center;position: absolute;left: 0;bottom: 25.5%;">当月新增总业绩: <span style="color: red">{:floor(get_achievement($personal['role'],$personal['id']))}</span> 阿纳豆</p>
@@ -240,7 +240,7 @@
 						<ul>
 							<li class="choice">充值</li>
 							<li>提现</li>
-							<li>转账</li>
+							<!--<li>转账</li>-->
 							<li class="put_record">充值记录<span>>></span></li>
 						</ul>
 						<ul style="display: none;">
@@ -580,7 +580,7 @@
 					<ul id="team_nav">
 						<li class="teamChoice">收益</li>
 						<li>投票</li>
-						<li>转账</li>
+						<!--<li>转账</li>-->
 						<li>支持</li>
 						<li>演员申请</li>
 					</ul>

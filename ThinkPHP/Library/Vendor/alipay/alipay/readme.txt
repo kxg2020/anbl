@@ -1,15 +1,14 @@
-﻿
+
             ╭───────────────────────╮
     ────┤           支付宝代码示例结构说明             ├────
             ╰───────────────────────╯ 
 　                                                                  
-　       接口名称：支付宝即时到账交易接口（create_direct_pay_by_user）
+　       接口名称：支付宝手机网站支付接口（alipay.wap.create.direct.pay.by.user）
 　 　    代码版本：3.4
-         开发语言：PHP 5.0
+         开发语言：PHP
          版    权：支付宝（中国）网络技术有限公司
-　       制 作 者：支付宝技术部技术支持组
-         联系方式：https://support.open.alipay.com/alipay/support/index.htm
-         免责声明：DEMO仅供参考，实际开发中需要结合具体场景修改使用。
+　       制 作 者：支付宝商户事业部技术支持组
+         联系方式：商户服务电话0571-88158090
 
     ─────────────────────────────────
 
@@ -17,7 +16,7 @@
  代码文件结构
 ───────
 
-create_direct_pay_by_user-php-UTF-8
+alipay.wap.create.direct.pay.by.user-php-UTF-8
   │
   ├lib┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈类文件夹
   │  │
@@ -51,8 +50,6 @@ create_direct_pay_by_user-php-UTF-8
 
 2、需要配置的文件是：
 alipay.config.php
-notify_url.php
-return_url.php
 
 curl、XML解析方法需您自行编写代码。
 

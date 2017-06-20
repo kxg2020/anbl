@@ -397,6 +397,7 @@ $(function(){
 
 
 	$('.rechargeOk').click(function(){
+
 		var money = $('input[name = rechargeMoney]').val();
 		var path = $('#images').val();
 		var type = $('.apply_style_choice').attr('data-id');
@@ -495,6 +496,7 @@ $(function(){
 
 
 	$('.ex').click(function(){
+
 		var money = $('input[name = exMoney'+data_id+']').val();
 
 		if(money == ''){

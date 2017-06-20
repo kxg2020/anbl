@@ -85,6 +85,7 @@ class Qiniu{
             'fileName'=>$key,
             'fileBody'=>file_get_contents($file['tmp_name'])
         );
+
         $config = array();
         $result = $this->qiniu->upload($config, $upfile);
         $url = $this->qiniu->downlink($key);

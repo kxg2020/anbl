@@ -464,6 +464,9 @@ class CommissionController extends CommonController
             //>> 如果是第四代，开始
             if($level > 3){
                 foreach($child as $key => $value){
+                    if($value['role'] > 2){
+                        continue;
+                    }
                     $children = M('MemberRecharge')->where(['member_id'=>$value['id'],'is_pass'=>1])->select();
                     if (!empty($children)) {
                         $group[] = $children;

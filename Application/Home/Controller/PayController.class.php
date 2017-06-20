@@ -16,58 +16,95 @@ class PayController extends  Controller{
 
     public function doPay(){
 
-        // 设置这个页面的字符集
-        header("Content-type:text/html;charset=utf-8");
-        // 获取支付宝配置
-        $alipay_config=C('alipay_config');
-        // 支付类型,不修改
-        $payment_type = "1";
-        // 服务器异步通知页面路径
-        $notify_url = C('alipay.notify_url');
-        // 页面跳转同步通知页面路径
-        $return_url = C('alipay.return_url');
-        // 卖家支付宝帐户必填
-        $seller_email = C('alipay.seller_email');
-        // 商户订单号 通过支付页面的表单进行传递，注意要唯一
-        $out_trade_no = '801512365245';
-        // 订单名称,必填 通过支付页面的表单进行传递
-        $subject = '比手速大赛';
-        // 付款金额,必填,通过支付页面的表单进行传递
-        $total_fee = '0.01';
-        // 订单描述,通过支付页面的表单进行传递
-        $body = '快付款，比赛手速';
-        // 商品展示地址 通过支付页面的表单进行传递
-        $show_url = $_POST['ordshow_url'];
-        // 防钓鱼时间戳,若要使用请调用类文件submit中的query_timestamp函数
-        $anti_phishing_key = "";
-        // 客户端的IP地址
-        $exter_invoke_ip = '';
+        header("Content-type: text/html; charset=utf-8");
 
-        // 构造要请求的参数数组
-        $parameter = array(
-            "service"       => "create_direct_pay_by_user",
-            "partner"       => trim($alipay_config['partner']),
-            "payment_type"  => $payment_type,
-            "notify_url"    => $notify_url,
-            "return_url"    => $return_url,
-            "seller_email"  => $seller_email,
-            "out_trade_no"  => $out_trade_no,
-            "subject"       => $subject,
-            "total_fee"     => $total_fee,
-            "body"          => $body,
-            "show_url"      => $show_url,
-            "anti_phishing_key"    => $anti_phishing_key,
-            "exter_invoke_ip"      => $exter_invoke_ip,
-            "_input_charset"       => trim(strtolower($alipay_config['input_charset']))
+        $type = isset($_POST['paytype']) ? $_POST['paytype'] : 'alipay';
+
+        if($type == 'alipay'){
+            $service = 'create_direct_pay_by_user';//pc
+        }else{
+            $service = 'alipay.wap.create.direct.pay.by.user';//手机站
+        }
+
+        $alipay_config = array(
+
+            // 收款账号邮箱
+            'email' => 'yangtao@ecshy.com',
+
+            // 加密key，开通支付宝账户后给予
+            'key' => 'wcgf9kam5w2iwsnmk15w26stvr8ya24h',
+
+            //账户后给予
+            'partner' => '2088221781617250',
+
+            //收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
+            'seller_id' => '2088221781617250',
+
+            //签名方式
+            'sign_type' => strtoupper('MD5'),
+
+            //字符编码格式 目前支持utf-8
+            'input_charset' => strtolower('utf-8'),
+
+            // 产品类型，无需修改
+            'service' => $service,
+
+            // 支付类型 ，无需修改
+            'payment_type' => '1',
+
+            'transport'=>'http',
         );
-        //>> 实例化对象,建立请求
-        $submit = new \AlipaySubmit($alipay_config);
 
-        // 创建支付表单页面
-        $htmlText = $submit->buildRequestForm($parameter,"post", "确认");
+        $out_trade_no = date('YmdHis') . rand(1000, 9999);
+        $money = $_POST['money']; //支付金额
+        $subject = "订单" . $out_trade_no;
+        $body = "订单" . $out_trade_no;
 
-        // 显示支付表单页面
-        echo $htmlText;
+        $url_current = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER["REQUEST_URI"];//当前地址
+        $notify_url = dirname($url_current)."/notify.php"; //通知地址
+//echo $notify_url;exit;
+        $return_url = "https://www.baidu.com"; //支付成功跳转地址
+
+
+        require 'alipay/alipay.config.php';
+        require 'alipay/lib/alipay_submit.class.php';
+
+
+//构造要请求的参数数组，无需改动
+        $parameter = array(
+            "service" => $alipay_config['service'],
+            "partner" => $alipay_config['partner'],
+            "seller_id" => $alipay_config['seller_id'],
+            "payment_type" => $alipay_config['payment_type'],
+            "notify_url" => $notify_url,
+            "return_url" => $return_url,
+            "_input_charset" => $alipay_config['input_charset'],
+            "out_trade_no" => $out_trade_no,
+            "subject" => $subject,
+            "total_fee" => $money,
+            "show_url" => $return_url,
+            //"app_pay" => "Y",//启用此参数能唤起钱包APP支付宝
+            "body" => $body,
+            //其他业务参数根据在线开发文档，添加参数.文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.2Z6TSk&treeId=60&articleId=103693&docType=1
+            //如"参数名"    => "参数值"   注：上一个参数末尾需要“,”逗号。
+        );
+
+        //建立请求
+        $alipaySubmit = new \alipay_submit($alipay_config);
+
+
+
+        if ($type == 'alipay') {
+
+            $html_text = $alipaySubmit->buildRequestForm($parameter, "get", "确认");
+
+            echo $html_text;
+        }elseif ($type == 'alipay_wap') {
+
+            $html_text = $alipaySubmit->buildRequestForm($parameter, "get", "确认");
+
+            echo $html_text;
+        }
     }
 
 
@@ -246,7 +283,6 @@ class PayController extends  Controller{
      *测试
      */
     public function example(){
-
 
 
         $this->display('example/index');

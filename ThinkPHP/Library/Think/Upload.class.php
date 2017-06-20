@@ -146,6 +146,7 @@ class Upload {
         $files   =  $this->dealFiles($files);    
         foreach ($files as $key => $file) {
             $file['name']  = strip_tags($file['name']);
+
             if(!isset($file['key']))   $file['key']    =   $key;
             /* 通过扩展获取文件类型，可解决FLASH上传$FILES数组返回文件类型错误的问题 */
             if(isset($finfo)){
@@ -168,6 +169,7 @@ class Upload {
 
             /* 调用回调函数检测文件是否存在 */
             $data = call_user_func($this->callback, $file);
+
             if( $this->callback && $data ){
                 if ( file_exists('.'.$data['path'])  ) {
                     $info[$key] = $data;
@@ -179,6 +181,7 @@ class Upload {
 
             /* 生成保存文件名 */
             $savename = $this->getSaveName($file);
+
             if(false == $savename){
                 continue;
             } else {
@@ -205,6 +208,7 @@ class Upload {
 
             /* 保存文件 并记录保存成功的文件 */
             if ($this->uploader->save($file,$this->replace)) {
+
                 unset($file['error'], $file['tmp_name']);
                 $info[$key] = $file;
             } else {
