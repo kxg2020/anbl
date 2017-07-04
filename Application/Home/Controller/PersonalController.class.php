@@ -543,27 +543,8 @@ class PersonalController extends CommonController
 
         $paramArr = $_REQUEST;
 
-        $rule = M('CashRule')->find();
-
-        // 当前日期
         $crrDay = date('Y-m-d');
-
-        // 设定的日期
-        $lastDay = date('Y-m').'-'.($rule['shouyi_date'] < 10 ? '0'.$rule['shouyi_date'] : $rule['shouyi_date']);
-
-        // 本月的最后一天
-        $crrMonthLastDay = $this->getTheMonth();
-
-        if(strtotime($crrMonthLastDay) < strtotime($lastDay)){
-
-            $lastDay = $crrMonthLastDay;
-
-        }
-
-
-        // 查询不同提现方式的手续费
-
-
+        $lastDay = $this->getTheMonth();
        switch($paramArr['id']){
            case 1:
                //>> 余额提现
@@ -604,16 +585,13 @@ class PersonalController extends CommonController
                        //>> 生成订单
                        $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
 
-                       //>> 手续费费率
-                       $rate = $rule['yue_rate'] / 100;
-
                        $insertData = [
                            'money' => $paramArr['money'],
                            'member_id' => $this->userInfo['id'],
                            'create_time' => time(),
                            'is_pass' => 0,
                            'order_number' => $orderNumber,
-                           'charge' => $paramArr['money'] * $rate,
+                           'charge' => $paramArr['money'] * 0.1,
                            'type'=>'余额提现'
                        ];
 
@@ -639,8 +617,8 @@ class PersonalController extends CommonController
 
            //>> 收益提现
            case 2:
-               //>> 判断当前时间是否是设定的时间
-               if (date('w') == $rule['shouyi_week']) {
+               //>> 判断当前时间是否是周五
+               if (date('w') == 5) {
                    if (!empty($paramArr)) {
 
                        if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
@@ -684,15 +662,13 @@ class PersonalController extends CommonController
                            //>> 生成订单
                            $orderNumber = 'CS' . date('Ymd') . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
 
-                           //>> 提现费率
-                           $rate = $rule['shouyi_rate'] / 100;
                            $insertData = [
                                'money' => $paramArr['money'],
                                'member_id' => $this->userInfo['id'],
                                'create_time' => time(),
                                'is_pass' => 0,
                                'order_number' => $orderNumber,
-                               'charge' => $paramArr['money'] * $rate,
+                               'charge' => $paramArr['money'] * 0.1,
                                'type'=>'收益提现'
                            ];
 
@@ -770,14 +746,13 @@ class PersonalController extends CommonController
                        die($this->_printError('1054'));
                    }
                } else {
-
-                   $this->ajaxReturn(['msg'=>'每周'.$rule['shouyi_week'].'或每月'.$rule['shouyi_date'].'号才可以提现']);
+                   die($this->_printError('1056'));
                }
                break;
 
            case 3:
                //>> 佣金提现
-               if (date('w') == $rule['yongjin_week']) {
+               if (date('w') == 5) {
                    if (!empty($paramArr)) {
 
                        if (isset($paramArr['money']) && !empty($paramArr['money']) && is_numeric($paramArr['money'])) {
@@ -849,7 +824,7 @@ class PersonalController extends CommonController
                        die($this->_printError('1056'));
                    }
                }else{
-                   $this->ajaxReturn(['msg'=>'每周'.$rule['yongjin_week'].'才可以提现']);
+                   die($this->_printError('1050'));
                }
                break;
        }

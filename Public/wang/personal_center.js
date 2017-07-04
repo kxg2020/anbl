@@ -496,7 +496,7 @@ $(function(){
 
 
 	$('.ex').click(function(){
-
+		
 		var money = $('input[name = exMoney'+data_id+']').val();
 
 		if(money == ''){
